@@ -18,15 +18,6 @@ else:
 
 # Fetch data
 for sym in symbols:
-    #symbol = sym.upper() + "USDT"
-    #output_file = f"data/{symbol}_1m.csv"
-
-    #fetch_1m_data(
-    #    symbol=symbol,
-    #    start_ts=start_ts,
-    #    end_ts=end_ts,
-    #    output_path=output_file
-    #)
     symbol = sym.upper() + "USDT"
     output_file = f"data/futures/{symbol}_1m_last_7_days.csv"
 
