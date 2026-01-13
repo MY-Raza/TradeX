@@ -1,6 +1,6 @@
 import yaml
 from datetime import datetime, timedelta
-from TradeX.Data.binance.binance_fetcher import BinanceFuturesFetcher
+from TradeX.data.binance.binance_fetcher import BinanceFuturesFetcher
 
 # Load configuration
 with open("config.yml", "r") as f:
