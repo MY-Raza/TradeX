@@ -1,6 +1,6 @@
 import yaml
 from datetime import datetime, timedelta
-from BTC_Data_Fetcher import fetch_1m_data
+from BTC_Data_Fetcher import fetch_1m_data, fetch_1m_futures_data 
 
 with open("config.yml", "r") as f:
     config = yaml.safe_load(f)
@@ -18,10 +18,19 @@ else:
 
 # Fetch data
 for sym in symbols:
-    symbol = sym.upper() + "USDT"
-    output_file = f"data/{symbol}_1m.csv"
+    #symbol = sym.upper() + "USDT"
+    #output_file = f"data/{symbol}_1m.csv"
 
-    fetch_1m_data(
+    #fetch_1m_data(
+    #    symbol=symbol,
+    #    start_ts=start_ts,
+    #    end_ts=end_ts,
+    #    output_path=output_file
+    #)
+    symbol = sym.upper() + "USDT"
+    output_file = f"data/futures/{symbol}_1m_last_7_days.csv"
+
+    fetch_1m_futures_data(
         symbol=symbol,
         start_ts=start_ts,
         end_ts=end_ts,
