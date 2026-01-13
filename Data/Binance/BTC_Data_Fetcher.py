@@ -13,53 +13,6 @@ API_SECRET = os.getenv("API_SECRET_KEY")
 client = Client(API_KEY, API_SECRET)
 
 
-def fetch_1m_data(symbol, start_ts, end_ts, output_path):
-    interval = Client.KLINE_INTERVAL_1MINUTE
-    all_klines = []
-
-    while start_ts < end_ts:
-        print(f"Fetching {symbol} data from {datetime.utcfromtimestamp(start_ts/1000)}")
-
-        klines = client.get_klines(
-            symbol=symbol,
-            interval=interval,
-            startTime=start_ts,
-            limit=1000
-        )
-
-        if not klines:
-            break
-
-        all_klines.extend(klines)
-        start_ts = klines[-1][0] + 1
-        time.sleep(0.5)
-
-    # Binance raw columns
-    raw_columns = [
-        "timestamp", "open", "high", "low", "close", "volume",
-        "close_time", "quote_asset_volume",
-        "number_of_trades",
-        "taker_buy_base_volume",
-        "taker_buy_quote_volume",
-        "ignore"
-    ]
-
-    df = pd.DataFrame(all_klines, columns=raw_columns)
-
-    # Keep only required columns
-    df = df[["timestamp", "open", "high", "low", "close", "volume"]]
-
-    # Ensure correct data types
-    df["timestamp"] = df["timestamp"].astype("int64")
-    df[["open", "high", "low", "close", "volume"]] = df[
-        ["open", "high", "low", "close", "volume"]
-    ].astype(float)
-
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    df.to_csv(output_path, index=False)
-
-    print(f"Saved: {output_path}")
-
 # Function for Fetching Future Data
 
 def fetch_1m_futures_data(symbol, start_ts, end_ts, output_path):
