@@ -8,7 +8,8 @@ from TradeX.utils.db.db_utils import (
     get_engine,
     create_schema,
     read_df_from_db,
-    total_columns
+    total_columns,
+    total_rows
 )
 from binance_fetcher import BinanceFuturesFetcher
 
@@ -81,6 +82,12 @@ for symbol in symbols:
     number_of_columns =  total_columns(engine, table_name=table_name.lower(), schema="data_binance")
     if number_of_columns:
         print(f"Total Columns are '{number_of_columns}'")
+    else:
+        print(f'Unexpected Error')
+    
+    number_of_rows = total_rows(engine, table_name=table_name.lower(), schema="data_binance")
+    if number_of_rows:
+        print(f"Total Rows are '{number_of_rows}'")
     else:
         print(f'Unexpected Error')
           
