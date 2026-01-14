@@ -2,33 +2,29 @@ import yaml
 from datetime import datetime, timedelta
 from TradeX.data.binance.binance_fetcher import BinanceFuturesFetcher
 
-# Load configuration
+# Load config
 with open("config.yml", "r") as f:
     config = yaml.safe_load(f)
 
 symbols = config["symbols"]
-start_date = config["start_date"]
-end_date = config.get("end_date", "now")  # Can be "now" or a date string
+start_date = config.get("start_date")
+end_date = config.get("end_date", "now")
 
-# Initialize the fetcher
 fetcher = BinanceFuturesFetcher()
 
-# Convert end_date to timestamp in milliseconds
-end_ts = int(datetime.utcnow().timestamp() * 1000) if end_date == "now" else int(datetime.strptime(end_date, "%Y-%m-%d").timestamp() * 1000)
+end_ts = (
+    int(datetime.utcnow().timestamp() * 1000)
+    if end_date == "now"
+    else int(datetime.strptime(end_date, "%Y-%m-%d").timestamp() * 1000)
+)
 
-# Fetch previous 7 days from end_ts
-start_ts = int((datetime.utcnow() - timedelta(days=7)).timestamp() * 1000)
+start_ts = (
+    int(datetime.strptime(start_date, "%Y-%m-%d").timestamp() * 1000)
+    if start_date
+    else int((datetime.utcnow() - timedelta(days=7)).timestamp() * 1000)
+)
 
-# Fetch data for each symbol
 for sym in symbols:
     symbol = sym.upper() + "USDT"
-    output_file = f"data/futures/{symbol}_1m_last_7_days.csv"
-
-    # Using the class-based method with interval as 1 minute
-    fetcher.fetch_futures_data(
-        symbol=symbol,
-        start_ts=start_ts,
-        end_ts=end_ts,
-        output_path=output_file,
-        interval="1m"
-    )
+    print(f"\nProcessing {symbol}...")
+    fetcher.fetch_and_save(symbol=symbol, start_ts=start_ts, end_ts=end_ts, interval="1m")
