@@ -2,7 +2,7 @@ from binance.client import Client
 import pandas as pd
 from datetime import datetime
 import time
-from TradeX.utils.db.db_utils import save_df_to_db  # import the function
+from TradeX.utils.db.db_utils import save_df_to_db  
 
 class BinanceFuturesFetcher:
     def __init__(self, api_key, api_secret, engine, schema="data_binance"):
@@ -67,4 +67,4 @@ class BinanceFuturesFetcher:
         table_name = f"{symbol_clean.lower()}_{interval}"
 
         # Save DataFrame using the function from db_utils.py
-        save_df_to_db(df, table_name, engine=self.engine, schema=self.schema)
+        save_df_to_db(df, table_name, engine=self.engine, schema=self.schema,time_column='timestamp',is_timeseries = true)

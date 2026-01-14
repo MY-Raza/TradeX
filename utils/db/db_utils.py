@@ -81,24 +81,57 @@ def drop_table(engine, table_name, schema="data_binance"):
 # ---------------------------
 # DataFrame Operations
 # ---------------------------
-def save_df_to_db(df: pd.DataFrame, table_name: str, engine, schema="data_binance"):
+def save_df_to_db(
+    df: pd.DataFrame,
+    table_name: str,
+    engine,
+    schema="data_binance",
+    time_column=None,          
+    is_timeseries=False        
+):
     """
-    Save a pandas DataFrame to PostgreSQL under the given schema.
+    Save a pandas DataFrame to PostgreSQL.
+    If is_timeseries=True, convert table to TimescaleDB hypertable.
     """
+
     if df.empty:
         print("[save_df_to_db] No data to insert.")
         return
 
     try:
+        # Insert data
         df.to_sql(
             table_name,
             engine,
             schema=schema,
             if_exists="append",
             index=False,
-            method='multi'
+            method="multi"
         )
-        print(f"[save_df_to_db] Inserted {len(df)} rows into table '{schema}.{table_name}'.")
+
+        print(f"[save_df_to_db] Inserted {len(df)} rows into '{schema}.{table_name}'")
+
+        # Convert to hypertable if required
+        if is_timeseries:
+            if not time_column:
+                raise ValueError("time_column must be provided for time-series data.")
+
+            hypertable_sql = text(f"""
+                SELECT create_hypertable(
+                    '{schema}.{table_name}',
+                    '{time_column}',
+                    if_not_exists => TRUE
+                );
+            """)
+
+            with engine.begin() as conn:
+                conn.execute(hypertable_sql)
+
+            print(
+                f"[save_df_to_db] Hypertable ensured for "
+                f"'{schema}.{table_name}' on column '{time_column}'"
+            )
+
     except SQLAlchemyError as e:
         print(f"[save_df_to_db] SQLAlchemyError: {e}")
     except Exception as e:
