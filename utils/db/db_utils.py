@@ -157,3 +157,24 @@ def total_columns(engine, table_name, schema="data_binance"):
     except Exception as e:
         print(f"[total_columns] Error: {e}")
     return 0
+
+def total_rows(engine, table_name, schema="data_binance"):
+    """
+    Get total number of rows in a table.
+    """
+    try:
+        query = text(f"SELECT COUNT(*) FROM {schema}.{table_name}")
+        
+        with engine.connect() as conn:
+            result = conn.execute(query)
+            row_count = result.scalar()
+
+        print(f"[total_rows] Table '{schema}.{table_name}' has {row_count} rows.")
+        return row_count
+
+    except SQLAlchemyError as e:
+        print(f"[total_rows] SQLAlchemyError: {e}")
+    except Exception as e:
+        print(f"[total_rows] Error: {e}")
+
+    return 0
