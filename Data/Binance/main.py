@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import yaml
 
-from utils.db.db_utils import DBUtils
+from TradeX.utils.db.db_utils import get_engine, create_schema  # functional DB utils
+from TradeX.utils.db.db_utils import save_df_to_db
 from binance_fetcher import BinanceFuturesFetcher
 
 # Load environment variables
@@ -26,13 +27,14 @@ if end_date_str == "now":
 else:
     end_ts = int(datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000)
 
-# Initialize database handler
-db_utils = DBUtils()  # schema defaults to data_binance
+# Initialize database engine and schema
+engine = get_engine()
+create_schema(engine, schema="data_binance")
 
 # Initialize Binance fetcher
 API_KEY = os.getenv("API_KEY")
 API_SECRET = os.getenv("API_SECRET_KEY")
-fetcher = BinanceFuturesFetcher(API_KEY, API_SECRET, db_utils)
+fetcher = BinanceFuturesFetcher(API_KEY, API_SECRET, engine, schema="data_binance")
 
 # Fetch and save data for each symbol
 for symbol in symbols:

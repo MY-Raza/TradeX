@@ -2,16 +2,18 @@ from binance.client import Client
 import pandas as pd
 from datetime import datetime
 import time
+from TradeX.utils.db.db_utils import save_df_to_db  # import the function
 
 class BinanceFuturesFetcher:
-    def __init__(self, api_key, api_secret, db_utils):
+    def __init__(self, api_key, api_secret, engine, schema="data_binance"):
         """
-        Initialize Binance client and accept a DBHandler object.
+        Initialize Binance client and DB engine info.
         """
         self.client = Client(api_key, api_secret)
-        self.db_utils = db_utils
+        self.engine = engine
+        self.schema = schema
 
-    def fetch_klines(self, symbol: str, start_ts: int, end_ts: int, interval: str = "1m"):
+    def fetch_klines(self, symbol: str, start_ts: int, end_ts: int, interval: str = "1m") -> pd.DataFrame:
         """
         Fetch Binance futures data and return as a pandas DataFrame.
         """
@@ -55,7 +57,7 @@ class BinanceFuturesFetcher:
 
     def fetch_and_save(self, symbol: str, start_ts: int, end_ts: int, interval: str = "1m"):
         """
-        Fetch data and save it to DB using DBHandler.
+        Fetch data and save it to PostgreSQL using functional db_utils.
         """
         df = self.fetch_klines(symbol, start_ts, end_ts, interval)
         if df.empty:
@@ -63,4 +65,6 @@ class BinanceFuturesFetcher:
 
         symbol_clean = symbol.upper().replace("USDT", "")
         table_name = f"{symbol_clean.lower()}_{interval}"
-        self.db_utils.save_dataframe(df, table_name)
+
+        # Save DataFrame using the function from db_utils.py
+        save_df_to_db(df, table_name, engine=self.engine, schema=self.schema)
