@@ -1,30 +1,40 @@
-import yaml
+import os
+from dotenv import load_dotenv
 from datetime import datetime, timedelta
-from TradeX.data.binance.binance_fetcher import BinanceFuturesFetcher
+import yaml
 
-# Load config
+from utils.db.db_utils import DBUtils
+from binance_fetcher import BinanceFuturesFetcher
+
+# Load environment variables
+load_dotenv()
+
+# Load configuration from config.yml
 with open("config.yml", "r") as f:
     config = yaml.safe_load(f)
 
-symbols = config["symbols"]
-start_date = config.get("start_date")
-end_date = config.get("end_date", "now")
+exchange_name = config.get("exchange_name", "binance")
+symbols = config.get("symbols", [])
+start_date_str = config.get("start_date")
+end_date_str = config.get("end_date", "now")
 
-fetcher = BinanceFuturesFetcher()
+# Convert dates to timestamps in milliseconds
+start_ts = int(datetime.strptime(start_date_str, "%Y-%m-%d").timestamp() * 1000)
 
-end_ts = (
-    int(datetime.utcnow().timestamp() * 1000)
-    if end_date == "now"
-    else int(datetime.strptime(end_date, "%Y-%m-%d").timestamp() * 1000)
-)
+if end_date_str == "now":
+    end_ts = int(datetime.utcnow().timestamp() * 1000)
+else:
+    end_ts = int(datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000)
 
-start_ts = (
-    int(datetime.strptime(start_date, "%Y-%m-%d").timestamp() * 1000)
-    if start_date
-    else int((datetime.utcnow() - timedelta(days=7)).timestamp() * 1000)
-)
+# Initialize database handler
+db_utils = DBUtils()  # schema defaults to data_binance
 
-for sym in symbols:
-    symbol = sym.upper() + "USDT"
-    print(f"\nProcessing {symbol}...")
-    fetcher.fetch_and_save(symbol=symbol, start_ts=start_ts, end_ts=end_ts, interval="1m")
+# Initialize Binance fetcher
+API_KEY = os.getenv("API_KEY")
+API_SECRET = os.getenv("API_SECRET_KEY")
+fetcher = BinanceFuturesFetcher(API_KEY, API_SECRET, db_utils)
+
+# Fetch and save data for each symbol
+for symbol in symbols:
+    symbol_pair = symbol.upper() + "USDT"  # Append USDT to symbol for futures
+    fetcher.fetch_and_save(symbol_pair, start_ts, end_ts, interval="1m")
