@@ -120,6 +120,7 @@ def save_df_to_db(
                 SELECT create_hypertable(
                     '{schema}.{table_name}',
                     '{time_column}',
+                    migrate_data =>TRUE,
                     if_not_exists => TRUE
                 );
             """)

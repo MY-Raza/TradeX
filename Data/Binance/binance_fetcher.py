@@ -67,4 +67,4 @@ class BinanceFuturesFetcher:
         table_name = f"{symbol_clean.lower()}_{interval}"
 
         # Save DataFrame using the function from db_utils.py
-        save_df_to_db(df, table_name, engine=self.engine, schema=self.schema,time_column='timestamp',is_timeseries = true)
+        save_df_to_db(df, table_name, engine=self.engine, schema=self.schema,time_column='timestamp',is_timeseries = True)
