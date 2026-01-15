@@ -55,8 +55,8 @@ def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1min") -> pd.Data
     df = df.set_index('timestamp')
 
     # Map string intervals to pandas offset aliases
-    interval_map = {"1m": "1T", "5m": "5T", "1h": "1H", "1d": "1D"}
-    freq = interval_map.get(interval, "1T")
+    interval_map = {"1m": "1min", "5m": "5min", "1h": "1H", "1d": "1D"}
+    freq = interval_map.get(interval, "1min")  
 
     idx = pd.date_range(start=df.index.min(), end=df.index.max(), freq=freq)
     df = df.reindex(idx)
@@ -72,12 +72,12 @@ def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1min") -> pd.Data
 def remove_outliers(df: pd.DataFrame, columns=None, z_thresh=3.0) -> pd.DataFrame:
     """
     Remove rows with outliers based on z-score method.
-    
+
     Args:
         df (pd.DataFrame): DataFrame containing numeric columns.
         columns (list): List of columns to check for outliers. Defaults to OHLCV.
         z_thresh (float): Z-score threshold for defining outliers.
-    
+
     Returns:
         pd.DataFrame: DataFrame with outliers removed.
     """
@@ -87,6 +87,13 @@ def remove_outliers(df: pd.DataFrame, columns=None, z_thresh=3.0) -> pd.DataFram
     df = df.copy()
     columns = columns or ["open", "high", "low", "close", "volume"]
 
+    # Ensure all columns are float
+    for col in columns:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    # Remove any rows that are now NaN after conversion
+    df = df.dropna(subset=columns)
+
     from scipy.stats import zscore
     z = df[columns].apply(zscore, nan_policy='omit')
     mask = (z.abs() < z_thresh).all(axis=1)
@@ -94,6 +101,7 @@ def remove_outliers(df: pd.DataFrame, columns=None, z_thresh=3.0) -> pd.DataFram
 
     logger.info(f"Removed outliers. Total rows remaining: {len(df)}")
     return df
+
 
 
 def fill_missing_values(df: pd.DataFrame, method='ffill') -> pd.DataFrame:
