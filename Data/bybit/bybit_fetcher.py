@@ -10,8 +10,23 @@ logger = get_logger(__name__)
 class BybitFuturesFetcher:
     """
     Fetches raw Bybit USDT Perpetual Futures klines data.
-    Handles conversion from start/end dates to timestamps internally.
+    Handles conversion from start/end dates to timestamps internally
+    and paginates safely to avoid infinite loops.
     """
+
+    INTERVAL_MAP = {
+        "1": 60_000,
+        "3": 3 * 60_000,
+        "5": 5 * 60_000,
+        "15": 15 * 60_000,
+        "30": 30 * 60_000,
+        "60": 60 * 60_000,
+        "120": 120 * 60_000,
+        "240": 240 * 60_000,
+        "360": 360 * 60_000,
+        "720": 720 * 60_000,
+        "D": 24 * 60 * 60_000
+    }
 
     def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
         self.client = HTTP(
@@ -48,6 +63,7 @@ class BybitFuturesFetcher:
     ) -> pd.DataFrame:
         """
         Fetch Bybit Futures klines for a symbol between given dates.
+        Paginates safely to avoid infinite loops.
 
         Args:
             symbol (str): Trading pair, e.g., 'BTCUSDT'
@@ -59,32 +75,42 @@ class BybitFuturesFetcher:
             pd.DataFrame: Raw klines DataFrame
         """
         start_ts, end_ts = self._convert_to_timestamp(start_date, end_date)
+        interval_ms = self.INTERVAL_MAP.get(interval, 60_000)
 
         all_klines = []
+        loop_count = 0
+        max_loops = 1000  # safety to avoid infinite loops
 
-        while start_ts < end_ts:
+        while start_ts < end_ts and loop_count < max_loops:
+            loop_count += 1
             logger.info(
                 f"Fetching {symbol} from {datetime.utcfromtimestamp(start_ts / 1000)} interval={interval}"
             )
 
             response = self.client.get_kline(
-                category="linear",   # USDT Perpetual
+                category="linear",  # USDT Perpetual
                 symbol=symbol,
                 interval=interval,
                 start=start_ts,
                 end=end_ts,
-                limit=1000
+                limit=200  # safer limit for Bybit
             )
 
             klines = response.get("result", {}).get("list", [])
 
             if not klines:
-                logger.warning("No more klines returned from Bybit.")
+                logger.info("No more klines returned. Ending loop.")
                 break
 
             all_klines.extend(klines)
-            start_ts = int(klines[-1][0]) + 1
-            time.sleep(0.5)
+            last_ts = int(klines[-1][0])
+            if last_ts == start_ts:
+                # safeguard if API returns same timestamp repeatedly
+                logger.warning("API returned repeated timestamp. Ending loop to avoid infinite loop.")
+                break
+
+            start_ts = last_ts + interval_ms
+            time.sleep(0.3)
 
         if not all_klines:
             logger.warning("No data fetched from Bybit.")
@@ -101,5 +127,6 @@ class BybitFuturesFetcher:
         numeric_cols = ["open", "high", "low", "close", "volume", "turnover"]
         df[numeric_cols] = df[numeric_cols].astype(float)
         df["timestamp"] = df["timestamp"].astype(int)
+
         logger.info(f"Fetched {len(df)} rows for {symbol}.")
         return df

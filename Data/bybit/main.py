@@ -8,7 +8,7 @@ from TradeX.utils.db.utils import (
     total_columns, total_rows, drop_schema
 )
 from TradeX.logs.logging import get_logger
-from binance_fetcher import BinanceFuturesFetcher
+from bybit_fetcher import BybitFuturesFetcher
 from TradeX.utils.cleaning_utils import (
     clean_klines_df, fill_missing_timestamps,
     fill_missing_values, resample_ohlcv
@@ -17,19 +17,19 @@ from TradeX.utils.cleaning_utils import (
 logger = get_logger(__name__)
 
 """
-main.py
+main_bybit.py
 
-End-to-end Binance Futures data ingestion pipeline:
+End-to-end Bybit USDT Perpetual Futures data ingestion pipeline:
 
 1. Load environment variables and config.
 2. Initialize database and schema.
-3. Fetch raw klines from Binance.
+3. Fetch raw klines from Bybit.
 4. Clean and process data using multiple cleaning steps.
 5. Save cleaned data to PostgreSQL/TimescaleDB.
 6. Verify data insertion and log table stats.
 
 Dependencies:
-- Binance API credentials (BINANCE_API_KEY, BINANCE_SECRET_KEY)
+- Bybit API credentials (BYBIT_API_KEY, BYBIT_SECRET_KEY)
 - DATABASE_URL environment variable
 - config.yml containing symbols and date range
 """
@@ -38,7 +38,7 @@ Dependencies:
 # Load Environment Variables
 # ---------------------------
 load_dotenv()
-SCHEMA = os.getenv("DB_SCHEMA_BINANCE", "data_binance")
+SCHEMA = os.getenv("DB_SCHEMA_BYBIT", "data_bybit")
 logger.info("Environment variables loaded.")
 
 # ---------------------------
@@ -60,21 +60,26 @@ if engine is None:
 create_schema(engine, schema=SCHEMA)
 
 # ---------------------------
-# Initialize Binance Fetcher
+# Initialize Bybit Fetcher
 # ---------------------------
-API_KEY = os.getenv("BINANCE_API_KEY")
-API_SECRET = os.getenv("BINANCE_SECRET_KEY")
-fetcher = BinanceFuturesFetcher(api_key=API_KEY, api_secret=API_SECRET)
+API_KEY = os.getenv("BYBIT_API_KEY")
+API_SECRET = os.getenv("BYBIT_SECRET_KEY")
+
+fetcher = BybitFuturesFetcher(
+    api_key=API_KEY,
+    api_secret=API_SECRET,
+    testnet=False
+)
 
 # ---------------------------
 # Fetch, Clean & Process Data
 # ---------------------------
 for symbol in symbols:
-    # Fetch raw Binance klines
     raw_df = fetcher.fetch_klines(
         symbol=f"{symbol.upper()}USDT",
         start_date=start_date_str,
-        end_date=end_date_str
+        end_date=end_date_str,
+        interval="1"  # Bybit uses "1" instead of "1m"
     )
 
     if raw_df.empty:
@@ -83,25 +88,23 @@ for symbol in symbols:
 
     logger.info("Data fetching completed.")
 
-    # Clean raw OHLCV data
+    # ---------------------------
+    # Cleaning Pipeline (Shared)
+    # ---------------------------
     df = clean_klines_df(raw_df)
     logger.info("Basic data cleaning completed.")
 
-    # Fill missing timestamps
     df = fill_missing_timestamps(df, interval="1m")
     logger.info("Missing timestamps inserted.")
 
-    # Remove outliers in OHLCV columns
     df = remove_outliers(df)
     logger.info("Outliers removed.")
 
-    # Fill remaining missing values
     df = fill_missing_values(df, method="ffill")
     logger.info("Missing values forward-filled.")
 
-    # Resample data if needed (optional, e.g., 5m candles)
+    # Optional resampling
     # df = resample_ohlcv(df, interval="5min")
-    # logger.info("Data resampled to 5-minute candles.")
 
     # ---------------------------
     # Save cleaned DataFrame to DB
@@ -129,9 +132,4 @@ for symbol in symbols:
     row_count = total_rows(engine, table_name, schema=SCHEMA)
     logger.info(f"Table '{table_name}' has {col_count} columns and {row_count} rows.")
 
-# ---------------------------
-# Optional: Drop schema (use with caution!)
-# ---------------------------
-# drop_schema(engine=engine, schema=SCHEMA)
-
-logger.info("Data ingestion pipeline completed successfully.")
+logger.info("Bybit data ingestion pipeline completed successfully.")

@@ -69,40 +69,6 @@ def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1min") -> pd.Data
     return df
 
 
-def remove_outliers(df: pd.DataFrame, columns=None, z_thresh=3.0) -> pd.DataFrame:
-    """
-    Remove rows with outliers based on z-score method.
-
-    Args:
-        df (pd.DataFrame): DataFrame containing numeric columns.
-        columns (list): List of columns to check for outliers. Defaults to OHLCV.
-        z_thresh (float): Z-score threshold for defining outliers.
-
-    Returns:
-        pd.DataFrame: DataFrame with outliers removed.
-    """
-    if df.empty:
-        return df
-
-    df = df.copy()
-    columns = columns or ["open", "high", "low", "close", "volume"]
-
-    # Ensure all columns are float
-    for col in columns:
-        df[col] = pd.to_numeric(df[col], errors='coerce')
-
-    # Remove any rows that are now NaN after conversion
-    df = df.dropna(subset=columns)
-
-    from scipy.stats import zscore
-    z = df[columns].apply(zscore, nan_policy='omit')
-    mask = (z.abs() < z_thresh).all(axis=1)
-    df = df[mask]
-
-    logger.info(f"Removed outliers. Total rows remaining: {len(df)}")
-    return df
-
-
 
 def fill_missing_values(df: pd.DataFrame, method='ffill') -> pd.DataFrame:
     """
