@@ -10,6 +10,8 @@ from TradeX.utils.db.utils import (
     read_df_from_db,
     total_columns,
     total_rows,
+    drop_schema,
+    drop_table
 )
 from TradeX.logs.logging import get_logger
 from binance_fetcher import BinanceFuturesFetcher
@@ -151,5 +153,12 @@ for symbol in symbols:
 
     except Exception:
         logger.exception(f"Unexpected error during processing of symbol '{symbol}'.")
+
+    
+#for symbol in symbols:
+ #   table_name = f"{symbol.lower()}_1m"
+  #  drop_table(engine=engine,table_name=table_name,schema=SCHEMA)
+
+#drop_schema(engine=engine,schema=SCHEMA)
 
 logger.info("Data ingestion pipeline completed successfully.")
