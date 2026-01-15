@@ -77,7 +77,7 @@ fetcher = BinanceFuturesFetcher(api_key=API_KEY, api_secret=API_SECRET)
 # ---------------------------
 for symbol in symbols:
     # Fetch raw Binance klines for the symbol
-    raw_df = fetcher.fetch_klines(symbol=f"{symbol.upper()}USDT", start_ts=start_ts, end_ts=end_ts)
+    raw_df = fetcher.fetch_klines(symbol=f"{symbol.upper()}USDT", start_date=start_date_str, end_date=end_date_str)
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping.")
         continue
