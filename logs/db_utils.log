@@ -494,3 +494,381 @@ LINE 1: SELECT COUNT(*) FROM data_binance.matic_1m
 2026-01-15 11:11:22,621 | INFO | TradeX.utils.db.utils | 'data_binance.link_1m' contains 159617 rows.
 2026-01-15 11:11:22,621 | INFO | __main__ | Table 'link_1m' has 159617 rows.
 2026-01-15 11:11:22,621 | INFO | __main__ | Data ingestion pipeline completed successfully.
+2026-01-15 11:24:23,241 | INFO | __main__ | Environment variables loaded.
+2026-01-15 11:24:23,241 | INFO | __main__ | Configuration loaded successfully.
+2026-01-15 11:24:23,241 | INFO | __main__ | Date range resolved | start=2026-01-06 | end=now
+2026-01-15 11:24:23,400 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-15 11:24:23,401 | INFO | __main__ | Database engine initialized.
+2026-01-15 11:24:23,401 | INFO | __main__ | Using schema: 'data_binance'
+2026-01-15 11:24:23,585 | INFO | TradeX.utils.db.utils | Schema 'data_binance' is ready.
+2026-01-15 11:24:23,585 | INFO | __main__ | Schema ensured.
+2026-01-15 11:24:24,289 | INFO | binance_fetcher | BinanceFuturesFetcher initialized.
+2026-01-15 11:24:24,289 | INFO | __main__ | Binance Futures Fetcher initialized.
+2026-01-15 11:24:24,305 | INFO | __main__ | Starting fetch cycle for BTCUSDT.
+2026-01-15 11:24:24,305 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:24:26,037 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:24:26,737 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:24:27,441 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:24:28,137 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:24:28,837 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:24:29,535 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:24:30,235 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:24:30,931 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:24:31,626 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:24:32,323 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:24:33,024 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:24:33,719 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:24:34,412 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:24:35,111 | INFO | binance_fetcher | Fetching BTCUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:24:35,279 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:24:35,413 | INFO | binance_fetcher | Fetched 13344 rows for BTCUSDT.
+2026-01-15 11:24:35,427 | INFO | binance_fetcher | Saving data to table 'btc_1m' (schema will be resolved at runtime).
+2026-01-15 11:24:40,855 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.btc_1m'.
+2026-01-15 11:24:40,860 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.btc_1m' on column 'timestamp'.
+2026-01-15 11:24:40,860 | INFO | binance_fetcher | Data saved successfully for BTCUSDT (13344 rows).
+2026-01-15 11:24:40,981 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.btc_1m'.
+2026-01-15 11:24:40,981 | INFO | __main__ | Verification success | 5 rows read from 'btc_1m'.
+2026-01-15 11:24:41,048 | INFO | TradeX.utils.db.utils | Table 'data_binance.btc_1m' has 6 columns.
+2026-01-15 11:24:41,049 | INFO | __main__ | Table 'btc_1m' has 6 columns.
+2026-01-15 11:24:42,264 | INFO | TradeX.utils.db.utils | 'data_binance.btc_1m' contains 186275 rows.
+2026-01-15 11:24:42,280 | INFO | __main__ | Table 'btc_1m' has 186275 rows.
+2026-01-15 11:24:42,280 | INFO | __main__ | Starting fetch cycle for ETHUSDT.
+2026-01-15 11:24:42,280 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:24:42,978 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:24:43,677 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:24:44,375 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:24:45,072 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:24:45,767 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:24:46,471 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:24:47,166 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:24:47,860 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:24:48,568 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:24:49,277 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:24:49,994 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:24:50,689 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:24:51,386 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:24:52,069 | INFO | binance_fetcher | Fetching ETHUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:24:52,251 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:24:52,330 | INFO | binance_fetcher | Fetched 13344 rows for ETHUSDT.
+2026-01-15 11:24:52,339 | INFO | binance_fetcher | Saving data to table 'eth_1m' (schema will be resolved at runtime).
+2026-01-15 11:24:56,574 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.eth_1m'.
+2026-01-15 11:24:56,589 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.eth_1m' on column 'timestamp'.
+2026-01-15 11:24:56,590 | INFO | binance_fetcher | Data saved successfully for ETHUSDT (13344 rows).
+2026-01-15 11:24:56,696 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.eth_1m'.
+2026-01-15 11:24:56,697 | INFO | __main__ | Verification success | 5 rows read from 'eth_1m'.
+2026-01-15 11:24:56,714 | INFO | TradeX.utils.db.utils | Table 'data_binance.eth_1m' has 6 columns.
+2026-01-15 11:24:56,714 | INFO | __main__ | Table 'eth_1m' has 6 columns.
+2026-01-15 11:24:57,154 | INFO | TradeX.utils.db.utils | 'data_binance.eth_1m' contains 186275 rows.
+2026-01-15 11:24:57,154 | INFO | __main__ | Table 'eth_1m' has 186275 rows.
+2026-01-15 11:24:57,154 | INFO | __main__ | Starting fetch cycle for BNBUSDT.
+2026-01-15 11:24:57,159 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:24:57,852 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:24:58,545 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:24:59,242 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:24:59,940 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:25:00,644 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:25:01,347 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:25:02,068 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:25:02,767 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:25:03,472 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:25:04,202 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:25:04,896 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:25:05,587 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:25:06,280 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:25:06,974 | INFO | binance_fetcher | Fetching BNBUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:25:07,148 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:25:07,218 | INFO | binance_fetcher | Fetched 13344 rows for BNBUSDT.
+2026-01-15 11:25:07,228 | INFO | binance_fetcher | Saving data to table 'bnb_1m' (schema will be resolved at runtime).
+2026-01-15 11:25:12,200 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.bnb_1m'.
+2026-01-15 11:25:12,212 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.bnb_1m' on column 'timestamp'.
+2026-01-15 11:25:12,212 | INFO | binance_fetcher | Data saved successfully for BNBUSDT (13344 rows).
+2026-01-15 11:25:12,317 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.bnb_1m'.
+2026-01-15 11:25:12,318 | INFO | __main__ | Verification success | 5 rows read from 'bnb_1m'.
+2026-01-15 11:25:12,335 | INFO | TradeX.utils.db.utils | Table 'data_binance.bnb_1m' has 6 columns.
+2026-01-15 11:25:12,335 | INFO | __main__ | Table 'bnb_1m' has 6 columns.
+2026-01-15 11:25:12,826 | INFO | TradeX.utils.db.utils | 'data_binance.bnb_1m' contains 186275 rows.
+2026-01-15 11:25:12,826 | INFO | __main__ | Table 'bnb_1m' has 186275 rows.
+2026-01-15 11:25:12,826 | INFO | __main__ | Starting fetch cycle for ADAUSDT.
+2026-01-15 11:25:12,842 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:25:13,550 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:25:14,244 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:25:14,938 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:25:15,633 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:25:16,329 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:25:17,029 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:25:17,764 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:25:18,468 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:25:19,166 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:25:19,868 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:25:20,578 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:25:21,274 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:25:21,979 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:25:22,688 | INFO | binance_fetcher | Fetching ADAUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:25:22,872 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:25:22,944 | INFO | binance_fetcher | Fetched 13344 rows for ADAUSDT.
+2026-01-15 11:25:22,952 | INFO | binance_fetcher | Saving data to table 'ada_1m' (schema will be resolved at runtime).
+2026-01-15 11:25:28,233 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.ada_1m'.
+2026-01-15 11:25:28,240 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.ada_1m' on column 'timestamp'.
+2026-01-15 11:25:28,240 | INFO | binance_fetcher | Data saved successfully for ADAUSDT (13344 rows).
+2026-01-15 11:25:28,400 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.ada_1m'.
+2026-01-15 11:25:28,400 | INFO | __main__ | Verification success | 5 rows read from 'ada_1m'.
+2026-01-15 11:25:28,434 | INFO | TradeX.utils.db.utils | Table 'data_binance.ada_1m' has 6 columns.
+2026-01-15 11:25:28,435 | INFO | __main__ | Table 'ada_1m' has 6 columns.
+2026-01-15 11:25:30,443 | INFO | TradeX.utils.db.utils | 'data_binance.ada_1m' contains 172961 rows.
+2026-01-15 11:25:30,443 | INFO | __main__ | Table 'ada_1m' has 172961 rows.
+2026-01-15 11:25:30,443 | INFO | __main__ | Starting fetch cycle for XRPUSDT.
+2026-01-15 11:25:30,443 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:25:31,207 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:25:32,022 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:25:32,742 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:25:33,472 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:25:34,232 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:25:34,995 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:25:35,708 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:25:36,424 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:25:37,119 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:25:37,858 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:25:38,568 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:25:39,280 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:25:40,014 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:25:40,737 | INFO | binance_fetcher | Fetching XRPUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:25:40,926 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:25:40,993 | INFO | binance_fetcher | Fetched 13344 rows for XRPUSDT.
+2026-01-15 11:25:41,000 | INFO | binance_fetcher | Saving data to table 'xrp_1m' (schema will be resolved at runtime).
+2026-01-15 11:25:46,914 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.xrp_1m'.
+2026-01-15 11:25:46,924 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.xrp_1m' on column 'timestamp'.
+2026-01-15 11:25:46,924 | INFO | binance_fetcher | Data saved successfully for XRPUSDT (13344 rows).
+2026-01-15 11:25:47,020 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.xrp_1m'.
+2026-01-15 11:25:47,020 | INFO | __main__ | Verification success | 5 rows read from 'xrp_1m'.
+2026-01-15 11:25:47,036 | INFO | TradeX.utils.db.utils | Table 'data_binance.xrp_1m' has 6 columns.
+2026-01-15 11:25:47,037 | INFO | __main__ | Table 'xrp_1m' has 6 columns.
+2026-01-15 11:25:47,447 | INFO | TradeX.utils.db.utils | 'data_binance.xrp_1m' contains 172961 rows.
+2026-01-15 11:25:47,447 | INFO | __main__ | Table 'xrp_1m' has 172961 rows.
+2026-01-15 11:25:47,447 | INFO | __main__ | Starting fetch cycle for DOGEUSDT.
+2026-01-15 11:25:47,462 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:25:48,171 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:25:48,950 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:25:49,701 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:25:50,411 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:25:51,131 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:25:51,839 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:25:52,535 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:25:53,247 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:25:53,961 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:25:54,657 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:25:55,349 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:25:56,077 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:25:56,772 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:25:57,465 | INFO | binance_fetcher | Fetching DOGEUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:25:57,649 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:25:57,716 | INFO | binance_fetcher | Fetched 13344 rows for DOGEUSDT.
+2026-01-15 11:25:57,724 | INFO | binance_fetcher | Saving data to table 'doge_1m' (schema will be resolved at runtime).
+2026-01-15 11:26:05,550 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.doge_1m'.
+2026-01-15 11:26:05,555 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.doge_1m' on column 'timestamp'.
+2026-01-15 11:26:05,555 | INFO | binance_fetcher | Data saved successfully for DOGEUSDT (13344 rows).
+2026-01-15 11:26:05,682 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.doge_1m'.
+2026-01-15 11:26:05,682 | INFO | __main__ | Verification success | 5 rows read from 'doge_1m'.
+2026-01-15 11:26:05,711 | INFO | TradeX.utils.db.utils | Table 'data_binance.doge_1m' has 6 columns.
+2026-01-15 11:26:05,711 | INFO | __main__ | Table 'doge_1m' has 6 columns.
+2026-01-15 11:26:06,083 | INFO | TradeX.utils.db.utils | 'data_binance.doge_1m' contains 172961 rows.
+2026-01-15 11:26:06,083 | INFO | __main__ | Table 'doge_1m' has 172961 rows.
+2026-01-15 11:26:06,083 | INFO | __main__ | Starting fetch cycle for SOLUSDT.
+2026-01-15 11:26:06,083 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:26:06,809 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:26:07,511 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:26:08,208 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:26:08,902 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:26:09,603 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:26:10,296 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:26:11,005 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:26:11,697 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:26:12,397 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:26:13,096 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:26:13,797 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:26:14,496 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:26:15,195 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:26:15,878 | INFO | binance_fetcher | Fetching SOLUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:26:16,055 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:26:16,129 | INFO | binance_fetcher | Fetched 13344 rows for SOLUSDT.
+2026-01-15 11:26:16,136 | INFO | binance_fetcher | Saving data to table 'sol_1m' (schema will be resolved at runtime).
+2026-01-15 11:26:21,550 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.sol_1m'.
+2026-01-15 11:26:21,557 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.sol_1m' on column 'timestamp'.
+2026-01-15 11:26:21,557 | INFO | binance_fetcher | Data saved successfully for SOLUSDT (13344 rows).
+2026-01-15 11:26:21,673 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.sol_1m'.
+2026-01-15 11:26:21,673 | INFO | __main__ | Verification success | 5 rows read from 'sol_1m'.
+2026-01-15 11:26:21,688 | INFO | TradeX.utils.db.utils | Table 'data_binance.sol_1m' has 6 columns.
+2026-01-15 11:26:21,688 | INFO | __main__ | Table 'sol_1m' has 6 columns.
+2026-01-15 11:26:21,996 | INFO | TradeX.utils.db.utils | 'data_binance.sol_1m' contains 172961 rows.
+2026-01-15 11:26:21,996 | INFO | __main__ | Table 'sol_1m' has 172961 rows.
+2026-01-15 11:26:21,996 | INFO | __main__ | Starting fetch cycle for DOTUSDT.
+2026-01-15 11:26:21,996 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:26:22,700 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:26:23,403 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:26:24,148 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:26:24,839 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:26:25,535 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:26:26,235 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:26:26,937 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:26:27,631 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:26:28,335 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:26:29,035 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:26:29,736 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:26:30,428 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:26:31,118 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:26:31,803 | INFO | binance_fetcher | Fetching DOTUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:26:31,982 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:26:32,046 | INFO | binance_fetcher | Fetched 13344 rows for DOTUSDT.
+2026-01-15 11:26:32,054 | INFO | binance_fetcher | Saving data to table 'dot_1m' (schema will be resolved at runtime).
+2026-01-15 11:26:37,003 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.dot_1m'.
+2026-01-15 11:26:37,016 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.dot_1m' on column 'timestamp'.
+2026-01-15 11:26:37,017 | INFO | binance_fetcher | Data saved successfully for DOTUSDT (13344 rows).
+2026-01-15 11:26:37,165 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.dot_1m'.
+2026-01-15 11:26:37,165 | INFO | __main__ | Verification success | 5 rows read from 'dot_1m'.
+2026-01-15 11:26:37,196 | INFO | TradeX.utils.db.utils | Table 'data_binance.dot_1m' has 6 columns.
+2026-01-15 11:26:37,196 | INFO | __main__ | Table 'dot_1m' has 6 columns.
+2026-01-15 11:26:37,519 | INFO | TradeX.utils.db.utils | 'data_binance.dot_1m' contains 172961 rows.
+2026-01-15 11:26:37,519 | INFO | __main__ | Table 'dot_1m' has 172961 rows.
+2026-01-15 11:26:37,519 | INFO | __main__ | Starting fetch cycle for MATICUSDT.
+2026-01-15 11:26:37,519 | INFO | binance_fetcher | Fetching MATICUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:26:37,695 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:26:37,695 | WARNING | binance_fetcher | No data fetched from Binance.
+2026-01-15 11:26:37,706 | WARNING | binance_fetcher | No data to save. Skipping database insert.
+2026-01-15 11:26:37,710 | ERROR | TradeX.utils.db.utils | Failed to read table.
+Traceback (most recent call last):
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "data_binance.matic_1m" does not exist
+LINE 1: SELECT * FROM data_binance.matic_1m LIMIT 5
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\utils\db\utils.py", line 229, in read_df_from_db
+    df = pd.read_sql_query(query, engine)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\pandas\io\sql.py", line 528, in read_sql_query
+    return pandas_sql.read_query(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\pandas\io\sql.py", line 1848, in read_query
+    result = self.execute(sql, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\pandas\io\sql.py", line 1671, in execute
+    return self.con.exec_driver_sql(sql, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1779, in exec_driver_sql
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "data_binance.matic_1m" does not exist
+LINE 1: SELECT * FROM data_binance.matic_1m LIMIT 5
+                      ^
+
+[SQL: SELECT * FROM data_binance.matic_1m LIMIT 5]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-15 11:26:37,734 | WARNING | __main__ | No data found in database for 'MATICUSDT'.
+2026-01-15 11:26:37,753 | ERROR | TradeX.utils.db.utils | Failed to count table columns.
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\utils\db\utils.py", line 297, in total_columns
+    columns = inspector.get_columns(table_name, schema=schema)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\reflection.py", line 869, in get_columns
+    col_defs = self.dialect.get_columns(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in get_columns
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\reflection.py", line 106, in cache
+    ret = fn(self, con, *args, **kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\dialects\postgresql\base.py", line 3762, in get_columns
+    return self._value_or_raise(data, table_name, schema)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\dialects\postgresql\base.py", line 3730, in _value_or_raise
+    raise exc.NoSuchTableError(
+sqlalchemy.exc.NoSuchTableError: data_binance.matic_1m
+2026-01-15 11:26:37,765 | INFO | __main__ | Table 'matic_1m' has 0 columns.
+2026-01-15 11:26:37,767 | ERROR | TradeX.utils.db.utils | Failed to count rows.
+Traceback (most recent call last):
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "data_binance.matic_1m" does not exist
+LINE 1: SELECT COUNT(*) FROM data_binance.matic_1m
+                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\utils\db\utils.py", line 249, in total_rows
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "data_binance.matic_1m" does not exist
+LINE 1: SELECT COUNT(*) FROM data_binance.matic_1m
+                             ^
+
+[SQL: SELECT COUNT(*) FROM data_binance.matic_1m]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-15 11:26:37,782 | INFO | __main__ | Table 'matic_1m' has 0 rows.
+2026-01-15 11:26:37,782 | INFO | __main__ | Starting fetch cycle for LINKUSDT.
+2026-01-15 11:26:37,783 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-05 19:00:00 | interval=1m
+2026-01-15 11:26:38,480 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-15 11:26:39,176 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-15 11:26:39,876 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-15 11:26:40,576 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-15 11:26:41,274 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-15 11:26:41,969 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-15 11:26:42,662 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-15 11:26:43,376 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-15 11:26:44,118 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-15 11:26:44,899 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-15 11:26:45,720 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-15 11:26:46,539 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-15 11:26:47,357 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-15 11:26:48,174 | INFO | binance_fetcher | Fetching LINKUSDT | from 2026-01-15 01:24:00.001000 | interval=1m
+2026-01-15 11:26:48,340 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-15 11:26:48,414 | INFO | binance_fetcher | Fetched 13344 rows for LINKUSDT.
+2026-01-15 11:26:48,420 | INFO | binance_fetcher | Saving data to table 'link_1m' (schema will be resolved at runtime).
+2026-01-15 11:26:53,429 | INFO | TradeX.utils.db.utils | Inserted 13344 rows into 'data_binance.link_1m'.
+2026-01-15 11:26:53,435 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.link_1m' on column 'timestamp'.
+2026-01-15 11:26:53,436 | INFO | binance_fetcher | Data saved successfully for LINKUSDT (13344 rows).
+2026-01-15 11:26:53,514 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_binance.link_1m'.
+2026-01-15 11:26:53,514 | INFO | __main__ | Verification success | 5 rows read from 'link_1m'.
+2026-01-15 11:26:53,529 | INFO | TradeX.utils.db.utils | Table 'data_binance.link_1m' has 6 columns.
+2026-01-15 11:26:53,530 | INFO | __main__ | Table 'link_1m' has 6 columns.
+2026-01-15 11:26:54,211 | INFO | TradeX.utils.db.utils | 'data_binance.link_1m' contains 172961 rows.
+2026-01-15 11:26:54,211 | INFO | __main__ | Table 'link_1m' has 172961 rows.
+2026-01-15 11:26:54,211 | INFO | __main__ | Data ingestion pipeline completed successfully.
