@@ -4,7 +4,7 @@ from datetime import datetime
 import yaml
 import pandas as pd
 
-from TradeX.utils.db.db_utils import (
+from TradeX.utils.db.utils import (
     get_engine,
     create_schema,
     read_df_from_db,
@@ -52,8 +52,8 @@ create_schema(engine, schema="data_binance")
 # ---------------------------
 # Initialize Binance Fetcher
 # ---------------------------
-API_KEY = os.getenv("API_KEY")
-API_SECRET = os.getenv("API_SECRET_KEY")
+API_KEY = os.getenv("BINANCE_API_KEY")
+API_SECRET = os.getenv("BINANCE_SECRET_KEY")
 if not API_KEY or not API_SECRET:
     raise RuntimeError("API_KEY or API_SECRET_KEY not found in environment variables.")
 

@@ -2,7 +2,7 @@ from binance.client import Client
 import pandas as pd
 from datetime import datetime
 import time
-from TradeX.utils.db.db_utils import save_df_to_db  
+from TradeX.utils.db.utils import save_df_to_db  
 
 class BinanceFuturesFetcher:
     def __init__(self, api_key, api_secret, engine, schema="data_binance"):
