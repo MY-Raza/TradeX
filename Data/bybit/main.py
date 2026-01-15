@@ -97,9 +97,6 @@ for symbol in symbols:
     df = fill_missing_timestamps(df, interval="1m")
     logger.info("Missing timestamps inserted.")
 
-    df = remove_outliers(df)
-    logger.info("Outliers removed.")
-
     df = fill_missing_values(df, method="ffill")
     logger.info("Missing values forward-filled.")
 
