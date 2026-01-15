@@ -99,7 +99,7 @@ def drop_schema(engine, schema: str | None = None):
     """
     try:
         schema = resolve_schema(schema)
-        confirm = input(f"Drop schema '{schema}'? (yes/no): ").lower()
+        confirm = input(f"Are you sure to drop '{schema}'? (yes/no): ").lower()
         if confirm != "yes":
             logger.warning("Schema drop cancelled.")
             return
@@ -234,7 +234,7 @@ def drop_table(engine, table_name: str, schema: str | None = None):
         full_name = f"{schema}.{table_name}"
 
         # Ask user for confirmation before dropping
-        confirm = input(f"⚠️ Drop table '{full_name}'? (yes/no): ").lower()
+        confirm = input(f"Are you sure to drop table '{full_name}'? (yes/no): ").lower()
         if confirm != "yes":
             logger.warning("Table drop cancelled by user.")
             return
