@@ -65,42 +65,35 @@ class BybitFuturesFetcher:
             pd.DataFrame: Raw klines DataFrame
         """
         start_ts, end_ts = self._convert_to_timestamp(start_date, end_date)
-        interval_ms = self.INTERVAL_MAP.get(interval, 60_000)
 
         all_klines = []
-        loop_count = 0
-        max_loops = 1000  # safety to avoid infinite loops
-
-        while start_ts < end_ts and loop_count < max_loops:
-            loop_count += 1
+        while start_ts < end_ts:
+            
             logger.info(
                 f"Fetching {symbol} from {datetime.utcfromtimestamp(start_ts / 1000)} interval={interval}"
             )
 
             response = self.client.get_kline(
-                category="linear",  # USDT Perpetual
-                symbol=symbol,
-                interval=interval,
-                start=start_ts,
-                end=end_ts,
-                limit=200  # safer limit for Bybit
-            )
+                        category="linear",
+                        symbol=symbol,
+                        interval=interval,
+                        start=start_ts,
+                        end=end_ts,
+                         limit=1000
+                        )
 
-            klines = response.get("result", {}).get("list", [])
+               # Extract the list of klines safely
+            klines_list = response.get("result", {}).get("list", [])
 
-            if not klines:
+            if not klines_list:
                 logger.info("No more klines returned. Ending loop.")
                 break
 
-            all_klines.extend(klines)
-            last_ts = int(klines[-1][0])
-            if last_ts == start_ts:
-                # safeguard if API returns same timestamp repeatedly
-                logger.warning("API returned repeated timestamp. Ending loop to avoid infinite loop.")
-                break
+            all_klines.extend(klines_list)
 
-            start_ts = last_ts + interval_ms
-            time.sleep(0.3)
+            # Update start_ts using the last kline's timestamp
+            start_ts = int(klines_list[-1][0]) + 1  # ensure int
+            time.sleep(0.5)
 
         if not all_klines:
             logger.warning("No data fetched from Bybit.")
