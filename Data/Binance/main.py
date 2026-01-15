@@ -159,6 +159,6 @@ for symbol in symbols:
  #   table_name = f"{symbol.lower()}_1m"
   #  drop_table(engine=engine,table_name=table_name,schema=SCHEMA)
 
-#drop_schema(engine=engine,schema=SCHEMA)
+drop_schema(engine=engine,schema=SCHEMA)
 
 logger.info("Data ingestion pipeline completed successfully.")
