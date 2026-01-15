@@ -1,164 +1,114 @@
 import os
 from datetime import datetime
-
 import yaml
 from dotenv import load_dotenv
 
-from TradeX.utils.db.utils import (
-    get_engine,
-    create_schema,
-    read_df_from_db,
-    total_columns,
-    total_rows,
-    drop_schema,
-    drop_table
-)
+from TradeX.utils.db.utils import get_engine, create_schema, save_df_to_db, read_df_from_db, total_columns, total_rows
 from TradeX.logs.logging import get_logger
 from binance_fetcher import BinanceFuturesFetcher
+from TradeX.utils.cleaning_utils import clean_klines_df
 
 logger = get_logger(__name__)
+
+"""
+main.py
+
+This script runs the end-to-end Binance Futures data ingestion pipeline:
+
+1. Load environment variables and configuration.
+2. Convert dates into timestamps.
+3. Initialize the database and schema.
+4. Fetch raw klines from Binance using BinanceFuturesFetcher.
+5. Clean the data using cleaning_utils.
+6. Save the cleaned data into PostgreSQL/TimescaleDB.
+7. Verify data insertion and log table stats.
+
+Dependencies:
+- Binance API credentials (BINANCE_API_KEY, BINANCE_SECRET_KEY)
+- DATABASE_URL environment variable
+- config.yml containing symbols and date range
+"""
 
 # ---------------------------
 # Load Environment Variables
 # ---------------------------
-load_dotenv()
+load_dotenv()  # Load variables from .env file
+SCHEMA = os.getenv("DB_SCHEMA", "data_binance")  # Default schema if not in .env
 logger.info("Environment variables loaded.")
-SCHEMA = os.getenv("DB_SCHEMA", "data_binance")
+
 # ---------------------------
-# Load Configuration
+# Load Config
 # ---------------------------
-try:
-    with open("config.yml", "r") as f:
-        config = yaml.safe_load(f)
+with open("config.yml", "r") as f:
+    config = yaml.safe_load(f)
 
-    exchange_name = config.get("exchange_name", "binance")
-    symbols = config.get("symbols", [])
-    start_date_str = config.get("start_date")
-    end_date_str = config.get("end_date", "now")
-
-    logger.info("Configuration loaded successfully.")
-
-except Exception:
-    logger.exception("Failed to load configuration file.")
-    raise
+symbols = config.get("symbols", [])          # List of trading symbols
+start_date_str = config.get("start_date")   # Start date in YYYY-MM-DD
+end_date_str = config.get("end_date", "now")  # End date or "now"
 
 # ---------------------------
 # Convert Dates to Timestamps (ms)
 # ---------------------------
-try:
-    start_ts = int(datetime.strptime(start_date_str, "%Y-%m-%d").timestamp() * 1000)
-
-    if end_date_str == "now":
-        end_ts = int(datetime.utcnow().timestamp() * 1000)
-    else:
-        end_ts = int(datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000)
-
-    logger.info(f"Date range resolved | start={start_date_str} | end={end_date_str}")
-
-except Exception:
-    logger.exception("Failed to parse date configuration.")
-    raise
+start_ts = int(datetime.strptime(start_date_str, "%Y-%m-%d").timestamp() * 1000)
+end_ts = (
+    int(datetime.utcnow().timestamp() * 1000)
+    if end_date_str == "now"
+    else int(datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000)
+)
+logger.info(f"Date range resolved | start={start_date_str} | end={end_date_str}")
 
 # ---------------------------
 # Initialize Database
 # ---------------------------
-engine = get_engine()
+engine = get_engine()  # Create SQLAlchemy engine
 if engine is None:
-    logger.critical("Database engine initialization failed.")
     raise RuntimeError("Database engine could not be initialized.")
-
-logger.info("Database engine initialized.")
-
-# ---------------------------
-# Resolve Schema (prompt user once)
-# ---------------------------
-logger.info(f"Using schema: '{SCHEMA}'")
-
-# Ensure schema exists
-create_schema(engine, schema=SCHEMA)
-logger.info("Schema ensured.")
+create_schema(engine, schema=SCHEMA)  # Ensure schema exists
 
 # ---------------------------
 # Initialize Binance Fetcher
 # ---------------------------
 API_KEY = os.getenv("BINANCE_API_KEY")
 API_SECRET = os.getenv("BINANCE_SECRET_KEY")
-
-if not API_KEY or not API_SECRET:
-    logger.critical("Binance API credentials missing.")
-    raise RuntimeError("BINANCE_API_KEY or BINANCE_SECRET_KEY not found.")
-
-fetcher = BinanceFuturesFetcher(
-    api_key=API_KEY,
-    api_secret=API_SECRET,
-    engine=engine,
-    schema=SCHEMA   
-)
-
-logger.info("Binance Futures Fetcher initialized.")
+fetcher = BinanceFuturesFetcher(api_key=API_KEY, api_secret=API_SECRET)
 
 # ---------------------------
-# Fetch, Store & Verify Data
+# Fetch, Clean & Save Data
 # ---------------------------
 for symbol in symbols:
-    try:
-        symbol_pair = f"{symbol.upper()}USDT"
-        logger.info(f"Starting fetch cycle for {symbol_pair}.")
+    # Fetch raw Binance klines for the symbol
+    raw_df = fetcher.fetch_klines(symbol=f"{symbol.upper()}USDT", start_ts=start_ts, end_ts=end_ts)
+    if raw_df.empty:
+        logger.warning(f"No data fetched for {symbol}. Skipping.")
+        continue
 
-        fetcher.fetch_and_save(
-            symbol=symbol_pair,
-            start_ts=start_ts,
-            end_ts=end_ts,
-            interval="1m"
-        )
+    # Clean the raw data using cleaning_utils
+    df = clean_klines_df(raw_df)
 
-        table_name = f"{symbol.lower()}_1m"
+    # Save cleaned DataFrame to DB
+    table_name = f"{symbol.lower()}_1m"
+    save_df_to_db(
+        df=df,
+        table_name=table_name,
+        engine=engine,
+        schema=SCHEMA,
+        time_column="timestamp",
+        is_timeseries=True  # Converts table to TimescaleDB hypertable
+    )
 
-        # ---------------------------
-        # Read back data (verification)
-        # ---------------------------
-        df_db = read_df_from_db(
-            engine=engine,
-            table_name=table_name,
-            schema=SCHEMA,   # pass schema
-            limit=5
-        )
+    # ---------------------------
+    # Verification
+    # ---------------------------
+    # Read back first 5 rows to ensure data saved
+    df_db = read_df_from_db(engine, table_name, schema=SCHEMA, limit=5)
+    if not df_db.empty:
+        logger.info(f"Verification success | {len(df_db)} rows read from '{table_name}'.")
+    else:
+        logger.warning(f"No data found in database for '{symbol}'.")
 
-        if not df_db.empty:
-            logger.info(
-                f"Verification success | {len(df_db)} rows read from '{table_name}'."
-            )
-        else:
-            logger.warning(f"No data found in database for '{symbol_pair}'.")
-
-        # ---------------------------
-        # Column Count
-        # ---------------------------
-        col_count = total_columns(
-            engine=engine,
-            table_name=table_name,
-            schema=SCHEMA   # pass schema
-        )
-        logger.info(f"Table '{table_name}' has {col_count} columns.")
-
-        # ---------------------------
-        # Row Count
-        # ---------------------------
-        row_count = total_rows(
-            engine=engine,
-            table_name=table_name,
-            schema=SCHEMA  # pass schema
-        )
-        logger.info(f"Table '{table_name}' has {row_count} rows.")
-
-    except Exception:
-        logger.exception(f"Unexpected error during processing of symbol '{symbol}'.")
-
-    
-#for symbol in symbols:
- #   table_name = f"{symbol.lower()}_1m"
-  #  drop_table(engine=engine,table_name=table_name,schema=SCHEMA)
-
-drop_schema(engine=engine,schema=SCHEMA)
+    # Log table statistics
+    col_count = total_columns(engine, table_name, schema=SCHEMA)
+    row_count = total_rows(engine, table_name, schema=SCHEMA)
+    logger.info(f"Table '{table_name}' has {col_count} columns and {row_count} rows.")
 
 logger.info("Data ingestion pipeline completed successfully.")
