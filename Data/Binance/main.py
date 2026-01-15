@@ -46,16 +46,7 @@ symbols = config.get("symbols", [])          # List of trading symbols
 start_date_str = config.get("start_date")   # Start date in YYYY-MM-DD
 end_date_str = config.get("end_date", "now")  # End date or "now"
 
-# ---------------------------
-# Convert Dates to Timestamps (ms)
-# ---------------------------
-start_ts = int(datetime.strptime(start_date_str, "%Y-%m-%d").timestamp() * 1000)
-end_ts = (
-    int(datetime.utcnow().timestamp() * 1000)
-    if end_date_str == "now"
-    else int(datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000)
-)
-logger.info(f"Date range resolved | start={start_date_str} | end={end_date_str}")
+
 
 # ---------------------------
 # Initialize Database
