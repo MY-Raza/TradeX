@@ -1,19 +1,20 @@
 import logging
 import os
 
-# ---------------------------
-# Resolve absolute path safely
-# ---------------------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# --------------------------------------------------
+# Project root = parent directory of "logs"
+# --------------------------------------------------
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
-
+LOG_DIR = os.path.join(PROJECT_ROOT, "logs")
 LOG_FILE = os.path.join(LOG_DIR, "db_utils.log")
 
-# ---------------------------
+# logs folder already exists, but this is safe
+os.makedirs(LOG_DIR, exist_ok=True)
+
+# --------------------------------------------------
 # Logging Configuration
-# ---------------------------
+# --------------------------------------------------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",

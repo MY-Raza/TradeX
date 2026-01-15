@@ -9,22 +9,19 @@ from TradeX.utils.db.utils import (
     create_schema,
     read_df_from_db,
     total_columns,
-    total_rows
+    total_rows,
 )
 from TradeX.logs.logging import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 
-
 logger = get_logger(__name__)
-
 
 # ---------------------------
 # Load Environment Variables
 # ---------------------------
 load_dotenv()
 logger.info("Environment variables loaded.")
-
-
+SCHEMA = os.getenv("DB_SCHEMA", "data_binance")
 # ---------------------------
 # Load Configuration
 # ---------------------------
@@ -43,31 +40,22 @@ except Exception:
     logger.exception("Failed to load configuration file.")
     raise
 
-
 # ---------------------------
 # Convert Dates to Timestamps (ms)
 # ---------------------------
 try:
-    start_ts = int(
-        datetime.strptime(start_date_str, "%Y-%m-%d").timestamp() * 1000
-    )
+    start_ts = int(datetime.strptime(start_date_str, "%Y-%m-%d").timestamp() * 1000)
 
     if end_date_str == "now":
         end_ts = int(datetime.utcnow().timestamp() * 1000)
     else:
-        end_ts = int(
-            datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000
-        )
+        end_ts = int(datetime.strptime(end_date_str, "%Y-%m-%d").timestamp() * 1000)
 
-    logger.info(
-        f"Date range resolved | "
-        f"start={start_date_str} | end={end_date_str}"
-    )
+    logger.info(f"Date range resolved | start={start_date_str} | end={end_date_str}")
 
 except Exception:
     logger.exception("Failed to parse date configuration.")
     raise
-
 
 # ---------------------------
 # Initialize Database
@@ -79,13 +67,14 @@ if engine is None:
 
 logger.info("Database engine initialized.")
 
+# ---------------------------
+# Resolve Schema (prompt user once)
+# ---------------------------
+logger.info(f"Using schema: '{SCHEMA}'")
 
-# ---------------------------
-# Ensure Schema Exists (PROMPTS IF NOT PROVIDED)
-# ---------------------------
-create_schema(engine)   # ← schema resolved interactively
+# Ensure schema exists
+create_schema(engine, schema=SCHEMA)
 logger.info("Schema ensured.")
-
 
 # ---------------------------
 # Initialize Binance Fetcher
@@ -100,11 +89,11 @@ if not API_KEY or not API_SECRET:
 fetcher = BinanceFuturesFetcher(
     api_key=API_KEY,
     api_secret=API_SECRET,
-    engine=engine
+    engine=engine,
+    schema=SCHEMA   
 )
 
 logger.info("Binance Futures Fetcher initialized.")
-
 
 # ---------------------------
 # Fetch, Store & Verify Data
@@ -129,46 +118,38 @@ for symbol in symbols:
         df_db = read_df_from_db(
             engine=engine,
             table_name=table_name,
-            limit=5   # schema prompted if not provided
+            schema=SCHEMA,   # pass schema
+            limit=5
         )
 
         if not df_db.empty:
             logger.info(
-                f"Verification success | "
-                f"{len(df_db)} rows read from '{table_name}'."
+                f"Verification success | {len(df_db)} rows read from '{table_name}'."
             )
         else:
-            logger.warning(
-                f"No data found in database for '{symbol_pair}'."
-            )
+            logger.warning(f"No data found in database for '{symbol_pair}'.")
 
         # ---------------------------
         # Column Count
         # ---------------------------
         col_count = total_columns(
             engine=engine,
-            table_name=table_name
+            table_name=table_name,
+            schema=SCHEMA   # pass schema
         )
-
-        logger.info(
-            f"Table '{table_name}' has {col_count} columns."
-        )
+        logger.info(f"Table '{table_name}' has {col_count} columns.")
 
         # ---------------------------
         # Row Count
         # ---------------------------
         row_count = total_rows(
             engine=engine,
-            table_name=table_name
+            table_name=table_name,
+            schema=SCHEMA  # pass schema
         )
-
-        logger.info(
-            f"Table '{table_name}' has {row_count} rows."
-        )
+        logger.info(f"Table '{table_name}' has {row_count} rows.")
 
     except Exception:
-        logger.exception(
-            f"Unexpected error during processing of symbol '{symbol}'."
-        )
+        logger.exception(f"Unexpected error during processing of symbol '{symbol}'.")
 
 logger.info("Data ingestion pipeline completed successfully.")

@@ -11,9 +11,12 @@ logger = get_logger(__name__)
 # ---------------------------
 # Helper Utilities
 # ---------------------------
+USER_SCHEMA: str | None = None
+
 def resolve_schema(schema: str | None) -> str:
     """
     Resolve schema value. Prompt user if schema is not provided.
+    Only prompts once and remembers the schema globally.
 
     Args:
         schema (str | None): Schema name
@@ -24,16 +27,22 @@ def resolve_schema(schema: str | None) -> str:
     Raises:
         ValueError: If schema is empty
     """
-    if schema:
+    global USER_SCHEMA
+
+    if schema:  # explicit schema passed
+        USER_SCHEMA = schema
         return schema
 
+    if USER_SCHEMA:  # return previously stored schema
+        return USER_SCHEMA
+
+    # Prompt user for schema if not already stored
     user_schema = input("🔎 Please enter schema name: ").strip()
     if not user_schema:
         raise ValueError("Schema name cannot be empty.")
 
-    logger.info(f"Schema provided by user: '{user_schema}'")
-    return user_schema
-
+    USER_SCHEMA = user_schema
+    return USER_SCHEMA
 
 # ---------------------------
 # Engine Initialization

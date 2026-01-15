@@ -21,7 +21,7 @@ class BinanceFuturesFetcher:
         api_key: str,
         api_secret: str,
         engine,
-        schema: str | None = None
+        schema
     ):
         """
         Initialize Binance client and database configuration.
