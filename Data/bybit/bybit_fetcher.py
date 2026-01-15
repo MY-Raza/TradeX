@@ -16,23 +16,13 @@ class BybitFuturesFetcher:
 
     INTERVAL_MAP = {
         "1": 60_000,
-        "3": 3 * 60_000,
-        "5": 5 * 60_000,
-        "15": 15 * 60_000,
-        "30": 30 * 60_000,
-        "60": 60 * 60_000,
-        "120": 120 * 60_000,
-        "240": 240 * 60_000,
-        "360": 360 * 60_000,
-        "720": 720 * 60_000,
-        "D": 24 * 60 * 60_000
     }
 
-    def __init__(self, api_key: str, api_secret: str, testnet: bool = False):
+    def __init__(self, api_key: str, api_secret: str, demo: bool = False):
         self.client = HTTP(
             api_key=api_key,
             api_secret=api_secret,
-            testnet=testnet
+            demo=demo
         )
         logger.info("BybitFuturesFetcher initialized.")
 

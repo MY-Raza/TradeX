@@ -68,7 +68,7 @@ API_SECRET = os.getenv("BYBIT_SECRET_KEY")
 fetcher = BybitFuturesFetcher(
     api_key=API_KEY,
     api_secret=API_SECRET,
-    testnet=False
+    demo=False
 )
 
 # ---------------------------
