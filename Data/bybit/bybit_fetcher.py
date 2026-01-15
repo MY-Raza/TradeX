@@ -100,7 +100,6 @@ class BybitFuturesFetcher:
         # Convert numeric columns
         numeric_cols = ["open", "high", "low", "close", "volume", "turnover"]
         df[numeric_cols] = df[numeric_cols].astype(float)
-        df["timestamp"] = pd.to_datetime(df["timestamp"].astype(int), unit="ms")
-
+        df["timestamp"] = df["timestamp"].astype(int)
         logger.info(f"Fetched {len(df)} rows for {symbol}.")
         return df
