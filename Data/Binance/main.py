@@ -3,7 +3,7 @@ from datetime import datetime
 import yaml
 from dotenv import load_dotenv
 
-from TradeX.utils.db.utils import get_engine, create_schema, save_df_to_db, read_df_from_db, total_columns, total_rows
+from TradeX.utils.db.utils import get_engine, create_schema, save_df_to_db, read_df_from_db, total_columns, total_rows, drop_schema
 from TradeX.logs.logging import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.cleaning_utils import clean_klines_df
@@ -83,9 +83,11 @@ for symbol in symbols:
         continue
 
     # Clean the raw data using cleaning_utils
+    logger.info(f"Data Fetching Completed")
     df = clean_klines_df(raw_df)
 
     # Save cleaned DataFrame to DB
+    logger.info(f"Data Cleaning Completed")
     table_name = f"{symbol.lower()}_1m"
     save_df_to_db(
         df=df,
@@ -110,5 +112,7 @@ for symbol in symbols:
     col_count = total_columns(engine, table_name, schema=SCHEMA)
     row_count = total_rows(engine, table_name, schema=SCHEMA)
     logger.info(f"Table '{table_name}' has {col_count} columns and {row_count} rows.")
+
+drop_schema(engine=engine,schema=SCHEMA)
 
 logger.info("Data ingestion pipeline completed successfully.")
