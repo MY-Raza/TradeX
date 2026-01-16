@@ -25,15 +25,22 @@ logger = get_logger(__name__)
 """
 main.py
 
-End-to-end Binance Futures data ingestion pipeline:
+End-to-end Binance Futures data ingestion pipeline.
 
-1. Load environment variables and config
-2. Initialize database and schema
-3. Initialize Binance Futures fetcher (stateful)
-4. Fetch raw OHLCV data
-5. Clean and process data
-6. Save to PostgreSQL / TimescaleDB
-7. Verify insertion
+Pipeline Steps:
+1. Load environment variables (API keys, DB schema).
+2. Load configuration from 'config.yml'.
+3. Initialize database engine and schema.
+4. Initialize Binance Futures fetcher for each symbol.
+5. Fetch RAW OHLCV klines data.
+6. Clean and process OHLCV data.
+7. Save cleaned data to PostgreSQL / TimescaleDB.
+8. Verify data insertion and log table statistics.
+
+Notes:
+- The fetcher returns RAW data; cleaning and preprocessing is handled separately.
+- Optional resampling can be applied to higher timeframes.
+- Schema drop is optional and should be used with caution.
 """
 
 # -------------------------------------------------
@@ -41,7 +48,7 @@ End-to-end Binance Futures data ingestion pipeline:
 # -------------------------------------------------
 load_dotenv()
 
-SCHEMA = os.getenv("DB_SCHEMA_BINANCE", "data_binance")
+SCHEMA = os.getenv("DB_SCHEMA_BINANCE", "data_binance")  # Default schema
 BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
 BINANCE_SECRET_KEY = os.getenv("BINANCE_SECRET_KEY")
 
@@ -51,7 +58,7 @@ if not BINANCE_API_KEY or not BINANCE_SECRET_KEY:
 logger.info("Environment variables loaded successfully.")
 
 # -------------------------------------------------
-# Load Config
+# Load Configuration
 # -------------------------------------------------
 with open("config.yml", "r") as f:
     config = yaml.safe_load(f)
@@ -65,7 +72,7 @@ if not symbols or not start_date:
     raise ValueError("Config file must contain at least 'symbols' and 'start_date'.")
 
 logger.info(
-    f"Config loaded | symbols={symbols} | start={start_date} | end={end_date}"
+    f"Configuration loaded | symbols={symbols} | start={start_date} | end={end_date} | interval={interval}"
 )
 
 # -------------------------------------------------
@@ -75,6 +82,7 @@ engine = get_engine()
 if engine is None:
     raise RuntimeError("Database engine could not be initialized.")
 
+# Create schema if it does not exist
 create_schema(engine, schema=SCHEMA)
 logger.info(f"Database schema '{SCHEMA}' is ready.")
 
@@ -82,8 +90,9 @@ logger.info(f"Database schema '{SCHEMA}' is ready.")
 # Fetch, Clean & Store Data
 # -------------------------------------------------
 for symbol in symbols:
-    logger.info(f"Starting pipeline for symbol: {symbol}")
+    logger.info(f"Starting data pipeline for symbol: {symbol}")
 
+    # Initialize Binance fetcher
     fetcher = BinanceFuturesFetcher(
         api_key=BINANCE_API_KEY,
         api_secret=BINANCE_SECRET_KEY,
@@ -94,15 +103,15 @@ for symbol in symbols:
     )
 
     # ---------------------------
-    # Fetch Raw Data
+    # Fetch RAW OHLCV Data
     # ---------------------------
     raw_df = fetcher.fetch_klines()
 
     if raw_df.empty:
-        logger.warning(f"No data fetched for {symbol}. Skipping.")
+        logger.warning(f"No data fetched for {symbol}. Skipping to next symbol.")
         continue
 
-    logger.info(f"Raw data fetched | rows={len(raw_df)}")
+    logger.info(f"RAW data fetched for {symbol} | rows={len(raw_df)}")
 
     # ---------------------------
     # Data Cleaning Pipeline
@@ -116,12 +125,16 @@ for symbol in symbols:
     df = fill_missing_values(df, method="ffill")
     logger.info("Missing values forward-filled.")
 
-    # Optional resampling
+    # Optional: Resample to higher timeframe
     # df = resample_ohlcv(df, interval="5min")
     # logger.info("Data resampled to 5-minute candles.")
 
+    if df.empty:
+        logger.warning(f"Cleaned DataFrame empty for {symbol}. Skipping database save.")
+        continue
+
     # ---------------------------
-    # Save to Database
+    # Save Data to Database
     # ---------------------------
     table_name = f"{symbol.lower()}_{interval.replace('m', 'm')}"
 
@@ -134,7 +147,7 @@ for symbol in symbols:
         is_timeseries=True
     )
 
-    logger.info(f"Data saved to table '{SCHEMA}.{table_name}'")
+    logger.info(f"Cleaned data saved to table '{SCHEMA}.{table_name}'")
 
     # ---------------------------
     # Verification
@@ -143,22 +156,21 @@ for symbol in symbols:
 
     if not df_db.empty:
         logger.info(
-            f"Verification successful | "
-            f"{len(df_db)} rows read from '{table_name}'"
+            f"Verification successful | {len(df_db)} rows read from '{table_name}'"
         )
     else:
         logger.warning(f"Verification failed for table '{table_name}'")
 
+    # Log table statistics
     col_count = total_columns(engine, table_name, schema=SCHEMA)
     row_count = total_rows(engine, table_name, schema=SCHEMA)
 
     logger.info(
-        f"Table stats | table={table_name} | "
-        f"columns={col_count} | rows={row_count}"
+        f"Table stats | table={table_name} | columns={col_count} | rows={row_count}"
     )
 
 # -------------------------------------------------
-# Optional: Drop Schema (USE WITH CAUTION)
+# Optional: Drop Schema (Use With Caution)
 # -------------------------------------------------
 # drop_schema(engine=engine, schema=SCHEMA)
 
