@@ -4,72 +4,63 @@ from TradeX.logs.logging import get_logger
 logger = get_logger(__name__)
 
 
-def clean_klines_df(df: pd.DataFrame) -> pd.DataFrame:
+def clean_klines_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     """
-    Perform basic OHLCV data cleaning for Binance or other exchanges.
+    Comprehensive OHLCV data cleaning pipeline.
 
-    Cleaning steps:
+    Steps performed:
         1. Keep only essential columns: timestamp, open, high, low, close, volume
-        2. Convert OHLCV fields to numeric types (float)
-        3. Convert timestamp to integer milliseconds
+        2. Convert OHLCV columns to float
+        3. Ensure timestamp is integer milliseconds
         4. Sort by timestamp
         5. Remove duplicate timestamps
         6. Drop the last candle (often incomplete)
+        7. Fill missing timestamps to ensure a continuous series
+        8. Fill missing OHLCV values using forward-fill (default)
 
     Args:
         df (pd.DataFrame): Raw OHLCV DataFrame.
+        interval (str, optional): Kline interval for filling missing timestamps.
+                                  Options: "1m", "5m", "15m", "1h", "1d". Default is "1m".
 
     Returns:
-        pd.DataFrame: Cleaned OHLCV DataFrame.
+        pd.DataFrame: Cleaned OHLCV DataFrame with continuous timestamps and filled values.
     """
     if df.empty:
         logger.warning("Received empty DataFrame for cleaning.")
         return df
 
-    # Keep only necessary columns
+    df = df.copy()
+
+    # ---------------------------
+    # Keep essential columns
+    # ---------------------------
     required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
-    df = df[required_cols].copy()
+    df = df[required_cols]
 
-    # Convert OHLCV to float
-    numeric_cols = ["open", "high", "low", "close", "volume"]
-    df[numeric_cols] = df[numeric_cols].astype(float)
-
-    # Ensure timestamp is int
+    # ---------------------------
+    # Convert OHLCV to float and timestamp to int
+    # ---------------------------
+    df[["open", "high", "low", "close", "volume"]] = df[["open", "high", "low", "close", "volume"]].astype(float)
     df["timestamp"] = df["timestamp"].astype(int)
 
-    # Sort by timestamp
+    # -----
+    # Sort 
+    # -----
     df = df.sort_values("timestamp")
-    
 
-    # Drop the last candle (usually incomplete)
+    # ---------------------------
+    # Drop last candle (often incomplete)
+    # ---------------------------
     if len(df) > 1:
         df = df.iloc[:-1]
 
-    logger.info(f"Cleaned OHLCV data: {len(df)} rows")
-    return df.reset_index(drop=True)
-
-
-def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
-    """
-    Fill missing timestamps to ensure a continuous time series.
-
-    Args:
-        df (pd.DataFrame): OHLCV DataFrame with 'timestamp' column in ms.
-        interval (str, optional): Kline interval, e.g., "1m", "5m", "1h", "1d". Defaults to "1m".
-
-    Returns:
-        pd.DataFrame: OHLCV DataFrame with continuous timestamps.
-    """
-    if df.empty:
-        return df
-
-    df = df.copy()
-
-    # Convert timestamps to datetime
+    # ---------------------------
+    # Fill missing timestamps
+    # ---------------------------
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
     df.set_index("timestamp", inplace=True)
 
-    # Map interval string to pandas frequency
     interval_map = {
         "1m": "1min",
         "5m": "5min",
@@ -78,42 +69,22 @@ def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1m") -> pd.DataFr
         "1d": "1D",
     }
     freq = interval_map.get(interval, "1min")
-
-    # Create a full timestamp index
     full_index = pd.date_range(df.index.min(), df.index.max(), freq=freq)
-
-    # Reindex to fill missing timestamps
     df = df.reindex(full_index)
 
-    # Reset index and convert back to ms
+    # ---------------------------
+    # Fill missing values
+    # ---------------------------
+    df[["open", "high", "low", "close", "volume"]] = df[["open", "high", "low", "close", "volume"]].fillna(method="ffill")
+
+    # ---------------------------
+    # Reset index and convert timestamp to ms
+    # ---------------------------
     df.reset_index(inplace=True)
     df.rename(columns={"index": "timestamp"}, inplace=True)
     df["timestamp"] = df["timestamp"].astype("int64") // 10**6
 
-    logger.info(f"Missing timestamps filled. Total rows: {len(df)}")
-    return df
-
-
-def fill_missing_values(df: pd.DataFrame, method: str = "ffill") -> pd.DataFrame:
-    """
-    Fill missing OHLCV values using forward or backward fill.
-
-    Args:
-        df (pd.DataFrame): OHLCV DataFrame with possible NaNs.
-        method (str, optional): Fill method: 'ffill' (forward) or 'bfill' (backward). Defaults to "ffill".
-
-    Returns:
-        pd.DataFrame: OHLCV DataFrame with missing values filled.
-    """
-    if df.empty:
-        return df
-
-    df = df.copy()
-
-    # Fill missing values
-    df.fillna(method=method, inplace=True)
-
-    logger.info(f"Missing values filled using method='{method}'")
+    logger.info(f"Cleaned OHLCV data | total rows: {len(df)}")
     return df
 
 
@@ -139,12 +110,9 @@ def resample_ohlcv(df: pd.DataFrame, interval: str = "5min") -> pd.DataFrame:
         return df
 
     df = df.copy()
-
-    # Convert timestamp to datetime and set as index
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
     df.set_index("timestamp", inplace=True)
 
-    # Define OHLCV aggregation rules
     ohlc_agg = {
         "open": "first",
         "high": "max",
@@ -153,11 +121,8 @@ def resample_ohlcv(df: pd.DataFrame, interval: str = "5min") -> pd.DataFrame:
         "volume": "sum",
     }
 
-    # Resample and drop incomplete periods
     df_resampled = df.resample(interval).agg(ohlc_agg).dropna().reset_index()
-
-    # Convert timestamp back to milliseconds
     df_resampled["timestamp"] = df_resampled["timestamp"].astype("int64") // 10**6
 
-    logger.info(f"Resampled OHLCV to '{interval}'. Rows: {len(df_resampled)}")
+    logger.info(f"Resampled OHLCV to '{interval}' | rows: {len(df_resampled)}")
     return df_resampled

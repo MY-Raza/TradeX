@@ -15,8 +15,6 @@ from TradeX.logs.logging import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.cleaning_utils import (
     clean_klines_df,
-    fill_missing_timestamps,
-    fill_missing_values,
     resample_ohlcv
 )
 
@@ -115,13 +113,7 @@ for symbol in symbols:
     # Data Cleaning Pipeline
     # ---------------------------
     df = clean_klines_df(raw_df)
-    logger.info("Basic OHLCV cleaning completed.")
-
-    df = fill_missing_timestamps(df, interval=interval)
-    logger.info("Missing timestamps filled.")
-
-    df = fill_missing_values(df, method="ffill")
-    logger.info("Missing values forward-filled.")
+    logger.info("OHLCV cleaning completed.")
 
     # Optional: Resample to higher timeframe
     # df = resample_ohlcv(df, interval="5min")
