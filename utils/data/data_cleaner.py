@@ -68,14 +68,7 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     df.set_index("timestamp", inplace=True)
 
-    freq_map = {
-        "1m": "1min",
-        "5m": "5min",
-        "15m": "15min",
-        "1h": "1H",
-        "1d": "1D",
-    }
-    freq = freq_map.get(interval, "1min")
+    freq =  "1min"
 
     full_index = pd.date_range(df.index.min(), df.index.max(), freq=freq)
     df = df.reindex(full_index)
