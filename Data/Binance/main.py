@@ -94,8 +94,6 @@ for symbol in symbols:
 
     # Initialize Binance fetcher
     fetcher = BinanceFuturesFetcher(
-        api_key=BINANCE_API_KEY,
-        api_secret=BINANCE_SECRET_KEY,
         symbol=f"{symbol.upper()}USDT",
         start_date=start_date,
         end_date=end_date,
