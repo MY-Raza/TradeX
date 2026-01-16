@@ -27,11 +27,6 @@ class BybitFuturesFetcher:
         end_ts (int): End timestamp in milliseconds.
     """
 
-    # Map interval codes to milliseconds
-    INTERVAL_MAP = {
-        "1": 60_000,  # 1 minute
-    }
-
     def __init__(
         self,
         api_key: str,
@@ -65,8 +60,10 @@ class BybitFuturesFetcher:
             demo=demo,
         )
 
-        # Validate interval
-        if interval not in self.INTERVAL_MAP:
+        # Validate and set interval in milliseconds (hardcoded)
+        if interval == "1":
+            self.interval_ms = 60_000  # 1 minute
+        else:
             raise ValueError(f"Unsupported interval: {interval}")
 
         # Store parameters
@@ -76,7 +73,6 @@ class BybitFuturesFetcher:
         self.interval = interval
         self.limit = limit
         self.max_loops = max_loops
-        self.interval_ms = self.INTERVAL_MAP[interval]
 
         # Convert dates to timestamps in milliseconds
         self.start_ts, self.end_ts = self._convert_to_timestamp()

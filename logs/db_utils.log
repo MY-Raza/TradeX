@@ -3966,3 +3966,294 @@
 2026-01-16 11:11:21,126 | INFO | __main__ | Verification success | 5 rows read from DB.
 2026-01-16 11:11:21,449 | INFO | __main__ | Table stats | link_1m → columns=6, rows=60967
 2026-01-16 11:11:21,449 | INFO | __main__ | Bybit data ingestion pipeline completed successfully.
+2026-01-16 11:53:17,875 | INFO | __main__ | Environment variables loaded successfully.
+2026-01-16 11:53:17,880 | INFO | __main__ | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'], start_date=2026-01-06, end_date=now
+2026-01-16 11:53:17,937 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-16 11:53:18,138 | INFO | TradeX.utils.db.utils | Schema 'data_bybit' is ready.
+2026-01-16 11:53:18,138 | INFO | __main__ | Database schema ready: data_bybit
+2026-01-16 11:53:18,138 | INFO | __main__ | Processing symbol: BTC
+2026-01-16 11:53:18,143 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | BTCUSDT | 2026-01-06 → now
+2026-01-16 11:53:18,144 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-05 19:00:00
+2026-01-16 11:53:18,926 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-06 11:40:00
+2026-01-16 11:53:19,334 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-07 04:20:00
+2026-01-16 11:53:19,745 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-07 21:00:00
+2026-01-16 11:53:20,320 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-08 13:40:00
+2026-01-16 11:53:20,814 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-09 06:20:00
+2026-01-16 11:53:21,310 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-09 23:00:00
+2026-01-16 11:53:21,720 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-10 15:40:00
+2026-01-16 11:53:22,139 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-11 08:20:00
+2026-01-16 11:53:22,548 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-12 01:00:00
+2026-01-16 11:53:22,959 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-12 17:40:00
+2026-01-16 11:53:23,370 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-13 10:20:00
+2026-01-16 11:53:23,985 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-14 03:00:00
+2026-01-16 11:53:24,385 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-14 19:40:00
+2026-01-16 11:53:24,882 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-15 12:20:00
+2026-01-16 11:53:25,298 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:53:25,305 | INFO | __main__ | RAW data fetched for BTC: 15000 rows
+2026-01-16 11:53:25,381 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:53:25,382 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:53:25,411 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:53:25,412 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:53:25,416 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:53:25,416 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:53:28,369 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.btc_1m'.
+2026-01-16 11:53:28,388 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.btc_1m' on column 'timestamp'.
+2026-01-16 11:53:28,389 | INFO | __main__ | Saved cleaned data to table: data_bybit.btc_1m
+2026-01-16 11:53:28,520 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.btc_1m'.
+2026-01-16 11:53:28,520 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:53:28,950 | INFO | __main__ | Table stats | btc_1m → columns=6, rows=75968
+2026-01-16 11:53:28,950 | INFO | __main__ | Processing symbol: ETH
+2026-01-16 11:53:28,950 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | ETHUSDT | 2026-01-06 → now
+2026-01-16 11:53:28,969 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-05 19:00:00
+2026-01-16 11:53:29,724 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-06 11:40:00
+2026-01-16 11:53:30,135 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-07 04:20:00
+2026-01-16 11:53:30,554 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-07 21:00:00
+2026-01-16 11:53:31,056 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-08 13:40:00
+2026-01-16 11:53:31,656 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-09 06:20:00
+2026-01-16 11:53:32,064 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-09 23:00:00
+2026-01-16 11:53:32,560 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-10 15:40:00
+2026-01-16 11:53:32,968 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-11 08:20:00
+2026-01-16 11:53:33,464 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-12 01:00:00
+2026-01-16 11:53:33,878 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-12 17:40:00
+2026-01-16 11:53:34,288 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-13 10:20:00
+2026-01-16 11:53:34,700 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-14 03:00:00
+2026-01-16 11:53:35,274 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-14 19:40:00
+2026-01-16 11:53:35,847 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-15 12:20:00
+2026-01-16 11:53:36,255 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:53:36,269 | INFO | __main__ | RAW data fetched for ETH: 15000 rows
+2026-01-16 11:53:36,297 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:53:36,298 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:53:36,304 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:53:36,304 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:53:36,305 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:53:36,306 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:53:39,293 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.eth_1m'.
+2026-01-16 11:53:39,309 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.eth_1m' on column 'timestamp'.
+2026-01-16 11:53:39,309 | INFO | __main__ | Saved cleaned data to table: data_bybit.eth_1m
+2026-01-16 11:53:39,445 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.eth_1m'.
+2026-01-16 11:53:39,445 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:53:39,594 | INFO | __main__ | Table stats | eth_1m → columns=6, rows=75966
+2026-01-16 11:53:39,594 | INFO | __main__ | Processing symbol: BNB
+2026-01-16 11:53:39,594 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | BNBUSDT | 2026-01-06 → now
+2026-01-16 11:53:39,605 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-05 19:00:00
+2026-01-16 11:53:40,424 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-06 11:40:00
+2026-01-16 11:53:40,837 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-07 04:20:00
+2026-01-16 11:53:41,328 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-07 21:00:00
+2026-01-16 11:53:41,738 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-08 13:40:00
+2026-01-16 11:53:42,149 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-09 06:20:00
+2026-01-16 11:53:42,640 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-09 23:00:00
+2026-01-16 11:53:43,050 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-10 15:40:00
+2026-01-16 11:53:43,545 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-11 08:20:00
+2026-01-16 11:53:44,039 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-12 01:00:00
+2026-01-16 11:53:44,452 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-12 17:40:00
+2026-01-16 11:53:45,022 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-13 10:20:00
+2026-01-16 11:53:45,430 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-14 03:00:00
+2026-01-16 11:53:45,927 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-14 19:40:00
+2026-01-16 11:53:46,414 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-15 12:20:00
+2026-01-16 11:53:46,994 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:53:47,004 | INFO | __main__ | RAW data fetched for BNB: 15000 rows
+2026-01-16 11:53:47,035 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:53:47,036 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:53:47,041 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:53:47,041 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:53:47,042 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:53:47,043 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:53:49,918 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.bnb_1m'.
+2026-01-16 11:53:49,933 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.bnb_1m' on column 'timestamp'.
+2026-01-16 11:53:49,933 | INFO | __main__ | Saved cleaned data to table: data_bybit.bnb_1m
+2026-01-16 11:53:50,117 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.bnb_1m'.
+2026-01-16 11:53:50,117 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:53:50,217 | INFO | __main__ | Table stats | bnb_1m → columns=6, rows=75968
+2026-01-16 11:53:50,217 | INFO | __main__ | Processing symbol: ADA
+2026-01-16 11:53:50,217 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | ADAUSDT | 2026-01-06 → now
+2026-01-16 11:53:50,220 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-05 19:00:00
+2026-01-16 11:53:51,097 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-06 11:40:00
+2026-01-16 11:53:51,679 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-07 04:20:00
+2026-01-16 11:53:52,276 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-07 21:00:00
+2026-01-16 11:53:52,861 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-08 13:40:00
+2026-01-16 11:53:53,446 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-09 06:20:00
+2026-01-16 11:53:54,034 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-09 23:00:00
+2026-01-16 11:53:54,632 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-10 15:40:00
+2026-01-16 11:53:55,226 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-11 08:20:00
+2026-01-16 11:53:55,810 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-12 01:00:00
+2026-01-16 11:53:56,397 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-12 17:40:00
+2026-01-16 11:53:56,983 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-13 10:20:00
+2026-01-16 11:53:57,570 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-14 03:00:00
+2026-01-16 11:53:58,153 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-14 19:40:00
+2026-01-16 11:53:58,735 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-15 12:20:00
+2026-01-16 11:53:59,318 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:53:59,325 | INFO | __main__ | RAW data fetched for ADA: 15000 rows
+2026-01-16 11:53:59,354 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:53:59,355 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:53:59,360 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:53:59,361 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:53:59,362 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:53:59,363 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:54:02,236 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.ada_1m'.
+2026-01-16 11:54:02,241 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.ada_1m' on column 'timestamp'.
+2026-01-16 11:54:02,241 | INFO | __main__ | Saved cleaned data to table: data_bybit.ada_1m
+2026-01-16 11:54:02,382 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.ada_1m'.
+2026-01-16 11:54:02,382 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:54:02,519 | INFO | __main__ | Table stats | ada_1m → columns=6, rows=75968
+2026-01-16 11:54:02,519 | INFO | __main__ | Processing symbol: XRP
+2026-01-16 11:54:02,519 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | XRPUSDT | 2026-01-06 → now
+2026-01-16 11:54:02,519 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-05 19:00:00
+2026-01-16 11:54:03,233 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-06 11:40:00
+2026-01-16 11:54:03,730 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-07 04:20:00
+2026-01-16 11:54:04,313 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-07 21:00:00
+2026-01-16 11:54:04,809 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-08 13:40:00
+2026-01-16 11:54:05,566 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-09 06:20:00
+2026-01-16 11:54:06,067 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-09 23:00:00
+2026-01-16 11:54:06,656 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-10 15:40:00
+2026-01-16 11:54:07,064 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-11 08:20:00
+2026-01-16 11:54:07,472 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-12 01:00:00
+2026-01-16 11:54:08,055 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-12 17:40:00
+2026-01-16 11:54:08,479 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-13 10:20:00
+2026-01-16 11:54:08,883 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-14 03:00:00
+2026-01-16 11:54:09,283 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-14 19:40:00
+2026-01-16 11:54:09,686 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-15 12:20:00
+2026-01-16 11:54:10,174 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:54:10,187 | INFO | __main__ | RAW data fetched for XRP: 15000 rows
+2026-01-16 11:54:10,219 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:54:10,220 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:54:10,224 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:54:10,224 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:54:10,225 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:54:10,226 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:54:13,092 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.xrp_1m'.
+2026-01-16 11:54:13,093 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.xrp_1m' on column 'timestamp'.
+2026-01-16 11:54:13,093 | INFO | __main__ | Saved cleaned data to table: data_bybit.xrp_1m
+2026-01-16 11:54:13,212 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.xrp_1m'.
+2026-01-16 11:54:13,212 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:54:13,312 | INFO | __main__ | Table stats | xrp_1m → columns=6, rows=75973
+2026-01-16 11:54:13,312 | INFO | __main__ | Processing symbol: DOGE
+2026-01-16 11:54:13,312 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | DOGEUSDT | 2026-01-06 → now
+2026-01-16 11:54:13,324 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-05 19:00:00
+2026-01-16 11:54:14,018 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-06 11:40:00
+2026-01-16 11:54:14,441 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-07 04:20:00
+2026-01-16 11:54:14,930 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-07 21:00:00
+2026-01-16 11:54:15,423 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-08 13:40:00
+2026-01-16 11:54:15,838 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-09 06:20:00
+2026-01-16 11:54:16,436 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-09 23:00:00
+2026-01-16 11:54:16,847 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-10 15:40:00
+2026-01-16 11:54:17,352 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-11 08:20:00
+2026-01-16 11:54:17,762 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-12 01:00:00
+2026-01-16 11:54:18,346 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-12 17:40:00
+2026-01-16 11:54:18,926 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-13 10:20:00
+2026-01-16 11:54:19,334 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-14 03:00:00
+2026-01-16 11:54:19,909 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-14 19:40:00
+2026-01-16 11:54:20,321 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-15 12:20:00
+2026-01-16 11:54:20,892 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:54:20,907 | INFO | __main__ | RAW data fetched for DOGE: 15000 rows
+2026-01-16 11:54:20,939 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:54:20,940 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:54:20,944 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:54:20,944 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:54:20,946 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:54:20,946 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:54:25,762 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.doge_1m'.
+2026-01-16 11:54:25,765 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.doge_1m' on column 'timestamp'.
+2026-01-16 11:54:25,765 | INFO | __main__ | Saved cleaned data to table: data_bybit.doge_1m
+2026-01-16 11:54:25,847 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.doge_1m'.
+2026-01-16 11:54:25,848 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:54:25,971 | INFO | __main__ | Table stats | doge_1m → columns=6, rows=75970
+2026-01-16 11:54:25,971 | INFO | __main__ | Processing symbol: SOL
+2026-01-16 11:54:25,971 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | SOLUSDT | 2026-01-06 → now
+2026-01-16 11:54:25,979 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-05 19:00:00
+2026-01-16 11:54:26,690 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-06 11:40:00
+2026-01-16 11:54:27,097 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-07 04:20:00
+2026-01-16 11:54:27,590 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-07 21:00:00
+2026-01-16 11:54:27,994 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-08 13:40:00
+2026-01-16 11:54:28,417 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-09 06:20:00
+2026-01-16 11:54:28,824 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-09 23:00:00
+2026-01-16 11:54:29,314 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-10 15:40:00
+2026-01-16 11:54:29,891 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-11 08:20:00
+2026-01-16 11:54:30,381 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-12 01:00:00
+2026-01-16 11:54:30,881 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-12 17:40:00
+2026-01-16 11:54:31,629 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-13 10:20:00
+2026-01-16 11:54:32,148 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-14 03:00:00
+2026-01-16 11:54:32,544 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-14 19:40:00
+2026-01-16 11:54:33,026 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-15 12:20:00
+2026-01-16 11:54:33,430 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:54:33,445 | INFO | __main__ | RAW data fetched for SOL: 15000 rows
+2026-01-16 11:54:33,481 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:54:33,482 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:54:33,486 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:54:33,486 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:54:33,488 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:54:33,489 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:54:36,293 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.sol_1m'.
+2026-01-16 11:54:36,300 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.sol_1m' on column 'timestamp'.
+2026-01-16 11:54:36,300 | INFO | __main__ | Saved cleaned data to table: data_bybit.sol_1m
+2026-01-16 11:54:36,414 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.sol_1m'.
+2026-01-16 11:54:36,414 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:54:36,508 | INFO | __main__ | Table stats | sol_1m → columns=6, rows=75973
+2026-01-16 11:54:36,509 | INFO | __main__ | Processing symbol: DOT
+2026-01-16 11:54:36,509 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | DOTUSDT | 2026-01-06 → now
+2026-01-16 11:54:36,511 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-05 19:00:00
+2026-01-16 11:54:37,220 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-06 11:40:00
+2026-01-16 11:54:37,629 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-07 04:20:00
+2026-01-16 11:54:38,123 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-07 21:00:00
+2026-01-16 11:54:38,532 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-08 13:40:00
+2026-01-16 11:54:39,112 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-09 06:20:00
+2026-01-16 11:54:39,695 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-09 23:00:00
+2026-01-16 11:54:40,107 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-10 15:40:00
+2026-01-16 11:54:40,514 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-11 08:20:00
+2026-01-16 11:54:40,923 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-12 01:00:00
+2026-01-16 11:54:41,335 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-12 17:40:00
+2026-01-16 11:54:41,744 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-13 10:20:00
+2026-01-16 11:54:42,154 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-14 03:00:00
+2026-01-16 11:54:42,586 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-14 19:40:00
+2026-01-16 11:54:42,989 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-15 12:20:00
+2026-01-16 11:54:43,482 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:54:43,495 | INFO | __main__ | RAW data fetched for DOT: 15000 rows
+2026-01-16 11:54:43,526 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:54:43,527 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:54:43,533 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:54:43,533 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:54:43,535 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:54:43,536 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:54:46,214 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.dot_1m'.
+2026-01-16 11:54:46,214 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.dot_1m' on column 'timestamp'.
+2026-01-16 11:54:46,227 | INFO | __main__ | Saved cleaned data to table: data_bybit.dot_1m
+2026-01-16 11:54:46,345 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.dot_1m'.
+2026-01-16 11:54:46,345 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:54:46,461 | INFO | __main__ | Table stats | dot_1m → columns=6, rows=75965
+2026-01-16 11:54:46,461 | INFO | __main__ | Processing symbol: MATIC
+2026-01-16 11:54:46,461 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | MATICUSDT | 2026-01-06 → now
+2026-01-16 11:54:46,472 | INFO | bybit_fetcher | Fetching MATICUSDT from 2026-01-05 19:00:00
+2026-01-16 11:54:47,008 | INFO | bybit_fetcher | No more klines returned.
+2026-01-16 11:54:47,008 | WARNING | bybit_fetcher | No klines fetched.
+2026-01-16 11:54:47,013 | WARNING | __main__ | No data fetched for MATIC. Skipping.
+2026-01-16 11:54:47,015 | INFO | __main__ | Processing symbol: LINK
+2026-01-16 11:54:47,015 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | LINKUSDT | 2026-01-06 → now
+2026-01-16 11:54:47,017 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-05 19:00:00
+2026-01-16 11:54:47,807 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-06 11:40:00
+2026-01-16 11:54:48,230 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-07 04:20:00
+2026-01-16 11:54:48,643 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-07 21:00:00
+2026-01-16 11:54:49,062 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-08 13:40:00
+2026-01-16 11:54:49,486 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-09 06:20:00
+2026-01-16 11:54:49,936 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-09 23:00:00
+2026-01-16 11:54:50,361 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-10 15:40:00
+2026-01-16 11:54:50,773 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-11 08:20:00
+2026-01-16 11:54:51,189 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-12 01:00:00
+2026-01-16 11:54:51,605 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-12 17:40:00
+2026-01-16 11:54:52,021 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-13 10:20:00
+2026-01-16 11:54:52,430 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-14 03:00:00
+2026-01-16 11:54:53,010 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-14 19:40:00
+2026-01-16 11:54:53,427 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-15 12:20:00
+2026-01-16 11:54:53,831 | INFO | bybit_fetcher | Fetched RAW klines: 15000 rows
+2026-01-16 11:54:53,840 | INFO | __main__ | RAW data fetched for LINK: 15000 rows
+2026-01-16 11:54:53,873 | INFO | TradeX.utils.cleaning_utils | Cleaned OHLCV data: 14999 rows
+2026-01-16 11:54:53,874 | INFO | __main__ | Basic OHLCV cleaning completed.
+2026-01-16 11:54:53,879 | INFO | TradeX.utils.cleaning_utils | Missing timestamps filled. Total rows: 14999
+2026-01-16 11:54:53,880 | INFO | __main__ | Missing timestamps inserted.
+2026-01-16 11:54:53,881 | INFO | TradeX.utils.cleaning_utils | Missing values filled using method='ffill'
+2026-01-16 11:54:53,881 | INFO | __main__ | Missing values forward-filled.
+2026-01-16 11:54:56,589 | INFO | TradeX.utils.db.utils | Inserted 14999 rows into 'data_bybit.link_1m'.
+2026-01-16 11:54:56,596 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.link_1m' on column 'timestamp'.
+2026-01-16 11:54:56,596 | INFO | __main__ | Saved cleaned data to table: data_bybit.link_1m
+2026-01-16 11:54:56,720 | INFO | TradeX.utils.db.utils | Read 5 rows from 'data_bybit.link_1m'.
+2026-01-16 11:54:56,720 | INFO | __main__ | Verification success | 5 rows read from DB.
+2026-01-16 11:54:56,822 | INFO | __main__ | Table stats | link_1m → columns=6, rows=75966
+2026-01-16 11:54:56,822 | INFO | __main__ | Bybit data ingestion pipeline completed successfully.
