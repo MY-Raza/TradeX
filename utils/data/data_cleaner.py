@@ -1,10 +1,10 @@
 import pandas as pd
-from TradeX.logs.logging import get_logger
+from TradeX.utils.common.logs import get_logger
 
 logger = get_logger(__name__)
 
 
-def clean_klines_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
+def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     """
     Comprehensive OHLCV data cleaning pipeline.
 
@@ -30,7 +30,6 @@ def clean_klines_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
         logger.warning("Received empty DataFrame for cleaning.")
         return df
 
-    df = df.copy()
 
     # ---------------------------
     # Keep essential columns
@@ -63,10 +62,6 @@ def clean_klines_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
 
     interval_map = {
         "1m": "1min",
-        "5m": "5min",
-        "15m": "15min",
-        "1h": "1H",
-        "1d": "1D",
     }
     freq = interval_map.get(interval, "1min")
     full_index = pd.date_range(df.index.min(), df.index.max(), freq=freq)
@@ -81,7 +76,6 @@ def clean_klines_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # Reset index and convert timestamp to ms
     # ---------------------------
     df.reset_index(inplace=True)
-    df.rename(columns={"index": "timestamp"}, inplace=True)
     df["timestamp"] = df["timestamp"].astype("int64") // 10**6
 
     logger.info(f"Cleaned OHLCV data | total rows: {len(df)}")

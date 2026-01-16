@@ -1,21 +1,14 @@
-import os
-import yaml
-from dotenv import load_dotenv
-
 from TradeX.utils.db.utils import (
     get_engine,
     create_schema,
     save_df_to_db,
-    read_df_from_db,
-    drop_schema,
-    get_last_date
 )
-from TradeX.logs.logging import get_logger
+from TradeX.utils.common.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
-from TradeX.utils.cleaning_utils import (
-    clean_klines_df,
-    resample_ohlcv
+from TradeX.utils.data.data_cleaner import (
+    clean_df,
 )
+from TradeX.utils.common.utils_common import load_config
 
 logger = get_logger(__name__)
 
@@ -40,47 +33,18 @@ Notes:
 - Schema drop is optional and should be used with caution.
 """
 
-# -------------------------------------------------
-# Load Environment Variables
-# -------------------------------------------------
-load_dotenv()
-
-SCHEMA = os.getenv("DB_SCHEMA_BINANCE", "data_binance")  # Default schema
-BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
-BINANCE_SECRET_KEY = os.getenv("BINANCE_SECRET_KEY")
-
-if not BINANCE_API_KEY or not BINANCE_SECRET_KEY:
-    raise RuntimeError("Binance API credentials not found in environment variables.")
-
-logger.info("Environment variables loaded successfully.")
+SCHEMA = "data_binance"
 
 # -------------------------------------------------
 # Load Configuration
 # -------------------------------------------------
-with open("config.yml", "r") as f:
-    config = yaml.safe_load(f)
-
-symbols = config.get("symbols", [])
-start_date = config.get("start_date")
-end_date = config.get("end_date", "now")
-interval = config.get("interval", "1m")
-
-if not symbols or not start_date:
-    raise ValueError("Config file must contain at least 'symbols' and 'start_date'.")
-
-logger.info(
-    f"Configuration loaded | symbols={symbols} | start={start_date} | end={end_date} | interval={interval}"
-)
-
-# -------------------------------------------------
-# Initialize Database
-# -------------------------------------------------
-engine = get_engine()
-if engine is None:
-    raise RuntimeError("Database engine could not be initialized.")
+config = load_config("config.yml")
+symbols = config["symbols"]
+start_date = config["start_date"]
+end_date = config["end_date"]
 
 # Create schema if it does not exist
-create_schema(engine, schema=SCHEMA)
+create_schema(schema=SCHEMA)
 logger.info(f"Database schema '{SCHEMA}' is ready.")
 
 # -------------------------------------------------
@@ -94,7 +58,7 @@ for symbol in symbols:
         symbol=f"{symbol.upper()}USDT",
         start_date=start_date,
         end_date=end_date,
-        interval=interval
+        interval="1m"
     )
 
     # ---------------------------
@@ -111,7 +75,7 @@ for symbol in symbols:
     # ---------------------------
     # Data Cleaning Pipeline
     # ---------------------------
-    df = clean_klines_df(raw_df)
+    df = clean_df(raw_df)
     logger.info("OHLCV cleaning completed.")
 
     # Optional: Resample to higher timeframe
@@ -125,38 +89,16 @@ for symbol in symbols:
     # ---------------------------
     # Save Data to Database
     # ---------------------------
-    table_name = f"{symbol.lower()}_{interval.replace('m', 'm')}"
+    table_name = f"{symbol.lower()}_1m"
 
     save_df_to_db(
         df=df,
         table_name=table_name,
-        engine=engine,
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True
     )
 
     logger.info(f"Cleaned data saved to table '{SCHEMA}.{table_name}'")
-
-    # ---------------------------
-    # Verification
-    # ---------------------------
-    df_db = read_df_from_db(engine, table_name, schema=SCHEMA, limit=5)
-
-    if not df_db.empty:
-        logger.info(
-            f"Verification successful | {len(df_db)} rows read from '{table_name}'"
-        )
-    else:
-        logger.warning(f"Verification failed for table '{table_name}'")
-
-    last_date=get_last_date(engine=engine,table_name=table_name,schema=SCHEMA)    
-    logger.info(f"Last Date For {SCHEMA}.{table_name}: {last_date}.")    
-
-
-# -------------------------------------------------
-# Optional: Drop Schema (Use With Caution)
-# -------------------------------------------------
-# drop_schema(engine=engine, schema=SCHEMA)
 
 logger.info("Binance Futures data ingestion pipeline completed successfully.")

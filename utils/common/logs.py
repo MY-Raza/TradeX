@@ -6,7 +6,7 @@ import os
 # --------------------------------------------------
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-LOG_DIR = os.path.join(PROJECT_ROOT, "logs")
+LOG_DIR = os.path.join(PROJECT_ROOT, "common")
 LOG_FILE = os.path.join(LOG_DIR, "db_utils.log")
 
 # logs folder already exists, but this is safe

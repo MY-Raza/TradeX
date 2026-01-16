@@ -1,20 +1,13 @@
-import os
-import yaml
-from dotenv import load_dotenv
-
 from TradeX.utils.db.utils import (
-    get_engine,
     create_schema,
     save_df_to_db,
-    read_df_from_db,
-    get_last_date
 )
-from TradeX.logs.logging import get_logger
+from TradeX.utils.common.logs import get_logger
 from bybit_fetcher import BybitFuturesFetcher
-from TradeX.utils.cleaning_utils import (
-    clean_klines_df,
-    resample_ohlcv,
+from TradeX.utils.data.data_cleaner import (
+    clean_df,
 )
+from TradeX.utils.common.utils_common import load_config
 
 logger = get_logger(__name__)
 
@@ -38,37 +31,22 @@ Note:
 - Optional resampling can be applied if required.
 """
 
-# ---------------------------
-# Load Environment Variables
-# ---------------------------
-load_dotenv()
-
-SCHEMA = os.getenv("DB_SCHEMA_BYBIT", "data_bybit")  # Default schema
+SCHEMA = "data_bybit"
 
 # ---------------------------
 # Load Configuration
 # ---------------------------
-with open("config.yml", "r") as f:
-    config = yaml.safe_load(f)
-
-symbols = config.get("symbols", [])
-start_date_str = config.get("start_date")
-end_date_str = config.get("end_date", "now")
-
-if not symbols or not start_date_str:
-    raise ValueError("Config must include 'symbols' and 'start_date'.")
-
-logger.info(f"Configuration loaded | symbols={symbols}, start_date={start_date_str}, end_date={end_date_str}")
+config = load_config("config.yml")
+symbols = config["symbols"]
+start_date = config["start_date"]
+end_date = config["end_date"]
 
 # ---------------------------
 # Initialize Database
 # ---------------------------
-engine = get_engine()
-if engine is None:
-    raise RuntimeError("Database engine could not be initialized.")
 
 # Create schema if it doesn't exist
-create_schema(engine, schema=SCHEMA)
+create_schema(schema=SCHEMA)
 logger.info(f"Database schema ready: {SCHEMA}")
 
 # ---------------------------
@@ -81,8 +59,8 @@ for symbol in symbols:
     # Initialize Bybit fetcher
     fetcher = BybitFuturesFetcher(
         symbol=f"{symbol}USDT",
-        start_date=start_date_str,
-        end_date=end_date_str,
+        start_date=start_date,
+        end_date=end_date,
         interval="1",  # 1-minute interval
     )
 
@@ -100,7 +78,7 @@ for symbol in symbols:
     # ---------------------------
     # Cleaning & Processing Pipeline
     # ---------------------------
-    df = clean_klines_df(raw_df)
+    df = clean_df(raw_df)
     logger.info("OHLCV cleaning completed.")
 
     # Optional: Resample to higher timeframe
@@ -119,25 +97,11 @@ for symbol in symbols:
     save_df_to_db(
         df=df,
         table_name=table_name,
-        engine=engine,
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True,
     )
 
     logger.info(f"Saved cleaned data to table: {SCHEMA}.{table_name}")
-
-    # ---------------------------
-    # Verification
-    # ---------------------------
-    df_db = read_df_from_db(engine, table_name, schema=SCHEMA, limit=5)
-
-    if not df_db.empty:
-        logger.info(f"Verification success | {len(df_db)} rows read from DB.")
-    else:
-        logger.warning("Verification failed: No rows read from DB.")
-
-    last_date=get_last_date(engine=engine,table_name=table_name,schema=SCHEMA)    
-    logger.info(f"Last Date For {SCHEMA}.{table_name}: {last_date}.")
 
 logger.info("Bybit data ingestion pipeline completed successfully.")

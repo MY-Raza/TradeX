@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine, text, inspect
-from TradeX.logs.logging import get_logger
+from TradeX.utils.common.logs import get_logger
 from datetime import datetime
 
 
@@ -75,7 +75,7 @@ def get_engine(db_url: str | None = None):
 # ---------------------------
 # Schema Management
 # ---------------------------
-def create_schema(engine, schema: str | None = None):
+def create_schema(schema: str | None = None):
     """
     Create a schema if it does not exist.
 
@@ -85,13 +85,13 @@ def create_schema(engine, schema: str | None = None):
     """
     try:
         schema = resolve_schema(schema)
-        with engine.begin() as conn:
+        with get_engine.begin() as conn:
             conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
         logger.info(f"Schema '{schema}' is ready.")
     except Exception:
         logger.exception("Failed to create schema.")
 
-def drop_schema(engine, schema: str | None = None):
+def drop_schema(schema: str | None = None):
     """
     Drop a schema after user confirmation.
 
@@ -105,7 +105,7 @@ def drop_schema(engine, schema: str | None = None):
         if confirm != "yes":
             logger.warning("Schema drop cancelled.")
             return
-        with engine.begin() as conn:
+        with get_engine.begin() as conn:
             conn.execute(text(f"DROP SCHEMA IF EXISTS {schema} CASCADE;"))
         logger.warning(f"Schema '{schema}' dropped.")
     except Exception:
@@ -117,7 +117,6 @@ def drop_schema(engine, schema: str | None = None):
 def save_df_to_db(
     df: pd.DataFrame,
     table_name: str,
-    engine,
     schema: str | None = None,
     time_column: str | None = None,
     is_timeseries: bool = False
@@ -139,12 +138,12 @@ def save_df_to_db(
     try:
         schema = resolve_schema(schema)
         # Insert DataFrame into database
-        df.to_sql(table_name, engine, schema=schema, if_exists="append", index=False, method="multi")
+        df.to_sql(table_name, get_engine, schema=schema, if_exists="append", index=False, method="multi")
         logger.info(f"Inserted {len(df)} rows into '{schema}.{table_name}'.")
 
         # Convert table to hypertable if required
         if is_timeseries and time_column:
-            with engine.begin() as conn:
+            with get_engine.begin() as conn:
                 conn.execute(text(f"""
                     SELECT create_hypertable('{schema}.{table_name}', '{time_column}', migrate_data => TRUE, if_not_exists => TRUE);
                 """))
@@ -152,7 +151,7 @@ def save_df_to_db(
     except Exception:
         logger.exception("Failed to save DataFrame to database.")
 
-def read_df_from_db(engine, table_name: str, schema: str | None = None, limit: int | None = None) -> pd.DataFrame:
+def read_df_from_db(table_name: str, schema: str | None = None, limit: int | None = None) -> pd.DataFrame:
     """
     Read data from a table into a pandas DataFrame.
 
@@ -170,7 +169,7 @@ def read_df_from_db(engine, table_name: str, schema: str | None = None, limit: i
         query = f"SELECT * FROM {schema}.{table_name}"
         if limit:
             query += f" LIMIT {limit}"
-        df = pd.read_sql_query(query, engine)
+        df = pd.read_sql_query(query, get_engine)
         logger.info(f"Read {len(df)} rows from '{schema}.{table_name}'.")
         return df
     except Exception:
@@ -181,7 +180,7 @@ def read_df_from_db(engine, table_name: str, schema: str | None = None, limit: i
 # Table Information Utilities
 # ---------------------------
 
-def drop_table(engine, table_name: str, schema: str | None = None):
+def drop_table(table_name: str, schema: str | None = None):
     """
     Drop a table after user confirmation.
 
@@ -202,7 +201,7 @@ def drop_table(engine, table_name: str, schema: str | None = None):
             return
 
         # Drop the table
-        with engine.begin() as conn:
+        with get_engine.begin() as conn:
             conn.execute(text(f"DROP TABLE IF EXISTS {full_name} CASCADE;"))
 
         logger.warning(f"Table '{full_name}' dropped.")
@@ -210,7 +209,7 @@ def drop_table(engine, table_name: str, schema: str | None = None):
     except Exception:
         logger.exception("Failed to drop table.")
 
-def get_last_date(engine, table_name: str, schema: str | None = None, time_column: str = "timestamp") -> datetime | None:
+def get_last_date(table_name: str, schema: str | None = None, time_column: str = "timestamp") -> datetime | None:
     """
     Fetch the latest timestamp from a table and convert it to a datetime object.
 
@@ -230,7 +229,7 @@ def get_last_date(engine, table_name: str, schema: str | None = None, time_colum
     try:
         schema = resolve_schema(schema)
         query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}"
-        with engine.connect() as conn:
+        with get_engine.connect() as conn:
             result = conn.execute(text(query)).scalar()
 
         if result is None:
