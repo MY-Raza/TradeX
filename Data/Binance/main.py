@@ -7,9 +7,8 @@ from TradeX.utils.db.utils import (
     create_schema,
     save_df_to_db,
     read_df_from_db,
-    total_columns,
-    total_rows,
-    drop_schema
+    drop_schema,
+    get_last_date
 )
 from TradeX.logs.logging import get_logger
 from binance_fetcher import BinanceFuturesFetcher
@@ -151,13 +150,9 @@ for symbol in symbols:
     else:
         logger.warning(f"Verification failed for table '{table_name}'")
 
-    # Log table statistics
-    col_count = total_columns(engine, table_name, schema=SCHEMA)
-    row_count = total_rows(engine, table_name, schema=SCHEMA)
+    last_date=get_last_date(engine=engine,table_name=table_name,schema=SCHEMA)    
+    logger.info(f"Last Date For {SCHEMA}.{table_name}: {last_date}.")    
 
-    logger.info(
-        f"Table stats | table={table_name} | columns={col_count} | rows={row_count}"
-    )
 
 # -------------------------------------------------
 # Optional: Drop Schema (Use With Caution)

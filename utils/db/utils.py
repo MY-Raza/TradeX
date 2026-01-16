@@ -2,6 +2,8 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine, text, inspect
 from TradeX.logs.logging import get_logger
+from datetime import datetime
+
 
 logger = get_logger(__name__)
 
@@ -178,46 +180,6 @@ def read_df_from_db(engine, table_name: str, schema: str | None = None, limit: i
 # ---------------------------
 # Table Information Utilities
 # ---------------------------
-def total_rows(engine, table_name: str, schema: str | None = None) -> int:
-    """
-    Get total number of rows in a table.
-
-    Args:
-        engine: SQLAlchemy engine.
-        table_name (str): Table name.
-        schema (str | None): Optional schema name.
-
-    Returns:
-        int: Total row count, 0 if error occurs.
-    """
-    try:
-        schema = resolve_schema(schema)
-        with engine.connect() as conn:
-            result = conn.execute(text(f"SELECT COUNT(*) FROM {schema}.{table_name}"))
-            return result.scalar()
-    except Exception:
-        logger.exception("Failed to count rows.")
-        return 0
-
-def total_columns(engine, table_name: str, schema: str | None = None) -> int:
-    """
-    Get total number of columns in a table.
-
-    Args:
-        engine: SQLAlchemy engine.
-        table_name (str): Table name.
-        schema (str | None): Optional schema name.
-
-    Returns:
-        int: Total number of columns, 0 if error occurs.
-    """
-    try:
-        schema = resolve_schema(schema)
-        inspector = inspect(engine)
-        return len(inspector.get_columns(table_name, schema=schema))
-    except Exception:
-        logger.exception("Failed to count columns.")
-        return 0
 
 def drop_table(engine, table_name: str, schema: str | None = None):
     """
@@ -247,3 +209,38 @@ def drop_table(engine, table_name: str, schema: str | None = None):
 
     except Exception:
         logger.exception("Failed to drop table.")
+
+def get_last_date(engine, table_name: str, schema: str | None = None, time_column: str = "timestamp") -> datetime | None:
+    """
+    Fetch the latest timestamp from a table and convert it to a datetime object.
+
+    Args:
+        engine: SQLAlchemy engine.
+        table_name (str): Name of the table to query.
+        schema (str | None): Optional schema name. If None, resolves via `resolve_schema`.
+        time_column (str, optional): Column storing the timestamp in milliseconds. Defaults to "timestamp".
+
+    Returns:
+        datetime | None: Latest timestamp as a datetime object, or None if table is empty or error occurs.
+
+    Notes:
+        - Assumes timestamps are stored in **milliseconds** since epoch.
+        - Converts the timestamp to a timezone-naive UTC datetime.
+    """
+    try:
+        schema = resolve_schema(schema)
+        query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}"
+        with engine.connect() as conn:
+            result = conn.execute(text(query)).scalar()
+
+        if result is None:
+            logger.warning(f"No timestamps found in '{schema}.{table_name}'.")
+            return None
+
+        # Convert milliseconds timestamp to datetime
+        last_dt = datetime.utcfromtimestamp(result / 1000)
+        return last_dt
+
+    except Exception:
+        logger.exception(f"Failed to fetch last timestamp from '{table_name}'.")
+        return None 
