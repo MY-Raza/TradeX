@@ -47,13 +47,6 @@ Note:
 load_dotenv()
 
 SCHEMA = os.getenv("DB_SCHEMA_BYBIT", "data_bybit")  # Default schema
-API_KEY = os.getenv("BYBIT_API_KEY")
-API_SECRET = os.getenv("BYBIT_SECRET_KEY")
-
-if not API_KEY or not API_SECRET:
-    raise RuntimeError("Bybit API credentials not found in environment variables.")
-
-logger.info("Environment variables loaded successfully.")
 
 # ---------------------------
 # Load Configuration
@@ -90,13 +83,10 @@ for symbol in symbols:
 
     # Initialize Bybit fetcher
     fetcher = BybitFuturesFetcher(
-        api_key=API_KEY,
-        api_secret=API_SECRET,
         symbol=f"{symbol}USDT",
         start_date=start_date_str,
         end_date=end_date_str,
         interval="1",  # 1-minute interval
-        demo=False,
     )
 
     # ---------------------------
