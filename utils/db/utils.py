@@ -71,7 +71,7 @@ def get_engine(db_url: str | None = None):
     except Exception:
         logger.exception("Failed to create engine.")
         return None
-engine = get_engine()
+
 # ---------------------------
 # Schema Management
 # ---------------------------
@@ -83,7 +83,7 @@ def create_schema(schema: str | None = None):
         engine: SQLAlchemy engine.
         schema (str | None): Optional schema name.
     """
-    
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         with engine.begin() as conn:
@@ -100,6 +100,7 @@ def drop_schema(schema: str | None = None):
         engine: SQLAlchemy engine.
         schema (str | None): Optional schema name.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         confirm = input(f"Are you sure to drop '{schema}'? (yes/no): ").lower()
@@ -136,6 +137,7 @@ def save_df_to_db(
     if df.empty:
         logger.warning("DataFrame empty. Nothing to insert.")
         return
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         # Insert DataFrame into database
@@ -165,6 +167,7 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
     Returns:
         pd.DataFrame: DataFrame containing table data.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         query = f"SELECT * FROM {schema}.{table_name}"
@@ -190,6 +193,7 @@ def drop_table(table_name: str, schema: str | None = None):
         table_name (str): Name of the table to drop.
         schema (str | None): Optional schema name.
     """
+    engine = get_engine()
     try:
         # Resolve schema name
         schema = resolve_schema(schema)
@@ -227,6 +231,7 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
         - Assumes timestamps are stored in **milliseconds** since epoch.
         - Converts the timestamp to a timezone-naive UTC datetime.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}"

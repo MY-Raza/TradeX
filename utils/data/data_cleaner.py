@@ -15,6 +15,41 @@ def is_timestamp_ms(series: pd.Series) -> bool:
 
 
 # -------------------------------------------------
+# Helper: normalize timestamp column
+# -------------------------------------------------
+def normalize_timestamp(df: pd.DataFrame) -> (pd.DataFrame, bool):
+    """
+    Convert timestamp column to datetime. Returns updated df and a flag
+    indicating whether the original timestamps were in milliseconds.
+    """
+    timestamp_is_ms = is_timestamp_ms(df["timestamp"])
+    if timestamp_is_ms:
+        df["timestamp"] = pd.to_datetime(df["timestamp"].astype(int), unit="ms")
+    else:
+        df["timestamp"] = pd.to_datetime(df["timestamp"])
+    return df, timestamp_is_ms
+
+
+# -------------------------------------------------
+# Helper: convert timestamp back to ms if needed
+# -------------------------------------------------
+def convert_timestamp_to_ms(df: pd.DataFrame, timestamp_is_ms: bool) -> pd.DataFrame:
+    if timestamp_is_ms:
+        df["timestamp"] = df["timestamp"].astype("int64") // 10**6
+    return df
+
+
+# -------------------------------------------------
+# Helper: convert OHLCV columns to float
+# -------------------------------------------------
+def convert_ohlcv_to_float(df: pd.DataFrame) -> pd.DataFrame:
+    df[["open", "high", "low", "close", "volume"]] = df[
+        ["open", "high", "low", "close", "volume"]
+    ].astype(float)
+    return df
+
+
+# -------------------------------------------------
 # Clean OHLCV Data
 # -------------------------------------------------
 def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
@@ -37,20 +72,12 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     # Convert OHLCV to float
     # ---------------------------
-    df[["open", "high", "low", "close", "volume"]] = df[
-        ["open", "high", "low", "close", "volume"]
-    ].astype(float)
+    df = convert_ohlcv_to_float(df)
 
     # ---------------------------
-    # Detect timestamp format
+    # Normalize timestamp
     # ---------------------------
-    timestamp_is_ms = is_timestamp_ms(df["timestamp"])
-
-    # Normalize timestamp → datetime for processing
-    if timestamp_is_ms:
-        df["timestamp"] = pd.to_datetime(df["timestamp"].astype(int), unit="ms")
-    else:
-        df["timestamp"] = pd.to_datetime(df["timestamp"])
+    df, timestamp_is_ms = normalize_timestamp(df)
 
     # ---------------------------
     # Sort and drop duplicates
@@ -68,27 +95,26 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     df.set_index("timestamp", inplace=True)
 
-    freq =  "1min"
-
+    freq = "1min"  # default, can extend to interval mapping if needed
     full_index = pd.date_range(df.index.min(), df.index.max(), freq=freq)
     df = df.reindex(full_index)
 
     # ---------------------------
     # Fill missing OHLCV values
     # ---------------------------
+    df = convert_ohlcv_to_float(df)
     df[["open", "high", "low", "close", "volume"]] = df[
         ["open", "high", "low", "close", "volume"]
     ].ffill()
 
     # ---------------------------
-    # Reset index
+    # Reset index and rename
     # ---------------------------
     df.reset_index(inplace=True)
     df.rename(columns={"index": "timestamp"}, inplace=True)
 
-    # Convert back to ms ONLY if original input was ms
-    if timestamp_is_ms:
-        df["timestamp"] = df["timestamp"].astype("int64") // 10**6
+    # Convert back to ms if needed
+    df = convert_timestamp_to_ms(df, timestamp_is_ms)
 
     logger.info(f"Cleaned OHLCV data | total rows: {len(df)}")
     return df
@@ -108,15 +134,9 @@ def resample_ohlcv(df: pd.DataFrame, interval: str = "5min") -> pd.DataFrame:
     df = df.copy()
 
     # ---------------------------
-    # Detect timestamp format
+    # Normalize timestamp
     # ---------------------------
-    timestamp_is_ms = is_timestamp_ms(df["timestamp"])
-
-    # Normalize timestamp → datetime
-    if timestamp_is_ms:
-        df["timestamp"] = pd.to_datetime(df["timestamp"].astype(int), unit="ms")
-    else:
-        df["timestamp"] = pd.to_datetime(df["timestamp"])
+    df, timestamp_is_ms = normalize_timestamp(df)
 
     df.set_index("timestamp", inplace=True)
 
@@ -131,18 +151,10 @@ def resample_ohlcv(df: pd.DataFrame, interval: str = "5min") -> pd.DataFrame:
         "volume": "sum",
     }
 
-    df_resampled = (
-        df.resample(interval)
-        .agg(ohlc_agg)
-        .dropna()
-        .reset_index()
-    )
+    df_resampled = df.resample(interval).agg(ohlc_agg).dropna().reset_index()
 
-    # Convert back to ms ONLY if original input was ms
-    if timestamp_is_ms:
-        df_resampled["timestamp"] = (
-            df_resampled["timestamp"].astype("int64") // 10**6
-        )
+    # Convert back to ms if needed
+    df_resampled = convert_timestamp_to_ms(df_resampled, timestamp_is_ms)
 
     logger.info(f"Resampled OHLCV to '{interval}' | rows: {len(df_resampled)}")
     return df_resampled
