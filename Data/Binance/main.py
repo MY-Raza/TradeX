@@ -71,6 +71,7 @@ for symbol in symbols:
         continue
 
     logger.info(f"RAW data fetched for {symbol} | rows={len(raw_df)}")
+    logger.info(f"Raw DF columns: {raw_df.columns.tolist()}")
 
     # ---------------------------
     # Data Cleaning Pipeline

@@ -83,9 +83,10 @@ def create_schema(schema: str | None = None):
         engine: SQLAlchemy engine.
         schema (str | None): Optional schema name.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
-        with get_engine.begin() as conn:
+        with engine.begin() as conn:
             conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
         logger.info(f"Schema '{schema}' is ready.")
     except Exception:
@@ -99,13 +100,14 @@ def drop_schema(schema: str | None = None):
         engine: SQLAlchemy engine.
         schema (str | None): Optional schema name.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         confirm = input(f"Are you sure to drop '{schema}'? (yes/no): ").lower()
         if confirm != "yes":
             logger.warning("Schema drop cancelled.")
             return
-        with get_engine.begin() as conn:
+        with engine.begin() as conn:
             conn.execute(text(f"DROP SCHEMA IF EXISTS {schema} CASCADE;"))
         logger.warning(f"Schema '{schema}' dropped.")
     except Exception:
@@ -135,15 +137,16 @@ def save_df_to_db(
     if df.empty:
         logger.warning("DataFrame empty. Nothing to insert.")
         return
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         # Insert DataFrame into database
-        df.to_sql(table_name, get_engine, schema=schema, if_exists="append", index=False, method="multi")
+        df.to_sql(table_name, engine, schema=schema, if_exists="append", index=False, method="multi")
         logger.info(f"Inserted {len(df)} rows into '{schema}.{table_name}'.")
 
         # Convert table to hypertable if required
         if is_timeseries and time_column:
-            with get_engine.begin() as conn:
+            with engine.begin() as conn:
                 conn.execute(text(f"""
                     SELECT create_hypertable('{schema}.{table_name}', '{time_column}', migrate_data => TRUE, if_not_exists => TRUE);
                 """))
@@ -164,12 +167,13 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
     Returns:
         pd.DataFrame: DataFrame containing table data.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         query = f"SELECT * FROM {schema}.{table_name}"
         if limit:
             query += f" LIMIT {limit}"
-        df = pd.read_sql_query(query, get_engine)
+        df = pd.read_sql_query(query, engine)
         logger.info(f"Read {len(df)} rows from '{schema}.{table_name}'.")
         return df
     except Exception:
@@ -189,6 +193,7 @@ def drop_table(table_name: str, schema: str | None = None):
         table_name (str): Name of the table to drop.
         schema (str | None): Optional schema name.
     """
+    engine = get_engine()
     try:
         # Resolve schema name
         schema = resolve_schema(schema)
@@ -201,7 +206,7 @@ def drop_table(table_name: str, schema: str | None = None):
             return
 
         # Drop the table
-        with get_engine.begin() as conn:
+        with engine.begin() as conn:
             conn.execute(text(f"DROP TABLE IF EXISTS {full_name} CASCADE;"))
 
         logger.warning(f"Table '{full_name}' dropped.")
@@ -226,10 +231,11 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
         - Assumes timestamps are stored in **milliseconds** since epoch.
         - Converts the timestamp to a timezone-naive UTC datetime.
     """
+    engine = get_engine()
     try:
         schema = resolve_schema(schema)
         query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}"
-        with get_engine.connect() as conn:
+        with engine.connect() as conn:
             result = conn.execute(text(query)).scalar()
 
         if result is None:
