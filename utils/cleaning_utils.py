@@ -37,9 +37,9 @@ def clean_klines_df(df: pd.DataFrame) -> pd.DataFrame:
     # Ensure timestamp is int
     df["timestamp"] = df["timestamp"].astype(int)
 
-    # Sort by timestamp and drop duplicates
+    # Sort by timestamp
     df = df.sort_values("timestamp")
-    df = df.drop_duplicates(subset="timestamp")
+    
 
     # Drop the last candle (usually incomplete)
     if len(df) > 1:
