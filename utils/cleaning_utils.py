@@ -3,122 +3,119 @@ from TradeX.logs.logging import get_logger
 
 logger = get_logger(__name__)
 
+
 def clean_klines_df(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Clean Binance Futures kline DataFrame for further analysis or database insertion.
-
-    Steps performed:
-    1. Keep only relevant columns: 'timestamp', 'open', 'high', 'low', 'close', 'volume'.
-    2. Convert numeric columns to float type for consistency.
-    3. Drop duplicate rows based on the 'timestamp' column to avoid repeated data.
-    4. Sort the DataFrame by 'timestamp' in ascending order.
-    5. Drop the last row (incomplete candle) since it may not represent a full interval.
-
-    Args:
-        df (pd.DataFrame): Raw Binance kline DataFrame containing OHLCV data.
-
-    Returns:
-        pd.DataFrame: Cleaned DataFrame ready for further processing or saving.
+    Perform basic OHLCV cleaning:
+    - Select required columns
+    - Convert numeric fields
+    - Sort by timestamp
+    - Drop duplicates
+    - Drop last incomplete candle
     """
+
     if df.empty:
         logger.warning("Received empty DataFrame for cleaning.")
         return df
 
-    df = df[["timestamp", "open", "high", "low", "close", "volume"]].copy()
+    required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
+    df = df[required_cols].copy()
+
     numeric_cols = ["open", "high", "low", "close", "volume"]
-    df.loc[:, numeric_cols] = df[numeric_cols].astype(float)
-    df = df.drop_duplicates(subset="timestamp").sort_values("timestamp")
-    if not df.empty:
+    df[numeric_cols] = df[numeric_cols].astype(float)
+    df["timestamp"] = df["timestamp"].astype(int)
+
+    df = df.sort_values("timestamp")
+    df = df.drop_duplicates(subset="timestamp")
+
+    # Drop last candle (often incomplete)
+    if len(df) > 1:
         df = df.iloc[:-1]
 
-    logger.info(f"Cleaned DataFrame: {len(df)} rows remaining.")
-    return df
+    logger.info(f"Cleaned OHLCV data: {len(df)} rows")
+    return df.reset_index(drop=True)
 
 
-def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1min") -> pd.DataFrame:
+def fill_missing_timestamps(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     """
-    Fill missing timestamps in the DataFrame with NaNs for OHLCV values.
-    Useful when you want continuous time series for analysis.
-
-    Args:
-        df (pd.DataFrame): Cleaned kline DataFrame.
-        interval (str): Time interval, e.g., '1min', '5min', '1h'.
-
-    Returns:
-        pd.DataFrame: DataFrame with missing timestamps inserted.
+    Insert missing timestamps for a continuous time series.
     """
+
     if df.empty:
         return df
 
     df = df.copy()
-    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-    df = df.set_index('timestamp')
+    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
+    df.set_index("timestamp", inplace=True)
 
-    # Map string intervals to pandas offset aliases
-    interval_map = {"1m": "1min", "5m": "5min", "1h": "1H", "1d": "1D"}
-    freq = interval_map.get(interval, "1min")  
+    interval_map = {
+        "1m": "1min",
+        "5m": "5min",
+        "15m": "15min",
+        "1h": "1H",
+        "1d": "1D",
+    }
 
-    idx = pd.date_range(start=df.index.min(), end=df.index.max(), freq=freq)
-    df = df.reindex(idx)
+    freq = interval_map.get(interval, "1min")
+    full_index = pd.date_range(df.index.min(), df.index.max(), freq=freq)
 
-    # Reset index and convert back timestamp to ms
-    df = df.reset_index().rename(columns={"index": "timestamp"})
-    df['timestamp'] = (df['timestamp'].astype('int64') // 10**6)
+    df = df.reindex(full_index)
 
-    logger.info(f"Inserted missing timestamps. Total rows: {len(df)}")
+    df.reset_index(inplace=True)
+    df.rename(columns={"index": "timestamp"}, inplace=True)
+    df["timestamp"] = df["timestamp"].astype("int64") // 10**6
+
+    logger.info(f"Missing timestamps filled. Total rows: {len(df)}")
     return df
 
 
-
-def fill_missing_values(df: pd.DataFrame, method='ffill') -> pd.DataFrame:
+def fill_missing_values(df: pd.DataFrame, method: str = "ffill") -> pd.DataFrame:
     """
-    Fill missing OHLCV values in the DataFrame.
-
-    Args:
-        df (pd.DataFrame): DataFrame with NaNs.
-        method (str): 'ffill' for forward fill, 'bfill' for backward fill.
-
-    Returns:
-        pd.DataFrame: DataFrame with missing values filled.
+    Fill missing OHLCV values using forward or backward fill.
     """
+
     if df.empty:
         return df
 
     df = df.copy()
     df.fillna(method=method, inplace=True)
-    logger.info("Missing values filled using method: %s", method)
+
+    logger.info(f"Missing values filled using method='{method}'")
     return df
 
 
-def resample_ohlcv(df: pd.DataFrame, interval: str = '5min') -> pd.DataFrame:
+def resample_ohlcv(df: pd.DataFrame, interval: str = "5min") -> pd.DataFrame:
     """
-    Resample OHLCV data to a higher interval.
-    Example: 1-minute data -> 5-minute candles.
-
-    Args:
-        df (pd.DataFrame): DataFrame with timestamp as ms and OHLCV columns.
-        interval (str): Resampling interval, e.g., '5min', '1H', '1D'.
-
-    Returns:
-        pd.DataFrame: Resampled OHLCV DataFrame.
+    Resample OHLCV data to a higher timeframe.
     """
+
     if df.empty:
         return df
 
     df = df.copy()
-    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
-    df.set_index('timestamp', inplace=True)
+    df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
+    df.set_index("timestamp", inplace=True)
 
-    ohlc_dict = {
-        'open': 'first',
-        'high': 'max',
-        'low': 'min',
-        'close': 'last',
-        'volume': 'sum'
+    ohlc_agg = {
+        "open": "first",
+        "high": "max",
+        "low": "min",
+        "close": "last",
+        "volume": "sum",
     }
 
-    df_resampled = df.resample(interval).agg(ohlc_dict).dropna().reset_index()
-    df_resampled['timestamp'] = (df_resampled['timestamp'].astype('int64') // 10**6)
-    
-    logger.info(f"Resampled OHLCV to interval '{interval}'. Total rows: {len(df_resampled)}")
+    df_resampled = (
+        df.resample(interval)
+        .agg(ohlc_agg)
+        .dropna()
+        .reset_index()
+    )
+
+    df_resampled["timestamp"] = (
+        df_resampled["timestamp"].astype("int64") // 10**6
+    )
+
+    logger.info(
+        f"Resampled OHLCV to '{interval}'. Rows: {len(df_resampled)}"
+    )
     return df_resampled
