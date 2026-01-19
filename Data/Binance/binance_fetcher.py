@@ -5,9 +5,9 @@ from datetime import datetime
 import pandas as pd
 from binance.client import Client
 from dotenv import load_dotenv
-from TradeX.logs.logs import get_logger
+from TradeX.utils.common.logs import get_logger
 
-logger = get_logger(__name__)
+logger = get_logger("binance_fetcher")
 
 # ---------------------------
 # Load API keys from environment

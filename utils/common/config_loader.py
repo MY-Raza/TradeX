@@ -1,9 +1,9 @@
 import yaml
-from TradeX.logs.logs import get_logger
+from TradeX.utils.common.logs import get_logger
 import os
 import inspect
 
-logger = get_logger(__name__)
+logger = get_logger("config_loader")
 
 def read_config(filename: str = "config.yml") -> dict:
     """

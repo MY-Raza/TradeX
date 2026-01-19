@@ -1,5 +1,5 @@
 from TradeX.utils.db.utils import save_df_to_db
-from TradeX.logs.logs import get_logger
+from TradeX.utils.common.logs import get_logger
 from bybit_fetcher import BybitFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.common.config_loader import read_config
@@ -38,16 +38,18 @@ symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]
 
+
+# if talbe exist
+
 # ---------------------------
 # Fetch, Clean & Store Data
 # ---------------------------
 for symbol in symbols:
-    symbol = symbol.upper()
     logger.info(f"Processing symbol: {symbol}")
 
     # Initialize Bybit fetcher
     fetcher = BybitFuturesFetcher(
-        symbol=f"{symbol}USDT",
+        symbol=f"{symbol.upper()}USDT",
         start_date=start_date,
         end_date=end_date,
         interval="1",  # 1-minute interval
@@ -78,7 +80,7 @@ for symbol in symbols:
 
     save_df_to_db(
         df=df,
-        table_name=symbol.lower(),
+        table_name=symbol,
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True,

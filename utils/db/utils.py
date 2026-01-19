@@ -1,11 +1,11 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine, text 
-from TradeX.logs.logs import get_logger
+from TradeX.utils.common.logs import get_logger
 from datetime import datetime
 
 
-logger = get_logger(__name__)
+logger = get_logger("utils")
 
 # ---------------------------
 # Global variable to store the schema

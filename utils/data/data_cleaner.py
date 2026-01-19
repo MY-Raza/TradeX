@@ -2,7 +2,7 @@ import pandas as pd
 from TradeX.utils.common.config_loader import get_logger
 from TradeX.utils.common.constants import INTERVAL_MS_MAP
 
-logger = get_logger(__name__)
+logger = get_logger("data_cleaner")
 
 
 
