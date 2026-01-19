@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from sqlalchemy import create_engine, text 
+from sqlalchemy import create_engine, text, inspect 
 from TradeX.utils.common.logs import get_logger
 from datetime import datetime
 
@@ -240,14 +240,15 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
     """
     engine = get_engine()
     try:
+        inspector = inspect(engine)
+        full_table_name = f"{table_name}_1m"
+        if not inspector.has_table(full_table_name, schema=schema):
+          logger.info(f"Table '{schema}.{full_table_name}' does not exist. Will start from config start_date.")
+          return None
         schema = ensure_schema(schema)
         query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}_1m"
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(text(query)).scalar()
-
-        if result is None:
-            logger.warning(f"No timestamps found in '{schema}.{table_name}_1m'.")
-            return None
 
         # Convert milliseconds timestamp to datetime
         last_dt = datetime.utcfromtimestamp(result / 1000)

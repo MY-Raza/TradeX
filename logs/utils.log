@@ -26,3 +26,104 @@
 2026-01-19 17:31:25,054 | INFO | utils | Schema 'data_binance' is ready.
 2026-01-19 17:31:34,841 | INFO | utils | Inserted 19471 rows into 'data_binance.link_1m'.
 2026-01-19 17:31:34,848 | INFO | utils | Hypertable ensured for 'data_binance.link_1m' on column 'timestamp'.
+2026-01-19 17:42:07,175 | INFO | utils | Database engine created successfully.
+2026-01-19 17:43:38,334 | INFO | utils | Database engine created successfully.
+2026-01-19 17:43:39,458 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:39,698 | INFO | utils | Inserted 999 rows into 'data_bybit.btc_1m'.
+2026-01-19 17:43:39,709 | INFO | utils | Hypertable ensured for 'data_bybit.btc_1m' on column 'timestamp'.
+2026-01-19 17:43:41,556 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:41,728 | INFO | utils | Inserted 999 rows into 'data_bybit.eth_1m'.
+2026-01-19 17:43:41,730 | INFO | utils | Hypertable ensured for 'data_bybit.eth_1m' on column 'timestamp'.
+2026-01-19 17:43:43,407 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:43,612 | INFO | utils | Inserted 999 rows into 'data_bybit.bnb_1m'.
+2026-01-19 17:43:43,620 | INFO | utils | Hypertable ensured for 'data_bybit.bnb_1m' on column 'timestamp'.
+2026-01-19 17:43:45,452 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:45,660 | INFO | utils | Inserted 999 rows into 'data_bybit.ada_1m'.
+2026-01-19 17:43:45,663 | INFO | utils | Hypertable ensured for 'data_bybit.ada_1m' on column 'timestamp'.
+2026-01-19 17:43:47,277 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:47,476 | INFO | utils | Inserted 999 rows into 'data_bybit.xrp_1m'.
+2026-01-19 17:43:47,477 | INFO | utils | Hypertable ensured for 'data_bybit.xrp_1m' on column 'timestamp'.
+2026-01-19 17:43:49,253 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:49,427 | INFO | utils | Inserted 999 rows into 'data_bybit.doge_1m'.
+2026-01-19 17:43:49,443 | INFO | utils | Hypertable ensured for 'data_bybit.doge_1m' on column 'timestamp'.
+2026-01-19 17:43:51,698 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:51,876 | INFO | utils | Inserted 999 rows into 'data_bybit.sol_1m'.
+2026-01-19 17:43:51,882 | INFO | utils | Hypertable ensured for 'data_bybit.sol_1m' on column 'timestamp'.
+2026-01-19 17:43:53,997 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:54,493 | INFO | utils | Inserted 999 rows into 'data_bybit.dot_1m'.
+2026-01-19 17:43:54,499 | INFO | utils | Hypertable ensured for 'data_bybit.dot_1m' on column 'timestamp'.
+2026-01-19 17:43:54,510 | ERROR | utils | Failed to fetch last timestamp from 'matic_1m'.
+Traceback (most recent call last):
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "data_bybit.matic_1m" does not exist
+LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
+                                              ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\utils\db\utils.py", line 246, in get_last_date
+    result = conn.execute(text(query)).scalar()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Program Files\Miniconda\envs\tradex_env\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "data_bybit.matic_1m" does not exist
+LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
+                                              ^
+
+[SQL: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-19 17:43:57,668 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:43:57,853 | INFO | utils | Inserted 999 rows into 'data_bybit.link_1m'.
+2026-01-19 17:43:57,868 | INFO | utils | Hypertable ensured for 'data_bybit.link_1m' on column 'timestamp'.
+2026-01-19 17:48:00,491 | INFO | utils | Database engine created successfully.
+2026-01-19 17:48:01,811 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:01,991 | INFO | utils | Inserted 999 rows into 'data_bybit.btc_1m'.
+2026-01-19 17:48:01,998 | INFO | utils | Hypertable ensured for 'data_bybit.btc_1m' on column 'timestamp'.
+2026-01-19 17:48:02,798 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:02,924 | INFO | utils | Inserted 999 rows into 'data_bybit.eth_1m'.
+2026-01-19 17:48:02,938 | INFO | utils | Hypertable ensured for 'data_bybit.eth_1m' on column 'timestamp'.
+2026-01-19 17:48:03,962 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:04,108 | INFO | utils | Inserted 999 rows into 'data_bybit.bnb_1m'.
+2026-01-19 17:48:04,108 | INFO | utils | Hypertable ensured for 'data_bybit.bnb_1m' on column 'timestamp'.
+2026-01-19 17:48:04,916 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:05,039 | INFO | utils | Inserted 999 rows into 'data_bybit.ada_1m'.
+2026-01-19 17:48:05,055 | INFO | utils | Hypertable ensured for 'data_bybit.ada_1m' on column 'timestamp'.
+2026-01-19 17:48:05,854 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:05,987 | INFO | utils | Inserted 999 rows into 'data_bybit.xrp_1m'.
+2026-01-19 17:48:05,991 | INFO | utils | Hypertable ensured for 'data_bybit.xrp_1m' on column 'timestamp'.
+2026-01-19 17:48:07,032 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:07,153 | INFO | utils | Inserted 999 rows into 'data_bybit.doge_1m'.
+2026-01-19 17:48:07,169 | INFO | utils | Hypertable ensured for 'data_bybit.doge_1m' on column 'timestamp'.
+2026-01-19 17:48:07,988 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:08,119 | INFO | utils | Inserted 999 rows into 'data_bybit.sol_1m'.
+2026-01-19 17:48:08,122 | INFO | utils | Hypertable ensured for 'data_bybit.sol_1m' on column 'timestamp'.
+2026-01-19 17:48:08,929 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:09,100 | INFO | utils | Inserted 999 rows into 'data_bybit.dot_1m'.
+2026-01-19 17:48:09,101 | INFO | utils | Hypertable ensured for 'data_bybit.dot_1m' on column 'timestamp'.
+2026-01-19 17:48:09,104 | INFO | utils | Table 'data_bybit.matic_1m' does not exist. Will start from config start_date.
+2026-01-19 17:48:10,420 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-19 17:48:10,567 | INFO | utils | Inserted 999 rows into 'data_bybit.link_1m'.
+2026-01-19 17:48:10,579 | INFO | utils | Hypertable ensured for 'data_bybit.link_1m' on column 'timestamp'.
