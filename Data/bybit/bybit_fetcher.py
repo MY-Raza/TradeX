@@ -81,7 +81,7 @@ class BybitFuturesFetcher:
 
         return start_ts, end_ts
 
-    def fetch_klines(self) -> pd.DataFrame:
+    def fetch_raw_data(self) -> pd.DataFrame:
         all_klines = []
         start_ts = self.start_ts
         last_start_ts = None

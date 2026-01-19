@@ -1,5 +1,4 @@
 from TradeX.utils.db.utils import (
-    get_engine,
     create_schema,
     save_df_to_db,
 )
@@ -64,7 +63,7 @@ for symbol in symbols:
     # ---------------------------
     # Fetch RAW OHLCV Data
     # ---------------------------
-    raw_df = fetcher.fetch_klines()
+    raw_df = fetcher.fetch_raw_data()
 
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping to next symbol.")

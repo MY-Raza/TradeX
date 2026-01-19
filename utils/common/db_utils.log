@@ -1780,3 +1780,594 @@ AttributeError: 'NoneType' object has no attribute 'cursor'
 2026-01-19 10:17:28,872 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.link_1m' on column 'timestamp'.
 2026-01-19 10:17:28,872 | INFO | __main__ | Saved cleaned data to table: data_bybit.link_1m
 2026-01-19 10:17:28,872 | INFO | __main__ | Bybit data ingestion pipeline completed successfully.
+2026-01-19 10:20:42,128 | INFO | binance_fetcher | Binance Client initialized.
+2026-01-19 10:20:42,160 | INFO | TradeX.utils.common.utils_common | Configuration loaded | exchange=binance | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2026-01-06 | end_date=now
+2026-01-19 10:20:42,232 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:20:42,296 | INFO | TradeX.utils.db.utils | Schema 'data_binance' is ready.
+2026-01-19 10:20:42,296 | INFO | __main__ | Database schema 'data_binance' is ready.
+2026-01-19 10:20:42,296 | INFO | __main__ | Starting data pipeline for symbol: btc
+2026-01-19 10:20:42,296 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:20:42,296 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:20:43,702 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:20:44,596 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:20:45,489 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:20:46,385 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:20:47,278 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:20:48,177 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:20:49,068 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:20:49,961 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:20:50,855 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:20:51,751 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:20:52,648 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:20:53,538 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:20:54,436 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:20:55,330 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:20:56,224 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:20:57,125 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:20:58,032 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:20:58,920 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:20:59,807 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:21:00,671 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-19 00:20:00.001000 | interval=1m
+2026-01-19 10:21:01,020 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:21:01,089 | INFO | binance_fetcher | Fetched 19041 rows for BTCUSDT.
+2026-01-19 10:21:01,097 | INFO | __main__ | RAW data fetched for btc | rows=19041
+2026-01-19 10:21:01,097 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:21:01,162 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19040
+2026-01-19 10:21:01,162 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:21:01,162 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:21:10,093 | INFO | TradeX.utils.db.utils | Inserted 19040 rows into 'data_binance.btc_1m'.
+2026-01-19 10:21:10,128 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.btc_1m' on column 'timestamp'.
+2026-01-19 10:21:10,128 | INFO | __main__ | Cleaned data saved to table 'data_binance.btc_1m'
+2026-01-19 10:21:10,128 | INFO | __main__ | Starting data pipeline for symbol: eth
+2026-01-19 10:21:10,128 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:21:10,136 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:21:11,028 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:21:11,937 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:21:12,837 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:21:13,739 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:21:14,639 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:21:15,533 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:21:16,424 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:21:17,321 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:21:18,226 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:21:19,117 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:21:20,035 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:21:20,933 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:21:22,133 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:21:23,029 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:21:24,521 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:21:25,419 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:21:26,317 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:21:27,211 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:21:28,104 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:21:28,967 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-19 00:21:00.001000 | interval=1m
+2026-01-19 10:21:29,323 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:21:29,396 | INFO | binance_fetcher | Fetched 19042 rows for ETHUSDT.
+2026-01-19 10:21:29,412 | INFO | __main__ | RAW data fetched for eth | rows=19042
+2026-01-19 10:21:29,412 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:21:29,476 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19041
+2026-01-19 10:21:29,476 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:21:29,484 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:21:39,055 | INFO | TradeX.utils.db.utils | Inserted 19041 rows into 'data_binance.eth_1m'.
+2026-01-19 10:21:39,104 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.eth_1m' on column 'timestamp'.
+2026-01-19 10:21:39,104 | INFO | __main__ | Cleaned data saved to table 'data_binance.eth_1m'
+2026-01-19 10:21:39,104 | INFO | __main__ | Starting data pipeline for symbol: bnb
+2026-01-19 10:21:39,104 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:21:39,104 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:21:40,013 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:21:40,904 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:21:41,795 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:21:42,686 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:21:43,578 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:21:44,469 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:21:45,372 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:21:46,265 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:21:47,168 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:21:48,059 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:21:48,952 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:21:49,844 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:21:51,032 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:21:51,940 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:21:52,836 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:21:53,734 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:21:54,625 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:21:55,516 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:21:56,414 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:21:57,275 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-19 00:21:00.001000 | interval=1m
+2026-01-19 10:21:57,625 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:21:57,742 | INFO | binance_fetcher | Fetched 19042 rows for BNBUSDT.
+2026-01-19 10:21:57,768 | INFO | __main__ | RAW data fetched for bnb | rows=19042
+2026-01-19 10:21:57,768 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:21:57,891 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19041
+2026-01-19 10:21:57,891 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:21:57,891 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:22:08,934 | INFO | TradeX.utils.db.utils | Inserted 19041 rows into 'data_binance.bnb_1m'.
+2026-01-19 10:22:08,974 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.bnb_1m' on column 'timestamp'.
+2026-01-19 10:22:08,974 | INFO | __main__ | Cleaned data saved to table 'data_binance.bnb_1m'
+2026-01-19 10:22:08,974 | INFO | __main__ | Starting data pipeline for symbol: ada
+2026-01-19 10:22:08,982 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:22:08,982 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:22:09,893 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:22:10,785 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:22:11,678 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:22:12,571 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:22:13,476 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:22:14,395 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:22:15,291 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:22:16,180 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:22:17,078 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:22:17,966 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:22:18,856 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:22:19,757 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:22:20,654 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:22:21,548 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:22:22,460 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:22:23,349 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:22:24,234 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:22:25,124 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:22:26,018 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:22:26,881 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-19 00:22:00.001000 | interval=1m
+2026-01-19 10:22:27,242 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:22:27,336 | INFO | binance_fetcher | Fetched 19043 rows for ADAUSDT.
+2026-01-19 10:22:27,352 | INFO | __main__ | RAW data fetched for ada | rows=19043
+2026-01-19 10:22:27,352 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:22:27,432 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19042
+2026-01-19 10:22:27,432 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:22:27,432 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:22:38,461 | INFO | TradeX.utils.db.utils | Inserted 19042 rows into 'data_binance.ada_1m'.
+2026-01-19 10:22:38,501 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.ada_1m' on column 'timestamp'.
+2026-01-19 10:22:38,501 | INFO | __main__ | Cleaned data saved to table 'data_binance.ada_1m'
+2026-01-19 10:22:38,501 | INFO | __main__ | Starting data pipeline for symbol: xrp
+2026-01-19 10:22:38,501 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:22:38,501 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:22:39,405 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:22:41,340 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:22:42,231 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:22:43,128 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:22:44,027 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:22:44,930 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:22:45,834 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:22:46,727 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:22:47,622 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:22:48,815 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:22:49,713 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:22:50,607 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:22:51,500 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:22:52,391 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:22:53,294 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:22:54,194 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:22:55,088 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:22:55,984 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:22:56,880 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:22:57,754 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-19 00:22:00.001000 | interval=1m
+2026-01-19 10:22:58,113 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:22:58,177 | INFO | binance_fetcher | Fetched 19043 rows for XRPUSDT.
+2026-01-19 10:22:58,201 | INFO | __main__ | RAW data fetched for xrp | rows=19043
+2026-01-19 10:22:58,201 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:22:58,265 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19042
+2026-01-19 10:22:58,265 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:22:58,265 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:23:09,284 | INFO | TradeX.utils.db.utils | Inserted 19042 rows into 'data_binance.xrp_1m'.
+2026-01-19 10:23:09,324 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.xrp_1m' on column 'timestamp'.
+2026-01-19 10:23:09,324 | INFO | __main__ | Cleaned data saved to table 'data_binance.xrp_1m'
+2026-01-19 10:23:09,324 | INFO | __main__ | Starting data pipeline for symbol: doge
+2026-01-19 10:23:09,324 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:23:09,324 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:23:10,227 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:23:11,119 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:23:12,015 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:23:12,911 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:23:13,804 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:23:14,697 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:23:15,601 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:23:16,491 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:23:17,400 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:23:18,297 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:23:19,191 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:23:20,085 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:23:20,978 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:23:21,878 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:23:22,769 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:23:23,668 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:23:24,564 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:23:25,452 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:23:26,651 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:23:27,526 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-19 00:23:00.001000 | interval=1m
+2026-01-19 10:23:27,892 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:23:27,963 | INFO | binance_fetcher | Fetched 19044 rows for DOGEUSDT.
+2026-01-19 10:23:27,979 | INFO | __main__ | RAW data fetched for doge | rows=19044
+2026-01-19 10:23:27,979 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:23:28,051 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19043
+2026-01-19 10:23:28,051 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:23:28,051 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:23:39,145 | INFO | TradeX.utils.db.utils | Inserted 19043 rows into 'data_binance.doge_1m'.
+2026-01-19 10:23:39,181 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.doge_1m' on column 'timestamp'.
+2026-01-19 10:23:39,181 | INFO | __main__ | Cleaned data saved to table 'data_binance.doge_1m'
+2026-01-19 10:23:39,181 | INFO | __main__ | Starting data pipeline for symbol: sol
+2026-01-19 10:23:39,181 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:23:39,181 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:23:40,078 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:23:40,985 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:23:41,880 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:23:42,769 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:23:43,663 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:23:44,556 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:23:45,459 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:23:46,409 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:23:47,302 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:23:48,191 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:23:49,090 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:23:49,986 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:23:50,884 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:23:51,777 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:23:52,676 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:23:53,611 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:23:54,504 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:23:55,392 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:23:56,286 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:23:57,147 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-19 00:23:00.001000 | interval=1m
+2026-01-19 10:23:58,108 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:23:58,180 | INFO | binance_fetcher | Fetched 19044 rows for SOLUSDT.
+2026-01-19 10:23:58,201 | INFO | __main__ | RAW data fetched for sol | rows=19044
+2026-01-19 10:23:58,201 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:23:58,281 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19043
+2026-01-19 10:23:58,281 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:23:58,281 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:24:09,791 | INFO | TradeX.utils.db.utils | Inserted 19043 rows into 'data_binance.sol_1m'.
+2026-01-19 10:24:09,830 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.sol_1m' on column 'timestamp'.
+2026-01-19 10:24:09,830 | INFO | __main__ | Cleaned data saved to table 'data_binance.sol_1m'
+2026-01-19 10:24:09,830 | INFO | __main__ | Starting data pipeline for symbol: dot
+2026-01-19 10:24:09,830 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:24:09,830 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:24:10,727 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:24:11,620 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:24:12,509 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:24:13,397 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:24:14,300 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:24:15,194 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:24:16,096 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:24:16,983 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:24:17,869 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:24:18,757 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:24:19,652 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:24:20,558 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:24:21,447 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:24:22,336 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:24:23,609 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:24:24,503 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:24:25,390 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:24:26,276 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:24:27,476 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:24:28,342 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-19 00:24:00.001000 | interval=1m
+2026-01-19 10:24:28,699 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:24:28,771 | INFO | binance_fetcher | Fetched 19045 rows for DOTUSDT.
+2026-01-19 10:24:28,787 | INFO | __main__ | RAW data fetched for dot | rows=19045
+2026-01-19 10:24:28,787 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:24:28,865 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19044
+2026-01-19 10:24:28,865 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:24:28,865 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:24:43,714 | INFO | TradeX.utils.db.utils | Inserted 19044 rows into 'data_binance.dot_1m'.
+2026-01-19 10:24:43,762 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.dot_1m' on column 'timestamp'.
+2026-01-19 10:24:43,762 | INFO | __main__ | Cleaned data saved to table 'data_binance.dot_1m'
+2026-01-19 10:24:43,763 | INFO | __main__ | Starting data pipeline for symbol: matic
+2026-01-19 10:24:43,763 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:24:43,764 | INFO | binance_fetcher | Fetching MATICUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:24:44,161 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:24:44,162 | WARNING | binance_fetcher | No data fetched from Binance.
+2026-01-19 10:24:44,174 | WARNING | __main__ | No data fetched for matic. Skipping to next symbol.
+2026-01-19 10:24:44,174 | INFO | __main__ | Starting data pipeline for symbol: link
+2026-01-19 10:24:44,175 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-19 10:24:44,183 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-19 10:24:45,083 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-19 10:24:45,976 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-19 10:24:46,874 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-19 10:24:47,765 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-19 10:24:48,655 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-19 10:24:49,546 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-19 10:24:50,448 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-19 10:24:51,337 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-19 10:24:52,247 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-19 10:24:53,138 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-19 10:24:54,038 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-19 10:24:55,226 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-19 10:24:56,124 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-19 10:24:57,023 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-19 10:24:57,913 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-19 10:24:58,810 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-19 10:24:59,708 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-19 10:25:00,896 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-19 10:25:01,784 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-19 10:25:02,649 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-19 00:24:00.001000 | interval=1m
+2026-01-19 10:25:03,016 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-19 10:25:03,083 | INFO | binance_fetcher | Fetched 19045 rows for LINKUSDT.
+2026-01-19 10:25:03,092 | INFO | __main__ | RAW data fetched for link | rows=19045
+2026-01-19 10:25:03,092 | INFO | __main__ | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-19 10:25:03,152 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19044
+2026-01-19 10:25:03,154 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:25:03,155 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:25:12,234 | INFO | TradeX.utils.db.utils | Inserted 19044 rows into 'data_binance.link_1m'.
+2026-01-19 10:25:12,367 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_binance.link_1m' on column 'timestamp'.
+2026-01-19 10:25:12,367 | INFO | __main__ | Cleaned data saved to table 'data_binance.link_1m'
+2026-01-19 10:25:12,382 | INFO | __main__ | Binance Futures data ingestion pipeline completed successfully.
+2026-01-19 10:25:39,886 | INFO | bybit_fetcher | Bybit HTTP client initialized.
+2026-01-19 10:25:39,934 | INFO | TradeX.utils.common.utils_common | Configuration loaded | exchange=bybit | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2026-01-06 | end_date=now
+2026-01-19 10:25:40,012 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:25:40,102 | INFO | TradeX.utils.db.utils | Schema 'data_bybit' is ready.
+2026-01-19 10:25:40,104 | INFO | __main__ | Database schema ready: data_bybit
+2026-01-19 10:25:40,104 | INFO | __main__ | Processing symbol: BTC
+2026-01-19 10:25:40,106 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | BTCUSDT | 2026-01-06 → now
+2026-01-19 10:25:40,107 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-05 19:00:00
+2026-01-19 10:25:41,807 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-06 11:40:00
+2026-01-19 10:25:42,860 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-07 04:20:00
+2026-01-19 10:25:43,914 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-07 21:00:00
+2026-01-19 10:25:44,491 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-08 13:40:00
+2026-01-19 10:25:46,029 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-09 06:20:00
+2026-01-19 10:25:47,083 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-09 23:00:00
+2026-01-19 10:25:47,680 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-10 15:40:00
+2026-01-19 10:25:48,819 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-11 08:20:00
+2026-01-19 10:25:50,381 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-12 01:00:00
+2026-01-19 10:25:51,921 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-12 17:40:00
+2026-01-19 10:25:53,452 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-13 10:20:00
+2026-01-19 10:25:54,566 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-14 03:00:00
+2026-01-19 10:25:55,384 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-14 19:40:00
+2026-01-19 10:25:55,959 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-15 12:20:00
+2026-01-19 10:25:57,006 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-16 05:00:00
+2026-01-19 10:25:58,052 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-16 21:40:00
+2026-01-19 10:25:59,091 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-17 14:20:00
+2026-01-19 10:25:59,683 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-18 07:00:00
+2026-01-19 10:26:01,210 | INFO | bybit_fetcher | Fetching BTCUSDT from 2026-01-18 23:40:00
+2026-01-19 10:26:02,017 | INFO | bybit_fetcher | Fetched RAW klines: 19341 rows
+2026-01-19 10:26:02,025 | INFO | __main__ | RAW data fetched for BTC: 19341 rows
+2026-01-19 10:26:02,082 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19340
+2026-01-19 10:26:02,083 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:26:02,084 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:26:10,858 | INFO | TradeX.utils.db.utils | Inserted 19340 rows into 'data_bybit.btc_1m'.
+2026-01-19 10:26:10,872 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.btc_1m' on column 'timestamp'.
+2026-01-19 10:26:10,872 | INFO | __main__ | Saved cleaned data to table: data_bybit.btc_1m
+2026-01-19 10:26:10,873 | INFO | __main__ | Processing symbol: ETH
+2026-01-19 10:26:10,873 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | ETHUSDT | 2026-01-06 → now
+2026-01-19 10:26:10,874 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-05 19:00:00
+2026-01-19 10:26:11,929 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-06 11:40:00
+2026-01-19 10:26:12,731 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-07 04:20:00
+2026-01-19 10:26:13,301 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-07 21:00:00
+2026-01-19 10:26:13,874 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-08 13:40:00
+2026-01-19 10:26:15,408 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-09 06:20:00
+2026-01-19 10:26:16,455 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-09 23:00:00
+2026-01-19 10:26:17,504 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-10 15:40:00
+2026-01-19 10:26:18,089 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-11 08:20:00
+2026-01-19 10:26:18,660 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-12 01:00:00
+2026-01-19 10:26:19,713 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-12 17:40:00
+2026-01-19 10:26:20,283 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-13 10:20:00
+2026-01-19 10:26:20,863 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-14 03:00:00
+2026-01-19 10:26:21,436 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-14 19:40:00
+2026-01-19 10:26:22,972 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-15 12:20:00
+2026-01-19 10:26:24,496 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-16 05:00:00
+2026-01-19 10:26:25,073 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-16 21:40:00
+2026-01-19 10:26:25,870 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-17 14:20:00
+2026-01-19 10:26:27,399 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-18 07:00:00
+2026-01-19 10:26:28,210 | INFO | bybit_fetcher | Fetching ETHUSDT from 2026-01-18 23:40:00
+2026-01-19 10:26:29,500 | INFO | bybit_fetcher | Fetched RAW klines: 19341 rows
+2026-01-19 10:26:29,512 | INFO | __main__ | RAW data fetched for ETH: 19341 rows
+2026-01-19 10:26:29,601 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19340
+2026-01-19 10:26:29,602 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:26:29,604 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:26:48,273 | INFO | TradeX.utils.db.utils | Inserted 19340 rows into 'data_bybit.eth_1m'.
+2026-01-19 10:26:48,281 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.eth_1m' on column 'timestamp'.
+2026-01-19 10:26:48,282 | INFO | __main__ | Saved cleaned data to table: data_bybit.eth_1m
+2026-01-19 10:26:48,283 | INFO | __main__ | Processing symbol: BNB
+2026-01-19 10:26:48,284 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | BNBUSDT | 2026-01-06 → now
+2026-01-19 10:26:48,286 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-05 19:00:00
+2026-01-19 10:26:49,339 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-06 11:40:00
+2026-01-19 10:26:49,904 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-07 04:20:00
+2026-01-19 10:26:51,414 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-07 21:00:00
+2026-01-19 10:26:52,468 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-08 13:40:00
+2026-01-19 10:26:53,305 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-09 06:20:00
+2026-01-19 10:26:54,349 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-09 23:00:00
+2026-01-19 10:26:55,388 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-10 15:40:00
+2026-01-19 10:26:56,429 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-11 08:20:00
+2026-01-19 10:26:57,476 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-12 01:00:00
+2026-01-19 10:26:58,542 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-12 17:40:00
+2026-01-19 10:26:59,586 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-13 10:20:00
+2026-01-19 10:27:00,632 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-14 03:00:00
+2026-01-19 10:27:01,196 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-14 19:40:00
+2026-01-19 10:27:01,773 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-15 12:20:00
+2026-01-19 10:27:02,401 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-16 05:00:00
+2026-01-19 10:27:03,939 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-16 21:40:00
+2026-01-19 10:27:04,977 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-17 14:20:00
+2026-01-19 10:27:06,504 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-18 07:00:00
+2026-01-19 10:27:07,543 | INFO | bybit_fetcher | Fetching BNBUSDT from 2026-01-18 23:40:00
+2026-01-19 10:27:08,834 | INFO | bybit_fetcher | Fetched RAW klines: 19342 rows
+2026-01-19 10:27:08,841 | INFO | __main__ | RAW data fetched for BNB: 19342 rows
+2026-01-19 10:27:08,888 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19341
+2026-01-19 10:27:08,888 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:27:08,888 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:27:16,607 | INFO | TradeX.utils.db.utils | Inserted 19341 rows into 'data_bybit.bnb_1m'.
+2026-01-19 10:27:16,607 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.bnb_1m' on column 'timestamp'.
+2026-01-19 10:27:16,607 | INFO | __main__ | Saved cleaned data to table: data_bybit.bnb_1m
+2026-01-19 10:27:16,607 | INFO | __main__ | Processing symbol: ADA
+2026-01-19 10:27:16,607 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | ADAUSDT | 2026-01-06 → now
+2026-01-19 10:27:16,607 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-05 19:00:00
+2026-01-19 10:27:17,184 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-06 11:40:00
+2026-01-19 10:27:17,994 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-07 04:20:00
+2026-01-19 10:27:19,046 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-07 21:00:00
+2026-01-19 10:27:19,624 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-08 13:40:00
+2026-01-19 10:27:20,431 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-09 06:20:00
+2026-01-19 10:27:21,476 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-09 23:00:00
+2026-01-19 10:27:22,523 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-10 15:40:00
+2026-01-19 10:27:23,332 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-11 08:20:00
+2026-01-19 10:27:24,372 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-12 01:00:00
+2026-01-19 10:27:25,417 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-12 17:40:00
+2026-01-19 10:27:26,468 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-13 10:20:00
+2026-01-19 10:27:27,034 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-14 03:00:00
+2026-01-19 10:27:27,838 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-14 19:40:00
+2026-01-19 10:27:28,411 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-15 12:20:00
+2026-01-19 10:27:28,983 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-16 05:00:00
+2026-01-19 10:27:30,040 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-16 21:40:00
+2026-01-19 10:27:30,600 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-17 14:20:00
+2026-01-19 10:27:31,402 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-18 07:00:00
+2026-01-19 10:27:32,441 | INFO | bybit_fetcher | Fetching ADAUSDT from 2026-01-18 23:40:00
+2026-01-19 10:27:33,244 | INFO | bybit_fetcher | Fetched RAW klines: 19342 rows
+2026-01-19 10:27:33,257 | INFO | __main__ | RAW data fetched for ADA: 19342 rows
+2026-01-19 10:27:33,316 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19341
+2026-01-19 10:27:33,317 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:27:33,318 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:27:42,504 | INFO | TradeX.utils.db.utils | Inserted 19341 rows into 'data_bybit.ada_1m'.
+2026-01-19 10:27:42,511 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.ada_1m' on column 'timestamp'.
+2026-01-19 10:27:42,511 | INFO | __main__ | Saved cleaned data to table: data_bybit.ada_1m
+2026-01-19 10:27:42,512 | INFO | __main__ | Processing symbol: XRP
+2026-01-19 10:27:42,513 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | XRPUSDT | 2026-01-06 → now
+2026-01-19 10:27:42,513 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-05 19:00:00
+2026-01-19 10:27:43,569 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-06 11:40:00
+2026-01-19 10:27:44,141 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-07 04:20:00
+2026-01-19 10:27:44,711 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-07 21:00:00
+2026-01-19 10:27:46,275 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-08 13:40:00
+2026-01-19 10:27:47,804 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-09 06:20:00
+2026-01-19 10:27:49,331 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-09 23:00:00
+2026-01-19 10:27:50,141 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-10 15:40:00
+2026-01-19 10:27:51,677 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-11 08:20:00
+2026-01-19 10:27:53,220 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-12 01:00:00
+2026-01-19 10:27:54,321 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-12 17:40:00
+2026-01-19 10:27:55,132 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-13 10:20:00
+2026-01-19 10:27:56,180 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-14 03:00:00
+2026-01-19 10:27:56,986 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-14 19:40:00
+2026-01-19 10:27:58,518 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-15 12:20:00
+2026-01-19 10:27:59,572 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-16 05:00:00
+2026-01-19 10:28:00,148 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-16 21:40:00
+2026-01-19 10:28:00,715 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-17 14:20:00
+2026-01-19 10:28:02,234 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-18 07:00:00
+2026-01-19 10:28:03,295 | INFO | bybit_fetcher | Fetching XRPUSDT from 2026-01-18 23:40:00
+2026-01-19 10:28:04,103 | INFO | bybit_fetcher | Fetched RAW klines: 19343 rows
+2026-01-19 10:28:04,117 | INFO | __main__ | RAW data fetched for XRP: 19343 rows
+2026-01-19 10:28:04,171 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19342
+2026-01-19 10:28:04,172 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:28:04,173 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:28:18,090 | INFO | TradeX.utils.db.utils | Inserted 19342 rows into 'data_bybit.xrp_1m'.
+2026-01-19 10:28:18,102 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.xrp_1m' on column 'timestamp'.
+2026-01-19 10:28:18,103 | INFO | __main__ | Saved cleaned data to table: data_bybit.xrp_1m
+2026-01-19 10:28:18,103 | INFO | __main__ | Processing symbol: DOGE
+2026-01-19 10:28:18,104 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | DOGEUSDT | 2026-01-06 → now
+2026-01-19 10:28:18,105 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-05 19:00:00
+2026-01-19 10:28:19,640 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-06 11:40:00
+2026-01-19 10:28:21,180 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-07 04:20:00
+2026-01-19 10:28:21,753 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-07 21:00:00
+2026-01-19 10:28:22,324 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-08 13:40:00
+2026-01-19 10:28:23,855 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-09 06:20:00
+2026-01-19 10:28:24,904 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-09 23:00:00
+2026-01-19 10:28:25,473 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-10 15:40:00
+2026-01-19 10:28:26,044 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-11 08:20:00
+2026-01-19 10:28:26,612 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-12 01:00:00
+2026-01-19 10:28:27,184 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-12 17:40:00
+2026-01-19 10:28:28,707 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-13 10:20:00
+2026-01-19 10:28:30,263 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-14 03:00:00
+2026-01-19 10:28:31,821 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-14 19:40:00
+2026-01-19 10:28:33,347 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-15 12:20:00
+2026-01-19 10:28:33,915 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-16 05:00:00
+2026-01-19 10:28:35,447 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-16 21:40:00
+2026-01-19 10:28:36,251 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-17 14:20:00
+2026-01-19 10:28:37,049 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-18 07:00:00
+2026-01-19 10:28:38,089 | INFO | bybit_fetcher | Fetching DOGEUSDT from 2026-01-18 23:40:00
+2026-01-19 10:28:39,371 | INFO | bybit_fetcher | Fetched RAW klines: 19344 rows
+2026-01-19 10:28:39,389 | INFO | __main__ | RAW data fetched for DOGE: 19344 rows
+2026-01-19 10:28:39,463 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19343
+2026-01-19 10:28:39,464 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:28:39,466 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:28:48,318 | INFO | TradeX.utils.db.utils | Inserted 19343 rows into 'data_bybit.doge_1m'.
+2026-01-19 10:28:48,334 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.doge_1m' on column 'timestamp'.
+2026-01-19 10:28:48,334 | INFO | __main__ | Saved cleaned data to table: data_bybit.doge_1m
+2026-01-19 10:28:48,334 | INFO | __main__ | Processing symbol: SOL
+2026-01-19 10:28:48,334 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | SOLUSDT | 2026-01-06 → now
+2026-01-19 10:28:48,334 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-05 19:00:00
+2026-01-19 10:28:48,930 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-06 11:40:00
+2026-01-19 10:28:49,973 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-07 04:20:00
+2026-01-19 10:28:50,780 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-07 21:00:00
+2026-01-19 10:28:51,822 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-08 13:40:00
+2026-01-19 10:28:52,646 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-09 06:20:00
+2026-01-19 10:28:53,270 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-09 23:00:00
+2026-01-19 10:28:53,838 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-10 15:40:00
+2026-01-19 10:28:54,893 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-11 08:20:00
+2026-01-19 10:28:55,460 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-12 01:00:00
+2026-01-19 10:28:57,007 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-12 17:40:00
+2026-01-19 10:28:58,054 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-13 10:20:00
+2026-01-19 10:28:58,628 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-14 03:00:00
+2026-01-19 10:28:59,674 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-14 19:40:00
+2026-01-19 10:29:00,729 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-15 12:20:00
+2026-01-19 10:29:02,263 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-16 05:00:00
+2026-01-19 10:29:03,080 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-16 21:40:00
+2026-01-19 10:29:04,124 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-17 14:20:00
+2026-01-19 10:29:04,687 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-18 07:00:00
+2026-01-19 10:29:06,207 | INFO | bybit_fetcher | Fetching SOLUSDT from 2026-01-18 23:40:00
+2026-01-19 10:29:07,492 | INFO | bybit_fetcher | Fetched RAW klines: 19344 rows
+2026-01-19 10:29:07,508 | INFO | __main__ | RAW data fetched for SOL: 19344 rows
+2026-01-19 10:29:07,575 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19343
+2026-01-19 10:29:07,575 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:29:07,575 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:29:17,106 | INFO | TradeX.utils.db.utils | Inserted 19343 rows into 'data_bybit.sol_1m'.
+2026-01-19 10:29:17,109 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.sol_1m' on column 'timestamp'.
+2026-01-19 10:29:17,109 | INFO | __main__ | Saved cleaned data to table: data_bybit.sol_1m
+2026-01-19 10:29:17,110 | INFO | __main__ | Processing symbol: DOT
+2026-01-19 10:29:17,110 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | DOTUSDT | 2026-01-06 → now
+2026-01-19 10:29:17,111 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-05 19:00:00
+2026-01-19 10:29:18,159 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-06 11:40:00
+2026-01-19 10:29:19,682 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-07 04:20:00
+2026-01-19 10:29:20,256 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-07 21:00:00
+2026-01-19 10:29:21,310 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-08 13:40:00
+2026-01-19 10:29:22,844 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-09 06:20:00
+2026-01-19 10:29:24,376 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-09 23:00:00
+2026-01-19 10:29:25,187 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-10 15:40:00
+2026-01-19 10:29:26,717 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-11 08:20:00
+2026-01-19 10:29:28,241 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-12 01:00:00
+2026-01-19 10:29:28,809 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-12 17:40:00
+2026-01-19 10:29:29,386 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-13 10:20:00
+2026-01-19 10:29:30,910 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-14 03:00:00
+2026-01-19 10:29:32,446 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-14 19:40:00
+2026-01-19 10:29:33,022 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-15 12:20:00
+2026-01-19 10:29:33,591 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-16 05:00:00
+2026-01-19 10:29:34,402 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-16 21:40:00
+2026-01-19 10:29:35,202 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-17 14:20:00
+2026-01-19 10:29:36,723 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-18 07:00:00
+2026-01-19 10:29:38,273 | INFO | bybit_fetcher | Fetching DOTUSDT from 2026-01-18 23:40:00
+2026-01-19 10:29:39,090 | INFO | bybit_fetcher | Fetched RAW klines: 19345 rows
+2026-01-19 10:29:39,108 | INFO | __main__ | RAW data fetched for DOT: 19345 rows
+2026-01-19 10:29:39,195 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19344
+2026-01-19 10:29:39,196 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:29:39,199 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:29:47,917 | INFO | TradeX.utils.db.utils | Inserted 19344 rows into 'data_bybit.dot_1m'.
+2026-01-19 10:29:47,920 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.dot_1m' on column 'timestamp'.
+2026-01-19 10:29:47,920 | INFO | __main__ | Saved cleaned data to table: data_bybit.dot_1m
+2026-01-19 10:29:47,920 | INFO | __main__ | Processing symbol: MATIC
+2026-01-19 10:29:47,920 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | MATICUSDT | 2026-01-06 → now
+2026-01-19 10:29:47,920 | INFO | bybit_fetcher | Fetching MATICUSDT from 2026-01-05 19:00:00
+2026-01-19 10:29:48,216 | INFO | bybit_fetcher | No more klines returned.
+2026-01-19 10:29:48,216 | WARNING | bybit_fetcher | No klines fetched.
+2026-01-19 10:29:48,216 | WARNING | __main__ | No data fetched for MATIC. Skipping.
+2026-01-19 10:29:48,216 | INFO | __main__ | Processing symbol: LINK
+2026-01-19 10:29:48,216 | INFO | bybit_fetcher | BybitFuturesFetcher initialized | LINKUSDT | 2026-01-06 → now
+2026-01-19 10:29:48,216 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-05 19:00:00
+2026-01-19 10:29:49,763 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-06 11:40:00
+2026-01-19 10:29:50,812 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-07 04:20:00
+2026-01-19 10:29:51,620 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-07 21:00:00
+2026-01-19 10:29:52,190 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-08 13:40:00
+2026-01-19 10:29:53,012 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-09 06:20:00
+2026-01-19 10:29:53,845 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-09 23:00:00
+2026-01-19 10:29:55,171 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-10 15:40:00
+2026-01-19 10:29:55,738 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-11 08:20:00
+2026-01-19 10:29:56,798 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-12 01:00:00
+2026-01-19 10:29:57,387 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-12 17:40:00
+2026-01-19 10:29:57,971 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-13 10:20:00
+2026-01-19 10:29:58,539 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-14 03:00:00
+2026-01-19 10:29:59,117 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-14 19:40:00
+2026-01-19 10:30:00,177 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-15 12:20:00
+2026-01-19 10:30:01,230 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-16 05:00:00
+2026-01-19 10:30:02,287 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-16 21:40:00
+2026-01-19 10:30:03,089 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-17 14:20:00
+2026-01-19 10:30:03,668 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-18 07:00:00
+2026-01-19 10:30:04,227 | INFO | bybit_fetcher | Fetching LINKUSDT from 2026-01-18 23:40:00
+2026-01-19 10:30:04,782 | INFO | bybit_fetcher | Fetched RAW klines: 19345 rows
+2026-01-19 10:30:04,798 | INFO | __main__ | RAW data fetched for LINK: 19345 rows
+2026-01-19 10:30:04,851 | INFO | TradeX.utils.data.data_cleaner | Cleaned OHLCV data | rows: 19344
+2026-01-19 10:30:04,852 | INFO | __main__ | OHLCV cleaning completed.
+2026-01-19 10:30:04,853 | INFO | TradeX.utils.db.utils | Database engine created successfully.
+2026-01-19 10:30:11,144 | INFO | TradeX.utils.db.utils | Inserted 19344 rows into 'data_bybit.link_1m'.
+2026-01-19 10:30:11,150 | INFO | TradeX.utils.db.utils | Hypertable ensured for 'data_bybit.link_1m' on column 'timestamp'.
+2026-01-19 10:30:11,150 | INFO | __main__ | Saved cleaned data to table: data_bybit.link_1m
+2026-01-19 10:30:11,151 | INFO | __main__ | Bybit data ingestion pipeline completed successfully.

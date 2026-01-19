@@ -69,7 +69,7 @@ class BinanceFuturesFetcher:
             logger.exception("Failed to convert dates to timestamps.")
             raise
 
-    def fetch_klines(self) -> pd.DataFrame:
+    def fetch_raw_data(self) -> pd.DataFrame:
         all_klines = []
         start_ts = self.start_ts
 

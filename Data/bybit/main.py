@@ -65,9 +65,9 @@ for symbol in symbols:
     )
 
     # ---------------------------
-    # Fetch RAW klines
+    # Fetch RAW DATA
     # ---------------------------
-    raw_df = fetcher.fetch_klines()
+    raw_df = fetcher.fetch_raw_data()
 
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping.")
