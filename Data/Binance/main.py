@@ -1,6 +1,7 @@
 from TradeX.utils.db.utils import (
     create_schema,
     save_df_to_db,
+    drop_schema
 )
 from TradeX.utils.common.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
@@ -53,52 +54,53 @@ for symbol in symbols:
     logger.info(f"Starting data pipeline for symbol: {symbol}")
 
     # Initialize Binance fetcher
-    fetcher = BinanceFuturesFetcher(
-        symbol=f"{symbol.upper()}USDT",
-        start_date=start_date,
-        end_date=end_date,
-        interval="1m"
-    )
+    #fetcher = BinanceFuturesFetcher(
+     #   symbol=f"{symbol.upper()}USDT",
+      #  start_date=start_date,
+       # end_date=end_date,
+        #interval="1m"
+    #)
 
     # ---------------------------
     # Fetch RAW OHLCV Data
     # ---------------------------
-    raw_df = fetcher.fetch_raw_data()
+    #raw_df = fetcher.fetch_raw_data()
 
-    if raw_df.empty:
-        logger.warning(f"No data fetched for {symbol}. Skipping to next symbol.")
-        continue
+    #if raw_df.empty:
+     #   logger.warning(f"No data fetched for {symbol}. Skipping to next symbol.")
+      #  continue
 
-    logger.info(f"RAW data fetched for {symbol} | rows={len(raw_df)}")
-    logger.info(f"Raw DF columns: {raw_df.columns.tolist()}")
+    #logger.info(f"RAW data fetched for {symbol} | rows={len(raw_df)}")
+    #logger.info(f"Raw DF columns: {raw_df.columns.tolist()}")
 
     # ---------------------------
     # Data Cleaning Pipeline
     # ---------------------------
-    df = clean_df(raw_df)
-    logger.info("OHLCV cleaning completed.")
+    #df = clean_df(raw_df)
+    #logger.info("OHLCV cleaning completed.")
 
     # Optional: Resample to higher timeframe
     # df = resample_ohlcv(df, interval="5min")
     # logger.info("Data resampled to 5-minute candles.")
 
-    if df.empty:
-        logger.warning(f"Cleaned DataFrame empty for {symbol}. Skipping database save.")
-        continue
+    #if df.empty:
+     #   logger.warning(f"Cleaned DataFrame empty for {symbol}. Skipping database save.")
+      #  continue
 
     # ---------------------------
     # Save Data to Database
     # ---------------------------
-    table_name = f"{symbol.lower()}_1m"
+    #table_name = f"{symbol.lower()}_1m"
 
-    save_df_to_db(
-        df=df,
-        table_name=table_name,
-        schema=SCHEMA,
-        time_column="timestamp",
-        is_timeseries=True
-    )
+    #save_df_to_db(
+     #   df=df,
+      #  table_name=table_name,
+       # schema=SCHEMA,
+        #time_column="timestamp",
+        #is_timeseries=True
+    #)
 
-    logger.info(f"Cleaned data saved to table '{SCHEMA}.{table_name}'")
+#    logger.info(f"Cleaned data saved to table '{SCHEMA}.{table_name}'")
 
+drop_schema(schema=SCHEMA)
 logger.info("Binance Futures data ingestion pipeline completed successfully.")

@@ -68,7 +68,7 @@ for symbol in symbols:
     # Fetch RAW DATA
     # ---------------------------
     raw_df = fetcher.fetch_raw_data()
-
+    raw_df.to_csv("bybit_btc.csv", index=False)
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping.")
         continue

@@ -85,6 +85,12 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
         ["open", "high", "low", "close", "volume"]
     ].ffill()
 
+    # ---------------------------
+    # Restore timestamp column
+    # ---------------------------
+    df.reset_index(inplace=True)
+    df.rename(columns={"index": "timestamp"}, inplace=True)
+
     logger.info(f"Cleaned OHLCV data | rows: {len(df)}")
     return df
 
