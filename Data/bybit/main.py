@@ -2,8 +2,9 @@ from TradeX.utils.db.utils import save_df_to_db
 from TradeX.logs.logs import get_logger
 from bybit_fetcher import BybitFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
-from TradeX.utils.common.utils_common import read_config
+from TradeX.utils.common.config_loader import read_config
 import os
+from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 
 logger = get_logger("bybit_main")
 
@@ -27,7 +28,7 @@ Note:
 - Optional resampling can be applied if required.
 """
 
-SCHEMA = "data_bybit"
+SCHEMA = EXCHANGE_SCHEMA_MAP["bybit"]
 
 # ---------------------------
 # Load Configuration

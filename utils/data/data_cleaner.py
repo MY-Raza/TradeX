@@ -1,14 +1,13 @@
 import pandas as pd
-from TradeX.utils.common.utils_common import get_logger
+from TradeX.utils.common.config_loader import get_logger
+from TradeX.utils.common.constants import INTERVAL_MS_MAP
 
 logger = get_logger(__name__)
 
 # =================================================
 # Constants
 # =================================================
-INTERVAL_MS_MAP = {
-    "1m": 60_000,
-}
+interval_ms_map = INTERVAL_MS_MAP["1m"]
 
 
 # -------------------------------------------------
@@ -33,10 +32,10 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
         logger.warning("Received empty DataFrame for cleaning.")
         return df
 
-    if interval not in INTERVAL_MS_MAP:
+    if interval not in interval_ms_map:
         raise ValueError(f"Unsupported interval: {interval}")
 
-    interval_ms = INTERVAL_MS_MAP[interval]
+    interval_ms = interval_ms_map[interval]
 
     df = df.copy()
 
@@ -107,10 +106,10 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     if df.empty:
         return df
 
-    if interval not in INTERVAL_MS_MAP:
+    if interval not in interval_ms_map:
         raise ValueError(f"Unsupported interval: {interval}")
 
-    interval_ms = INTERVAL_MS_MAP[interval]
+    interval_ms = interval_ms_map[interval]
 
     df = df.copy()
 

@@ -1,11 +1,10 @@
 from TradeX.utils.db.utils import save_df_to_db
 from TradeX.logs.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
-from TradeX.utils.data.data_cleaner import (
-    clean_df,
-)
-from TradeX.utils.common.utils_common import read_config
+from TradeX.utils.data.data_cleaner import clean_df
+from TradeX.utils.common.config_loader import read_config
 import os
+from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 
 logger = get_logger("binance_main")
 
@@ -30,7 +29,7 @@ Notes:
 - Schema drop is optional and should be used with caution.
 """
 
-SCHEMA = "data_binance"
+SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 
 # -------------------------------------------------
 # Load Configuration
