@@ -52,7 +52,6 @@ logger.info(f"Database schema '{SCHEMA}' is ready.")
 # -------------------------------------------------
 # Fetch, Clean & Store Data
 # -------------------------------------------------
-drop_schema(schema=SCHEMA)
 for symbol in symbols:
     logger.info(f"Starting data pipeline for symbol: {symbol}")
 

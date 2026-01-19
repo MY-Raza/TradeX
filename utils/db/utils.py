@@ -69,7 +69,7 @@ def get_engine(db_url: str | None = None):
             raise ValueError("DATABASE_URL not provided.")
 
         _ENGINE = create_engine(db_url, pool_pre_ping=True)
-        logger.info("Database engine created successfully (singleton).")
+        logger.info("Database engine created successfully.")
         return _ENGINE
 
     except Exception:

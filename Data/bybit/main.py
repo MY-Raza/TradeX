@@ -55,7 +55,6 @@ logger.info(f"Database schema ready: {SCHEMA}")
 # ---------------------------
 # Fetch, Clean & Store Data
 # ---------------------------
-drop_schema(schema=SCHEMA)
 for symbol in symbols:
     symbol = symbol.upper()
     logger.info(f"Processing symbol: {symbol}")
