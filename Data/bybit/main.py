@@ -74,7 +74,6 @@ for symbol in symbols:
         continue
 
     logger.info(f"RAW data fetched for {symbol}: {len(raw_df)} rows")
-
     # ---------------------------
     # Cleaning & Processing Pipeline
     # ---------------------------
