@@ -1,14 +1,12 @@
 import logging
 import os
-
+from pathlib import Path
 # --------------------------------------------------
 # Project root = parent directory of "logs"
 # --------------------------------------------------
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-LOG_DIR = os.path.join(PROJECT_ROOT, "logs")
-# Ensure logs folder exists
-os.makedirs(LOG_DIR, exist_ok=True)
+PROJECT_ROOT = Path(__file__).resolve().parents[2]  # logs.py is in TradeX/utils/common/
+LOG_DIR = PROJECT_ROOT / "logs"
+LOG_DIR.mkdir(exist_ok=True)
 
 def get_logger(name: str) -> logging.Logger:
     """
