@@ -1,7 +1,4 @@
-from TradeX.utils.db.utils import (
-    save_df_to_db,
-    drop_schema
-)
+from TradeX.utils.db.utils import save_df_to_db
 from TradeX.utils.common.logs import get_logger
 from bybit_fetcher import BybitFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
@@ -78,16 +75,15 @@ for symbol in symbols:
     # ---------------------------
     # Save to Database
     # ---------------------------
-    table_name = f"{symbol.lower()}_1m"
 
     save_df_to_db(
         df=df,
-        table_name=table_name,
+        table_name=symbol.lower(),
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True,
     )
 
-    logger.info(f"Saved cleaned data to table: {SCHEMA}.{table_name}")
+    logger.info(f"Saved cleaned data to table: {SCHEMA}.{symbol.lower()}_1m")
 
 logger.info("Bybit data ingestion pipeline completed successfully.")

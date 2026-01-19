@@ -1,7 +1,4 @@
-from TradeX.utils.db.utils import (
-    save_df_to_db,
-    drop_schema
-)
+from TradeX.utils.db.utils import save_df_to_db
 from TradeX.utils.common.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.data.data_cleaner import (
@@ -86,7 +83,7 @@ for symbol in symbols:
 
     save_df_to_db(
         df=df,
-        table_name=symbol,
+        table_name=symbol.lower(),
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True
