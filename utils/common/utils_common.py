@@ -1,5 +1,5 @@
 import yaml
-from TradeX.utils.common.logs import get_logger
+from TradeX.logs.logs import get_logger
 import os
 
 logger = get_logger(__name__)

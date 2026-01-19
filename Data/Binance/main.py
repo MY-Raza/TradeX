@@ -1,5 +1,5 @@
 from TradeX.utils.db.utils import save_df_to_db
-from TradeX.utils.common.logs import get_logger
+from TradeX.logs.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.data.data_cleaner import (
     clean_df,
@@ -7,7 +7,7 @@ from TradeX.utils.data.data_cleaner import (
 from TradeX.utils.common.utils_common import read_config
 import os
 
-logger = get_logger(__name__)
+logger = get_logger("binance_main")
 
 """
 main.py

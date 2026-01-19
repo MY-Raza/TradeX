@@ -5,7 +5,7 @@ from datetime import datetime
 import pandas as pd
 from pybit.unified_trading import HTTP
 from dotenv import load_dotenv
-from TradeX.utils.common.logs import get_logger
+from TradeX.logs.logs import get_logger
 
 logger = get_logger(__name__)
 

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine, text 
-from TradeX.utils.common.logs import get_logger
+from TradeX.logs.logs import get_logger
 from datetime import datetime
 
 
@@ -15,7 +15,7 @@ USER_SCHEMA: str | None = None
 # ---------------------------
 # Schema Utilities
 # ---------------------------
-def resolve_schema(schema: str | None) -> str:
+def ensure_schema(schema: str | None) -> str:
     """
     Resolve the database schema to use.
 
@@ -89,7 +89,7 @@ def create_schema(schema: str | None = None):
     """
     engine = get_engine()
     try:
-        schema = resolve_schema(schema)
+        schema = ensure_schema(schema)
         with engine.begin() as conn:
             conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
         logger.info(f"Schema '{schema}' is ready.")
@@ -106,7 +106,7 @@ def drop_schema(schema: str | None = None):
     """
     engine = get_engine()
     try:
-        schema = resolve_schema(schema)
+        schema = ensure_schema(schema)
         confirm = input(f"Are you sure to drop '{schema}'? (yes/no): ").lower()
         if confirm != "yes":
             logger.warning("Schema drop cancelled.")
@@ -143,7 +143,7 @@ def save_df_to_db(
         return
     engine = get_engine()
     try:
-        schema = resolve_schema(schema)
+        schema = ensure_schema(schema)
         create_schema(schema=schema)
         # Insert DataFrame into database
         df.to_sql(table_name + "_1m", engine, schema=schema, if_exists="append", index=False, method="multi")
@@ -175,7 +175,7 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
     """
     engine = get_engine()
     try:
-        schema = resolve_schema(schema)
+        schema = ensure_schema(schema)
         query = f"SELECT * FROM {schema}.{table_name}_1m"
         if limit:
             query += f" LIMIT {limit}"
@@ -203,7 +203,7 @@ def drop_table(table_name : str, schema: str | None = None):
     engine = get_engine()
     try:
         # Resolve schema name
-        schema = resolve_schema(schema)
+        schema = ensure_schema(schema)
         full_name = f"{schema}.{table_name}"
 
         # Ask user for confirmation before dropping
@@ -228,7 +228,7 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
     Args:
         engine: SQLAlchemy engine.
         table_name (str): Name of the table to query.
-        schema (str | None): Optional schema name. If None, resolves via `resolve_schema`.
+        schema (str | None): Optional schema name. If None, resolves via `ensure_schema`.
         time_column (str, optional): Column storing the timestamp in milliseconds. Defaults to "timestamp".
 
     Returns:
@@ -240,7 +240,7 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
     """
     engine = get_engine()
     try:
-        schema = resolve_schema(schema)
+        schema = ensure_schema(schema)
         query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}_1m"
         with engine.connect() as conn:
             result = conn.execute(text(query)).scalar()
