@@ -34,8 +34,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 # -------------------------------------------------
 # Load Configuration
 # -------------------------------------------------
-config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.yml'))
-config = read_config(config_path)
+config = read_config()
 symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]

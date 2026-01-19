@@ -1,21 +1,17 @@
 import yaml
 from TradeX.logs.logs import get_logger
 import os
+import inspect
 
 logger = get_logger(__name__)
 
-def read_config(config_path : str) -> dict:
+def read_config(filename: str = "config.yml") -> dict:
     """
     Load exchange configuration from a YAML file.
-
-    This function reads a YAML config file and extracts common parameters:
-        - exchange_name
-        - symbols (list of trading pairs)
-        - start_date
-        - end_date (optional, defaults to "now")
+    Automatically resolves the path relative to the caller's file.
 
     Args:
-        config_path (str, optional): Path to the YAML config file. Defaults to "config.yml".
+        filename (str): Config file name (default "config.yml")
 
     Returns:
         dict: Dictionary with keys:
@@ -25,15 +21,32 @@ def read_config(config_path : str) -> dict:
             - end_date (str)
 
     Raises:
-        ValueError: If 'symbols' or 'start_date' are missing in the YAML file.
         FileNotFoundError: If the YAML file does not exist.
-        yaml.YAMLError: If the YAML file is malformed.
+        ValueError: If required keys are missing.
+        yaml.YAMLError: If YAML is malformed.
     """
+
     try:
+        # ---------------------------
+        # Get the caller's file location
+        # ---------------------------
+        caller_frame = inspect.stack()[1]
+        caller_file = caller_frame.filename
+        caller_dir = os.path.dirname(os.path.abspath(caller_file))
+
+        # Build config path relative to caller
+        config_path = os.path.join(caller_dir, filename)
+
+        if not os.path.exists(config_path):
+            raise FileNotFoundError(f"Config file not found: {config_path}")
+
+        # ---------------------------
+        # Load YAML
+        # ---------------------------
         with open(config_path, "r") as f:
             config = yaml.safe_load(f)
 
-        exchange_name = config.get("exchange_name", "").lower()
+        exchange_name = str(config.get("exchange_name", "")).lower()
         symbols = config.get("symbols", [])
         start_date = config.get("start_date")
         end_date = config.get("end_date", "now")
