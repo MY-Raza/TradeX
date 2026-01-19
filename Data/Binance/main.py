@@ -1,5 +1,4 @@
 from TradeX.utils.db.utils import (
-    create_schema,
     save_df_to_db,
     drop_schema
 )
@@ -8,7 +7,7 @@ from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.data.data_cleaner import (
     clean_df,
 )
-from TradeX.utils.common.utils_common import load_config
+from TradeX.utils.common.utils_common import read_config
 import os
 
 logger = get_logger(__name__)
@@ -40,7 +39,7 @@ SCHEMA = "data_binance"
 # Load Configuration
 # -------------------------------------------------
 config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.yml'))
-config = load_config(config_path)
+config = read_config(config_path)
 symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]

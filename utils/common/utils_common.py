@@ -1,9 +1,10 @@
 import yaml
 from TradeX.utils.common.logs import get_logger
+import os
 
 logger = get_logger(__name__)
 
-def load_config(config_path: str = "config.yml") -> dict:
+def read_config(config_path : str) -> dict:
     """
     Load exchange configuration from a YAML file.
 
