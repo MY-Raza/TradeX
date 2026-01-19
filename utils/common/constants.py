@@ -4,8 +4,6 @@ EXCHANGE_SCHEMA_MAP = {
 }
 
 
-from types import MappingProxyType
-
-INTERVAL_MS_MAP = MappingProxyType({
+INTERVAL_MS_MAP = {
     "1m": 60_000,
-})
+}
