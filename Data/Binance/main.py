@@ -45,10 +45,6 @@ symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]
 
-# Create schema if it does not exist
-create_schema(schema=SCHEMA)
-logger.info(f"Database schema '{SCHEMA}' is ready.")
-
 # -------------------------------------------------
 # Fetch, Clean & Store Data
 # -------------------------------------------------
@@ -66,7 +62,7 @@ for symbol in symbols:
     # ---------------------------
     # Fetch RAW OHLCV Data
     # ---------------------------
-    raw_df = fetcher.fetch_raw_data()
+    raw_df = fetcher.fetch_data()
 
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping to next symbol.")
@@ -85,23 +81,16 @@ for symbol in symbols:
     # df = resample_ohlcv(df, interval="5min")
     # logger.info("Data resampled to 5-minute candles.")
 
-    if df.empty:
-        logger.warning(f"Cleaned DataFrame empty for {symbol}. Skipping database save.")
-        continue
-
     # ---------------------------
     # Save Data to Database
     # ---------------------------
-    table_name = f"{symbol.lower()}_1m"
 
     save_df_to_db(
         df=df,
-        table_name=table_name,
+        table_name=symbol,
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True
     )
-
-    logger.info(f"Cleaned data saved to table '{SCHEMA}.{table_name}'")
 
 logger.info("Binance Futures data ingestion pipeline completed successfully.")

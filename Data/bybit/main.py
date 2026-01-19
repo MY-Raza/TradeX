@@ -45,14 +45,6 @@ start_date = config["start_date"]
 end_date = config["end_date"]
 
 # ---------------------------
-# Initialize Database
-# ---------------------------
-
-# Create schema if it doesn't exist
-create_schema(schema=SCHEMA)
-logger.info(f"Database schema ready: {SCHEMA}")
-
-# ---------------------------
 # Fetch, Clean & Store Data
 # ---------------------------
 for symbol in symbols:
@@ -70,7 +62,7 @@ for symbol in symbols:
     # ---------------------------
     # Fetch RAW DATA
     # ---------------------------
-    raw_df = fetcher.fetch_raw_data()
+    raw_df = fetcher.fetch_data()
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping.")
         continue
@@ -85,10 +77,6 @@ for symbol in symbols:
     # Optional: Resample to higher timeframe
     # df = resample_ohlcv(df, interval="5min")
     # logger.info("Resampling completed.")
-
-    if df.empty:
-        logger.warning(f"Cleaned DataFrame empty for {symbol}. Skipping DB save.")
-        continue
 
     # ---------------------------
     # Save to Database

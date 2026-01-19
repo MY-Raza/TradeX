@@ -146,16 +146,16 @@ def save_df_to_db(
         schema = resolve_schema(schema)
         create_schema(schema=schema)
         # Insert DataFrame into database
-        df.to_sql(table_name, engine, schema=schema, if_exists="append", index=False, method="multi")
-        logger.info(f"Inserted {len(df)} rows into '{schema}.{table_name}'.")
+        df.to_sql(table_name + "_1m", engine, schema=schema, if_exists="append", index=False, method="multi")
+        logger.info(f"Inserted {len(df)} rows into '{schema}.{table_name +"_1m"}'.")
 
         # Convert table to hypertable if required
         if is_timeseries and time_column:
             with engine.begin() as conn:
                 conn.execute(text(f"""
-                    SELECT create_hypertable('{schema}.{table_name}', '{time_column}', migrate_data => TRUE, if_not_exists => TRUE);
+                    SELECT create_hypertable('{schema}.{table_name+"_1m"} ', '{time_column}', migrate_data => TRUE, if_not_exists => TRUE);
                 """))
-            logger.info(f"Hypertable ensured for '{schema}.{table_name}' on column '{time_column}'.")
+            logger.info(f"Hypertable ensured for '{schema}.{table_name+"_1m"}' on column '{time_column}'.")
     except Exception:
         logger.exception("Failed to save DataFrame to database.")
 
@@ -175,11 +175,11 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
     engine = get_engine()
     try:
         schema = resolve_schema(schema)
-        query = f"SELECT * FROM {schema}.{table_name}"
+        query = f"SELECT * FROM {schema}.{table_name+"_1m"}"
         if limit:
             query += f" LIMIT {limit}"
         df = pd.read_sql_query(query, engine)
-        logger.info(f"Read {len(df)} rows from '{schema}.{table_name}'.")
+        logger.info(f"Read {len(df)} rows from '{schema}.{table_name+"_1m"}'.")
         return df
     except Exception:
         logger.exception("Failed to read table.")
@@ -189,7 +189,7 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
 # Table Information Utilities
 # ---------------------------
 
-def drop_table(table_name: str, schema: str | None = None):
+def drop_table(table_name : str, schema: str | None = None):
     """
     Drop a table after user confirmation.
 
@@ -198,6 +198,7 @@ def drop_table(table_name: str, schema: str | None = None):
         table_name (str): Name of the table to drop.
         schema (str | None): Optional schema name.
     """
+    table_name = table_name +"_1m"
     engine = get_engine()
     try:
         # Resolve schema name
@@ -239,12 +240,12 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
     engine = get_engine()
     try:
         schema = resolve_schema(schema)
-        query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}"
+        query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name+"_1m"}"
         with engine.connect() as conn:
             result = conn.execute(text(query)).scalar()
 
         if result is None:
-            logger.warning(f"No timestamps found in '{schema}.{table_name}'.")
+            logger.warning(f"No timestamps found in '{schema}.{table_name+"_1m"}'.")
             return None
 
         # Convert milliseconds timestamp to datetime
@@ -252,5 +253,5 @@ def get_last_date(table_name: str, schema: str | None = None, time_column: str =
         return last_dt
 
     except Exception:
-        logger.exception(f"Failed to fetch last timestamp from '{table_name}'.")
+        logger.exception(f"Failed to fetch last timestamp from '{table_name+"_1m"}'.")
         return None 
