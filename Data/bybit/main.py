@@ -1,6 +1,7 @@
 from TradeX.utils.db.utils import (
     create_schema,
     save_df_to_db,
+    drop_schema
 )
 from TradeX.utils.common.logs import get_logger
 from bybit_fetcher import BybitFuturesFetcher
@@ -8,6 +9,7 @@ from TradeX.utils.data.data_cleaner import (
     clean_df,
 )
 from TradeX.utils.common.utils_common import load_config
+import os
 
 logger = get_logger(__name__)
 
@@ -36,7 +38,8 @@ SCHEMA = "data_bybit"
 # ---------------------------
 # Load Configuration
 # ---------------------------
-config = load_config("config.yml")
+config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'config.yml'))
+config = load_config(config_path)
 symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]
@@ -52,6 +55,7 @@ logger.info(f"Database schema ready: {SCHEMA}")
 # ---------------------------
 # Fetch, Clean & Store Data
 # ---------------------------
+drop_schema(schema=SCHEMA)
 for symbol in symbols:
     symbol = symbol.upper()
     logger.info(f"Processing symbol: {symbol}")
@@ -68,7 +72,6 @@ for symbol in symbols:
     # Fetch RAW DATA
     # ---------------------------
     raw_df = fetcher.fetch_raw_data()
-    raw_df.to_csv("bybit_btc.csv", index=False)
     if raw_df.empty:
         logger.warning(f"No data fetched for {symbol}. Skipping.")
         continue

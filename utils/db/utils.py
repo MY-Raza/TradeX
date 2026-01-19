@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from sqlalchemy import create_engine, text, inspect
+from sqlalchemy import create_engine, text 
 from TradeX.utils.common.logs import get_logger
 from datetime import datetime
 
@@ -50,24 +50,28 @@ def resolve_schema(schema: str | None) -> str:
 # ---------------------------
 # Engine Utilities
 # ---------------------------
+_ENGINE = None
+
+
 def get_engine(db_url: str | None = None):
     """
-    Create a SQLAlchemy engine to connect to the database.
-
-    Args:
-        db_url (str | None): Optional database URL. 
-                             If not provided, read from 'DATABASE_URL' environment variable.
-
-    Returns:
-        Engine | None: SQLAlchemy engine object or None if creation fails.
+    Return a singleton SQLAlchemy engine.
+    Engine is created only once and reused everywhere.
     """
+    global _ENGINE
+
+    if _ENGINE is not None:
+        return _ENGINE
+
     try:
         db_url = db_url or os.getenv("DATABASE_URL")
         if not db_url:
             raise ValueError("DATABASE_URL not provided.")
-        engine = create_engine(db_url)
-        logger.info("Database engine created successfully.")
-        return engine
+
+        _ENGINE = create_engine(db_url, pool_pre_ping=True)
+        logger.info("Database engine created successfully (singleton).")
+        return _ENGINE
+
     except Exception:
         logger.exception("Failed to create engine.")
         return None
@@ -140,6 +144,7 @@ def save_df_to_db(
     engine = get_engine()
     try:
         schema = resolve_schema(schema)
+        create_schema(schema=schema)
         # Insert DataFrame into database
         df.to_sql(table_name, engine, schema=schema, if_exists="append", index=False, method="multi")
         logger.info(f"Inserted {len(df)} rows into '{schema}.{table_name}'.")

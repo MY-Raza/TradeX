@@ -12,7 +12,8 @@ logger = get_logger(__name__)
 # ---------------------------
 # Load API keys from environment
 # ---------------------------
-load_dotenv()
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+load_dotenv(dotenv_path)
 
 API_KEY = os.getenv("BYBIT_API_KEY")
 API_SECRET = os.getenv("BYBIT_SECRET_KEY")
