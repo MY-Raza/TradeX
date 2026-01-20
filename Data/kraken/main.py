@@ -16,7 +16,6 @@ def main():
     # 1. Load config
     # -------------------------------
     SCHEMA = EXCHANGE_SCHEMA_MAP["kraken"]
-
     config = read_config()
     symbols = config["symbols"]
     start_date = config["start_date"]
