@@ -78,12 +78,6 @@ for symbol in symbols:
     # ---------------------------
     # Cleaning & Processing Pipeline
     # ---------------------------
-    # Print column names from raw_df
-    logger.info(f"Columns in raw_df for {symbol}: {raw_df.columns.tolist()}")
-    if "time" in raw_df.columns:
-     raw_df.rename(columns={"time": "timestamp"}, inplace=True)
-
-    logger.info(f"Columns after rename: {raw_df.columns.tolist()}")  
 
     df = clean_df(raw_df)
 
@@ -94,6 +88,7 @@ for symbol in symbols:
     # ---------------------------
     # Save to Database
     # ---------------------------
+
     save_df_to_db(
         df=df,
         table_name=symbol,

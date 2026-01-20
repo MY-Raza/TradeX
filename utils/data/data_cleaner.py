@@ -39,8 +39,10 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     # Required columns
     # ---------------------------
+    logger.info(f"Raw Columns: {df.columns.tolist()}")
     if "time" in df.columns:
-      df = df.rename(columns={"time": "timestamp"}, inplace=True)
+      df = df.rename(columns={"time": "timestamp"})
+    logger.info(f"Cleaned Columns: {df.columns.tolist()}")
     required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
     missing = set(required_cols) - set(df.columns)
     if missing:
@@ -88,10 +90,11 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     # Restore timestamp column
     # ---------------------------
-    df.reset_index(inplace=True)
-    df.rename(columns={"index": "timestamp"}, inplace=True)
-
+    if "timestamp" not in df.columns:
+       df.reset_index(inplace=True)
+       df.rename(columns={"index": "timestamp"}, inplace=True)
     logger.info(f"Cleaned OHLCV data | rows: {len(df)}")
+    
     return df
 
 
