@@ -724,3 +724,24 @@ LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
 2026-01-20 18:10:46,396 | INFO | utils | Schema 'data_kraken' ready
 2026-01-20 18:10:46,413 | INFO | utils | Unique index ensured: ltc_1m_timestamp_uidx
 2026-01-20 18:10:46,946 | INFO | utils | Inserted 720 rows into data_kraken.ltc_1m
+2026-01-20 18:31:06,885 | INFO | utils | Database engine initialized
+2026-01-20 18:31:39,993 | INFO | utils | Database engine initialized
+2026-01-20 18:31:41,438 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+
+2026-01-20 18:31:41,440 | INFO | utils |            timestamp     open     high      low    close  volume
+20908  1768894080000  91032.3  91054.1  91020.0  91029.0  73.863
+20909  1768894140000  91029.0  91051.6  91019.0  91019.7  80.959
+20910  1768894200000  91019.7  91019.8  90960.0  90967.9  68.271
+20911  1768894260000  90967.8  91038.5  90950.0  91038.5  98.206
+20912  1768894320000  91038.5  91100.0  91026.0  91089.9  92.040
+2026-01-20 18:32:42,612 | INFO | utils | Database engine initialized
+2026-01-20 18:32:43,104 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+
+2026-01-20 18:32:43,119 | INFO | utils |        timestamp     open     high      low    close   volume
+0  1767639600000  94400.5  94406.4  94300.0  94313.1  291.577
+1  1767639660000  94313.1  94353.3  94295.5  94353.2  125.304
+2  1767639720000  94353.3  94358.4  94280.1  94298.4  142.027
+3  1767639780000  94298.4  94318.0  94283.7  94299.9  104.387
+4  1767639840000  94299.9  94301.1  94226.2  94265.3  220.855
