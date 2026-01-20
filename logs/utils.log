@@ -303,3 +303,33 @@ LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
 2026-01-20 11:20:09,031 | INFO | utils | Schema 'data_binance' ready
 2026-01-20 11:20:09,052 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
 2026-01-20 11:20:24,618 | INFO | utils | Inserted 20539 rows into data_binance.link_1m
+2026-01-20 11:21:27,941 | INFO | utils | Database engine initialized
+2026-01-20 11:22:00,610 | WARNING | utils | Schema 'data_bybit' dropped
+2026-01-20 11:22:21,075 | INFO | utils | Database engine initialized
+2026-01-20 11:22:41,700 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:22:41,731 | INFO | utils | Unique index ensured: btc_1m_timestamp_uidx
+2026-01-20 11:22:53,706 | INFO | utils | Inserted 20837 rows into data_bybit.btc_1m
+2026-01-20 11:23:14,671 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:23:14,697 | INFO | utils | Unique index ensured: eth_1m_timestamp_uidx
+2026-01-20 11:23:27,490 | INFO | utils | Inserted 20837 rows into data_bybit.eth_1m
+2026-01-20 11:23:49,230 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:23:49,255 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-20 11:24:04,880 | INFO | utils | Inserted 20838 rows into data_bybit.bnb_1m
+2026-01-20 11:24:26,226 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:24:26,255 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-20 11:24:41,031 | INFO | utils | Inserted 20838 rows into data_bybit.ada_1m
+2026-01-20 11:25:07,229 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:25:07,255 | INFO | utils | Unique index ensured: xrp_1m_timestamp_uidx
+2026-01-20 11:25:21,657 | INFO | utils | Inserted 20839 rows into data_bybit.xrp_1m
+2026-01-20 11:25:47,309 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:25:47,339 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-20 11:26:01,935 | INFO | utils | Inserted 20840 rows into data_bybit.doge_1m
+2026-01-20 11:26:22,886 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:26:22,915 | INFO | utils | Unique index ensured: sol_1m_timestamp_uidx
+2026-01-20 11:26:37,465 | INFO | utils | Inserted 20840 rows into data_bybit.sol_1m
+2026-01-20 11:27:03,315 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:27:03,346 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-20 11:27:18,156 | INFO | utils | Inserted 20841 rows into data_bybit.dot_1m
+2026-01-20 11:27:40,263 | INFO | utils | Schema 'data_bybit' ready
+2026-01-20 11:27:40,288 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
+2026-01-20 11:27:55,075 | INFO | utils | Inserted 20842 rows into data_bybit.link_1m

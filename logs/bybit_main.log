@@ -199,3 +199,51 @@
 2026-01-20 11:04:07,289 | INFO | bybit_main | RAW data fetched for link: 20819 rows
 2026-01-20 11:04:07,354 | INFO | bybit_main | OHLCV cleaning completed.
 2026-01-20 11:04:21,120 | INFO | bybit_main | Saved cleaned data to table: data_bybit.link_1m
+2026-01-20 11:22:20,955 | INFO | bybit_main | Processing symbol: btc
+2026-01-20 11:22:21,142 | INFO | bybit_main | No existing data found for btc. Using start_date=2026-01-06
+2026-01-20 11:22:41,619 | INFO | bybit_main | RAW data fetched for btc: 20838 rows
+2026-01-20 11:22:41,692 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:22:53,706 | INFO | bybit_main | Saved cleaned data to table: data_bybit.btc_1m
+2026-01-20 11:22:53,707 | INFO | bybit_main | Processing symbol: eth
+2026-01-20 11:22:53,738 | INFO | bybit_main | No existing data found for eth. Using start_date=2026-01-06
+2026-01-20 11:23:14,605 | INFO | bybit_main | RAW data fetched for eth: 20838 rows
+2026-01-20 11:23:14,668 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:23:27,490 | INFO | bybit_main | Saved cleaned data to table: data_bybit.eth_1m
+2026-01-20 11:23:27,491 | INFO | bybit_main | Processing symbol: bnb
+2026-01-20 11:23:27,523 | INFO | bybit_main | No existing data found for bnb. Using start_date=2026-01-06
+2026-01-20 11:23:49,163 | INFO | bybit_main | RAW data fetched for bnb: 20839 rows
+2026-01-20 11:23:49,228 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:24:04,880 | INFO | bybit_main | Saved cleaned data to table: data_bybit.bnb_1m
+2026-01-20 11:24:04,888 | INFO | bybit_main | Processing symbol: ada
+2026-01-20 11:24:04,940 | INFO | bybit_main | No existing data found for ada. Using start_date=2026-01-06
+2026-01-20 11:24:26,164 | INFO | bybit_main | RAW data fetched for ada: 20839 rows
+2026-01-20 11:24:26,223 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:24:41,031 | INFO | bybit_main | Saved cleaned data to table: data_bybit.ada_1m
+2026-01-20 11:24:41,041 | INFO | bybit_main | Processing symbol: xrp
+2026-01-20 11:24:41,085 | INFO | bybit_main | No existing data found for xrp. Using start_date=2026-01-06
+2026-01-20 11:25:07,164 | INFO | bybit_main | RAW data fetched for xrp: 20840 rows
+2026-01-20 11:25:07,226 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:25:21,657 | INFO | bybit_main | Saved cleaned data to table: data_bybit.xrp_1m
+2026-01-20 11:25:21,667 | INFO | bybit_main | Processing symbol: doge
+2026-01-20 11:25:21,701 | INFO | bybit_main | No existing data found for doge. Using start_date=2026-01-06
+2026-01-20 11:25:47,246 | INFO | bybit_main | RAW data fetched for doge: 20841 rows
+2026-01-20 11:25:47,306 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:26:01,935 | INFO | bybit_main | Saved cleaned data to table: data_bybit.doge_1m
+2026-01-20 11:26:01,935 | INFO | bybit_main | Processing symbol: sol
+2026-01-20 11:26:01,976 | INFO | bybit_main | No existing data found for sol. Using start_date=2026-01-06
+2026-01-20 11:26:22,822 | INFO | bybit_main | RAW data fetched for sol: 20841 rows
+2026-01-20 11:26:22,884 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:26:37,465 | INFO | bybit_main | Saved cleaned data to table: data_bybit.sol_1m
+2026-01-20 11:26:37,465 | INFO | bybit_main | Processing symbol: dot
+2026-01-20 11:26:37,506 | INFO | bybit_main | No existing data found for dot. Using start_date=2026-01-06
+2026-01-20 11:27:03,249 | INFO | bybit_main | RAW data fetched for dot: 20842 rows
+2026-01-20 11:27:03,312 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:27:18,157 | INFO | bybit_main | Saved cleaned data to table: data_bybit.dot_1m
+2026-01-20 11:27:18,157 | INFO | bybit_main | Processing symbol: matic
+2026-01-20 11:27:18,190 | INFO | bybit_main | No existing data found for matic. Using start_date=2026-01-06
+2026-01-20 11:27:18,513 | WARNING | bybit_main | No data fetched for matic. Skipping.
+2026-01-20 11:27:18,514 | INFO | bybit_main | Processing symbol: link
+2026-01-20 11:27:18,517 | INFO | bybit_main | No existing data found for link. Using start_date=2026-01-06
+2026-01-20 11:27:40,198 | INFO | bybit_main | RAW data fetched for link: 20843 rows
+2026-01-20 11:27:40,261 | INFO | bybit_main | OHLCV cleaning completed.
+2026-01-20 11:27:55,075 | INFO | bybit_main | Saved cleaned data to table: data_bybit.link_1m
