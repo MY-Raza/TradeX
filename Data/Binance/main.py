@@ -78,7 +78,6 @@ for symbol in symbols:
     # Data Cleaning Pipeline
     # ---------------------------
     df = clean_df(raw_df)
-    logger.info("OHLCV cleaning completed.")
 
     # Optional: Resample to higher timeframe
     # df = resample_ohlcv(df, interval="5min")
