@@ -1,10 +1,16 @@
 from kraken_fetcher import KrakenFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
-from TradeX.utils.db.utils import save_df_to_db
+from TradeX.utils.db.utils import save_df_to_db,get_last_date
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from TradeX.utils.common.logs import get_logger
+from datetime import datetime, timezone
 logger = get_logger("kraken_main")
+def timestamp_to_str(ms: int) -> str:
+    """Convert epoch ms to 'YYYY-MM-DD HH:MM:SS' string for KrakenFuturesFetcher."""
+    dt = datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
+
 def main():
     # -------------------------------
     # 1. Load config
@@ -28,6 +34,15 @@ def main():
             kraken_symbol = f"{kraken_symbol}/USD"
 
         logger.info(f"\nFetching data for {kraken_symbol} from {start_date} to {end_date}...")
+        
+        last_ts = get_last_date(table_name=f"{symbol}_1m", schema=SCHEMA, time_column="timestamp")
+        if last_ts:
+            # Increment by 1ms to avoid duplicate
+            start_date = timestamp_to_str(last_ts + 1)
+            logger.info(f"Found existing data for {kraken_symbol}, starting from {start_date}")
+        else:
+            start_date = start_date
+            logger.info(f"No existing data for {kraken_symbol}, using start date from config: {start_date}")
 
         # -------------------------------
         # Fetch raw data
@@ -37,7 +52,7 @@ def main():
             start_date=start_date,
             end_date=end_date,
             timeframe="1m",
-            limit=100,
+            limit=1000,
             sleep_seconds=0.5
         )
 
@@ -45,7 +60,7 @@ def main():
         logger.info(f"Raw data fetched | rows: {len(raw_df)}")
 
         if raw_df.empty:
-            print(f"No data for {kraken_symbol}, skipping.")
+            logger.info(f"No data for {kraken_symbol}, skipping.")
             continue
 
         # -------------------------------
@@ -60,7 +75,7 @@ def main():
         save_df_to_db(
             df=cleaned_df,
             table_name=f"{symbol}",
-            schema="data_kraken",
+            schema=SCHEMA,
             time_column="timestamp",
             is_timeseries=True
         )
