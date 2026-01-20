@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine, text, inspect
-from datetime import datetime
 from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("utils")
@@ -18,6 +17,7 @@ USER_SCHEMA: str | None = None
 # =====================================================
 def get_engine(db_url: str | None = None):
     global _ENGINE
+
     if _ENGINE:
         return _ENGINE
 
@@ -66,8 +66,8 @@ def drop_schema(schema: str | None = None):
     schema = ensure_schema(schema)
 
     confirm = input(
-        f"⚠️  DROP schema '{schema}' and ALL objects? Type 'yes' to continue: "
-    ).strip().lower()
+        f"⚠️ DROP schema '{schema}' and ALL objects? Type 'yes' to continue: "
+    ).lower()
 
     if confirm != "yes":
         logger.warning("Schema drop cancelled")
@@ -80,35 +80,27 @@ def drop_schema(schema: str | None = None):
 
 
 # =====================================================
-# Table Helpers
+# Table Repair Helpers (CRITICAL)
 # =====================================================
-def ensure_table_constraints(
+def ensure_unique_index(
     table_name: str,
     schema: str,
     time_column: str
 ):
     """
-    Ensure UNIQUE constraint exists (required for ON CONFLICT).
-    Safe to call multiple times.
+    Ensures a UNIQUE INDEX exists.
+    Works even for OLD tables and hypertables.
     """
     engine = get_engine()
-    constraint_name = f"{table_name}_{time_column}_unique"
+    index_name = f"{table_name}_{time_column}_uidx"
 
     with engine.begin() as conn:
         conn.execute(text(f"""
-            DO $$
-            BEGIN
-                IF NOT EXISTS (
-                    SELECT 1
-                    FROM pg_constraint
-                    WHERE conname = '{constraint_name}'
-                ) THEN
-                    ALTER TABLE {schema}.{table_name}
-                    ADD CONSTRAINT {constraint_name}
-                    UNIQUE ({time_column});
-                END IF;
-            END $$;
+            CREATE UNIQUE INDEX IF NOT EXISTS {index_name}
+            ON {schema}.{table_name} ({time_column});
         """))
+
+    logger.info(f"Unique index ensured: {index_name}")
 
 
 def ensure_hypertable(
@@ -165,23 +157,12 @@ def save_df_to_db(
     table = f"{table_name}_1m"
 
     # -------------------------------------------------
-    # 1. Deduplicate inside batch
+    # 1. Deduplicate incoming batch
     # -------------------------------------------------
     df = df.drop_duplicates(subset=[time_column])
 
     # -------------------------------------------------
-    # 2. Filter already ingested data
-    # -------------------------------------------------
-    last_ts = get_last_date(table, schema, time_column)
-    if last_ts:
-        df = df[df[time_column] > last_ts]
-
-    if df.empty:
-        logger.info("No new rows to insert")
-        return
-
-    # -------------------------------------------------
-    # 3. Create table if not exists
+    # 2. Create table if missing
     # -------------------------------------------------
     df.head(0).to_sql(
         table,
@@ -192,12 +173,26 @@ def save_df_to_db(
     )
 
     # -------------------------------------------------
-    # 4. Ensure UNIQUE constraint BEFORE insert
+    # 3. SELF-HEAL table (this fixes Binance issue)
     # -------------------------------------------------
-    ensure_table_constraints(table, schema, time_column)
+    ensure_unique_index(table, schema, time_column)
+
+    if is_timeseries:
+        ensure_hypertable(table, schema, time_column)
 
     # -------------------------------------------------
-    # 5. Safe INSERT with ON CONFLICT
+    # 4. Filter already ingested rows
+    # -------------------------------------------------
+    last_ts = get_last_date(table, schema, time_column)
+    if last_ts:
+        df = df[df[time_column] > last_ts]
+
+    if df.empty:
+        logger.info("No new rows to insert")
+        return
+
+    # -------------------------------------------------
+    # 5. Safe insert (NOW guaranteed to work)
     # -------------------------------------------------
     cols = ",".join(df.columns)
     placeholders = ",".join([f":{c}" for c in df.columns])
@@ -212,12 +207,6 @@ def save_df_to_db(
         conn.execute(insert_sql, df.to_dict(orient="records"))
 
     logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
-
-    # -------------------------------------------------
-    # 6. Ensure hypertable
-    # -------------------------------------------------
-    if is_timeseries:
-        ensure_hypertable(table, schema, time_column)
 
 
 # =====================================================

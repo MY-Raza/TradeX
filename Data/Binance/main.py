@@ -1,4 +1,4 @@
-from TradeX.utils.db.utils import save_df_to_db,get_last_date
+from TradeX.utils.db.utils import save_df_to_db,get_last_date,drop_schema
 from TradeX.utils.common.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df

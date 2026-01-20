@@ -267,3 +267,39 @@ LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
 2026-01-20 11:03:32,946 | INFO | utils | Inserted 20817 rows into data_bybit.dot_1m
 2026-01-20 11:04:07,357 | INFO | utils | Schema 'data_bybit' ready
 2026-01-20 11:04:09,964 | INFO | utils | Inserted 20818 rows into data_bybit.link_1m
+2026-01-20 11:06:13,504 | INFO | utils | Database engine initialized
+2026-01-20 11:06:34,350 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:07:36,223 | INFO | utils | Database engine initialized
+2026-01-20 11:08:16,617 | WARNING | utils | Schema 'data_binance' dropped
+2026-01-20 11:08:38,786 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:14:11,853 | INFO | utils | Database engine initialized
+2026-01-20 11:14:17,696 | WARNING | utils | Schema 'data_binance' dropped
+2026-01-20 11:14:38,015 | INFO | utils | Database engine initialized
+2026-01-20 11:15:15,941 | INFO | utils | Database engine initialized
+2026-01-20 11:15:36,183 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:15:36,235 | INFO | utils | Unique index ensured: btc_1m_timestamp_uidx
+2026-01-20 11:15:50,260 | INFO | utils | Inserted 20535 rows into data_binance.btc_1m
+2026-01-20 11:16:10,296 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:16:10,323 | INFO | utils | Unique index ensured: eth_1m_timestamp_uidx
+2026-01-20 11:16:23,743 | INFO | utils | Inserted 20535 rows into data_binance.eth_1m
+2026-01-20 11:16:43,440 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:16:43,464 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-20 11:16:56,879 | INFO | utils | Inserted 20536 rows into data_binance.bnb_1m
+2026-01-20 11:17:16,539 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:17:16,563 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-20 11:17:30,464 | INFO | utils | Inserted 20536 rows into data_binance.ada_1m
+2026-01-20 11:17:50,181 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:17:50,205 | INFO | utils | Unique index ensured: xrp_1m_timestamp_uidx
+2026-01-20 11:18:03,989 | INFO | utils | Inserted 20537 rows into data_binance.xrp_1m
+2026-01-20 11:18:23,755 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:18:23,782 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-20 11:18:38,190 | INFO | utils | Inserted 20538 rows into data_binance.doge_1m
+2026-01-20 11:18:57,995 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:18:58,015 | INFO | utils | Unique index ensured: sol_1m_timestamp_uidx
+2026-01-20 11:19:12,960 | INFO | utils | Inserted 20538 rows into data_binance.sol_1m
+2026-01-20 11:19:32,605 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:19:32,640 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-20 11:19:48,716 | INFO | utils | Inserted 20539 rows into data_binance.dot_1m
+2026-01-20 11:20:09,031 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 11:20:09,052 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
+2026-01-20 11:20:24,618 | INFO | utils | Inserted 20539 rows into data_binance.link_1m
