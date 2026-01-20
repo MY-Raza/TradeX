@@ -1,259 +1,258 @@
 import os
 import pandas as pd
-from sqlalchemy import create_engine, text, inspect 
-from TradeX.utils.common.logs import get_logger
+from sqlalchemy import create_engine, text, inspect
 from datetime import datetime
-
+from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("utils")
 
-# ---------------------------
-# Global variable to store the schema
-# ---------------------------
+# =====================================================
+# Globals
+# =====================================================
+_ENGINE = None
 USER_SCHEMA: str | None = None
 
-# ---------------------------
+
+# =====================================================
+# Engine
+# =====================================================
+def get_engine(db_url: str | None = None):
+    global _ENGINE
+    if _ENGINE:
+        return _ENGINE
+
+    db_url = db_url or os.getenv("DATABASE_URL")
+    if not db_url:
+        raise ValueError("DATABASE_URL not provided")
+
+    _ENGINE = create_engine(db_url, pool_pre_ping=True)
+    logger.info("Database engine initialized")
+    return _ENGINE
+
+
+# =====================================================
 # Schema Utilities
-# ---------------------------
+# =====================================================
 def ensure_schema(schema: str | None) -> str:
-    """
-    Resolve the database schema to use.
-
-    If a schema is explicitly provided, it is used. 
-    Otherwise, the user is prompted to enter one. 
-    The resolved schema is stored globally to avoid repeated prompts.
-
-    Args:
-        schema (str | None): Optional schema name.
-
-    Returns:
-        str: Valid schema name.
-
-    Raises:
-        ValueError: If no schema is provided or entered.
-    """
     global USER_SCHEMA
-    if schema:  # If schema provided, use it
+
+    if schema:
         USER_SCHEMA = schema
         return schema
-    if USER_SCHEMA:  # Return previously stored schema
+
+    if USER_SCHEMA:
         return USER_SCHEMA
 
-    # Prompt user for schema
-    user_schema = input("Enter schema name: ").strip()
-    if not user_schema:
-        raise ValueError("Schema cannot be empty.")
-    
-    USER_SCHEMA = user_schema
-    return USER_SCHEMA
+    schema = input("Enter schema name: ").strip()
+    if not schema:
+        raise ValueError("Schema cannot be empty")
 
-# ---------------------------
-# Engine Utilities
-# ---------------------------
-_ENGINE = None
+    USER_SCHEMA = schema
+    return schema
 
 
-def get_engine(db_url: str | None = None):
-    """
-    Return a singleton SQLAlchemy engine.
-    Engine is created only once and reused everywhere.
-    """
-    global _ENGINE
-
-    if _ENGINE is not None:
-        return _ENGINE
-
-    try:
-        db_url = db_url or os.getenv("DATABASE_URL")
-        if not db_url:
-            raise ValueError("DATABASE_URL not provided.")
-
-        _ENGINE = create_engine(db_url, pool_pre_ping=True)
-        logger.info("Database engine created successfully.")
-        return _ENGINE
-
-    except Exception:
-        logger.exception("Failed to create engine.")
-        return None
-
-# ---------------------------
-# Schema Management
-# ---------------------------
 def create_schema(schema: str | None = None):
-    """
-    Create a schema if it does not exist.
-
-    Args:
-        engine: SQLAlchemy engine.
-        schema (str | None): Optional schema name.
-    """
     engine = get_engine()
-    try:
-        schema = ensure_schema(schema)
-        with engine.begin() as conn:
-            conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
-        logger.info(f"Schema '{schema}' is ready.")
-    except Exception:
-        logger.exception("Failed to create schema.")
+    schema = ensure_schema(schema)
+
+    with engine.begin() as conn:
+        conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema}"))
+
+    logger.info(f"Schema '{schema}' ready")
+
 
 def drop_schema(schema: str | None = None):
-    """
-    Drop a schema after user confirmation.
+    engine = get_engine()
+    schema = ensure_schema(schema)
 
-    Args:
-        engine: SQLAlchemy engine.
-        schema (str | None): Optional schema name.
+    confirm = input(
+        f"⚠️  DROP schema '{schema}' and ALL objects? Type 'yes' to continue: "
+    ).strip().lower()
+
+    if confirm != "yes":
+        logger.warning("Schema drop cancelled")
+        return
+
+    with engine.begin() as conn:
+        conn.execute(text(f"DROP SCHEMA IF EXISTS {schema} CASCADE"))
+
+    logger.warning(f"Schema '{schema}' dropped")
+
+
+# =====================================================
+# Table Helpers
+# =====================================================
+def ensure_table_constraints(
+    table_name: str,
+    schema: str,
+    time_column: str
+):
+    """
+    Ensure UNIQUE constraint exists (required for ON CONFLICT).
+    Safe to call multiple times.
     """
     engine = get_engine()
-    try:
-        schema = ensure_schema(schema)
-        confirm = input(f"Are you sure to drop '{schema}'? (yes/no): ").lower()
-        if confirm != "yes":
-            logger.warning("Schema drop cancelled.")
-            return
-        with engine.begin() as conn:
-            conn.execute(text(f"DROP SCHEMA IF EXISTS {schema} CASCADE;"))
-        logger.warning(f"Schema '{schema}' dropped.")
-    except Exception:
-        logger.exception("Failed to drop schema.")
+    constraint_name = f"{table_name}_{time_column}_unique"
 
-# ---------------------------
-# DataFrame Storage Utilities
-# ---------------------------
+    with engine.begin() as conn:
+        conn.execute(text(f"""
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1
+                    FROM pg_constraint
+                    WHERE conname = '{constraint_name}'
+                ) THEN
+                    ALTER TABLE {schema}.{table_name}
+                    ADD CONSTRAINT {constraint_name}
+                    UNIQUE ({time_column});
+                END IF;
+            END $$;
+        """))
+
+
+def ensure_hypertable(
+    table_name: str,
+    schema: str,
+    time_column: str
+):
+    engine = get_engine()
+    with engine.begin() as conn:
+        conn.execute(text(f"""
+            SELECT create_hypertable(
+                '{schema}.{table_name}',
+                '{time_column}',
+                migrate_data => TRUE,
+                if_not_exists => TRUE
+            );
+        """))
+
+
+# =====================================================
+# Core DB Operations
+# =====================================================
+def get_last_date(
+    table_name: str,
+    schema: str,
+    time_column: str
+) -> int | None:
+    engine = get_engine()
+    inspector = inspect(engine)
+
+    if not inspector.has_table(table_name, schema=schema):
+        return None
+
+    query = f"SELECT MAX({time_column}) FROM {schema}.{table_name}"
+    with engine.begin() as conn:
+        return conn.execute(text(query)).scalar()
+
+
 def save_df_to_db(
     df: pd.DataFrame,
     table_name: str,
     schema: str | None = None,
-    time_column: str | None = None,
-    is_timeseries: bool = False
+    time_column: str = "timestamp",
+    is_timeseries: bool = True
 ):
-    """
-    Save a pandas DataFrame to the database.
-
-    Args:
-        df (pd.DataFrame): DataFrame to save.
-        table_name (str): Target table name.
-        engine: SQLAlchemy engine.
-        schema (str | None): Optional schema name.
-        time_column (str | None): Column to use as time for timeseries.
-        is_timeseries (bool): If True, create a TimescaleDB hypertable.
-    """
     if df.empty:
-        logger.warning("DataFrame empty. Nothing to insert.")
+        logger.warning("Empty DataFrame, skipping insert")
         return
+
     engine = get_engine()
-    try:
-        schema = ensure_schema(schema)
-        create_schema(schema=schema)
-        # Insert DataFrame into database
-        df.to_sql(table_name + "_1m", engine, schema=schema, if_exists="append", index=False, method="multi")
-        logger.info(f"Inserted {len(df)} rows into '{schema}.{table_name}_1m'.")
+    schema = ensure_schema(schema)
+    create_schema(schema)
+
+    table = f"{table_name}_1m"
+
+    # -------------------------------------------------
+    # 1. Deduplicate inside batch
+    # -------------------------------------------------
+    df = df.drop_duplicates(subset=[time_column])
+
+    # -------------------------------------------------
+    # 2. Filter already ingested data
+    # -------------------------------------------------
+    last_ts = get_last_date(table, schema, time_column)
+    if last_ts:
+        df = df[df[time_column] > last_ts]
+
+    if df.empty:
+        logger.info("No new rows to insert")
+        return
+
+    # -------------------------------------------------
+    # 3. Create table if not exists
+    # -------------------------------------------------
+    df.head(0).to_sql(
+        table,
+        engine,
+        schema=schema,
+        if_exists="append",
+        index=False
+    )
+
+    # -------------------------------------------------
+    # 4. Ensure UNIQUE constraint BEFORE insert
+    # -------------------------------------------------
+    ensure_table_constraints(table, schema, time_column)
+
+    # -------------------------------------------------
+    # 5. Safe INSERT with ON CONFLICT
+    # -------------------------------------------------
+    cols = ",".join(df.columns)
+    placeholders = ",".join([f":{c}" for c in df.columns])
+
+    insert_sql = text(f"""
+        INSERT INTO {schema}.{table} ({cols})
+        VALUES ({placeholders})
+        ON CONFLICT ({time_column}) DO NOTHING
+    """)
+
+    with engine.begin() as conn:
+        conn.execute(insert_sql, df.to_dict(orient="records"))
+
+    logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
+
+    # -------------------------------------------------
+    # 6. Ensure hypertable
+    # -------------------------------------------------
+    if is_timeseries:
+        ensure_hypertable(table, schema, time_column)
 
 
-        # Convert table to hypertable if required
-        if is_timeseries and time_column:
-            with engine.begin() as conn:
-                conn.execute(text(f"""
-                    SELECT create_hypertable('{schema}.{table_name+"_1m"} ', '{time_column}', migrate_data => TRUE, if_not_exists => TRUE);
-                """))
-            logger.info(f"Hypertable ensured for '{schema}.{table_name}_1m' on column '{time_column}'.")
-    except Exception:
-        logger.exception("Failed to save DataFrame to database.")
-
-def read_df_from_db(table_name: str, schema: str | None = None, limit: int | None = None) -> pd.DataFrame:
-    """
-    Read data from a table into a pandas DataFrame.
-
-    Args:
-        engine: SQLAlchemy engine.
-        table_name (str): Table to read from.
-        schema (str | None): Optional schema name.
-        limit (int | None): Optional number of rows to read.
-
-    Returns:
-        pd.DataFrame: DataFrame containing table data.
-    """
+# =====================================================
+# Read Helpers
+# =====================================================
+def read_df_from_db(
+    table_name: str,
+    schema: str | None = None,
+    limit: int | None = None
+) -> pd.DataFrame:
     engine = get_engine()
-    try:
-        schema = ensure_schema(schema)
-        query = f"SELECT * FROM {schema}.{table_name}_1m"
-        if limit:
-            query += f" LIMIT {limit}"
-        df = pd.read_sql_query(query, engine)
-        logger.info(f"Read {len(df)} rows from '{schema}.{table_name}_1m'.")
-        return df
-    except Exception:
-        logger.exception("Failed to read table.")
-        return pd.DataFrame()
+    schema = ensure_schema(schema)
+    table = f"{table_name}_1m"
 
-# ---------------------------
-# Table Information Utilities
-# ---------------------------
+    query = f"SELECT * FROM {schema}.{table}"
+    if limit:
+        query += f" LIMIT {limit}"
 
-def drop_table(table_name : str, schema: str | None = None):
-    """
-    Drop a table after user confirmation.
+    return pd.read_sql_query(query, engine)
 
-    Args:
-        engine: SQLAlchemy engine.
-        table_name (str): Name of the table to drop.
-        schema (str | None): Optional schema name.
-    """
-    table_name = table_name +"_1m"
+
+# =====================================================
+# Drop Helpers
+# =====================================================
+def drop_table(table_name: str, schema: str | None = None):
     engine = get_engine()
-    try:
-        # Resolve schema name
-        schema = ensure_schema(schema)
-        full_name = f"{schema}.{table_name}"
+    schema = ensure_schema(schema)
+    table = f"{table_name}_1m"
 
-        # Ask user for confirmation before dropping
-        confirm = input(f"Are you sure to drop table '{full_name}'? (yes/no): ").lower()
-        if confirm != "yes":
-            logger.warning("Table drop cancelled by user.")
-            return
+    confirm = input(f"Drop table {schema}.{table}? (yes/no): ").lower()
+    if confirm != "yes":
+        logger.warning("Table drop cancelled")
+        return
 
-        # Drop the table
-        with engine.begin() as conn:
-            conn.execute(text(f"DROP TABLE IF EXISTS {full_name} CASCADE;"))
+    with engine.begin() as conn:
+        conn.execute(text(f"DROP TABLE IF EXISTS {schema}.{table} CASCADE"))
 
-        logger.warning(f"Table '{full_name}' dropped.")
-
-    except Exception:
-        logger.exception("Failed to drop table.")
-
-def get_last_date(table_name: str, schema: str | None = None, time_column: str = "timestamp") -> datetime | None:
-    """
-    Fetch the latest timestamp from a table and convert it to a datetime object.
-
-    Args:
-        engine: SQLAlchemy engine.
-        table_name (str): Name of the table to query.
-        schema (str | None): Optional schema name. If None, resolves via `ensure_schema`.
-        time_column (str, optional): Column storing the timestamp in milliseconds. Defaults to "timestamp".
-
-    Returns:
-        datetime | None: Latest timestamp as a datetime object, or None if table is empty or error occurs.
-
-    Notes:
-        - Assumes timestamps are stored in **milliseconds** since epoch.
-        - Converts the timestamp to a timezone-naive UTC datetime.
-    """
-    engine = get_engine()
-    try:
-        inspector = inspect(engine)
-        full_table_name = f"{table_name}_1m"
-        if not inspector.has_table(full_table_name, schema=schema):
-          logger.info(f"Table '{schema}.{full_table_name}' does not exist. Will start from config start_date.")
-          return None
-        schema = ensure_schema(schema)
-        query = f"SELECT MAX({time_column}) as last_ts FROM {schema}.{table_name}_1m"
-        with engine.begin() as conn:
-            result = conn.execute(text(query)).scalar()
-
-        # Convert milliseconds timestamp to datetime
-        last_dt = datetime.utcfromtimestamp(result / 1000)
-        return last_dt
-
-    except Exception:
-        logger.exception(f"Failed to fetch last timestamp from '{table_name}_1m'.")
-        return None 
+    logger.warning(f"Table {schema}.{table} dropped")
