@@ -1,138 +1,116 @@
-# kraken_futures_fetcher.py
-import os
+# kraken_fetcher.py
 import time
-import requests
-import pandas as pd
 from datetime import datetime
-from dotenv import load_dotenv
+import pandas as pd
+import ccxt
 from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("kraken_fetcher")
 
-# ---------------------------
-# Load Kraken API credentials from .env
-# ---------------------------
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
-load_dotenv(dotenv_path)
-
-KRAKEN_API_KEY = os.getenv("KRAKEN_API_KEY")
-KRAKEN_PRIVATE_KEY = os.getenv("KRAKEN_SECRET_KEY")
-
-if not KRAKEN_API_KEY or not KRAKEN_PRIVATE_KEY:
-    logger.warning("Kraken API credentials not found. Public endpoints will still work.")
-
 
 class KrakenFuturesFetcher:
     """
-    Fetches OHLCV futures candlestick data from Kraken Futures API.
-
-    Public endpoint: https://futures.kraken.com/api/charts/v1/{tick_type}/{symbol}/{resolution}
-
-    Parameters:
-        symbol: str       -> futures contract symbol, e.g., "PI_XBTUSD" (Perpetual BTC/USD)
-        start_date: str   -> "YYYY-MM-DD" or "YYYY-MM-DD HH:MM:SS"
-        end_date: str     -> "YYYY-MM-DD" or "YYYY-MM-DD HH:MM:SS" or "now"
-        tick_type: str    -> "trade", "mark", or "spot"
-        resolution: str   -> candle interval: "1m", "5m", "1h", etc.
-        max_loops: int    -> safety limit for pagination
+    Fetch historical Kraken Futures OHLCV (candlestick) data using CCXT.
     """
-
-    BASE_URL = "https://futures.kraken.com/api/charts/v1/{tick_type}/{symbol}/{resolution}"
 
     def __init__(
         self,
         symbol: str,
         start_date: str,
         end_date: str = "now",
-        tick_type: str = "trade",
-        resolution: str = "1m",
-        max_loops: int = 20000,
+        timeframe: str = "1m",
+        limit: int = 100,
+        sleep_seconds: float = 0.5,
     ):
         self.symbol = symbol.upper()
         self.start_date = start_date
         self.end_date = end_date
-        self.tick_type = tick_type
-        self.resolution = resolution
-        self.max_loops = max_loops
+        self.timeframe = timeframe
+        self.limit = limit
+        self.sleep_seconds = sleep_seconds
 
-        # Convert dates to epoch seconds
-        self.start_ts = self._to_epoch(self.start_date)
-        self.end_ts = (
-            int(datetime.utcnow().timestamp())
-            if self.end_date.lower() == "now"
-            else self._to_epoch(self.end_date)
-        )
+        # Initialize Kraken exchange for futures
+        self.exchange = ccxt.kraken({
+            'options': {'defaultType': 'future'}
+        })
 
-        if self.start_ts >= self.end_ts:
-            raise ValueError("start_date must be earlier than end_date")
+        # Convert dates to timestamps
+        self.start_ts, self.end_ts = self._convert_to_timestamp()
 
         logger.info(
-            f"KrakenFuturesFetcher initialized | {self.symbol} | {self.tick_type} | "
-            f"{self.start_date} → {self.end_date}"
+            f"KrakenFuturesFetcher initialized | symbol={self.symbol} | timeframe={self.timeframe} "
+            f"| start={self.start_date} | end={self.end_date}"
         )
 
-    def _to_epoch(self, dt_str: str) -> int:
-        """Convert datetime string to UNIX epoch seconds."""
+    def _convert_to_timestamp(self) -> tuple[int, int]:
+        """Convert start_date and end_date to epoch milliseconds."""
+        # Parse start_date
         try:
-            dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S")
         except ValueError:
-            dt = datetime.strptime(dt_str, "%Y-%m-%d")
-        return int(dt.timestamp())
+            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d")
+        start_ts = int(start_dt.timestamp() * 1000)
+
+        # Parse end_date
+        if self.end_date.lower() == "now":
+            end_ts = int(datetime.utcnow().timestamp() * 1000)
+        else:
+            try:
+                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d")
+            end_ts = int(end_dt.timestamp() * 1000)
+
+        if start_ts >= end_ts:
+            raise ValueError("start_date must be earlier than end_date")
+
+        return start_ts, end_ts
 
     def fetch_data(self) -> pd.DataFrame:
-        """Fetch historical OHLCV futures data and return as pandas DataFrame."""
-        all_records = []
-        current_from = self.start_ts
-        loops = 0
+        """
+        Fetch OHLCV data in batches until the end timestamp is reached.
+        Returns a pandas DataFrame.
+        """
+        all_ohlcv = []
+        since = self.start_ts
 
-        while current_from < self.end_ts:
-            loops += 1
-            if loops > self.max_loops:
-                logger.error("Max loop count reached. Breaking fetch loop.")
-                break
-
-            url = self.BASE_URL.format(
-                tick_type=self.tick_type,
-                symbol=self.symbol,
-                resolution=self.resolution,
+        # Kraken fetch_ohlcv uses milliseconds for 'since'
+        while since < self.end_ts:
+            logger.info(
+                f"Fetching {self.symbol} | {datetime.utcfromtimestamp(since / 1000)} | timeframe={self.timeframe}"
             )
-            params = {
-                "from": current_from,
-                "to": self.end_ts,
-            }
 
-            logger.info(f"Fetching {self.symbol} from {current_from} → {self.end_ts}")
             try:
-                resp = requests.get(url, params=params, timeout=10)
-                resp.raise_for_status()
-            except requests.RequestException as e:
-                logger.error(f"Request error: {e}")
+                ohlcv = self.exchange.fetch_ohlcv(
+                    symbol=self.symbol,
+                    timeframe=self.timeframe,
+                    since=since,
+                    limit=self.limit
+                )
+            except ccxt.NetworkError as e:
+                logger.warning(f"Network error: {e}. Retrying in {self.sleep_seconds} seconds...")
+                time.sleep(self.sleep_seconds)
+                continue
+            except ccxt.ExchangeError as e:
+                logger.error(f"Exchange error: {e}")
                 break
 
-            data = resp.json()
-            candles = data.get("candles", [])
-            if not candles:
-                logger.info("No more candles returned.")
+            if not ohlcv:
+                logger.warning("No more data returned from Kraken.")
                 break
 
-            # Convert to DataFrame
-            df_part = pd.DataFrame(candles)
-            df_part["time"] = pd.to_datetime(df_part["time"], unit="ms")
-            all_records.append(df_part)
+            all_ohlcv.extend(ohlcv)
 
-            # Advance 'from' for pagination
-            last_time_ms = df_part["time"].astype("int64").max() // 1_000_000
-            current_from = (last_time_ms // 1000) + 1  # convert ns -> seconds
+            # Advance timestamp to last fetched + 1ms to avoid duplicates
+            since = ohlcv[-1][0] + 1
+            time.sleep(self.sleep_seconds)
 
-            time.sleep(0.3)  # rate limit buffer
-
-            if current_from >= self.end_ts:
-                break
-
-        if not all_records:
-            logger.warning("No data fetched.")
+        if not all_ohlcv:
+            logger.warning("No data fetched from Kraken.")
             return pd.DataFrame()
 
-        df = pd.concat(all_records, ignore_index=True)
-        logger.info(f"Fetched {len(df)} rows for {self.symbol}.")
+        df = pd.DataFrame(
+            all_ohlcv,
+            columns=["timestamp", "open", "high", "low", "close", "volume"]
+        )
         return df

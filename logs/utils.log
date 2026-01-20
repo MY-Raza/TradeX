@@ -535,3 +535,97 @@ LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
 2026-01-20 16:41:59,656 | INFO | utils | Database engine initialized
 2026-01-20 16:42:23,248 | INFO | utils | Database engine initialized
 2026-01-20 16:44:35,574 | INFO | utils | Database engine initialized
+2026-01-20 17:33:05,783 | INFO | utils | Database engine initialized
+2026-01-20 17:33:09,162 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:09,226 | INFO | utils | Unique index ensured: btc_1m_timestamp_uidx
+2026-01-20 17:33:10,813 | INFO | utils | Inserted 300 rows into data_binance.btc_1m
+2026-01-20 17:33:13,326 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:13,342 | INFO | utils | Unique index ensured: eth_1m_timestamp_uidx
+2026-01-20 17:33:13,879 | INFO | utils | Inserted 301 rows into data_binance.eth_1m
+2026-01-20 17:33:16,937 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:16,953 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-20 17:33:17,364 | INFO | utils | Inserted 301 rows into data_binance.bnb_1m
+2026-01-20 17:33:20,151 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:20,167 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-20 17:33:20,609 | INFO | utils | Inserted 301 rows into data_binance.ada_1m
+2026-01-20 17:33:23,196 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:23,212 | INFO | utils | Unique index ensured: xrp_1m_timestamp_uidx
+2026-01-20 17:33:23,676 | INFO | utils | Inserted 301 rows into data_binance.xrp_1m
+2026-01-20 17:33:26,239 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:26,255 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-20 17:33:26,667 | INFO | utils | Inserted 301 rows into data_binance.doge_1m
+2026-01-20 17:33:29,509 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:29,525 | INFO | utils | Unique index ensured: sol_1m_timestamp_uidx
+2026-01-20 17:33:29,935 | INFO | utils | Inserted 301 rows into data_binance.sol_1m
+2026-01-20 17:33:32,392 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:32,416 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-20 17:33:32,835 | INFO | utils | Inserted 301 rows into data_binance.dot_1m
+2026-01-20 17:33:35,835 | INFO | utils | Schema 'data_binance' ready
+2026-01-20 17:33:35,851 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
+2026-01-20 17:33:36,266 | INFO | utils | Inserted 301 rows into data_binance.link_1m
+2026-01-20 17:39:07,713 | INFO | utils | Database engine initialized
+2026-01-20 17:39:07,880 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:39:07,924 | INFO | utils | Unique index ensured: btc_futures_1m_timestamp_uidx
+2026-01-20 17:39:08,078 | INFO | utils | Inserted 99 rows into data_kraken.btc_futures_1m
+2026-01-20 17:42:05,503 | INFO | utils | Database engine initialized
+2026-01-20 17:42:05,551 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:05,591 | INFO | utils | Unique index ensured: xbt_futures_1m_timestamp_uidx
+2026-01-20 17:42:05,997 | INFO | utils | Inserted 499 rows into data_kraken.xbt_futures_1m
+2026-01-20 17:42:14,102 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:14,127 | INFO | utils | Unique index ensured: eth_futures_1m_timestamp_uidx
+2026-01-20 17:42:14,512 | INFO | utils | Inserted 499 rows into data_kraken.eth_futures_1m
+2026-01-20 17:42:22,608 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:22,640 | INFO | utils | Unique index ensured: bnb_futures_1m_timestamp_uidx
+2026-01-20 17:42:23,073 | INFO | utils | Inserted 499 rows into data_kraken.bnb_futures_1m
+2026-01-20 17:42:30,988 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:31,019 | INFO | utils | Unique index ensured: ada_futures_1m_timestamp_uidx
+2026-01-20 17:42:31,388 | INFO | utils | Inserted 499 rows into data_kraken.ada_futures_1m
+2026-01-20 17:42:39,429 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:39,445 | INFO | utils | Unique index ensured: xrp_futures_1m_timestamp_uidx
+2026-01-20 17:42:39,820 | INFO | utils | Inserted 499 rows into data_kraken.xrp_futures_1m
+2026-01-20 17:42:48,199 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:48,215 | INFO | utils | Unique index ensured: doge_futures_1m_timestamp_uidx
+2026-01-20 17:42:48,580 | INFO | utils | Inserted 499 rows into data_kraken.doge_futures_1m
+2026-01-20 17:42:57,509 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:42:57,524 | INFO | utils | Unique index ensured: sol_futures_1m_timestamp_uidx
+2026-01-20 17:42:57,922 | INFO | utils | Inserted 499 rows into data_kraken.sol_futures_1m
+2026-01-20 17:43:06,004 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:43:06,028 | INFO | utils | Unique index ensured: dot_futures_1m_timestamp_uidx
+2026-01-20 17:43:06,418 | INFO | utils | Inserted 499 rows into data_kraken.dot_futures_1m
+2026-01-20 17:43:16,101 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:43:16,117 | INFO | utils | Unique index ensured: link_futures_1m_timestamp_uidx
+2026-01-20 17:43:16,513 | INFO | utils | Inserted 499 rows into data_kraken.link_futures_1m
+2026-01-20 17:43:24,521 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:43:24,536 | INFO | utils | Unique index ensured: ltc_futures_1m_timestamp_uidx
+2026-01-20 17:43:24,923 | INFO | utils | Inserted 499 rows into data_kraken.ltc_futures_1m
+2026-01-20 17:48:46,755 | INFO | utils | Database engine initialized
+2026-01-20 17:48:46,803 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:48:46,844 | INFO | utils | Unique index ensured: xbt_1m_timestamp_uidx
+2026-01-20 17:48:47,293 | INFO | utils | Inserted 499 rows into data_kraken.xbt_1m
+2026-01-20 17:48:55,210 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:48:55,234 | INFO | utils | Unique index ensured: eth_1m_timestamp_uidx
+2026-01-20 17:48:55,623 | INFO | utils | Inserted 499 rows into data_kraken.eth_1m
+2026-01-20 17:49:03,475 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:03,508 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-20 17:49:03,908 | INFO | utils | Inserted 499 rows into data_kraken.bnb_1m
+2026-01-20 17:49:11,818 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:11,829 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-20 17:49:12,221 | INFO | utils | Inserted 499 rows into data_kraken.ada_1m
+2026-01-20 17:49:20,169 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:20,185 | INFO | utils | Unique index ensured: xrp_1m_timestamp_uidx
+2026-01-20 17:49:20,559 | INFO | utils | Inserted 499 rows into data_kraken.xrp_1m
+2026-01-20 17:49:28,516 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:28,541 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-20 17:49:28,943 | INFO | utils | Inserted 499 rows into data_kraken.doge_1m
+2026-01-20 17:49:36,929 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:36,960 | INFO | utils | Unique index ensured: sol_1m_timestamp_uidx
+2026-01-20 17:49:37,324 | INFO | utils | Inserted 499 rows into data_kraken.sol_1m
+2026-01-20 17:49:45,165 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:45,189 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-20 17:49:45,603 | INFO | utils | Inserted 499 rows into data_kraken.dot_1m
+2026-01-20 17:49:55,446 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:49:55,463 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
+2026-01-20 17:49:55,844 | INFO | utils | Inserted 499 rows into data_kraken.link_1m
+2026-01-20 17:50:03,765 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 17:50:03,789 | INFO | utils | Unique index ensured: ltc_1m_timestamp_uidx
+2026-01-20 17:50:04,182 | INFO | utils | Inserted 499 rows into data_kraken.ltc_1m

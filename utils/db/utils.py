@@ -2,9 +2,12 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine, text, inspect
 from TradeX.utils.common.logs import get_logger
+from dotenv import load_dotenv
+
 
 logger = get_logger("utils")
-
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+load_dotenv(dotenv_path)
 # =====================================================
 # Globals
 # =====================================================
