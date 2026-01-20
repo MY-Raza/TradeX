@@ -1,6 +1,6 @@
 from kraken_fetcher import KrakenFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
-from TradeX.utils.db.utils import save_df_to_db,get_last_date,read_df_from_db
+from TradeX.utils.db.utils import save_df_to_db,get_last_date,read_df_from_db,drop_schema
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from TradeX.utils.common.logs import get_logger
@@ -27,7 +27,8 @@ def main():
     for symbol in symbols:
         # Map symbol to Kraken futures pair (example: 'xbt' -> 'BTC/USD')
         kraken_symbol = symbol.upper()
-        read_df_from_db(table_name=f"{symbol}",schema=SCHEMA)
+        #read_df_from_db(table_name=f"{symbol}",schema=SCHEMA),
+        #drop_schema(SCHEMA)
         if kraken_symbol == "XBT":
             kraken_symbol = "BTC/USD"
         else:

@@ -98,14 +98,16 @@ class KrakenFuturesFetcher:
                 break
 
             all_ohlcv.extend(ohlcv)
-            since = ohlcv[-1][0] + 1  # Advance 1 ms to avoid duplicates
-            time.sleep(self.sleep_seconds)
-            # last_candle_ts = ohlcv[-1][0]
-            #if last_candle_ts == since:
+            #since = ohlcv[-1][0] + 1  # Advance 1 ms to avoid duplicates
+            #time.sleep(self.sleep_seconds)
+            last_candle_ts = ohlcv[-1][0]
+            if last_candle_ts == since:
             # Safety to avoid infinite loop
-            #since += 60000  # skip 1 minute
-            #else:
-            # since = last_candle_ts + 1
+             since += 60000  # skip 1 minute
+            else:
+             since = last_candle_ts + 1
+            
+            time.sleep(self.sleep_seconds)
 
         if not all_ohlcv:
             logger.warning("No data fetched from Kraken.")
