@@ -217,6 +217,10 @@ def read_df_from_db(
     schema: str | None = None,
     limit: int | None = None
 ) -> pd.DataFrame:
+    """
+    Read data from the database table.
+    Prints last 5 rows in the console.
+    """
     engine = get_engine()
     schema = ensure_schema(schema)
     table = f"{table_name}_1m"
@@ -225,7 +229,17 @@ def read_df_from_db(
     if limit:
         query += f" LIMIT {limit}"
 
-    return pd.read_sql_query(query, engine)
+    df = pd.read_sql_query(query, engine)
+
+    # Print last 5 rows
+    if not df.empty:
+        print(f"\nLast 5 rows from {schema}.{table}:\n")
+        print(df.tail(5))
+    else:
+        print(f"No data found in {schema}.{table}")
+
+    return df
+
 
 
 # =====================================================

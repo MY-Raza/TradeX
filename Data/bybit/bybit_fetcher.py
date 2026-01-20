@@ -70,12 +70,28 @@ class BybitFuturesFetcher:
         )
 
     def _convert_to_timestamp(self) -> tuple[int, int]:
-        start_ts = int(datetime.strptime(self.start_date, "%Y-%m-%d").timestamp() * 1000)
-        end_ts = (
-            int(datetime.utcnow().timestamp() * 1000)
-            if self.end_date.lower() == "now"
-            else int(datetime.strptime(self.end_date, "%Y-%m-%d").timestamp() * 1000)
-        )
+        """
+        Convert start_date and end_date strings to epoch milliseconds.
+        Supports formats:
+          - 'YYYY-MM-DD'
+          - 'YYYY-MM-DD HH:MM:SS'
+        """
+        # Parse start_date
+        try:
+            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d")
+        start_ts = int(start_dt.timestamp() * 1000)
+
+        # Parse end_date
+        if self.end_date.lower() == "now":
+            end_ts = int(datetime.utcnow().timestamp() * 1000)
+        else:
+            try:
+                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d")
+            end_ts = int(end_dt.timestamp() * 1000)
 
         if start_ts >= end_ts:
             raise ValueError("start_date must be earlier than end_date")
