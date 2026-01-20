@@ -136,3 +136,52 @@
 2026-01-19 17:55:59,918 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
 2026-01-19 17:55:59,927 | INFO | binance_main | OHLCV cleaning completed.
 2026-01-19 17:56:00,052 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-01-20 09:47:10,011 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-01-20 09:47:11,526 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-01-19
+2026-01-20 09:47:14,326 | INFO | binance_main | RAW data fetched for btc | rows=1728
+2026-01-20 09:47:14,327 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:14,362 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:15,577 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-01-20 09:47:17,513 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-01-19
+2026-01-20 09:47:19,740 | INFO | binance_main | RAW data fetched for eth | rows=1728
+2026-01-20 09:47:19,741 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:19,755 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:20,429 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-01-20 09:47:22,011 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-01-19
+2026-01-20 09:47:24,232 | INFO | binance_main | RAW data fetched for bnb | rows=1728
+2026-01-20 09:47:24,233 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:24,247 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:24,929 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-01-20 09:47:25,853 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-01-19
+2026-01-20 09:47:28,372 | INFO | binance_main | RAW data fetched for ada | rows=1728
+2026-01-20 09:47:28,372 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:28,384 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:29,046 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-01-20 09:47:30,067 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-01-19
+2026-01-20 09:47:32,285 | INFO | binance_main | RAW data fetched for xrp | rows=1728
+2026-01-20 09:47:32,286 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:32,298 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:33,038 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-01-20 09:47:34,204 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-01-19
+2026-01-20 09:47:36,424 | INFO | binance_main | RAW data fetched for doge | rows=1728
+2026-01-20 09:47:36,424 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:36,435 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:37,091 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-01-20 09:47:38,044 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-01-19
+2026-01-20 09:47:40,260 | INFO | binance_main | RAW data fetched for sol | rows=1728
+2026-01-20 09:47:40,261 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:40,272 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:40,959 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-01-20 09:47:42,042 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-01-19
+2026-01-20 09:47:44,255 | INFO | binance_main | RAW data fetched for dot | rows=1728
+2026-01-20 09:47:44,256 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:44,264 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:45,026 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-01-20 09:47:45,029 | INFO | binance_main | No existing data found for matic. Using start_date=2026-01-19
+2026-01-20 09:47:45,419 | WARNING | binance_main | No data fetched for matic. Skipping to next symbol.
+2026-01-20 09:47:45,420 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-01-20 09:47:46,395 | INFO | binance_main | Found existing data for link. Setting start_date=2026-01-19
+2026-01-20 09:47:48,596 | INFO | binance_main | RAW data fetched for link | rows=1728
+2026-01-20 09:47:48,597 | INFO | binance_main | Raw DF columns: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_volume', 'taker_buy_quote_volume', 'ignore']
+2026-01-20 09:47:48,609 | INFO | binance_main | OHLCV cleaning completed.
+2026-01-20 09:47:49,312 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.

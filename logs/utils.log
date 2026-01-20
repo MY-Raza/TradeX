@@ -185,3 +185,61 @@ LINE 1: SELECT MAX(timestamp) as last_ts FROM data_bybit.matic_1m
 2026-01-19 17:55:59,929 | INFO | utils | Schema 'data_binance' is ready.
 2026-01-19 17:56:00,045 | INFO | utils | Inserted 775 rows into 'data_binance.link_1m'.
 2026-01-19 17:56:00,052 | INFO | utils | Hypertable ensured for 'data_binance.link_1m' on column 'timestamp'.
+2026-01-20 09:47:10,150 | INFO | utils | Database engine created successfully.
+2026-01-20 09:47:14,368 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:15,555 | INFO | utils | Inserted 1727 rows into 'data_binance.btc_1m'.
+2026-01-20 09:47:15,577 | INFO | utils | Hypertable ensured for 'data_binance.btc_1m' on column 'timestamp'.
+2026-01-20 09:47:19,757 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:20,424 | INFO | utils | Inserted 1727 rows into 'data_binance.eth_1m'.
+2026-01-20 09:47:20,428 | INFO | utils | Hypertable ensured for 'data_binance.eth_1m' on column 'timestamp'.
+2026-01-20 09:47:24,248 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:24,911 | INFO | utils | Inserted 1727 rows into 'data_binance.bnb_1m'.
+2026-01-20 09:47:24,928 | INFO | utils | Hypertable ensured for 'data_binance.bnb_1m' on column 'timestamp'.
+2026-01-20 09:47:28,385 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:29,032 | INFO | utils | Inserted 1727 rows into 'data_binance.ada_1m'.
+2026-01-20 09:47:29,045 | INFO | utils | Hypertable ensured for 'data_binance.ada_1m' on column 'timestamp'.
+2026-01-20 09:47:32,300 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:33,029 | INFO | utils | Inserted 1727 rows into 'data_binance.xrp_1m'.
+2026-01-20 09:47:33,038 | INFO | utils | Hypertable ensured for 'data_binance.xrp_1m' on column 'timestamp'.
+2026-01-20 09:47:36,436 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:37,084 | INFO | utils | Inserted 1727 rows into 'data_binance.doge_1m'.
+2026-01-20 09:47:37,091 | INFO | utils | Hypertable ensured for 'data_binance.doge_1m' on column 'timestamp'.
+2026-01-20 09:47:40,273 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:40,944 | INFO | utils | Inserted 1727 rows into 'data_binance.sol_1m'.
+2026-01-20 09:47:40,959 | INFO | utils | Hypertable ensured for 'data_binance.sol_1m' on column 'timestamp'.
+2026-01-20 09:47:44,266 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:45,018 | INFO | utils | Inserted 1727 rows into 'data_binance.dot_1m'.
+2026-01-20 09:47:45,026 | INFO | utils | Hypertable ensured for 'data_binance.dot_1m' on column 'timestamp'.
+2026-01-20 09:47:45,028 | INFO | utils | Table 'data_binance.matic_1m' does not exist. Will start from config start_date.
+2026-01-20 09:47:48,610 | INFO | utils | Schema 'data_binance' is ready.
+2026-01-20 09:47:49,296 | INFO | utils | Inserted 1727 rows into 'data_binance.link_1m'.
+2026-01-20 09:47:49,312 | INFO | utils | Hypertable ensured for 'data_binance.link_1m' on column 'timestamp'.
+2026-01-20 09:48:25,358 | INFO | utils | Database engine created successfully.
+2026-01-20 09:48:27,854 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:28,602 | INFO | utils | Inserted 1999 rows into 'data_bybit.btc_1m'.
+2026-01-20 09:48:28,620 | INFO | utils | Hypertable ensured for 'data_bybit.btc_1m' on column 'timestamp'.
+2026-01-20 09:48:30,485 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:31,171 | INFO | utils | Inserted 1999 rows into 'data_bybit.eth_1m'.
+2026-01-20 09:48:31,178 | INFO | utils | Hypertable ensured for 'data_bybit.eth_1m' on column 'timestamp'.
+2026-01-20 09:48:33,039 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:33,725 | INFO | utils | Inserted 1999 rows into 'data_bybit.bnb_1m'.
+2026-01-20 09:48:33,738 | INFO | utils | Hypertable ensured for 'data_bybit.bnb_1m' on column 'timestamp'.
+2026-01-20 09:48:35,568 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:36,311 | INFO | utils | Inserted 1999 rows into 'data_bybit.ada_1m'.
+2026-01-20 09:48:36,320 | INFO | utils | Hypertable ensured for 'data_bybit.ada_1m' on column 'timestamp'.
+2026-01-20 09:48:38,752 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:39,461 | INFO | utils | Inserted 1999 rows into 'data_bybit.xrp_1m'.
+2026-01-20 09:48:39,471 | INFO | utils | Hypertable ensured for 'data_bybit.xrp_1m' on column 'timestamp'.
+2026-01-20 09:48:41,278 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:42,235 | INFO | utils | Inserted 1999 rows into 'data_bybit.doge_1m'.
+2026-01-20 09:48:42,247 | INFO | utils | Hypertable ensured for 'data_bybit.doge_1m' on column 'timestamp'.
+2026-01-20 09:48:44,702 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:45,433 | INFO | utils | Inserted 1999 rows into 'data_bybit.sol_1m'.
+2026-01-20 09:48:45,447 | INFO | utils | Hypertable ensured for 'data_bybit.sol_1m' on column 'timestamp'.
+2026-01-20 09:48:47,350 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:48,128 | INFO | utils | Inserted 1999 rows into 'data_bybit.dot_1m'.
+2026-01-20 09:48:48,146 | INFO | utils | Hypertable ensured for 'data_bybit.dot_1m' on column 'timestamp'.
+2026-01-20 09:48:48,149 | INFO | utils | Table 'data_bybit.matic_1m' does not exist. Will start from config start_date.
+2026-01-20 09:48:50,165 | INFO | utils | Schema 'data_bybit' is ready.
+2026-01-20 09:48:50,887 | INFO | utils | Inserted 1999 rows into 'data_bybit.link_1m'.
+2026-01-20 09:48:50,903 | INFO | utils | Hypertable ensured for 'data_bybit.link_1m' on column 'timestamp'.
