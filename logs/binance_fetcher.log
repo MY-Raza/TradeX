@@ -906,3 +906,94 @@
 2026-01-20 11:33:37,320 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-20 01:33:00.001000 | interval=1m
 2026-01-20 11:33:37,683 | WARNING | binance_fetcher | No more klines returned from Binance.
 2026-01-20 11:33:37,754 | INFO | binance_fetcher | Fetched 20554 rows for LINKUSDT.
+2026-01-20 12:29:56,453 | INFO | binance_fetcher | Binance Client initialized.
+2026-01-20 12:29:56,856 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-01-06 | end=now
+2026-01-20 12:29:56,857 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-05 19:00:00 | interval=1m
+2026-01-20 12:29:58,487 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-06 11:39:00.001000 | interval=1m
+2026-01-20 12:29:59,502 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-07 04:19:00.001000 | interval=1m
+2026-01-20 12:30:00,411 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-07 20:59:00.001000 | interval=1m
+2026-01-20 12:30:01,311 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-08 13:39:00.001000 | interval=1m
+2026-01-20 12:30:02,206 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-09 06:19:00.001000 | interval=1m
+2026-01-20 12:30:03,128 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-09 22:59:00.001000 | interval=1m
+2026-01-20 12:30:04,209 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-10 15:39:00.001000 | interval=1m
+2026-01-20 12:30:05,205 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-11 08:19:00.001000 | interval=1m
+2026-01-20 12:30:06,104 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-12 00:59:00.001000 | interval=1m
+2026-01-20 12:30:07,276 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-12 17:39:00.001000 | interval=1m
+2026-01-20 12:30:08,186 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-13 10:19:00.001000 | interval=1m
+2026-01-20 12:30:09,147 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-14 02:59:00.001000 | interval=1m
+2026-01-20 12:30:10,040 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-14 19:39:00.001000 | interval=1m
+2026-01-20 12:30:10,955 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-15 12:19:00.001000 | interval=1m
+2026-01-20 12:30:11,997 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-16 04:59:00.001000 | interval=1m
+2026-01-20 12:30:13,144 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-16 21:39:00.001000 | interval=1m
+2026-01-20 12:30:14,072 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-17 14:19:00.001000 | interval=1m
+2026-01-20 12:30:14,960 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-18 06:59:00.001000 | interval=1m
+2026-01-20 12:30:15,853 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-18 23:39:00.001000 | interval=1m
+2026-01-20 12:31:30,889 | INFO | binance_fetcher | Binance Client initialized.
+2026-01-20 12:31:31,517 | ERROR | binance_fetcher | Failed to convert dates to timestamps.
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\Data\binance\binance_fetcher.py", line 62, in _convert_to_timestamp
+    start_ts = int(datetime.strptime(self.start_date, "%Y-%m-%d").timestamp() * 1000)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Program Files\Miniconda\envs\tradex_env\Lib\_strptime.py", line 567, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Program Files\Miniconda\envs\tradex_env\Lib\_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains:  01:29:00
+2026-01-20 12:32:32,578 | INFO | binance_fetcher | Binance Client initialized.
+2026-01-20 12:32:33,186 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-01-20 01:29:00 | end=now
+2026-01-20 12:32:33,186 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-19 20:29:00 | interval=1m
+2026-01-20 12:32:34,401 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:34,759 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:34,763 | INFO | binance_fetcher | Fetched 364 rows for BTCUSDT.
+2026-01-20 12:32:36,327 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-01-20 01:29:00 | end=now
+2026-01-20 12:32:36,330 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-19 20:29:00 | interval=1m
+2026-01-20 12:32:37,217 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:37,632 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:37,634 | INFO | binance_fetcher | Fetched 364 rows for ETHUSDT.
+2026-01-20 12:32:38,764 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-01-20 01:30:00 | end=now
+2026-01-20 12:32:38,769 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-19 20:30:00 | interval=1m
+2026-01-20 12:32:39,635 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:39,984 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:39,994 | INFO | binance_fetcher | Fetched 363 rows for BNBUSDT.
+2026-01-20 12:32:41,223 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-01-20 01:30:00 | end=now
+2026-01-20 12:32:41,223 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-19 20:30:00 | interval=1m
+2026-01-20 12:32:42,178 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:42,656 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:42,664 | INFO | binance_fetcher | Fetched 363 rows for ADAUSDT.
+2026-01-20 12:32:43,749 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-01-20 01:30:00 | end=now
+2026-01-20 12:32:43,763 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-19 20:30:00 | interval=1m
+2026-01-20 12:32:44,633 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:44,982 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:44,997 | INFO | binance_fetcher | Fetched 363 rows for XRPUSDT.
+2026-01-20 12:32:46,187 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-01-20 01:31:00 | end=now
+2026-01-20 12:32:46,188 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-19 20:31:00 | interval=1m
+2026-01-20 12:32:47,126 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:47,554 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:47,557 | INFO | binance_fetcher | Fetched 362 rows for DOGEUSDT.
+2026-01-20 12:32:48,656 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-01-20 01:31:00 | end=now
+2026-01-20 12:32:48,666 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-19 20:31:00 | interval=1m
+2026-01-20 12:32:49,572 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:49,960 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:49,963 | INFO | binance_fetcher | Fetched 362 rows for SOLUSDT.
+2026-01-20 12:32:51,094 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-01-20 01:31:00 | end=now
+2026-01-20 12:32:51,098 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-19 20:31:00 | interval=1m
+2026-01-20 12:32:51,961 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:52,314 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:52,317 | INFO | binance_fetcher | Fetched 362 rows for DOTUSDT.
+2026-01-20 12:32:52,553 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2026-01-20 01:31:00 | end=now
+2026-01-20 12:32:52,554 | INFO | binance_fetcher | Fetching MATICUSDT | 2026-01-19 20:31:00 | interval=1m
+2026-01-20 12:32:52,981 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:52,982 | WARNING | binance_fetcher | No data fetched from Binance.
+2026-01-20 12:32:53,905 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-01-20 01:32:00 | end=now
+2026-01-20 12:32:53,906 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-19 20:32:00 | interval=1m
+2026-01-20 12:32:54,931 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-01-20 02:32:00.001000 | interval=1m
+2026-01-20 12:32:55,422 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:32:55,437 | INFO | binance_fetcher | Fetched 361 rows for LINKUSDT.
+2026-01-20 12:33:33,095 | INFO | binance_fetcher | Binance Client initialized.
+2026-01-20 12:33:34,368 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-01-20 02:31:00 | end=now
+2026-01-20 12:33:34,368 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-19 21:31:00 | interval=1m
+2026-01-20 12:33:35,785 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-01-20 02:33:00.001000 | interval=1m
+2026-01-20 12:33:36,046 | WARNING | binance_fetcher | No more klines returned from Binance.
+2026-01-20 12:33:36,055 | INFO | binance_fetcher | Fetched 303 rows for BTCUSDT.
+2026-01-20 12:33:57,773 | INFO | binance_fetcher | Binance Client initialized.

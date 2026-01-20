@@ -58,18 +58,34 @@ class BinanceFuturesFetcher:
         )
 
     def _convert_to_timestamp(self) -> tuple[int, int]:
+        """
+        Convert start_date and end_date strings to epoch milliseconds.
+        Supports formats:
+          - 'YYYY-MM-DD'
+          - 'YYYY-MM-DD HH:MM:SS'
+        """
+        # Parse start_date
         try:
-            start_ts = int(datetime.strptime(self.start_date, "%Y-%m-%d").timestamp() * 1000)
-            end_ts = (
-                int(datetime.utcnow().timestamp() * 1000)
-                if self.end_date.lower() == "now"
-                else int(datetime.strptime(self.end_date, "%Y-%m-%d").timestamp() * 1000)
-            )
-            return start_ts, end_ts
-        except Exception:
-            logger.exception("Failed to convert dates to timestamps.")
-            raise
+            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d")
+        start_ts = int(start_dt.timestamp() * 1000)
 
+        # Parse end_date
+        if self.end_date.lower() == "now":
+            end_ts = int(datetime.utcnow().timestamp() * 1000)
+        else:
+            try:
+                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d")
+            end_ts = int(end_dt.timestamp() * 1000)
+
+        if start_ts >= end_ts:
+            raise ValueError("start_date must be earlier than end_date")
+
+        return start_ts, end_ts
+    
     def fetch_data(self) -> pd.DataFrame:
         all_klines = []
         start_ts = self.start_ts
@@ -88,7 +104,7 @@ class BinanceFuturesFetcher:
             )
 
             if not klines:
-                logger.warning("No more klines returned from Binance.")
+                logger.warning("No more data returned from Binance.")
                 break
 
             all_klines.extend(klines)
@@ -111,6 +127,4 @@ class BinanceFuturesFetcher:
                 "taker_buy_base_volume", "taker_buy_quote_volume", "ignore"
             ]
         )
-
-        logger.info(f"Fetched {len(df)} rows for {self.symbol}.")
         return df

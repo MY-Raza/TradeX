@@ -1,4 +1,4 @@
-from TradeX.utils.db.utils import save_df_to_db,get_last_date,read_df_from_db
+from TradeX.utils.db.utils import save_df_to_db,get_last_date
 from TradeX.utils.common.logs import get_logger
 from bybit_fetcher import BybitFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
@@ -43,14 +43,12 @@ end_date = config["end_date"]
 # ---------------------------
 for symbol in symbols:
     logger.info(f"Processing symbol: {symbol}")
-    read_df_from_db(table_name=f"{symbol}",schema=SCHEMA,)
     last_stored_date = get_last_date(table_name=f"{symbol}_1m", schema=SCHEMA, time_column="timestamp")
 
     if last_stored_date:
         # Start from the last timestamp in the database
           last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
           start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
-          logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
           logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
     else:
         # Use default start date from config

@@ -128,7 +128,7 @@ class BybitFuturesFetcher:
 
             klines = response.get("result", {}).get("list", [])
             if not klines:
-                logger.info("No more klines returned.")
+                logger.info("No more data returned.")
                 break
 
             klines.reverse()
@@ -138,12 +138,11 @@ class BybitFuturesFetcher:
             time.sleep(0.25)
 
         if not all_klines:
-            logger.warning("No klines fetched.")
+            logger.warning("No data fetched.")
             return pd.DataFrame()
 
         df = pd.DataFrame(
             all_klines,
             columns=["timestamp", "open", "high", "low", "close", "volume", "turnover"],
         )
-        logger.info(f"Fetched RAW klines: {len(df)} rows")
         return df

@@ -1,10 +1,10 @@
-from TradeX.utils.db.utils import save_df_to_db,get_last_date,drop_schema
+from TradeX.utils.db.utils import save_df_to_db,get_last_date
 from TradeX.utils.common.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.common.config_loader import read_config
-import os
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
+from datetime import datetime, timezone
 
 logger = get_logger("binance_main")
 
@@ -44,13 +44,12 @@ end_date = config["end_date"]
 # -------------------------------------------------
 for symbol in symbols:
     logger.info(f"Starting data pipeline for symbol: {symbol}")
-    table_name = symbol.lower()
-    last_stored_date = get_last_date(table_name=table_name, schema=SCHEMA, time_column="timestamp")
+    last_stored_date = get_last_date(table_name=f"{symbol}_1m", schema=SCHEMA, time_column="timestamp")
 
     if last_stored_date:
-        # Start from the last timestamp in the database
-        start_date = last_stored_date.strftime("%Y-%m-%d")
-        logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
+          last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
+          start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
+          logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
     else:
         # Use default start date from config
         start_date = start_date
@@ -74,7 +73,6 @@ for symbol in symbols:
         continue
 
     logger.info(f"RAW data fetched for {symbol} | rows={len(raw_df)}")
-    logger.info(f"Raw DF columns: {raw_df.columns.tolist()}")
 
     # ---------------------------
     # Data Cleaning Pipeline
