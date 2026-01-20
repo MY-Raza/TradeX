@@ -1,5 +1,5 @@
 # main.py (Kraken Futures)
-from TradeX.utils.db.utils import save_df_to_db, get_last_date
+from TradeX.utils.db.utils import save_df_to_db, get_last_date,drop_schema
 from TradeX.utils.common.logs import get_logger
 from TradeX.data.kraken.kraken_fetcher import KrakenFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
@@ -49,9 +49,7 @@ for symbol in symbols:
 
     if last_stored_date:
         # Convert from timestamp to datetime
-        last_stored_date_dt = datetime.fromtimestamp(
-            last_stored_date, tz=timezone.utc
-        )
+        last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
         start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
         logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
     else:

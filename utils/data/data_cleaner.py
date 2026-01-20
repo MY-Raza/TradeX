@@ -51,7 +51,7 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     # Ensure correct dtypes
     # ---------------------------
-    df["timestamp"] = df["timestamp"].astype("int64")
+    df["timestamp"] = df["timestamp"]#.astype("int64")
     df = convert_ohlcv_to_float(df)
 
     # ---------------------------

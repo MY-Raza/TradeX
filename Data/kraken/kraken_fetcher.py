@@ -121,8 +121,8 @@ class KrakenFuturesFetcher:
             all_records.append(df_part)
 
             # Advance 'from' for pagination
-            last_time_ms = df_part["time"].astype("int64").max()
-            current_from = int(last_time_ms // 10**9) + 1  # convert ns -> seconds
+            last_time_ms = df_part["time"].astype("int64").max() // 1_000_000
+            current_from = (last_time_ms // 1000) + 1  # convert ns -> seconds
 
             time.sleep(0.3)  # rate limit buffer
 

@@ -570,3 +570,62 @@
 2026-01-20 16:02:57,723 | INFO | kraken_fetcher | Fetching PI_ETHUSD from 1768888921 → 1768888958
 2026-01-20 16:02:58,457 | INFO | kraken_fetcher | No more candles returned.
 2026-01-20 16:02:58,468 | INFO | kraken_fetcher | Fetched 20823 rows for PI_ETHUSD.
+2026-01-20 16:42:23,407 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_XBTUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:23,407 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1767639600 → 1768891343
+2026-01-20 16:42:24,478 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_XBTUSD/1m?from=1767639600&to=1768891343
+2026-01-20 16:42:24,478 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:24,509 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_ETHUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:24,509 | INFO | kraken_fetcher | Fetching PI_ETHUSD from 1767639600 → 1768891344
+2026-01-20 16:42:25,913 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_ETHUSD/1m?from=1767639600&to=1768891344
+2026-01-20 16:42:25,913 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:25,937 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_BNBUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:25,937 | INFO | kraken_fetcher | Fetching PI_BNBUSD from 1767639600 → 1768891345
+2026-01-20 16:42:26,839 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_BNBUSD/1m?from=1767639600&to=1768891345
+2026-01-20 16:42:26,839 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:26,858 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_ADAUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:26,861 | INFO | kraken_fetcher | Fetching PI_ADAUSD from 1767639600 → 1768891346
+2026-01-20 16:42:27,626 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_ADAUSD/1m?from=1767639600&to=1768891346
+2026-01-20 16:42:27,626 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:27,634 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_XRPUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:27,634 | INFO | kraken_fetcher | Fetching PI_XRPUSD from 1767639600 → 1768891347
+2026-01-20 16:42:28,955 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_XRPUSD/1m?from=1767639600&to=1768891347
+2026-01-20 16:42:28,955 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:28,966 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_DOGEUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:28,966 | INFO | kraken_fetcher | Fetching PI_DOGEUSD from 1767639600 → 1768891348
+2026-01-20 16:42:29,737 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_DOGEUSD/1m?from=1767639600&to=1768891348
+2026-01-20 16:42:29,737 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:29,751 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_SOLUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:29,751 | INFO | kraken_fetcher | Fetching PI_SOLUSD from 1767639600 → 1768891349
+2026-01-20 16:42:30,577 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_SOLUSD/1m?from=1767639600&to=1768891349
+2026-01-20 16:42:30,577 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:30,582 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_DOTUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:30,590 | INFO | kraken_fetcher | Fetching PI_DOTUSD from 1767639600 → 1768891350
+2026-01-20 16:42:31,391 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_DOTUSD/1m?from=1767639600&to=1768891350
+2026-01-20 16:42:31,391 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:31,395 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_MATICUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:31,395 | INFO | kraken_fetcher | Fetching PI_MATICUSD from 1767639600 → 1768891351
+2026-01-20 16:42:32,155 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_MATICUSD/1m?from=1767639600&to=1768891351
+2026-01-20 16:42:32,155 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:32,168 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_LINKUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:32,168 | INFO | kraken_fetcher | Fetching PI_LINKUSD from 1767639600 → 1768891352
+2026-01-20 16:42:33,170 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_LINKUSD/1m?from=1767639600&to=1768891352
+2026-01-20 16:42:33,170 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:42:33,192 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_LTCUSD | ohlc | 2026-01-06 → now
+2026-01-20 16:42:33,192 | INFO | kraken_fetcher | Fetching PI_LTCUSD from 1767639600 → 1768891353
+2026-01-20 16:42:34,033 | ERROR | kraken_fetcher | Request error: 400 Client Error: Bad Request for url: https://futures.kraken.com/api/charts/v1/ohlc/PI_LTCUSD/1m?from=1767639600&to=1768891353
+2026-01-20 16:42:34,033 | WARNING | kraken_fetcher | No data fetched.
+2026-01-20 16:44:35,652 | INFO | kraken_fetcher | KrakenFuturesFetcher initialized | PI_XBTUSD | trade | 2026-01-06 → now
+2026-01-20 16:44:35,652 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1767639600 → 1768891475
+2026-01-20 16:44:37,430 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1767759541 → 1768891475
+2026-01-20 16:44:38,741 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1767879541 → 1768891475
+2026-01-20 16:44:40,124 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1767999541 → 1768891475
+2026-01-20 16:44:41,435 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768119541 → 1768891475
+2026-01-20 16:44:43,260 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768239541 → 1768891475
+2026-01-20 16:44:44,674 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768359541 → 1768891475
+2026-01-20 16:44:46,173 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768479541 → 1768891475
+2026-01-20 16:44:47,841 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768599541 → 1768891475
+2026-01-20 16:44:49,365 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768719541 → 1768891475
+2026-01-20 16:44:50,684 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768839541 → 1768891475
+2026-01-20 16:44:52,033 | INFO | kraken_fetcher | Fetching PI_XBTUSD from 1768891441 → 1768891475
+2026-01-20 16:44:52,813 | INFO | kraken_fetcher | No more candles returned.
+2026-01-20 16:44:52,831 | INFO | kraken_fetcher | Fetched 20865 rows for PI_XBTUSD.
