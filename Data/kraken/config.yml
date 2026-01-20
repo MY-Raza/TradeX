@@ -1,0 +1,23 @@
+# Name of the exchange to fetch data from
+exchange_name: 'kraken'
+
+# # List of trading pairs (symbols) to fetch
+symbols:
+  - btc
+  - eth
+  - bnb
+  - ada
+  - xrp
+  - doge
+  - sol
+  - dot
+  - matic
+  - link
+
+# Start date of the historical data to fetch
+# Format: 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS'
+start_date: '2026-01-06'
+
+# End date of the historical data to fetch
+# Use 'now' if to fetch until the current time
+end_date: now
