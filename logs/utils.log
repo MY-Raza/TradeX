@@ -1114,3 +1114,124 @@ Last 5 rows from data_kraken.ltc_1m:
 2026-01-20 18:50:15,425 | INFO | utils | Schema 'data_kraken' ready
 2026-01-20 18:50:15,430 | INFO | utils | Unique index ensured: ltc_1m_timestamp_uidx
 2026-01-20 18:50:15,441 | INFO | utils | Inserted 3 rows into data_kraken.ltc_1m
+2026-01-20 19:01:31,705 | INFO | utils | Database engine initialized
+2026-01-20 19:01:32,077 | INFO | utils | 
+Last 5 rows from data_kraken.xbt_1m:
+
+2026-01-20 19:01:32,077 | INFO | utils |          timestamp     open     high      low    close    volume
+719  1768916340000  90891.5  90965.8  90891.5  90959.2  1.510548
+720  1768916400000  90965.8  91000.0  90965.8  90965.9  1.323970
+721  1768916460000  90965.9  90979.9  90959.2  90959.2  0.098615
+722  1768916520000  90952.6  90952.6  90906.2  90906.2  0.064691
+723  1768916580000  90906.2  90930.0  90906.2  90929.9  0.440274
+2026-01-20 19:01:35,354 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:35,365 | INFO | utils | Unique index ensured: xbt_1m_timestamp_uidx
+2026-01-20 19:01:35,435 | INFO | utils | Inserted 11 rows into data_kraken.xbt_1m
+2026-01-20 19:01:35,447 | INFO | utils | 
+Last 5 rows from data_kraken.eth_1m:
+
+2026-01-20 19:01:35,448 | INFO | utils |          timestamp     open     high      low    close     volume
+719  1768916340000  3086.28  3091.50  3086.28  3091.50  49.935356
+720  1768916400000  3091.50  3092.15  3088.67  3089.73   9.884323
+721  1768916460000  3089.72  3089.72  3088.66  3088.66   0.444502
+722  1768916520000  3088.05  3088.05  3085.21  3085.21   6.408311
+723  1768916580000  3084.83  3085.13  3083.49  3084.64  68.634344
+2026-01-20 19:01:39,641 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:39,647 | INFO | utils | Unique index ensured: eth_1m_timestamp_uidx
+2026-01-20 19:01:39,677 | INFO | utils | Inserted 12 rows into data_kraken.eth_1m
+2026-01-20 19:01:39,686 | INFO | utils | 
+Last 5 rows from data_kraken.bnb_1m:
+
+2026-01-20 19:01:39,686 | INFO | utils |          timestamp    open    high     low   close   volume
+719  1768916340000  908.45  908.45  908.45  908.45  0.00000
+720  1768916400000  908.45  908.45  908.45  908.45  0.00000
+721  1768916460000  908.93  909.09  908.93  909.09  0.73990
+722  1768916520000  908.48  908.48  908.48  908.48  0.08364
+723  1768916580000  908.48  908.48  908.48  908.48  0.00000
+2026-01-20 19:01:43,015 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:43,020 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-20 19:01:43,043 | INFO | utils | Inserted 12 rows into data_kraken.bnb_1m
+2026-01-20 19:01:43,052 | INFO | utils | 
+Last 5 rows from data_kraken.ada_1m:
+
+2026-01-20 19:01:43,054 | INFO | utils |          timestamp      open      high       low     close        volume
+719  1768916340000  0.358717  0.359403  0.358717  0.359403   2347.758906
+720  1768916400000  0.359577  0.359577  0.358543  0.358543  26525.068718
+721  1768916460000  0.358770  0.358842  0.358770  0.358842    629.186900
+722  1768916520000  0.358979  0.358979  0.358620  0.358620   4752.391264
+723  1768916580000  0.358938  0.359283  0.358938  0.359272   1553.358390
+2026-01-20 19:01:46,128 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:46,133 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-20 19:01:46,166 | INFO | utils | Inserted 12 rows into data_kraken.ada_1m
+2026-01-20 19:01:46,185 | INFO | utils | 
+Last 5 rows from data_kraken.xrp_1m:
+
+2026-01-20 19:01:46,186 | INFO | utils |          timestamp     open     high      low    close       volume
+719  1768916340000  1.92444  1.92624  1.92431  1.92624  1469.098053
+720  1768916400000  1.92653  1.92672  1.92601  1.92601   744.982461
+721  1768916460000  1.92600  1.92604  1.92476  1.92476  1033.148180
+722  1768916520000  1.92347  1.92445  1.92347  1.92430  1269.334815
+723  1768916580000  1.92421  1.92455  1.92363  1.92428   349.686484
+2026-01-20 19:01:49,412 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:49,417 | INFO | utils | Unique index ensured: xrp_1m_timestamp_uidx
+2026-01-20 19:01:49,443 | INFO | utils | Inserted 12 rows into data_kraken.xrp_1m
+2026-01-20 19:01:49,453 | INFO | utils | 
+Last 5 rows from data_kraken.doge_1m:
+
+2026-01-20 19:01:49,454 | INFO | utils |          timestamp      open      high       low     close        volume
+719  1768916340000  0.125228  0.125432  0.125228  0.125432  13132.324534
+720  1768916400000  0.125432  0.125432  0.125280  0.125305  35657.072210
+721  1768916460000  0.125296  0.125296  0.125280  0.125296     47.247000
+722  1768916520000  0.125230  0.125230  0.125177  0.125177  18992.883979
+723  1768916580000  0.125131  0.125221  0.125131  0.125221    161.227000
+2026-01-20 19:01:52,566 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:52,573 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-20 19:01:52,602 | INFO | utils | Inserted 12 rows into data_kraken.doge_1m
+2026-01-20 19:01:52,614 | INFO | utils | 
+Last 5 rows from data_kraken.sol_1m:
+
+2026-01-20 19:01:52,614 | INFO | utils |          timestamp    open    high     low   close      volume
+718  1768916340000  128.80  128.95  128.80  128.95   22.709064
+719  1768916400000  128.96  128.96  128.91  128.91    2.284028
+720  1768916460000  128.88  128.91  128.87  128.88   15.915975
+721  1768916520000  128.88  128.88  128.72  128.72  115.487798
+722  1768916580000  128.71  128.73  128.64  128.66  190.144636
+2026-01-20 19:01:55,739 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:55,743 | INFO | utils | Unique index ensured: sol_1m_timestamp_uidx
+2026-01-20 19:01:55,772 | INFO | utils | Inserted 12 rows into data_kraken.sol_1m
+2026-01-20 19:01:55,786 | INFO | utils | 
+Last 5 rows from data_kraken.dot_1m:
+
+2026-01-20 19:01:55,787 | INFO | utils |          timestamp    open    high     low   close     volume
+718  1768916340000  1.9554  1.9554  1.9554  1.9554   0.000000
+719  1768916400000  1.9554  1.9554  1.9554  1.9554   0.000000
+720  1768916460000  1.9560  1.9560  1.9560  1.9560  10.122699
+721  1768916520000  1.9560  1.9560  1.9560  1.9560   0.000000
+722  1768916580000  1.9560  1.9560  1.9560  1.9560   0.000000
+2026-01-20 19:01:58,960 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:01:58,967 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-20 19:01:59,004 | INFO | utils | Inserted 12 rows into data_kraken.dot_1m
+2026-01-20 19:01:59,022 | INFO | utils | 
+Last 5 rows from data_kraken.link_1m:
+
+2026-01-20 19:01:59,023 | INFO | utils |          timestamp      open      high       low     close     volume
+718  1768916340000  12.49054  12.50106  12.49054  12.50106  14.238447
+719  1768916400000  12.50833  12.50833  12.50832  12.50832  28.829528
+720  1768916460000  12.50832  12.50832  12.50832  12.50832   0.000000
+721  1768916520000  12.48060  12.48060  12.48060  12.48060   5.814320
+722  1768916580000  12.48060  12.48060  12.48060  12.48060   0.000000
+2026-01-20 19:02:02,254 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:02:02,259 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
+2026-01-20 19:02:02,284 | INFO | utils | Inserted 12 rows into data_kraken.link_1m
+2026-01-20 19:02:02,294 | INFO | utils | 
+Last 5 rows from data_kraken.ltc_1m:
+
+2026-01-20 19:02:02,295 | INFO | utils |          timestamp   open   high    low  close      volume
+718  1768916340000  69.41  69.46  69.41  69.46    2.897578
+719  1768916400000  69.48  69.48  69.43  69.43  118.602074
+720  1768916460000  69.39  69.39  69.39  69.39    0.131139
+721  1768916520000  69.38  69.38  69.38  69.38    0.922278
+722  1768916580000  69.38  69.38  69.38  69.38    0.000000
+2026-01-20 19:02:05,637 | INFO | utils | Schema 'data_kraken' ready
+2026-01-20 19:02:05,642 | INFO | utils | Unique index ensured: ltc_1m_timestamp_uidx
+2026-01-20 19:02:05,672 | INFO | utils | Inserted 12 rows into data_kraken.ltc_1m
