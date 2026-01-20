@@ -237,7 +237,7 @@ def read_df_from_db(
     # Print last 5 rows
     if not df.empty:
         logger.info(f"\nLast 5 rows from {schema}.{table}:\n")
-        logger.info(df.head(5))
+        logger.info(df.tail(5))
     else:
         print(f"No data found in {schema}.{table}")
 
