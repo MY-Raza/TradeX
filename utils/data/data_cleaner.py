@@ -39,6 +39,8 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     # Required columns
     # ---------------------------
+    if "time" in df.columns:
+      df = df.rename(columns={"time": "timestamp"}, inplace=True)
     required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
     missing = set(required_cols) - set(df.columns)
     if missing:
@@ -70,8 +72,10 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     end_ts = df["timestamp"].iloc[-1]
 
     full_range = range(start_ts, end_ts + interval_ms, interval_ms)
-
-    df = df.set_index("timestamp").reindex(full_range)
+    if len(full_range) > 10_000_000:  # threshold, adjust based on memory
+     logger.warning("Skipping full reindexing due to huge number of rows")
+    else:
+     df = df.set_index("timestamp").reindex(full_range)
 
     # ---------------------------
     # Forward fill OHLCV

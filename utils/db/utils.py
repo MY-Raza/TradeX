@@ -164,14 +164,18 @@ def save_df_to_db(
     # -------------------------------------------------
     # 2. Create table if missing
     # -------------------------------------------------
-    df.head(0).to_sql(
+    inspector = inspect(engine)
+    if not inspector.has_table(table, schema=schema):
+       df.head(0).to_sql(
         table,
         engine,
         schema=schema,
-        if_exists="append",
+        if_exists="fail",  # only create table
         index=False
-    )
-
+     )
+       logger.info(f"Table '{schema}.{table}' created")
+    else:
+      logger.info(f"Table '{schema}.{table}' already exists, skipping creation")
     # -------------------------------------------------
     # 3. SELF-HEAL table (this fixes Binance issue)
     # -------------------------------------------------
