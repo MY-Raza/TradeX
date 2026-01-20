@@ -49,7 +49,9 @@ for symbol in symbols:
 
     if last_stored_date:
         # Convert from timestamp to datetime
-        last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
+        last_stored_date_dt = datetime.fromtimestamp(
+            last_stored_date, tz=timezone.utc
+        )
         start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
         logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
     else:

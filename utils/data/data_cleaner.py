@@ -39,10 +39,8 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     # ---------------------------
     # Required columns
     # ---------------------------
-    logger.info(f"Raw Columns: {df.columns.tolist()}")
     if "time" in df.columns:
       df = df.rename(columns={"time": "timestamp"})
-    logger.info(f"Cleaned Columns: {df.columns.tolist()}")
     required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
     missing = set(required_cols) - set(df.columns)
     if missing:

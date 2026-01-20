@@ -130,7 +130,6 @@ def get_last_date(
 ) -> int | None:
     engine = get_engine()
     inspector = inspect(engine)
-
     if not inspector.has_table(table_name, schema=schema):
         return None
 
@@ -179,6 +178,7 @@ def save_df_to_db(
 
     if is_timeseries:
         ensure_hypertable(table, schema, time_column)
+        
 
     # -------------------------------------------------
     # 4. Filter already ingested rows
