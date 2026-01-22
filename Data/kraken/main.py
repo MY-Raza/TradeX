@@ -80,7 +80,6 @@ def main():
 
             # Clean the data: remove duplicates, sort by timestamp, etc.
             df = clean_df(df)
-            logger.info(f"First 15 Rows of Cleaned Data: {df.head(15)}")
             # Save to database
             save_df_to_db(
                 df=df,
@@ -89,7 +88,6 @@ def main():
                 time_column="timestamp",
                 is_timeseries=True
             )
-            read_df_from_db(table_name=symbol.lower(),schema=SCHEMA)
             logger.info(f"Successfully saved data for {kraken_symbol}. Rows: {len(df)}")
 
         except Exception as e:

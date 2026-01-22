@@ -2374,3 +2374,35 @@ First 15 rows from data_kraken.ltc_1m:
 12  1768522320000  72.36  72.36  72.30  72.32   23.46
 13  1768522380000  72.32  72.32  72.30  72.32    3.84
 14  1768522440000  72.32  72.37  72.32  72.36   11.85
+2026-01-22 15:58:52,903 | INFO | utils | Database engine initialized
+2026-01-22 15:59:06,315 | WARNING | utils | Schema 'data_kraken' dropped
+2026-01-22 15:59:15,819 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 15:59:15,895 | INFO | utils | Unique index ensured: xbt_1m_timestamp_uidx
+2026-01-22 15:59:24,996 | INFO | utils | Inserted 9293 rows into data_kraken.xbt_1m
+2026-01-22 15:59:37,438 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 15:59:37,460 | INFO | utils | Unique index ensured: eth_1m_timestamp_uidx
+2026-01-22 15:59:47,504 | INFO | utils | Inserted 9293 rows into data_kraken.eth_1m
+2026-01-22 15:59:55,619 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 15:59:55,648 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-22 16:00:05,404 | INFO | utils | Inserted 9294 rows into data_kraken.bnb_1m
+2026-01-22 16:00:11,710 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:00:11,982 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-22 16:00:21,060 | INFO | utils | Inserted 9294 rows into data_kraken.ada_1m
+2026-01-22 16:00:30,581 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:00:30,611 | INFO | utils | Unique index ensured: xrp_1m_timestamp_uidx
+2026-01-22 16:00:45,090 | INFO | utils | Inserted 9294 rows into data_kraken.xrp_1m
+2026-01-22 16:00:52,113 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:00:52,145 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-22 16:01:04,416 | INFO | utils | Inserted 9295 rows into data_kraken.doge_1m
+2026-01-22 16:01:14,273 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:01:14,298 | INFO | utils | Unique index ensured: sol_1m_timestamp_uidx
+2026-01-22 16:01:23,135 | INFO | utils | Inserted 9295 rows into data_kraken.sol_1m
+2026-01-22 16:01:31,401 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:01:31,747 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-22 16:01:40,778 | INFO | utils | Inserted 9295 rows into data_kraken.dot_1m
+2026-01-22 16:01:59,067 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:01:59,375 | INFO | utils | Unique index ensured: link_1m_timestamp_uidx
+2026-01-22 16:02:08,794 | INFO | utils | Inserted 9296 rows into data_kraken.link_1m
+2026-01-22 16:02:24,557 | INFO | utils | Schema 'data_kraken' ready
+2026-01-22 16:02:24,581 | INFO | utils | Unique index ensured: ltc_1m_timestamp_uidx
+2026-01-22 16:02:32,809 | INFO | utils | Inserted 9296 rows into data_kraken.ltc_1m
