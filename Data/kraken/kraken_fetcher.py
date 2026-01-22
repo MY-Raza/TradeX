@@ -1,189 +1,107 @@
-# kraken_fetcher.py
-
-import time
-from datetime import datetime
+import requests
 import pandas as pd
-import ccxt
-from TradeX.utils.common.logs import get_logger
-
-logger = get_logger("kraken_fetcher")
+from datetime import datetime, timezone
 
 
 class KrakenFuturesFetcher:
     """
-    Fetch historical Kraken Futures OHLCV data in batches
-    and verify it starts from the given start_date.
+    Fetch OHLCV data from Kraken Futures.
+
+    Usage:
+        fetcher = KrakenFuturesFetcher(symbol="PF_XBTUSD", interval="1m")
+        df = fetcher.fetch(start_date="2024-01-01", end_date="now")
     """
 
-    def __init__(
-        self,
-        symbol: str,
-        start_date: str,
-        end_date: str = "now",
-        timeframe: str = "1m",
-        limit: int = 1000,
-        sleep_seconds: float = 0.5,
-    ):
-        self.symbol = symbol.upper()
-        self.start_date = start_date
-        self.end_date = end_date
-        self.timeframe = timeframe
-        self.limit = limit
-        self.sleep_seconds = sleep_seconds
+    BASE_URL_TEMPLATE = "https://futures.kraken.com/api/charts/v1/trade/{symbol}/{interval}"
 
-        # Initialize Kraken Futures
-        self.exchange = ccxt.kraken({
-            "options": {"defaultType": "future"}
-        })
+    def __init__(self, symbol: str, interval: str = "1m"):
+        self.symbol = symbol
+        self.interval = interval
+        self.base_url = self.BASE_URL_TEMPLATE.format(symbol=self.symbol, interval=self.interval)
 
-        # Convert dates → epoch ms
-        self.start_ts, self.end_ts = self._convert_to_timestamp()
-
-        logger.info(
-            f"KrakenFuturesFetcher initialized | "
-            f"symbol={self.symbol} | timeframe={self.timeframe} | "
-            f"start={self.start_date} | end={self.end_date}"
-        )
-
-    # --------------------------------------------------
-    # Timestamp conversion
-    # --------------------------------------------------
-    def _convert_to_timestamp(self) -> tuple[int, int]:
-        """Convert start_date and end_date to epoch milliseconds."""
-        try:
-            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d %H:%M:%S")
-        except ValueError:
-            start_dt = datetime.strptime(self.start_date, "%Y-%m-%d")
-
-        start_ts = int(start_dt.timestamp() * 1000)
-
-        if self.end_date.lower() == "now":
-            end_ts = int(datetime.utcnow().timestamp() * 1000)
-        else:
-            try:
-                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d %H:%M:%S")
-            except ValueError:
-                end_dt = datetime.strptime(self.end_date, "%Y-%m-%d")
-
-            end_ts = int(end_dt.timestamp() * 1000)
-
-        if start_ts >= end_ts:
-            raise ValueError("start_date must be earlier than end_date")
-
-        return start_ts, end_ts
-
-    # --------------------------------------------------
-    # DEBUG: Verify requested vs returned timestamps
-    # --------------------------------------------------
-    def _debug_since_vs_returned(self, since: int, ohlcv: list):
-        if not ohlcv:
-            logger.warning("DEBUG: Empty OHLCV response")
-            return
-
-        first_ts = ohlcv[0][0]
-        diff_ms = first_ts - since
-        diff_min = diff_ms / 60000
-
-        logger.info(
-            "DEBUG START CHECK | "
-            f"requested_since={since} "
-            f"({datetime.utcfromtimestamp(since / 1000)}) | "
-            f"first_returned={first_ts} "
-            f"({datetime.utcfromtimestamp(first_ts / 1000)}) | "
-            f"diff={diff_ms} ms ({diff_min:.2f} min)"
-        )
-
-    # --------------------------------------------------
-    # Fetch data
-    # --------------------------------------------------
-    def fetch_data(self) -> pd.DataFrame:
+    @staticmethod
+    def to_unix(date_str: str, end: bool = False) -> int:
         """
-        Fetch OHLCV data in batches until end_ts.
-        Returns DataFrame with epoch ms timestamps.
+        Convert YYYY-MM-DD date string to UNIX timestamp (seconds).
+        Use end=True to set 23:59:59 for the day.
         """
-        all_ohlcv = []
-        since = self.start_ts
+        if date_str.lower() == "now":
+            return int(datetime.now(tz=timezone.utc).timestamp())
+        dt = datetime.strptime(date_str, "%Y-%m-%d")
+        if end:
+            dt = dt.replace(hour=23, minute=59, second=59)
+        return int(dt.replace(tzinfo=timezone.utc).timestamp())
 
-        while since < self.end_ts:
-            logger.info(
-                f"Fetching {self.symbol} | "
-                f"from {datetime.utcfromtimestamp(since / 1000)}"
-            )
+    def fetch_chunk(self, from_ts: int) -> dict:
+        """
+        Fetch a chunk of OHLCV data starting from `from_ts`.
+        """
+        params = {"from": from_ts}
+        response = requests.get(self.base_url, params=params, timeout=30)
+        response.raise_for_status()
+        return response.json()
 
-            try:
-                ohlcv = self.exchange.fetch_ohlcv(
-                    symbol=self.symbol,
-                    timeframe=self.timeframe,
-                    since=since,
-                    limit=self.limit,
-                )
+    def fetch(self, start_date: str, end_date: str = "now") -> pd.DataFrame:
+        """
+        Fetch all OHLCV data between start_date and end_date.
+        Returns a DataFrame with columns: timestamp, open, high, low, close, volume
+        Timestamp is in Unix seconds.
+        """
+        start_ts = self.to_unix(start_date)
+        end_ts = self.to_unix(end_date)
 
-                # 🔍 DEBUG CHECK
-                self._debug_since_vs_returned(since, ohlcv)
+        all_candles = []
+        current_from = start_ts
 
-            except ccxt.NetworkError as e:
-                logger.warning(
-                    f"Network error: {e}, retrying in {self.sleep_seconds}s"
-                )
-                time.sleep(self.sleep_seconds)
-                continue
+        while True:
+            print(f"Fetching candles from {datetime.utcfromtimestamp(current_from)}")
+            raw = self.fetch_chunk(current_from)
+            candles = raw.get("candles", [])
 
-            except ccxt.ExchangeError as e:
-                logger.error(f"Exchange error: {e}")
+            if not candles:
+                print("No more candles returned.")
                 break
 
-            if not ohlcv:
-                logger.info("No more data returned from Kraken.")
+            all_candles.extend(candles)
+
+            # Stop if no more candles
+            if not raw.get("more_candles", False):
+                print("Reached last candle.")
                 break
 
-            all_ohlcv.extend(ohlcv)
+            # Move to next timestamp (last candle + interval)
+            last_ts = candles[-1]["time"] // 1000
+            current_from = last_ts + 60  # 1-minute increment
 
-            # Advance timestamp safely
-            last_candle_ts = ohlcv[-1][0]
+            # Stop if passed end timestamp
+            if current_from > end_ts:
+                break
 
-            if last_candle_ts == since:
-                # Safety guard (Kraken edge case)
-                logger.warning(
-                    "Last candle timestamp equals 'since'. "
-                    "Skipping forward 1 minute to avoid infinite loop."
-                )
-                since += 60_000
-            else:
-                since = last_candle_ts + 1
+        # Convert to DataFrame
+        df = pd.DataFrame(all_candles)
+        if df.empty:
+            print("⚠️ No data fetched.")
+            return df
 
-            time.sleep(self.sleep_seconds)
+        # Convert numeric columns
+        for col in ["open", "high", "low", "close", "volume"]:
+            df[col] = pd.to_numeric(df[col])
 
-        if not all_ohlcv:
-            logger.warning("No data fetched from Kraken.")
-            return pd.DataFrame()
+        # Keep Unix timestamp in seconds
+        df["timestamp"] = (df["time"] // 1000).astype(int)
+        df = df[["timestamp", "open", "high", "low", "close", "volume"]]
 
-        # --------------------------------------------------
-        # Build DataFrame
-        # --------------------------------------------------
-        df = pd.DataFrame(
-            all_ohlcv,
-            columns=["timestamp", "open", "high", "low", "close", "volume"],
-        )
+        # Filter for end date just in case
+        df = df[df["timestamp"] <= end_ts]
 
-        # --------------------------------------------------
-        # FINAL VALIDATION
-        # --------------------------------------------------
-        first_ts = int(df["timestamp"].min())
-        last_ts = int(df["timestamp"].max())
-
-        logger.info(
-            "FINAL DATA RANGE | "
-            f"start_ts={first_ts} "
-            f"({datetime.utcfromtimestamp(first_ts / 1000)}) | "
-            f"end_ts={last_ts} "
-            f"({datetime.utcfromtimestamp(last_ts / 1000)}) | "
-            f"expected_start>={datetime.utcfromtimestamp(self.start_ts / 1000)}"
-        )
-
-        if first_ts < self.start_ts:
-            logger.error(
-                "❌ DATA STARTS BEFORE REQUESTED start_date | "
-                f"diff_ms={self.start_ts - first_ts}"
-            )
+        print(f"✅ Total rows fetched: {len(df)}")
+        print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+        print(f"End  : {datetime.utcfromtimestamp(df['timestamp'].max())}")
 
         return df
+
+    def save_to_csv(self, df: pd.DataFrame, filename: str):
+        """Save DataFrame to CSV."""
+        df.to_csv(filename, index=False)
+        print(f"💾 Saved to {filename}")
+
