@@ -130,6 +130,7 @@ class KrakenFuturesFetcher:
 
         # Convert list of candles to DataFrame
         df = pd.DataFrame(all_candles)
+        logger.info(f"First 15 Rows Before Performing any Operation: {df.head(15)}")
         if df.empty:
             print("⚠️ No data fetched.")
             return df
@@ -147,6 +148,7 @@ class KrakenFuturesFetcher:
 
         # Debug info
         logger.info(f"✅ Total rows fetched: {len(df)}")
+        logger.info(f"First 15 Rows:{df.head(15)}")
         logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min() / 1000)}")
         logger.info(f"End  : {datetime.utcfromtimestamp(df['timestamp'].max() / 1000)}")
 

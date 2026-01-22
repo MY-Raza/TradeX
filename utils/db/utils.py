@@ -283,8 +283,8 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
     df = pd.read_sql_query(query, engine)
 
     if not df.empty:
-        logger.info(f"\nLast 5 rows from {schema}.{table}:\n")
-        logger.info(df.tail(5))
+        logger.info(f"\nFirst 15 rows from {schema}.{table}:\n")
+        logger.info(df.head(15))
     else:
         logger.info(f"No data found in {schema}.{table}")
 
