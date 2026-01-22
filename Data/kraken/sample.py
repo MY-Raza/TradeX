@@ -2,9 +2,13 @@ from TradeX.utils.common.config_loader import read_config
 from TradeX.data.kraken.kraken_fetcher import KrakenFuturesFetcher  
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import clean_df
+from TradeX.utils.db.utils import save_df_to_db,drop_schema
+from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 import os
 
 logger = get_logger("kraken_main")
+
+SCHEMA = EXCHANGE_SCHEMA_MAP["kraken"]
 
 def main():
     # -----------------------------
@@ -36,10 +40,7 @@ def main():
         try:
             df = fetcher.fetch(start_date=start_date, end_date=end_date)
             df = clean_df(df)
-            # Save CSV
-            filename = f"kraken_{kraken_symbol}_ohlcv_cleaned.csv"
-            filepath = os.path.join(os.getcwd(), filename)
-            fetcher.save_to_csv(df, filepath)
+            drop_schema(SCHEMA)
 
         except Exception as e:
             logger.exception(f"Failed to fetch {kraken_symbol}: {e}")
