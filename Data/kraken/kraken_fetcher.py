@@ -45,7 +45,7 @@ class KrakenFuturesFetcher:
         """
         Fetch all OHLCV data between start_date and end_date.
         Returns a DataFrame with columns: timestamp, open, high, low, close, volume
-        Timestamp is in Unix seconds.
+        Timestamp is in Unix milliseconds (ms) for compatibility with clean_df.
         """
         start_ts = self.to_unix(start_date)
         end_ts = self.to_unix(end_date)
@@ -70,7 +70,7 @@ class KrakenFuturesFetcher:
                 break
 
             # Move to next timestamp (last candle + interval)
-            last_ts = candles[-1]["time"] // 1000
+            last_ts = candles[-1]["time"] // 1000  # seconds
             current_from = last_ts + 60  # 1-minute increment
 
             # Stop if passed end timestamp
@@ -87,16 +87,18 @@ class KrakenFuturesFetcher:
         for col in ["open", "high", "low", "close", "volume"]:
             df[col] = pd.to_numeric(df[col])
 
-        # Keep Unix timestamp in seconds
-        df["timestamp"] = (df["time"] // 1000).astype(int)
+        # --------------------------
+        # FIX: Keep timestamp in milliseconds
+        # --------------------------
+        df["timestamp"] = df["time"].astype(int)  # milliseconds
         df = df[["timestamp", "open", "high", "low", "close", "volume"]]
 
-        # Filter for end date just in case
-        df = df[df["timestamp"] <= end_ts]
+        # Optional: filter for end date (convert end_ts to ms)
+        df = df[df["timestamp"] <= end_ts * 1000]
 
         print(f"✅ Total rows fetched: {len(df)}")
-        print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
-        print(f"End  : {datetime.utcfromtimestamp(df['timestamp'].max())}")
+        print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min() / 1000)}")
+        print(f"End  : {datetime.utcfromtimestamp(df['timestamp'].max() / 1000)}")
 
         return df
 
@@ -104,4 +106,3 @@ class KrakenFuturesFetcher:
         """Save DataFrame to CSV."""
         df.to_csv(filename, index=False)
         print(f"💾 Saved to {filename}")
-
