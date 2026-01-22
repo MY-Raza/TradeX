@@ -1,64 +1,103 @@
+# kraken_main.py
+
 from TradeX.utils.common.config_loader import read_config
 from TradeX.data.kraken.kraken_fetcher import KrakenFuturesFetcher  
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import clean_df
-from TradeX.utils.db.utils import save_df_to_db,drop_schema,get_last_date
+from TradeX.utils.db.utils import save_df_to_db, drop_schema, get_last_date
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from datetime import datetime, timezone
 
+# ---------------------------
+# Initialize logger
+# ---------------------------
 logger = get_logger("kraken_main")
 
+# Retrieve the schema for Kraken from constants
 SCHEMA = EXCHANGE_SCHEMA_MAP["kraken"]
 
+
 def main():
+    """
+    Main function to fetch Kraken Futures OHLCV data and save it to the database.
+
+    Steps:
+        1. Load configuration from 'config.yml'.
+        2. Validate exchange is 'kraken'.
+        3. Loop through each symbol in the config.
+        4. Check the last stored timestamp in the database.
+        5. Fetch data from Kraken Futures starting from last timestamp (or config start date).
+        6. Clean the data using clean_df.
+        7. Save the cleaned data into the database.
+        8. Handle any exceptions during fetching or saving.
+    """
     # -----------------------------
     # Load config
     # -----------------------------
     config = read_config("config.yml")
-    exchange_name = config["exchange_name"]
-    symbols = config["symbols"]
-    start_date = config["start_date"]
-    end_date = config["end_date"]
+    exchange_name = config.get("exchange_name")
+    symbols = config.get("symbols", [])
+    start_date = config.get("start_date")
+    end_date = config.get("end_date")
 
     # -----------------------------
     # Validate exchange
     # -----------------------------
-    if exchange_name != "kraken":
+    if exchange_name.lower() != "kraken":
         logger.error("This script only supports Kraken exchange")
         return
 
     # -----------------------------
-    # Loop through symbols
+    # Loop through all symbols
     # -----------------------------
     for symbol in symbols:
-        # Kraken uses PF_ prefix for futures, and uppercase
+        # Kraken uses PF_ prefix for futures, and uppercase symbols
         kraken_symbol = f"PF_{symbol.upper()}USD"
 
         logger.info(f"Fetching data for {kraken_symbol} from {start_date} to {end_date}")
-        last_stored_date = get_last_date(table_name=f"{symbol}_1m", schema=SCHEMA, time_column="timestamp")
-        if last_stored_date:
-            # Start from the last timestamp in the database
-           last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
-           start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
-           logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
 
+        # Check last stored timestamp in DB
+        last_stored_date = get_last_date(
+            table_name=f"{symbol}_1m", 
+            schema=SCHEMA, 
+            time_column="timestamp"
+        )
+
+        if last_stored_date:
+            # If existing data exists, start fetching from last timestamp
+            last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
+            start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
+            logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
         else:
-            start_date = start_date
+            # No data exists; use configured start_date
             logger.info(f"No existing data found for {symbol}. Using start_date={start_date}")
             
+        # Initialize Kraken fetcher for this symbol
         fetcher = KrakenFuturesFetcher(symbol=kraken_symbol, interval="1m")
+
         try:
+            # Fetch OHLCV data
             df = fetcher.fetch(start_date=start_date, end_date=end_date)
+
+            # Clean the data: remove duplicates, sort by timestamp, etc.
             df = clean_df(df)
+
+            # Save to database
             save_df_to_db(
                 df=df,
                 table_name=symbol.lower(),
                 schema=SCHEMA,
                 time_column="timestamp",
-                is_timeseries= True)
+                is_timeseries=True
+            )
+
+            logger.info(f"Successfully saved data for {kraken_symbol}. Rows: {len(df)}")
 
         except Exception as e:
-            logger.exception(f"Failed to fetch {kraken_symbol}: {e}")
+            # Catch and log any exceptions
+            logger.exception(f"Failed to fetch or save {kraken_symbol}: {e}")
 
+
+# Entry point for script execution
 if __name__ == "__main__":
     main()

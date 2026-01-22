@@ -1,24 +1,40 @@
+# utils.py
+
 import os
 import pandas as pd
 from sqlalchemy import create_engine, text, inspect
 from TradeX.utils.common.logs import get_logger
 from dotenv import load_dotenv
 
-
+# ---------------------------
+# Initialize logger
+# ---------------------------
 logger = get_logger("utils")
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
+
+# Load environment variables
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
 load_dotenv(dotenv_path)
-# =====================================================
+
+# ---------------------------
 # Globals
-# =====================================================
+# ---------------------------
 _ENGINE = None
 USER_SCHEMA: str | None = None
 
 
 # =====================================================
-# Engine
+# Database Engine
 # =====================================================
 def get_engine(db_url: str | None = None):
+    """
+    Create and return a singleton SQLAlchemy engine.
+
+    Args:
+        db_url (str | None): Optional database URL; defaults to DATABASE_URL in .env.
+
+    Returns:
+        sqlalchemy.Engine: Engine object for DB operations.
+    """
     global _ENGINE
 
     if _ENGINE:
@@ -37,6 +53,15 @@ def get_engine(db_url: str | None = None):
 # Schema Utilities
 # =====================================================
 def ensure_schema(schema: str | None) -> str:
+    """
+    Ensure a schema is defined. If not, prompt the user.
+
+    Args:
+        schema (str | None): Optional schema name.
+
+    Returns:
+        str: Valid schema name.
+    """
     global USER_SCHEMA
 
     if schema:
@@ -55,6 +80,12 @@ def ensure_schema(schema: str | None) -> str:
 
 
 def create_schema(schema: str | None = None):
+    """
+    Create a database schema if it does not exist.
+
+    Args:
+        schema (str | None): Optional schema name.
+    """
     engine = get_engine()
     schema = ensure_schema(schema)
 
@@ -65,13 +96,16 @@ def create_schema(schema: str | None = None):
 
 
 def drop_schema(schema: str | None = None):
+    """
+    Drop a database schema after user confirmation.
+
+    Args:
+        schema (str | None): Optional schema name.
+    """
     engine = get_engine()
     schema = ensure_schema(schema)
 
-    confirm = input(
-        f"⚠️ DROP schema '{schema}' and ALL objects? Type 'yes' to continue: "
-    ).lower()
-
+    confirm = input(f"⚠️ DROP schema '{schema}' and ALL objects? Type 'yes' to continue: ").lower()
     if confirm != "yes":
         logger.warning("Schema drop cancelled")
         return
@@ -83,16 +117,17 @@ def drop_schema(schema: str | None = None):
 
 
 # =====================================================
-# Table Repair Helpers (CRITICAL)
+# Table Repair Helpers
 # =====================================================
-def ensure_unique_index(
-    table_name: str,
-    schema: str,
-    time_column: str
-):
+def ensure_unique_index(table_name: str, schema: str, time_column: str):
     """
-    Ensures a UNIQUE INDEX exists.
-    Works even for OLD tables and hypertables.
+    Ensure a UNIQUE index exists on a table for the time column.
+    Handles older tables or hypertables safely.
+
+    Args:
+        table_name (str): Table name.
+        schema (str): Schema name.
+        time_column (str): Timestamp column name.
     """
     engine = get_engine()
     index_name = f"{table_name}_{time_column}_uidx"
@@ -106,11 +141,15 @@ def ensure_unique_index(
     logger.info(f"Unique index ensured: {index_name}")
 
 
-def ensure_hypertable(
-    table_name: str,
-    schema: str,
-    time_column: str
-):
+def ensure_hypertable(table_name: str, schema: str, time_column: str):
+    """
+    Convert a table to a TimescaleDB hypertable if not already.
+
+    Args:
+        table_name (str): Table name.
+        schema (str): Schema name.
+        time_column (str): Timestamp column name.
+    """
     engine = get_engine()
     with engine.begin() as conn:
         conn.execute(text(f"""
@@ -126,11 +165,18 @@ def ensure_hypertable(
 # =====================================================
 # Core DB Operations
 # =====================================================
-def get_last_date(
-    table_name: str,
-    schema: str,
-    time_column: str
-) -> int | None:
+def get_last_date(table_name: str, schema: str, time_column: str) -> int | None:
+    """
+    Get the last timestamp in a table.
+
+    Args:
+        table_name (str): Table name.
+        schema (str): Schema name.
+        time_column (str): Timestamp column name.
+
+    Returns:
+        int | None: Last timestamp (ms) or None if table doesn't exist.
+    """
     engine = get_engine()
     inspector = inspect(engine)
     if not inspector.has_table(table_name, schema=schema):
@@ -148,6 +194,24 @@ def save_df_to_db(
     time_column: str = "timestamp",
     is_timeseries: bool = True
 ):
+    """
+    Save a DataFrame to the database safely.
+
+    Steps:
+        1. Deduplicate batch.
+        2. Create table if missing.
+        3. Ensure unique index.
+        4. Convert to hypertable if needed.
+        5. Filter already ingested rows.
+        6. Insert remaining rows safely.
+
+    Args:
+        df (pd.DataFrame): DataFrame to insert.
+        table_name (str): Table name.
+        schema (str | None): Schema name.
+        time_column (str): Timestamp column name.
+        is_timeseries (bool): Convert table to Timescale hypertable if True.
+    """
     if df.empty:
         logger.warning("Empty DataFrame, skipping insert")
         return
@@ -158,34 +222,18 @@ def save_df_to_db(
 
     table = f"{table_name}_1m"
 
-    # -------------------------------------------------
-    # 1. Deduplicate incoming batch
-    # -------------------------------------------------
+    # 1. Deduplicate
     df = df.drop_duplicates(subset=[time_column])
 
-    # -------------------------------------------------
     # 2. Create table if missing
-    # -------------------------------------------------
-    df.head(0).to_sql(
-        table,
-        engine,
-        schema=schema,
-        if_exists="append",
-        index=False
-    )
+    df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
 
-    # -------------------------------------------------
-    # 3. SELF-HEAL table (this fixes Binance issue)
-    # -------------------------------------------------
+    # 3. Self-heal
     ensure_unique_index(table, schema, time_column)
-
     if is_timeseries:
         ensure_hypertable(table, schema, time_column)
-        
 
-    # -------------------------------------------------
     # 4. Filter already ingested rows
-    # -------------------------------------------------
     last_ts = get_last_date(table, schema, time_column)
     if last_ts:
         df = df[df[time_column] > last_ts]
@@ -194,12 +242,9 @@ def save_df_to_db(
         logger.info("No new rows to insert")
         return
 
-    # -------------------------------------------------
-    # 5. Safe insert (NOW guaranteed to work)
-    # -------------------------------------------------
+    # 5. Safe insert with ON CONFLICT DO NOTHING
     cols = ",".join(df.columns)
     placeholders = ",".join([f":{c}" for c in df.columns])
-
     insert_sql = text(f"""
         INSERT INTO {schema}.{table} ({cols})
         VALUES ({placeholders})
@@ -215,14 +260,17 @@ def save_df_to_db(
 # =====================================================
 # Read Helpers
 # =====================================================
-def read_df_from_db(
-    table_name: str,
-    schema: str | None = None,
-    limit: int | None = None
-) -> pd.DataFrame:
+def read_df_from_db(table_name: str, schema: str | None = None, limit: int | None = None) -> pd.DataFrame:
     """
-    Read data from the database table.
-    Prints last 5 rows in the console.
+    Read data from a table and log last 5 rows.
+
+    Args:
+        table_name (str): Table name.
+        schema (str | None): Schema name.
+        limit (int | None): Limit number of rows to fetch.
+
+    Returns:
+        pd.DataFrame: Retrieved rows.
     """
     engine = get_engine()
     schema = ensure_schema(schema)
@@ -234,21 +282,26 @@ def read_df_from_db(
 
     df = pd.read_sql_query(query, engine)
 
-    # Print last 5 rows
     if not df.empty:
         logger.info(f"\nLast 5 rows from {schema}.{table}:\n")
         logger.info(df.tail(5))
     else:
-        print(f"No data found in {schema}.{table}")
+        logger.info(f"No data found in {schema}.{table}")
 
     return df
-
 
 
 # =====================================================
 # Drop Helpers
 # =====================================================
 def drop_table(table_name: str, schema: str | None = None):
+    """
+    Drop a table after user confirmation.
+
+    Args:
+        table_name (str): Table name.
+        schema (str | None): Schema name.
+    """
     engine = get_engine()
     schema = ensure_schema(schema)
     table = f"{table_name}_1m"
