@@ -46,3 +46,5 @@ print(f"Total symbols available: {len(all_symbols)}")
 # Print first 20 symbols with details
 for symbol in all_symbols[:20]:
     print(symbol.name, symbol.description, symbol.path)
+
+mt5.shutdown()
