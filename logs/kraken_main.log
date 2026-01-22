@@ -1813,3 +1813,277 @@ ValueError: unconverted data remains:  07:02:00
 13  1768522380000  72.32  72.32  72.30  72.32    3.84
 14  1768522440000  72.32  72.37  72.32  72.36   11.85
 2026-01-22 14:52:25,267 | INFO | kraken_main | Successfully saved data for PF_LTCUSD. Rows: 9226
+2026-01-22 15:16:12,686 | INFO | kraken_main | Fetching data for PF_XBTUSD from 2026-01-16 to now
+2026-01-22 15:16:12,712 | INFO | kraken_main | No existing data found for xbt. Using start_date=2026-01-16
+2026-01-22 15:16:51,942 | INFO | kraken_main | Fetching data for PF_XBTUSD from 2026-01-16 to now
+2026-01-22 15:16:51,966 | INFO | kraken_main | No existing data found for xbt. Using start_date=2026-01-16
+2026-01-22 15:20:20,472 | INFO | kraken_main | Fetching data for PF_XBTUSD from 2026-01-16 to now
+2026-01-22 15:20:20,944 | INFO | kraken_main | No existing data found for xbt. Using start_date=2026-01-16
+2026-01-22 15:20:20,944 | ERROR | kraken_main | Failed to fetch or save PF_XBTUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:20,955 | INFO | kraken_main | Fetching data for PF_ETHUSD from 2026-01-16 to now
+2026-01-22 15:20:20,958 | INFO | kraken_main | No existing data found for eth. Using start_date=2026-01-16
+2026-01-22 15:20:20,958 | ERROR | kraken_main | Failed to fetch or save PF_ETHUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:20,960 | INFO | kraken_main | Fetching data for PF_BNBUSD from 2026-01-16 to now
+2026-01-22 15:20:20,963 | INFO | kraken_main | No existing data found for bnb. Using start_date=2026-01-16
+2026-01-22 15:20:20,963 | ERROR | kraken_main | Failed to fetch or save PF_BNBUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:20,964 | INFO | kraken_main | Fetching data for PF_ADAUSD from 2026-01-16 to now
+2026-01-22 15:20:20,966 | INFO | kraken_main | No existing data found for ada. Using start_date=2026-01-16
+2026-01-22 15:20:20,967 | ERROR | kraken_main | Failed to fetch or save PF_ADAUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:21,006 | INFO | kraken_main | Fetching data for PF_XRPUSD from 2026-01-16 to now
+2026-01-22 15:20:21,010 | INFO | kraken_main | No existing data found for xrp. Using start_date=2026-01-16
+2026-01-22 15:20:21,011 | ERROR | kraken_main | Failed to fetch or save PF_XRPUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:21,013 | INFO | kraken_main | Fetching data for PF_DOGEUSD from 2026-01-16 to now
+2026-01-22 15:20:21,016 | INFO | kraken_main | No existing data found for doge. Using start_date=2026-01-16
+2026-01-22 15:20:21,016 | ERROR | kraken_main | Failed to fetch or save PF_DOGEUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:21,019 | INFO | kraken_main | Fetching data for PF_SOLUSD from 2026-01-16 to now
+2026-01-22 15:20:21,022 | INFO | kraken_main | No existing data found for sol. Using start_date=2026-01-16
+2026-01-22 15:20:21,023 | ERROR | kraken_main | Failed to fetch or save PF_SOLUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:21,024 | INFO | kraken_main | Fetching data for PF_DOTUSD from 2026-01-16 to now
+2026-01-22 15:20:21,026 | INFO | kraken_main | No existing data found for dot. Using start_date=2026-01-16
+2026-01-22 15:20:21,027 | ERROR | kraken_main | Failed to fetch or save PF_DOTUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:21,028 | INFO | kraken_main | Fetching data for PF_LINKUSD from 2026-01-16 to now
+2026-01-22 15:20:21,030 | INFO | kraken_main | No existing data found for link. Using start_date=2026-01-16
+2026-01-22 15:20:21,030 | ERROR | kraken_main | Failed to fetch or save PF_LINKUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:20:21,032 | INFO | kraken_main | Fetching data for PF_LTCUSD from 2026-01-16 to now
+2026-01-22 15:20:21,034 | INFO | kraken_main | No existing data found for ltc. Using start_date=2026-01-16
+2026-01-22 15:20:21,034 | ERROR | kraken_main | Failed to fetch or save PF_LTCUSD: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+Traceback (most recent call last):
+  File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\main.py", line 79, in main
+    df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
+         ^^^^^^^^^^^^^^^^^^
+AttributeError: 'KrakenFuturesFetcher' object has no attribute 'fetch_data'
+2026-01-22 15:21:00,117 | INFO | kraken_main | Fetching data for PF_XBTUSD from 2026-01-16 to now
+2026-01-22 15:21:00,326 | INFO | kraken_main | No existing data found for xbt. Using start_date=2026-01-16
+2026-01-22 15:21:09,675 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp          open          high           low         close  volume
+0   1768521600000  95608.263156  95617.540145  95571.818247  95579.082449     0.0
+1   1768521660000  95579.082449  95679.192980  95578.550177  95663.595338     0.0
+2   1768521720000  95663.595338  95679.819339  95636.515164  95662.357756     0.0
+3   1768521780000  95662.357756  95687.472244  95657.279305  95683.397198     0.0
+4   1768521840000  95683.397198  95685.063372  95669.064535  95669.993949     0.0
+5   1768521900000  95669.993949  95700.740999  95669.993949  95681.112288     0.0
+6   1768521960000  95681.112288  95745.977934  95681.112288  95707.722025     0.0
+7   1768522020000  95707.722025  95707.722025  95683.460301  95683.460301     0.0
+8   1768522080000  95683.460301  95700.153492  95667.793791  95681.828574     0.0
+9   1768522140000  95681.828574  95681.828574  95652.467185  95652.869303     0.0
+10  1768522200000  95652.869303  95656.317288  95644.582242  95648.846056     0.0
+11  1768522260000  95648.846056  95685.110920  95644.665713  95671.466612     0.0
+12  1768522320000  95671.466612  95672.379197  95652.879948  95670.749046     0.0
+13  1768522380000  95670.749046  95672.363845  95638.984934  95663.849202     0.0
+14  1768522440000  95663.849202  95675.880683  95661.073477  95670.952721     0.0
+2026-01-22 15:21:17,847 | INFO | kraken_main | Successfully saved data for PF_XBTUSD. Rows: 9255
+2026-01-22 15:21:17,848 | INFO | kraken_main | Fetching data for PF_ETHUSD from 2026-01-16 to now
+2026-01-22 15:21:17,852 | INFO | kraken_main | No existing data found for eth. Using start_date=2026-01-16
+2026-01-22 15:21:38,016 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp         open         high          low        close  volume
+0   1768521600000  3318.046474  3318.263779  3317.302775  3317.560648     0.0
+1   1768521660000  3317.560648  3321.025941  3317.560648  3320.589527     0.0
+2   1768521720000  3320.589527  3321.541452  3319.228062  3320.583680     0.0
+3   1768521780000  3320.583680  3322.188859  3320.109527  3322.188859     0.0
+4   1768521840000  3322.188859  3322.278228  3320.973939  3321.085112     0.0
+5   1768521900000  3321.085112  3323.407677  3321.048330  3321.714605     0.0
+6   1768521960000  3321.714605  3323.572206  3321.714605  3322.369136     0.0
+7   1768522020000  3322.369136  3322.369136  3320.271739  3320.757541     0.0
+8   1768522080000  3320.757541  3321.482547  3320.123706  3320.876226     0.0
+9   1768522140000  3320.876226  3321.265583  3319.481371  3319.609683     0.0
+10  1768522200000  3319.609683  3320.079875  3319.430933  3319.486728     0.0
+11  1768522260000  3319.486728  3320.466811  3319.271876  3319.821274     0.0
+12  1768522320000  3319.821274  3319.821274  3317.782209  3318.250132     0.0
+13  1768522380000  3318.250132  3318.250132  3316.035211  3316.897394     0.0
+14  1768522440000  3316.897394  3317.156379  3316.533854  3316.813264     0.0
+2026-01-22 15:21:45,753 | INFO | kraken_main | Successfully saved data for PF_ETHUSD. Rows: 9255
+2026-01-22 15:21:45,754 | INFO | kraken_main | Fetching data for PF_BNBUSD from 2026-01-16 to now
+2026-01-22 15:21:45,758 | INFO | kraken_main | No existing data found for bnb. Using start_date=2026-01-16
+2026-01-22 15:21:53,313 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp        open        high         low       close  volume
+0   1768521600000  931.300313  931.387329  931.007253  931.083569     0.0
+1   1768521660000  931.083569  931.598129  931.083569  931.374292     0.0
+2   1768521720000  931.374292  931.798029  931.236298  931.776369     0.0
+3   1768521780000  931.776369  931.830166  931.727131  931.802848     0.0
+4   1768521840000  931.802848  931.849289  931.719140  931.815657     0.0
+5   1768521900000  931.815657  932.103394  931.660710  931.725482     0.0
+6   1768521960000  931.725482  931.772270  931.330597  931.330597     0.0
+7   1768522020000  931.330597  931.413654  931.274026  931.319711     0.0
+8   1768522080000  931.319711  931.326932  931.043803  931.122633     0.0
+9   1768522140000  931.122633  931.140297  930.527451  930.557969     0.0
+10  1768522200000  930.557969  930.569832  929.871536  930.198355     0.0
+11  1768522260000  930.198355  930.324643  929.972113  929.981719     0.0
+12  1768522320000  929.981719  930.131252  929.830713  930.014159     0.0
+13  1768522380000  930.014159  930.243376  929.899533  930.216874     0.0
+14  1768522440000  930.216874  930.317287  930.153007  930.314623     0.0
+2026-01-22 15:22:00,506 | INFO | kraken_main | Successfully saved data for PF_BNBUSD. Rows: 9256
+2026-01-22 15:22:00,507 | INFO | kraken_main | Fetching data for PF_ADAUSD from 2026-01-16 to now
+2026-01-22 15:22:00,511 | INFO | kraken_main | No existing data found for ada. Using start_date=2026-01-16
+2026-01-22 15:22:08,183 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp      open      high       low     close  volume
+0   1768521600000  0.393520  0.393524  0.392958  0.392958     0.0
+1   1768521660000  0.392958  0.393225  0.392958  0.393116     0.0
+2   1768521720000  0.393116  0.393526  0.393074  0.393310     0.0
+3   1768521780000  0.393310  0.393476  0.393203  0.393476     0.0
+4   1768521840000  0.393476  0.393476  0.393115  0.393287     0.0
+5   1768521900000  0.393287  0.393686  0.393287  0.393494     0.0
+6   1768521960000  0.393494  0.393566  0.393184  0.393186     0.0
+7   1768522020000  0.393186  0.393236  0.393074  0.393088     0.0
+8   1768522080000  0.393088  0.393408  0.393005  0.393028     0.0
+9   1768522140000  0.393028  0.393125  0.392880  0.392880     0.0
+10  1768522200000  0.392880  0.393028  0.392797  0.392952     0.0
+11  1768522260000  0.392952  0.393054  0.392952  0.393007     0.0
+12  1768522320000  0.393007  0.393096  0.392903  0.393096     0.0
+13  1768522380000  0.393096  0.393206  0.393018  0.393188     0.0
+14  1768522440000  0.393188  0.393263  0.393180  0.393195     0.0
+2026-01-22 15:22:15,779 | INFO | kraken_main | Successfully saved data for PF_ADAUSD. Rows: 9256
+2026-01-22 15:22:15,779 | INFO | kraken_main | Fetching data for PF_XRPUSD from 2026-01-16 to now
+2026-01-22 15:22:15,784 | INFO | kraken_main | No existing data found for xrp. Using start_date=2026-01-16
+2026-01-22 15:22:38,403 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp      open      high       low     close  volume
+0   1768521600000  2.078731  2.078731  2.077196  2.077196     0.0
+1   1768521660000  2.077196  2.079025  2.077160  2.078631     0.0
+2   1768521720000  2.078631  2.079219  2.078333  2.079099     0.0
+3   1768521780000  2.079099  2.079686  2.079022  2.079420     0.0
+4   1768521840000  2.079420  2.079606  2.079243  2.079310     0.0
+5   1768521900000  2.079310  2.080589  2.079305  2.080559     0.0
+6   1768521960000  2.080559  2.081225  2.079627  2.079627     0.0
+7   1768522020000  2.079627  2.079763  2.078223  2.079763     0.0
+8   1768522080000  2.079763  2.080011  2.078799  2.078799     0.0
+9   1768522140000  2.078799  2.078799  2.077836  2.078102     0.0
+10  1768522200000  2.078102  2.078220  2.076762  2.077249     0.0
+11  1768522260000  2.077249  2.077249  2.076390  2.076743     0.0
+12  1768522320000  2.076743  2.077361  2.076488  2.077349     0.0
+13  1768522380000  2.077349  2.077349  2.076302  2.077032     0.0
+14  1768522440000  2.077032  2.077411  2.077003  2.077411     0.0
+2026-01-22 15:22:48,331 | INFO | kraken_main | Successfully saved data for PF_XRPUSD. Rows: 9256
+2026-01-22 15:22:48,331 | INFO | kraken_main | Fetching data for PF_DOGEUSD from 2026-01-16 to now
+2026-01-22 15:22:48,336 | INFO | kraken_main | No existing data found for doge. Using start_date=2026-01-16
+2026-01-22 15:22:59,536 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp      open      high       low     close  volume
+0   1768521600000  0.140018  0.140026  0.139880  0.139880     0.0
+1   1768521660000  0.139880  0.139991  0.139876  0.139948     0.0
+2   1768521720000  0.139948  0.140031  0.139944  0.139992     0.0
+3   1768521780000  0.139992  0.140060  0.139989  0.140036     0.0
+4   1768521840000  0.140036  0.140046  0.139999  0.140021     0.0
+5   1768521900000  0.140021  0.140122  0.140020  0.140068     0.0
+6   1768521960000  0.140068  0.140074  0.139966  0.139966     0.0
+7   1768522020000  0.139966  0.139966  0.139880  0.139894     0.0
+8   1768522080000  0.139894  0.139977  0.139878  0.139916     0.0
+9   1768522140000  0.139916  0.139921  0.139864  0.139889     0.0
+10  1768522200000  0.139889  0.139945  0.139882  0.139928     0.0
+11  1768522260000  0.139928  0.139928  0.139889  0.139891     0.0
+12  1768522320000  0.139891  0.139893  0.139852  0.139893     0.0
+13  1768522380000  0.139893  0.139893  0.139833  0.139833     0.0
+14  1768522440000  0.139833  0.139886  0.139833  0.139883     0.0
+2026-01-22 15:23:10,204 | INFO | kraken_main | Successfully saved data for PF_DOGEUSD. Rows: 9257
+2026-01-22 15:23:10,205 | INFO | kraken_main | Fetching data for PF_SOLUSD from 2026-01-16 to now
+2026-01-22 15:23:10,212 | INFO | kraken_main | No existing data found for sol. Using start_date=2026-01-16
+2026-01-22 15:23:20,324 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp        open        high         low       close  volume
+0   1768521600000  142.380467  142.392740  142.217669  142.228721     0.0
+1   1768521660000  142.228721  142.382227  142.227597  142.349226     0.0
+2   1768521720000  142.349226  142.429640  142.333018  142.392126     0.0
+3   1768521780000  142.392126  142.454183  142.389276  142.435828     0.0
+4   1768521840000  142.435828  142.439284  142.393940  142.415202     0.0
+5   1768521900000  142.415202  142.482716  142.415202  142.434558     0.0
+6   1768521960000  142.434558  142.497263  142.425781  142.451989     0.0
+7   1768522020000  142.451989  142.451989  142.367933  142.370417     0.0
+8   1768522080000  142.370417  142.451997  142.349309  142.374287     0.0
+9   1768522140000  142.374287  142.399635  142.370362  142.372511     0.0
+10  1768522200000  142.372511  142.376524  142.342062  142.353005     0.0
+11  1768522260000  142.353005  142.425505  142.351717  142.404543     0.0
+12  1768522320000  142.404543  142.425219  142.369680  142.425205     0.0
+13  1768522380000  142.425205  142.426006  142.387309  142.387309     0.0
+14  1768522440000  142.387309  142.400809  142.380868  142.387162     0.0
+2026-01-22 15:23:28,654 | INFO | kraken_main | Successfully saved data for PF_SOLUSD. Rows: 9257
+2026-01-22 15:23:28,655 | INFO | kraken_main | Fetching data for PF_DOTUSD from 2026-01-16 to now
+2026-01-22 15:23:28,660 | INFO | kraken_main | No existing data found for dot. Using start_date=2026-01-16
+2026-01-22 15:23:34,656 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp      open      high       low     close  volume
+0   1768521600000  2.115927  2.115927  2.113568  2.114644     0.0
+1   1768521660000  2.114644  2.115368  2.114094  2.114371     0.0
+2   1768521720000  2.114371  2.116030  2.114134  2.115954     0.0
+3   1768521780000  2.115954  2.117113  2.115948  2.117064     0.0
+4   1768521840000  2.117064  2.117650  2.116358  2.116358     0.0
+5   1768521900000  2.116358  2.118026  2.116358  2.117104     0.0
+6   1768521960000  2.117104  2.117367  2.114386  2.114386     0.0
+7   1768522020000  2.114386  2.114458  2.112985  2.112985     0.0
+8   1768522080000  2.112985  2.113855  2.112038  2.112734     0.0
+9   1768522140000  2.112734  2.113389  2.112478  2.112593     0.0
+10  1768522200000  2.112593  2.114522  2.112493  2.114520     0.0
+11  1768522260000  2.114520  2.115744  2.114339  2.115445     0.0
+12  1768522320000  2.115445  2.115445  2.114173  2.114808     0.0
+13  1768522380000  2.114808  2.114891  2.114166  2.114625     0.0
+14  1768522440000  2.114625  2.116512  2.114625  2.116262     0.0
+2026-01-22 15:23:43,483 | INFO | kraken_main | Successfully saved data for PF_DOTUSD. Rows: 9257
+2026-01-22 15:23:43,484 | INFO | kraken_main | Fetching data for PF_LINKUSD from 2026-01-16 to now
+2026-01-22 15:23:43,488 | INFO | kraken_main | No existing data found for link. Using start_date=2026-01-16
+2026-01-22 15:23:55,021 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp       open       high        low      close  volume
+0   1768521600000  13.793088  13.793088  13.779544  13.780069     0.0
+1   1768521660000  13.780069  13.799828  13.779747  13.798470     0.0
+2   1768521720000  13.798470  13.808604  13.792239  13.803551     0.0
+3   1768521780000  13.803551  13.811230  13.802381  13.804219     0.0
+4   1768521840000  13.804219  13.806264  13.798776  13.799204     0.0
+5   1768521900000  13.799204  13.811103  13.799204  13.808109     0.0
+6   1768521960000  13.808109  13.810835  13.803998  13.803998     0.0
+7   1768522020000  13.803998  13.803998  13.797151  13.799258     0.0
+8   1768522080000  13.799258  13.799743  13.791396  13.791807     0.0
+9   1768522140000  13.791807  13.793626  13.781785  13.784367     0.0
+10  1768522200000  13.784367  13.785821  13.780062  13.780062     0.0
+11  1768522260000  13.780062  13.780062  13.776288  13.777208     0.0
+12  1768522320000  13.777208  13.788963  13.776389  13.788455     0.0
+13  1768522380000  13.788455  13.792733  13.784930  13.792654     0.0
+14  1768522440000  13.792654  13.800895  13.792458  13.800708     0.0
+2026-01-22 15:24:02,773 | INFO | kraken_main | Successfully saved data for PF_LINKUSD. Rows: 9258
+2026-01-22 15:24:02,774 | INFO | kraken_main | Fetching data for PF_LTCUSD from 2026-01-16 to now
+2026-01-22 15:24:02,777 | INFO | kraken_main | No existing data found for ltc. Using start_date=2026-01-16
+2026-01-22 15:24:11,804 | INFO | kraken_main | First 15 Rows of Cleaned Data:         timestamp       open       high        low      close  volume
+0   1768521600000  72.208324  72.324987  72.206936  72.316453     0.0
+1   1768521660000  72.316453  72.344259  72.313395  72.332733     0.0
+2   1768521720000  72.332733  72.337356  72.321571  72.329876     0.0
+3   1768521780000  72.329876  72.350900  72.324546  72.350900     0.0
+4   1768521840000  72.350900  72.355779  72.317027  72.327123     0.0
+5   1768521900000  72.327123  72.359308  72.327123  72.332261     0.0
+6   1768521960000  72.332261  72.340156  72.309162  72.313800     0.0
+7   1768522020000  72.313800  72.321213  72.275189  72.319423     0.0
+8   1768522080000  72.319423  72.386968  72.317589  72.339001     0.0
+9   1768522140000  72.339001  72.344015  72.325484  72.344015     0.0
+10  1768522200000  72.344015  72.364039  72.334363  72.360790     0.0
+11  1768522260000  72.360790  72.360790  72.289928  72.297445     0.0
+12  1768522320000  72.297445  72.307345  72.290081  72.295606     0.0
+13  1768522380000  72.295606  72.307197  72.272047  72.306632     0.0
+14  1768522440000  72.306632  72.370881  72.306632  72.364339     0.0
+2026-01-22 15:24:19,391 | INFO | kraken_main | Successfully saved data for PF_LTCUSD. Rows: 9258

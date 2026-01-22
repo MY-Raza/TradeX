@@ -46,7 +46,6 @@ def main():
     if exchange_name.lower() != "kraken":
         logger.error("This script only supports Kraken exchange")
         return
-    drop_schema(SCHEMA)
     # -----------------------------
     # Loop through all symbols
     # -----------------------------
