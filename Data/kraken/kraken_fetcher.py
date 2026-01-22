@@ -22,14 +22,27 @@ class KrakenFuturesFetcher:
     @staticmethod
     def to_unix(date_str: str, end: bool = False) -> int:
         """
-        Convert YYYY-MM-DD date string to UNIX timestamp (seconds).
-        Use end=True to set 23:59:59 for the day.
+        Convert date string to UNIX timestamp (seconds).
+
+        Supports:
+          - "YYYY-MM-DD"
+          - "YYYY-MM-DD HH:MM:SS"
+          - "now"
+
+        If end=True, sets to 23:59:59 if time is not provided.
         """
         if date_str.lower() == "now":
             return int(datetime.now(tz=timezone.utc).timestamp())
-        dt = datetime.strptime(date_str, "%Y-%m-%d")
-        if end:
-            dt = dt.replace(hour=23, minute=59, second=59)
+
+        # Try parsing full datetime first
+        try:
+            dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            # Fallback to date only
+            dt = datetime.strptime(date_str, "%Y-%m-%d")
+            if end:
+                dt = dt.replace(hour=23, minute=59, second=59)
+
         return int(dt.replace(tzinfo=timezone.utc).timestamp())
 
     def fetch_chunk(self, from_ts: int) -> dict:
@@ -88,12 +101,12 @@ class KrakenFuturesFetcher:
             df[col] = pd.to_numeric(df[col])
 
         # --------------------------
-        # FIX: Keep timestamp in milliseconds
+        # Keep timestamp in milliseconds
         # --------------------------
         df["timestamp"] = df["time"].astype(int)  # milliseconds
         df = df[["timestamp", "open", "high", "low", "close", "volume"]]
 
-        # Optional: filter for end date (convert end_ts to ms)
+        # Filter for end date (convert end_ts to ms)
         df = df[df["timestamp"] <= end_ts * 1000]
 
         print(f"✅ Total rows fetched: {len(df)}")
