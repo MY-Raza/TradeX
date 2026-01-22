@@ -39,7 +39,7 @@ def main():
     symbols = config.get("symbols", [])
     start_date = config.get("start_date")
     end_date = config.get("end_date")
-
+    drop_schema(SCHEMA)
     # -----------------------------
     # Validate exchange
     # -----------------------------
