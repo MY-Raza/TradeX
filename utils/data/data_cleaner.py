@@ -108,7 +108,7 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     df = convert_ohlcv_to_float(df)
     df[["open", "high", "low", "close", "volume"]] = df[
         ["open", "high", "low", "close", "volume"]
-    ].fillna(method="ffill").fillna(method="bfill")
+    ].ffill().bfill()
 
     # ---------------------------
     # Restore timestamp column

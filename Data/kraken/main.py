@@ -77,7 +77,7 @@ def main():
 
         try:
             # Fetch OHLCV data
-            df = fetcher.fetch(start_date=start_date, end_date=end_date)
+            df = fetcher.fetch_data(start_date=start_date, end_date=end_date)
 
             # Clean the data: remove duplicates, sort by timestamp, etc.
             df = clean_df(df)

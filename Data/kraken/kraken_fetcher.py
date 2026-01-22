@@ -83,7 +83,7 @@ class KrakenFuturesFetcher:
         response.raise_for_status()
         return response.json()
 
-    def fetch(self, start_date: str, end_date: str = "now") -> pd.DataFrame:
+    def fetch_data(self, start_date: str, end_date: str = "now") -> pd.DataFrame:
         """
         Fetch all OHLCV data between start_date and end_date.
 
