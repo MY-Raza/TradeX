@@ -4,6 +4,9 @@ from TradeX.utils.common.config_loader import read_config
 from TradeX.data.mt5.metatrader5_fetcher import MetaTrader5FutureFetcher
 from dotenv import load_dotenv
 import os
+from TradeX.utils.data.data_cleaner import clean_df
+from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
+from TradeX.utils.db.utils import save_df_to_db
 
 # =========================================
 # MT5 CONNECTION DETAILS
@@ -34,6 +37,11 @@ utc_from = datetime.fromisoformat(start_date)
 utc_to = datetime.now() if end_date == "now" else datetime.fromisoformat(end_date)
 
 # =========================================
+# LOAD CONSTANTS
+# =========================================
+SCHEMA = EXCHANGE_SCHEMA_MAP["metatrader5"]
+
+# =========================================
 # CREATE FETCHER INSTANCE
 # =========================================
 fetcher = MetaTrader5FutureFetcher(raw_symbols, utc_from, utc_to, mt5.TIMEFRAME_M1)
@@ -42,11 +50,20 @@ fetcher = MetaTrader5FutureFetcher(raw_symbols, utc_from, utc_to, mt5.TIMEFRAME_
 # FETCH DATA
 # =========================================
 for symbol in raw_symbols:
+    print(f"Fetching {symbol}...")
     df = fetcher.fetch(symbol)
     if df is not None:
-        print(f"\nData for {symbol}:")
+        print(f"Raw Rows fetched: {len(df)}\n")
+
+        df = clean_df(df,"1m")
+        print(f"Cleaned Rows fetched: {len(df)}\n")
+
+        save_df_to_db(df=df,table_name=symbol.lower(),schema=SCHEMA,time_column="timestamp",is_timeseries=True)
+        print(f"\nData for {symbol} saved to DB\n")
         print(df.head())
         print(f"✅ Rows fetched: {len(df)}\n")
+    else:
+        print(f"⚠ No data returned for {symbol}\n")    
 
 # =========================================
 # SHUTDOWN MT5
