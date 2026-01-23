@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import os
 from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
-from TradeX.utils.db.utils import save_df_to_db, get_last_date, drop_schema
+from TradeX.utils.db.utils import save_df_to_db, get_last_date, drop_schema,read_df_from_db
 from TradeX.utils.common.logs import get_logger
 
 # =========================================
@@ -100,7 +100,6 @@ for symbol in raw_symbols:
         logger.info(df.tail(5))
     else:
         logger.warning(f"⚠ No data returned for {symbol}")
-
 # =========================================
 # SHUTDOWN MT5 CONNECTION
 # =========================================

@@ -2874,3 +2874,88 @@ First 15 rows from data_kraken.ltc_1m:
 2026-01-23 12:35:20,463 | INFO | utils | Schema 'data_metatrader5' ready
 2026-01-23 12:35:20,478 | INFO | utils | Unique index ensured: xlm_1m_timestamp_uidx
 2026-01-23 12:35:20,715 | INFO | utils | Inserted 18 rows into data_metatrader5.xlm_1m
+2026-01-23 12:40:59,416 | INFO | utils | Database engine initialized
+2026-01-23 12:41:00,697 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:00,745 | INFO | utils | Unique index ensured: ada_1m_timestamp_uidx
+2026-01-23 12:41:00,948 | INFO | utils | Inserted 5 rows into data_metatrader5.ada_1m
+2026-01-23 12:41:01,889 | INFO | utils | 
+First 5 rows from data_metatrader5.ada_1m:
+
+2026-01-23 12:41:01,889 | INFO | utils |        timestamp    open    high     low   close  volume
+0  1767985200000  0.3997  0.3999  0.3991  0.3992    35.0
+1  1767985260000  0.3992  0.3993  0.3986  0.3987    20.0
+2  1767985320000  0.3987  0.3990  0.3987  0.3988    20.0
+3  1767985380000  0.3988  0.3991  0.3986  0.3987    22.0
+4  1767985440000  0.3985  0.3987  0.3982  0.3985    12.0
+2026-01-23 12:41:02,799 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:02,816 | INFO | utils | Unique index ensured: avax_1m_timestamp_uidx
+2026-01-23 12:41:03,065 | INFO | utils | Inserted 5 rows into data_metatrader5.avax_1m
+2026-01-23 12:41:03,851 | INFO | utils | 
+First 5 rows from data_metatrader5.avax_1m:
+
+2026-01-23 12:41:03,867 | INFO | utils |        timestamp    open    high     low   close  volume
+0  1767985200000  14.125  14.145  14.125  14.135    16.0
+1  1767985260000  14.135  14.135  14.125  14.135     7.0
+2  1767985320000  14.135  14.135  14.125  14.135     3.0
+3  1767985380000  14.135  14.145  14.115  14.125     8.0
+4  1767985440000  14.125  14.125  14.115  14.125     5.0
+2026-01-23 12:41:04,755 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:04,767 | INFO | utils | Unique index ensured: bch_1m_timestamp_uidx
+2026-01-23 12:41:04,926 | INFO | utils | Inserted 5 rows into data_metatrader5.bch_1m
+2026-01-23 12:41:05,647 | INFO | utils | 
+First 5 rows from data_metatrader5.bch_1m:
+
+2026-01-23 12:41:05,647 | INFO | utils |        timestamp    open    high     low   close  volume
+0  1767985200000  635.11  635.11  634.80  634.80     9.0
+1  1767985260000  634.80  635.00  634.49  634.49    13.0
+2  1767985320000  634.54  634.71  634.51  634.51    11.0
+3  1767985380000  634.61  634.71  634.21  634.32    12.0
+4  1767985440000  634.31  634.67  634.22  634.66    12.0
+2026-01-23 12:41:06,628 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:06,644 | INFO | utils | Unique index ensured: bnb_1m_timestamp_uidx
+2026-01-23 12:41:06,856 | INFO | utils | Inserted 5 rows into data_metatrader5.bnb_1m
+2026-01-23 12:41:07,626 | INFO | utils | 
+First 5 rows from data_metatrader5.bnb_1m:
+
+2026-01-23 12:41:07,627 | INFO | utils |        timestamp    open    high     low   close  volume
+0  1767985200000  897.65  898.25  897.65  897.85    14.0
+1  1767985260000  897.95  897.95  897.35  897.35    15.0
+2  1767985320000  897.45  898.15  897.45  897.75    17.0
+3  1767985380000  897.85  898.15  897.65  897.65     9.0
+4  1767985440000  897.75  897.85  897.45  897.75     8.0
+2026-01-23 12:41:08,557 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:08,570 | INFO | utils | Unique index ensured: btc_1m_timestamp_uidx
+2026-01-23 12:41:08,756 | INFO | utils | Inserted 5 rows into data_metatrader5.btc_1m
+2026-01-23 12:41:09,443 | INFO | utils | 
+First 5 rows from data_metatrader5.btc_1m:
+
+2026-01-23 12:41:09,458 | INFO | utils |        timestamp     open     high      low    close  volume
+0  1767985200000  91559.0  91582.0  91472.0  91481.0   190.0
+1  1767985260000  91489.0  91530.0  91434.0  91463.0   171.0
+2  1767985320000  91463.0  91538.0  91409.0  91507.0   161.0
+3  1767985380000  91511.0  91578.0  91478.0  91507.0   159.0
+4  1767985440000  91514.0  91549.0  91478.0  91530.0   151.0
+2026-01-23 12:41:10,614 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:10,627 | INFO | utils | Unique index ensured: doge_1m_timestamp_uidx
+2026-01-23 12:41:10,817 | INFO | utils | Inserted 5 rows into data_metatrader5.doge_1m
+2026-01-23 12:41:11,558 | INFO | utils | 
+First 5 rows from data_metatrader5.doge_1m:
+
+2026-01-23 12:41:11,558 | INFO | utils |        timestamp     open     high      low    close  volume
+0  1767985200000  0.14331  0.14339  0.14313  0.14315    29.0
+1  1767985260000  0.14315  0.14317  0.14291  0.14293    29.0
+2  1767985320000  0.14293  0.14307  0.14293  0.14301    27.0
+3  1767985380000  0.14301  0.14313  0.14291  0.14295    25.0
+4  1767985440000  0.14295  0.14299  0.14283  0.14297    26.0
+2026-01-23 12:41:12,589 | INFO | utils | Schema 'data_metatrader5' ready
+2026-01-23 12:41:12,602 | INFO | utils | Unique index ensured: dot_1m_timestamp_uidx
+2026-01-23 12:41:13,141 | INFO | utils | Inserted 5 rows into data_metatrader5.dot_1m
+2026-01-23 12:41:14,652 | INFO | utils | 
+First 5 rows from data_metatrader5.dot_1m:
+
+2026-01-23 12:41:14,652 | INFO | utils |        timestamp   open   high    low  close  volume
+0  1767985200000  2.103  2.105  2.102  2.103    17.0
+1  1767985260000  2.102  2.103  2.100  2.101    12.0
+2  1767985320000  2.101  2.103  2.101  2.102    10.0
+3  1767985380000  2.102  2.104  2.100  2.101    14.0
+4  1767985440000  2.100  2.100  2.099  2.100     3.0
