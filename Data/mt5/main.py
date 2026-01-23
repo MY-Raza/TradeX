@@ -2,17 +2,38 @@ import MetaTrader5 as mt5
 from datetime import datetime
 from TradeX.utils.common.config_loader import read_config
 from TradeX.data.mt5.metatrader5_fetcher import MetaTrader5FutureFetcher
-from dotenv import load_dotenv
-import os
+
 
 # =========================================
-# Load Environment Variables
+# MT5 CONNECTION DETAILS
 # =========================================
-load_dotenv()  # reads .env
+LOGIN = 261947
+PASSWORD = "784iOm&y9B"
+SERVER = "FusionMarkets-Demo"
+TIMEFRAME = mt5.TIMEFRAME_M1  # 1-minute candles
 
-MT5_LOGIN = int(os.getenv("MT5_LOGIN"))
-MT5_PASSWORD = os.getenv("MT5_PASSWORD")
-MT5_SERVER = os.getenv("MT5_SERVER")
+# =========================================
+# SYMBOL SUFFIX RULES
+# =========================================
+SPECIAL_SUFFIX = {
+    "neth": "25"
+}
+
+def resolve_mt5_symbol(symbol: str) -> str:
+    """
+    Converts config symbol to MT5 symbol.
+    """
+    symbol = symbol.lower()
+    if symbol in SPECIAL_SUFFIX:
+        return f"{symbol.upper()}{SPECIAL_SUFFIX[symbol]}"
+    return f"{symbol.upper()}USD"
+
+# =========================================
+# INITIALIZE MT5
+# =========================================
+if not mt5.initialize(login=LOGIN, password=PASSWORD, server=SERVER):
+    raise RuntimeError(f"❌ MT5 init failed: {mt5.last_error()}")
+print("✅ MT5 initialized")
 
 # =========================================
 # LOAD CONFIG
@@ -25,30 +46,46 @@ end_date = config["end_date"]
 utc_from = datetime.fromisoformat(start_date)
 utc_to = datetime.now() if end_date == "now" else datetime.fromisoformat(end_date)
 
-# -------------------------------
-# Create MT5 fetcher instance
-# -------------------------------
+# =========================================
+# RESOLVE SYMBOLS
+# =========================================
+resolved_symbols = []
+print("\n📌 Resolving symbols:")
+
+for s in raw_symbols:
+    mt5_sym = resolve_mt5_symbol(s)
+    if mt5.symbol_info(mt5_sym):
+        mt5.symbol_select(mt5_sym, True)
+        resolved_symbols.append(mt5_sym)
+        print(f"  ✔ {s} -> {mt5_sym}")
+    else:
+        print(f"  ⚠ {s} -> {mt5_sym} (NOT FOUND)")
+
+if not resolved_symbols:
+    raise RuntimeError("❌ No valid symbols found on MT5")
+
+# =========================================
+# CREATE FETCHER INSTANCE
+# =========================================
 fetcher = MetaTrader5FutureFetcher(
-    login=MT5_LOGIN,
-    password=MT5_PASSWORD,
-    server=MT5_SERVER,
-    symbols=raw_symbols,
+    symbols=resolved_symbols,
     utc_from=utc_from,
     utc_to=utc_to,
-    timeframe=None
+    timeframe=TIMEFRAME
 )
 
-# -------------------------------
-# Fetch data for all symbols
-# -------------------------------
-for symbol in raw_symbols:
+# =========================================
+# FETCH DATA
+# =========================================
+for symbol in resolved_symbols:
     df = fetcher.fetch(symbol)
     if df is not None:
         print(f"\nData for {symbol}:")
         print(df.head())
         print(f"✅ Rows fetched: {len(df)}\n")
 
-# -------------------------------
-# Shutdown MT5
-# -------------------------------
-fetcher.shutdown()
+# =========================================
+# SHUTDOWN MT5
+# =========================================
+mt5.shutdown()
+print("🔌 MT5 shutdown complete")
