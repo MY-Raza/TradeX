@@ -97,7 +97,7 @@ for symbol in raw_symbols:
         )
 
         logger.info(f"Data for {symbol} saved to DB successfully")
-        logger.info(df.head())
+        logger.info(df.tail(5))
     else:
         logger.warning(f"⚠ No data returned for {symbol}")
 
