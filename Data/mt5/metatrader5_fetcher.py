@@ -1,6 +1,9 @@
 import MetaTrader5 as mt5
 import pandas as pd
 from datetime import timedelta, datetime
+from TradeX.utils.common.logs import get_logger
+
+logger = get_logger("metatrader5_fetcher")
 
 class MetaTrader5FutureFetcher:
     SPECIAL_SUFFIX = {
@@ -25,11 +28,11 @@ class MetaTrader5FutureFetcher:
         for sym in self.symbols:
             info = mt5.symbol_info(sym)
             if info is None:
-                print(f"⚠ Symbol not found: {sym}")
+                logger.warning(f"⚠ Symbol not found: {sym}")
             elif mt5.symbol_select(sym, True):
-                print(f"✔ Enabled symbol: {sym}")
+                logger.info(f"✔ Enabled symbol: {sym}")
             else:
-                print(f"❌ Failed to enable symbol: {sym}")
+                logger.error(f"❌ Failed to enable symbol: {sym}")
 
     def resolve_symbol(self, symbol: str) -> str:
         """
@@ -51,12 +54,12 @@ class MetaTrader5FutureFetcher:
         # Check symbol info
         info = mt5.symbol_info(mt5_symbol)
         if info is None:
-            print(f"❌ Symbol {mt5_symbol} not found on MT5 server")
+            logger.error(f"❌ Symbol {mt5_symbol} not found on MT5 server")
             return None
 
         # Enable symbol
         if not mt5.symbol_select(mt5_symbol, True):
-            print(f"❌ Failed to enable symbol {mt5_symbol}")
+            logger.error(f"❌ Failed to enable symbol {mt5_symbol}")
             return None
 
         dfs = []
@@ -68,7 +71,7 @@ class MetaTrader5FutureFetcher:
             try:
                 rates = mt5.copy_rates_range(mt5_symbol, self.timeframe, current_from, current_to)
             except Exception as e:
-                print(f"❌ Error fetching {mt5_symbol} from {current_from} to {current_to}: {e}")
+                logger.error(f"❌ Error fetching {mt5_symbol} from {current_from} to {current_to}: {e}")
                 current_from = current_to
                 continue
 
@@ -81,7 +84,7 @@ class MetaTrader5FutureFetcher:
                 df_chunk = df_chunk[["timestamp", "open", "high", "low", "close", "volume"]]
                 dfs.append(df_chunk)
             else:
-                print(f"⚠ No data for {mt5_symbol} from {current_from} to {current_to}")
+                logger.warning(f"⚠ No data for {mt5_symbol} from {current_from} to {current_to}")
 
             current_from = current_to
 
