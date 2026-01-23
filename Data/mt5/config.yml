@@ -3,30 +3,25 @@ exchange_name: 'fusionmarkets_mt5'
 
 # List of trading pairs (symbols) to fetch
 symbols:
-  - AUDCAD
-  - AUDCHF
-  - AUDJPY
-  - AUDNZD
-  - AUDUSD
-  - CADCHF
-  - CADJPY
-  - CHFJPY
-  - EURAUD
-  - EURCAD
-  - EURCHF
-  - EURGBP
-  - EURJPY
-  - EURNZD
-  - EURUSD
-  - GBPAUD
-  - GBPCAD
-  - GBPCHF
-  - GBPJPY
-  - GBPNZD
+  - ada
+  - ava
+  - bch
+  - bnb
+  - btc
+  - doge
+  - dot
+  - eos
+  - eth
+  - lnk
+  - ltc
+  - matic
+  - neth
+  - sol
+  - xlm
 
 # Start date of the historical data to fetch
 # Format: 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS'
-start_date: '2026-01-16'
+start_date: '2026-01-10'
 
 # End date of the historical data to fetch
 # Use 'now' if to fetch until the current time
