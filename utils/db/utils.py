@@ -315,3 +315,28 @@ def drop_table(table_name: str, schema: str | None = None):
         conn.execute(text(f"DROP TABLE IF EXISTS {schema}.{table} CASCADE"))
 
     logger.warning(f"Table {schema}.{table} dropped")
+
+def fetch_ohlcv_df(
+    table_name: str,
+    schema: str,
+    time_column: str = "timestamp",
+    limit: int | None = None,
+    unit: str = "ms"  # "ms" or "s"
+) -> pd.DataFrame:
+    """
+    Fetch OHLCV data and convert UNIX timestamp to datetime index.
+    """
+    df = read_df_from_db(table_name, schema, limit)
+
+    if df.empty:
+        return df
+
+    # Convert UNIX → datetime
+    df[time_column] = pd.to_datetime(df[time_column], unit=unit)
+
+    # Set datetime index (MANDATORY for resample)
+    df.set_index(time_column, inplace=True)
+    df.sort_index(inplace=True)
+
+    return df
+

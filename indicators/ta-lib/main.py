@@ -2,29 +2,39 @@
 import numpy as np
 from indicators import *
 from TradeX.utils.common.logs import get_logger
+from TradeX.utils.data.data_cleaner import resample_ohlcv
+from TradeX.utils.db.utils import fetch_ohlcv_df
+import pandas as pd
+from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 
 logger = get_logger("indicators_main")
 
-# ---------------------------
-# Generate random OHLCV data
-# ---------------------------
-np.random.seed(42)
-data_length = 100
+SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 
-# Open between 50 and 200
-open_ = np.random.uniform(50, 200, data_length).astype(np.float64)
-# High = open + random 0-5
-high = open_ + np.random.uniform(0, 5, data_length).astype(np.float64)
-# Low = open - random 0-5, but not below 50
-low = np.maximum(open_ - np.random.uniform(0, 5, data_length), 50).astype(np.float64)
-# Close between low and high
-close = np.random.uniform(low, high).astype(np.float64)
-# Volume between 1000 and 5000
-volume = np.random.uniform(1000, 5000, data_length).astype(np.float64)
-# Reference series for statistical indicators
-ref = np.random.uniform(50, 200, data_length).astype(np.float64)
-# Variable periods for MAVP
-periods = np.random.uniform(5, 30, data_length).astype(np.float64)
+# ---------------------------
+#  OHLCV data
+# ---------------------------
+df_1m = fetch_ohlcv_df(
+    table_name="btc",
+    schema=SCHEMA,
+    time_column="timestamp"
+)
+
+if df_1m.empty:
+    logger.error(f"No Data Fetched")
+    exit()
+
+else:
+    df_1h = resample_ohlcv(df_1m,interval="1h")
+    open_ = df_1h["open"].values
+    high = df_1h["high"].values
+    low = df_1h["low"].values
+    close = df_1h["close"].values
+    volume = df_1h["volume"].values
+    # Reference series for statistical indicators
+    ref = np.random.uniform(50, 200,len(df_1h)).astype(np.float64)
+    # Variable periods for MAVP
+    periods = np.random.uniform(5, 30,len(df_1h)).astype(np.float64)
 
 # ---------------------------
 # Moving Averages
