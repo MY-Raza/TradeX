@@ -319,3 +319,31 @@ def willr(high, low, close, period=14):
     close = np.asarray(close, dtype=np.float64)
     return talib.WILLR(high, low, close, timeperiod=period)
 
+def ad(high, low, close, volume):
+    """
+    Chaikin Accumulation/Distribution Line
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    volume = np.asarray(volume, dtype=np.float64)
+    return talib.AD(high, low, close, volume)
+
+def adosc(high, low, close, volume, fastperiod=3, slowperiod=10):
+    """
+    Chaikin A/D Oscillator
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    volume = np.asarray(volume, dtype=np.float64)
+    return talib.ADOSC(high, low, close, volume, fastperiod=fastperiod, slowperiod=slowperiod)
+
+def obv(close, volume):
+    """
+    On Balance Volume
+    """
+    close = np.asarray(close, dtype=np.float64)
+    volume = np.asarray(volume, dtype=np.float64)
+    return talib.OBV(close, volume)
+
