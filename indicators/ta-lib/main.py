@@ -130,3 +130,8 @@ print("WCLPRICE:", wclprice(high, low, close)[-5:])
 print("ATR:", atr(high, low, close)[-5:])
 print("NATR:", natr(high, low, close)[-5:])
 print("TRANGE:", trange(high, low, close)[-5:])
+
+# Example usage for a few patterns
+print("CDLDOJI:", candlestick_pattern(open_, high, low, close, "CDLDOJI")[-5:])
+print("CDLENGULFING:", candlestick_pattern(open_, high, low, close, "CDLENGULFING")[-5:])
+print("CDLMORNINGSTAR:", candlestick_pattern(open_, high, low, close, "CDLMORNINGSTAR")[-5:])

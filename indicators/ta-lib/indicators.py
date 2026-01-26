@@ -461,3 +461,43 @@ def trange(high, low, close):
     low = np.asarray(low, dtype=np.float64)
     close = np.asarray(close, dtype=np.float64)
     return talib.TRANGE(high, low, close)
+
+# ---------------------------
+# Candlestick Pattern Recognition
+# ---------------------------
+
+CDL_PATTERNS = [
+    "CDL2CROWS","CDL3BLACKCROWS","CDL3INSIDE","CDL3LINESTRIKE","CDL3OUTSIDE",
+    "CDL3STARSINSOUTH","CDL3WHITESOLDIERS","CDLABANDONEDBABY","CDLADVANCEBLOCK","CDLBELTHOLD",
+    "CDLBREAKAWAY","CDLCLOSINGMARUBOZU","CDLCONCEALBABYSWALL","CDLCOUNTERATTACK","CDLDARKCLOUDCOVER",
+    "CDLDOJI","CDLDOJISTAR","CDLDRAGONFLYDOJI","CDLENGULFING","CDLEVENINGDOJISTAR",
+    "CDLEVENINGSTAR","CDLGAPSIDESIDEWHITE","CDLGRAVESTONEDOJI","CDLHAMMER","CDLHANGINGMAN",
+    "CDLHARAMI","CDLHARAMICROSS","CDLHIGHWAVE","CDLHIKKAKE","CDLHIKKAKEMOD",
+    "CDLHOMINGPIGEON","CDLIDENTICAL3CROWS","CDLINNECK","CDLINVERTEDHAMMER","CDLKICKING",
+    "CDLKICKINGBYLENGTH","CDLLADDERBOTTOM","CDLLONGLEGGEDDOJI","CDLLONGLINE","CDLMARUBOZU",
+    "CDLMATCHINGLOW","CDLMATHOLD","CDLMORNINGDOJISTAR","CDLMORNINGSTAR","CDLONNECK",
+    "CDLPIERCING","CDLRICKSHAWMAN","CDLRISEFALL3METHODS","CDLSEPARATINGLINES","CDLSHOOTINGSTAR",
+    "CDLSHORTLINE","CDLSPINNINGTOP","CDLSTALLEDPATTERN","CDLSTICKSANDWICH","CDLTAKURI",
+    "CDLTASUKIGAP","CDLTHRUSTING","CDLTRISTAR","CDLUNIQUE3RIVER","CDLUPSIDEGAP2CROWS","CDLXSIDEGAP3METHODS"
+]
+
+def candlestick_pattern(open_, high, low, close, pattern_name):
+    """
+    Calculate any TA-Lib candlestick pattern by name.
+    
+    Parameters:
+        open_, high, low, close : array-like
+        pattern_name : str (must be in CDL_PATTERNS)
+    
+    Returns:
+        np.ndarray : pattern values (0=no pattern, ±100=pattern detected)
+    """
+    open_ = np.asarray(open_, dtype=np.float64)
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+
+    if pattern_name not in CDL_PATTERNS:
+        raise ValueError(f"{pattern_name} is not a valid TA-Lib candlestick pattern.")
+
+    return getattr(talib, pattern_name)(open_, high, low, close)
