@@ -347,3 +347,47 @@ def obv(close, volume):
     volume = np.asarray(volume, dtype=np.float64)
     return talib.OBV(close, volume)
 
+# ---------------------------
+# Hilbert Transform Indicators
+# ---------------------------
+def ht_dcperiod(close):
+    """
+    Hilbert Transform - Dominant Cycle Period
+    Returns the estimated dominant cycle period.
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.HT_DCPERIOD(close)
+
+def ht_dcphase(close):
+    """
+    Hilbert Transform - Dominant Cycle Phase
+    Returns the estimated dominant cycle phase.
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.HT_DCPHASE(close)
+
+def ht_phasor(close):
+    """
+    Hilbert Transform - Phasor Components
+    Returns InPhase and Quadrature components.
+    """
+    close = np.asarray(close, dtype=np.float64)
+    inphase, quadrature = talib.HT_PHASOR(close)
+    return inphase, quadrature
+
+def ht_sine(close):
+    """
+    Hilbert Transform - SineWave
+    Returns sine and leadsine components.
+    """
+    close = np.asarray(close, dtype=np.float64)
+    sine, leadsine = talib.HT_SINE(close)
+    return sine, leadsine
+
+def ht_trendmode(close):
+    """
+    Hilbert Transform - Trend vs Cycle Mode
+    Returns 0 for cycle, 1 for trend.
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.HT_TRENDMODE(close)
