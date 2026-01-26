@@ -1,74 +1,45 @@
-"""
-main.py
-
-Example usage of TA-Lib indicator wrappers.
-"""
-
+# main.py
 import numpy as np
-from indicators import call_indicator, indicator_help
+from indicators import *
 
-
-# ----------------------------
-# Generate random market data
-# ----------------------------
+# ---------------------------
+# Generate random price data
+# ---------------------------
 np.random.seed(42)
-length = 100
 
-open_ = np.random.random(length) * 100
-high = open_ + np.random.random(length) * 5
-low = open_ - np.random.random(length) * 5
-close = low + np.random.random(length) * (high - low)
-volume = np.random.randint(100, 1000, length)
+data_length = 100
 
+close = np.random.uniform(100, 200, data_length).astype(float)
+high = close + np.random.uniform(0, 5, data_length)
+low = close - np.random.uniform(0, 5, data_length)
 
-# ----------------------------
-# Example: RSI
-# ----------------------------
-rsi = call_indicator(
-    name="RSI",
-    close=close,
-    timeperiod=14
-)
+# Variable periods for MAVP
+periods = np.random.randint(5, 30, data_length)
 
-print("RSI values:")
-print(rsi)
+# ---------------------------
+# Call indicators
+# ---------------------------
+print("SMA:", sma(close)[-5:])
+print("EMA:", ema(close)[-5:])
+print("DEMA:", dema(close)[-5:])
+print("TEMA:", tema(close)[-5:])
+print("WMA:", wma(close)[-5:])
+print("KAMA:", kama(close)[-5:])
+print("HT Trendline:", ht_trendline(close)[-5:])
 
+upper, middle, lower = bbands(close)
+print("BBANDS Upper:", upper[-5:])
+print("BBANDS Middle:", middle[-5:])
+print("BBANDS Lower:", lower[-5:])
 
-# ----------------------------
-# Example: MACD
-# ----------------------------
-macd, macd_signal, macd_hist = call_indicator(
-    name="MACD",
-    close=close,
-    fastperiod=12,
-    slowperiod=26,
-    signalperiod=9
-)
+mama_val, fama_val = mama(close)
+print("MAMA:", mama_val[-5:])
+print("FAMA:", fama_val[-5:])
 
-print("\nMACD:")
-print(macd)
+print("MIDPOINT:", midpoint(close)[-5:])
+print("MIDPRICE:", midprice(high, low)[-5:])
 
+print("SAR:", sar(high, low)[-5:])
+print("SAREXT:", sarext(high, low)[-5:])
 
-# ----------------------------
-# Example: Bollinger Bands
-# ----------------------------
-upper, middle, lower = call_indicator(
-    name="BBANDS",
-    close=close,
-    timeperiod=20
-)
-
-print("\nBollinger Bands:")
-print("Upper:", upper)
-
-
-# ----------------------------
-# List all available indicators
-# ----------------------------
-print("\nTotal Indicators Available:", len(get_all_indicators()))
-
-
-# ----------------------------
-# Show indicator documentation
-# ----------------------------
-indicator_help("ADX")
+print("MAVP:", mavp(close, periods)[-5:])
