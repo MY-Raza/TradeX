@@ -20,6 +20,10 @@ df_1m = fetch_ohlcv_df(
     time_column="timestamp"
 )
 
+print("DEBUG df_1m columns:", df_1m.columns)
+print("DEBUG df_1m index:", df_1m.index)
+print(df_1m.head())
+
 if df_1m.empty:
     logger.error(f"No Data Fetched")
     exit()

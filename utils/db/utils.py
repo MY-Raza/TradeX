@@ -321,22 +321,21 @@ def fetch_ohlcv_df(
     schema: str,
     time_column: str = "timestamp",
     limit: int | None = None,
-    unit: str = "ms"  # "ms" or "s"
 ) -> pd.DataFrame:
     """
-    Fetch OHLCV data and convert UNIX timestamp to datetime index.
+    Fetch OHLCV data with UNIX timestamp column (int64).
     """
     df = read_df_from_db(table_name, schema, limit)
 
     if df.empty:
         return df
 
-    # Convert UNIX → datetime
-    df[time_column] = pd.to_datetime(df[time_column], unit=unit)
+    # Ensure correct dtype
+    df[time_column] = df[time_column].astype("int64")
 
-    # Set datetime index (MANDATORY for resample)
-    df.set_index(time_column, inplace=True)
-    df.sort_index(inplace=True)
+    # Sort but DO NOT set index
+    df = df.sort_values(time_column)
 
     return df
+
 
