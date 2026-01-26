@@ -1,67 +1,56 @@
 """
 indicators.py
 
-This module provides wrapper functions for all TA-Lib indicators.
-Each indicator is dynamically exposed with proper documentation.
-
-Author: Yasir Raza
+Dynamic TA-Lib indicator wrapper with automatic argument mapping.
 """
 
 import talib
-import numpy as np
 import inspect
 
-
-def get_all_indicators():
-    """
-    Returns a dictionary of all available TA-Lib indicators.
-
-    Returns
-    -------
-    dict
-        {indicator_name: function_reference}
-    """
-    return talib.get_functions()
+# Standard OHLCV ordering used by TA-Lib
+INPUT_ORDER = ["open", "high", "low", "close", "volume"]
 
 
 def call_indicator(name: str, **kwargs):
     """
-    Call any TA-Lib indicator dynamically by name.
+    Call any TA-Lib indicator using human-friendly keyword arguments.
 
     Parameters
     ----------
     name : str
-        Name of the TA-Lib indicator (e.g. 'RSI', 'MACD')
+        Indicator name (e.g. RSI, MACD, EMA)
     **kwargs
-        Inputs required by the indicator (e.g. close, high, low)
+        Indicator inputs (close, high, low, etc.)
 
     Returns
     -------
-    numpy.ndarray or tuple of numpy.ndarray
+    numpy.ndarray or tuple
         Indicator output
     """
     name = name.upper()
 
     if not hasattr(talib, name):
-        raise ValueError(f"Indicator '{name}' not found in TA-Lib.")
+        raise ValueError(f"Indicator '{name}' not found in TA-Lib")
 
-    indicator_func = getattr(talib, name)
-    return indicator_func(**kwargs)
+    func = getattr(talib, name)
+    spec = inspect.getfullargspec(func)
+
+    positional_args = []
+    keyword_args = {}
+
+    for arg in spec.args:
+        if arg in INPUT_ORDER and arg in kwargs:
+            positional_args.append(kwargs[arg])
+        elif arg in kwargs:
+            keyword_args[arg] = kwargs[arg]
+
+    return func(*positional_args, **keyword_args)
 
 
 def indicator_help(name: str):
     """
-    Print full documentation and required parameters of an indicator.
-
-    Parameters
-    ----------
-    name : str
-        Indicator name
+    Print indicator documentation.
     """
     name = name.upper()
     func = getattr(talib, name)
-
-    print("=" * 60)
-    print(f"Indicator: {name}")
-    print("=" * 60)
     print(inspect.getdoc(func))

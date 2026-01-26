@@ -5,7 +5,7 @@ Example usage of TA-Lib indicator wrappers.
 """
 
 import numpy as np
-from indicators import call_indicator, indicator_help, get_all_indicators
+from indicators import call_indicator, indicator_help
 
 
 # ----------------------------
