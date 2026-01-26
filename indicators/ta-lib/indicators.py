@@ -391,3 +391,73 @@ def ht_trendmode(close):
     """
     close = np.asarray(close, dtype=np.float64)
     return talib.HT_TRENDMODE(close)
+
+# ---------------------------
+# Price Transform Indicators
+# ---------------------------
+def avgprice(open_, high, low, close):
+    """
+    Average Price = (Open + High + Low + Close) / 4
+    """
+    open_ = np.asarray(open_, dtype=np.float64)
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.AVGPRICE(open_, high, low, close)
+
+def medprice(high, low):
+    """
+    Median Price = (High + Low) / 2
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    return talib.MEDPRICE(high, low)
+
+def typprice(high, low, close):
+    """
+    Typical Price = (High + Low + Close) / 3
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.TYPPRICE(high, low, close)
+
+def wclprice(high, low, close):
+    """
+    Weighted Close Price = (High + Low + 2*Close) / 4
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.WCLPRICE(high, low, close)
+
+# ---------------------------
+# Volatility Indicators
+# ---------------------------
+def atr(high, low, close, period=14):
+    """
+    Average True Range
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ATR(high, low, close, timeperiod=period)
+
+def natr(high, low, close, period=14):
+    """
+    Normalized Average True Range
+    NATR = ATR / Close * 100
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.NATR(high, low, close, timeperiod=period)
+
+def trange(high, low, close):
+    """
+    True Range
+    """
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.TRANGE(high, low, close)

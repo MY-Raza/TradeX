@@ -121,3 +121,12 @@ print("HT Phasor Quadrature:", quadrature[-5:])
 print("HT Sine:", sine[-5:])
 print("HT LeadSine:", leadsine[-5:])
 print("HT TrendMode:", ht_trendmode(close)[-5:])
+
+print("AVGPRICE:", avgprice(open_, high, low, close)[-5:])
+print("MEDPRICE:", medprice(high, low)[-5:])
+print("TYPPRICE:", typprice(high, low, close)[-5:])
+print("WCLPRICE:", wclprice(high, low, close)[-5:])
+
+print("ATR:", atr(high, low, close)[-5:])
+print("NATR:", natr(high, low, close)[-5:])
+print("TRANGE:", trange(high, low, close)[-5:])
