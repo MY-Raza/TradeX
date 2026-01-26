@@ -14,7 +14,7 @@ high = close + np.random.uniform(0, 5, data_length)
 low = close - np.random.uniform(0, 5, data_length)
 
 # Variable periods for MAVP
-periods = np.random.randint(5, 30, data_length)
+periods = np.random.uniform(5, 30, data_length).astype(np.float64)
 
 # ---------------------------
 # Call indicators

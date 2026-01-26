@@ -49,6 +49,8 @@ def mama(close, fastlimit=0.5, slowlimit=0.05):
     return mama, fama
 
 def mavp(close, periods, minperiod=2, maxperiod=30, ma_type=0):
+    close = np.asarray(close, dtype=np.float64)
+    periods = np.asarray(periods, dtype=np.float64)
     return talib.MAVP(
         close,
         periods,
@@ -85,7 +87,7 @@ def sar(high, low, acceleration=0.02, maximum=0.2):
 
 def sarext(
     high, low,
-    startvalue=0,
+    startvalue=-183,
     offsetonreverse=0,
     accelerationinitlong=0.02,
     accelerationlong=0.02,
@@ -105,3 +107,215 @@ def sarext(
         accelerationshort,
         accelerationmaxshort
     )
+
+# indicators.py (additional functions)
+import numpy as np
+import talib
+
+# ---------------------------
+# Directional Movement & ADX
+# ---------------------------
+def adx(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ADX(high, low, close, timeperiod=period)
+
+def adxr(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ADXR(high, low, close, timeperiod=period)
+
+def plus_di(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.PLUS_DI(high, low, close, timeperiod=period)
+
+def minus_di(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.MINUS_DI(high, low, close, timeperiod=period)
+
+def plus_dm(high, low, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    return talib.PLUS_DM(high, low, timeperiod=period)
+
+def minus_dm(high, low, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    return talib.MINUS_DM(high, low, timeperiod=period)
+
+def dx(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.DX(high, low, close, timeperiod=period)
+
+
+# ---------------------------
+# Price Oscillators
+# ---------------------------
+def apo(close, fastperiod=12, slowperiod=26, matype=0):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.APO(close, fastperiod=fastperiod, slowperiod=slowperiod, matype=matype)
+
+def ppo(close, fastperiod=12, slowperiod=26, matype=0):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.PPO(close, fastperiod=fastperiod, slowperiod=slowperiod, matype=matype)
+
+def macd(close, fastperiod=12, slowperiod=26, signalperiod=9):
+    close = np.asarray(close, dtype=np.float64)
+    macd_val, signal, hist = talib.MACD(close, fastperiod=fastperiod, slowperiod=slowperiod, signalperiod=signalperiod)
+    return macd_val, signal, hist
+
+def macdext(close, fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, signalperiod=9, signalmatype=0):
+    close = np.asarray(close, dtype=np.float64)
+    macd_val, signal, hist = talib.MACDEXT(
+        close,
+        fastperiod=fastperiod,
+        fastmatype=fastmatype,
+        slowperiod=slowperiod,
+        slowmatype=slowmatype,
+        signalperiod=signalperiod,
+        signalmatype=signalmatype
+    )
+    return macd_val, signal, hist
+
+def macdfix(close, signalperiod=9):
+    close = np.asarray(close, dtype=np.float64)
+    macd_val, signal, hist = talib.MACDFIX(close, signalperiod=signalperiod)
+    return macd_val, signal, hist
+
+
+# ---------------------------
+# Momentum Indicators
+# ---------------------------
+def cci(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.CCI(high, low, close, timeperiod=period)
+
+def mom(close, period=10):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.MOM(close, timeperiod=period)
+
+def roc(close, period=10):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ROC(close, timeperiod=period)
+
+def rocp(close, period=10):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ROCP(close, timeperiod=period)
+
+def rocr(close, period=10):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ROCR(close, timeperiod=period)
+
+def rocr100(close, period=10):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ROCR100(close, timeperiod=period)
+
+def trix(close, period=30):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.TRIX(close, timeperiod=period)
+
+def cmo(close, period=14):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.CMO(close, timeperiod=period)
+
+
+# ---------------------------
+# Volume / Money Flow
+# ---------------------------
+def mfi(high, low, close, volume, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    volume = np.asarray(volume, dtype=np.float64)
+    return talib.MFI(high, low, close, volume, timeperiod=period)
+
+def bop(open_, high, low, close):
+    open_ = np.asarray(open_, dtype=np.float64)
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.BOP(open_, high, low, close)
+
+
+# ---------------------------
+# Aroon Indicators
+# ---------------------------
+def aroon(high, low, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    aroon_up, aroon_down = talib.AROON(high, low, timeperiod=period)
+    return aroon_up, aroon_down
+
+def aroonosc(high, low, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    return talib.AROONOSC(high, low, timeperiod=period)
+
+
+# ---------------------------
+# Relative Strength & Stochastic
+# ---------------------------
+def rsi(close, period=14):
+    close = np.asarray(close, dtype=np.float64)
+    return talib.RSI(close, timeperiod=period)
+
+def stoch(high, low, close, fastk_period=14, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    slowk, slowd = talib.STOCH(high, low, close,
+                               fastk_period=fastk_period,
+                               slowk_period=slowk_period,
+                               slowk_matype=slowk_matype,
+                               slowd_period=slowd_period,
+                               slowd_matype=slowd_matype)
+    return slowk, slowd
+
+def stochf(high, low, close, fastk_period=14, fastd_period=3, fastd_matype=0):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    fastk, fastd = talib.STOCHF(high, low, close,
+                                fastk_period=fastk_period,
+                                fastd_period=fastd_period,
+                                fastd_matype=fastd_matype)
+    return fastk, fastd
+
+def stochrsi(close, timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=0):
+    close = np.asarray(close, dtype=np.float64)
+    fastk, fastd = talib.STOCHRSI(close,
+                                  timeperiod=timeperiod,
+                                  fastk_period=fastk_period,
+                                  fastd_period=fastd_period,
+                                  fastd_matype=fastd_matype)
+    return fastk, fastd
+
+
+# ---------------------------
+# Ultimate Oscillator & Williams %R
+# ---------------------------
+def ultosc(high, low, close, timeperiod1=7, timeperiod2=14, timeperiod3=28):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.ULTOSC(high, low, close,
+                        timeperiod1=timeperiod1,
+                        timeperiod2=timeperiod2,
+                        timeperiod3=timeperiod3)
+
+def willr(high, low, close, period=14):
+    high = np.asarray(high, dtype=np.float64)
+    low = np.asarray(low, dtype=np.float64)
+    close = np.asarray(close, dtype=np.float64)
+    return talib.WILLR(high, low, close, timeperiod=period)
+
