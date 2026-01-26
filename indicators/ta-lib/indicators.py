@@ -501,3 +501,71 @@ def candlestick_pattern(open_, high, low, close, pattern_name):
         raise ValueError(f"{pattern_name} is not a valid TA-Lib candlestick pattern.")
 
     return getattr(talib, pattern_name)(open_, high, low, close)
+
+# ---------------------------
+# Statistical / Regression Indicators
+# ---------------------------
+def beta(close, ref, period=5):
+    """
+    Beta: Measures correlation and volatility relative to another series (ref)
+    """
+    close = np.asarray(close, dtype=np.float64)
+    ref = np.asarray(ref, dtype=np.float64)
+    return talib.BETA(close, ref, timeperiod=period)
+
+def correl(close, ref, period=30):
+    """
+    Pearson's Correlation Coefficient (r)
+    """
+    close = np.asarray(close, dtype=np.float64)
+    ref = np.asarray(ref, dtype=np.float64)
+    return talib.CORREL(close, ref, timeperiod=period)
+
+def linearreg(close, period=14):
+    """
+    Linear Regression
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.LINEARREG(close, timeperiod=period)
+
+def linearreg_angle(close, period=14):
+    """
+    Linear Regression Angle
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.LINEARREG_ANGLE(close, timeperiod=period)
+
+def linearreg_intercept(close, period=14):
+    """
+    Linear Regression Intercept
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.LINEARREG_INTERCEPT(close, timeperiod=period)
+
+def linearreg_slope(close, period=14):
+    """
+    Linear Regression Slope
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.LINEARREG_SLOPE(close, timeperiod=period)
+
+def stddev(close, period=14):
+    """
+    Standard Deviation
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.STDDEV(close, timeperiod=period, nbdev=1)
+
+def tsf(close, period=14):
+    """
+    Time Series Forecast
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.TSF(close, timeperiod=period)
+
+def var(close, period=14):
+    """
+    Variance
+    """
+    close = np.asarray(close, dtype=np.float64)
+    return talib.VAR(close, timeperiod=period, nbdev=1)

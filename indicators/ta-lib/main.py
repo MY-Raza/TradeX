@@ -22,6 +22,8 @@ close = np.random.uniform(low, high).astype(np.float64)
 
 # Volume between 1000 and 5000
 volume = np.random.uniform(1000, 5000, data_length).astype(np.float64)
+
+ref = np.random.uniform(50, 200, data_length)
 # Variable periods for MAVP
 periods = np.random.uniform(5, 30, data_length).astype(np.float64)
 
@@ -135,3 +137,15 @@ print("TRANGE:", trange(high, low, close)[-5:])
 print("CDLDOJI:", candlestick_pattern(open_, high, low, close, "CDLDOJI")[-5:])
 print("CDLENGULFING:", candlestick_pattern(open_, high, low, close, "CDLENGULFING")[-5:])
 print("CDLMORNINGSTAR:", candlestick_pattern(open_, high, low, close, "CDLMORNINGSTAR")[-5:])
+
+# Assuming 'close' and 'ref' are numpy arrays of floats
+print("BETA:", beta(close, ref)[-5:])
+print("CORREL:", correl(close, ref)[-5:])
+print("LinearReg:", linearreg(close)[-5:])
+print("LinearReg Angle:", linearreg_angle(close)[-5:])
+print("LinearReg Intercept:", linearreg_intercept(close)[-5:])
+print("LinearReg Slope:", linearreg_slope(close)[-5:])
+print("STDDEV:", stddev(close)[-5:])
+print("TSF:", tsf(close)[-5:])
+print("VAR:", var(close)[-5:])
+
