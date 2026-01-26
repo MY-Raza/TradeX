@@ -105,19 +105,19 @@ class KrakenFuturesFetcher:
         current_from = start_ts
 
         while True:
-            print(f"Fetching candles from {datetime.utcfromtimestamp(current_from)}")
+            logger.info(f"Fetching candles from {datetime.utcfromtimestamp(current_from)}")
             raw = self.fetch_chunk(current_from)
             candles = raw.get("candles", [])
 
             if not candles:
-                print("No more candles returned.")
+                logger.info(f"No more candles returned.")
                 break
 
             all_candles.extend(candles)
 
             # Stop if API indicates no more candles
             if not raw.get("more_candles", False):
-                print("Reached last candle.")
+                logger.info(f"Reached last candle.")
                 break
 
             # Move to next timestamp (last candle + interval)
@@ -131,7 +131,7 @@ class KrakenFuturesFetcher:
         # Convert list of candles to DataFrame
         df = pd.DataFrame(all_candles)
         if df.empty:
-            print("⚠️ No data fetched.")
+            logger.info(f"⚠️ No data fetched.")
             return df
 
         # Ensure numeric columns
