@@ -1562,4 +1562,3 @@ def var(close, period=14):
     """
     close = np.asarray(close, dtype=np.float64)
     return talib.VAR(close, timeperiod=period, nbdev=1)
-
