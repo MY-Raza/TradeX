@@ -19,7 +19,7 @@ close = np.random.uniform(low, high).astype(np.float64)
 # Volume between 1000 and 5000
 volume = np.random.uniform(1000, 5000, data_length).astype(np.float64)
 # Reference series for statistical indicators
-ref = np.random.uniform(50, 200, data_length)
+ref = np.random.uniform(50, 200, data_length).astype(np.float64)
 # Variable periods for MAVP
 periods = np.random.uniform(5, 30, data_length).astype(np.float64)
 

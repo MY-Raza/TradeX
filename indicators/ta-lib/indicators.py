@@ -169,7 +169,6 @@ def ht_trendline(close):
     Returns:
         np.ndarray: Trendline values for each input period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.HT_TRENDLINE(close)
 
 
@@ -190,7 +189,6 @@ def mama(close, fastlimit=0.5, slowlimit=0.05):
             - mama: The adaptive moving average (faster-moving).
             - fama: Following adaptive moving average (slower-moving).
     """
-    close = np.asarray(close, dtype=np.float64)
     mama_val, fama_val = talib.MAMA(close, fastlimit=fastlimit, slowlimit=slowlimit)
     return mama_val, fama_val
 
@@ -212,8 +210,6 @@ def mavp(close, periods, minperiod=2, maxperiod=30, ma_type=0):
     Returns:
         np.ndarray: MAVP values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
-    periods = np.asarray(periods, dtype=np.float64)
     return talib.MAVP(
         close,
         periods,
@@ -246,7 +242,6 @@ def bbands(close, period=20, nbdevup=2, nbdevdn=2):
             - middle (np.ndarray): Middle Bollinger Band (SMA).
             - lower (np.ndarray): Lower Bollinger Band.
     """
-    close = np.asarray(close, dtype=np.float64)
     upper, middle, lower = talib.BBANDS(
         close,
         timeperiod=period,
@@ -269,7 +264,6 @@ def midpoint(close, period=14):
     Returns:
         np.ndarray: Midpoint values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.MIDPOINT(close, timeperiod=period)
 
 
@@ -288,8 +282,6 @@ def midprice(high, low, period=14):
     Returns:
         np.ndarray: Midprice values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.MIDPRICE(high, low, timeperiod=period)
 
 # =========================================================
@@ -312,8 +304,6 @@ def sar(high, low, acceleration=0.02, maximum=0.2):
     Returns:
         np.ndarray: SAR values for each period. Values below price indicate an uptrend, above price indicate a downtrend.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.SAR(high, low, acceleration=acceleration, maximum=maximum)
 
 
@@ -349,8 +339,6 @@ def sarext(
     Returns:
         np.ndarray: Extended SAR values for each period. Values below price indicate uptrend, above price indicate downtrend.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.SAREXT(
         high, low,
         startvalue,
@@ -383,9 +371,6 @@ def adx(high, low, close, period=14):
     Returns:
         np.ndarray: ADX values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.ADX(high, low, close, timeperiod=period)
 
 
@@ -405,9 +390,6 @@ def adxr(high, low, close, period=14):
     Returns:
         np.ndarray: ADXR values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.ADXR(high, low, close, timeperiod=period)
 
 
@@ -426,9 +408,6 @@ def plus_di(high, low, close, period=14):
     Returns:
         np.ndarray: +DI values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.PLUS_DI(high, low, close, timeperiod=period)
 
 
@@ -447,9 +426,6 @@ def minus_di(high, low, close, period=14):
     Returns:
         np.ndarray: -DI values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.MINUS_DI(high, low, close, timeperiod=period)
 
 
@@ -467,8 +443,6 @@ def plus_dm(high, low, period=14):
     Returns:
         np.ndarray: +DM values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.PLUS_DM(high, low, timeperiod=period)
 
 
@@ -486,8 +460,6 @@ def minus_dm(high, low, period=14):
     Returns:
         np.ndarray: -DM values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.MINUS_DM(high, low, timeperiod=period)
 
 
@@ -507,9 +479,6 @@ def dx(high, low, close, period=14):
     Returns:
         np.ndarray: DX values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.DX(high, low, close, timeperiod=period)
 
 # =========================================================
@@ -532,7 +501,6 @@ def apo(close, fastperiod=12, slowperiod=26, matype=0):
     Returns:
         np.ndarray: APO values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.APO(close, fastperiod=fastperiod, slowperiod=slowperiod, matype=matype)
 
 
@@ -552,7 +520,6 @@ def ppo(close, fastperiod=12, slowperiod=26, matype=0):
     Returns:
         np.ndarray: PPO values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.PPO(close, fastperiod=fastperiod, slowperiod=slowperiod, matype=matype)
 
 
@@ -576,7 +543,6 @@ def macd(close, fastperiod=12, slowperiod=26, signalperiod=9):
             - signal (np.ndarray): Signal line values.
             - hist (np.ndarray): Histogram values (MACD - Signal).
     """
-    close = np.asarray(close, dtype=np.float64)
     macd_val, signal, hist = talib.MACD(close, fastperiod=fastperiod, slowperiod=slowperiod, signalperiod=signalperiod)
     return macd_val, signal, hist
 
@@ -602,7 +568,6 @@ def macdext(close, fastperiod=12, fastmatype=0, slowperiod=26, slowmatype=0, sig
             - signal (np.ndarray): Signal line values.
             - hist (np.ndarray): Histogram values (MACD - Signal).
     """
-    close = np.asarray(close, dtype=np.float64)
     macd_val, signal, hist = talib.MACDEXT(
         close,
         fastperiod=fastperiod,
@@ -632,7 +597,6 @@ def macdfix(close, signalperiod=9):
             - signal (np.ndarray): Signal line values.
             - hist (np.ndarray): Histogram values (MACD - Signal).
     """
-    close = np.asarray(close, dtype=np.float64)
     macd_val, signal, hist = talib.MACDFIX(close, signalperiod=signalperiod)
     return macd_val, signal, hist
 
@@ -657,9 +621,6 @@ def cci(high, low, close, period=14):
     Returns:
         np.ndarray: CCI values for each period.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.CCI(high, low, close, timeperiod=period)
 
 
@@ -676,7 +637,6 @@ def mom(close, period=10):
     Returns:
         np.ndarray: Momentum values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.MOM(close, timeperiod=period)
 
 
@@ -693,7 +653,6 @@ def roc(close, period=10):
     Returns:
         np.ndarray: ROC values in percentage for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.ROC(close, timeperiod=period)
 
 
@@ -710,7 +669,6 @@ def rocp(close, period=10):
     Returns:
         np.ndarray: ROCP values as relative change for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.ROCP(close, timeperiod=period)
 
 
@@ -727,7 +685,6 @@ def rocr(close, period=10):
     Returns:
         np.ndarray: ROCR values (ratio) for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.ROCR(close, timeperiod=period)
 
 
@@ -744,7 +701,6 @@ def rocr100(close, period=10):
     Returns:
         np.ndarray: ROCR100 values in percentage for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.ROCR100(close, timeperiod=period)
 
 
@@ -762,7 +718,6 @@ def trix(close, period=30):
     Returns:
         np.ndarray: TRIX values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.TRIX(close, timeperiod=period)
 
 
@@ -780,7 +735,6 @@ def cmo(close, period=14):
     Returns:
         np.ndarray: CMO values for each period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.CMO(close, timeperiod=period)
 
 # =========================================================
@@ -804,10 +758,6 @@ def mfi(high, low, close, volume, period=14):
     Returns:
         np.ndarray: MFI values ranging between 0 and 100.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
-    volume = np.asarray(volume, dtype=np.float64)
     return talib.MFI(high, low, close, volume, timeperiod=period)
 
 
@@ -827,10 +777,6 @@ def bop(open_, high, low, close):
     Returns:
         np.ndarray: BOP values, where positive indicates bullish pressure and negative indicates bearish pressure.
     """
-    open_ = np.asarray(open_, dtype=np.float64)
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.BOP(open_, high, low, close)
 
 
@@ -857,8 +803,6 @@ def aroon(high, low, period=14):
             aroon_up (np.ndarray): Aroon Up values ranging from 0 to 100.
             aroon_down (np.ndarray): Aroon Down values ranging from 0 to 100.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     aroon_up, aroon_down = talib.AROON(high, low, timeperiod=period)
     return aroon_up, aroon_down
 
@@ -878,8 +822,6 @@ def aroonosc(high, low, period=14):
     Returns:
         np.ndarray: Aroon Oscillator values ranging from -100 to 100.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.AROONOSC(high, low, timeperiod=period)
 
 
@@ -901,7 +843,6 @@ def rsi(close, period=14):
         np.ndarray: RSI values ranging from 0 to 100.
                     Values above 70 generally indicate overbought, below 30 indicate oversold.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.RSI(close, timeperiod=period)
 
 
@@ -926,9 +867,6 @@ def stoch(high, low, close, fastk_period=14, slowk_period=3, slowk_matype=0, slo
             slowk (np.ndarray): Smoothed %K values.
             slowd (np.ndarray): Smoothed %D values.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     slowk, slowd = talib.STOCH(
         high, low, close,
         fastk_period=fastk_period,
@@ -959,9 +897,6 @@ def stochf(high, low, close, fastk_period=14, fastd_period=3, fastd_matype=0):
             fastk (np.ndarray): Fast %K values.
             fastd (np.ndarray): Fast %D values.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     fastk, fastd = talib.STOCHF(
         high, low, close,
         fastk_period=fastk_period,
@@ -989,7 +924,6 @@ def stochrsi(close, timeperiod=14, fastk_period=5, fastd_period=3, fastd_matype=
             fastk (np.ndarray): Fast %K values of StochRSI.
             fastd (np.ndarray): Smoothed %D values of StochRSI.
     """
-    close = np.asarray(close, dtype=np.float64)
     fastk, fastd = talib.STOCHRSI(
         close,
         timeperiod=timeperiod,
@@ -1021,9 +955,6 @@ def ultosc(high, low, close, timeperiod1=7, timeperiod2=14, timeperiod3=28):
         np.ndarray: Ultimate Oscillator values ranging typically between 0 and 100.
                     Values above 70 indicate overbought, below 30 indicate oversold.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.ULTOSC(
         high, low, close,
         timeperiod1=timeperiod1,
@@ -1048,9 +979,6 @@ def willr(high, low, close, period=14):
         np.ndarray: Williams %R values ranging from -100 to 0.
                     Values above -20 indicate overbought, below -80 indicate oversold.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.WILLR(high, low, close, timeperiod=period)
 
 
@@ -1069,10 +997,6 @@ def ad(high, low, close, volume):
     Returns:
         np.ndarray: Accumulation/Distribution values indicating buying or selling pressure.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
-    volume = np.asarray(volume, dtype=np.float64)
     return talib.AD(high, low, close, volume)
 
 
@@ -1094,10 +1018,6 @@ def adosc(high, low, close, volume, fastperiod=3, slowperiod=10):
         np.ndarray: Chaikin A/D Oscillator values.
                     Positive values indicate buying pressure, negative values indicate selling pressure.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
-    volume = np.asarray(volume, dtype=np.float64)
     return talib.ADOSC(high, low, close, volume, fastperiod=fastperiod, slowperiod=slowperiod)
 
 
@@ -1115,8 +1035,6 @@ def obv(close, volume):
         np.ndarray: OBV values indicating cumulative buying/selling pressure.
                     Rising OBV suggests buying pressure, falling OBV suggests selling pressure.
     """
-    close = np.asarray(close, dtype=np.float64)
-    volume = np.asarray(volume, dtype=np.float64)
     return talib.OBV(close, volume)
 
 # ---------------------------
@@ -1135,7 +1053,6 @@ def ht_dcperiod(close):
     Returns:
         np.ndarray: Array of estimated dominant cycle periods.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.HT_DCPERIOD(close)
 
 
@@ -1151,7 +1068,6 @@ def ht_dcphase(close):
     Returns:
         np.ndarray: Array of dominant cycle phase values in degrees (0-360).
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.HT_DCPHASE(close)
 
 
@@ -1169,7 +1085,6 @@ def ht_phasor(close):
             - inphase: In-phase component of the Hilbert Transform.
             - quadrature: Quadrature component of the Hilbert Transform.
     """
-    close = np.asarray(close, dtype=np.float64)
     inphase, quadrature = talib.HT_PHASOR(close)
     return inphase, quadrature
 
@@ -1188,7 +1103,6 @@ def ht_sine(close):
             - sine: Sinewave component.
             - leadsine: Leadsine component.
     """
-    close = np.asarray(close, dtype=np.float64)
     sine, leadsine = talib.HT_SINE(close)
     return sine, leadsine
 
@@ -1206,7 +1120,6 @@ def ht_trendmode(close):
         np.ndarray: 
             1 indicates trending mode, 0 indicates cyclic mode.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.HT_TRENDMODE(close)
 
 # ---------------------------
@@ -1229,10 +1142,6 @@ def avgprice(open_, high, low, close):
     Returns:
         np.ndarray: Array of average prices.
     """
-    open_ = np.asarray(open_, dtype=np.float64)
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.AVGPRICE(open_, high, low, close)
 
 
@@ -1250,8 +1159,6 @@ def medprice(high, low):
     Returns:
         np.ndarray: Array of median prices.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
     return talib.MEDPRICE(high, low)
 
 
@@ -1270,9 +1177,6 @@ def typprice(high, low, close):
     Returns:
         np.ndarray: Array of typical prices.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.TYPPRICE(high, low, close)
 
 
@@ -1291,9 +1195,6 @@ def wclprice(high, low, close):
     Returns:
         np.ndarray: Array of weighted close prices.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.WCLPRICE(high, low, close)
 
 # ---------------------------
@@ -1316,9 +1217,6 @@ def atr(high, low, close, period=14):
     Returns:
         np.ndarray: Array of ATR values.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.ATR(high, low, close, timeperiod=period)
 
 
@@ -1338,9 +1236,6 @@ def natr(high, low, close, period=14):
     Returns:
         np.ndarray: Array of NATR values (percentage).
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.NATR(high, low, close, timeperiod=period)
 
 
@@ -1359,9 +1254,6 @@ def trange(high, low, close):
     Returns:
         np.ndarray: Array of True Range values.
     """
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
     return talib.TRANGE(high, low, close)
 
 # ---------------------------
@@ -1410,10 +1302,6 @@ def candlestick_pattern(open_, high, low, close, pattern_name):
     Raises:
         ValueError: If `pattern_name` is not in CDL_PATTERNS.
     """
-    open_ = np.asarray(open_, dtype=np.float64)
-    high = np.asarray(high, dtype=np.float64)
-    low = np.asarray(low, dtype=np.float64)
-    close = np.asarray(close, dtype=np.float64)
 
     if pattern_name not in CDL_PATTERNS:
         raise ValueError(f"{pattern_name} is not a valid TA-Lib candlestick pattern.")
@@ -1437,8 +1325,6 @@ def beta(close, ref, period=5):
         np.ndarray: Beta values, representing how the target series moves relative
                     to the reference series.
     """
-    close = np.asarray(close, dtype=np.float64)
-    ref = np.asarray(ref, dtype=np.float64)
     return talib.BETA(close, ref, timeperiod=period)
 
 
@@ -1454,8 +1340,6 @@ def correl(close, ref, period=30):
     Returns:
         np.ndarray: Correlation coefficient values ranging from -1 to 1.
     """
-    close = np.asarray(close, dtype=np.float64)
-    ref = np.asarray(ref, dtype=np.float64)
     return talib.CORREL(close, ref, timeperiod=period)
 
 
@@ -1470,7 +1354,6 @@ def linearreg(close, period=14):
     Returns:
         np.ndarray: Linear regression values (predicted price on the regression line).
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.LINEARREG(close, timeperiod=period)
 
 
@@ -1485,7 +1368,6 @@ def linearreg_angle(close, period=14):
     Returns:
         np.ndarray: Angle of the regression line.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.LINEARREG_ANGLE(close, timeperiod=period)
 
 
@@ -1500,7 +1382,6 @@ def linearreg_intercept(close, period=14):
     Returns:
         np.ndarray: Regression line intercept values.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.LINEARREG_INTERCEPT(close, timeperiod=period)
 
 
@@ -1515,7 +1396,6 @@ def linearreg_slope(close, period=14):
     Returns:
         np.ndarray: Slope values representing rate of change per period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.LINEARREG_SLOPE(close, timeperiod=period)
 
 
@@ -1530,7 +1410,6 @@ def stddev(close, period=14):
     Returns:
         np.ndarray: Standard deviation values over the period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.STDDEV(close, timeperiod=period, nbdev=1)
 
 
@@ -1545,7 +1424,6 @@ def tsf(close, period=14):
     Returns:
         np.ndarray: Forecasted values based on linear regression.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.TSF(close, timeperiod=period)
 
 
@@ -1560,5 +1438,4 @@ def var(close, period=14):
     Returns:
         np.ndarray: Variance values over the period.
     """
-    close = np.asarray(close, dtype=np.float64)
     return talib.VAR(close, timeperiod=period, nbdev=1)
