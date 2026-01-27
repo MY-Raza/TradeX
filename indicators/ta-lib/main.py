@@ -6,6 +6,7 @@ from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.utils.db.utils import fetch_ohlcv_df
 import pandas as pd
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
+from signals import generate_signals
 
 logger = get_logger("indicators_main")
 
@@ -19,10 +20,6 @@ df_1m = fetch_ohlcv_df(
     schema=SCHEMA,
     time_column="timestamp"
 )
-
-print("DEBUG df_1m columns:", df_1m.columns)
-print("DEBUG df_1m index:", df_1m.index)
-print(df_1m.head())
 
 if df_1m.empty:
     logger.error(f"No Data Fetched")
@@ -199,3 +196,18 @@ logger.info(f"LinearReg Slope: {linearreg_slope(close)[-5:]}")
 logger.info(f"STDDEV: {stddev(close)[-5:]}")
 logger.info(f"TSF: {tsf(close)[-5:]}")
 logger.info(f"VAR: {var(close)[-5:]}")
+
+macd_val, macd_signal, _ = macd(close)
+
+indicators_dict = {
+    "close": close,
+    "rsi": rsi(close),
+    "macd": macd_val,
+    "macd_signal": macd_signal,
+    "ema_fast": ema(close, period=12),
+    "ema_slow": ema(close, period=26),
+}
+
+signals = generate_signals(indicators_dict)
+
+logger.info(f"Signals (last 10): {signals[-10:]}")
