@@ -4,9 +4,10 @@ import numpy as np
 import pandas as pd
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db,drop_schema
+from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db,drop_table
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from signals import *
+from indicators import *
 
 # ---------------------------
 # Logger Initialization
@@ -45,7 +46,6 @@ volume = df_1h["volume"].values
 # Optional: Reference series and variable periods (used in some indicators)
 ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
 periods = np.random.uniform(5, 30, len(df_1h)).astype(np.float64)
-
 # ---------------------------
 # Automatically detect all functions ending with '_signal' in signals.py
 # ---------------------------
@@ -124,7 +124,8 @@ signal_args = {
     "natr_signal": (high, low, close),
     "trange_signal": (high, low, close),
 
-    "candlestick_signal": (open_, high, low, close, "CDLDOJI"),
+    "candlestick_signal":(open_, high, low, close, "CDLDOJI")
+        ,
 
     "beta_signal": (close, ref),
     "correl_signal": (close, ref),
@@ -155,9 +156,11 @@ for func_name, func in signal_funcs.items():
 
                 # Special handling for candlestick_signal
                 if func_name == "candlestick_signal":
-                    result, pattern_name = result
-                    table_name = f"btc_{pattern_name}_1h"
-                    col_prefix = pattern_name
+                    signals_array, pattern_name = result
+                    table_name = f"btc_{pattern_name.lower()}_1h"
+                    col_prefix = func_name
+                    result = signals_array
+                    print(table_name)
                 else:
                     table_name = f"btc_{func_name}_1h"
                     col_prefix = func_name
@@ -168,7 +171,7 @@ for func_name, func in signal_funcs.items():
                 elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
                     result_df = pd.DataFrame(result, columns=[f"{col_prefix}_{i}" for i in range(result.shape[1])])
                 else:
-                    result_df = pd.DataFrame({f"{col_prefix}_value": result})
+                    result_df = pd.DataFrame({f"{col_prefix}": result})
 
                 result_df.insert(0, "timestamp", df_1h["timestamp"])
 
@@ -190,15 +193,21 @@ for func_name, func in signal_funcs.items():
     else:
         try:
             result = func(*args_config)
-            table_name = f"btc_{func_name}_1h"
-            col_prefix = func_name
+            if func_name == "candlestick_signal":
+                signals_array, pattern_name = result   # unpack tuple
+                result = signals_array                 # keep only numeric signal array
+                table_name = f"btc_{pattern_name.lower()}_1h"  # dynamic table name
+                col_prefix = func_name   
+            else:
+                table_name = f"btc_{func_name}_1h"
+                col_prefix = func_name  
 
             if isinstance(result, tuple):
                 result_df = pd.DataFrame({f"{col_prefix}_{i}": r for i, r in enumerate(result)})
             elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
                 result_df = pd.DataFrame(result, columns=[f"{col_prefix}_{i}" for i in range(result.shape[1])])
             else:
-                result_df = pd.DataFrame({f"{col_prefix}_value": result})
+                result_df = pd.DataFrame({f"{col_prefix}": result})
 
             result_df.insert(0, "timestamp", df_1h["timestamp"])
 

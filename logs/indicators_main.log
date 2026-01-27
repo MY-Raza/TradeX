@@ -3067,3 +3067,1541 @@
 2026-01-27 14:19:17,801 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
 2026-01-27 14:19:17,885 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
 2026-01-27 14:19:17,985 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 14:42:31,137 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 14:42:31,757 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 14:42:32,244 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 14:42:32,715 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 14:42:33,150 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 14:42:33,646 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 14:42:34,163 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 14:42:34,516 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 14:42:34,812 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 14:42:35,124 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 14:42:35,440 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 14:42:35,742 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 14:42:36,041 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 14:42:36,356 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 14:42:36,674 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 14:42:36,974 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 14:42:37,289 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 14:42:37,605 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 14:42:37,922 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 14:42:38,239 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 14:42:38,555 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 14:42:38,889 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 14:42:39,157 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 14:42:39,471 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 14:42:39,788 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 14:42:40,136 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 14:42:40,454 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 14:42:40,739 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 14:42:41,007 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 14:42:41,273 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 14:42:41,602 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 14:42:41,922 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 14:42:42,205 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 14:42:42,488 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 14:42:42,772 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 14:42:43,103 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 14:42:43,389 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 14:42:43,671 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 14:42:43,925 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 14:42:44,188 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 14:42:44,471 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 14:42:44,785 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 14:42:45,055 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 14:42:45,353 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 14:42:45,621 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 14:42:45,872 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 14:42:46,154 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 14:42:46,454 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 14:42:46,720 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 14:42:47,013 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 14:42:47,256 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 14:42:47,533 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 14:42:47,787 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 14:42:48,070 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 14:42:48,352 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 14:42:48,667 | INFO | indicators_main | Saved candlestick_signal to table btc_candlestick_signal_1h
+2026-01-27 14:42:48,953 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 14:42:49,236 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 14:42:49,593 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 14:42:49,884 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 14:42:50,248 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 14:42:50,754 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 14:42:51,354 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 14:48:02,664 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 14:48:02,918 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 14:48:03,177 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 14:48:03,427 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 14:48:03,709 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 14:48:03,980 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 14:48:04,254 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 14:48:04,537 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 14:48:04,821 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 14:48:05,095 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 14:48:05,451 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 14:48:05,845 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 14:48:06,100 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 14:48:06,355 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 14:48:06,624 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 14:48:06,885 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 14:48:07,137 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 14:48:07,396 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 14:48:07,668 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 14:48:07,958 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 14:48:08,236 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 14:48:09,164 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 14:48:09,669 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 14:48:10,084 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 14:48:10,575 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 14:48:10,988 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 14:48:11,511 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 14:48:12,014 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 14:48:12,329 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 14:48:12,597 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 14:48:12,865 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 14:48:13,134 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 14:48:13,538 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 14:48:13,826 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 14:48:14,123 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 14:48:14,728 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 14:48:15,115 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 14:48:15,448 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 14:48:15,716 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 14:48:16,038 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 14:48:16,307 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 14:48:16,578 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 14:48:16,882 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 14:48:17,178 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 14:48:17,480 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 14:48:17,766 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 14:48:18,024 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 14:48:18,291 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 14:48:18,566 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 14:48:18,838 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 14:48:19,119 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 14:48:19,383 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 14:48:19,663 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 14:48:19,938 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 14:48:20,231 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 14:49:02,606 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 14:49:02,934 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 14:49:03,249 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 14:49:03,635 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 14:49:03,929 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 14:49:04,252 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 14:49:04,579 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 14:49:04,954 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 14:49:05,286 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 14:49:05,657 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 14:49:05,984 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 14:49:06,388 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 14:49:06,890 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 14:49:07,271 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 14:49:07,609 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 14:49:07,901 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 14:49:08,239 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 14:49:08,499 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 14:49:08,898 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 14:49:09,566 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 14:49:10,050 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 14:49:10,693 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 14:49:10,967 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 14:49:11,211 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 14:49:11,482 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 14:49:11,729 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 14:49:11,982 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 14:49:12,239 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 14:49:12,513 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 14:49:12,763 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 14:49:13,041 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 14:49:13,309 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 14:49:13,675 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 14:49:13,950 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 14:49:14,297 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 14:49:14,739 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 14:49:15,215 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 14:49:15,590 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 14:49:15,867 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 14:49:16,140 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 14:49:16,417 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 14:49:16,721 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 14:49:17,026 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 14:49:17,324 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 14:49:17,621 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 14:49:17,880 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 14:49:18,137 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 14:49:18,403 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 14:49:18,703 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 14:49:18,999 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 14:49:19,256 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 14:49:19,517 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 14:49:19,790 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 14:49:20,081 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 14:49:20,383 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 14:49:21,225 | ERROR | indicators_main | Error computing candlestick_signal with args (array([94400.5, 94248.6, 94131. , 94049.1, 94125.3, 93822.3, 93768.8,
+       93736.1, 93587. , 93725.7, 93758.8, 93552. , 93727.5, 93207.4,
+       93196.9, 93420.4, 93536.4, 93800. , 93819.4, 93678. , 93796.2,
+       93608.2, 92651.3, 91547.5, 92006.4, 92062.2, 92472.7, 93207.8,
+       93319.9, 93708.1, 92670.4, 92405.6, 92923.2, 92778.1, 92637.3,
+       92504. , 92576.4, 92848.1, 92680.4, 91672. , 91924.1, 92041.8,
+       91953.3, 91994.4, 91920.8, 91303.2, 91229.9, 91214.9, 90857.4,
+       91143.6, 91015.6, 91050. , 91143.5, 91328.1, 91356.8, 91386.1,
+       90925.5, 90780. , 90988. , 90788. , 89844. , 90509.8, 90200. ,
+       89979.3, 90366.8, 90192.2, 89953.7, 89930. , 89978.5, 90730. ,
+       90888. , 91320.1, 91070.3, 90890.9, 90875. , 91223.2, 91184.2,
+       91059.8, 91248.1, 91016. , 90999.6, 91190.1, 90978.7, 91058.2,
+       91103.8, 90712.1, 89989.3, 90299.1, 90443.5, 90398.1, 90404.8,
+       90560. , 90110.7, 91137.8, 91589.9, 91372.9, 90772.3, 90290.6,
+       90272.4, 90503.9, 90584.9, 90603.7, 90565.1, 90649.6, 90652.7,
+       90591.3, 90422. , 90563.5, 90475. , 90627.1, 90628.6, 90730. ,
+       90795.3, 90692.9, 90696.6, 90620.9, 90551.8, 90622.8, 90640.7,
+       90512.3, 90555.2, 90591.3, 90539. , 90470. , 90384.9, 90469.7,
+       90600.1, 90597.8, 90654.9, 90696.4, 90750. , 90730.4, 90697.4,
+       90663.9, 90755.9, 90690. , 90689.4, 90707.2, 90889.3, 90811.9,
+       91074.7, 90834. , 90996. , 90944.8, 90840.8, 90644.7, 90654.2,
+       90711.1, 90482.3, 90964.4, 91229.2, 91369.9, 92168.8, 91766.2,
+       92126.6, 92066.7, 91789.4, 91369.2, 90714. , 90646.8, 90394.6,
+       90573.9, 90741.6, 90596.7, 90852.7, 91618.6, 92078.9, 91469.9,
+       91648.2, 91821.9, 91446.5, 91005.6, 91203.9, 91252.5, 91436.4,
+       91157.3, 91093.5, 91380.9, 91479.3, 91883.7, 92146.9, 91908. ,
+       92137.7, 92239.6, 92092.6, 91962.1, 92076.3, 92021. , 92414.2,
+       93407.9, 93341.6, 93190.5, 93581.1, 94179.6, 94349. , 94040. ,
+       95730.4, 95375.2, 95196.2, 95191.4, 95300. , 95665.6, 95192.2,
+       94963.1, 94984.7, 95166.6, 94866.2, 95051.5, 95050. , 94763.7,
+       95041.5, 94964.3, 96449. , 96691.9, 97232.1, 96895.1, 96764.5,
+       97221.8, 97606. , 97515. , 96825.6, 96908. , 96613.3, 96400. ,
+       96297.2, 95943.1, 96273.4, 96372.6, 96195.2, 96601.2, 96596.1,
+       96993.9, 96763.1, 96548.9, 96931.3, 96800.9, 96013.6, 96717.3,
+       96684.7, 96587.4, 95806.8, 95469.2, 95220.8, 95545.3, 95536.3,
+       95567.4, 95589.6, 95623.7, 95469.4, 95319.6, 95233.4, 95615.9,
+       95702.5, 95608.4, 95628.4, 95568.1, 95272.5, 95382.5, 95414.6,
+       95400.1, 95137. , 94537.6, 94826.5, 95041.7, 94966.7, 94961. ,
+       95517.2, 95469.6, 95473.5, 95503.8, 95416.8, 95344.1, 95318.8,
+       95324.1, 95267.4, 95270.4, 95190.9, 95061.1, 95213.6, 95219.5,
+       95076.7, 95283.8, 95212.7, 95399.6, 95419.9, 95529. , 95265. ,
+       95318.1, 95384.6, 95258.3, 95332.9, 95272.7, 95120.8, 95107.9,
+       95073.2, 94928.8, 94989.1, 95155. , 95057.4, 95154.6, 95142.1,
+       94989.9, 95150. , 95233.4, 95139.9, 95133.3, 95071.5, 95105. ,
+       94917.9, 95067.7, 95123.6, 95231.1, 95396.3, 95335.6, 95259.4,
+       95386.5, 95442.9, 93614. , 92658.2, 92542.3, 92516.8, 92656.7,
+       92614.3, 92471.4, 92542.9, 92787.8, 93200.2, 93000. , 93021.2,
+       93136.8, 93025.9, 92992.9, 92779.8, 93013.4, 93265. , 93195.1,
+       93023. , 93066.2, 93107.5, 92968.5, 92528. , 92589.6, 92676.1,
+       92688.8, 92519. , 92396.9, 92026.3, 91590.1, 90894.5]), array([94450. , 94760.3, 94193.4, 94361. , 94154.2, 93950. , 94125.1,
+       93829.8, 93900.7, 93966.4, 93786. , 93906.6, 93740.3, 93379.4,
+       93529.8, 93620.7, 93865.5, 93950. , 93826.8, 94415.4, 94274. ,
+       93728.9, 92743.1, 92211.3, 92369.5, 92668.7, 93825. , 93490.1,
+       93743.4, 93708.1, 92866.7, 93028.3, 93080. , 92893. , 92818. ,
+       92869.4, 92862.4, 92928. , 92680.4, 91953. , 92219.8, 92140.3,
+       92249.3, 92108.1, 91957.5, 91750. , 91660. , 91411.3, 91250. ,
+       91266. , 91206.6, 91361.8, 91462.1, 91524.1, 91666. , 91440.5,
+       91099.9, 91142.2, 91157.6, 90835.1, 90555.1, 90741.2, 90345.2,
+       90466. , 90459. , 90210.5, 90072.9, 90134.2, 90790. , 90888. ,
+       91400. , 91425.1, 91291.7, 90954.1, 91298. , 91449.9, 91288.8,
+       91269.2, 91600. , 91446.7, 91232.3, 91203. , 91086.9, 91115.8,
+       91103.9, 90812. , 90437.7, 90515.5, 90638.5, 90559.8, 91000. ,
+       90630.2, 91999. , 91749.9, 91639. , 91467.2, 90772.3, 90552.8,
+       90630.9, 90679.7, 90693. , 90649.4, 90704. , 90748.6, 90656.4,
+       90610. , 90584.9, 90569.5, 90650.4, 90710. , 90730. , 90800. ,
+       90795.3, 90758.7, 90727.1, 90631.6, 90630. , 90688.1, 90708. ,
+       90564.3, 90597.9, 90627.6, 90539. , 90562.2, 90535.7, 90609.8,
+       90639.8, 90699.9, 90696.5, 90750. , 90818. , 90757.4, 90708.5,
+       90787.8, 90778.5, 90700. , 90730.2, 90980. , 90926.9, 91143.1,
+       91103.2, 91252.5, 91103.3, 90944.8, 90892.2, 90706.8, 90795. ,
+       90711.2, 91000. , 91229.2, 91770. , 92379.5, 92488. , 92245.1,
+       92220. , 92166.7, 91932.3, 91586.5, 90895.1, 90755.6, 90795.9,
+       90828.2, 90788. , 91100. , 91637.8, 92299. , 92264.2, 91911.1,
+       91847.2, 92017. , 91461.2, 91395.8, 91280.1, 91524.5, 91514.2,
+       91344.9, 91438.8, 91621. , 92222. , 92258. , 92180.6, 92234.7,
+       92676.6, 92317.4, 92226.7, 92125.5, 92555.1, 92888. , 93408. ,
+       93707. , 93451.4, 93840.7, 94189. , 94462.7, 94478.3, 96863.7,
+       96089.9, 95627.6, 95545.2, 95527.5, 95670. , 95755. , 95236.8,
+       94986.8, 95226.7, 95288. , 95152.1, 95256.8, 95058.5, 95129.8,
+       95213.6, 96780. , 97100. , 97667.7, 97733.9, 97065.8, 97611.8,
+       97932.1, 97667. , 97535.9, 97331.4, 96960.9, 96940. , 96574.8,
+       96358.9, 96349.6, 96485.6, 96533. , 96744.2, 96645.2, 97155. ,
+       97020. , 96884.3, 96963.3, 96988. , 97100. , 96833. , 97000. ,
+       97047.6, 96592.6, 95901.6, 95623.8, 95600. , 95837.8, 95688.9,
+       95788.4, 95825. , 95648.6, 95550. , 95546.6, 95654.4, 95790. ,
+       95750. , 95805. , 95741. , 95586.4, 95436. , 95536.8, 95537.9,
+       95763. , 95658.8, 94950. , 95095.4, 95191.8, 95018.3, 95527.4,
+       95550. , 95535.6, 95536.2, 95536.9, 95487.9, 95372.8, 95344.2,
+       95326.1, 95346.1, 95302.9, 95190.9, 95220. , 95260. , 95236.2,
+       95287.1, 95386. , 95399.7, 95500. , 95621.9, 95529. , 95395.9,
+       95423. , 95384.6, 95351.6, 95373.2, 95272.8, 95169.5, 95200.9,
+       95074.1, 95034.1, 95175. , 95155. , 95236.5, 95177.5, 95152.2,
+       95165.5, 95252.4, 95257.4, 95145.9, 95145.9, 95168.4, 95326.4,
+       95076.5, 95159.9, 95244. , 95481.8, 95485.9, 95403.2, 95393.9,
+       95490. , 95443. , 93614.1, 92825.6, 92639.4, 92748.4, 92708.8,
+       92767.5, 92591.9, 92810. , 93312.8, 93208.7, 93035.2, 93267.5,
+       93188. , 93117.1, 93000. , 93051.9, 93379. , 93351.9, 93226.6,
+       93116.6, 93241.8, 93312.1, 93033.9, 92720.3, 92845. , 92840. ,
+       92693.4, 92646.2, 92440.1, 92042.1, 91603.8, 91132.4]), array([94075.7, 93980. , 93757.9, 93952.6, 93813.7, 93510. , 93688. ,
+       93467.1, 93563. , 93688. , 93520.8, 93500. , 93088. , 93130.4,
+       93186.5, 93359.6, 93530.5, 93737.5, 93590.7, 93469.3, 93292. ,
+       92280.4, 91480.2, 91209. , 91862.5, 92062.2, 92338. , 92920.1,
+       93279.6, 92607.9, 92293.8, 92202.9, 92707.2, 92565.9, 92457.9,
+       92483.1, 92576.4, 92656.6, 91551.3, 91549.9, 91874. , 91920. ,
+       91815.6, 91321.2, 90987. , 91100.8, 90994.5, 90700. , 90634.1,
+       90740.5, 91006.8, 90842.2, 90966.1, 91037.9, 91259. , 90713.7,
+       90555.1, 90665.2, 90749.3, 89828.4, 89588.1, 90123. , 89909.8,
+       89733.6, 89990.6, 89750. , 89831.8, 89242. , 89761.3, 90244.7,
+       90789.6, 90888.5, 90737.6, 90519.9, 90872.7, 90975. , 91000. ,
+       91013.6, 90800.6, 90970. , 90916.1, 90886.3, 90875. , 90951.6,
+       90704. , 89632.8, 89962.8, 90231.4, 90356.9, 90166.5, 90346.9,
+       89888. , 89800. , 91124.5, 90960.1, 90272.6, 90145. , 90191.7,
+       90082.6, 90320.3, 90557. , 90474.4, 90538.9, 90560. , 90512.2,
+       90351.6, 90390. , 90432.4, 90467.2, 90570. , 90579.7, 90680. ,
+       90656.1, 90623.5, 90599.9, 90494. , 90535.9, 90562.5, 90503.9,
+       90450. , 90545. , 90538. , 90451.4, 90358.5, 90384.9, 90410.6,
+       90521.1, 90579.2, 90585.8, 90629.9, 90696.2, 90530.9, 90628.1,
+       90555. , 90625.3, 90640. , 90649.9, 90670.1, 90779.5, 90811.9,
+       90650. , 90834. , 90853.5, 90750.8, 90609.5, 90314.9, 90544.2,
+       90410. , 90175.3, 90642. , 91047.9, 91323.8, 91757.1, 91700. ,
+       91986.1, 91760. , 91342. , 90341.3, 90610. , 90319.4, 90381.6,
+       90573.8, 90490.9, 90066. , 90657. , 91520.1, 90966. , 91358.9,
+       91383.1, 91366.8, 90870. , 91005.5, 91023. , 91202.9, 91011. ,
+       91035. , 91076.1, 91316.3, 91425.6, 91764.9, 91866.3, 91881.1,
+       91850.6, 91980. , 91928.8, 91868. , 91836.3, 91700.6, 92060.2,
+       93009.8, 93050. , 93138.7, 93421.9, 94036. , 94011.7, 94037.8,
+       95025.6, 95120.5, 95082. , 95153. , 95235.8, 95172.9, 94888. ,
+       94413.4, 94812. , 94855.6, 94841.3, 94841.7, 94700. , 94643. ,
+       94844.6, 94944.6, 96129.8, 96664.3, 96681.6, 96180. , 96631.9,
+       97157.4, 97328.5, 96666.6, 96805.7, 96450. , 96257. , 96043.4,
+       95733.1, 95909.1, 96190. , 96123.4, 96133.7, 96243.8, 96508.1,
+       96686. , 96532.9, 96471.1, 96562.5, 95550. , 95403.7, 96225.7,
+       96368. , 95700. , 95080. , 95089. , 95145.1, 95447.6, 95362.6,
+       95526.6, 95380. , 95350. , 95279.8, 95111.1, 95211. , 95480.5,
+       95432.6, 95526.2, 95542.4, 95254. , 95210.5, 95313.4, 95238. ,
+       95130. , 94234.5, 94454.5, 94502.8, 94931. , 94793.1, 94630. ,
+       95300.1, 95193.9, 95380. , 95380.4, 95332.8, 95136.2, 95214.9,
+       95209.2, 95230. , 95133. , 94999.9, 94977.5, 95124.4, 95075.6,
+       95036. , 95189.1, 95152.1, 95311.5, 95378.1, 95165.5, 95247. ,
+       95294. , 95247. , 95247. , 95247. , 95000. , 95066.1, 95022.8,
+       94819.5, 94826.1, 94981.2, 95035.1, 95008.9, 95110. , 94980. ,
+       94980. , 95116. , 95043.9, 95034.5, 95044. , 94850.4, 94890. ,
+       94872.9, 95024.6, 95083. , 95136.4, 95281. , 95240.9, 95240.3,
+       95355.5, 93550.3, 91800. , 92173.7, 92333.4, 92450. , 92459. ,
+       92454.5, 92344.5, 92510. , 92635. , 92888. , 92836.9, 92916.9,
+       92960. , 92741.3, 92660. , 92776.4, 92947.4, 93097.3, 92888. ,
+       92948.1, 93055.4, 92961.4, 92514.3, 92116. , 92320.2, 92479.1,
+       92330. , 92200. , 91900. , 91235.5, 90723.3, 90819.5]), array([94248.6, 94131. , 94049.1, 94125.2, 93822.4, 93768.8, 93736. ,
+       93587. , 93725.8, 93758.8, 93552. , 93727.5, 93207.4, 93197. ,
+       93420.4, 93536.3, 93799.9, 93819.4, 93678.1, 93796.2, 93608.2,
+       92651.3, 91547.6, 92006.4, 92062.2, 92472.8, 93207.8, 93320. ,
+       93708. , 92670.4, 92405.7, 92923.2, 92778.2, 92637.3, 92504. ,
+       92576.4, 92848.1, 92680.3, 91672. , 91924.1, 92041.9, 91953.4,
+       91994.4, 91920.8, 91303.1, 91229.9, 91215. , 90857.4, 91143.6,
+       91015.6, 91050. , 91143.6, 91328. , 91356.8, 91386. , 90925.6,
+       90780.1, 90987.9, 90788. , 89844. , 90509.9, 90200. , 89979.4,
+       90366.8, 90192.3, 89953.8, 89930. , 89978.5, 90730. , 90887.9,
+       91320. , 91070.3, 90890.9, 90875.1, 91223.2, 91184.2, 91059.8,
+       91248.1, 91016. , 90999.5, 91190.1, 90978.7, 91058.2, 91103.8,
+       90712.1, 89989.4, 90299. , 90443.6, 90398.1, 90404.8, 90559.9,
+       90110.8, 91137.7, 91589.9, 91372.8, 90772.3, 90290.6, 90272.3,
+       90503.8, 90585. , 90603.6, 90565.1, 90649.6, 90652.7, 90591.3,
+       90421.9, 90563.5, 90475.1, 90627.1, 90628.6, 90729.9, 90795.4,
+       90692.8, 90696.6, 90620.9, 90551.8, 90622.7, 90640.6, 90512.3,
+       90555.2, 90591.4, 90539. , 90469.9, 90384.9, 90469.6, 90600. ,
+       90597.9, 90654.8, 90696.5, 90750. , 90730.4, 90697.4, 90664. ,
+       90756. , 90689.9, 90689.4, 90707.3, 90889.3, 90812. , 91074.8,
+       90834.1, 90996. , 90944.7, 90840.9, 90644.7, 90654.2, 90711.1,
+       90482.4, 90964.4, 91229.1, 91370. , 92168.8, 91766.2, 92126.7,
+       92066.6, 91789.3, 91369.2, 90714. , 90646.8, 90394.6, 90573.9,
+       90741.6, 90596.8, 90852.8, 91618.7, 92078.8, 91469.9, 91648.2,
+       91821.9, 91446.5, 91005.6, 91204. , 91252.6, 91436.3, 91157.4,
+       91093.5, 91380.9, 91479.3, 91883.6, 92146.9, 91908. , 92137.8,
+       92239.6, 92092.5, 91962.1, 92076.2, 92021. , 92414.3, 93407.9,
+       93341.6, 93190.6, 93581. , 94179.5, 94349.1, 94040. , 95730.5,
+       95375.2, 95196.2, 95191.4, 95299.9, 95665.7, 95192.2, 94963.1,
+       94984.8, 95166.6, 94866.3, 95051.6, 95050.1, 94763.6, 95041.5,
+       94964.3, 96449. , 96691.9, 97232.2, 96895.2, 96764.5, 97221.8,
+       97606. , 97515. , 96825.5, 96907.9, 96613.3, 96400.1, 96297.3,
+       95943.1, 96273.3, 96372.5, 96195.2, 96601.2, 96596.2, 96993.8,
+       96763.2, 96548.9, 96931.3, 96801. , 96013.6, 96717.3, 96684.7,
+       96587.4, 95806.9, 95469.2, 95220.7, 95545.3, 95536.3, 95567.3,
+       95589.6, 95623.7, 95469.5, 95319.6, 95233.4, 95615.9, 95702.5,
+       95608.4, 95628.3, 95568.1, 95272.6, 95382.6, 95414.6, 95400.2,
+       95137. , 94537.5, 94826.6, 95041.6, 94966.6, 94961. , 95517.1,
+       95469.6, 95473.6, 95503.7, 95416.9, 95344.2, 95318.9, 95324. ,
+       95267.4, 95270.5, 95191. , 95061.1, 95213.6, 95219.5, 95076.6,
+       95283.9, 95212.7, 95399.7, 95419.9, 95529. , 95265.1, 95318.1,
+       95384.5, 95258.3, 95332.8, 95272.7, 95120.8, 95107.9, 95073.1,
+       94928.9, 94989. , 95155. , 95057.4, 95154.5, 95142.1, 94989.9,
+       95150. , 95233.3, 95139.9, 95133.4, 95071.4, 95104.9, 94917.8,
+       95067.8, 95123.6, 95231.2, 95396.2, 95335.6, 95259.3, 95386.4,
+       95442.9, 93614. , 92658.3, 92542.2, 92516.7, 92656.6, 92614.4,
+       92471.4, 92542.8, 92787.9, 93200.3, 93000. , 93021.2, 93136.7,
+       93025.9, 92993. , 92779.7, 93013.5, 93264.9, 93195.1, 93022.9,
+       93066.2, 93107.4, 92968.5, 92528.1, 92589.6, 92676.1, 92688.7,
+       92518.9, 92397. , 92026.2, 91590.1, 90894.5, 91089.9]), 'CDLDOJI'): (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 14:49:21,907 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 14:49:22,368 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 14:49:22,872 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 14:49:23,420 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 14:49:23,928 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 14:49:24,234 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 14:49:24,570 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 14:52:10,040 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 14:52:10,342 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 14:52:10,642 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 14:52:10,926 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 14:52:11,242 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 14:52:11,574 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 14:52:11,891 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 14:52:12,255 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 14:52:12,652 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 14:52:13,256 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 14:52:13,674 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 14:52:13,957 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 14:52:14,288 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 14:52:14,559 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 14:52:14,858 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 14:52:15,142 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 14:52:15,409 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 14:52:15,691 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 14:52:16,078 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 14:52:16,404 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 14:52:16,738 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 14:52:17,071 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 14:52:17,341 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 14:52:17,608 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 14:52:17,890 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 14:52:18,142 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 14:52:18,408 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 14:52:18,659 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 14:52:19,301 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 14:52:19,606 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 14:52:19,874 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 14:52:20,156 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 14:52:20,439 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 14:52:20,692 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 14:52:20,971 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 14:52:21,269 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 14:52:21,540 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 14:52:21,806 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 14:52:22,104 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 14:52:22,373 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 14:52:22,655 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 14:52:22,922 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 14:52:23,219 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 14:52:23,519 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 14:52:23,791 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 14:52:24,085 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 14:52:24,323 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 14:52:24,902 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 14:52:25,359 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 14:52:26,029 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 14:52:26,381 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 14:52:26,637 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 14:52:26,903 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 14:52:27,169 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 14:52:27,452 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 14:52:27,610 | ERROR | indicators_main | Error computing candlestick_signal with args (array([94400.5, 94248.6, 94131. , 94049.1, 94125.3, 93822.3, 93768.8,
+       93736.1, 93587. , 93725.7, 93758.8, 93552. , 93727.5, 93207.4,
+       93196.9, 93420.4, 93536.4, 93800. , 93819.4, 93678. , 93796.2,
+       93608.2, 92651.3, 91547.5, 92006.4, 92062.2, 92472.7, 93207.8,
+       93319.9, 93708.1, 92670.4, 92405.6, 92923.2, 92778.1, 92637.3,
+       92504. , 92576.4, 92848.1, 92680.4, 91672. , 91924.1, 92041.8,
+       91953.3, 91994.4, 91920.8, 91303.2, 91229.9, 91214.9, 90857.4,
+       91143.6, 91015.6, 91050. , 91143.5, 91328.1, 91356.8, 91386.1,
+       90925.5, 90780. , 90988. , 90788. , 89844. , 90509.8, 90200. ,
+       89979.3, 90366.8, 90192.2, 89953.7, 89930. , 89978.5, 90730. ,
+       90888. , 91320.1, 91070.3, 90890.9, 90875. , 91223.2, 91184.2,
+       91059.8, 91248.1, 91016. , 90999.6, 91190.1, 90978.7, 91058.2,
+       91103.8, 90712.1, 89989.3, 90299.1, 90443.5, 90398.1, 90404.8,
+       90560. , 90110.7, 91137.8, 91589.9, 91372.9, 90772.3, 90290.6,
+       90272.4, 90503.9, 90584.9, 90603.7, 90565.1, 90649.6, 90652.7,
+       90591.3, 90422. , 90563.5, 90475. , 90627.1, 90628.6, 90730. ,
+       90795.3, 90692.9, 90696.6, 90620.9, 90551.8, 90622.8, 90640.7,
+       90512.3, 90555.2, 90591.3, 90539. , 90470. , 90384.9, 90469.7,
+       90600.1, 90597.8, 90654.9, 90696.4, 90750. , 90730.4, 90697.4,
+       90663.9, 90755.9, 90690. , 90689.4, 90707.2, 90889.3, 90811.9,
+       91074.7, 90834. , 90996. , 90944.8, 90840.8, 90644.7, 90654.2,
+       90711.1, 90482.3, 90964.4, 91229.2, 91369.9, 92168.8, 91766.2,
+       92126.6, 92066.7, 91789.4, 91369.2, 90714. , 90646.8, 90394.6,
+       90573.9, 90741.6, 90596.7, 90852.7, 91618.6, 92078.9, 91469.9,
+       91648.2, 91821.9, 91446.5, 91005.6, 91203.9, 91252.5, 91436.4,
+       91157.3, 91093.5, 91380.9, 91479.3, 91883.7, 92146.9, 91908. ,
+       92137.7, 92239.6, 92092.6, 91962.1, 92076.3, 92021. , 92414.2,
+       93407.9, 93341.6, 93190.5, 93581.1, 94179.6, 94349. , 94040. ,
+       95730.4, 95375.2, 95196.2, 95191.4, 95300. , 95665.6, 95192.2,
+       94963.1, 94984.7, 95166.6, 94866.2, 95051.5, 95050. , 94763.7,
+       95041.5, 94964.3, 96449. , 96691.9, 97232.1, 96895.1, 96764.5,
+       97221.8, 97606. , 97515. , 96825.6, 96908. , 96613.3, 96400. ,
+       96297.2, 95943.1, 96273.4, 96372.6, 96195.2, 96601.2, 96596.1,
+       96993.9, 96763.1, 96548.9, 96931.3, 96800.9, 96013.6, 96717.3,
+       96684.7, 96587.4, 95806.8, 95469.2, 95220.8, 95545.3, 95536.3,
+       95567.4, 95589.6, 95623.7, 95469.4, 95319.6, 95233.4, 95615.9,
+       95702.5, 95608.4, 95628.4, 95568.1, 95272.5, 95382.5, 95414.6,
+       95400.1, 95137. , 94537.6, 94826.5, 95041.7, 94966.7, 94961. ,
+       95517.2, 95469.6, 95473.5, 95503.8, 95416.8, 95344.1, 95318.8,
+       95324.1, 95267.4, 95270.4, 95190.9, 95061.1, 95213.6, 95219.5,
+       95076.7, 95283.8, 95212.7, 95399.6, 95419.9, 95529. , 95265. ,
+       95318.1, 95384.6, 95258.3, 95332.9, 95272.7, 95120.8, 95107.9,
+       95073.2, 94928.8, 94989.1, 95155. , 95057.4, 95154.6, 95142.1,
+       94989.9, 95150. , 95233.4, 95139.9, 95133.3, 95071.5, 95105. ,
+       94917.9, 95067.7, 95123.6, 95231.1, 95396.3, 95335.6, 95259.4,
+       95386.5, 95442.9, 93614. , 92658.2, 92542.3, 92516.8, 92656.7,
+       92614.3, 92471.4, 92542.9, 92787.8, 93200.2, 93000. , 93021.2,
+       93136.8, 93025.9, 92992.9, 92779.8, 93013.4, 93265. , 93195.1,
+       93023. , 93066.2, 93107.5, 92968.5, 92528. , 92589.6, 92676.1,
+       92688.8, 92519. , 92396.9, 92026.3, 91590.1, 90894.5]), array([94450. , 94760.3, 94193.4, 94361. , 94154.2, 93950. , 94125.1,
+       93829.8, 93900.7, 93966.4, 93786. , 93906.6, 93740.3, 93379.4,
+       93529.8, 93620.7, 93865.5, 93950. , 93826.8, 94415.4, 94274. ,
+       93728.9, 92743.1, 92211.3, 92369.5, 92668.7, 93825. , 93490.1,
+       93743.4, 93708.1, 92866.7, 93028.3, 93080. , 92893. , 92818. ,
+       92869.4, 92862.4, 92928. , 92680.4, 91953. , 92219.8, 92140.3,
+       92249.3, 92108.1, 91957.5, 91750. , 91660. , 91411.3, 91250. ,
+       91266. , 91206.6, 91361.8, 91462.1, 91524.1, 91666. , 91440.5,
+       91099.9, 91142.2, 91157.6, 90835.1, 90555.1, 90741.2, 90345.2,
+       90466. , 90459. , 90210.5, 90072.9, 90134.2, 90790. , 90888. ,
+       91400. , 91425.1, 91291.7, 90954.1, 91298. , 91449.9, 91288.8,
+       91269.2, 91600. , 91446.7, 91232.3, 91203. , 91086.9, 91115.8,
+       91103.9, 90812. , 90437.7, 90515.5, 90638.5, 90559.8, 91000. ,
+       90630.2, 91999. , 91749.9, 91639. , 91467.2, 90772.3, 90552.8,
+       90630.9, 90679.7, 90693. , 90649.4, 90704. , 90748.6, 90656.4,
+       90610. , 90584.9, 90569.5, 90650.4, 90710. , 90730. , 90800. ,
+       90795.3, 90758.7, 90727.1, 90631.6, 90630. , 90688.1, 90708. ,
+       90564.3, 90597.9, 90627.6, 90539. , 90562.2, 90535.7, 90609.8,
+       90639.8, 90699.9, 90696.5, 90750. , 90818. , 90757.4, 90708.5,
+       90787.8, 90778.5, 90700. , 90730.2, 90980. , 90926.9, 91143.1,
+       91103.2, 91252.5, 91103.3, 90944.8, 90892.2, 90706.8, 90795. ,
+       90711.2, 91000. , 91229.2, 91770. , 92379.5, 92488. , 92245.1,
+       92220. , 92166.7, 91932.3, 91586.5, 90895.1, 90755.6, 90795.9,
+       90828.2, 90788. , 91100. , 91637.8, 92299. , 92264.2, 91911.1,
+       91847.2, 92017. , 91461.2, 91395.8, 91280.1, 91524.5, 91514.2,
+       91344.9, 91438.8, 91621. , 92222. , 92258. , 92180.6, 92234.7,
+       92676.6, 92317.4, 92226.7, 92125.5, 92555.1, 92888. , 93408. ,
+       93707. , 93451.4, 93840.7, 94189. , 94462.7, 94478.3, 96863.7,
+       96089.9, 95627.6, 95545.2, 95527.5, 95670. , 95755. , 95236.8,
+       94986.8, 95226.7, 95288. , 95152.1, 95256.8, 95058.5, 95129.8,
+       95213.6, 96780. , 97100. , 97667.7, 97733.9, 97065.8, 97611.8,
+       97932.1, 97667. , 97535.9, 97331.4, 96960.9, 96940. , 96574.8,
+       96358.9, 96349.6, 96485.6, 96533. , 96744.2, 96645.2, 97155. ,
+       97020. , 96884.3, 96963.3, 96988. , 97100. , 96833. , 97000. ,
+       97047.6, 96592.6, 95901.6, 95623.8, 95600. , 95837.8, 95688.9,
+       95788.4, 95825. , 95648.6, 95550. , 95546.6, 95654.4, 95790. ,
+       95750. , 95805. , 95741. , 95586.4, 95436. , 95536.8, 95537.9,
+       95763. , 95658.8, 94950. , 95095.4, 95191.8, 95018.3, 95527.4,
+       95550. , 95535.6, 95536.2, 95536.9, 95487.9, 95372.8, 95344.2,
+       95326.1, 95346.1, 95302.9, 95190.9, 95220. , 95260. , 95236.2,
+       95287.1, 95386. , 95399.7, 95500. , 95621.9, 95529. , 95395.9,
+       95423. , 95384.6, 95351.6, 95373.2, 95272.8, 95169.5, 95200.9,
+       95074.1, 95034.1, 95175. , 95155. , 95236.5, 95177.5, 95152.2,
+       95165.5, 95252.4, 95257.4, 95145.9, 95145.9, 95168.4, 95326.4,
+       95076.5, 95159.9, 95244. , 95481.8, 95485.9, 95403.2, 95393.9,
+       95490. , 95443. , 93614.1, 92825.6, 92639.4, 92748.4, 92708.8,
+       92767.5, 92591.9, 92810. , 93312.8, 93208.7, 93035.2, 93267.5,
+       93188. , 93117.1, 93000. , 93051.9, 93379. , 93351.9, 93226.6,
+       93116.6, 93241.8, 93312.1, 93033.9, 92720.3, 92845. , 92840. ,
+       92693.4, 92646.2, 92440.1, 92042.1, 91603.8, 91132.4]), array([94075.7, 93980. , 93757.9, 93952.6, 93813.7, 93510. , 93688. ,
+       93467.1, 93563. , 93688. , 93520.8, 93500. , 93088. , 93130.4,
+       93186.5, 93359.6, 93530.5, 93737.5, 93590.7, 93469.3, 93292. ,
+       92280.4, 91480.2, 91209. , 91862.5, 92062.2, 92338. , 92920.1,
+       93279.6, 92607.9, 92293.8, 92202.9, 92707.2, 92565.9, 92457.9,
+       92483.1, 92576.4, 92656.6, 91551.3, 91549.9, 91874. , 91920. ,
+       91815.6, 91321.2, 90987. , 91100.8, 90994.5, 90700. , 90634.1,
+       90740.5, 91006.8, 90842.2, 90966.1, 91037.9, 91259. , 90713.7,
+       90555.1, 90665.2, 90749.3, 89828.4, 89588.1, 90123. , 89909.8,
+       89733.6, 89990.6, 89750. , 89831.8, 89242. , 89761.3, 90244.7,
+       90789.6, 90888.5, 90737.6, 90519.9, 90872.7, 90975. , 91000. ,
+       91013.6, 90800.6, 90970. , 90916.1, 90886.3, 90875. , 90951.6,
+       90704. , 89632.8, 89962.8, 90231.4, 90356.9, 90166.5, 90346.9,
+       89888. , 89800. , 91124.5, 90960.1, 90272.6, 90145. , 90191.7,
+       90082.6, 90320.3, 90557. , 90474.4, 90538.9, 90560. , 90512.2,
+       90351.6, 90390. , 90432.4, 90467.2, 90570. , 90579.7, 90680. ,
+       90656.1, 90623.5, 90599.9, 90494. , 90535.9, 90562.5, 90503.9,
+       90450. , 90545. , 90538. , 90451.4, 90358.5, 90384.9, 90410.6,
+       90521.1, 90579.2, 90585.8, 90629.9, 90696.2, 90530.9, 90628.1,
+       90555. , 90625.3, 90640. , 90649.9, 90670.1, 90779.5, 90811.9,
+       90650. , 90834. , 90853.5, 90750.8, 90609.5, 90314.9, 90544.2,
+       90410. , 90175.3, 90642. , 91047.9, 91323.8, 91757.1, 91700. ,
+       91986.1, 91760. , 91342. , 90341.3, 90610. , 90319.4, 90381.6,
+       90573.8, 90490.9, 90066. , 90657. , 91520.1, 90966. , 91358.9,
+       91383.1, 91366.8, 90870. , 91005.5, 91023. , 91202.9, 91011. ,
+       91035. , 91076.1, 91316.3, 91425.6, 91764.9, 91866.3, 91881.1,
+       91850.6, 91980. , 91928.8, 91868. , 91836.3, 91700.6, 92060.2,
+       93009.8, 93050. , 93138.7, 93421.9, 94036. , 94011.7, 94037.8,
+       95025.6, 95120.5, 95082. , 95153. , 95235.8, 95172.9, 94888. ,
+       94413.4, 94812. , 94855.6, 94841.3, 94841.7, 94700. , 94643. ,
+       94844.6, 94944.6, 96129.8, 96664.3, 96681.6, 96180. , 96631.9,
+       97157.4, 97328.5, 96666.6, 96805.7, 96450. , 96257. , 96043.4,
+       95733.1, 95909.1, 96190. , 96123.4, 96133.7, 96243.8, 96508.1,
+       96686. , 96532.9, 96471.1, 96562.5, 95550. , 95403.7, 96225.7,
+       96368. , 95700. , 95080. , 95089. , 95145.1, 95447.6, 95362.6,
+       95526.6, 95380. , 95350. , 95279.8, 95111.1, 95211. , 95480.5,
+       95432.6, 95526.2, 95542.4, 95254. , 95210.5, 95313.4, 95238. ,
+       95130. , 94234.5, 94454.5, 94502.8, 94931. , 94793.1, 94630. ,
+       95300.1, 95193.9, 95380. , 95380.4, 95332.8, 95136.2, 95214.9,
+       95209.2, 95230. , 95133. , 94999.9, 94977.5, 95124.4, 95075.6,
+       95036. , 95189.1, 95152.1, 95311.5, 95378.1, 95165.5, 95247. ,
+       95294. , 95247. , 95247. , 95247. , 95000. , 95066.1, 95022.8,
+       94819.5, 94826.1, 94981.2, 95035.1, 95008.9, 95110. , 94980. ,
+       94980. , 95116. , 95043.9, 95034.5, 95044. , 94850.4, 94890. ,
+       94872.9, 95024.6, 95083. , 95136.4, 95281. , 95240.9, 95240.3,
+       95355.5, 93550.3, 91800. , 92173.7, 92333.4, 92450. , 92459. ,
+       92454.5, 92344.5, 92510. , 92635. , 92888. , 92836.9, 92916.9,
+       92960. , 92741.3, 92660. , 92776.4, 92947.4, 93097.3, 92888. ,
+       92948.1, 93055.4, 92961.4, 92514.3, 92116. , 92320.2, 92479.1,
+       92330. , 92200. , 91900. , 91235.5, 90723.3, 90819.5]), array([94248.6, 94131. , 94049.1, 94125.2, 93822.4, 93768.8, 93736. ,
+       93587. , 93725.8, 93758.8, 93552. , 93727.5, 93207.4, 93197. ,
+       93420.4, 93536.3, 93799.9, 93819.4, 93678.1, 93796.2, 93608.2,
+       92651.3, 91547.6, 92006.4, 92062.2, 92472.8, 93207.8, 93320. ,
+       93708. , 92670.4, 92405.7, 92923.2, 92778.2, 92637.3, 92504. ,
+       92576.4, 92848.1, 92680.3, 91672. , 91924.1, 92041.9, 91953.4,
+       91994.4, 91920.8, 91303.1, 91229.9, 91215. , 90857.4, 91143.6,
+       91015.6, 91050. , 91143.6, 91328. , 91356.8, 91386. , 90925.6,
+       90780.1, 90987.9, 90788. , 89844. , 90509.9, 90200. , 89979.4,
+       90366.8, 90192.3, 89953.8, 89930. , 89978.5, 90730. , 90887.9,
+       91320. , 91070.3, 90890.9, 90875.1, 91223.2, 91184.2, 91059.8,
+       91248.1, 91016. , 90999.5, 91190.1, 90978.7, 91058.2, 91103.8,
+       90712.1, 89989.4, 90299. , 90443.6, 90398.1, 90404.8, 90559.9,
+       90110.8, 91137.7, 91589.9, 91372.8, 90772.3, 90290.6, 90272.3,
+       90503.8, 90585. , 90603.6, 90565.1, 90649.6, 90652.7, 90591.3,
+       90421.9, 90563.5, 90475.1, 90627.1, 90628.6, 90729.9, 90795.4,
+       90692.8, 90696.6, 90620.9, 90551.8, 90622.7, 90640.6, 90512.3,
+       90555.2, 90591.4, 90539. , 90469.9, 90384.9, 90469.6, 90600. ,
+       90597.9, 90654.8, 90696.5, 90750. , 90730.4, 90697.4, 90664. ,
+       90756. , 90689.9, 90689.4, 90707.3, 90889.3, 90812. , 91074.8,
+       90834.1, 90996. , 90944.7, 90840.9, 90644.7, 90654.2, 90711.1,
+       90482.4, 90964.4, 91229.1, 91370. , 92168.8, 91766.2, 92126.7,
+       92066.6, 91789.3, 91369.2, 90714. , 90646.8, 90394.6, 90573.9,
+       90741.6, 90596.8, 90852.8, 91618.7, 92078.8, 91469.9, 91648.2,
+       91821.9, 91446.5, 91005.6, 91204. , 91252.6, 91436.3, 91157.4,
+       91093.5, 91380.9, 91479.3, 91883.6, 92146.9, 91908. , 92137.8,
+       92239.6, 92092.5, 91962.1, 92076.2, 92021. , 92414.3, 93407.9,
+       93341.6, 93190.6, 93581. , 94179.5, 94349.1, 94040. , 95730.5,
+       95375.2, 95196.2, 95191.4, 95299.9, 95665.7, 95192.2, 94963.1,
+       94984.8, 95166.6, 94866.3, 95051.6, 95050.1, 94763.6, 95041.5,
+       94964.3, 96449. , 96691.9, 97232.2, 96895.2, 96764.5, 97221.8,
+       97606. , 97515. , 96825.5, 96907.9, 96613.3, 96400.1, 96297.3,
+       95943.1, 96273.3, 96372.5, 96195.2, 96601.2, 96596.2, 96993.8,
+       96763.2, 96548.9, 96931.3, 96801. , 96013.6, 96717.3, 96684.7,
+       96587.4, 95806.9, 95469.2, 95220.7, 95545.3, 95536.3, 95567.3,
+       95589.6, 95623.7, 95469.5, 95319.6, 95233.4, 95615.9, 95702.5,
+       95608.4, 95628.3, 95568.1, 95272.6, 95382.6, 95414.6, 95400.2,
+       95137. , 94537.5, 94826.6, 95041.6, 94966.6, 94961. , 95517.1,
+       95469.6, 95473.6, 95503.7, 95416.9, 95344.2, 95318.9, 95324. ,
+       95267.4, 95270.5, 95191. , 95061.1, 95213.6, 95219.5, 95076.6,
+       95283.9, 95212.7, 95399.7, 95419.9, 95529. , 95265.1, 95318.1,
+       95384.5, 95258.3, 95332.8, 95272.7, 95120.8, 95107.9, 95073.1,
+       94928.9, 94989. , 95155. , 95057.4, 95154.5, 95142.1, 94989.9,
+       95150. , 95233.3, 95139.9, 95133.4, 95071.4, 95104.9, 94917.8,
+       95067.8, 95123.6, 95231.2, 95396.2, 95335.6, 95259.3, 95386.4,
+       95442.9, 93614. , 92658.3, 92542.2, 92516.7, 92656.6, 92614.4,
+       92471.4, 92542.8, 92787.9, 93200.3, 93000. , 93021.2, 93136.7,
+       93025.9, 92993. , 92779.7, 93013.5, 93264.9, 93195.1, 93022.9,
+       93066.2, 93107.4, 92968.5, 92528.1, 92589.6, 92676.1, 92688.7,
+       92518.9, 92397. , 92026.2, 91590.1, 90894.5, 91089.9]), 'CDLDOJI'): (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 14:52:27,884 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 14:52:28,152 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 14:52:28,419 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 14:52:28,718 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 14:52:28,986 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 14:52:29,258 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 14:52:29,558 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 14:53:11,325 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 14:53:11,935 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 14:53:12,365 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 14:53:12,715 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 14:53:12,955 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 14:53:13,237 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 14:53:13,525 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 14:53:13,905 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 14:53:14,195 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 14:53:14,475 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 14:53:14,745 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 14:53:14,995 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 14:53:15,245 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 14:53:15,515 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 14:53:15,790 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 14:53:16,055 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 14:53:16,425 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 14:53:16,685 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 14:53:16,945 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 14:53:17,265 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 14:53:17,685 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 14:53:18,451 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 14:53:18,845 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 14:53:19,245 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 14:53:19,625 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 14:53:19,895 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 14:53:20,247 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 14:53:20,494 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 14:53:20,757 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 14:53:21,040 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 14:53:21,323 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 14:53:21,593 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 14:53:21,903 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 14:53:22,173 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 14:53:22,440 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 14:53:22,706 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 14:53:23,034 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 14:53:23,337 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 14:53:23,967 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 14:53:24,410 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 14:53:24,671 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 14:53:24,970 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 14:53:25,238 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 14:53:25,912 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 14:53:26,375 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 14:53:26,628 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 14:53:26,903 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 14:53:27,173 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 14:53:27,484 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 14:53:27,795 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 14:53:28,084 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 14:53:28,337 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 14:53:28,586 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 14:53:28,853 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 14:53:29,416 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 14:53:30,000 | INFO | indicators_main | Saved candlestick_signal to table btc_candlestick_signal_1h
+2026-01-27 14:53:30,253 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 14:53:30,537 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 14:53:30,867 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 14:53:31,292 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 14:53:31,566 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 14:53:31,850 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 14:53:32,212 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 14:59:27,736 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 14:59:28,069 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 14:59:28,433 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 14:59:28,860 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 14:59:29,154 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 14:59:29,531 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 14:59:29,851 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 14:59:30,183 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 14:59:30,501 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 14:59:30,849 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 14:59:31,198 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 14:59:31,689 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 14:59:32,332 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 14:59:32,713 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 14:59:33,000 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 14:59:33,321 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 14:59:33,650 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 14:59:33,984 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 14:59:34,315 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 14:59:34,759 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 14:59:35,065 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 14:59:35,413 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 14:59:35,810 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 14:59:36,442 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 14:59:36,753 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 14:59:37,018 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 14:59:37,660 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 14:59:38,043 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 14:59:38,520 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 14:59:38,767 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 14:59:39,048 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 14:59:39,316 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 14:59:39,582 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 14:59:39,881 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 14:59:40,148 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 14:59:40,416 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 14:59:40,693 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 14:59:40,932 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 14:59:41,198 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 14:59:41,481 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 14:59:41,780 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 14:59:42,081 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 14:59:42,380 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 14:59:42,648 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 14:59:42,930 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 14:59:43,198 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 14:59:43,498 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 14:59:43,765 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 14:59:44,062 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 14:59:44,346 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 14:59:44,630 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 14:59:44,902 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 14:59:45,195 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 14:59:45,462 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 14:59:45,715 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 14:59:46,356 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 14:59:46,677 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 14:59:46,961 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 14:59:47,260 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 14:59:47,607 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 14:59:47,878 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 14:59:48,146 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 14:59:48,599 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:01:29,713 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:01:29,991 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:01:30,257 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:01:30,788 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:01:31,039 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:01:31,304 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:01:31,556 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:01:31,827 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:01:32,102 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:01:32,418 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:01:32,835 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:01:33,118 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:01:33,367 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:01:33,668 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:01:33,936 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:01:34,195 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:01:34,453 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:01:34,750 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:01:35,067 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:01:35,493 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:01:35,847 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:01:36,149 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:01:36,497 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:01:37,239 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:01:37,630 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:01:37,947 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:01:38,234 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:01:38,485 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:01:38,751 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:01:39,050 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:01:39,333 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:01:39,586 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:01:39,867 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:01:40,134 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:01:40,478 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:01:40,765 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:01:41,033 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:01:41,300 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:01:41,582 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:01:41,865 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:01:42,227 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:01:42,780 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:01:43,189 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:01:43,557 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:01:43,862 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:01:44,116 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:01:44,381 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:01:44,648 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:01:44,946 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:01:45,227 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:01:45,481 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:01:45,747 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:01:46,063 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:01:46,330 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:01:46,613 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:01:48,375 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "cdldoji_value" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,CDLDOJI_va...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,CDLDOJI_value)
+        VALUES (%(timestamp)s,%(CDLDOJI_value)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'CDLDOJI_value': 0}, {'timestamp': 1767643200000, 'CDLDOJI_value': 0}, {'timestamp': 1767646800000, 'CDLDOJI_value': 0}, {'timestamp': 1767650400000, 'CDLDOJI_value': 0}, {'timestamp': 1767654000000, 'CDLDOJI_value': 0}, {'timestamp': 1767657600000, 'CDLDOJI_value': 0}, {'timestamp': 1767661200000, 'CDLDOJI_value': 0}, {'timestamp': 1767664800000, 'CDLDOJI_value': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'CDLDOJI_value': 0}, {'timestamp': 1768892400000, 'CDLDOJI_value': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:01:49,038 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:01:49,593 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:01:49,942 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:01:50,222 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:01:50,475 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:01:50,884 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:01:51,160 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:03:59,038 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:03:59,355 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:03:59,670 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:04:00,005 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:04:00,383 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:04:00,749 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:04:01,101 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:04:01,452 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:04:01,802 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:04:02,481 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:04:02,880 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:04:03,205 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:04:03,518 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:04:03,819 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:04:04,172 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:04:04,517 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:04:04,788 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:04:05,184 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:04:05,532 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:04:05,849 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:04:06,167 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:04:06,464 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:04:06,798 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:04:07,163 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:04:07,529 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:04:07,833 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:04:08,089 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:04:08,776 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:04:09,208 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:04:09,594 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:04:09,868 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:04:10,135 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:04:10,417 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:04:10,684 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:04:10,950 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:04:11,217 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:04:11,483 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:04:11,750 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:04:12,001 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:04:12,315 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:04:12,630 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:04:12,915 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:04:13,183 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:04:13,449 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:04:13,700 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:04:13,950 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:04:14,357 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:04:15,086 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:04:15,459 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:04:15,732 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:04:15,998 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:04:16,249 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:04:16,546 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:04:16,815 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:04:17,080 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:04:17,176 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "cdldoji_value" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,cdldoji_va...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,cdldoji_value)
+        VALUES (%(timestamp)s,%(cdldoji_value)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'cdldoji_value': 0}, {'timestamp': 1767643200000, 'cdldoji_value': 0}, {'timestamp': 1767646800000, 'cdldoji_value': 0}, {'timestamp': 1767650400000, 'cdldoji_value': 0}, {'timestamp': 1767654000000, 'cdldoji_value': 0}, {'timestamp': 1767657600000, 'cdldoji_value': 0}, {'timestamp': 1767661200000, 'cdldoji_value': 0}, {'timestamp': 1767664800000, 'cdldoji_value': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'cdldoji_value': 0}, {'timestamp': 1768892400000, 'cdldoji_value': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:04:17,446 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:04:17,794 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:04:18,112 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:04:18,380 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:04:18,691 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:04:18,970 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:04:19,286 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:05:06,143 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:05:06,388 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:05:06,654 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:05:06,916 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:05:07,283 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:05:07,547 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:05:07,804 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:05:08,070 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:05:08,353 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:05:08,730 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:05:09,127 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:05:09,386 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:05:09,669 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:05:09,935 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:05:10,201 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:05:10,500 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:05:10,769 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:05:11,054 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:05:11,413 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:05:11,684 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:05:11,997 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:05:12,865 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:05:13,117 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:05:13,384 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:05:13,659 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:05:13,916 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:05:14,184 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:05:14,433 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:05:14,731 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:05:15,044 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:05:15,295 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:05:15,565 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:05:15,879 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:05:16,164 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:05:16,432 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:05:16,698 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:05:16,981 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:05:17,295 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:05:17,566 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:05:17,832 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:05:18,395 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:05:18,789 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:05:19,203 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:05:19,510 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:05:19,795 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:05:20,048 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:05:20,315 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:05:20,580 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:05:20,846 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:05:21,113 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:05:21,396 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:05:21,662 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:05:21,927 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:05:22,195 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:05:22,462 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:05:22,558 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "cdldoji_value" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,cdldoji_va...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,cdldoji_value)
+        VALUES (%(timestamp)s,%(cdldoji_value)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'cdldoji_value': 0}, {'timestamp': 1767643200000, 'cdldoji_value': 0}, {'timestamp': 1767646800000, 'cdldoji_value': 0}, {'timestamp': 1767650400000, 'cdldoji_value': 0}, {'timestamp': 1767654000000, 'cdldoji_value': 0}, {'timestamp': 1767657600000, 'cdldoji_value': 0}, {'timestamp': 1767661200000, 'cdldoji_value': 0}, {'timestamp': 1767664800000, 'cdldoji_value': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'cdldoji_value': 0}, {'timestamp': 1768892400000, 'cdldoji_value': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:05:22,858 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:05:23,130 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:05:23,396 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:05:23,740 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:05:24,236 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:05:24,485 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:05:24,766 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:09:31,289 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:09:31,590 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:09:31,874 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:09:32,190 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:09:32,474 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:09:32,788 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:09:33,215 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:09:33,615 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:09:33,986 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:09:34,322 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:09:34,637 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:09:35,017 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:09:35,320 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:09:35,621 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:09:35,905 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:09:36,236 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:09:36,553 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:09:36,980 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:09:37,317 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:09:37,699 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:09:38,331 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:09:38,950 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:09:39,237 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:09:39,553 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:09:39,836 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:09:40,088 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:09:40,354 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:09:40,667 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:09:40,999 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:09:41,269 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:09:41,521 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:09:41,817 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:09:42,086 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:09:42,336 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:09:42,590 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:09:42,932 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:09:43,218 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:09:43,485 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:09:43,799 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:09:44,476 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:09:44,893 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:09:45,308 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:09:45,615 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:09:45,917 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:09:46,184 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:09:46,481 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:09:46,765 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:09:47,033 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:09:47,301 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:09:47,582 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:09:47,849 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:09:48,101 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:09:48,367 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:09:48,633 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:09:48,901 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:09:48,998 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "value_value" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,value_valu...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,value_value)
+        VALUES (%(timestamp)s,%(value_value)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'value_value': 0}, {'timestamp': 1767643200000, 'value_value': 0}, {'timestamp': 1767646800000, 'value_value': 0}, {'timestamp': 1767650400000, 'value_value': 0}, {'timestamp': 1767654000000, 'value_value': 0}, {'timestamp': 1767657600000, 'value_value': 0}, {'timestamp': 1767661200000, 'value_value': 0}, {'timestamp': 1767664800000, 'value_value': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'value_value': 0}, {'timestamp': 1768892400000, 'value_value': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:09:49,264 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:09:49,564 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:09:49,832 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:09:50,104 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:09:50,381 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:09:50,632 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:09:50,941 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:11:25,838 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:11:26,285 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:11:26,570 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:11:26,868 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:11:27,129 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:11:27,363 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:11:27,655 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:11:27,926 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:11:28,209 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:11:28,560 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:11:28,968 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:11:29,300 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:11:29,612 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:11:30,309 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:11:30,751 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:11:31,300 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:11:31,710 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:11:31,987 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:11:32,355 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:11:32,755 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:11:33,026 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:11:33,318 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:11:33,591 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:11:33,874 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:11:34,153 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:11:34,481 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:11:34,758 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:11:35,020 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:11:35,306 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:11:35,872 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:11:36,788 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:11:37,387 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:11:37,782 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:11:38,061 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:11:38,338 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:11:38,621 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:11:38,888 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:11:39,145 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:11:39,406 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:11:39,720 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:11:40,001 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:11:40,272 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:11:40,554 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:11:40,831 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:11:41,104 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:11:41,371 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:11:41,679 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:11:42,252 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:11:42,552 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:11:42,836 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:11:43,120 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:11:43,386 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:11:43,664 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:11:43,935 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:11:44,250 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:11:44,353 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "candlestick_signal_value" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestic...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestick_signal_value)
+        VALUES (%(timestamp)s,%(candlestick_signal_value)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'candlestick_signal_value': 0}, {'timestamp': 1767643200000, 'candlestick_signal_value': 0}, {'timestamp': 1767646800000, 'candlestick_signal_value': 0}, {'timestamp': 1767650400000, 'candlestick_signal_value': 0}, {'timestamp': 1767654000000, 'candlestick_signal_value': 0}, {'timestamp': 1767657600000, 'candlestick_signal_value': 0}, {'timestamp': 1767661200000, 'candlestick_signal_value': 0}, {'timestamp': 1767664800000, 'candlestick_signal_value': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'candlestick_signal_value': 0}, {'timestamp': 1768892400000, 'candlestick_signal_value': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:11:44,619 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:11:44,964 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:11:45,235 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:11:45,517 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:11:45,833 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:11:46,165 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:11:46,435 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:16:08,948 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:16:09,254 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:16:09,546 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:16:09,887 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:16:10,219 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:16:10,541 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:16:10,988 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:16:11,324 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:16:11,664 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:16:11,969 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:16:12,287 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:16:12,624 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:16:12,937 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:16:13,233 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:16:13,559 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:16:13,853 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:16:14,213 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:16:15,091 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:16:15,496 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:16:15,858 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:16:16,170 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:16:16,479 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:16:16,812 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:16:17,074 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:16:17,362 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:16:17,636 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:16:17,974 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:16:18,298 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:16:18,573 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:16:18,868 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:16:19,151 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:16:19,471 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:16:19,764 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:16:20,246 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:16:20,713 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:16:20,992 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:16:21,281 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:16:21,782 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:16:22,282 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:16:22,691 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:16:23,133 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:16:23,648 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:16:24,064 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:16:24,490 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:16:24,941 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:16:25,183 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:16:25,458 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:16:26,273 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:16:27,440 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:16:27,840 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:16:28,214 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:16:28,620 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:16:29,023 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:16:29,456 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:16:29,854 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:16:29,965 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "candlestick_signal_value" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestic...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestick_signal_value)
+        VALUES (%(timestamp)s,%(candlestick_signal_value)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'candlestick_signal_value': 0}, {'timestamp': 1767643200000, 'candlestick_signal_value': 0}, {'timestamp': 1767646800000, 'candlestick_signal_value': 0}, {'timestamp': 1767650400000, 'candlestick_signal_value': 0}, {'timestamp': 1767654000000, 'candlestick_signal_value': 0}, {'timestamp': 1767657600000, 'candlestick_signal_value': 0}, {'timestamp': 1767661200000, 'candlestick_signal_value': 0}, {'timestamp': 1767664800000, 'candlestick_signal_value': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'candlestick_signal_value': 0}, {'timestamp': 1768892400000, 'candlestick_signal_value': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:16:31,113 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:16:31,534 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:16:31,930 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:16:32,461 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:16:32,957 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:16:33,305 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:16:33,607 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:19:04,204 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:19:04,478 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:19:04,730 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:19:05,016 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:19:05,262 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:19:05,528 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:19:05,771 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:19:06,092 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:19:06,408 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:19:06,676 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:19:06,976 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:19:07,305 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:19:07,601 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:19:07,877 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:19:08,206 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:19:08,569 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:19:08,890 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:19:09,223 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:19:09,524 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:19:09,840 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:19:10,109 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:19:10,391 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:19:10,705 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:19:11,038 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:19:11,387 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:19:11,717 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:19:12,048 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:19:12,356 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:19:12,671 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:19:12,987 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:19:13,311 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:19:13,652 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:19:13,969 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:19:14,278 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:19:14,620 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:19:14,954 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:19:15,261 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:19:15,586 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:19:15,855 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:19:16,134 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:19:16,452 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:19:16,800 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:19:17,096 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:19:17,449 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:19:17,767 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:19:18,269 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:19:18,960 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:19:19,832 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:19:20,150 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:19:20,546 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:19:20,882 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:19:21,214 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:19:21,594 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:19:21,915 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:19:22,261 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:19:22,358 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "candlestick_signal" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestic...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestick_signal)
+        VALUES (%(timestamp)s,%(candlestick_signal)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'candlestick_signal': 0}, {'timestamp': 1767643200000, 'candlestick_signal': 0}, {'timestamp': 1767646800000, 'candlestick_signal': 0}, {'timestamp': 1767650400000, 'candlestick_signal': 0}, {'timestamp': 1767654000000, 'candlestick_signal': 0}, {'timestamp': 1767657600000, 'candlestick_signal': 0}, {'timestamp': 1767661200000, 'candlestick_signal': 0}, {'timestamp': 1767664800000, 'candlestick_signal': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'candlestick_signal': 0}, {'timestamp': 1768892400000, 'candlestick_signal': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:19:22,697 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:19:23,063 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:19:23,341 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:19:23,703 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:19:24,055 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:19:24,445 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:19:24,845 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:21:24,619 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:21:24,932 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:21:25,259 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:21:25,643 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:21:25,979 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:21:26,313 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:21:26,647 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:21:27,656 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:21:27,960 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:21:28,274 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:21:28,628 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:21:28,992 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:21:29,469 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:21:29,982 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:21:30,249 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:21:30,590 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:21:30,842 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:21:31,115 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:21:31,445 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:21:31,761 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:21:32,157 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:21:32,572 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:21:32,847 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:21:33,146 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:21:33,446 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:21:33,733 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:21:34,027 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:21:34,289 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:21:34,579 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:21:34,831 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:21:35,516 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:21:35,937 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:21:36,336 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:21:36,762 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:21:37,045 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:21:37,326 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:21:37,656 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:21:37,976 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:21:38,286 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:21:38,575 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:21:38,861 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:21:39,143 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:21:39,410 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:21:39,725 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:21:40,025 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:21:40,293 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:21:40,560 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:21:41,093 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:21:41,533 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:21:41,934 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:21:42,336 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:21:42,725 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:21:43,222 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:21:43,688 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:21:44,193 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:21:44,301 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedColumn) column "candlestick_signal" of relation "btc_cdldoji_1h" does not exist
+LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestic...
+                                                             ^
+
+[SQL: 
+        INSERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestick_signal)
+        VALUES (%(timestamp)s,%(candlestick_signal)s)
+        ON CONFLICT (timestamp) DO NOTHING
+    ]
+[parameters: [{'timestamp': 1767639600000, 'candlestick_signal': 0}, {'timestamp': 1767643200000, 'candlestick_signal': 0}, {'timestamp': 1767646800000, 'candlestick_signal': 0}, {'timestamp': 1767650400000, 'candlestick_signal': 0}, {'timestamp': 1767654000000, 'candlestick_signal': 0}, {'timestamp': 1767657600000, 'candlestick_signal': 0}, {'timestamp': 1767661200000, 'candlestick_signal': 0}, {'timestamp': 1767664800000, 'candlestick_signal': 0}  ... displaying 10 of 349 total bound parameter sets ...  {'timestamp': 1768888800000, 'candlestick_signal': 0}, {'timestamp': 1768892400000, 'candlestick_signal': 0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 15:21:44,715 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:21:45,116 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:21:45,472 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:21:45,872 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:21:46,133 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:21:46,446 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:21:46,914 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:22:54,201 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:22:54,501 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:22:54,865 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:22:55,183 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:22:55,499 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:22:55,869 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:22:56,151 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:22:56,443 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:22:56,734 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:22:57,032 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:22:57,318 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:22:57,647 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:22:57,980 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:22:58,305 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:22:58,693 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:22:59,218 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:22:59,829 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:23:00,146 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:23:00,448 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:23:00,809 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:23:01,144 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:23:01,448 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:23:01,730 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:23:01,999 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:23:02,313 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:23:02,627 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:23:02,915 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:23:03,197 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:23:03,465 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:23:03,746 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:23:04,011 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:23:04,296 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:23:04,735 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:23:05,359 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:23:05,865 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:23:05,954 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:23:06,228 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:23:06,480 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:23:06,770 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:23:07,055 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:23:07,343 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:23:07,619 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:23:07,920 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:23:08,205 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:23:08,493 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:23:08,757 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:23:09,027 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:23:09,326 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:23:09,603 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:23:09,877 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:23:10,191 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:23:10,790 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:23:11,593 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:23:12,251 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:23:12,715 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:23:23,332 | INFO | indicators_main | Saved candlestick_signal to table btc_cdldoji_1h
+2026-01-27 15:23:23,768 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:23:24,100 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:23:24,393 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:23:24,729 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:23:24,987 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:23:25,252 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:23:25,503 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 15:26:10,286 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:26:10,597 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:26:10,969 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:26:11,304 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:26:11,624 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:26:11,977 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:26:12,395 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:26:12,795 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:26:13,149 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:26:13,498 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:26:13,902 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:26:14,278 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:26:14,609 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:26:15,034 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:26:15,519 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:26:15,969 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:26:16,275 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:26:16,602 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:26:16,923 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:26:17,284 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:26:17,701 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:26:18,046 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:26:18,433 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:26:18,924 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:26:19,352 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:26:19,696 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:26:19,993 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:26:20,408 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:26:21,257 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:26:21,857 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:26:22,258 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:26:22,642 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:26:22,986 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:26:23,314 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:26:23,676 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:26:23,988 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:26:24,347 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:26:24,687 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:26:25,069 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:26:25,435 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:26:25,763 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:26:26,086 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:26:26,563 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:26:27,560 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:26:28,062 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:26:28,514 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:26:29,017 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:26:29,503 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:29:29,614 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 15:29:29,981 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 15:29:30,293 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 15:29:30,642 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 15:29:30,952 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 15:29:31,277 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 15:29:31,631 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 15:29:31,986 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 15:29:32,291 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 15:29:32,631 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 15:29:32,902 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 15:29:33,199 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 15:29:33,459 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 15:29:33,717 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 15:29:34,118 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 15:29:34,378 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 15:29:34,651 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 15:29:34,993 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 15:29:35,242 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 15:29:35,516 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 15:29:35,775 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 15:29:36,034 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 15:29:36,321 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 15:29:36,592 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 15:29:36,853 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 15:29:37,140 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 15:29:37,485 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 15:29:37,789 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 15:29:38,183 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 15:29:38,635 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 15:29:38,915 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 15:29:39,474 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 15:29:39,918 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 15:29:40,314 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 15:29:40,722 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 15:29:41,030 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 15:29:41,297 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 15:29:41,548 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 15:29:41,882 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 15:29:42,146 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 15:29:42,471 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 15:29:42,755 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 15:29:43,020 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 15:29:43,302 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 15:29:43,600 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 15:29:43,849 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 15:29:44,129 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 15:29:44,411 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 15:29:44,958 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 15:29:45,458 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 15:29:45,926 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 15:29:46,348 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 15:29:46,669 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 15:29:46,973 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 15:29:47,270 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 15:29:56,389 | INFO | indicators_main | Saved candlestick_signal to table btc_cdldojistar_1h
+2026-01-27 15:29:56,796 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 15:29:57,132 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 15:29:57,486 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 15:29:57,844 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 15:29:58,167 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 15:29:58,489 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 15:29:58,777 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
