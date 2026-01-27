@@ -199,15 +199,17 @@ logger.info(f"VAR: {var(close)[-5:]}")
 
 macd_val, macd_signal, _ = macd(close)
 
-indicators_dict = {
-    "close": close,
-    "rsi": rsi(close),
-    "macd": macd_val,
-    "macd_signal": macd_signal,
-    "ema_fast": ema(close, period=12),
-    "ema_slow": ema(close, period=26),
+indicators = {
+    'close': close,
+    'sma': sma(close),
+    'ema': ema(close),
+    'macd': macd_val,
+    'macd_signal': signal,
+    'rsi': rsi(close),
+    'bb_upper': upper,
+    'bb_lower': lower,
+    'atr': atr(high, low, close)
 }
-
-signals = generate_signals(indicators_dict)
+signals = generate_signals(indicators)
 
 logger.info(f"Signals (last 10): {signals[-10:]}")
