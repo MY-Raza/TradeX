@@ -5,7 +5,7 @@ import pandas as pd
 from indicators import *
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db
+from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db,drop_schema
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from signals import generate_signals
 
@@ -93,7 +93,8 @@ signals_df = pd.DataFrame({
 save_df_to_db(
     df=signals_df,
     table_name="btc_signals_1h",  
-    schema=schema,             
+    schema=SCHEMA,             
     time_column="timestamp",
     is_timeseries=True         
 )
+drop_schema(schema)

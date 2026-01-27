@@ -3162,3 +3162,30 @@ First 5 rows from data_binance.btc_1m:
 2026-01-27 10:58:52,903 | INFO | utils | Schema 'data_signals' ready
 2026-01-27 10:58:52,962 | INFO | utils | Unique index ensured: btc_signals_1h_timestamp_uidx
 2026-01-27 10:58:59,545 | INFO | utils | Inserted 349 rows into data_signals.btc_signals_1h
+2026-01-27 11:03:16,979 | INFO | utils | Database engine initialized
+2026-01-27 11:03:19,110 | INFO | utils | 
+First 5 rows from data_binance.btc_1m:
+
+2026-01-27 11:03:19,110 | INFO | utils |        timestamp     open     high      low    close   volume
+0  1767639600000  94400.5  94406.4  94300.0  94313.1  291.577
+1  1767639660000  94313.1  94353.3  94295.5  94353.2  125.304
+2  1767639720000  94353.3  94358.4  94280.1  94298.4  142.027
+3  1767639780000  94298.4  94318.0  94283.7  94299.9  104.387
+4  1767639840000  94299.9  94301.1  94226.2  94265.3  220.855
+2026-01-27 11:03:19,279 | INFO | utils | Schema 'data_binance' ready
+2026-01-27 11:03:19,359 | INFO | utils | Unique index ensured: btc_signals_1h_timestamp_uidx
+2026-01-27 11:03:26,390 | INFO | utils | Inserted 349 rows into data_binance.btc_signals_1h
+2026-01-27 11:04:20,079 | INFO | utils | Database engine initialized
+2026-01-27 11:04:20,644 | INFO | utils | 
+First 5 rows from data_binance.btc_1m:
+
+2026-01-27 11:04:20,644 | INFO | utils |        timestamp     open     high      low    close   volume
+0  1767639600000  94400.5  94406.4  94300.0  94313.1  291.577
+1  1767639660000  94313.1  94353.3  94295.5  94353.2  125.304
+2  1767639720000  94353.3  94358.4  94280.1  94298.4  142.027
+3  1767639780000  94298.4  94318.0  94283.7  94299.9  104.387
+4  1767639840000  94299.9  94301.1  94226.2  94265.3  220.855
+2026-01-27 11:04:20,691 | INFO | utils | Schema 'data_binance' ready
+2026-01-27 11:04:20,707 | INFO | utils | Unique index ensured: btc_signals_1h_timestamp_uidx
+2026-01-27 11:04:20,769 | INFO | utils | No new rows to insert
+2026-01-27 11:04:31,845 | WARNING | utils | Schema 'data_signals' dropped
