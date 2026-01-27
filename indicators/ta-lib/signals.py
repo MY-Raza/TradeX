@@ -381,7 +381,7 @@ def trange_signal(high, low, close):
 def candlestick_signal(open_, high, low, close, pattern_name):
     val = candlestick_pattern(open_, high, low, close, pattern_name)
     signals = np.where(val > 0, 1, np.where(val < 0, -1, 0))
-    return signals
+    return signals, pattern_name
 
 # =========================================================
 # STATISTICAL / REGRESSION SIGNALS

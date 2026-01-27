@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db
+from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db,drop_schema
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from signals import *
 
@@ -17,7 +17,7 @@ logger = get_logger("indicators_main")
 # Exchange schema configuration
 # ---------------------------
 SCHEMA = EXCHANGE_SCHEMA_MAP["signals"]
-
+drop_schema(SCHEMA)
 # ---------------------------
 # Fetch OHLCV data (1-minute interval)
 # ---------------------------
@@ -140,42 +140,78 @@ signal_args = {
 # Compute all signals and save each to its own table
 # ---------------------------
 for func_name, func in signal_funcs.items():
-    args = signal_args.get(func_name, ())
-    if not args:
+    args_config = signal_args.get(func_name, ())
+
+    if not args_config:
         logger.warning(f"No arguments provided for {func_name}, skipping")
         continue
 
-    try:
-        result = func(*args)
+    # ---------------------------
+    # Handle functions with MULTIPLE argument sets (like candlestick patterns)
+    # ---------------------------
+    if isinstance(args_config, list):
+        for args in args_config:
+            try:
+                result = func(*args)
 
-        # ---------------------------
-        # Convert result to DataFrame with timestamp as a column
-        # ---------------------------
-        if isinstance(result, tuple):
-            # Multi-output signals (e.g., MACD, MAMA)
-            result_df = pd.DataFrame({f"{func_name}_{i}": r for i, r in enumerate(result)})
-        elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
-            # Multi-column array
-            result_df = pd.DataFrame(result, columns=[f"{func_name}_{i}" for i in range(result.shape[1])])
-        else:
-            # Single series
-            result_df = pd.DataFrame({f"{func_name}_value": result})
+                # Special handling for candlestick_signal
+                if func_name == "candlestick_signal":
+                    result, pattern_name = result
+                    table_name = f"btc_{pattern_name}_1h"
+                    col_prefix = pattern_name
+                else:
+                    table_name = f"btc_{func_name}_1h"
+                    col_prefix = func_name
 
-        # Add timestamp as a regular column
-        result_df.insert(0, "timestamp", df_1h["timestamp"])
+                # Convert result to DataFrame
+                if isinstance(result, tuple):
+                    result_df = pd.DataFrame({f"{col_prefix}_{i}": r for i, r in enumerate(result)})
+                elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
+                    result_df = pd.DataFrame(result, columns=[f"{col_prefix}_{i}" for i in range(result.shape[1])])
+                else:
+                    result_df = pd.DataFrame({f"{col_prefix}_value": result})
 
-        # ---------------------------
-        # Save to database
-        # ---------------------------
-        table_name = f"btc_{func_name}_1h"
-        save_df_to_db(
-            result_df,
-            table_name=table_name,
-            schema=SCHEMA,
-            time_column="timestamp",
-            is_timeseries=True
-        )
-        logger.info(f"Saved {func_name} to table {table_name}")
+                result_df.insert(0, "timestamp", df_1h["timestamp"])
 
-    except Exception as e:
-        logger.error(f"Error computing or saving {func_name}: {e}")
+                save_df_to_db(
+                    result_df,
+                    table_name=table_name,
+                    schema=SCHEMA,
+                    time_column="timestamp",
+                    is_timeseries=True
+                )
+                logger.info(f"Saved {func_name} -> {table_name}")
+
+            except Exception as e:
+                logger.error(f"Error computing {func_name} with args {args}: {e}")
+
+    # ---------------------------
+    # Normal single-run signals
+    # ---------------------------
+    else:
+        try:
+            result = func(*args_config)
+            table_name = f"btc_{func_name}_1h"
+            col_prefix = func_name
+
+            if isinstance(result, tuple):
+                result_df = pd.DataFrame({f"{col_prefix}_{i}": r for i, r in enumerate(result)})
+            elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
+                result_df = pd.DataFrame(result, columns=[f"{col_prefix}_{i}" for i in range(result.shape[1])])
+            else:
+                result_df = pd.DataFrame({f"{col_prefix}_value": result})
+
+            result_df.insert(0, "timestamp", df_1h["timestamp"])
+
+            save_df_to_db(
+                result_df,
+                table_name=table_name,
+                schema=SCHEMA,
+                time_column="timestamp",
+                is_timeseries=True
+            )
+            logger.info(f"Saved {func_name} to table {table_name}")
+
+        except Exception as e:
+            logger.error(f"Error computing or saving {func_name}: {e}")
+

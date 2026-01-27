@@ -4543,3 +4543,200 @@ First 5 rows from data_binance.btc_1m:
 2026-01-27 13:06:13,221 | INFO | utils | Schema 'talib_signals' ready
 2026-01-27 13:06:13,261 | INFO | utils | Unique index ensured: btc_var_signal_1h_timestamp_uidx
 2026-01-27 13:06:25,387 | INFO | utils | Inserted 349 rows into talib_signals.btc_var_signal_1h
+2026-01-27 13:41:46,004 | INFO | utils | Database engine initialized
+2026-01-27 13:41:48,384 | INFO | utils | 
+First 5 rows from data_binance.btc_1m:
+
+2026-01-27 13:41:48,384 | INFO | utils |        timestamp     open     high      low    close   volume
+0  1767639600000  94400.5  94406.4  94300.0  94313.1  291.577
+1  1767639660000  94313.1  94353.3  94295.5  94353.2  125.304
+2  1767639720000  94353.3  94358.4  94280.1  94298.4  142.027
+3  1767639780000  94298.4  94318.0  94283.7  94299.9  104.387
+4  1767639840000  94299.9  94301.1  94226.2  94265.3  220.855
+2026-01-27 13:41:48,525 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:48,541 | INFO | utils | Unique index ensured: btc_sma_signal_1h_timestamp_uidx
+2026-01-27 13:41:48,902 | INFO | utils | No new rows to insert
+2026-01-27 13:41:48,904 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:48,928 | INFO | utils | Unique index ensured: btc_ema_signal_1h_timestamp_uidx
+2026-01-27 13:41:49,219 | INFO | utils | No new rows to insert
+2026-01-27 13:41:49,233 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:49,249 | INFO | utils | Unique index ensured: btc_dema_signal_1h_timestamp_uidx
+2026-01-27 13:41:49,529 | INFO | utils | No new rows to insert
+2026-01-27 13:41:49,537 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:49,545 | INFO | utils | Unique index ensured: btc_tema_signal_1h_timestamp_uidx
+2026-01-27 13:41:49,804 | INFO | utils | No new rows to insert
+2026-01-27 13:41:49,808 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:49,816 | INFO | utils | Unique index ensured: btc_trima_signal_1h_timestamp_uidx
+2026-01-27 13:41:50,047 | INFO | utils | No new rows to insert
+2026-01-27 13:41:50,061 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:50,069 | INFO | utils | Unique index ensured: btc_wma_signal_1h_timestamp_uidx
+2026-01-27 13:41:50,333 | INFO | utils | No new rows to insert
+2026-01-27 13:41:50,339 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:50,347 | INFO | utils | Unique index ensured: btc_t3_signal_1h_timestamp_uidx
+2026-01-27 13:41:50,595 | INFO | utils | No new rows to insert
+2026-01-27 13:41:50,610 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:50,618 | INFO | utils | Unique index ensured: btc_kama_signal_1h_timestamp_uidx
+2026-01-27 13:41:50,871 | INFO | utils | No new rows to insert
+2026-01-27 13:41:50,871 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:50,886 | INFO | utils | Unique index ensured: btc_ma_signal_1h_timestamp_uidx
+2026-01-27 13:41:51,146 | INFO | utils | No new rows to insert
+2026-01-27 13:41:51,154 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:51,162 | INFO | utils | Unique index ensured: btc_ht_trendline_signal_1h_timestamp_uidx
+2026-01-27 13:41:51,462 | INFO | utils | No new rows to insert
+2026-01-27 13:41:51,478 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:51,478 | INFO | utils | Unique index ensured: btc_mama_signal_1h_timestamp_uidx
+2026-01-27 13:41:51,776 | INFO | utils | No new rows to insert
+2026-01-27 13:41:51,791 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:51,791 | INFO | utils | Unique index ensured: btc_mavp_signal_1h_timestamp_uidx
+2026-01-27 13:41:52,075 | INFO | utils | No new rows to insert
+2026-01-27 13:41:52,086 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:52,094 | INFO | utils | Unique index ensured: btc_bbands_signal_1h_timestamp_uidx
+2026-01-27 13:41:52,415 | INFO | utils | No new rows to insert
+2026-01-27 13:41:52,421 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:52,429 | INFO | utils | Unique index ensured: btc_midpoint_signal_1h_timestamp_uidx
+2026-01-27 13:41:52,914 | INFO | utils | No new rows to insert
+2026-01-27 13:41:52,917 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:52,933 | INFO | utils | Unique index ensured: btc_midprice_signal_1h_timestamp_uidx
+2026-01-27 13:41:53,369 | INFO | utils | No new rows to insert
+2026-01-27 13:41:53,371 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:53,379 | INFO | utils | Unique index ensured: btc_sar_signal_1h_timestamp_uidx
+2026-01-27 13:41:53,808 | INFO | utils | No new rows to insert
+2026-01-27 13:41:53,812 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:53,820 | INFO | utils | Unique index ensured: btc_sarext_signal_1h_timestamp_uidx
+2026-01-27 13:41:54,235 | INFO | utils | No new rows to insert
+2026-01-27 13:41:54,251 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:54,259 | INFO | utils | Unique index ensured: btc_adx_signal_1h_timestamp_uidx
+2026-01-27 13:41:54,699 | INFO | utils | No new rows to insert
+2026-01-27 13:41:54,699 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:54,715 | INFO | utils | Unique index ensured: btc_adxr_signal_1h_timestamp_uidx
+2026-01-27 13:41:55,003 | INFO | utils | No new rows to insert
+2026-01-27 13:41:55,003 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:55,019 | INFO | utils | Unique index ensured: btc_apo_signal_1h_timestamp_uidx
+2026-01-27 13:41:55,307 | INFO | utils | No new rows to insert
+2026-01-27 13:41:55,315 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:55,323 | INFO | utils | Unique index ensured: btc_ppo_signal_1h_timestamp_uidx
+2026-01-27 13:41:55,627 | INFO | utils | No new rows to insert
+2026-01-27 13:41:55,627 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:55,635 | INFO | utils | Unique index ensured: btc_macd_signal_1h_timestamp_uidx
+2026-01-27 13:41:56,003 | INFO | utils | No new rows to insert
+2026-01-27 13:41:56,003 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:56,011 | INFO | utils | Unique index ensured: btc_macdext_signal_1h_timestamp_uidx
+2026-01-27 13:41:56,355 | INFO | utils | No new rows to insert
+2026-01-27 13:41:56,355 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:56,371 | INFO | utils | Unique index ensured: btc_macdfix_signal_1h_timestamp_uidx
+2026-01-27 13:41:56,719 | INFO | utils | No new rows to insert
+2026-01-27 13:41:56,720 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:56,736 | INFO | utils | Unique index ensured: btc_cci_signal_1h_timestamp_uidx
+2026-01-27 13:41:57,020 | INFO | utils | No new rows to insert
+2026-01-27 13:41:57,028 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:57,036 | INFO | utils | Unique index ensured: btc_mom_signal_1h_timestamp_uidx
+2026-01-27 13:41:57,316 | INFO | utils | No new rows to insert
+2026-01-27 13:41:57,325 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:57,328 | INFO | utils | Unique index ensured: btc_roc_signal_1h_timestamp_uidx
+2026-01-27 13:41:57,633 | INFO | utils | No new rows to insert
+2026-01-27 13:41:57,638 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:57,646 | INFO | utils | Unique index ensured: btc_rocp_signal_1h_timestamp_uidx
+2026-01-27 13:41:57,901 | INFO | utils | No new rows to insert
+2026-01-27 13:41:57,917 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:57,925 | INFO | utils | Unique index ensured: btc_rocr_signal_1h_timestamp_uidx
+2026-01-27 13:41:58,292 | INFO | utils | No new rows to insert
+2026-01-27 13:41:58,296 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:58,320 | INFO | utils | Unique index ensured: btc_rocr100_signal_1h_timestamp_uidx
+2026-01-27 13:41:58,713 | INFO | utils | No new rows to insert
+2026-01-27 13:41:58,720 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:58,728 | INFO | utils | Unique index ensured: btc_trix_signal_1h_timestamp_uidx
+2026-01-27 13:41:59,042 | INFO | utils | No new rows to insert
+2026-01-27 13:41:59,059 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:59,067 | INFO | utils | Unique index ensured: btc_cmo_signal_1h_timestamp_uidx
+2026-01-27 13:41:59,379 | INFO | utils | No new rows to insert
+2026-01-27 13:41:59,387 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:59,403 | INFO | utils | Unique index ensured: btc_mfi_signal_1h_timestamp_uidx
+2026-01-27 13:41:59,716 | INFO | utils | No new rows to insert
+2026-01-27 13:41:59,728 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:41:59,736 | INFO | utils | Unique index ensured: btc_bop_signal_1h_timestamp_uidx
+2026-01-27 13:42:00,076 | INFO | utils | No new rows to insert
+2026-01-27 13:42:00,076 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:00,092 | INFO | utils | Unique index ensured: btc_aroon_signal_1h_timestamp_uidx
+2026-01-27 13:42:00,408 | INFO | utils | No new rows to insert
+2026-01-27 13:42:00,412 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:00,420 | INFO | utils | Unique index ensured: btc_aroonosc_signal_1h_timestamp_uidx
+2026-01-27 13:42:00,744 | INFO | utils | No new rows to insert
+2026-01-27 13:42:00,760 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:00,768 | INFO | utils | Unique index ensured: btc_rsi_signal_1h_timestamp_uidx
+2026-01-27 13:42:01,078 | INFO | utils | No new rows to insert
+2026-01-27 13:42:01,093 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:01,101 | INFO | utils | Unique index ensured: btc_stoch_signal_1h_timestamp_uidx
+2026-01-27 13:42:01,395 | INFO | utils | No new rows to insert
+2026-01-27 13:42:01,410 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:01,419 | INFO | utils | Unique index ensured: btc_stochf_signal_1h_timestamp_uidx
+2026-01-27 13:42:01,723 | INFO | utils | No new rows to insert
+2026-01-27 13:42:01,725 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:01,733 | INFO | utils | Unique index ensured: btc_stochrsi_signal_1h_timestamp_uidx
+2026-01-27 13:42:02,045 | INFO | utils | No new rows to insert
+2026-01-27 13:42:02,060 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:02,060 | INFO | utils | Unique index ensured: btc_ultosc_signal_1h_timestamp_uidx
+2026-01-27 13:42:02,405 | INFO | utils | No new rows to insert
+2026-01-27 13:42:02,413 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:02,421 | INFO | utils | Unique index ensured: btc_willr_signal_1h_timestamp_uidx
+2026-01-27 13:42:02,772 | INFO | utils | No new rows to insert
+2026-01-27 13:42:02,778 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:02,794 | INFO | utils | Unique index ensured: btc_ad_signal_1h_timestamp_uidx
+2026-01-27 13:42:03,125 | INFO | utils | No new rows to insert
+2026-01-27 13:42:03,135 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:03,151 | INFO | utils | Unique index ensured: btc_adosc_signal_1h_timestamp_uidx
+2026-01-27 13:42:03,807 | INFO | utils | No new rows to insert
+2026-01-27 13:42:03,807 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:03,824 | INFO | utils | Unique index ensured: btc_obv_signal_1h_timestamp_uidx
+2026-01-27 13:42:04,355 | INFO | utils | No new rows to insert
+2026-01-27 13:42:04,364 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:04,372 | INFO | utils | Unique index ensured: btc_ht_trendmode_signal_1h_timestamp_uidx
+2026-01-27 13:42:04,676 | INFO | utils | No new rows to insert
+2026-01-27 13:42:04,692 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:04,692 | INFO | utils | Unique index ensured: btc_ht_phasor_signal_1h_timestamp_uidx
+2026-01-27 13:42:05,047 | INFO | utils | No new rows to insert
+2026-01-27 13:42:05,055 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:05,063 | INFO | utils | Unique index ensured: btc_ht_sine_signal_1h_timestamp_uidx
+2026-01-27 13:42:05,436 | INFO | utils | No new rows to insert
+2026-01-27 13:42:05,452 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:05,460 | INFO | utils | Unique index ensured: btc_avgprice_signal_1h_timestamp_uidx
+2026-01-27 13:42:05,804 | INFO | utils | No new rows to insert
+2026-01-27 13:42:05,812 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:05,820 | INFO | utils | Unique index ensured: btc_medprice_signal_1h_timestamp_uidx
+2026-01-27 13:42:06,132 | INFO | utils | No new rows to insert
+2026-01-27 13:42:06,132 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:06,148 | INFO | utils | Unique index ensured: btc_typprice_signal_1h_timestamp_uidx
+2026-01-27 13:42:06,468 | INFO | utils | No new rows to insert
+2026-01-27 13:42:06,468 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:06,476 | INFO | utils | Unique index ensured: btc_wclprice_signal_1h_timestamp_uidx
+2026-01-27 13:42:06,800 | INFO | utils | No new rows to insert
+2026-01-27 13:42:06,800 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:06,808 | INFO | utils | Unique index ensured: btc_atr_signal_1h_timestamp_uidx
+2026-01-27 13:42:07,145 | INFO | utils | No new rows to insert
+2026-01-27 13:42:07,148 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:07,156 | INFO | utils | Unique index ensured: btc_natr_signal_1h_timestamp_uidx
+2026-01-27 13:42:07,488 | INFO | utils | No new rows to insert
+2026-01-27 13:42:07,496 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:07,512 | INFO | utils | Unique index ensured: btc_trange_signal_1h_timestamp_uidx
+2026-01-27 13:42:07,824 | INFO | utils | No new rows to insert
+2026-01-27 13:42:07,824 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:08,626 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:08,646 | INFO | utils | Unique index ensured: btc_beta_signal_1h_timestamp_uidx
+2026-01-27 13:42:09,151 | INFO | utils | No new rows to insert
+2026-01-27 13:42:09,164 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:09,180 | INFO | utils | Unique index ensured: btc_correl_signal_1h_timestamp_uidx
+2026-01-27 13:42:09,882 | INFO | utils | No new rows to insert
+2026-01-27 13:42:09,894 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:09,902 | INFO | utils | Unique index ensured: btc_linearreg_angle_signal_1h_timestamp_uidx
+2026-01-27 13:42:10,392 | INFO | utils | No new rows to insert
+2026-01-27 13:42:10,392 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:10,408 | INFO | utils | Unique index ensured: btc_linearreg_slope_signal_1h_timestamp_uidx
+2026-01-27 13:42:10,876 | INFO | utils | No new rows to insert
+2026-01-27 13:42:10,884 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:10,892 | INFO | utils | Unique index ensured: btc_stddev_signal_1h_timestamp_uidx
+2026-01-27 13:42:11,282 | INFO | utils | No new rows to insert
+2026-01-27 13:42:11,299 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:11,307 | INFO | utils | Unique index ensured: btc_tsf_signal_1h_timestamp_uidx
+2026-01-27 13:42:11,654 | INFO | utils | No new rows to insert
+2026-01-27 13:42:11,668 | INFO | utils | Schema 'talib_signals' ready
+2026-01-27 13:42:11,676 | INFO | utils | Unique index ensured: btc_var_signal_1h_timestamp_uidx
+2026-01-27 13:42:11,940 | INFO | utils | No new rows to insert
