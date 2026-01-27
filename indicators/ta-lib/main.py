@@ -82,4 +82,4 @@ signals = generate_signals(indicators)
 # ---------------------------
 # Log the last 10 signals for review
 # ---------------------------
-logger.info(f"Signals (last 10): {signals[-20:]}")
+logger.info(f"Signals (last 50): {signals[-50:]}")
