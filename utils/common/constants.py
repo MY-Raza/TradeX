@@ -4,7 +4,7 @@ EXCHANGE_SCHEMA_MAP = {
     "binance": "data_binance",
     "kraken": "data_kraken",
     "metatrader5": "data_metatrader5",
-    "signals": "data_signals"
+    "signals": "talib_signals"
 }
 
 # Interval That Can be used for resampling

@@ -304,7 +304,7 @@ def drop_table(table_name: str, schema: str | None = None):
     """
     engine = get_engine()
     schema = ensure_schema(schema)
-    table = f"{table_name}_1m"
+    table = f"{table_name}_1h"
 
     confirm = input(f"Drop table {schema}.{table}? (yes/no): ").lower()
     if confirm != "yes":

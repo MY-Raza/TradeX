@@ -824,7 +824,6 @@ def aroonosc(high, low, period=14):
     """
     return talib.AROONOSC(high, low, timeperiod=period)
 
-
 # =========================================================
 # RELATIVE STRENGTH & STOCHASTIC INDICATORS
 # =========================================================

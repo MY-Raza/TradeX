@@ -2,12 +2,11 @@
 
 import numpy as np
 import pandas as pd
-from indicators import *
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db,drop_schema
+from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
-from signals import generate_signals
+from signals import *
 
 # ---------------------------
 # Logger Initialization
@@ -17,84 +16,166 @@ logger = get_logger("indicators_main")
 # ---------------------------
 # Exchange schema configuration
 # ---------------------------
-SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
-schema = EXCHANGE_SCHEMA_MAP["signals"]
+SCHEMA = EXCHANGE_SCHEMA_MAP["signals"]
 
 # ---------------------------
 # Fetch OHLCV data (1-minute interval)
 # ---------------------------
 df_1m = fetch_ohlcv_df(
-    table_name="btc",      # Table name in database
-    schema=SCHEMA,         # Exchange schema
-    time_column="timestamp"  # Column storing timestamp
+    table_name="btc",               # Table name in database
+    schema=EXCHANGE_SCHEMA_MAP["binance"],  # Exchange schema
+    time_column="timestamp"         # Column storing timestamp
 )
 
 if df_1m.empty:
     logger.error("No Data Fetched from database. Exiting.")
     exit()
-else:
-    # ---------------------------
-    # Resample 1-minute data to 1-hour data
-    # ---------------------------
-    df_1h = resample_ohlcv(df_1m, interval="1h")
-    
-    # Extract OHLCV series as numpy arrays
-    open_ = df_1h["open"].values
-    high = df_1h["high"].values
-    low = df_1h["low"].values
-    close = df_1h["close"].values
-    volume = df_1h["volume"].values
-    
-    # Optional: Reference series and variable periods (used in some indicators)
-    ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
-    periods = np.random.uniform(5, 30, len(df_1h)).astype(np.float64)
 
 # ---------------------------
-# Compute MACD indicator
+# Resample 1-minute data to 1-hour data
 # ---------------------------
-macd_val, macd_signal, _ = macd(close)
+df_1h = resample_ohlcv(df_1m, interval="1h")
+
+# Extract OHLCV series as numpy arrays
+open_ = df_1h["open"].values
+high = df_1h["high"].values
+low = df_1h["low"].values
+close = df_1h["close"].values
+volume = df_1h["volume"].values
+
+# Optional: Reference series and variable periods (used in some indicators)
+ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
+periods = np.random.uniform(5, 30, len(df_1h)).astype(np.float64)
 
 # ---------------------------
-# Compute all indicators and store in a dictionary
-# This dictionary will be passed to the signal generator
+# Automatically detect all functions ending with '_signal' in signals.py
 # ---------------------------
-indicators = {
-    'close': close,
-    'sma': sma(close),                     # Simple Moving Average
-    'ema': ema(close),                     # Exponential Moving Average
-    'adx': adx(high, low, close),          # Average Directional Index
-    'plus_di': plus_di(high, low, close),  # +DI
-    'minus_di': minus_di(high, low, close),# -DI
-    'macd': macd(close)[0],                # MACD line
-    'macd_signal': macd(close)[1],         # MACD signal line
-    'rsi': rsi(close),                     # Relative Strength Index
-    'mfi': mfi(high, low, close, volume),  # Money Flow Index
-    'stoch_k': stoch(high, low, close)[0],# Stochastic %K
-    'stoch_d': stoch(high, low, close)[1],# Stochastic %D
-    'atr': atr(high, low, close)           # Average True Range
+signal_funcs = {name: func for name, func in globals().items() if callable(func) and name.endswith("_signal")}
+
+# ---------------------------
+# Define required arguments for each signal
+# ---------------------------
+signal_args = {
+    "sma_signal": (close,),
+    "ema_signal": (close,),
+    "dema_signal": (close,),
+    "tema_signal": (close,),
+    "trima_signal": (close,),
+    "wma_signal": (close,),
+    "t3_signal": (close,),
+    "kama_signal": (close,),
+    "ma_signal": (close,),
+
+    "ht_trendline_signal": (close,),
+    "mama_signal": (close,),
+    "mavp_signal": (close, periods),
+
+    "bbands_signal": (close,),
+    "midpoint_signal": (close,),
+    "midprice_signal": (high, low),
+
+    "sar_signal": (close, high, low),
+    "sarext_signal": (close, high, low),
+
+    "adx_signal": (high, low, close),
+    "adxr_signal": (high, low, close),
+
+    "apo_signal": (close,),
+    "ppo_signal": (close,),
+    "macd_signal": (close,),
+    "macdext_signal": (close,),
+    "macdfix_signal": (close,),
+
+    "cci_signal": (high, low, close),
+    "mom_signal": (close,),
+    "roc_signal": (close,),
+    "rocp_signal": (close,),
+    "rocr_signal": (close,),
+    "rocr100_signal": (close,),
+    "trix_signal": (close,),
+    "cmo_signal": (close,),
+
+    "mfi_signal": (high, low, close, volume),
+    "bop_signal": (open_, high, low, close),
+
+    "aroon_signal": (high, low),
+    "aroonosc_signal": (high, low),
+
+    "rsi_signal": (close,),
+    "stoch_signal": (high, low, close),
+    "stochf_signal": (high, low, close),
+    "stochrsi_signal": (close,),
+    "ultosc_signal": (high, low, close),
+    "willr_signal": (high, low, close),
+
+    "ad_signal": (high, low, close, volume),
+    "adosc_signal": (high, low, close, volume),
+    "obv_signal": (close, volume),
+
+    "ht_trendmode_signal": (close,),
+    "ht_phasor_signal": (close,),
+    "ht_sine_signal": (close,),
+
+    "avgprice_signal": (open_, high, low, close),
+    "medprice_signal": (high, low, close),
+    "typprice_signal": (high, low, close),
+    "wclprice_signal": (high, low, close),
+
+    "atr_signal": (high, low, close),
+    "natr_signal": (high, low, close),
+    "trange_signal": (high, low, close),
+
+    "candlestick_signal": (open_, high, low, close, "CDLDOJI"),
+
+    "beta_signal": (close, ref),
+    "correl_signal": (close, ref),
+    "linearreg_angle_signal": (close,),
+    "linearreg_slope_signal": (close,),
+    "stddev_signal": (close,),
+    "tsf_signal": (close,),
+    "var_signal": (close,),
 }
 
 # ---------------------------
-# Generate trading signals
-# 1 = Buy, -1 = Sell, 0 = Hold
+# Compute all signals and save each to its own table
 # ---------------------------
-signals = generate_signals(indicators)
+for func_name, func in signal_funcs.items():
+    args = signal_args.get(func_name, ())
+    if not args:
+        logger.warning(f"No arguments provided for {func_name}, skipping")
+        continue
 
-# ---------------------------
-# Log the last 10 signals for review
-# ---------------------------
-logger.info(f"Signals (last 50): {signals[-1:]}")
+    try:
+        result = func(*args)
 
-signals_df = pd.DataFrame({
-    "timestamp": df_1h["timestamp"],
-    "signal": signals                 # 1 = Buy, -1 = Sell, 0 = Hold
-})
+        # ---------------------------
+        # Convert result to DataFrame with timestamp as a column
+        # ---------------------------
+        if isinstance(result, tuple):
+            # Multi-output signals (e.g., MACD, MAMA)
+            result_df = pd.DataFrame({f"{func_name}_{i}": r for i, r in enumerate(result)})
+        elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
+            # Multi-column array
+            result_df = pd.DataFrame(result, columns=[f"{func_name}_{i}" for i in range(result.shape[1])])
+        else:
+            # Single series
+            result_df = pd.DataFrame({f"{func_name}_value": result})
 
-save_df_to_db(
-    df=signals_df,
-    table_name="btc_signals_1h",  
-    schema=SCHEMA,             
-    time_column="timestamp",
-    is_timeseries=True         
-)
-drop_schema(schema)
+        # Add timestamp as a regular column
+        result_df.insert(0, "timestamp", df_1h["timestamp"])
+
+        # ---------------------------
+        # Save to database
+        # ---------------------------
+        table_name = f"btc_{func_name}_1h"
+        save_df_to_db(
+            result_df,
+            table_name=table_name,
+            schema=SCHEMA,
+            time_column="timestamp",
+            is_timeseries=True
+        )
+        logger.info(f"Saved {func_name} to table {table_name}")
+
+    except Exception as e:
+        logger.error(f"Error computing or saving {func_name}: {e}")
