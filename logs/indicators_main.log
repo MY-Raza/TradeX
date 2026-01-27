@@ -1201,3 +1201,1542 @@
 2026-01-27 12:21:26,446 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
 2026-01-27 12:21:33,843 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
 2026-01-27 12:21:40,835 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 12:32:01,599 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 12:32:01,989 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 12:32:02,345 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 12:32:02,689 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 12:32:03,470 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 12:32:04,191 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 12:32:04,691 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 12:32:05,064 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 12:32:05,465 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 12:32:05,798 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 12:32:06,127 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 12:32:06,538 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 12:32:06,939 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 12:32:07,345 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 12:32:07,665 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 12:32:08,001 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 12:32:08,333 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 12:32:08,580 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 12:32:08,829 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 12:32:09,147 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 12:32:09,487 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 12:32:09,813 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 12:32:10,143 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 12:32:10,474 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 12:32:10,811 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 12:32:11,303 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 12:32:11,731 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 12:32:12,251 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 12:32:12,764 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 12:32:13,096 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 12:32:13,409 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 12:32:13,719 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 12:32:14,021 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 12:32:14,330 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 12:32:14,658 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 12:32:14,986 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 12:32:15,335 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 12:32:15,730 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 12:32:16,096 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 12:32:16,420 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 12:32:16,767 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 12:32:17,085 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 12:32:17,392 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 12:32:17,673 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 12:32:18,017 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 12:32:18,412 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 12:32:18,766 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 12:32:19,141 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 12:32:19,876 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 12:32:21,222 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 12:32:21,544 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 12:32:22,032 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 12:32:22,643 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 12:32:23,062 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 12:32:23,390 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 12:32:23,390 | WARNING | indicators_main | No arguments provided for candlestick_signal, skipping
+2026-01-27 12:32:23,706 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 12:32:24,028 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 12:32:24,361 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 12:32:24,733 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 12:32:25,110 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 12:32:25,289 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 12:32:25,395 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 12:32:25,626 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL2CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:25,717 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3BLACKCROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3blackcrows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3BLACKCROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3BLACKCROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:25,826 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3INSIDE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3inside_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3INSIDE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3INSIDE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:25,950 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3LINESTRIKE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3linestrike_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3LINESTRIKE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3LINESTRIKE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,118 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3OUTSIDE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3outside_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3OUTSIDE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3OUTSIDE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,195 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3STARSINSOUTH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3starsinsouth_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3STARSINSOUTH_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3STARSINSOUTH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,282 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3WHITESOLDIERS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3whitesoldiers_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3WHITESOLDIERS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3WHITESOLDIERS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,375 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLABANDONEDBABY: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlabandonedbaby_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLABANDONEDBABY_1h_timestamp_uidx
+            ON talib_signals.btc_CDLABANDONEDBABY_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,532 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLADVANCEBLOCK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdladvanceblock_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLADVANCEBLOCK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLADVANCEBLOCK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,621 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLBELTHOLD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlbelthold_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLBELTHOLD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLBELTHOLD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,777 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLBREAKAWAY: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlbreakaway_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLBREAKAWAY_1h_timestamp_uidx
+            ON talib_signals.btc_CDLBREAKAWAY_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,851 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCLOSINGMARUBOZU: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlclosingmarubozu_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCLOSINGMARUBOZU_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCLOSINGMARUBOZU_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:26,933 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCONCEALBABYSWALL: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlconcealbabyswall_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCONCEALBABYSWALL_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCONCEALBABYSWALL_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,015 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCOUNTERATTACK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlcounterattack_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCOUNTERATTACK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCOUNTERATTACK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,107 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDARKCLOUDCOVER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldarkcloudcover_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDARKCLOUDCOVER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDARKCLOUDCOVER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,255 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,334 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,427 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDRAGONFLYDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldragonflydoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDRAGONFLYDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDRAGONFLYDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,528 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLENGULFING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlengulfing_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLENGULFING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLENGULFING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,597 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLEVENINGDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdleveningdojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLEVENINGDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLEVENINGDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,758 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLEVENINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdleveningstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLEVENINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLEVENINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,843 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLGAPSIDESIDEWHITE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlgapsidesidewhite_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLGAPSIDESIDEWHITE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLGAPSIDESIDEWHITE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:27,946 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLGRAVESTONEDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlgravestonedoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLGRAVESTONEDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLGRAVESTONEDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,043 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHAMMER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhammer_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHAMMER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHAMMER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,143 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHANGINGMAN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhangingman_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHANGINGMAN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHANGINGMAN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,245 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHARAMI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlharami_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHARAMI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHARAMI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,319 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHARAMICROSS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlharamicross_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHARAMICROSS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHARAMICROSS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,431 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIGHWAVE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhighwave_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIGHWAVE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIGHWAVE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,605 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIKKAKE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhikkake_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIKKAKE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIKKAKE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,683 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIKKAKEMOD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhikkakemod_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIKKAKEMOD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIKKAKEMOD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,777 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHOMINGPIGEON: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhomingpigeon_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHOMINGPIGEON_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHOMINGPIGEON_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:28,966 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLIDENTICAL3CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlidentical3crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLIDENTICAL3CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLIDENTICAL3CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,060 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLINNECK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlinneck_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLINNECK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLINNECK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,238 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLINVERTEDHAMMER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlinvertedhammer_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLINVERTEDHAMMER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLINVERTEDHAMMER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,317 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLKICKING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlkicking_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLKICKING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLKICKING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,456 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLKICKINGBYLENGTH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlkickingbylength_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLKICKINGBYLENGTH_1h_timestamp_uidx
+            ON talib_signals.btc_CDLKICKINGBYLENGTH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,551 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLADDERBOTTOM: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlladderbottom_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLADDERBOTTOM_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLADDERBOTTOM_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,654 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLONGLEGGEDDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdllongleggeddoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLONGLEGGEDDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLONGLEGGEDDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,832 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLONGLINE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdllongline_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLONGLINE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLONGLINE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,925 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMARUBOZU: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmarubozu_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMARUBOZU_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMARUBOZU_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:29,998 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMATCHINGLOW: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmatchinglow_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMATCHINGLOW_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMATCHINGLOW_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,085 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMATHOLD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmathold_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMATHOLD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMATHOLD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,181 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMORNINGDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmorningdojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMORNINGDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMORNINGDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,366 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMORNINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmorningstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMORNINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMORNINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,460 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLONNECK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlonneck_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLONNECK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLONNECK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,549 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLPIERCING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlpiercing_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLPIERCING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLPIERCING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,641 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLRICKSHAWMAN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlrickshawman_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLRICKSHAWMAN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLRICKSHAWMAN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,822 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLRISEFALL3METHODS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlrisefall3methods_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLRISEFALL3METHODS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLRISEFALL3METHODS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:30,918 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSEPARATINGLINES: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlseparatinglines_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSEPARATINGLINES_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSEPARATINGLINES_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,009 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSHOOTINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlshootingstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSHOOTINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSHOOTINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,093 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSHORTLINE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlshortline_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSHORTLINE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSHORTLINE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,270 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSPINNINGTOP: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlspinningtop_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSPINNINGTOP_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSPINNINGTOP_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,380 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSTALLEDPATTERN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlstalledpattern_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSTALLEDPATTERN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSTALLEDPATTERN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,472 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSTICKSANDWICH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlsticksandwich_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSTICKSANDWICH_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSTICKSANDWICH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,568 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTAKURI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltakuri_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTAKURI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTAKURI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,658 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTASUKIGAP: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltasukigap_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTASUKIGAP_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTASUKIGAP_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,750 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTHRUSTING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlthrusting_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTHRUSTING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTHRUSTING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:31,844 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTRISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltristar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTRISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTRISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:32,009 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLUNIQUE3RIVER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlunique3river_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLUNIQUE3RIVER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLUNIQUE3RIVER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:32,220 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLUPSIDEGAP2CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlupsidegap2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLUPSIDEGAP2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLUPSIDEGAP2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:32,388 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLXSIDEGAP3METHODS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlxsidegap3methods_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLXSIDEGAP3METHODS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLXSIDEGAP3METHODS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:32:55,472 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 12:32:55,829 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 12:32:56,141 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 12:32:56,532 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 12:32:56,861 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 12:32:57,221 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 12:32:57,550 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 12:32:57,818 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 12:32:58,099 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 12:32:58,469 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 12:32:58,746 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 12:32:59,293 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 12:32:59,578 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 12:32:59,876 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 12:33:00,220 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 12:33:00,501 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 12:33:00,819 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 12:33:01,080 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 12:33:01,360 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 12:33:01,642 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 12:33:01,939 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 12:33:02,251 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 12:33:02,595 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 12:33:02,917 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 12:33:03,255 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 12:33:03,548 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 12:33:03,848 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 12:33:04,111 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 12:33:04,512 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 12:33:05,051 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 12:33:05,774 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 12:33:06,505 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 12:33:06,953 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 12:33:07,266 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 12:33:07,541 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 12:33:07,891 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 12:33:08,238 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 12:33:08,586 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 12:33:08,861 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 12:33:09,127 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 12:33:09,406 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 12:33:09,668 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 12:33:09,934 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 12:33:10,678 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 12:33:11,094 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 12:33:11,361 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 12:33:11,627 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 12:33:11,891 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 12:33:12,158 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 12:33:12,430 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 12:33:12,696 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 12:33:12,966 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 12:33:13,298 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 12:33:13,588 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 12:33:13,845 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 12:33:13,845 | WARNING | indicators_main | No arguments provided for candlestick_signal, skipping
+2026-01-27 12:33:14,110 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 12:33:14,391 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 12:33:14,650 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 12:33:14,910 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 12:33:15,225 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 12:33:15,402 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 12:33:15,518 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 12:33:16,031 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL2CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,109 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3BLACKCROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3blackcrows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3BLACKCROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3BLACKCROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,186 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3INSIDE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3inside_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3INSIDE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3INSIDE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,344 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3LINESTRIKE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3linestrike_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3LINESTRIKE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3LINESTRIKE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,444 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3OUTSIDE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3outside_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3OUTSIDE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3OUTSIDE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,540 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3STARSINSOUTH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3starsinsouth_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3STARSINSOUTH_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3STARSINSOUTH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,719 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3WHITESOLDIERS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3whitesoldiers_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3WHITESOLDIERS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3WHITESOLDIERS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,866 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLABANDONEDBABY: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlabandonedbaby_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLABANDONEDBABY_1h_timestamp_uidx
+            ON talib_signals.btc_CDLABANDONEDBABY_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:16,967 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLADVANCEBLOCK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdladvanceblock_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLADVANCEBLOCK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLADVANCEBLOCK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:17,052 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLBELTHOLD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlbelthold_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLBELTHOLD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLBELTHOLD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:17,141 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLBREAKAWAY: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlbreakaway_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLBREAKAWAY_1h_timestamp_uidx
+            ON talib_signals.btc_CDLBREAKAWAY_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:17,318 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCLOSINGMARUBOZU: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlclosingmarubozu_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCLOSINGMARUBOZU_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCLOSINGMARUBOZU_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:18,344 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCONCEALBABYSWALL: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlconcealbabyswall_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCONCEALBABYSWALL_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCONCEALBABYSWALL_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:18,516 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCOUNTERATTACK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlcounterattack_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCOUNTERATTACK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCOUNTERATTACK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:18,685 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDARKCLOUDCOVER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldarkcloudcover_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDARKCLOUDCOVER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDARKCLOUDCOVER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:18,763 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:18,859 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,013 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDRAGONFLYDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldragonflydoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDRAGONFLYDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDRAGONFLYDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,117 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLENGULFING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlengulfing_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLENGULFING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLENGULFING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,203 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLEVENINGDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdleveningdojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLEVENINGDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLEVENINGDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,308 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLEVENINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdleveningstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLEVENINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLEVENINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,399 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLGAPSIDESIDEWHITE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlgapsidesidewhite_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLGAPSIDESIDEWHITE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLGAPSIDESIDEWHITE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,486 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLGRAVESTONEDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlgravestonedoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLGRAVESTONEDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLGRAVESTONEDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,580 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHAMMER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhammer_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHAMMER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHAMMER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,689 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHANGINGMAN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhangingman_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHANGINGMAN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHANGINGMAN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,869 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHARAMI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlharami_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHARAMI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHARAMI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:19,983 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHARAMICROSS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlharamicross_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHARAMICROSS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHARAMICROSS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,088 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIGHWAVE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhighwave_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIGHWAVE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIGHWAVE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,195 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIKKAKE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhikkake_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIKKAKE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIKKAKE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,288 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIKKAKEMOD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhikkakemod_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIKKAKEMOD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIKKAKEMOD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,399 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHOMINGPIGEON: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhomingpigeon_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHOMINGPIGEON_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHOMINGPIGEON_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,500 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLIDENTICAL3CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlidentical3crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLIDENTICAL3CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLIDENTICAL3CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,615 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLINNECK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlinneck_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLINNECK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLINNECK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,731 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLINVERTEDHAMMER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlinvertedhammer_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLINVERTEDHAMMER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLINVERTEDHAMMER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:20,937 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLKICKING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlkicking_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLKICKING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLKICKING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,126 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLKICKINGBYLENGTH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlkickingbylength_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLKICKINGBYLENGTH_1h_timestamp_uidx
+            ON talib_signals.btc_CDLKICKINGBYLENGTH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,242 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLADDERBOTTOM: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlladderbottom_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLADDERBOTTOM_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLADDERBOTTOM_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,428 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLONGLEGGEDDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdllongleggeddoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLONGLEGGEDDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLONGLEGGEDDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,614 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLONGLINE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdllongline_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLONGLINE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLONGLINE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,776 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMARUBOZU: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmarubozu_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMARUBOZU_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMARUBOZU_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,846 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMATCHINGLOW: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmatchinglow_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMATCHINGLOW_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMATCHINGLOW_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:21,940 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMATHOLD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmathold_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMATHOLD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMATHOLD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,099 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMORNINGDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmorningdojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMORNINGDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMORNINGDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,189 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMORNINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmorningstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMORNINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMORNINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,344 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLONNECK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlonneck_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLONNECK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLONNECK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,429 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLPIERCING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlpiercing_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLPIERCING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLPIERCING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,517 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLRICKSHAWMAN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlrickshawman_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLRICKSHAWMAN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLRICKSHAWMAN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,701 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLRISEFALL3METHODS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlrisefall3methods_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLRISEFALL3METHODS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLRISEFALL3METHODS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,814 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSEPARATINGLINES: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlseparatinglines_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSEPARATINGLINES_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSEPARATINGLINES_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:22,922 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSHOOTINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlshootingstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSHOOTINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSHOOTINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,093 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSHORTLINE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlshortline_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSHORTLINE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSHORTLINE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,282 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSPINNINGTOP: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlspinningtop_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSPINNINGTOP_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSPINNINGTOP_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,382 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSTALLEDPATTERN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlstalledpattern_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSTALLEDPATTERN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSTALLEDPATTERN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,542 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSTICKSANDWICH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlsticksandwich_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSTICKSANDWICH_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSTICKSANDWICH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,735 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTAKURI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltakuri_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTAKURI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTAKURI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,816 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTASUKIGAP: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltasukigap_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTASUKIGAP_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTASUKIGAP_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:23,980 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTHRUSTING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlthrusting_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTHRUSTING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTHRUSTING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:24,091 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTRISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltristar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTRISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTRISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:24,155 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLUNIQUE3RIVER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlunique3river_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLUNIQUE3RIVER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLUNIQUE3RIVER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:24,245 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLUPSIDEGAP2CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlupsidegap2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLUPSIDEGAP2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLUPSIDEGAP2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:33:24,324 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLXSIDEGAP3METHODS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlxsidegap3methods_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLXSIDEGAP3METHODS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLXSIDEGAP3METHODS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:38:10,455 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 12:38:16,180 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 12:38:23,044 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 12:38:29,040 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 12:38:35,338 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 12:38:41,836 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 12:38:48,545 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 12:38:55,345 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 12:39:01,302 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 12:39:07,475 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 12:39:14,627 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 12:39:21,154 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 12:39:27,161 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 12:39:33,515 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 12:39:40,454 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 12:39:46,609 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 12:39:52,644 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 12:39:58,983 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 12:40:05,253 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 12:40:11,911 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 12:40:18,034 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 12:40:24,996 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 12:40:30,976 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 12:40:37,326 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 12:40:43,284 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 12:40:49,686 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 12:40:55,756 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 12:41:02,793 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 12:41:09,723 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 12:41:16,109 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 12:41:25,919 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 12:41:32,944 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 12:41:40,157 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 12:41:46,992 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 12:41:53,433 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 12:41:59,603 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 12:42:06,458 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 12:42:13,257 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 12:42:19,779 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 12:42:27,088 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 12:42:33,859 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 12:42:40,974 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 12:42:47,409 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 12:42:53,863 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 12:43:00,760 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 12:43:07,389 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 12:43:14,708 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 12:43:21,654 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 12:43:28,495 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 12:43:35,152 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 12:43:42,150 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 12:43:48,919 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 12:43:56,343 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 12:44:03,425 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 12:44:10,473 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 12:44:10,473 | WARNING | indicators_main | No arguments provided for candlestick_signal, skipping
+2026-01-27 12:44:17,633 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 12:44:25,061 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 12:44:32,618 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 12:44:40,337 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 12:44:47,254 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 12:44:53,996 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 12:45:00,964 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
+2026-01-27 12:45:01,268 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL2CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:01,380 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3BLACKCROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3blackcrows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3BLACKCROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3BLACKCROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:01,547 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3INSIDE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3inside_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3INSIDE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3INSIDE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:01,882 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3LINESTRIKE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3linestrike_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3LINESTRIKE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3LINESTRIKE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,053 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3OUTSIDE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3outside_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3OUTSIDE_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3OUTSIDE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,272 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3STARSINSOUTH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3starsinsouth_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3STARSINSOUTH_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3STARSINSOUTH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,379 | ERROR | indicators_main | Error computing or saving candlestick pattern CDL3WHITESOLDIERS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl3whitesoldiers_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL3WHITESOLDIERS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL3WHITESOLDIERS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,496 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLABANDONEDBABY: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlabandonedbaby_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLABANDONEDBABY_1h_timestamp_uidx
+            ON talib_signals.btc_CDLABANDONEDBABY_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,605 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLADVANCEBLOCK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdladvanceblock_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLADVANCEBLOCK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLADVANCEBLOCK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,691 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLBELTHOLD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlbelthold_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLBELTHOLD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLBELTHOLD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,787 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLBREAKAWAY: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlbreakaway_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLBREAKAWAY_1h_timestamp_uidx
+            ON talib_signals.btc_CDLBREAKAWAY_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:02,950 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCLOSINGMARUBOZU: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlclosingmarubozu_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCLOSINGMARUBOZU_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCLOSINGMARUBOZU_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,050 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCONCEALBABYSWALL: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlconcealbabyswall_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCONCEALBABYSWALL_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCONCEALBABYSWALL_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,124 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLCOUNTERATTACK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlcounterattack_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLCOUNTERATTACK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLCOUNTERATTACK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,308 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDARKCLOUDCOVER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldarkcloudcover_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDARKCLOUDCOVER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDARKCLOUDCOVER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,419 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,576 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,726 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLDRAGONFLYDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdldragonflydoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLDRAGONFLYDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLDRAGONFLYDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,826 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLENGULFING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlengulfing_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLENGULFING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLENGULFING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:03,993 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLEVENINGDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdleveningdojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLEVENINGDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLEVENINGDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:04,179 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLEVENINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdleveningstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLEVENINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLEVENINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:04,279 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLGAPSIDESIDEWHITE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlgapsidesidewhite_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLGAPSIDESIDEWHITE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLGAPSIDESIDEWHITE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:04,429 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLGRAVESTONEDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlgravestonedoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLGRAVESTONEDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLGRAVESTONEDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:04,536 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHAMMER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhammer_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHAMMER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHAMMER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:04,713 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHANGINGMAN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhangingman_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHANGINGMAN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHANGINGMAN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:04,812 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHARAMI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlharami_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHARAMI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHARAMI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,007 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHARAMICROSS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlharamicross_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHARAMICROSS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHARAMICROSS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,175 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIGHWAVE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhighwave_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIGHWAVE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIGHWAVE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,279 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIKKAKE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhikkake_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIKKAKE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIKKAKE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,455 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHIKKAKEMOD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhikkakemod_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHIKKAKEMOD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHIKKAKEMOD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,545 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLHOMINGPIGEON: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlhomingpigeon_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLHOMINGPIGEON_1h_timestamp_uidx
+            ON talib_signals.btc_CDLHOMINGPIGEON_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,645 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLIDENTICAL3CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlidentical3crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLIDENTICAL3CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLIDENTICAL3CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,728 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLINNECK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlinneck_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLINNECK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLINNECK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,812 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLINVERTEDHAMMER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlinvertedhammer_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLINVERTEDHAMMER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLINVERTEDHAMMER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:05,913 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLKICKING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlkicking_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLKICKING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLKICKING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,074 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLKICKINGBYLENGTH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlkickingbylength_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLKICKINGBYLENGTH_1h_timestamp_uidx
+            ON talib_signals.btc_CDLKICKINGBYLENGTH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,240 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLADDERBOTTOM: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlladderbottom_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLADDERBOTTOM_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLADDERBOTTOM_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,332 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLONGLEGGEDDOJI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdllongleggeddoji_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLONGLEGGEDDOJI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLONGLEGGEDDOJI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,491 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLLONGLINE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdllongline_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLLONGLINE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLLONGLINE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,641 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMARUBOZU: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmarubozu_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMARUBOZU_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMARUBOZU_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,750 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMATCHINGLOW: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmatchinglow_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMATCHINGLOW_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMATCHINGLOW_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,891 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMATHOLD: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmathold_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMATHOLD_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMATHOLD_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:06,994 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMORNINGDOJISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmorningdojistar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMORNINGDOJISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMORNINGDOJISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:07,094 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLMORNINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlmorningstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLMORNINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLMORNINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:07,211 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLONNECK: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlonneck_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLONNECK_1h_timestamp_uidx
+            ON talib_signals.btc_CDLONNECK_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:07,393 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLPIERCING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlpiercing_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLPIERCING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLPIERCING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:07,494 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLRICKSHAWMAN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlrickshawman_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLRICKSHAWMAN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLRICKSHAWMAN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:07,673 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLRISEFALL3METHODS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlrisefall3methods_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLRISEFALL3METHODS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLRISEFALL3METHODS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:07,840 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSEPARATINGLINES: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlseparatinglines_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSEPARATINGLINES_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSEPARATINGLINES_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,024 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSHOOTINGSTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlshootingstar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSHOOTINGSTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSHOOTINGSTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,114 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSHORTLINE: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlshortline_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSHORTLINE_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSHORTLINE_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,273 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSPINNINGTOP: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlspinningtop_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSPINNINGTOP_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSPINNINGTOP_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,375 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSTALLEDPATTERN: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlstalledpattern_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSTALLEDPATTERN_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSTALLEDPATTERN_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,464 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLSTICKSANDWICH: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlsticksandwich_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLSTICKSANDWICH_1h_timestamp_uidx
+            ON talib_signals.btc_CDLSTICKSANDWICH_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,548 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTAKURI: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltakuri_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTAKURI_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTAKURI_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,675 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTASUKIGAP: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltasukigap_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTASUKIGAP_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTASUKIGAP_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,764 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTHRUSTING: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlthrusting_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTHRUSTING_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTHRUSTING_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:08,860 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLTRISTAR: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdltristar_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLTRISTAR_1h_timestamp_uidx
+            ON talib_signals.btc_CDLTRISTAR_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:09,039 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLUNIQUE3RIVER: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlunique3river_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLUNIQUE3RIVER_1h_timestamp_uidx
+            ON talib_signals.btc_CDLUNIQUE3RIVER_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:09,139 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLUPSIDEGAP2CROWS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlupsidegap2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLUPSIDEGAP2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLUPSIDEGAP2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:45:09,216 | ERROR | indicators_main | Error computing or saving candlestick pattern CDLXSIDEGAP3METHODS: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdlxsidegap3methods_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDLXSIDEGAP3METHODS_1h_timestamp_uidx
+            ON talib_signals.btc_CDLXSIDEGAP3METHODS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 12:59:01,439 | INFO | indicators_main | Saved sma_signal to table btc_sma_signal_1h
+2026-01-27 12:59:07,998 | INFO | indicators_main | Saved ema_signal to table btc_ema_signal_1h
+2026-01-27 12:59:14,010 | INFO | indicators_main | Saved dema_signal to table btc_dema_signal_1h
+2026-01-27 12:59:22,398 | INFO | indicators_main | Saved tema_signal to table btc_tema_signal_1h
+2026-01-27 12:59:29,396 | INFO | indicators_main | Saved trima_signal to table btc_trima_signal_1h
+2026-01-27 12:59:35,924 | INFO | indicators_main | Saved wma_signal to table btc_wma_signal_1h
+2026-01-27 12:59:42,713 | INFO | indicators_main | Saved t3_signal to table btc_t3_signal_1h
+2026-01-27 12:59:50,753 | INFO | indicators_main | Saved kama_signal to table btc_kama_signal_1h
+2026-01-27 12:59:57,256 | INFO | indicators_main | Saved ma_signal to table btc_ma_signal_1h
+2026-01-27 13:00:03,776 | INFO | indicators_main | Saved ht_trendline_signal to table btc_ht_trendline_signal_1h
+2026-01-27 13:00:10,202 | INFO | indicators_main | Saved mama_signal to table btc_mama_signal_1h
+2026-01-27 13:00:17,379 | INFO | indicators_main | Saved mavp_signal to table btc_mavp_signal_1h
+2026-01-27 13:00:24,495 | INFO | indicators_main | Saved bbands_signal to table btc_bbands_signal_1h
+2026-01-27 13:00:30,606 | INFO | indicators_main | Saved midpoint_signal to table btc_midpoint_signal_1h
+2026-01-27 13:00:37,662 | INFO | indicators_main | Saved midprice_signal to table btc_midprice_signal_1h
+2026-01-27 13:00:44,400 | INFO | indicators_main | Saved sar_signal to table btc_sar_signal_1h
+2026-01-27 13:00:50,573 | INFO | indicators_main | Saved sarext_signal to table btc_sarext_signal_1h
+2026-01-27 13:00:56,875 | INFO | indicators_main | Saved adx_signal to table btc_adx_signal_1h
+2026-01-27 13:01:03,271 | INFO | indicators_main | Saved adxr_signal to table btc_adxr_signal_1h
+2026-01-27 13:01:10,008 | INFO | indicators_main | Saved apo_signal to table btc_apo_signal_1h
+2026-01-27 13:01:16,386 | INFO | indicators_main | Saved ppo_signal to table btc_ppo_signal_1h
+2026-01-27 13:01:23,988 | INFO | indicators_main | Saved macd_signal to table btc_macd_signal_1h
+2026-01-27 13:01:30,570 | INFO | indicators_main | Saved macdext_signal to table btc_macdext_signal_1h
+2026-01-27 13:01:37,623 | INFO | indicators_main | Saved macdfix_signal to table btc_macdfix_signal_1h
+2026-01-27 13:01:44,597 | INFO | indicators_main | Saved cci_signal to table btc_cci_signal_1h
+2026-01-27 13:01:50,944 | INFO | indicators_main | Saved mom_signal to table btc_mom_signal_1h
+2026-01-27 13:01:57,683 | INFO | indicators_main | Saved roc_signal to table btc_roc_signal_1h
+2026-01-27 13:02:04,454 | INFO | indicators_main | Saved rocp_signal to table btc_rocp_signal_1h
+2026-01-27 13:02:11,600 | INFO | indicators_main | Saved rocr_signal to table btc_rocr_signal_1h
+2026-01-27 13:02:18,167 | INFO | indicators_main | Saved rocr100_signal to table btc_rocr100_signal_1h
+2026-01-27 13:02:26,584 | INFO | indicators_main | Saved trix_signal to table btc_trix_signal_1h
+2026-01-27 13:02:34,029 | INFO | indicators_main | Saved cmo_signal to table btc_cmo_signal_1h
+2026-01-27 13:02:41,753 | INFO | indicators_main | Saved mfi_signal to table btc_mfi_signal_1h
+2026-01-27 13:02:49,058 | INFO | indicators_main | Saved bop_signal to table btc_bop_signal_1h
+2026-01-27 13:02:56,173 | INFO | indicators_main | Saved aroon_signal to table btc_aroon_signal_1h
+2026-01-27 13:03:03,586 | INFO | indicators_main | Saved aroonosc_signal to table btc_aroonosc_signal_1h
+2026-01-27 13:03:10,873 | INFO | indicators_main | Saved rsi_signal to table btc_rsi_signal_1h
+2026-01-27 13:03:18,729 | INFO | indicators_main | Saved stoch_signal to table btc_stoch_signal_1h
+2026-01-27 13:03:26,985 | INFO | indicators_main | Saved stochf_signal to table btc_stochf_signal_1h
+2026-01-27 13:03:33,880 | INFO | indicators_main | Saved stochrsi_signal to table btc_stochrsi_signal_1h
+2026-01-27 13:03:41,168 | INFO | indicators_main | Saved ultosc_signal to table btc_ultosc_signal_1h
+2026-01-27 13:03:47,688 | INFO | indicators_main | Saved willr_signal to table btc_willr_signal_1h
+2026-01-27 13:03:54,580 | INFO | indicators_main | Saved ad_signal to table btc_ad_signal_1h
+2026-01-27 13:04:01,433 | INFO | indicators_main | Saved adosc_signal to table btc_adosc_signal_1h
+2026-01-27 13:04:08,737 | INFO | indicators_main | Saved obv_signal to table btc_obv_signal_1h
+2026-01-27 13:04:15,726 | INFO | indicators_main | Saved ht_trendmode_signal to table btc_ht_trendmode_signal_1h
+2026-01-27 13:04:24,332 | INFO | indicators_main | Saved ht_phasor_signal to table btc_ht_phasor_signal_1h
+2026-01-27 13:04:32,230 | INFO | indicators_main | Saved ht_sine_signal to table btc_ht_sine_signal_1h
+2026-01-27 13:04:39,016 | INFO | indicators_main | Saved avgprice_signal to table btc_avgprice_signal_1h
+2026-01-27 13:04:46,977 | INFO | indicators_main | Saved medprice_signal to table btc_medprice_signal_1h
+2026-01-27 13:04:53,669 | INFO | indicators_main | Saved typprice_signal to table btc_typprice_signal_1h
+2026-01-27 13:05:00,612 | INFO | indicators_main | Saved wclprice_signal to table btc_wclprice_signal_1h
+2026-01-27 13:05:08,205 | INFO | indicators_main | Saved atr_signal to table btc_atr_signal_1h
+2026-01-27 13:05:15,519 | INFO | indicators_main | Saved natr_signal to table btc_natr_signal_1h
+2026-01-27 13:05:23,588 | INFO | indicators_main | Saved trange_signal to table btc_trange_signal_1h
+2026-01-27 13:05:24,583 | ERROR | indicators_main | Error computing or saving candlestick_signal: (psycopg2.errors.UndefinedTable) relation "talib_signals.btc_cdl2crows_1h" does not exist
+
+[SQL: 
+            CREATE UNIQUE INDEX IF NOT EXISTS btc_CDL2CROWS_1h_timestamp_uidx
+            ON talib_signals.btc_CDL2CROWS_1h (timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-01-27 13:05:33,399 | INFO | indicators_main | Saved beta_signal to table btc_beta_signal_1h
+2026-01-27 13:05:41,186 | INFO | indicators_main | Saved correl_signal to table btc_correl_signal_1h
+2026-01-27 13:05:50,379 | INFO | indicators_main | Saved linearreg_angle_signal to table btc_linearreg_angle_signal_1h
+2026-01-27 13:05:57,582 | INFO | indicators_main | Saved linearreg_slope_signal to table btc_linearreg_slope_signal_1h
+2026-01-27 13:06:05,284 | INFO | indicators_main | Saved stddev_signal to table btc_stddev_signal_1h
+2026-01-27 13:06:13,189 | INFO | indicators_main | Saved tsf_signal to table btc_tsf_signal_1h
+2026-01-27 13:06:25,387 | INFO | indicators_main | Saved var_signal to table btc_var_signal_1h
