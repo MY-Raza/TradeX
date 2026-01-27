@@ -5,7 +5,7 @@ import pandas as pd
 from indicators import *
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.utils.db.utils import fetch_ohlcv_df
+from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from signals import generate_signals
 
@@ -18,6 +18,7 @@ logger = get_logger("indicators_main")
 # Exchange schema configuration
 # ---------------------------
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
+schema = EXCHANGE_SCHEMA_MAP["signals"]
 
 # ---------------------------
 # Fetch OHLCV data (1-minute interval)
@@ -82,4 +83,17 @@ signals = generate_signals(indicators)
 # ---------------------------
 # Log the last 10 signals for review
 # ---------------------------
-logger.info(f"Signals (last 50): {signals[-50:]}")
+logger.info(f"Signals (last 50): {signals[-1:]}")
+
+signals_df = pd.DataFrame({
+    "timestamp": df_1h["timestamp"],
+    "signal": signals                 # 1 = Buy, -1 = Sell, 0 = Hold
+})
+
+save_df_to_db(
+    df=signals_df,
+    table_name="btc_signals_1h",  
+    schema=schema,             
+    time_column="timestamp",
+    is_timeseries=True         
+)

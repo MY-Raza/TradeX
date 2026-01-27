@@ -87,7 +87,7 @@ for symbol in symbols:
 
     save_df_to_db(
         df=df,
-        table_name=symbol,
+        table_name=f"{symbol}_1m",
         schema=SCHEMA,
         time_column="timestamp",
         is_timeseries=True,

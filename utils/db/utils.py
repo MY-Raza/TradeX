@@ -220,7 +220,7 @@ def save_df_to_db(
     schema = ensure_schema(schema)
     create_schema(schema)
 
-    table = f"{table_name}_1m"
+    table = table_name
 
     # 1. Deduplicate
     df = df.drop_duplicates(subset=[time_column])

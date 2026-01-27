@@ -83,7 +83,7 @@ def main():
             # Save to database
             save_df_to_db(
                 df=df,
-                table_name=symbol.lower(),
+                table_name=f"{symbol.lower()}_1m",
                 schema=SCHEMA,
                 time_column="timestamp",
                 is_timeseries=True
