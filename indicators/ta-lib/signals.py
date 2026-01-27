@@ -1,54 +1,89 @@
-# signals.py
 import numpy as np
 
-def generate_signals(indicators):
+def generate_signals(data):
     """
-    Generate trading signals based on multiple indicators.
-    Returns an array: 1 for buy, -1 for sell, 0 for hold
+    Generate trading signals from indicator outputs.
+    data: dict containing all indicator arrays with keys:
+        'close', 'sma', 'ema', 'adx', 'plus_di', 'minus_di', 'macd', 'macd_signal',
+        'rsi', 'mfi', 'stoch_k', 'stoch_d', 'atr'
+    Returns: np.array of signals: 1=Buy, -1=Sell, 0=Hold
     """
-    # Extract relevant indicators
-    close = indicators['close']
-    short_ma = indicators['sma']  # e.g., 10-period SMA
-    long_ma = indicators['ema']   # e.g., 30-period EMA
-    macd = indicators['macd']
-    macd_signal = indicators['macd_signal']
-    rsi = indicators['rsi']
-    upper_bb = indicators['bb_upper']
-    lower_bb = indicators['bb_lower']
-    atr = indicators['atr']
-
+    
+    close = data['close']
+    sma = data['sma']
+    ema = data['ema']
+    adx = data['adx']
+    plus_di = data['plus_di']
+    minus_di = data['minus_di']
+    macd = data['macd']
+    macd_signal = data['macd_signal']
+    rsi = data['rsi']
+    mfi = data['mfi']
+    stoch_k = data['stoch_k']
+    stoch_d = data['stoch_d']
+    atr = data['atr']
+    
     signals = np.zeros(len(close))
+    
+    for i in range(len(close)):
+        buy_signal = 0
+        sell_signal = 0
 
-    for i in range(1, len(close)):
-        # Trend: Moving Averages + MACD
-        if short_ma[i] > long_ma[i] and macd[i] > macd_signal[i]:
-            trend_signal = 1  # Buy
-        elif short_ma[i] < long_ma[i] and macd[i] < macd_signal[i]:
-            trend_signal = -1  # Sell
-        else:
-            trend_signal = 0
+        # ---------------------------
+        # Trend direction (ADX + DI)
+        # ---------------------------
+        if adx[i] > 25:
+            if plus_di[i] > minus_di[i]:
+                buy_signal += 1
+            elif minus_di[i] > plus_di[i]:
+                sell_signal += 1
 
-        # Momentum: RSI
-        if rsi[i] > 70:
-            momentum_signal = -1  # Overbought → Sell
-        elif rsi[i] < 30:
-            momentum_signal = 1   # Oversold → Buy
-        else:
-            momentum_signal = 0
+        # ---------------------------
+        # MACD crossover
+        # ---------------------------
+        if i > 0:
+            if macd[i-1] < macd_signal[i-1] and macd[i] > macd_signal[i]:
+                buy_signal += 1
+            elif macd[i-1] > macd_signal[i-1] and macd[i] < macd_signal[i]:
+                sell_signal += 1
 
-        # Volatility: Bollinger Bands
-        if close[i] > upper_bb[i]:
-            volatility_signal = -1  # Price too high → Sell
-        elif close[i] < lower_bb[i]:
-            volatility_signal = 1   # Price too low → Buy
-        else:
-            volatility_signal = 0
+        # ---------------------------
+        # RSI oversold/overbought
+        # ---------------------------
+        if rsi[i] < 30:
+            buy_signal += 1
+        elif rsi[i] > 70:
+            sell_signal += 1
 
-        # Combine signals (majority vote)
-        combined = trend_signal + momentum_signal + volatility_signal
-        if combined > 0:
+        # ---------------------------
+        # MFI oversold/overbought
+        # ---------------------------
+        if mfi[i] < 20:
+            buy_signal += 1
+        elif mfi[i] > 80:
+            sell_signal += 1
+
+        # ---------------------------
+        # Stochastic %K/%D
+        # ---------------------------
+        if stoch_k[i] < 20 and stoch_d[i] < 20:
+            buy_signal += 1
+        elif stoch_k[i] > 80 and stoch_d[i] > 80:
+            sell_signal += 1
+
+        # ---------------------------
+        # ATR filter (optional: avoid signals in low volatility)
+        # ---------------------------
+        if atr[i] < np.mean(atr) * 0.5:
+            buy_signal = 0
+            sell_signal = 0
+
+        # ---------------------------
+        # Final decision
+        # ---------------------------
+        if buy_signal > sell_signal:
             signals[i] = 1
-        elif combined < 0:
+        elif sell_signal > buy_signal:
             signals[i] = -1
         else:
             signals[i] = 0

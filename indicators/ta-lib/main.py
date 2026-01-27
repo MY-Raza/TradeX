@@ -203,13 +203,18 @@ indicators = {
     'close': close,
     'sma': sma(close),
     'ema': ema(close),
-    'macd': macd_val,
-    'macd_signal': signal,
+    'adx': adx(high, low, close),
+    'plus_di': plus_di(high, low, close),
+    'minus_di': minus_di(high, low, close),
+    'macd': macd(close)[0],          # macd value
+    'macd_signal': macd(close)[1],   # macd signal
     'rsi': rsi(close),
-    'bb_upper': upper,
-    'bb_lower': lower,
+    'mfi': mfi(high, low, close, volume),
+    'stoch_k': stoch(high, low, close)[0],
+    'stoch_d': stoch(high, low, close)[1],
     'atr': atr(high, low, close)
 }
+
 signals = generate_signals(indicators)
 
 logger.info(f"Signals (last 10): {signals[-10:]}")
