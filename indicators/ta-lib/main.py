@@ -232,9 +232,13 @@ signals_df = fetch_ohlcv_df(
 )
 
 bt = Backtester(
-    price_1m_df=df_1m,      # from OHLCV schema
-    signal_1h_df=signals_df,    # from signals schema
+    price_df=df_1m,      # from OHLCV schema
+    signal_df=signals_df,    # from signals schema
     tp=3,
     sl=1
 )
+
+bt.run_backtest()              # run backtest
+trades_df = bt.get_results()   # fetch trade results
+print(trades_df)
 
