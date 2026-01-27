@@ -17,7 +17,6 @@ logger = get_logger("indicators_main")
 # Exchange schema configuration
 # ---------------------------
 SCHEMA = EXCHANGE_SCHEMA_MAP["signals"]
-drop_schema(SCHEMA)
 # ---------------------------
 # Fetch OHLCV data (1-minute interval)
 # ---------------------------
