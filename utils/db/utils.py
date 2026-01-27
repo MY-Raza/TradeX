@@ -274,7 +274,7 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
     """
     engine = get_engine()
     schema = ensure_schema(schema)
-    table = f"{table_name}_1m"
+    table = table_name
 
     query = f"SELECT * FROM {schema}.{table}"
     if limit:

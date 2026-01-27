@@ -8,6 +8,7 @@ from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db,drop_table
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from signals import *
 from indicators import *
+from TradeX.backtest.backtester import Backtester
 
 # ---------------------------
 # Logger Initialization
@@ -22,7 +23,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["signals"]
 # Fetch OHLCV data (1-minute interval)
 # ---------------------------
 df_1m = fetch_ohlcv_df(
-    table_name="btc",               # Table name in database
+    table_name="btc_1m",               # Table name in database
     schema=EXCHANGE_SCHEMA_MAP["binance"],  # Exchange schema
     time_column="timestamp"         # Column storing timestamp
 )
@@ -46,6 +47,7 @@ volume = df_1h["volume"].values
 # Optional: Reference series and variable periods (used in some indicators)
 ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
 periods = np.random.uniform(5, 30, len(df_1h)).astype(np.float64)
+
 # ---------------------------
 # Automatically detect all functions ending with '_signal' in signals.py
 # ---------------------------
@@ -157,12 +159,12 @@ for func_name, func in signal_funcs.items():
                 # Special handling for candlestick_signal
                 if func_name == "candlestick_signal":
                     signals_array, pattern_name = result
-                    table_name = f"btc_{pattern_name.lower()}_1h"
+                    table_name = f"btc_{pattern_name.lower().replace('_signal','')}_1h"
                     col_prefix = func_name
                     result = signals_array
                     print(table_name)
                 else:
-                    table_name = f"btc_{func_name}_1h"
+                    table_name = f"btc_{func_name.replace('_signal','')}_1h"
                     col_prefix = func_name
 
                 # Convert result to DataFrame
@@ -196,10 +198,10 @@ for func_name, func in signal_funcs.items():
             if func_name == "candlestick_signal":
                 signals_array, pattern_name = result   # unpack tuple
                 result = signals_array                 # keep only numeric signal array
-                table_name = f"btc_{pattern_name.lower()}_1h"  # dynamic table name
+                table_name = f"btc_{pattern_name.lower().replace('_signal','')}_1h"  # dynamic table name
                 col_prefix = func_name   
             else:
-                table_name = f"btc_{func_name}_1h"
+                table_name = f"btc_{func_name.replace('_signal','')}_1h"
                 col_prefix = func_name  
 
             if isinstance(result, tuple):
@@ -222,4 +224,17 @@ for func_name, func in signal_funcs.items():
 
         except Exception as e:
             logger.error(f"Error computing or saving {func_name}: {e}")
+
+signals_df = fetch_ohlcv_df(
+    table_name="btc_cdldoji_1h",               # Table name in database
+    schema=EXCHANGE_SCHEMA_MAP["signals"],  # Exchange schema
+    time_column="timestamp"         # Column storing timestamp
+)
+
+bt = Backtester(
+    price_1m_df=df_1m,      # from OHLCV schema
+    signal_1h_df=signals_df,    # from signals schema
+    tp=3,
+    sl=1
+)
 
