@@ -18,7 +18,8 @@ logger = get_logger("indicators_main")
 # CSV Input/Output Config
 # ---------------------------
 INPUT_CSV = r"C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\indicators\ta-lib\btc_1m_data.csv"
-SIGNALS_FOLDER = "signals_csv"  # folder to save signal CSVs
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
+SIGNALS_FOLDER = os.path.join(BASE_DIR, "signals_csv")  
 os.makedirs(SIGNALS_FOLDER, exist_ok=True)
 
 # ---------------------------
@@ -31,8 +32,6 @@ if df_1m.empty:
 df_1m["timestamp"] = pd.to_datetime(df_1m["datetime"])
 # Optional: drop the old datetime column if you no longer need it
 df_1m = df_1m.drop(columns=["datetime"])
-# Sort by timestamp to ensure correct resampling
-df_1m = df_1m.sort_values("timestamp").reset_index(drop=True)
 
 # Resample 1m -> 1h
 df_1h = resample_ohlcv(df_1m, "1h")
@@ -113,6 +112,7 @@ for func_name, func in signal_funcs.items():
 # ---------------------------
 # Backtesting example
 # ---------------------------
+os.makedirs(SIGNALS_FOLDER, exist_ok=True)
 signals_csv = os.path.join(SIGNALS_FOLDER, "candlestick_signal_cdldoji.csv")  
 if not os.path.exists(signals_csv):
     logger.error(f"Signal CSV {signals_csv} not found. Exiting backtest.")
