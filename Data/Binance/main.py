@@ -1,4 +1,4 @@
-from TradeX.utils.db.utils import save_df_to_db,get_last_date,read_df_from_db
+from TradeX.utils.db.utils import save_df_to_db,get_last_date,ensure_unique_index
 from TradeX.utils.common.logs import get_logger
 from binance_fetcher import BinanceFuturesFetcher
 from TradeX.utils.data.data_cleaner import clean_df
@@ -30,6 +30,7 @@ Notes:
 """
 
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
+ensure_unique_index(table_name="btc_1m", schema=SCHEMA, time_column="timestamp")
 last_date = get_last_date(table_name="btc_1m", schema=SCHEMA, time_column="timestamp")
 print(last_date)
 # -------------------------------------------------

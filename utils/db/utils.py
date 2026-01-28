@@ -131,6 +131,7 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
     """
     engine = get_engine()
     index_name = f"{table_name}_{time_column}_uidx"
+    desc_index = f"{table_name}_{time_column}_desc_idx"
 
     with engine.begin() as conn:
         conn.execute(text(f"""
@@ -138,7 +139,13 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
             ON {schema}.{table_name} ({time_column});
         """))
 
-    logger.info(f"Unique index ensured: {index_name}")
+        # For fast "last row" queries
+        conn.execute(text(f"""
+            CREATE INDEX IF NOT EXISTS {desc_index}
+            ON {schema}.{table_name} ({time_column} DESC);
+        """))
+
+    logger.info(f"Indexes ensured: {index_name}, {desc_index}")
 
 
 def ensure_hypertable(table_name: str, schema: str, time_column: str):
