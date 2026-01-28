@@ -152,6 +152,7 @@ def atr_signal(high, low, close, period=14):
 # CANDLESTICK PATTERNS
 # =========================================================
 
-def candlestick_signal(open_, high, low, close, pattern_name):
-    val = call_indicator(pattern_name, open_, high, low, close)
-    return np.where(val > 0, 1, np.where(val < 0, -1, 0))
+def candlestick_signal(open, high, low, close, pattern_name):
+    val = call_indicator(pattern_name, open, high, low, close)
+    signals = np.where(val > 0, 1, np.where(val < 0, -1, 0))
+    return signals,pattern_name
