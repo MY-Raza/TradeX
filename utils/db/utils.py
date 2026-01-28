@@ -182,7 +182,12 @@ def get_last_date(table_name: str, schema: str, time_column: str) -> int | None:
     if not inspector.has_table(table_name, schema=schema):
         return None
 
-    query = f"SELECT MAX({time_column}) FROM {schema}.{table_name}"
+    query = f"""
+        SELECT {time_column}
+        FROM {schema}.{table_name}
+        ORDER BY {time_column} DESC
+        LIMIT 1
+    """
     with engine.begin() as conn:
         return conn.execute(text(query)).scalar()
 
@@ -284,7 +289,7 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
 
     if not df.empty:
         logger.info(f"\nFirst 5 rows from {schema}.{table}:\n")
-        logger.info(df.head(5))
+        logger.info(df.tail(5))
     else:
         logger.info(f"No data found in {schema}.{table}")
 
@@ -337,5 +342,3 @@ def fetch_ohlcv_df(
     df = df.sort_values(time_column)
 
     return df
-
-
