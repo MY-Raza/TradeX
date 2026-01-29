@@ -1,154 +1,161 @@
-# backtester.py
 import pandas as pd
-import numpy as np
-from TradeX.utils.common.logs import get_logger
-
-logger = get_logger("backtester")
 
 
 class Backtester:
-    """
-    A simple backtester for take-profit (TP) / stop-loss (SL) trading strategies.
-
-    Attributes:
-        price_df (pd.DataFrame): OHLCV price data with 'timestamp', 'high', 'low', 'close' columns.
-        signal_df (pd.DataFrame): Trading signals with 'timestamp' and 'signals' columns.
-            Signals: 1 = Buy, -1 = Sell, 0 = No action.
-        tp (float): Take-profit percentage (default 3%).
-        sl (float): Stop-loss percentage (default 1%).
-        trades (list): List of trade dictionaries containing trade details.
-        last_trade_direction (str | None): Tracks the direction of the last closed trade to prevent consecutive same-direction trades.
-    """
-
-    def __init__(self, price_df: pd.DataFrame, signal_df: pd.DataFrame, tp: float = 3, sl: float = 1):
-        """
-        Initialize the Backtester with price and signal data.
-
-        Args:
-            price_df (pd.DataFrame): OHLCV price data.
-            signal_df (pd.DataFrame): Signal data.
-            tp (float, optional): Take-profit percentage. Defaults to 3.
-            sl (float, optional): Stop-loss percentage. Defaults to 1.
-        """
-        # Sort data by timestamp to ensure chronological order
+    def __init__(
+        self,
+        price_df: pd.DataFrame,
+        signal_df: pd.DataFrame,
+        starting_balance: float = 1000,
+        tp: float = 3,
+        sl: float = 1,
+        fee: float = 0.05,
+        leverage: float = 1.0,
+        slippage: float = 0.0,
+    ):
         self.price_df = price_df.sort_values("timestamp").reset_index(drop=True)
         self.signal_df = signal_df.sort_values("timestamp").reset_index(drop=True)
-        self.tp = tp
-        self.sl = sl
+
+        self.balance = starting_balance
+        self.starting_balance = starting_balance
+        self.break_balance = starting_balance * 0.5
+
+        self.tp = tp / 100
+        self.sl = sl / 100
+        self.fee = fee
+        self.leverage = leverage
+        self.slippage = slippage
+
         self.trades = []
-        self.last_trade_direction = None  # Prevent consecutive same-direction trades
+        self.open_trade = None
 
-    def run_backtest(self):
-        """
-        Run the backtesting process.
-
-        Steps:
-            1. Merge price and signal data using simple merge (timestamps must match).
-            2. Iterate through each row to simulate trades.
-            3. Open trades on new signals if no trade is open and direction is different from last trade.
-            4. Close trades if TP/SL is hit or signal flips.
-            5. Record trade details including entry price, exit price, TP/SL status, direction, and PnL.
-        """
-        # -------------------------------
-        # Merge signals into price data
-        # -------------------------------
-        merged_df = pd.merge(
+        self.data = pd.merge_asof(
             self.price_df,
-            self.signal_df.rename(columns={"timestamp": "signal_timestamp"}),
-            left_on="timestamp",
-            right_on="signal_timestamp",
-            how="left"  # keep all price rows; signals will be NaN if not available
+            self.signal_df[["timestamp", "signals"]],
+            on="timestamp",
+            direction="backward"
+        ).fillna({"signals": 0})
+
+    # -------------------------
+    # Open Trade
+    # -------------------------
+    def open_position(self, row):
+        direction = "long" if row.signals == 1 else "short"
+        entry_price = row.close
+
+        entry_action = "BUY" if direction == "long" else "SELL"
+
+        self.open_trade = {
+            "entry_time": row.timestamp,
+            "entry_price": entry_price,
+            "direction": direction,
+            "tp_price": entry_price * (1 + self.tp) if direction == "long" else entry_price * (1 - self.tp),
+            "sl_price": entry_price * (1 - self.sl) if direction == "long" else entry_price * (1 + self.sl),
+            "entry_action": entry_action,
+        }
+
+        self.balance *= (1 - (self.fee + self.slippage) / 100)
+
+    # -------------------------
+    # Close Trade
+    # -------------------------
+    def close_position(self, row, exit_price, reason):
+        entry_price = self.open_trade["entry_price"]
+        direction = self.open_trade["direction"]
+
+        pnl_pct = (
+            (exit_price - entry_price) / entry_price * 100
+            if direction == "long"
+            else (entry_price - exit_price) / entry_price * 100
         )
 
-        # Fill missing signals with 0 (no action)
-        merged_df["signals"] = merged_df["signals"].fillna(0)
+        pnl_pct *= self.leverage
+        pnl_pct -= (self.fee + self.slippage)
 
-        open_trade = None  # Track current open trade
+        self.balance *= (1 + pnl_pct / 100)
 
-        for i, row in merged_df.iterrows():
-            signal = row.get("signals", 0)
+        # Determine exit action
+        if direction == "long":
+            exit_action = f"SELL ({reason})"
+        else:
+            exit_action = f"BUY ({reason})"
 
-            # -------------------------------
-            # Handle existing open trade
-            # -------------------------------
-            if open_trade is not None:
-                high = row["high"]
-                low = row["low"]
-                tp_sl_hit = None
-                exit_price = row["close"]  # Default exit price if trade closes due to signal flip
+        self.trades.append({
+            "entry_time": self.open_trade["entry_time"],
+            "exit_time": row.timestamp,
+            "direction": direction,
+            "entry_action": self.open_trade["entry_action"],
+            "exit_action": exit_action,
+            "entry_price": entry_price,
+            "exit_price": exit_price,
+            "pnl_%": round(pnl_pct, 2),
+            "balance": round(self.balance, 2),
+        })
 
-                # Check if TP/SL has been hit
-                if open_trade["direction"] == "buy":
-                    if high >= open_trade["tp_price"]:
-                        tp_sl_hit = "TP"
-                        exit_price = open_trade["tp_price"]
-                    elif low <= open_trade["sl_price"]:
-                        tp_sl_hit = "SL"
-                        exit_price = open_trade["sl_price"]
-                else:  # sell trade
-                    if low <= open_trade["tp_price"]:
-                        tp_sl_hit = "TP"
-                        exit_price = open_trade["tp_price"]
-                    elif high >= open_trade["sl_price"]:
-                        tp_sl_hit = "SL"
-                        exit_price = open_trade["sl_price"]
+        self.open_trade = None
 
-                # Close trade if TP/SL hit or signal direction changes
-                if tp_sl_hit or (signal != 0 and signal != open_trade["signal"]):
-                    pnl = (
-                        (exit_price - open_trade["entry_price"]) if open_trade["direction"] == "buy" else
-                        (open_trade["entry_price"] - exit_price)
-                    )
+    # -------------------------
+    # Check TP / SL inside candle
+    # -------------------------
+    def check_tp_sl(self, row):
+        if not self.open_trade:
+            return False
 
-                    # Record trade
-                    self.trades.append({
-                        "timestamp": open_trade["timestamp"],
-                        "entry_price": open_trade["entry_price"],
-                        "exit_price": exit_price,
-                        "tp/sl": tp_sl_hit,
-                        "direction": open_trade["direction"],
-                        "pnl": pnl,
-                    })
+        high, low = row.high, row.low
+        tp_price = self.open_trade["tp_price"]
+        sl_price = self.open_trade["sl_price"]
+        direction = self.open_trade["direction"]
 
-                    # Update last trade direction to block consecutive same-direction trades
-                    self.last_trade_direction = open_trade["direction"]
-                    open_trade = None  # Reset current trade
+        if direction == "long":
+            if high >= tp_price:
+                self.close_position(row, tp_price, "TP")
+                return True
+            if low <= sl_price:
+                self.close_position(row, sl_price, "SL")
+                return True
+        else:
+            if low <= tp_price:
+                self.close_position(row, tp_price, "TP")
+                return True
+            if high >= sl_price:
+                self.close_position(row, sl_price, "SL")
+                return True
 
-            # -------------------------------
-            # Open a new trade if possible
-            # -------------------------------
-            if open_trade is None and signal in [1, -1]:
-                direction = "buy" if signal == 1 else "sell"
+        return False
 
-                # Skip trade if last trade had same direction
-                if self.last_trade_direction == direction:
+    # -------------------------
+    # Main Backtest Loop
+    # -------------------------
+    def run_backtest(self):
+        for _, row in self.data.iterrows():
+            signal = row.signals
+
+            if self.open_trade:
+                if self.check_tp_sl(row):
                     continue
 
-                entry_price = row["close"]
-                open_trade = {
-                    "timestamp": row["timestamp"],
-                    "entry_price": entry_price,
-                    "direction": direction,
-                    "signal": signal,
-                    "tp_price": entry_price * (1 + self.tp / 100) if signal == 1 else entry_price * (1 - self.tp / 100),
-                    "sl_price": entry_price * (1 - self.sl / 100) if signal == 1 else entry_price * (1 + self.sl / 100),
-                }
+                # Exit on signal flip
+                if signal != 0 and (
+                    (signal == 1 and self.open_trade["direction"] == "short") or
+                    (signal == -1 and self.open_trade["direction"] == "long")
+                ):
+                    self.close_position(row, row.close, "Signal Flip")
 
-        logger.info(f"Backtesting completed. Total trades recorded: {len(self.trades)}")
+            if not self.open_trade and signal in [1, -1]:
+                self.open_position(row)
 
-    def get_results(self) -> pd.DataFrame:
-        """
-        Return the recorded trades as a pandas DataFrame.
+            if self.balance <= self.break_balance:
+                print("⚠️ Account dropped below 50%. Stopping backtest.")
+                break
 
-        Columns:
-            - timestamp: When the trade was opened.
-            - entry_price: Entry price of the trade.
-            - exit_price: Price at which the trade was closed.
-            - tp/sl: Type of exit ('TP', 'SL', or None for signal flip exit).
-            - direction: 'buy' or 'sell'.
-            - pnl: Profit or loss for the trade.
-
-        Returns:
-            pd.DataFrame: DataFrame of all trades.
-        """
+    # -------------------------
+    # Results
+    # -------------------------
+    def get_results(self):
         return pd.DataFrame(self.trades)
+
+    def get_final_balance(self):
+        return round(self.balance, 2)
+
+    def get_total_return_pct(self):
+        return round((self.balance - self.starting_balance) / self.starting_balance * 100, 2)
