@@ -1,5 +1,5 @@
 import numpy as np
-from indicators import call_indicator
+from TradeX.indicators.talib.indicators import call_indicator
 
 # =========================================================
 # HELPER FUNCTIONS
