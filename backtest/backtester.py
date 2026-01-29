@@ -43,20 +43,25 @@ class Backtester:
         Run the backtesting process.
 
         Steps:
-            1. Merge price and signal data using merge_asof to align signals with prices.
+            1. Merge price and signal data using simple merge (timestamps must match).
             2. Iterate through each row to simulate trades.
             3. Open trades on new signals if no trade is open and direction is different from last trade.
             4. Close trades if TP/SL is hit or signal flips.
             5. Record trade details including entry price, exit price, TP/SL status, direction, and PnL.
         """
-        # Merge signals into price data (backward direction ensures signal applies to current or previous price row)
-        merged_df = pd.merge_asof(
+        # -------------------------------
+        # Merge signals into price data
+        # -------------------------------
+        merged_df = pd.merge(
             self.price_df,
             self.signal_df.rename(columns={"timestamp": "signal_timestamp"}),
             left_on="timestamp",
             right_on="signal_timestamp",
-            direction="backward"
+            how="left"  # keep all price rows; signals will be NaN if not available
         )
+
+        # Fill missing signals with 0 (no action)
+        merged_df["signals"] = merged_df["signals"].fillna(0)
 
         open_trade = None  # Track current open trade
 
@@ -90,7 +95,6 @@ class Backtester:
 
                 # Close trade if TP/SL hit or signal direction changes
                 if tp_sl_hit or (signal != 0 and signal != open_trade["signal"]):
-                    # PnL calculation based on trade direction
                     pnl = (
                         (exit_price - open_trade["entry_price"]) if open_trade["direction"] == "buy" else
                         (open_trade["entry_price"] - exit_price)
@@ -138,8 +142,8 @@ class Backtester:
 
         Columns:
             - timestamp: When the trade was opened.
-            - entryprice: Entry price of the trade.
-            - exitprice: Price at which the trade was closed.
+            - entry_price: Entry price of the trade.
+            - exit_price: Price at which the trade was closed.
             - tp/sl: Type of exit ('TP', 'SL', or None for signal flip exit).
             - direction: 'buy' or 'sell'.
             - pnl: Profit or loss for the trade.
