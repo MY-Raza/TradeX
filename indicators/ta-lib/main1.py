@@ -122,7 +122,7 @@ signals_df = pd.read_csv(signals_csv, parse_dates=["timestamp"])
 bt = Backtester(price_df=df_1m, signal_df=signals_df, tp=3, sl=1)
 bt.run_backtest()
 trades_df = bt.get_results()
-BACKTEST_CSV = os.path.join(SIGNALS_FOLDER, "backtest_results_bbands.csv")
+BACKTEST_CSV = os.path.join(SIGNALS_FOLDER, "ledger.csv")
 trades_df.to_csv(BACKTEST_CSV, index=False)
 logger.info(f"Backtest results saved to {BACKTEST_CSV}")
 # Optional: print first few rows
