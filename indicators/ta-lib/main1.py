@@ -47,67 +47,67 @@ volume = df_1h["volume"].values
 ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
 periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
 
-# # Mapping common names to arrays
-# AUTO_ARGS = {
-#     "open": open_,
-#     "high": high,
-#     "low": low,
-#     "close": close,
-#     "volume": volume,
-#     "ref": ref,
-#     "periods": periods,
-#     "pattern_name": "CDLDOJI"
-# }
+# Mapping common names to arrays
+AUTO_ARGS = {
+    "open": open_,
+    "high": high,
+    "low": low,
+    "close": close,
+    "volume": volume,
+    "ref": ref,
+    "periods": periods,
+    "pattern_name": "CDLDOJI"
+}
 
-# # ---------------------------
-# # Automatically detect all *_signal functions
-# # ---------------------------
-# signal_funcs = {name: func for name, func in globals().items() if callable(func) and name.endswith("_signal")}
+# ---------------------------
+# Automatically detect all *_signal functions
+# ---------------------------
+signal_funcs = {name: func for name, func in globals().items() if callable(func) and name.endswith("_signal")}
 
-# # ---------------------------
-# # Compute & save all signals automatically to separate CSVs
-# # ---------------------------
-# for func_name, func in signal_funcs.items():
-#     try:
-#         # Automatically get function arguments
-#         sig = inspect.signature(func)
-#         args_to_pass = []
-#         for param in sig.parameters.values():
-#             if param.name in AUTO_ARGS:
-#                 args_to_pass.append(AUTO_ARGS[param.name])
-#             elif param.default != inspect.Parameter.empty:
-#                 # use default value
-#                 pass
-#             else:
-#                 raise ValueError(f"Cannot automatically provide argument '{param.name}' for {func_name}")
+# ---------------------------
+# Compute & save all signals automatically to separate CSVs
+# ---------------------------
+for func_name, func in signal_funcs.items():
+    try:
+        # Automatically get function arguments
+        sig = inspect.signature(func)
+        args_to_pass = []
+        for param in sig.parameters.values():
+            if param.name in AUTO_ARGS:
+                args_to_pass.append(AUTO_ARGS[param.name])
+            elif param.default != inspect.Parameter.empty:
+                # use default value
+                pass
+            else:
+                raise ValueError(f"Cannot automatically provide argument '{param.name}' for {func_name}")
 
-#         # Call the signal function
-#         result = func(*args_to_pass)
+        # Call the signal function
+        result = func(*args_to_pass)
 
-#         # Determine CSV file name
-#         if func_name == "candlestick_signal":
-#             result, pattern = result
-#             csv_name = f"{func_name}_{pattern.lower()}.csv"
-#         else:
-#             csv_name = f"{func_name}.csv"
+        # Determine CSV file name
+        if func_name == "candlestick_signal":
+            result, pattern = result
+            csv_name = f"{func_name}_{pattern.lower()}.csv"
+        else:
+            csv_name = f"{func_name}.csv"
 
-#         # Convert result to DataFrame
-#         if isinstance(result, tuple):
-#             df_signal = pd.DataFrame({f"{func_name}_{i}": r for i, r in enumerate(result)})
-#         elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
-#             df_signal = pd.DataFrame(result, columns=[f"{func_name}_{i}" for i in range(result.shape[1])])
-#         else:
-#             df_signal = pd.DataFrame({func_name: result})
+        # Convert result to DataFrame
+        if isinstance(result, tuple):
+            df_signal = pd.DataFrame({"signals": r for i, r in enumerate(result)})
+        elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
+            df_signal = pd.DataFrame(result, columns=["signals" for i in range(result.shape[1])])
+        else:
+            df_signal = pd.DataFrame({"signals": result})
 
-#         df_signal.insert(0, "timestamp", df_1h["timestamp"])
+        df_signal.insert(0, "timestamp", df_1h["timestamp"])
 
-#         # Save to CSV
-#         output_csv = os.path.join(SIGNALS_FOLDER, csv_name)
-#         df_signal.to_csv(output_csv, index=False)
-#         logger.info(f"Saved {func_name} → {output_csv}")
+        # Save to CSV
+        output_csv = os.path.join(SIGNALS_FOLDER, csv_name)
+        df_signal.to_csv(output_csv, index=False)
+        logger.info(f"Saved {func_name} → {output_csv}")
 
-#     except Exception as e:
-#         logger.error(f"Error computing {func_name}: {e}")
+    except Exception as e:
+        logger.error(f"Error computing {func_name}: {e}")
 
 # ---------------------------
 # Backtesting example

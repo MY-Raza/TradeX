@@ -11,8 +11,8 @@ class Backtester:
     A simple backtester for take-profit (TP) / stop-loss (SL) trading strategies.
 
     Attributes:
-        price_df (pd.DataFrame): OHLCV price data with at least 'timestamp', 'high', 'low', 'close' columns.
-        signal_df (pd.DataFrame): Trading signals with at least 'timestamp' and 'bbands_signal' columns.
+        price_df (pd.DataFrame): OHLCV price data with 'timestamp', 'high', 'low', 'close' columns.
+        signal_df (pd.DataFrame): Trading signals with 'timestamp' and 'signals' columns.
             Signals: 1 = Buy, -1 = Sell, 0 = No action.
         tp (float): Take-profit percentage (default 3%).
         sl (float): Stop-loss percentage (default 1%).
@@ -61,7 +61,7 @@ class Backtester:
         open_trade = None  # Track current open trade
 
         for i, row in merged_df.iterrows():
-            signal = row.get("bbands_signal", 0)
+            signal = row.get("signals", 0)
 
             # -------------------------------
             # Handle existing open trade
@@ -120,14 +120,14 @@ class Backtester:
                 if self.last_trade_direction == direction:
                     continue
 
-                entryprice = row["close"]
+                entry_price = row["close"]
                 open_trade = {
                     "timestamp": row["timestamp"],
-                    "entryprice": entryprice,
+                    "entry_price": entry_price,
                     "direction": direction,
                     "signal": signal,
-                    "tp_price": entryprice * (1 + self.tp / 100) if signal == 1 else entryprice * (1 - self.tp / 100),
-                    "sl_price": entryprice * (1 - self.sl / 100) if signal == 1 else entryprice * (1 + self.sl / 100),
+                    "tp_price": entry_price * (1 + self.tp / 100) if signal == 1 else entry_price * (1 - self.tp / 100),
+                    "sl_price": entry_price * (1 - self.sl / 100) if signal == 1 else entry_price * (1 + self.sl / 100),
                 }
 
         logger.info(f"Backtesting completed. Total trades recorded: {len(self.trades)}")
