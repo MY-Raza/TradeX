@@ -92,15 +92,15 @@ class Backtester:
                 if tp_sl_hit or (signal != 0 and signal != open_trade["signal"]):
                     # PnL calculation based on trade direction
                     pnl = (
-                        (exit_price - open_trade["entryprice"]) if open_trade["direction"] == "buy" else
-                        (open_trade["entryprice"] - exit_price)
+                        (exit_price - open_trade["entry_price"]) if open_trade["direction"] == "buy" else
+                        (open_trade["entry_price"] - exit_price)
                     )
 
                     # Record trade
                     self.trades.append({
                         "timestamp": open_trade["timestamp"],
-                        "entryprice": open_trade["entryprice"],
-                        "exitprice": exit_price,
+                        "entry_price": open_trade["entry_price"],
+                        "exit_price": exit_price,
                         "tp/sl": tp_sl_hit,
                         "direction": open_trade["direction"],
                         "pnl": pnl,
