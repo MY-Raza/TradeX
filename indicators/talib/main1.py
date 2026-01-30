@@ -7,6 +7,7 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.indicators.talib.signals import *
 from TradeX.backtest.backtest1 import Backtest
+from TradeX.backtest.backtester import Backtester,BacktestConfig
 import os
 
 # ---------------------------
@@ -112,11 +113,11 @@ df_1m = df_1m.drop(columns=["datetime"])
 # # ---------------------------
 # # Backtesting example
 # # ---------------------------
-# os.makedirs(SIGNALS_FOLDER, exist_ok=True)
-# signals_csv = os.path.join(SIGNALS_FOLDER, "bbands_signal.csv")  
-# if not os.path.exists(signals_csv):
-#     logger.error(f"Signal CSV {signals_csv} not found. Exiting backtest.")
-#     exit()
+os.makedirs(SIGNALS_FOLDER, exist_ok=True)
+signals_csv = os.path.join(SIGNALS_FOLDER, "bbands_signal.csv")  
+if not os.path.exists(signals_csv):
+    logger.error(f"Signal CSV {signals_csv} not found. Exiting backtest.")
+    exit()
 
 # signals_df = pd.read_csv(signals_csv)
 # # Convert both to datetime FIRST
@@ -155,5 +156,28 @@ df_1m = df_1m.drop(columns=["datetime"])
 # print("PnL %:", pnl_percent)
 # df_ledger.to_csv("ledger1.csv", index=False)
 # print("Results saved to ledger1.csv")
+
+signals_df = pd.read_csv(signals_csv)
+
+price_df = df_1m[["timestamp", "open", "high", "low"]].copy()
+price_df["timestamp"] = pd.to_datetime(price_df["timestamp"])
+signals_df["timestamp"] = pd.to_datetime(signals_df["timestamp"])
+
+bt = Backtester(
+    BacktestConfig(
+        starting_balance=1000,
+        leverage=1,
+        take_profit_pct=0.03,
+        stop_loss_pct=0.01
+    )
+)
+
+ledger, final_balance, pnl_pct = bt.run(price_df, signals_df)
+
+print("Final Balance:", final_balance)
+print("PnL %:", pnl_pct)
+
+ledger.to_csv(os.path.join(SIGNALS_FOLDER, "ledger.csv"), index=False)
+
 
 
