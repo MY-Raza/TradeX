@@ -22,35 +22,52 @@ class Backtester:
         self.config = config or BacktestConfig()
         self.reset()
 
+    # ==========================================================
     def reset(self):
         self.balance = self.config.starting_balance
         self.trades = []
         self.current_position = None
         self.position_open = False
 
+        # 🔥 ledger state per direction
+        self.last_action_by_direction = {
+            "long": None,
+            "short": None
+        }
+
     # ==========================================================
-    # 🔒 TRADE RECORD GUARD (YOUR RULES)
+    # 🔒 STRICT CSV RECORDING RULE
     # ==========================================================
     def _record_trade(self, trade: dict):
         direction = trade["predicted_direction"]
         action = trade["action"]
 
-        allowed_actions = {"buy", "sell-tp", "sell-sl", "sell-direction-change"}
-
         if direction not in {"long", "short"}:
             return
 
-        if action not in allowed_actions:
-            return
+        last_action = self.last_action_by_direction[direction]
 
-        # buy/sell price exclusivity
+        # First entry MUST be buy
+        if last_action is None:
+            if action != "buy":
+                return
+        else:
+            # After buy → ONLY sell-direction-change
+            if last_action == "buy" and action != "sell-direction-change":
+                return
+
+            # No duplicates
+            if last_action == action:
+                return
+
+        # Enforce buy/sell exclusivity
         if trade["buy_price"] is not None:
             trade["sell_price"] = None
-
         if trade["sell_price"] is not None:
             trade["buy_price"] = None
 
         self.trades.append(trade)
+        self.last_action_by_direction[direction] = action
 
     # ==========================================================
     def run(self, price_data: pd.DataFrame, prediction_data: pd.DataFrame) -> Tuple[pd.DataFrame, float, float]:
@@ -106,6 +123,7 @@ class Backtester:
 
         return out
 
+    # ==========================================================
     def _check_risk_stop(self) -> bool:
         return self.balance < self.config.starting_balance * self.config.min_balance_pct
 
@@ -143,27 +161,17 @@ class Backtester:
 
         tp_hit, sl_hit = self._check_tp_sl(highs[idx], lows[idx], pos)
 
+        # TP / SL → backend only
         if tp_hit or sl_hit:
             exit_price = pos["tp"] if tp_hit else pos["sl"]
-            action = "sell-tp" if tp_hit else "sell-sl"
-
             pnl = self._calculate_pnl(pos["buy_price_adj"], exit_price, pos["direction"])
             self._update_balance(pnl)
-
-            self._record_trade({
-                "datetime": timestamps[idx],
-                "predicted_direction": "long" if pos["direction"] == 1 else "short",
-                "action": action,
-                "buy_price": None,
-                "sell_price": exit_price,
-                "balance": self.balance,
-                "pnl": pnl
-            })
 
             self.position_open = False
             self.current_position = None
             return idx
 
+        # Direction change → recorded
         if signal != 0 and signal != pos["direction"]:
             exit_idx = min(idx + self.config.buy_after_minutes, len(opens) - 1)
             exit_price = opens[exit_idx]
@@ -221,5 +229,4 @@ class Backtester:
         df = pd.DataFrame(self.trades)
         df["pnl"] *= 100
         df["cumulative_pnl"] = (df["balance"] / self.config.starting_balance - 1) * 100
-
         return df, self.balance, df["cumulative_pnl"].iloc[-1]
