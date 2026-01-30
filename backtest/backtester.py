@@ -9,7 +9,7 @@ class BacktestConfig:
     starting_balance: float = 10000.0
     leverage: float = 1.0
     transaction_fee: float = 0.001
-    slippage: float = 0.0005
+    slippage: float = 0.0
     take_profit_pct: float = 0.02
     stop_loss_pct: float = 0.01
     buy_after_minutes: int = 1
@@ -173,7 +173,7 @@ class Backtester:
 
         # Direction change → recorded
         if signal != 0 and signal != pos["direction"]:
-            exit_idx = min(idx + self.config.buy_after_minutes, len(opens) - 1)
+            exit_idx = min(idx, len(opens) - 1)
             exit_price = opens[exit_idx]
 
             pnl = self._calculate_pnl(pos["buy_price_adj"], exit_price, pos["direction"])

@@ -150,7 +150,7 @@ if not os.path.exists(signals_csv):
 # df_predictions = pd.read_csv(signals_csv)
 # df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
 # df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
-# bt = Backtest(df_1m, df_predictions)
+# bt = Backtest(df_1m, df_predictions,take_profit=3,stop_loss=1)
 # df_ledger, final_balance, pnl_percent = bt.run()
 # print("Final Balance:", final_balance)
 # print("PnL %:", pnl_percent)
