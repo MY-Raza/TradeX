@@ -73,11 +73,9 @@ class Backtester:
         highs = price_data["high"].values
         lows = price_data["low"].values
         
-        break_on_huge_loss = False
-        
-        for i in range(len(signals) - 1):
+        i = 0
+        while i < len(signals):
             if self.balance < self.breaking_balance:
-                break_on_huge_loss = True
                 break
             
             current_signal = signals[i]
@@ -86,189 +84,136 @@ class Backtester:
             if current_signal == 0:
                 if self.previous_direction is None or self.previous_direction == 0:
                     self.previous_direction = current_signal
+                    i += 1
                     continue
                 current_signal = self.previous_direction
             
-            # Get current minute interval data
-            start_idx = i
-            end_idx = min(i + self.config.buy_after_minutes + 10, len(opens))
-            np_temp = price_data.iloc[start_idx:end_idx][["timestamp", "open", "high", "low"]].values
-            np_temp_high = np_temp[:, 2]
-            np_temp_low = np_temp[:, 3]
-            
-            if len(np_temp) <= self.config.buy_after_minutes:
+            # If not in position, try to enter
+            if not self.position_open and current_signal != 0:
+                entry_idx = min(i + self.config.buy_after_minutes, len(opens) - 1)
+                if entry_idx >= len(opens):
+                    i += 1
+                    continue
+                    
+                entry_price = opens[entry_idx]
+                entry_pnl = -((self.config.transaction_fee + self.config.slippage) * 100)
+                self._update_balance(entry_pnl)
+                
+                self.current_position = {
+                    "direction": current_signal,
+                    "buy_price": entry_price,
+                    "entry_idx": entry_idx,
+                    "tp": self._calculate_tp(entry_price, current_signal),
+                    "sl": self._calculate_sl(entry_price, current_signal),
+                    "entry_datetime": timestamps[entry_idx]
+                }
+                
+                self.position_open = True
+                self.previous_direction = current_signal
+                
+                self._record_trade({
+                    "datetime": timestamps[entry_idx],
+                    "predicted_direction": "long" if current_signal == 1 else "short",
+                    "action": "buy",
+                    "buy_price": entry_price,
+                    "sell_price": None,
+                    "balance": self.balance,
+                    "pnl": entry_pnl,
+                    "pnl_sum": 0
+                })
+                
+                i = entry_idx
                 continue
             
-            # If not in position, try to buy
-            if not self.position_open:
-                self._enter_position(i, current_signal, timestamps, opens, np_temp)
-                self.previous_direction = current_signal
-            
             # If in position, manage it
-            else:
-                # Check for TP/SL first
-                tp_sl_exit = self._check_tp_sl(i, highs, lows, np_temp_high, np_temp_low)
-                if tp_sl_exit:
-                    exit_type, exit_idx, exit_price = tp_sl_exit
-                    self._exit_position(i, exit_type, exit_price, timestamps[exit_idx])
+            elif self.position_open:
+                pos = self.current_position
+                
+                # Check for TP/SL at current minute
+                tp_sl_hit = self._check_minute_tp_sl(i, highs[i], lows[i], pos)
+                if tp_sl_hit:
+                    exit_type, exit_price = tp_sl_hit
+                    pnl = self._calculate_position_pnl(
+                        pos["buy_price"], 
+                        exit_price, 
+                        pos["direction"],
+                        is_exit=True
+                    )
                     
-                    # If direction changed and TP/SL hit, enter new position
-                    if current_signal != self.current_position["direction"]:
-                        self._enter_position(exit_idx, current_signal, timestamps, opens, np_temp)
+                    self._update_balance(pnl)
+                    
+                    action_map = {
+                        "tp": "sell - take_profit",
+                        "sl": "sell - stop_loss"
+                    }
+                    
+                    self._record_trade({
+                        "datetime": timestamps[i],
+                        "predicted_direction": "long" if pos["direction"] == 1 else "short",
+                        "action": action_map[exit_type],
+                        "buy_price": None,
+                        "sell_price": exit_price,
+                        "balance": self.balance,
+                        "pnl": pnl,
+                        "pnl_sum": 0
+                    })
+                    
+                    self.position_open = False
+                    self.current_position = None
+                    
+                    # If direction changed, enter new position next iteration
+                    if current_signal != pos["direction"]:
+                        i += 1
+                        continue
                 
                 # Check for direction change
-                elif current_signal != self.current_position["direction"]:
+                elif current_signal != pos["direction"]:
                     # Exit at current open price
-                    exit_idx = min(i + self.config.buy_after_minutes, len(opens) - 1)
-                    exit_price = opens[exit_idx]
-                    self._exit_position(exit_idx, "direction-change", exit_price, timestamps[exit_idx])
+                    exit_price = opens[i]
+                    pnl = self._calculate_position_pnl(
+                        pos["buy_price"], 
+                        exit_price, 
+                        pos["direction"],
+                        is_exit=True
+                    )
                     
-                    # Enter new position
-                    self._enter_position(exit_idx, current_signal, timestamps, opens, np_temp)
-                
-                # Check TP/SL within current interval
-                else:
-                    self._check_interval_tp_sl(i, np_temp, np_temp_high, np_temp_low)
+                    self._update_balance(pnl)
+                    
+                    self._record_trade({
+                        "datetime": timestamps[i],
+                        "predicted_direction": "long" if pos["direction"] == 1 else "short",
+                        "action": "sell - direction change",
+                        "buy_price": None,
+                        "sell_price": exit_price,
+                        "balance": self.balance,
+                        "pnl": pnl,
+                        "pnl_sum": 0
+                    })
+                    
+                    self.position_open = False
+                    self.current_position = None
+                    
+                    # Enter new position on next iteration
+                    i += 1
+                    continue
             
-            self.previous_direction = current_signal
+            i += 1
         
-        return self._build_results(break_on_huge_loss)
+        return self._build_results()
 
-    def _enter_position(self, idx, signal, timestamps, opens, np_temp):
-        """Enter a new position."""
-        entry_idx = min(idx + self.config.buy_after_minutes, len(opens) - 1)
-        entry_price = opens[entry_idx]
-        
-        # Calculate entry PnL (negative due to fees/slippage)
-        entry_pnl = -((self.config.transaction_fee + self.config.slippage) * 100)
-        self._update_balance(entry_pnl)
-        
-        self.current_position = {
-            "direction": signal,
-            "buy_price": entry_price,
-            "buy_price_adj": entry_price,
-            "entry_idx": entry_idx,
-            "tp": self._calculate_tp(entry_price, signal),
-            "sl": self._calculate_sl(entry_price, signal),
-            "entry_datetime": timestamps[entry_idx]
-        }
-        
-        self.position_open = True
-        
-        self._record_trade({
-            "datetime": timestamps[entry_idx],
-            "predicted_direction": "long" if signal == 1 else "short",
-            "action": "buy",
-            "buy_price": entry_price,
-            "sell_price": None,
-            "balance": self.balance,
-            "pnl": entry_pnl,
-            "pnl_sum": 0
-        })
-
-    def _exit_position(self, idx, exit_type, exit_price, exit_timestamp):
-        """Exit current position."""
-        if not self.position_open:
-            return
-        
-        pos = self.current_position
-        pnl = self._calculate_position_pnl(
-            pos["buy_price"], 
-            exit_price, 
-            pos["direction"],
-            is_exit=True
-        )
-        
-        self._update_balance(pnl)
-        
-        action_map = {
-            "tp": "sell - take_profit",
-            "sl": "sell - stop_loss",
-            "direction-change": "sell - direction change"
-        }
-        
-        self._record_trade({
-            "datetime": exit_timestamp,
-            "predicted_direction": "long" if pos["direction"] == 1 else "short",
-            "action": action_map[exit_type],
-            "buy_price": None,
-            "sell_price": exit_price,
-            "balance": self.balance,
-            "pnl": pnl,
-            "pnl_sum": 0  # Will be calculated in _build_results
-        })
-        
-        self.position_open = False
-        self.current_position = None
-
-    def _check_tp_sl(self, idx, highs, lows, np_temp_high, np_temp_low):
+    def _check_minute_tp_sl(self, idx, high, low, position):
         """Check if TP or SL was hit at current minute."""
-        if not self.position_open:
-            return None
-        
-        pos = self.current_position
-        
-        # Check current minute's high/low
-        current_high = highs[idx]
-        current_low = lows[idx]
-        
-        if pos["direction"] == 1:  # Long
-            if current_high >= pos["tp"]:
-                return ("tp", idx, pos["tp"])
-            elif current_low <= pos["sl"]:
-                return ("sl", idx, pos["sl"])
+        if position["direction"] == 1:  # Long
+            if high >= position["tp"]:
+                return ("tp", position["tp"])
+            elif low <= position["sl"]:
+                return ("sl", position["sl"])
         else:  # Short
-            if current_low <= pos["tp"]:
-                return ("tp", idx, pos["tp"])
-            elif current_high >= pos["sl"]:
-                return ("sl", idx, pos["sl"])
-        
+            if low <= position["tp"]:
+                return ("tp", position["tp"])
+            elif high >= position["sl"]:
+                return ("sl", position["sl"])
         return None
-
-    def _check_interval_tp_sl(self, idx, np_temp, np_temp_high, np_temp_low):
-        """Check TP/SL within the current interval (for multi-minute positions)."""
-        if not self.position_open:
-            return
-        
-        pos = self.current_position
-        
-        if pos["direction"] == 1:  # Long
-            # Check for TP hit
-            tp_hits = np.where(np_temp_high >= pos["tp"])[0]
-            # Check for SL hit
-            sl_hits = np.where(np_temp_low <= pos["sl"])[0]
-        else:  # Short
-            # Check for TP hit
-            tp_hits = np.where(np_temp_low <= pos["tp"])[0]
-            # Check for SL hit
-            sl_hits = np.where(np_temp_high >= pos["sl"])[0]
-        
-        # Determine which hit first
-        if len(tp_hits) == 0 and len(sl_hits) == 0:
-            return
-        elif len(tp_hits) > 0 and len(sl_hits) == 0:
-            exit_idx = tp_hits[0]
-            exit_price = pos["tp"]
-            exit_type = "tp"
-        elif len(tp_hits) == 0 and len(sl_hits) > 0:
-            exit_idx = sl_hits[0]
-            exit_price = pos["sl"]
-            exit_type = "sl"
-        else:
-            if tp_hits[0] < sl_hits[0]:
-                exit_idx = tp_hits[0]
-                exit_price = pos["tp"]
-                exit_type = "tp"
-            else:
-                exit_idx = sl_hits[0]
-                exit_price = pos["sl"]
-                exit_type = "sl"
-        
-        # Calculate actual exit index
-        actual_exit_idx = min(idx + exit_idx, len(np_temp) - 1)
-        exit_timestamp = np_temp[actual_exit_idx][0]
-        
-        self._exit_position(actual_exit_idx, exit_type, exit_price, exit_timestamp)
 
     def _calculate_tp(self, price, direction):
         """Calculate take-profit price."""
@@ -307,11 +252,16 @@ class Backtester:
         
         return out
 
-    def _build_results(self, break_on_huge_loss: bool = False):
+    def _build_results(self):
         if not self.trades:
             return pd.DataFrame(), self.balance, 0.0
         
-        df = pd.DataFrame(self.trades, columns=self.header_names)
+        df = pd.DataFrame(self.trades)
+        
+        # Ensure all required columns exist
+        for col in self.header_names:
+            if col not in df.columns:
+                df[col] = 0.0
         
         # Calculate cumulative PnL
         df["pnl_sum"] = df["pnl"].cumsum()
@@ -321,7 +271,4 @@ class Backtester:
         
         pnl_percent = df["pnl_sum"].iloc[-1] if len(df) > 0 else 0.0
         
-        if break_on_huge_loss:
-            return df, -1000, pnl_percent
-        else:
-            return df, round(self.balance, 2), round(pnl_percent, 2)
+        return df, round(self.balance, 2), round(pnl_percent, 2)
