@@ -9,9 +9,9 @@ class Backtester:
         starting_balance: float = 1000,
         tp: float = 3,
         sl: float = 1,
-        fee: float = 0.05,
+        fee: float = 0.05,      # percent per side
         leverage: float = 1.0,
-        slippage: float = 0.0,
+        slippage: float = 0.0, # percent per side
     ):
         self.price_df = price_df.sort_values("timestamp").reset_index(drop=True)
         self.signal_df = signal_df.sort_values("timestamp").reset_index(drop=True)
@@ -37,7 +37,7 @@ class Backtester:
         ).fillna({"signals": 0})
 
     # -------------------------
-    # Open Trade
+    # Open Position
     # -------------------------
     def open_position(self, row):
         direction = "long" if row.signals == 1 else "short"
@@ -49,53 +49,66 @@ class Backtester:
             "entry_time": row.timestamp,
             "entry_price": entry_price,
             "direction": direction,
+            "entry_action": entry_action,
             "tp_price": entry_price * (1 + self.tp) if direction == "long" else entry_price * (1 - self.tp),
             "sl_price": entry_price * (1 - self.sl) if direction == "long" else entry_price * (1 + self.sl),
-            "entry_action": entry_action,
         }
 
-        self.balance *= (1 - (self.fee + self.slippage) / 100)
+        # Entry fee
+        entry_fee_pct = self.fee + self.slippage
+        self.balance *= (1 - entry_fee_pct / 100)
 
     # -------------------------
-    # Close Trade
+    # Close Position
     # -------------------------
     def close_position(self, row, exit_price, reason):
         entry_price = self.open_trade["entry_price"]
         direction = self.open_trade["direction"]
 
-        pnl_pct = (
-            (exit_price - entry_price) / entry_price * 100
-            if direction == "long"
-            else (entry_price - exit_price) / entry_price * 100
-        )
+        balance_before = self.balance
 
-        pnl_pct *= self.leverage
-        pnl_pct -= (self.fee + self.slippage)
-
-        self.balance *= (1 + pnl_pct / 100)
-
-        # Determine exit action
+        # -------- Gross PnL %
         if direction == "long":
-            exit_action = f"SELL ({reason})"
+            gross_pnl_pct = (exit_price - entry_price) / entry_price * 100
         else:
-            exit_action = f"BUY ({reason})"
+            gross_pnl_pct = (entry_price - exit_price) / entry_price * 100
+
+        gross_pnl_pct *= self.leverage
+
+        # -------- Fees
+        entry_fee_pct = self.fee + self.slippage
+        exit_fee_pct = self.fee + self.slippage
+        total_fees_pct = entry_fee_pct + exit_fee_pct
+
+        # -------- Net PnL
+        net_pnl_pct = gross_pnl_pct - total_fees_pct
+
+        self.balance *= (1 + net_pnl_pct / 100)
+
+        exit_action = "SELL" if direction == "long" else "BUY"
 
         self.trades.append({
             "entry_time": self.open_trade["entry_time"],
-            "exit_time": row.timestamp,
-            "direction": direction,
+            "side": direction.upper(),
             "entry_action": self.open_trade["entry_action"],
             "exit_action": exit_action,
-            "entry_price": entry_price,
-            "exit_price": exit_price,
-            "pnl_%": round(pnl_pct, 2),
-            "balance": round(self.balance, 2),
+            "exit_reason": reason,
+            "entry_price": round(entry_price, 4),
+            "exit_price": round(exit_price, 4),
+
+            # 🔥 clear PnL accounting
+            "gross_pnl_%": round(gross_pnl_pct, 2),
+            "fees_%": round(total_fees_pct, 2),
+            "net_pnl_%": round(net_pnl_pct, 2),
+
+            "balance_before": round(balance_before, 2),
+            "balance_after": round(self.balance, 2),
         })
 
         self.open_trade = None
 
     # -------------------------
-    # Check TP / SL inside candle
+    # Check TP / SL
     # -------------------------
     def check_tp_sl(self, row):
         if not self.open_trade:
@@ -124,7 +137,7 @@ class Backtester:
         return False
 
     # -------------------------
-    # Main Backtest Loop
+    # Main Loop
     # -------------------------
     def run_backtest(self):
         for _, row in self.data.iterrows():
@@ -134,18 +147,17 @@ class Backtester:
                 if self.check_tp_sl(row):
                     continue
 
-                # Exit on signal flip
                 if signal != 0 and (
                     (signal == 1 and self.open_trade["direction"] == "short") or
                     (signal == -1 and self.open_trade["direction"] == "long")
                 ):
-                    self.close_position(row, row.close, "Signal Flip")
+                    self.close_position(row, row.close, "SIGNAL_FLIP")
 
             if not self.open_trade and signal in [1, -1]:
                 self.open_position(row)
 
             if self.balance <= self.break_balance:
-                print("⚠️ Account dropped below 50%. Stopping backtest.")
+                print("⚠️ Account dropped below 50%. Backtest stopped.")
                 break
 
     # -------------------------
@@ -158,4 +170,6 @@ class Backtester:
         return round(self.balance, 2)
 
     def get_total_return_pct(self):
-        return round((self.balance - self.starting_balance) / self.starting_balance * 100, 2)
+        return round(
+            (self.balance - self.starting_balance) / self.starting_balance * 100, 2
+        )
