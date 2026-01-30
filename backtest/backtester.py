@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 
 class Backtester:
     def __init__(
@@ -7,168 +7,231 @@ class Backtester:
         price_df: pd.DataFrame,
         signal_df: pd.DataFrame,
         starting_balance: float = 1000,
-        tp: float = 3,
-        sl: float = 1,
+        tp: float = 100,
+        sl: float = 100,
         fee: float = 0.05,
         leverage: float = 1.0,
         slippage: float = 0.0,
+        buy_after_minutes=0
     ):
-        # Sort data chronologically
-        self.price_df = price_df.sort_values("timestamp").reset_index(drop=True)
-        self.signal_df = signal_df.sort_values("timestamp").reset_index(drop=True)
+        # Prepare price data
+        price_df["timestamp"] = pd.to_datetime(price_df["timestamp"])
+        self.np_1m = price_df.to_numpy()
+        self.index_1m_datetime = price_df.columns.get_loc("timestamp")
+        self.index_1m_open = price_df.columns.get_loc("open")
+        self.index_1m_high = price_df.columns.get_loc("high")
+        self.index_1m_low = price_df.columns.get_loc("low")
 
-        # Account state
-        self.balance = starting_balance
-        self.starting_balance = starting_balance
-        self.break_balance = starting_balance * 0.5  # stop if -50%
+         # Timestamps array for fast lookup
+        self.timestamps_1m = self.np_1m[:, self.index_1m_datetime]
 
-        # Trading parameters
-        self.tp = tp / 100
-        self.sl = sl / 100
-        self.fee = fee
+        # Prepare signal data
+        signal_df['timestamp'] = pd.to_datetime(signal_df['timestamp'])
+        self.np_model_predictions = signal_df.to_numpy()
+        self.index_pred_datetime = signal_df.columns.get_loc("timestamp")
+        self.index_pred_direction = signal_df.columns.get_loc("signals")
+
+         # Timestamps array for signals
+        self.timestamps_pred = self.np_model_predictions[:, self.index_pred_datetime]
+
+        # Precompute 1-minute interval indices for each prediction
+        self.interval_indices = []
+        for i in range(len(self.timestamps_pred) - 1):
+            start_idx = np.searchsorted(self.timestamps_1m, self.timestamps_pred[i])
+            end_idx = np.searchsorted(self.timestamps_1m, self.timestamps_pred[i + 1])
+            self.interval_indices.append((start_idx, end_idx))
+
+        # --------------------------
+        # Trade parameters
+        # --------------------------
+        self.starting_balance = self.current_balance = starting_balance
+        self.breaking_balance = self.current_balance * 0.5
+        self.take_profit_percent = tp / 100
+        self.stop_loss_percent = sl / 100
+        self.buy_after_minutes = int(buy_after_minutes)
+        self.transaction_fee_percent = fee * leverage
         self.leverage = leverage
-        self.slippage = slippage
+        self.slippage = slippage   
 
+        # --------------------------
         # Trade tracking
-        self.trades = []
-        self.open_trade = None
-
-        # Merge price with signals (no lookahead bias)
-        self.data = pd.merge_asof(
-            self.price_df,
-            self.signal_df[["timestamp", "signals"]],
-            on="timestamp",
-            direction="backward"
-        ).fillna({"signals": 0})
+        # --------------------------
+        self.in_position = False
+        self.buy_price = 0
+        self.sell_price = 0
+        self.array_to_save = []
+        self.header_names = [
+            'entry_time', 'side', 'action', 'buy_price',
+            'sell_price', 'balance', 'pnl'
+        ]
 
     # -------------------------
     # Open Position (Futures)
     # -------------------------
-    def open_position(self, row):
-        direction = "long" if row.signals == 1 else "short"
-        entry_price = row.close
+    def open_position(self, np_temp):
+    # Get the buy price from numpy array
+        self.buy_price = np_temp[self.buy_after_minutes][self.index_1m_open]
+        self.sell_price = 0
 
-        entry_action = "BUY" if direction == "long" else "SELL"
+    # Deduct fees and slippage immediately
+        pnl = -self.transaction_fee_percent - self.slippage
+        self.current_balance += self.current_balance * (pnl / 100)
 
-        self.open_trade = {
-            "entry_time": row.timestamp,
-            "entry_price": entry_price,
-            "direction": direction,
-            "entry_action": entry_action,
-            "tp_price": entry_price * (1 + self.tp) if direction == "long" else entry_price * (1 - self.tp),
-            "sl_price": entry_price * (1 - self.sl) if direction == "long" else entry_price * (1 + self.sl),
-        }
+    # Mark that we are in a trade
+        self.in_position = True
 
-        # Entry cost
-        self.balance *= (1 - (self.fee + self.slippage) / 100)
+    # Record the trade
+        trade_time = np_temp[self.buy_after_minutes][self.index_1m_datetime]
+        self.record_trade(trade_time, 'buy', pnl)
 
-    # -------------------------
-    # Close Position
-    # -------------------------
-    def close_position(self, row, exit_price, reason):
-        entry_price = self.open_trade["entry_price"]
-        direction = self.open_trade["direction"]
+    # --------------------------
+    # PnL when direction changes
+    # --------------------------
+    def pnl_direction_change(self, sell_datetime):
+        if not self.in_position:
+            return
 
-        balance_before = self.balance
+        pnl = ((self.sell_price - self.buy_price) / self.buy_price * 100) if self.previous_pred_direction > 0 \
+            else ((self.buy_price - self.sell_price) / self.buy_price * 100)
+        pnl *= self.leverage
+        pnl -= self.transaction_fee_percent + self.slippage
 
-        # PnL calculation
-        pnl_pct = (
-            (exit_price - entry_price) / entry_price * 100
-            if direction == "long"
-            else (entry_price - exit_price) / entry_price * 100
-        )
+        self.current_balance += self.current_balance * (pnl / 100)
+        self.in_position = False
+        self.record_trade(sell_datetime, 'sell - direction change', pnl)
 
-        pnl_pct *= self.leverage
-        pnl_pct -= (self.fee + self.slippage)
-
-        self.balance *= (1 + pnl_pct / 100)
-
-        exit_action = "SELL" if direction == "long" else "BUY"
-
-        # Log trade (clean & readable)
-        self.trades.append({
-            "entry_time": self.open_trade["entry_time"],
-            "exit_time": row.timestamp,
-            "side": direction.upper(),
-            "entry_action": self.open_trade["entry_action"],
-            "exit_action": exit_action,
-            "exit_reason": reason,
-            "entry_price": round(entry_price, 4),
-            "exit_price": round(exit_price, 4),
-            "pnl_%": round(pnl_pct, 2),
-            "balance_before": round(balance_before, 2),
-            "balance_after": round(self.balance, 2),
-        })
-
-        self.open_trade = None
-
-    # -------------------------
-    # Check TP / SL inside candle
-    # -------------------------
-    def check_tp_sl(self, row):
-        if not self.open_trade:
-            return False
-
-        high, low = row.high, row.low
-        tp_price = self.open_trade["tp_price"]
-        sl_price = self.open_trade["sl_price"]
-        direction = self.open_trade["direction"]
-
-        if direction == "long":
-            if high >= tp_price:
-                self.close_position(row, tp_price, "TP")
-                return True
-            if low <= sl_price:
-                self.close_position(row, sl_price, "SL")
-                return True
+    
+    # --------------------------
+    # Find take profit or stop loss index
+    # --------------------------
+    def find_tp_sl_index(self, take_profit_amount, stop_loss_amount, np_temp_high, np_temp_low):
+        if self.current_pred_direction > 0:
+            high_hits = np.where(np_temp_high >= take_profit_amount)[0]
+            low_hits = np.where(np_temp_low <= stop_loss_amount)[0]
         else:
-            if low <= tp_price:
-                self.close_position(row, tp_price, "TP")
-                return True
-            if high >= sl_price:
-                self.close_position(row, sl_price, "SL")
-                return True
+            high_hits = np.where(np_temp_high >= stop_loss_amount)[0]
+            low_hits = np.where(np_temp_low <= take_profit_amount)[0]
 
-        return False
+        if len(high_hits) == 0 and len(low_hits) == 0:
+            return False, -1
+        elif len(high_hits) > 0 and len(low_hits) == 0:
+            self.sell_price = np_temp_high[high_hits[0]]
+            return True, high_hits[0]
+        elif len(high_hits) == 0 and len(low_hits) > 0:
+            self.sell_price = np_temp_low[low_hits[0]]
+            return True, low_hits[0]
+        else:
+            if high_hits[0] < low_hits[0]:
+                self.sell_price = np_temp_high[high_hits[0]]
+                return True, high_hits[0]
+            else:
+                self.sell_price = np_temp_low[low_hits[0]]
+                return True, low_hits[0]
+            
+    
+    def check_tp_sl(self, np_temp, np_temp_high, np_temp_low):
+        if not self.in_position:
+            return
+
+        if self.current_pred_direction > 0:  # long
+            take_profit_amount = self.buy_price * (1 + self.take_profit_percent)
+            stop_loss_amount = self.buy_price * (1 - self.stop_loss_percent)
+        else:  # short
+            take_profit_amount = self.buy_price * (1 - self.take_profit_percent)
+            stop_loss_amount = self.buy_price * (1 + self.stop_loss_percent)
+
+        tp_sl_hit, index = self.find_tp_sl_index(take_profit_amount, stop_loss_amount, np_temp_high, np_temp_low)
+        if tp_sl_hit:
+            pnl = ((self.sell_price - self.buy_price) / self.buy_price * 100) if self.previous_pred_direction > 0 \
+                else ((self.buy_price - self.sell_price) / self.buy_price * 100)
+            pnl *= self.leverage
+            pnl -= self.transaction_fee_percent + self.slippage
+
+            self.current_balance += self.current_balance * (pnl / 100)
+            self.in_position = False
+
+            action_type = ' - take_profit' if pnl > 0 else ' - stop_loss'
+            self.record_trade(np_temp[index][self.index_1m_datetime], 'sell' + action_type, pnl)
+     # --------------------------
+    # Record trades
+    # --------------------------
+    def record_trade(self, datetime, action, pnl):
+        # Only record buy or sell actions
+        if 'buy' in action or 'sell' in action:
+            self.array_to_save.append([
+                datetime,
+                'long' if self.current_pred_direction > 0 else 'short',
+                action,
+                self.buy_price,
+                self.sell_price,
+                self.current_balance,
+                pnl
+            ])
+
+    # --------------------------
+    # Get 1-minute interval data
+    # --------------------------
+    def get_interval_min_data(self, index):
+        start_idx, end_idx = self.interval_indices[index]
+        np_temp = self.np_1m[start_idx:end_idx]
+        np_temp_high = np_temp[:, self.index_1m_high]
+        np_temp_low = np_temp[:, self.index_1m_low]
+        return np_temp, np_temp_high, np_temp_low
+    
 
     # -------------------------
     # Main Backtest Loop
     # -------------------------
     def run_backtest(self):
-        for _, row in self.data.iterrows():
-            signal = row.signals
+        self.previous_pred_direction = self.current_pred_direction = self.np_model_predictions[0][self.index_pred_direction]
+        break_on_huge_loss = False
 
-            # Manage open position
-            if self.open_trade:
-                if self.check_tp_sl(row):
+        for i in range(len(self.np_model_predictions) - 1):
+            self.current_pred_direction = self.np_model_predictions[i][self.index_pred_direction]
+
+            # Handle 0 signals
+            if self.current_pred_direction == 0:
+                if self.previous_pred_direction == 0:
+                    self.previous_pred_direction = self.current_pred_direction
                     continue
+                self.current_pred_direction = self.previous_pred_direction
 
-                # Exit on signal flip
-                if signal != 0 and (
-                    (signal == 1 and self.open_trade["direction"] == "short") or
-                    (signal == -1 and self.open_trade["direction"] == "long")
-                ):
-                    self.close_position(row, row.close, "SIGNAL_FLIP")
+            np_temp, np_temp_high, np_temp_low = self.get_interval_min_data(i)
+            if len(np_temp) <= 10:
+                continue
 
-            # Open new position
-            if not self.open_trade and signal in [1, -1]:
-                self.open_position(row)
+            # Buy if not in position
+            if not self.in_position:
+                self.open_position(np_temp)
+                self.previous_pred_direction = self.current_pred_direction
 
-            # Capital protection
-            if self.balance <= self.break_balance:
-                print("⚠️ Account dropped below 50%. Backtest stopped.")
+            # Handle direction change
+            if self.current_pred_direction != self.previous_pred_direction:
+                if len(np_temp) >= 10:
+                    self.sell_price = np_temp[self.buy_after_minutes][self.index_1m_open]
+                    sell_datetime = np_temp[self.buy_after_minutes][self.index_1m_datetime]
+                    self.pnl_direction_change(sell_datetime)
+
+                    if not self.in_position:
+                        self.open_position(np_temp)
+
+            # Check TP/SL
+            self.check_tp_sl(np_temp, np_temp_high, np_temp_low)
+            self.previous_pred_direction = self.current_pred_direction
+
+            # Break on huge loss
+            if self.current_balance < self.breaking_balance:
+                break_on_huge_loss = True
                 break
 
-    # -------------------------
-    # Results
-    # -------------------------
-    def get_results(self):
-        return pd.DataFrame(self.trades)
+        # Prepare ledger
+        df_ledger = pd.DataFrame(self.array_to_save, columns=self.header_names)
+        df_ledger['pnl_sum'] = df_ledger['pnl'].cumsum()
+        df_ledger[['balance', 'pnl', 'pnl_sum']] = df_ledger[['balance', 'pnl', 'pnl_sum']].round(2)
 
-    def get_final_balance(self):
-        return round(self.balance, 2)
+        pnl_percent = np.round(df_ledger["pnl_sum"].iloc[-1], 2) if len(df_ledger) > 1 else 0
 
-    def get_total_return_pct(self):
-        return round(
-            (self.balance - self.starting_balance) / self.starting_balance * 100, 2
-        )
+        if break_on_huge_loss:
+            return df_ledger, -1000, pnl_percent
+        else:
+            return df_ledger, round(self.current_balance, 2), round(pnl_percent, 2)

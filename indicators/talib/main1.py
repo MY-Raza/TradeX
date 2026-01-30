@@ -131,24 +131,11 @@ signals_df["timestamp"] = signals_df["timestamp"].dt.tz_convert(None)
 bt = Backtester(
         price_df=df_1m,
         signal_df=signals_df,
-        starting_balance=1000,
-        tp=3,           # 3% take profit
-        sl=1,           # 1% stop loss
-        fee=0.05,       # 0.05% fee
-        leverage=2.0,   # 2x leverage
-        slippage=0.02   # 0.02% slippage
     )
-bt.run_backtest()
-
-    # -----------------------------
-    # Get Results
-    # -----------------------------
-trades_df = bt.get_results()
-final_balance = bt.get_final_balance()
-total_return = bt.get_total_return_pct()
+trades_df,final_balance,total_return =bt.run_backtest()
 
 print("\n===== BACKTEST RESULTS =====")
-print(trades_df)
+print(trades_df.head())
 print(f"\nFinal Balance: ${final_balance}")
 print(f"Total Return: {total_return}%")
 
@@ -160,12 +147,12 @@ trades_df.to_csv(output_csv, index=False)
 # Load CSV files
 
     # Run backtest
-# df_predictions = pd.read_csv(signals_csv)
-# df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
-# df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
-# bt = Backtest(df_1m, df_predictions)
-# df_ledger, final_balance, pnl_percent = bt.run()
-# print("Final Balance:", final_balance)
-# print("PnL %:", pnl_percent)
-# df_ledger.to_csv("ledger1.csv", index=False)
-# print("Results saved to ledger1.csv")
+df_predictions = pd.read_csv(signals_csv)
+df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
+df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
+bt = Backtest(df_1m, df_predictions)
+df_ledger, final_balance, pnl_percent = bt.run()
+print("Final Balance:", final_balance)
+print("PnL %:", pnl_percent)
+df_ledger.to_csv("ledger1.csv", index=False)
+print("Results saved to ledger1.csv")
