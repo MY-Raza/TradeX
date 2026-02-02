@@ -30,8 +30,6 @@ Notes:
 """
 
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
-last_date = get_last_date(table_name="btc_1m", schema=SCHEMA, time_column="timestamp")
-print(last_date)
 # -------------------------------------------------
 # Load Configuration
 # -------------------------------------------------
