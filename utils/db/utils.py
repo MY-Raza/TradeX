@@ -152,7 +152,6 @@ def ensure_hypertable(table, schema, time_column):
     # 2. Use explicit casts (::regclass, ::text, etc.) to resolve 'unknown' types
     # 3. Add 'public.' prefix to create_hypertable if extension is in public schema
     full_table_name = f'"{schema}"."{table}"'
-    
     query = text(f"""
         SELECT public.create_hypertable(
             :table_name::regclass, 
@@ -169,9 +168,10 @@ def ensure_hypertable(table, schema, time_column):
         "migrate": True,
         "if_exists": True
     }
-
+    engine = get_engine()
     try:
-        conn.execute(query, params)
+        with engine.begin() as conn:
+            conn.execute(query, params)
     except Exception as e:
         # If 'public.' failed, it might be in a different schema or already a hypertable
         print(f"Hypertable check for {full_table_name} failed or already exists: {e}")

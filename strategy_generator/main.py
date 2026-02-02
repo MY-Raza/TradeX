@@ -104,14 +104,21 @@ def randomize_indicators(all_indicators):
 
     return indicator_flags
 
-
 def run_active_signals(flags, open_, high, low, close, volume):
     """
-    Executes only those indicator signal functions
-    whose flags are True.
+    Executes only those indicator signal functions whose flags are True.
+    Automatically passes only required arguments to each function.
     """
-
     signals = {}
+
+    # Prepare a dict of available data
+    data = {
+        "open": open_,
+        "high": high,
+        "low": low,
+        "close": close,
+        "volume": volume
+    }
 
     for name, active in flags.items():
         if not active:
@@ -129,26 +136,29 @@ def run_active_signals(flags, open_, high, low, close, volume):
         # Normal indicators
         # =========================
         func = SIGNAL_FUNCTIONS.get(name)
-
         if func is None:
             print(f"⚠ No signal function found for {name}")
             continue
 
-        # Handle variable arguments safely
-        try:
-            sig = func(close)
-        except TypeError:
-            try:
-                sig = func(high, low, close)
-            except TypeError:
-                try:
-                    sig = func(high, low, close, volume)
-                except TypeError:
-                    sig = func(close)
+        # Automatically get function arguments
+        sig_args = inspect.signature(func).parameters
+        args_to_pass = []
 
-        signals[name] = sig
+        for arg in sig_args:
+            if arg in data:
+                args_to_pass.append(data[arg])
+            else:
+                # optional argument with default is automatically handled
+                pass
+
+        try:
+            sig = func(*args_to_pass)
+            signals[name] = sig
+        except Exception as e:
+            print(f"⚠ Error calling {name}: {e}")
 
     return signals
+
 
 INPUT_CSV = r"D:\trading\TradeX\indicators\talib\btc_1m_data.csv"  
 df_1m = pd.read_csv(INPUT_CSV)
