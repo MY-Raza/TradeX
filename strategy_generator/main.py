@@ -7,6 +7,7 @@ import numpy as np
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.backtester import Backtester,BacktestConfig
 import datetime
+from scipy.stats import mode
 
 logger = get_logger("strategy_main")
 ALL_INDICATORS = (
@@ -138,8 +139,8 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
     # ---------------------------
     if signals_dict:
         all_signals = np.column_stack(list(signals_dict.values()))
-        summed = np.sum(all_signals, axis=1)
-        final_signal = np.sign(summed).astype(int)
+        final_signal, _  = mode(all_signals,axis = 1)
+        final_signal = final_signal.ravel().astype(int)
     else:
         final_signal = np.zeros(len(timestamps), dtype=int)
 
