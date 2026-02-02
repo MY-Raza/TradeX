@@ -119,7 +119,7 @@ if not os.path.exists(signals_csv):
     logger.error(f"Signal CSV {signals_csv} not found. Exiting backtest.")
     exit()
 
-# signals_df = pd.read_csv(signals_csv)
+signals_df = pd.read_csv(signals_csv)
 # # Convert both to datetime FIRST
 # df_1m["timestamp"] = pd.to_datetime(df_1m["timestamp"], utc=True)
 # signals_df["timestamp"] = pd.to_datetime(signals_df["timestamp"], utc=True)
@@ -147,37 +147,36 @@ if not os.path.exists(signals_csv):
 # # Load CSV files
 
     # Run backtest
-df_predictions = pd.read_csv(signals_csv)
-df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
-df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
-bt = Backtest(df_1m, df_predictions,take_profit=3,stop_loss=1)
-df_ledger, final_balance, pnl_percent = bt.run()
-print("Final Balance:", final_balance)
-print("PnL %:", pnl_percent)
-df_ledger.to_csv("ledger1.csv", index=False)
-print("Results saved to ledger1.csv")
-
-# signals_df = pd.read_csv(signals_csv)
-
-# price_df = df_1m[["timestamp", "open", "high", "low"]].copy()
-# price_df["timestamp"] = pd.to_datetime(price_df["timestamp"])
-# signals_df["timestamp"] = pd.to_datetime(signals_df["timestamp"])
-
-# bt = Backtester(
-#     BacktestConfig(
-#         starting_balance=1000,
-#         leverage=1,
-#         take_profit_pct=0.03,
-#         stop_loss_pct=0.01
-#     )
-# )
-
-# ledger, final_balance, pnl_pct = bt.run(price_df, signals_df)
-
+# df_predictions = pd.read_csv(signals_csv)
+# df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
+# df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
+# bt = Backtest(df_1m, df_predictions,take_profit=3,stop_loss=1)
+# df_ledger, final_balance, pnl_percent = bt.run()
 # print("Final Balance:", final_balance)
-# print("PnL %:", pnl_pct)
+# print("PnL %:", pnl_percent)
+# df_ledger.to_csv("ledger1.csv", index=False)
+# print("Results saved to ledger1.csv")
 
-# ledger.to_csv(os.path.join(SIGNALS_FOLDER, "ledger.csv"), index=False)
+config = BacktestConfig(
+        starting_balance=1000,
+        leverage=2,
+        transaction_fee=0.05,   # percent
+        slippage=0.02,          # percent
+        take_profit_pct=0.03,   # 3%
+        stop_loss_pct=0.01,     # 1%
+        buy_after_minutes=1,
+        min_balance_pct=0.5
+    )
+bt = Backtester(config)
+ledger_df, final_balance, total_pnl = bt.run(df_1m, signals_df)
+print("\n===== BACKTEST RESULTS =====")
+print("Final Balance:", final_balance)
+print("Total PnL %:", total_pnl)
+print("Number of Trades:", len(ledger_df))
+
+    # Save trades
+ledger_df.to_csv("ledger.csv", index=False)
+print("\nTrade log saved to ledger.csv")
 
 
 
