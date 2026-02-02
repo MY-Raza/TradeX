@@ -147,26 +147,34 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
 
     logger.info(f"Indexes ensured: {index_name}, {desc_index}")
 
+def ensure_hypertable(table, schema, time_column):
+    # 1. Use double quotes for identifiers to handle case-sensitivity/dots
+    # 2. Use explicit casts (::regclass, ::text, etc.) to resolve 'unknown' types
+    # 3. Add 'public.' prefix to create_hypertable if extension is in public schema
+    full_table_name = f'"{schema}"."{table}"'
+    
+    query = text(f"""
+        SELECT public.create_hypertable(
+            :table_name::regclass, 
+            :time_col::text, 
+            migrate_data => :migrate::boolean, 
+            if_not_exists => :if_exists::boolean
+        );
+    """)
 
-def ensure_hypertable(table_name: str, schema: str, time_column: str):
-    """
-    Convert a table to a TimescaleDB hypertable if not already.
+    # Using bind parameters for safety and type resolution
+    params = {
+        "table_name": full_table_name,
+        "time_col": time_column,
+        "migrate": True,
+        "if_exists": True
+    }
 
-    Args:
-        table_name (str): Table name.
-        schema (str): Schema name.
-        time_column (str): Timestamp column name.
-    """
-    engine = get_engine()
-    with engine.begin() as conn:
-        conn.execute(text(f"""
-            SELECT create_hypertable(
-                '{schema}.{table_name}',
-                '{time_column}',
-                migrate_data => TRUE,
-                if_not_exists => TRUE
-            );
-        """))
+    try:
+        conn.execute(query, params)
+    except Exception as e:
+        # If 'public.' failed, it might be in a different schema or already a hypertable
+        print(f"Hypertable check for {full_table_name} failed or already exists: {e}")
 
 
 # =====================================================

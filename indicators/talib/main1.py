@@ -34,19 +34,19 @@ df_1m["timestamp"] = pd.to_datetime(df_1m["datetime"])
 # Optional: drop the old datetime column if you no longer need it
 df_1m = df_1m.drop(columns=["datetime"])
 
-# # Resample 1m -> 1h
-# df_1h = resample_ohlcv(df_1m, "1h")
+# Resample 1m -> 1h
+df_1h = resample_ohlcv(df_1m, "1h")
 
-# # # ---------------------------
-# # # Prepare arrays for automatic argument detection
-# # # ---------------------------
-# # open_ = df_1h["open"].values
-# # high = df_1h["high"].values
-# # low = df_1h["low"].values
-# # close = df_1h["close"].values
-# # volume = df_1h["volume"].values
-# # ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
-# # periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
+# ---------------------------
+# Prepare arrays for automatic argument detection
+# ---------------------------
+open_ = df_1h["open"].values
+high = df_1h["high"].values
+low = df_1h["low"].values
+close = df_1h["close"].values
+volume = df_1h["volume"].values
+ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
+periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
 
 # # # Mapping common names to arrays
 # # AUTO_ARGS = {

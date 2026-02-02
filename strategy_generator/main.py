@@ -1,7 +1,12 @@
 import random
+from TradeX.indicators.talib.signals import candlestick_signal,SIGNAL_FUNCTIONS
+import os
+import pandas as pd
+from TradeX.utils.common.logs import get_logger
+import numpy as np
+from TradeX.utils.data.data_cleaner import resample_ohlcv
 
-
-
+logger = get_logger("strategy_main")
 ALL_INDICATORS = (
     # -------------------------
     # Overlap Studies
@@ -99,5 +104,87 @@ def randomize_indicators(all_indicators):
 
     return indicator_flags
 
+
+def run_active_signals(flags, open_, high, low, close, volume):
+    """
+    Executes only those indicator signal functions
+    whose flags are True.
+    """
+
+    signals = {}
+
+    for name, active in flags.items():
+        if not active:
+            continue
+
+        # =========================
+        # Candlestick patterns
+        # =========================
+        if name.startswith("CDL"):
+            sig, _ = candlestick_signal(open_, high, low, close, name)
+            signals[name] = sig
+            continue
+
+        # =========================
+        # Normal indicators
+        # =========================
+        func = SIGNAL_FUNCTIONS.get(name)
+
+        if func is None:
+            print(f"⚠ No signal function found for {name}")
+            continue
+
+        # Handle variable arguments safely
+        try:
+            sig = func(close)
+        except TypeError:
+            try:
+                sig = func(high, low, close)
+            except TypeError:
+                try:
+                    sig = func(high, low, close, volume)
+                except TypeError:
+                    sig = func(close)
+
+        signals[name] = sig
+
+    return signals
+
+INPUT_CSV = r"D:\trading\TradeX\indicators\talib\btc_1m_data.csv"  
+df_1m = pd.read_csv(INPUT_CSV)
+df_1m = pd.read_csv(INPUT_CSV)
+if df_1m.empty:
+    logger.error("No OHLCV data. Exiting.")
+    exit()
+df_1m["timestamp"] = pd.to_datetime(df_1m["datetime"])
+# Optional: drop the old datetime column if you no longer need it
+df_1m = df_1m.drop(columns=["datetime"])
+# Resample 1m -> 1h
+df_1h = resample_ohlcv(df_1m, "1h")
+
+# ---------------------------
+# Prepare arrays for automatic argument detection
+# ---------------------------
+open_ = df_1h["open"].values
+high = df_1h["high"].values
+low = df_1h["low"].values
+close = df_1h["close"].values
+volume = df_1h["volume"].values
+ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
+periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
+
+
 flags = randomize_indicators(ALL_INDICATORS)
-print(flags)
+signals = run_active_signals(
+    flags,
+    open_,
+    high,
+    low,
+    close,
+    volume
+)
+
+print("Executed indicators:")
+for k in signals.keys():
+    print("✔", k)
+

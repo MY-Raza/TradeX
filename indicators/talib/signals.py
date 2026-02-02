@@ -156,3 +156,46 @@ def candlestick_signal(open, high, low, close, pattern_name):
     val = call_indicator(pattern_name, open, high, low, close)
     signals = np.where(val > 0, 1, np.where(val < 0, -1, 0))
     return signals,pattern_name
+
+# =========================================================
+# SIGNAL FUNCTION REGISTRY
+# =========================================================
+
+SIGNAL_FUNCTIONS = {
+    # Moving Averages
+    "SMA": sma_signal,
+    "EMA": ema_signal,
+    "DEMA": dema_signal,
+    "TEMA": tema_signal,
+    "TRIMA": trima_signal,
+    "WMA": wma_signal,
+    "KAMA": kama_signal,
+    "MA": ma_signal,
+    "HT_TRENDLINE": ht_trendline_signal,
+    "MAMA": mama_signal,
+
+    # Bands & Midpoints
+    "BBANDS": bbands_signal,
+    "MIDPOINT": midpoint_signal,
+    "MIDPRICE": midprice_signal,
+
+    # Trend / SAR
+    "SAR": sar_signal,
+
+    # Oscillators
+    "MACD": macd_signal,
+    "APO": apo_signal,
+    "PPO": ppo_signal,
+
+    # Momentum
+    "RSI": rsi_signal,
+    "CCI": cci_signal,
+    "WILLR": willr_signal,
+
+    # Volume
+    "MFI": mfi_signal,
+    "OBV": obv_signal,
+
+    # Volatility
+    "ATR": atr_signal,
+}
