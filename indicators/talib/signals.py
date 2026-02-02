@@ -127,6 +127,49 @@ def willr_signal(high, low, close, period=14):
     will = call_indicator("WILLR", high, low, close, timeperiod=period)
     return np.where(will < -80, 1, np.where(will > -20, -1, 0))
 
+def adxr_signal(close, period=14):
+    adxr = call_indicator("ADXR", close, timeperiod=period)
+    return np.where(adxr > 0, 1, np.where(adxr < 0, -1, 0))
+
+def aroon_signal(high, low, period=14):
+    aroon_up, aroon_down = call_indicator("AROON", high, low, timeperiod=period)
+    return np.where(aroon_up > aroon_down, 1, np.where(aroon_up < aroon_down, -1, 0))
+
+def aroonosc_signal(high, low, period=14):
+    aroon_osc = call_indicator("AROONOSC", high, low, timeperiod=period)
+    return np.where(aroon_osc > 0, 1, np.where(aroon_osc < 0, -1, 0))
+
+def bop_signal(open_, high, low, close_):
+    bop = call_indicator("BOP", open_, high, low, close_)
+    return np.where(bop > 0, 1, np.where(bop < 0, -1, 0))
+
+def cmo_signal(close, period=14):
+    cmo = call_indicator("CMO", close, timeperiod=period)
+    return np.where(cmo > 0, 1, np.where(cmo < 0, -1, 0))
+
+def macdext_signal(close, fastperiod=12, slowperiod=26, signalperiod=9):
+    macd, signal, _ = call_indicator("MACDEXT", close, fastperiod=fastperiod, slowperiod=slowperiod, signalperiod=signalperiod)
+    signals = np.zeros_like(close)
+    signals[crossover(macd, signal)] = 1
+    signals[crossunder(macd, signal)] = -1
+    return signals
+
+def minus_di_signal(high, low, close, period=14):
+    mdi = call_indicator("MINUS_DI", high, low, close, timeperiod=period)
+    return np.where(mdi > 0, 1, np.where(mdi < 0, -1, 0))
+
+def minus_dm_signal(high, low, period=14):
+    mdm = call_indicator("MINUS_DM", high, low, timeperiod=period)
+    return np.where(mdm > 0, 1, np.where(mdm < 0, -1, 0))
+
+def mom_signal(close, period=10):
+    mom = call_indicator("MOM", close, timeperiod=period)
+    return np.where(mom > 0, 1, np.where(mom < 0, -1, 0))
+
+def plus_di_signal(high, low, close, period=14):
+    pdi = call_indicator("PLUS_DI", high, low, close, timeperiod=period)
+    return np.where(pdi > 0, 1, np.where(pdi < 0, -1, 0))
+
 # =========================================================
 # VOLUME INDICATORS
 # =========================================================
@@ -139,6 +182,24 @@ def obv_signal(close, volume):
     obv = call_indicator("OBV", close, volume)
     return np.where(obv > np.roll(obv, 1), 1, -1)
 
+def ad_signal(high, low, close, volume):
+    ad = call_indicator("AD", high, low, close, volume)
+    return np.where(ad > np.roll(ad, 1), 1, -1)
+
+def adosc_signal(high, low, close, volume, fastperiod=3, slowperiod=10):
+    adosc = call_indicator("ADOSC", high, low, close, volume, fastperiod=fastperiod, slowperiod=slowperiod)
+    return np.where(adosc > 0, 1, np.where(adosc < 0, -1, 0))
+
+def natr_signal(high, low, close, period=14):
+    natr = call_indicator("NATR", high, low, close, timeperiod=period)
+    mean = np.nanmean(natr)
+    return np.where(natr > mean, 1, -1)
+
+def wclprice_signal(high, low, close):
+    wcl = call_indicator("WCLPRICE", high, low, close)
+    price = (high + low + close) / 3
+    return np.where(price > wcl, 1, np.where(price < wcl, -1, 0))
+
 # =========================================================
 # VOLATILITY
 # =========================================================
@@ -147,6 +208,77 @@ def atr_signal(high, low, close, period=14):
     atr = call_indicator("ATR", high, low, close, timeperiod=period)
     mean = np.nanmean(atr)
     return np.where(atr > mean, 1, -1)
+
+def trange_signal(high, low, close):
+    tr = call_indicator("TRANGE", high, low, close)
+    mean = np.nanmean(tr)
+    return np.where(tr > mean, 1, -1)
+
+# def beta_signal(close, benchmark, period=14):
+#     val = call_indicator("BETA", close, benchmark, timeperiod=period)
+#     return np.where(val > 1, 1, np.where(val < 1, -1, 0))
+
+def linearreg_angle_signal(close, period=14):
+    val = call_indicator("LINEARREG_ANGLE", close, timeperiod=period)
+    return np.where(val > 0, 1, -1)
+
+def stddev_signal(close, period=14):
+    val = call_indicator("STDDEV", close, timeperiod=period)
+    mean = np.nanmean(val)
+    return np.where(val > mean, 1, -1)
+
+def var_signal(close, period=14):
+    val = call_indicator("VAR", close, timeperiod=period)
+    mean = np.nanmean(val)
+    return np.where(val > mean, 1, -1)
+
+
+# ========================================================
+# Hilbert Transform
+# ========================================================
+
+def ht_dcperiod_signal(close):
+    val = call_indicator("HT_DCPERIOD", close)
+    return np.where(val > np.roll(val, 1), 1, -1)
+
+def ht_dcphase_signal(close):
+    val = call_indicator("HT_DCPHASE", close)
+    return np.where(val > np.roll(val, 1), 1, -1)
+
+def ht_phasor_signal(close):
+    inphase, quadrature = call_indicator("HT_PHASOR", close)
+    signals = np.zeros_like(close)
+    signals[crossover(inphase, quadrature)] = 1
+    signals[crossunder(inphase, quadrature)] = -1
+    return signals
+
+def linearreg_signal(close, period=14):
+    val = call_indicator("LINEARREG", close, timeperiod=period)
+    return np.where(close > val, 1, np.where(close < val, -1, 0))
+
+def linearreg_intercept_signal(close, period=14):
+    val = call_indicator("LINEARREG_INTERCEPT", close, timeperiod=period)
+    return np.where(val > 0, 1, -1)
+
+def linearreg_slope_signal(close, period=14):
+    val = call_indicator("LINEARREG_SLOPE", close, timeperiod=period)
+    return np.where(val > 0, 1, -1)
+
+def tsf_signal(close, period=14):
+    val = call_indicator("TSF", close, timeperiod=period)
+    return np.where(close > val, 1, np.where(close < val, -1, 0))
+
+def ht_sine_signal(close):
+    sine, leadsine = call_indicator("HT_SINE", close)
+    signals = np.zeros_like(close)
+    signals[crossover(sine, leadsine)] = 1
+    signals[crossunder(sine, leadsine)] = -1
+    return signals
+
+def ht_trendmode_signal(close):
+    val = call_indicator("HT_TRENDMODE", close)
+    return np.where(val == 1, 1, -1)
+
 
 # =========================================================
 # CANDLESTICK PATTERNS
@@ -157,12 +289,169 @@ def candlestick_signal(open, high, low, close, pattern_name):
     signals = np.where(val > 0, 1, np.where(val < 0, -1, 0))
     return signals,pattern_name
 
+# ============================================
+# Math Transform
+# ===========================================
+
+def asin_signal(close):
+    val = call_indicator("ASIN", close)
+    return np.where(val > 0, 1, np.where(val < 0, -1, 0))
+
+def ceil_signal(close):
+    val = call_indicator("CEIL", close)
+    return val  # CEIL returns numeric, you can threshold if needed
+
+def cosh_signal(close):
+    val = call_indicator("COSH", close)
+    return val
+
+def log10_signal(close):
+    val = call_indicator("LOG10", close)
+    return val
+
+def sinh_signal(close):
+    val = call_indicator("SINH", close)
+    return val
+
+def tan_signal(close):
+    val = call_indicator("TAN", close)
+    return val
+
+def tanh_signal(close):
+    val = call_indicator("TANH", close)
+    return val
+
+def max_signal(close1, close2):
+    val = call_indicator("MAX", close1, close2)
+    return np.where(close1 > close2, 1, -1)
+
+def min_signal(close1, close2):
+    val = call_indicator("MIN", close1, close2)
+    return np.where(close1 < close2, 1, -1)
+
+def minindex_signal(close, period=14):
+    val = call_indicator("MININDEX", close, timeperiod=period)
+    return val
+
+def acos_signal(close):
+    val = call_indicator("ACOS", close)
+    return np.where(val > 0, 1, -1)
+
+def atan_signal(close):
+    val = call_indicator("ATAN", close)
+    return np.where(val > 0, 1, -1)
+
+def cos_signal(close):
+    val = call_indicator("COS", close)
+    return np.where(val > 0, 1, -1)
+
+def exp_signal(close):
+    val = call_indicator("EXP", close)
+    return np.where(val > np.mean(val), 1, -1)
+
+def floor_signal(close):
+    val = call_indicator("FLOOR", close)
+    return np.where(val > np.mean(val), 1, -1)
+
+def ln_signal(close):
+    val = call_indicator("LN", close)
+    return np.where(val > np.mean(val), 1, -1)
+
+def sin_signal(close):
+    val = call_indicator("SIN", close)
+    return np.where(val > 0, 1, -1)
+
+def sqrt_signal(close):
+    val = call_indicator("SQRT", close)
+    return np.where(val > np.mean(val), 1, -1)
+
+# =====================================================
+# Price Transform
+# =====================================================
+def avgprice_signal(open_, high, low, close):
+    avg = call_indicator("AVGPRICE", open_, high, low, close)
+    price = (open_ + high + low + close) / 4
+    return np.where(price > avg, 1, np.where(price < avg, -1, 0))
+
+def medprice_signal(high, low):
+    med = call_indicator("MEDPRICE", high, low)
+    price = (high + low) / 2
+    return np.where(price > med, 1, np.where(price < med, -1, 0))
+
+def typprice_signal(high, low, close):
+    typ = call_indicator("TYPPRICE", high, low, close)
+    price = (high + low + close) / 3
+    return np.where(price > typ, 1, np.where(price < typ, -1, 0))
+
+
+
+def adx_signal(high, low, close, period=14):
+    val = call_indicator("ADX", high, low, close, timeperiod=period)
+    mean = np.nanmean(val)
+    return np.where(val > mean, 1, -1)
+
+def rocp_signal(close, period=10):
+    val = call_indicator("ROCP", close, timeperiod=period)
+    return np.where(val > 0, 1, np.where(val < 0, -1, 0))
+
+def rocr_signal(close, period=10):
+    val = call_indicator("ROCR", close, timeperiod=period)
+    return np.where(val > 1, 1, np.where(val < 1, -1, 0))
+
+def rocr100_signal(close, period=10):
+    val = call_indicator("ROCR100", close, timeperiod=period)
+    return np.where(val > 100, 1, np.where(val < 100, -1, 0))
+
+def stochrsi_signal(close, timeperiod=14, fastk_period=3, fastd_period=3, fastd_matype=0):
+    fastk, fastd = call_indicator(
+        "STOCHRSI",
+        close,
+        timeperiod=timeperiod,
+        fastk_period=fastk_period,
+        fastd_period=fastd_period,
+        fastd_matype=fastd_matype
+    )
+    signals = np.zeros_like(close)
+    signals[crossover(fastk, fastd)] = 1
+    signals[crossunder(fastk, fastd)] = -1
+    return signals
+
+def t3_signal(close, period=14, vfactor=0.7):
+    t3 = call_indicator("T3", close, timeperiod=period, vfactor=vfactor)
+    return np.where(close > t3, 1, np.where(close < t3, -1, 0))
+
+def roc_signal(close, period=10):
+    val = call_indicator("ROC", close, timeperiod=period)
+    return np.where(val > 0, 1, np.where(val < 0, -1, 0))
+
+def stochf_signal(high, low, close, fastk_period=14, fastd_period=3, fastd_matype=0):
+    fastk, fastd = call_indicator(
+        "STOCHF",
+        high,
+        low,
+        close,
+        fastk_period=fastk_period,
+        fastd_period=fastd_period,
+        fastd_matype=fastd_matype
+    )
+    signals = np.zeros_like(close)
+    signals[crossover(fastk, fastd)] = 1
+    signals[crossunder(fastk, fastd)] = -1
+    return signals
+
+def trix_signal(close, period=14):
+    val = call_indicator("TRIX", close, timeperiod=period)
+    return np.where(val > 0, 1, np.where(val < 0, -1, 0))
+
+
 # =========================================================
 # SIGNAL FUNCTION REGISTRY
 # =========================================================
 
 SIGNAL_FUNCTIONS = {
+    # -------------------------
     # Moving Averages
+    # -------------------------
     "SMA": sma_signal,
     "EMA": ema_signal,
     "DEMA": dema_signal,
@@ -174,28 +463,116 @@ SIGNAL_FUNCTIONS = {
     "HT_TRENDLINE": ht_trendline_signal,
     "MAMA": mama_signal,
 
+    # -------------------------
     # Bands & Midpoints
+    # -------------------------
     "BBANDS": bbands_signal,
     "MIDPOINT": midpoint_signal,
     "MIDPRICE": midprice_signal,
+    "WCLPRICE": wclprice_signal,
+    "AVGPRICE": avgprice_signal if 'avgprice_signal' in globals() else None,
+    "MEDPRICE": medprice_signal if 'medprice_signal' in globals() else None,
+    "TYPPRICE": typprice_signal if 'typprice_signal' in globals() else None,
 
+    # -------------------------
     # Trend / SAR
+    # -------------------------
     "SAR": sar_signal,
 
+    # -------------------------
     # Oscillators
+    # -------------------------
     "MACD": macd_signal,
     "APO": apo_signal,
     "PPO": ppo_signal,
+    "MACDEXT": macdext_signal,
+    "ROCP": rocp_signal,
+    "ROCR": rocr_signal,
+    "ROCR100": rocr100_signal,
+    "STOCHRSI": stochrsi_signal,
+    "ADX": adx_signal,
+    "ADXR": adxr_signal,
+    "AROON": aroon_signal,
+    "AROONOSC": aroonosc_signal,
+    "BOP": bop_signal,
+    "CMO": cmo_signal,
+    "MINUS_DI": minus_di_signal,
+    "MINUS_DM": minus_dm_signal,
+    "MOM": mom_signal,
+    "PLUS_DI": plus_di_signal,
 
+    # -------------------------
     # Momentum
+    # -------------------------
     "RSI": rsi_signal,
     "CCI": cci_signal,
     "WILLR": willr_signal,
 
+    # -------------------------
     # Volume
+    # -------------------------
     "MFI": mfi_signal,
     "OBV": obv_signal,
+    "AD": ad_signal,
+    "ADOSC": adosc_signal,
 
+    # -------------------------
     # Volatility
+    # -------------------------
     "ATR": atr_signal,
+    "NATR": natr_signal,
+    "TRANGE": trange_signal,
+    # -------------------------
+    # Cycle / Hilbert
+    # -------------------------
+    "HT_DCPERIOD": ht_dcperiod_signal,
+    "HT_DCPHASE": ht_dcphase_signal,
+    "HT_PHASOR": ht_phasor_signal,
+    "HT_SINE": ht_sine_signal,
+    "HT_TRENDMODE": ht_trendmode_signal,
+
+    # -------------------------
+    # Statistic Indicators
+    # -------------------------
+    # "BETA": beta_signal,
+    "CORREL": correl_signal,
+    "LINEARREG": linearreg_signal,
+    "LINEARREG_ANGLE": linearreg_angle_signal,
+    "LINEARREG_INTERCEPT": linearreg_intercept_signal,
+    "LINEARREG_SLOPE": linearreg_slope_signal,
+    "STDDEV": stddev_signal,
+    "TSF": tsf_signal,
+    "VAR": var_signal,
+
+    # -------------------------
+    # Math Transform
+    # -------------------------
+    "ACOS": acos_signal,
+    "ASIN": asin_signal,
+    "ATAN": atan_signal,
+    "CEIL": ceil_signal,
+    "COS": cos_signal,
+    "COSH": cosh_signal,
+    "EXP": exp_signal,
+    "FLOOR": floor_signal,
+    "LN": ln_signal,
+    "LOG10": log10_signal,
+    "SIN": sin_signal,
+    "SINH": sinh_signal,
+    "SQRT": sqrt_signal,
+    "TAN": tan_signal,
+    "TANH": tanh_signal,
+
+    # -------------------------
+    # Math Operators
+    # -------------------------
+    "MAX": max_signal,
+    "MIN": min_signal,
+    "MININDEX": minindex_signal,
+
+    "TRIX": trix_signal,
+    "STOCHF": stochf_signal,
+    "ROC": roc_signal,
+    "T3": t3_signal
 }
+
