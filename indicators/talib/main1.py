@@ -146,7 +146,7 @@ if not os.path.exists(signals_csv):
 
 # # Load CSV files
 
-#     # Run backtest
+    # Run backtest
 # df_predictions = pd.read_csv(signals_csv)
 # df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
 # df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
