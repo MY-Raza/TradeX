@@ -443,6 +443,41 @@ def trix_signal(close, period=14):
     val = call_indicator("TRIX", close, timeperiod=period)
     return np.where(val > 0, 1, np.where(val < 0, -1, 0))
 
+def sarext_signal(high, low, close, startvalue=0, offsetonreverse=0, accelerationinit=0.02, accelerationmax=0.2, accelerationstep=0.02):
+    sar = call_indicator(
+        "SAREXT",
+        high,
+        low,
+        startvalue=startvalue,
+        offsetonreverse=offsetonreverse,
+        accelerationinit=accelerationinit,
+        accelerationmax=accelerationmax,
+        accelerationstep=accelerationstep
+    )
+    return np.where(close > sar, 1, np.where(close < sar, -1, 0))
+
+def dx_signal(high, low, close, period=14):
+    val = call_indicator("DX", high, low, close, timeperiod=period)
+    mean = np.nanmean(val)
+    return np.where(val > mean, 1, -1)
+
+def stoch_signal(high, low, close, fastk_period=14, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0):
+    slowk, slowd = call_indicator(
+        "STOCH",
+        high,
+        low,
+        close,
+        fastk_period=fastk_period,
+        slowk_period=slowk_period,
+        slowk_matype=slowk_matype,
+        slowd_period=slowd_period,
+        slowd_matype=slowd_matype
+    )
+    signals = np.zeros_like(close)
+    signals[crossover(slowk, slowd)] = 1
+    signals[crossunder(slowk, slowd)] = -1
+    return signals
+
 
 # =========================================================
 # SIGNAL FUNCTION REGISTRY
@@ -535,7 +570,6 @@ SIGNAL_FUNCTIONS = {
     # Statistic Indicators
     # -------------------------
     # "BETA": beta_signal,
-    "CORREL": correl_signal,
     "LINEARREG": linearreg_signal,
     "LINEARREG_ANGLE": linearreg_angle_signal,
     "LINEARREG_INTERCEPT": linearreg_intercept_signal,
@@ -563,16 +597,14 @@ SIGNAL_FUNCTIONS = {
     "TAN": tan_signal,
     "TANH": tanh_signal,
 
-    # -------------------------
-    # Math Operators
-    # -------------------------
-    "MAX": max_signal,
-    "MIN": min_signal,
-    "MININDEX": minindex_signal,
 
     "TRIX": trix_signal,
     "STOCHF": stochf_signal,
     "ROC": roc_signal,
-    "T3": t3_signal
+    "T3": t3_signal,
+
+    "SAREXT":sarext_signal,
+    "DX":dx_signal,
+    "STOCH":stoch_signal
 }
 

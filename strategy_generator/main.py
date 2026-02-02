@@ -5,7 +5,8 @@ import pandas as pd
 from TradeX.utils.common.logs import get_logger
 import numpy as np
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-import inspect
+from TradeX.backtest.backtester import Backtester,BacktestConfig
+import datetime
 
 logger = get_logger("strategy_main")
 ALL_INDICATORS = (
@@ -45,7 +46,7 @@ ALL_INDICATORS = (
     # -------------------------
     # Statistic Indicators
     # -------------------------
-    "BETA", "CORREL", "LINEARREG", "LINEARREG_ANGLE",
+    "LINEARREG", "LINEARREG_ANGLE",
     "LINEARREG_INTERCEPT", "LINEARREG_SLOPE",
     "STDDEV", "TSF", "VAR",
     # -------------------------
@@ -54,11 +55,6 @@ ALL_INDICATORS = (
     "ACOS", "ASIN", "ATAN", "CEIL", "COS", "COSH",
     "EXP", "FLOOR", "LN", "LOG10", "SIN", "SINH",
     "SQRT", "TAN", "TANH",
-    # -------------------------
-    # Math Operators
-    # -------------------------
-    "ADD", "DIV", "MAX", "MAXINDEX", "MIN",
-    "MININDEX", "MULT", "SUB", "SUM",
     # ---------------------------
     # CANDLESTICK PATTERN 
     # --------------------------
@@ -98,67 +94,65 @@ def randomize_indicators(all_indicators):
     Assigns True/False randomly to each indicator
     using random.choice.
     """
-    indicator_flags = {}
-
-    for name in all_indicators:
-        indicator_flags[name] = random.choice([True, False])
-
+    flags_array = np.random.choice([True, False], size=len(all_indicators))
+    indicator_flags = dict(zip(all_indicators, flags_array))
     return indicator_flags
 
-def run_active_signals(flags, open_, high, low, close, volume):
+def run_active_signals_with_voting(flags, open_, high, low, close, volume, timestamps):
     """
-    Executes only those indicator signal functions whose flags are True.
-    Automatically passes only required arguments to each function.
+    Executes all active indicator functions and aggregates them using voting.
+    Returns a DataFrame with columns: timestamp, signal
     """
-    signals = {}
+    import inspect
 
-    # Prepare a dict of available data
-    data = {
-        "open": open_,
-        "high": high,
-        "low": low,
-        "close": close,
-        "volume": volume
-    }
+    signals_dict = {}
+    data = {"open": open_, "high": high, "low": low, "close": close, "volume": volume}
 
     for name, active in flags.items():
         if not active:
             continue
 
-        # =========================
         # Candlestick patterns
-        # =========================
         if name.startswith("CDL"):
             sig, _ = candlestick_signal(open_, high, low, close, name)
-            signals[name] = sig
+            signals_dict[name] = sig
             continue
 
-        # =========================
         # Normal indicators
-        # =========================
         func = SIGNAL_FUNCTIONS.get(name)
         if func is None:
             print(f"⚠ No signal function found for {name}")
             continue
 
-        # Automatically get function arguments
         sig_args = inspect.signature(func).parameters
-        args_to_pass = []
-
-        for arg in sig_args:
-            if arg in data:
-                args_to_pass.append(data[arg])
-            else:
-                # optional argument with default is automatically handled
-                pass
+        args_to_pass = [data[arg] for arg in sig_args if arg in data]
 
         try:
             sig = func(*args_to_pass)
-            signals[name] = sig
+            signals_dict[name] = sig
         except Exception as e:
             print(f"⚠ Error calling {name}: {e}")
 
-    return signals
+    # ---------------------------
+    # Voting / Aggregating signals
+    # ---------------------------
+    if signals_dict:
+        all_signals = np.column_stack(list(signals_dict.values()))
+        summed = np.sum(all_signals, axis=1)
+        final_signal = np.sign(summed).astype(int)
+    else:
+        final_signal = np.zeros(len(timestamps), dtype=int)
+
+    # ---------------------------
+    # Return DataFrame with timestamp and signal
+    # ---------------------------
+    df_signals = pd.DataFrame({
+        "timestamp": timestamps,
+        "signals": final_signal
+    })
+
+    return df_signals
+
 
 
 INPUT_CSV = r"D:\trading\TradeX\indicators\talib\btc_1m_data.csv"  
@@ -186,16 +180,39 @@ periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
 
 
 flags = randomize_indicators(ALL_INDICATORS)
-signals = run_active_signals(
+for name, value in flags.items():
+    if value:
+        print("✔", name)
+signals = run_active_signals_with_voting(
     flags,
     open_,
     high,
     low,
     close,
-    volume
+    volume,
+    df_1h["timestamp"]
 )
+print(signals.head())
+timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+signals.to_csv(f"signals.csv", index=False) 
+signals_df = pd.read_csv("signals.csv")
+config = BacktestConfig(
+        starting_balance=1000,
+        leverage=1,
+        transaction_fee=0.05,   # percent
+        slippage=0.02,          # percent
+        take_profit_pct=0.03,   # 3%
+        stop_loss_pct=0.01,     # 1%
+        buy_after_minutes=1,
+        min_balance_pct=0.5
+    )
+bt = Backtester(config)
+ledger_df, final_balance, total_pnl = bt.run(df_1m, signals_df)
+print("\n===== BACKTEST RESULTS =====")
+print("Final Balance:", final_balance)
+print("Total PnL %:", total_pnl)
+print("Number of Trades:", len(ledger_df))
 
-print("Executed indicators:")
-for k in signals.keys():
-    print("✔", k)
-
+    # Save trades
+ledger_df.to_csv("ledger.csv", index=False)
+print("\nTrade log saved to ledger.csv")

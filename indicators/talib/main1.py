@@ -159,7 +159,7 @@ signals_df = pd.read_csv(signals_csv)
 
 config = BacktestConfig(
         starting_balance=1000,
-        leverage=2,
+        leverage=1,
         transaction_fee=0.05,   # percent
         slippage=0.02,          # percent
         take_profit_pct=0.03,   # 3%
