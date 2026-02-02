@@ -147,37 +147,37 @@ if not os.path.exists(signals_csv):
 # # Load CSV files
 
     # Run backtest
-# df_predictions = pd.read_csv(signals_csv)
-# df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
-# df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
-# bt = Backtest(df_1m, df_predictions,take_profit=3,stop_loss=1)
-# df_ledger, final_balance, pnl_percent = bt.run()
-# print("Final Balance:", final_balance)
-# print("PnL %:", pnl_percent)
-# df_ledger.to_csv("ledger1.csv", index=False)
-# print("Results saved to ledger1.csv")
-
-signals_df = pd.read_csv(signals_csv)
-
-price_df = df_1m[["timestamp", "open", "high", "low"]].copy()
-price_df["timestamp"] = pd.to_datetime(price_df["timestamp"])
-signals_df["timestamp"] = pd.to_datetime(signals_df["timestamp"])
-
-bt = Backtester(
-    BacktestConfig(
-        starting_balance=1000,
-        leverage=1,
-        take_profit_pct=0.03,
-        stop_loss_pct=0.01
-    )
-)
-
-ledger, final_balance, pnl_pct = bt.run(price_df, signals_df)
-
+df_predictions = pd.read_csv(signals_csv)
+df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
+df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
+bt = Backtest(df_1m, df_predictions,take_profit=3,stop_loss=1)
+df_ledger, final_balance, pnl_percent = bt.run()
 print("Final Balance:", final_balance)
-print("PnL %:", pnl_pct)
+print("PnL %:", pnl_percent)
+df_ledger.to_csv("ledger1.csv", index=False)
+print("Results saved to ledger1.csv")
 
-ledger.to_csv(os.path.join(SIGNALS_FOLDER, "ledger.csv"), index=False)
+# signals_df = pd.read_csv(signals_csv)
+
+# price_df = df_1m[["timestamp", "open", "high", "low"]].copy()
+# price_df["timestamp"] = pd.to_datetime(price_df["timestamp"])
+# signals_df["timestamp"] = pd.to_datetime(signals_df["timestamp"])
+
+# bt = Backtester(
+#     BacktestConfig(
+#         starting_balance=1000,
+#         leverage=1,
+#         take_profit_pct=0.03,
+#         stop_loss_pct=0.01
+#     )
+# )
+
+# ledger, final_balance, pnl_pct = bt.run(price_df, signals_df)
+
+# print("Final Balance:", final_balance)
+# print("PnL %:", pnl_pct)
+
+# ledger.to_csv(os.path.join(SIGNALS_FOLDER, "ledger.csv"), index=False)
 
 
 
