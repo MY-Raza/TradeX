@@ -363,5 +363,4 @@ def fetch_ohlcv_df(
 
     # Sort but DO NOT set index
     df = df.sort_values(time_column)
-
     return df

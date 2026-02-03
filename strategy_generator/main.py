@@ -7,7 +7,7 @@ from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.backtester import Backtester, BacktestConfig
 import datetime
 import json
-from TradeX.utils.db.utils import save_df_to_db
+from TradeX.utils.db.utils import save_df_to_db,insert_with_flags
 
 logger = get_logger("strategy_main")
 
@@ -157,7 +157,7 @@ def generate_strategy_id(flags: dict, timeframe="1h"):
 
     _save_counters(counters)
 
-    return f"sig_{timeframe}_{counters[timeframe]}"
+    return f"sig_{timeframe}_btc_{counters[timeframe]}"
 
 # ============================
 # Load and prepare data
@@ -196,15 +196,15 @@ signals = run_active_signals_with_voting(
 
 # Save signals to db
 
-strategy_id = generate_strategy_id(flags, timeframe="1h")
+# strategy_id = generate_strategy_id(flags, timeframe="1h")
 
-save_df_to_db(
-    df=signals,
-    schema="strategy_signals",
-    table_name=strategy_id,
-    time_column="timestamp",
-    is_timeseries=True
-)
+# save_df_to_db(
+#     df=signals,
+#     schema="strategy_signals",
+#     table_name=strategy_id,
+#     time_column="timestamp",
+#     is_timeseries=True
+# )
 
 
 # ============================
@@ -228,33 +228,27 @@ logger.info(f"Final Balance: {final_balance}")
 logger.info(f"Total PnL %: {total_pnl}")
 logger.info(f"Number of Trades: {len(ledger_df)}")
 
-# Save ledger
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
-SIGNALS_FOLDER = os.path.join(BASE_DIR, "strategy_csv")  
-os.makedirs(SIGNALS_FOLDER, exist_ok=True)
+# # Save ledger
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
+# SIGNALS_FOLDER = os.path.join(BASE_DIR, "strategy_csv")  
+# os.makedirs(SIGNALS_FOLDER, exist_ok=True)
 
-ledger_csv = f"{strategy_id}_ledger.csv"
-output_csv = os.path.join(SIGNALS_FOLDER, ledger_csv)
-ledger_df.to_csv(output_csv, index=False)
+# ledger_csv = f"{strategy_id}_ledger.csv"
+# output_csv = os.path.join(SIGNALS_FOLDER, ledger_csv)
+# ledger_df.to_csv(output_csv, index=False)
 
 # ============================
 # Save meta data to db including full flags
 # ============================
 
 flags_python = {k: bool(v) for k, v in flags.items()}
+df = pd.DataFrame([flags_python])
+print(df)
 
-meta_df = pd.DataFrame([{
-    "creation_time": datetime.datetime.utcnow(),
-    "strategy_id": strategy_id,
-    "timeframe": "1h",
-    "all_flags": json.dumps(flags_python)  # <--- store full True/False flags
-}])
-
-save_df_to_db(
-    df=meta_df,
-    schema="strategy_identifier",
-    table_name="strategy_registry",
-    time_column="creation_time",
-    is_timeseries=False
-)
+# meta_df = pd.DataFrame([{
+#     "creation_time": datetime.datetime.utcnow(),
+#     "strategy": strategy_id,
+#     "timeframe": "1h",
+#     **flags_python
+# }])
 
