@@ -253,7 +253,7 @@ def save_df_to_db(
     df.head(0).to_sql(
         table, engine, 
         schema=schema, 
-        if_exists="fail", 
+        if_exists="append", 
         index=False)
 
     # 3. Self-heal

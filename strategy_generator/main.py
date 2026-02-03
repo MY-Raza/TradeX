@@ -1,4 +1,3 @@
-import random
 from TradeX.indicators.talib.signals import candlestick_signal, SIGNAL_FUNCTIONS
 import os
 import pandas as pd
@@ -7,7 +6,6 @@ import numpy as np
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.backtester import Backtester, BacktestConfig
 import datetime
-import hashlib
 import json
 from TradeX.utils.db.utils import save_df_to_db
 
@@ -140,19 +138,26 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
     })
     return df_signals
 
+COUNTER_FILE = "strategy_counter.json"
+
+def _load_counters():
+    if os.path.exists(COUNTER_FILE):
+        with open(COUNTER_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def _save_counters(counters):
+    with open(COUNTER_FILE, "w") as f:
+        json.dump(counters, f)
+
 def generate_strategy_id(flags: dict, timeframe="1h"):
-    active = sorted(k for k, v in flags.items() if v)
+    counters = _load_counters()
 
-    payload = {
-        "timeframe": timeframe,
-        "indicators": active
-    }
+    counters[timeframe] = counters.get(timeframe, 0) + 1
 
-    digest = hashlib.sha256(
-        json.dumps(payload, sort_keys=True).encode()
-    ).hexdigest()[:16]
+    _save_counters(counters)
 
-    return f"sig_{timeframe}_{digest}"
+    return f"sig_{timeframe}_{counters[timeframe]}"
 
 # ============================
 # Load and prepare data
@@ -227,32 +232,32 @@ print("Total PnL %:", total_pnl)
 print("Number of Trades:", len(ledger_df))
 
 # Save ledger
-ledger_table = f"{strategy_id}_ledger"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
+SIGNALS_FOLDER = os.path.join(BASE_DIR, "strategy_csv")  
+os.makedirs(SIGNALS_FOLDER, exist_ok=True)
 
-save_df_to_db(
-    df=ledger_df,
-    schema="strategy_signals",
-    table_name=ledger_table,
-    time_column="timestamp",
-    is_timeseries=False
-)
+ledger_csv = f"{strategy_id}_ledger.csv"
+output_csv = os.path.join(SIGNALS_FOLDER, ledger_csv)
+ledger_df.to_csv(output_csv, index=False)
 
-# Saving meta data to db
+# ============================
+# Save meta data to db including full flags
+# ============================
+
+flags_python = {k: bool(v) for k, v in flags.items()}
 
 meta_df = pd.DataFrame([{
+    "creation_time": datetime.datetime.utcnow(),
     "strategy_id": strategy_id,
     "timeframe": "1h",
-    "active_indicators": json.dumps(
-        [k for k, v in flags.items() if v]
-    ),
-    "created_at": datetime.datetime.utcnow()
+    "all_flags": json.dumps(flags_python)  # <--- store full True/False flags
 }])
 
 save_df_to_db(
     df=meta_df,
-    schema="strategy_signals",
+    schema="strategy_identifier",
     table_name="strategy_registry",
-    time_column="created_at",
+    time_column="creation_time",
     is_timeseries=False
 )
 

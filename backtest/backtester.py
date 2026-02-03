@@ -241,7 +241,7 @@ class Backtester:
         # -----------------------------
         # Prepare final ledger DataFrame
         # -----------------------------
-        columns = ["datetime", "predicted_direction", "action",
+        columns = ["timestamp", "predicted_direction", "action",
                    "buy_price", "sell_price", "balance", "pnl", "pnl_sum"]
 
         return pd.DataFrame(ledger, columns=columns), round(balance, 2), round(pnl_sum, 2)
