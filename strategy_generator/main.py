@@ -7,6 +7,9 @@ import numpy as np
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.backtester import Backtester, BacktestConfig
 import datetime
+import hashlib
+import json
+from TradeX.utils.db.utils import save_df_to_db
 
 logger = get_logger("strategy_main")
 
@@ -137,6 +140,19 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
     })
     return df_signals
 
+def generate_strategy_id(flags: dict, timeframe="1h"):
+    active = sorted(k for k, v in flags.items() if v)
+
+    payload = {
+        "timeframe": timeframe,
+        "indicators": active
+    }
+
+    digest = hashlib.sha256(
+        json.dumps(payload, sort_keys=True).encode()
+    ).hexdigest()[:16]
+
+    return f"sig_{timeframe}_{digest}"
 
 # ============================
 # Load and prepare data
@@ -149,7 +165,6 @@ if df_1m.empty:
 
 df_1m["timestamp"] = pd.to_datetime(df_1m["datetime"])
 df_1m = df_1m.drop(columns=["datetime"])
-
 # Resample 1m -> 1h
 df_1h = resample_ohlcv(df_1m, "1h")
 
@@ -177,18 +192,22 @@ signals = run_active_signals_with_voting(
     df_1h["timestamp"]
 )
 
-print(signals.head())
+# Save signals to db
 
-# Save signals to CSV with timestamp
-timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-signals_file = f"signals.csv"
-signals.to_csv(signals_file, index=False)
-print(f"Signals saved to {signals_file}")
+strategy_id = generate_strategy_id(flags, timeframe="1h")
+
+save_df_to_db(
+    df=signals,
+    schema="strategy_signals",
+    table_name=strategy_id,
+    time_column="timestamp",
+    is_timeseries=True
+)
+
 
 # ============================
 # Backtesting
 # ============================
-signals_df = pd.read_csv(signals_file)
 config = BacktestConfig(
     starting_balance=1000,
     leverage=1,
@@ -200,7 +219,7 @@ config = BacktestConfig(
     min_balance_pct=0.5
 )
 bt = Backtester(config)
-ledger_df, final_balance, total_pnl = bt.run(df_1m, signals_df)
+ledger_df, final_balance, total_pnl = bt.run(df_1m, signals)
 
 print("\n===== BACKTEST RESULTS =====")
 print("Final Balance:", final_balance)
@@ -208,5 +227,32 @@ print("Total PnL %:", total_pnl)
 print("Number of Trades:", len(ledger_df))
 
 # Save ledger
-ledger_df.to_csv("ledger.csv", index=False)
-print("\nTrade log saved to ledger.csv")
+ledger_table = f"{strategy_id}_ledger"
+
+save_df_to_db(
+    df=ledger_df,
+    schema="strategy_signals",
+    table_name=ledger_table,
+    time_column="timestamp",
+    is_timeseries=False
+)
+
+# Saving meta data to db
+
+meta_df = pd.DataFrame([{
+    "strategy_id": strategy_id,
+    "timeframe": "1h",
+    "active_indicators": json.dumps(
+        [k for k, v in flags.items() if v]
+    ),
+    "created_at": datetime.datetime.utcnow()
+}])
+
+save_df_to_db(
+    df=meta_df,
+    schema="strategy_signals",
+    table_name="strategy_registry",
+    time_column="created_at",
+    is_timeseries=False
+)
+

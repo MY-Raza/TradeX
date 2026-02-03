@@ -148,33 +148,32 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
     logger.info(f"Indexes ensured: {index_name}, {desc_index}")
 
 def ensure_hypertable(table, schema, time_column):
-    # 1. Use double quotes for identifiers to handle case-sensitivity/dots
-    # 2. Use explicit casts (::regclass, ::text, etc.) to resolve 'unknown' types
-    # 3. Add 'public.' prefix to create_hypertable if extension is in public schema
-    full_table_name = f'"{schema}"."{table}"'
-    query = text(f"""
-        SELECT public.create_hypertable(
-            %(table_name)s::regclass, 
-            %(time_col)s, 
-            migrate_data => %(migrate)s, 
-            if_not_exists => %(if_exists)s
+    full_table_name = f'{schema}.{table}'
+    time_col_sql = f'{time_column}'
+
+    query = text("""
+        SELECT create_hypertable(
+           '{full_table_name}'::regclass,
+            '{time_col_sql}'::name,
+            migrate_data => :migrate,
+            if_not_exists => :if_not_exists
         );
     """)
 
-    # Using bind parameters for safety and type resolution
     params = {
         "table_name": full_table_name,
-        "time_col": time_column,
+        "time_column": time_column,
         "migrate": True,
-        "if_exists": True
+        "if_not_exists": True
     }
+
     engine = get_engine()
     try:
         with engine.begin() as conn:
             conn.execute(query, params)
     except Exception as e:
-        # If 'public.' failed, it might be in a different schema or already a hypertable
         print(f"Hypertable check for {full_table_name} failed or already exists: {e}")
+
 
 
 # =====================================================
