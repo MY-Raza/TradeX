@@ -8,6 +8,7 @@ from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.indicators.talib.signals import *
 from TradeX.backtest.backtest1 import Backtest
 from TradeX.backtest.backtester import Backtester,BacktestConfig
+from TradeX.backtest.newbacktest import HighPerfBacktest
 import os
 
 # ---------------------------
@@ -128,9 +129,9 @@ signals_df["timestamp"] = pd.to_datetime(signals_df["timestamp"], utc=True)
 df_1m["timestamp"] = df_1m["timestamp"].dt.tz_convert(None)
 signals_df["timestamp"] = signals_df["timestamp"].dt.tz_convert(None)
 
-# # Load CSV files
+# # # Load CSV files
 
-    # Run backtest
+     # Run backtest
 df_predictions = pd.read_csv(signals_csv)
 df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
 df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
@@ -141,26 +142,41 @@ print("PnL %:", pnl_percent)
 df_ledger.to_csv("ledger1.csv", index=False)
 print("Results saved to ledger1.csv")
 
-config = BacktestConfig(
-        starting_balance=1000,
-        leverage=1,
-        transaction_fee=0.05,   # percent
-        slippage=0.00,          # percent
-        take_profit_pct=0.03,   # 3%
-        stop_loss_pct=0.01,     # 1%
-        buy_after_minutes=1,
-        min_balance_pct=0.5
-    )
-bt = Backtester(config)
-ledger_df, final_balance, total_pnl = bt.run(df_1m, signals_df)
-print("\n===== BACKTEST RESULTS =====")
-print("Final Balance:", final_balance)
-print("Total PnL %:", total_pnl)
-print("Number of Trades:", len(ledger_df))
+# config = BacktestConfig(
+#         starting_balance=1000,
+#         leverage=1,
+#         transaction_fee=0.05,   # percent
+#         slippage=0.00,          # percent
+#         take_profit_pct=0.03,   # 3%
+#         stop_loss_pct=0.01,     # 1%
+#         buy_after_minutes=1,
+#         min_balance_pct=0.5
+#     )
+# bt = Backtester(config)
+# ledger_df, final_balance, total_pnl = bt.run(df_1m, signals_df)
+# print("\n===== BACKTEST RESULTS =====")
+# print("Final Balance:", final_balance)
+# print("Total PnL %:", total_pnl)
+# print("Number of Trades:", len(ledger_df))
 
-    # Save trades
-ledger_df.to_csv("ledger.csv", index=False)
-print("\nTrade log saved to ledger.csv")
+#     # Save trades
+# ledger_df.to_csv("ledger.csv", index=False)
+# print("\nTrade log saved to ledger.csv")
+bt = HighPerfBacktest(
+    df_price = df_1m,
+    df_predictions=signals_df,
+    starting_balance=1000,
+    take_profit=3,    # 1% TP
+    stop_loss=1,      # 1% SL
+    buy_after_minutes=0,
+    fee=0.05,
+    leverage=1,
+    slippage=0
+)
+ledger, final_balance, total_pnl_percent = bt.run()
+ledger.to_csv("test.csv")
+print("Final Balance:", final_balance)
+print("Total PnL %:", total_pnl_percent)
 
 
 
