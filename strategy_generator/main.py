@@ -157,7 +157,7 @@ def generate_strategy_id(flags: dict, timeframe="1h"):
 
     _save_counters(counters)
 
-    return f"sig_{timeframe}_btc_{counters[timeframe]}"
+    return f"sig_{timeframe}_{counters[timeframe]}"
 
 # ============================
 # Load and prepare data
@@ -242,8 +242,8 @@ ledger_df.to_csv(output_csv, index=False)
 # ============================
 strategy_df = pd.DataFrame([flags])
 strategy_df.insert(0, "timeframe", "1h") 
+strategy_df.insert(0, "symbol", "btc")
 strategy_df.insert(0, "strategy", strategy_id)
-strategy_df.insert(0, "creation_time", datetime.datetime.utcnow())
 strategy_df.columns = strategy_df.columns.str.lower()
 print(strategy_df)
 
