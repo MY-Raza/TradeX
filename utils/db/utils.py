@@ -154,10 +154,10 @@ def ensure_hypertable(table, schema, time_column):
     full_table_name = f'"{schema}"."{table}"'
     query = text(f"""
         SELECT public.create_hypertable(
-            :table_name::regclass, 
-            :time_col::text, 
-            migrate_data => :migrate::boolean, 
-            if_not_exists => :if_exists::boolean
+            %(table_name)s::regclass, 
+            %(time_col)s, 
+            migrate_data => %(migrate)s, 
+            if_not_exists => %(if_exists)s
         );
     """)
 
