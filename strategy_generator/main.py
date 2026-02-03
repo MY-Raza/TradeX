@@ -226,10 +226,10 @@ config = BacktestConfig(
 bt = Backtester(config)
 ledger_df, final_balance, total_pnl = bt.run(df_1m, signals)
 
-print("\n===== BACKTEST RESULTS =====")
-print("Final Balance:", final_balance)
-print("Total PnL %:", total_pnl)
-print("Number of Trades:", len(ledger_df))
+logger.info("\n===== BACKTEST RESULTS =====")
+logger.info(f"Final Balance: {final_balance}")
+logger.info(f"Total PnL %: {total_pnl}")
+logger.info(f"Number of Trades: {len(ledger_df)}")
 
 # Save ledger
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
