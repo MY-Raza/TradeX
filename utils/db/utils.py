@@ -148,31 +148,36 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
     logger.info(f"Indexes ensured: {index_name}, {desc_index}")
 
 def ensure_hypertable(table, schema, time_column):
-    full_table_name = f'{schema}.{table}'
+    full_table_name = f'"{schema}"."{table}"'
     time_col_sql = f'{time_column}'
-
-    query = text("""
-        SELECT create_hypertable(
-           '{full_table_name}'::regclass,
-            '{time_col_sql}'::name,
-            migrate_data => :migrate,
-            if_not_exists => :if_not_exists
-        );
-    """)
-
-    params = {
-        "table_name": full_table_name,
-        "time_column": time_column,
-        "migrate": True,
-        "if_not_exists": True
-    }
-
+    
     engine = get_engine()
+    
     try:
         with engine.begin() as conn:
+            # First, ensure TimescaleDB extension is installed
+            conn.execute(text("CREATE EXTENSION IF NOT EXISTS timescaledb;"))
+            
+            # Then create the hypertable
+            query = text(f"""
+                SELECT create_hypertable(
+                   '{full_table_name}'::regclass,
+                    '{time_col_sql}'::name,
+                    migrate_data => :migrate,
+                    if_not_exists => :if_not_exists
+                );
+            """)
+            
+            params = {
+                "migrate": True,
+                "if_not_exists": True
+            }
+            
             conn.execute(query, params)
+            print(f"Hypertable created/verified for {full_table_name}")
+            
     except Exception as e:
-        print(f"Hypertable check for {full_table_name} failed or already exists: {e}")
+        print(f"Hypertable check for {full_table_name} failed: {e}")
 
 
 
@@ -245,7 +250,11 @@ def save_df_to_db(
     df = df.drop_duplicates(subset=[time_column])
 
     # 2. Create table if missing
-    df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
+    df.head(0).to_sql(
+        table, engine, 
+        schema=schema, 
+        if_exists="fail", 
+        index=False)
 
     # 3. Self-heal
     ensure_unique_index(table, schema, time_column)
