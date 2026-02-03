@@ -8,8 +8,8 @@ class BacktestConfig:
     leverage: float = 1.0
     transaction_fee: float = 0.05
     slippage: float = 0.0
-    take_profit_pct: float = 0.03  # e.g., 3% TP
-    stop_loss_pct: float = 0.01    # e.g., 1% SL
+    take_profit_pct: float = 0.03  
+    stop_loss_pct: float = 0.01   
     buy_after_minutes: int = 0
     min_balance_pct: float = 0.5
 
