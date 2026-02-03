@@ -7,3 +7,11 @@
 2026-02-03 12:29:40,628 | INFO | strategy_main | Final Balance: 1324.8
 2026-02-03 12:29:40,628 | INFO | strategy_main | Total PnL %: 47.5
 2026-02-03 12:29:40,628 | INFO | strategy_main | Number of Trades: 2675
+2026-02-03 12:32:00,103 | WARNING | strategy_main | ⚠ Error calling BOP: bop_signal() missing 2 required positional arguments: 'low' and 'close_'
+2026-02-03 12:32:00,107 | WARNING | strategy_main | ⚠ No signal function found for PLUS_DM
+2026-02-03 12:32:00,111 | WARNING | strategy_main | ⚠ Error calling AVGPRICE: avgprice_signal() missing 1 required positional argument: 'close'
+2026-02-03 12:32:15,191 | INFO | strategy_main | 
+===== BACKTEST RESULTS =====
+2026-02-03 12:32:15,191 | INFO | strategy_main | Final Balance: 1324.8
+2026-02-03 12:32:15,192 | INFO | strategy_main | Total PnL %: 47.5
+2026-02-03 12:32:15,192 | INFO | strategy_main | Number of Trades: 2675

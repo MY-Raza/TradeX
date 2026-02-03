@@ -103,7 +103,7 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
         # Normal indicators
         func = SIGNAL_FUNCTIONS.get(name)
         if func is None:
-            print(f"⚠ No signal function found for {name}")
+            logger.warning(f"⚠ No signal function found for {name}")
             continue
 
         sig_args = inspect.signature(func).parameters
@@ -113,7 +113,7 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
             sig = func(*args_to_pass)
             signals_dict[name] = sig
         except Exception as e:
-            print(f"⚠ Error calling {name}: {e}")
+            logger.warning(f"⚠ Error calling {name}: {e}")
 
     # ---------------------------
     # Majority Voting (NumPy implementation, avoids SciPy)
@@ -182,9 +182,6 @@ volume = df_1h["volume"].values
 
 # Randomly activate indicators
 flags = randomize_indicators(ALL_INDICATORS)
-for name, value in flags.items():
-    if value:
-        print("✔", name)
 
 # Run active signals with voting
 signals = run_active_signals_with_voting(
