@@ -1,20 +1,16 @@
 import os
-import json
-import datetime
-import numpy as np
 import pandas as pd
-from concurrent.futures import ThreadPoolExecutor
-
-from TradeX.indicators.talib.signals import candlestick_signal, SIGNAL_FUNCTIONS
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.newbacktest import HighPerfBacktest
 from TradeX.utils.db.utils import save_df_to_db
+from strategy_counter import generate_strategy_id
+from signals_combiner import randomize_indicators, run_active_signals_with_voting
 
 logger = get_logger("strategy_main")
 
 # ============================
-# All indicators
+# List of all indicators
 # ============================
 ALL_INDICATORS = (
     # Overlap Studies
@@ -79,87 +75,25 @@ ALL_INDICATORS = (
 )
 
 # ============================
-# Randomize indicators
-# ============================
-def randomize_indicators(all_indicators):
-    flags_array = np.random.choice([True, False], size=len(all_indicators))
-    return dict(zip(all_indicators, flags_array))
-
-# ============================
-# Compute signals in parallel
-# ============================
-def run_active_signals_with_voting(flags, open_, high, low, close, volume, timestamps):
-    signals_dict = {}
-    data = {"open": open_, "high": high, "low": low, "close": close, "volume": volume}
-
-    def compute_signal(name):
-        try:
-            if name.startswith("CDL"):
-                sig, _ = candlestick_signal(open_, high, low, close, name)
-                return name, sig.astype(np.int8)
-            func = SIGNAL_FUNCTIONS.get(name)
-            if func is None:
-                return None, None
-            args = [data[arg] for arg in func.__code__.co_varnames if arg in data]
-            sig = func(*args)
-            return name, sig.astype(np.int8)
-        except Exception as e:
-            logger.warning(f"Error calling {name}: {e}")
-            return None, None
-
-    with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
-        results = executor.map(compute_signal, [n for n, a in flags.items() if a])
-
-    for name, sig in results:
-        if name is not None and sig is not None:
-            signals_dict[name] = sig
-
-    # Voting
-    if signals_dict:
-        all_signals = np.column_stack(list(signals_dict.values()))
-        buy_votes = np.sum(all_signals == 1, axis=1)
-        sell_votes = np.sum(all_signals == -1, axis=1)
-        final_signal = np.where(buy_votes > sell_votes, 1,
-                        np.where(sell_votes > buy_votes, -1, 0)).astype(np.int8)
-    else:
-        final_signal = np.zeros(len(timestamps), dtype=np.int8)
-
-    return pd.DataFrame({"timestamp": timestamps, "signals": final_signal})
-
-# ============================
-# Strategy counter
-# ============================
-COUNTER_FILE = r"D:\trading\TradeX\strategy_generator\strategy_counter.json"
-
-def _load_counters():
-    if os.path.exists(COUNTER_FILE):
-        with open(COUNTER_FILE, "r") as f:
-            return json.load(f)
-    return {}
-
-def _save_counters(counters):
-    with open(COUNTER_FILE, "w") as f:
-        json.dump(counters, f)
-
-def generate_strategy_id(flags: dict, timeframe="1h"):
-    counters = _load_counters()
-    counters[timeframe] = counters.get(timeframe, 0) + 1
-    _save_counters(counters)
-    return f"sig_{timeframe}_btc_{counters[timeframe]}"
-
-# ============================
-# Load data
+# Load 1-minute OHLCV data
 # ============================
 INPUT_CSV = r"D:\trading\TradeX\indicators\talib\btc_1m_data.csv"
 df_1m = pd.read_csv(INPUT_CSV)
+
 if df_1m.empty:
-    logger.error("No OHLCV data. Exiting.")
+    logger.error("No OHLCV data found. Exiting script.")
     exit()
 
+# Convert datetime column to pandas datetime
 df_1m["timestamp"] = pd.to_datetime(df_1m["datetime"])
 df_1m = df_1m.drop(columns=["datetime"])
+
+# ============================
+# Resample data to 1-hour OHLCV
+# ============================
 df_1h = resample_ohlcv(df_1m, "1h")
 
+# Extract NumPy arrays for fast calculations
 open_ = df_1h["open"].values
 high = df_1h["high"].values
 low = df_1h["low"].values
@@ -167,15 +101,25 @@ close = df_1h["close"].values
 volume = df_1h["volume"].values
 
 # ============================
-# Run signals
+# Randomly activate/deactivate indicators
 # ============================
 flags = randomize_indicators(ALL_INDICATORS)
+
+# ============================
+# Compute active signals with voting
+# ============================
+# Voting mechanism: each indicator outputs -1, 0, or 1
+# The final signal per timestamp is determined by majority vote
 signals = run_active_signals_with_voting(flags, open_, high, low, close, volume, df_1h["timestamp"])
 
 # ============================
-# Save signals to DB
+# Generate unique strategy ID
 # ============================
 strategy_id = generate_strategy_id(flags, timeframe="1h")
+
+# ============================
+# Save signals to database
+# ============================
 save_df_to_db(
     df=signals,
     schema="strategy_signals",
@@ -185,27 +129,32 @@ save_df_to_db(
 )
 
 # ============================
-# Backtesting
+# Run backtest
 # ============================
 bt = HighPerfBacktest(
-    df_price=df_1m,
-    df_predictions=signals,
-    starting_balance=1000,
-    take_profit=3,
-    stop_loss=1,
-    fee=0.05,
-    leverage=1,
-    slippage=0
+    df_price=df_1m,          # Original 1-minute price data
+    df_predictions=signals,   # Signals computed from indicators
+    starting_balance=1000,    # Initial capital
+    take_profit=3,            # Take profit % per trade
+    stop_loss=1,              # Stop loss % per trade
+    fee=0.05,                 # Trading fee per trade
+    leverage=1,               # Leverage multiplier
+    slippage=0                # Slippage in price
 )
+
+# Execute backtest
 ledger, final_balance, total_pnl_percent = bt.run()
 
+# ============================
+# Log backtest results
+# ============================
 logger.info("\n===== BACKTEST RESULTS =====")
 logger.info(f"Final Balance: {final_balance}")
 logger.info(f"Total PnL %: {total_pnl_percent}")
 logger.info(f"Number of Trades: {len(ledger)}")
 
 # ============================
-# Save ledger CSV
+# Save ledger as CSV
 # ============================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SIGNALS_FOLDER = os.path.join(BASE_DIR, "strategy_csv")
@@ -217,7 +166,7 @@ ledger.to_csv(os.path.join(SIGNALS_FOLDER, ledger_csv), index=False)
 # ============================
 # Save strategy metadata
 # ============================
-strategy_df = pd.DataFrame([flags])
+strategy_df = pd.DataFrame([flags])  # Flags per indicator (True/False)
 strategy_df.insert(0, "timeframe", "1h")
 strategy_df.insert(0, "symbol", "btc")
 strategy_df.insert(0, "strategy", strategy_id)
