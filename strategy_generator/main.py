@@ -212,7 +212,7 @@ for timeframe in TIMEFRAMES:
         strategy_df = pd.DataFrame([flags])
         strategy_df.insert(0, "timehorizon", timeframe)
         strategy_df.insert(0, "symbol", "btc")
-        strategy_df.insert(0, "s1", "1")
+        strategy_df.insert(0, "sl", "1")
         strategy_df.insert(0, "tp", "3")
         strategy_df.insert(0, "strategy", strategy_id)
         strategy_df.columns = strategy_df.columns.str.lower()
