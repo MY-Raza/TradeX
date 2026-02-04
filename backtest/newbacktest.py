@@ -115,8 +115,6 @@ class HighPerfBacktest:
         For each prediction timestamp:
         - Find the slice of price data that belongs to that prediction window
         - Interval = [prediction_time, next_prediction_time)
-
-        This prevents look-ahead bias and avoids repeated searching later.
         """
 
         self.interval_indices = []
