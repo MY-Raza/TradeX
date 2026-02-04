@@ -187,3 +187,11 @@
 2026-02-04 13:02:09,598 | INFO | strategy_main | Final Balance: 152434288955623.1
 2026-02-04 13:02:09,598 | INFO | strategy_main | Total PnL %: 2606.34
 2026-02-04 13:02:09,598 | INFO | strategy_main | Number of Trades: 8600
+2026-02-04 13:07:45,475 | WARNING | strategy_main | Error calling SAREXT: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 13:07:45,487 | WARNING | strategy_main | Error calling BOP: bop_signal() missing 2 required positional arguments: 'low' and 'close_'
+2026-02-04 13:07:45,492 | WARNING | strategy_main | Error calling AVGPRICE: avgprice_signal() missing 1 required positional argument: 'close'
+2026-02-04 13:07:54,393 | INFO | strategy_main | 
+===== BACKTEST RESULTS =====
+2026-02-04 13:07:54,393 | INFO | strategy_main | Final Balance: 10684657487031.83
+2026-02-04 13:07:54,394 | INFO | strategy_main | Total PnL %: 2339.45
+2026-02-04 13:07:54,394 | INFO | strategy_main | Number of Trades: 7672

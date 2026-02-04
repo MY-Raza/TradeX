@@ -10240,3 +10240,10 @@ First 5 rows from data_binance.btc_1m:
 2026-02-04 13:02:09,726 | INFO | utils | Schema 'strategy_identifier' ready
 2026-02-04 13:02:09,766 | INFO | utils | Indexes ensured: strategy_registry_strategy_uidx, strategy_registry_strategy_desc_idx
 2026-02-04 13:02:09,792 | INFO | utils | Inserted 1 rows into strategy_identifier.strategy_registry
+2026-02-04 13:07:45,691 | INFO | utils | Database engine initialized
+2026-02-04 13:07:45,918 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-04 13:07:45,996 | INFO | utils | Indexes ensured: sig_1h_btc_5_timestamp_uidx, sig_1h_btc_5_timestamp_desc_idx
+2026-02-04 13:07:52,681 | INFO | utils | Inserted 17574 rows into strategy_signals.sig_1h_btc_5
+2026-02-04 13:07:54,504 | INFO | utils | Schema 'strategy_identifier' ready
+2026-02-04 13:07:54,546 | INFO | utils | Indexes ensured: strategy_registry_strategy_uidx, strategy_registry_strategy_desc_idx
+2026-02-04 13:07:54,569 | INFO | utils | Inserted 1 rows into strategy_identifier.strategy_registry

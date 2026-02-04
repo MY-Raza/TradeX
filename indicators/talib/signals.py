@@ -127,8 +127,9 @@ def willr_signal(high, low, close, period=14):
     will = call_indicator("WILLR", high, low, close, timeperiod=period)
     return np.where(will < -80, 1, np.where(will > -20, -1, 0))
 
-def adxr_signal(close, period=14):
-    adxr = call_indicator("ADXR", close, timeperiod=period)
+def adxr_signal(high, low, close, period=14):
+    adxr = call_indicator("ADXR", high, low, close, timeperiod=period)
+    # Convert numeric value to trading signal
     return np.where(adxr > 0, 1, np.where(adxr < 0, -1, 0))
 
 def aroon_signal(high, low, period=14):
@@ -443,18 +444,22 @@ def trix_signal(close, period=14):
     val = call_indicator("TRIX", close, timeperiod=period)
     return np.where(val > 0, 1, np.where(val < 0, -1, 0))
 
-def sarext_signal(high, low, close, startvalue=0, offsetonreverse=0, accelerationinit=0.02, accelerationmax=0.2, accelerationstep=0.02):
+def sarext_signal(high, low, close):
     sar = call_indicator(
         "SAREXT",
         high,
         low,
-        startvalue=startvalue,
-        offsetonreverse=offsetonreverse,
-        accelerationinit=accelerationinit,
-        accelerationmax=accelerationmax,
-        accelerationstep=accelerationstep
+        startValue=0,
+        offsetOnReverse=0,
+        accelerationInitLong=0.02,
+        accelerationInitShort=0.02,
+        accelerationMaxLong=0.2,
+        accelerationMaxShort=0.2,
+        accelerationStepLong=0.02,
+        accelerationStepShort=0.02
     )
     return np.where(close > sar, 1, np.where(close < sar, -1, 0))
+
 
 def dx_signal(high, low, close, period=14):
     val = call_indicator("DX", high, low, close, timeperiod=period)
@@ -505,9 +510,9 @@ SIGNAL_FUNCTIONS = {
     "MIDPOINT": midpoint_signal,
     "MIDPRICE": midprice_signal,
     "WCLPRICE": wclprice_signal,
-    "AVGPRICE": avgprice_signal if 'avgprice_signal' in globals() else None,
-    "MEDPRICE": medprice_signal if 'medprice_signal' in globals() else None,
-    "TYPPRICE": typprice_signal if 'typprice_signal' in globals() else None,
+    "AVGPRICE": avgprice_signal,
+    "MEDPRICE": medprice_signal,
+    "TYPPRICE": typprice_signal,
 
     # -------------------------
     # Trend / SAR
