@@ -5,7 +5,6 @@ from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from datetime import datetime, timezone
-
 logger = get_logger("binance_main")
 
 """

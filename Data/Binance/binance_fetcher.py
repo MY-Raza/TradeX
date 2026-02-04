@@ -56,7 +56,7 @@ class BinanceFuturesFetcher:
         end_date: str = "now",
         interval: str = "1m",
         limit: int = 1000,
-        sleep_seconds: float = 0.5,
+        sleep_seconds: float = 2,
     ):
         """
         Initialize the BinanceFuturesFetcher instance.
