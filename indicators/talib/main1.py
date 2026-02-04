@@ -7,7 +7,6 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.indicators.talib.signals import *
 from TradeX.backtest.backtest1 import Backtest
-from TradeX.backtest.backtester import Backtester,BacktestConfig
 from TradeX.backtest.newbacktest import HighPerfBacktest
 import os
 
@@ -38,82 +37,82 @@ df_1m = df_1m.drop(columns=["datetime"])
 # Resample 1m -> 1h
 df_1h = resample_ohlcv(df_1m, "1h")
 
-# # ---------------------------
-# # Prepare arrays for automatic argument detection
-# # ---------------------------
-# open_ = df_1h["open"].values
-# high = df_1h["high"].values
-# low = df_1h["low"].values
-# close = df_1h["close"].values
-# volume = df_1h["volume"].values
-# ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
-# periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
+# ---------------------------
+# Prepare arrays for automatic argument detection
+# ---------------------------
+open_ = df_1h["open"].values
+high = df_1h["high"].values
+low = df_1h["low"].values
+close = df_1h["close"].values
+volume = df_1h["volume"].values
+ref = np.random.uniform(50, 200, len(df_1h)).astype(np.float64)
+periods = np.random.randint(5, 30, len(df_1h)).astype(np.float64)
 
-# # Mapping common names to arrays
-# AUTO_ARGS = {
-#     "open": open_,
-#     "high": high,
-#     "low": low,
-#     "close": close,
-#     "volume": volume,
-#     "ref": ref,
-#     "periods": periods,
-#     "pattern_name": "CDLDOJI"
-# }
+# Mapping common names to arrays
+AUTO_ARGS = {
+    "open": open_,
+    "high": high,
+    "low": low,
+    "close": close,
+    "volume": volume,
+    "ref": ref,
+    "periods": periods,
+    "pattern_name": "CDLDOJI"
+}
 
-# # ---------------------------
-# # Automatically detect all *_signal functions
-# # ---------------------------
-# signal_funcs = {name: func for name, func in globals().items() if callable(func) and name.endswith("_signal")}
+# ---------------------------
+# Automatically detect all *_signal functions
+# ---------------------------
+signal_funcs = {name: func for name, func in globals().items() if callable(func) and name.endswith("_signal")}
 
-# # ---------------------------
-# # Compute & save all signals automatically to separate CSVs
-# # ---------------------------
-# for func_name, func in signal_funcs.items():
-#     try:
-#         # Automatically get function arguments
-#         sig = inspect.signature(func)
-#         args_to_pass = []
-#         for param in sig.parameters.values():
-#             if param.name in AUTO_ARGS:
-#                 args_to_pass.append(AUTO_ARGS[param.name])
-#             elif param.default != inspect.Parameter.empty:
-#                 # use default value
-#                 pass
-#             else:
-#                 raise ValueError(f"Cannot automatically provide argument '{param.name}' for {func_name}")
+# ---------------------------
+# Compute & save all signals automatically to separate CSVs
+# ---------------------------
+for func_name, func in signal_funcs.items():
+    try:
+        # Automatically get function arguments
+        sig = inspect.signature(func)
+        args_to_pass = []
+        for param in sig.parameters.values():
+            if param.name in AUTO_ARGS:
+                args_to_pass.append(AUTO_ARGS[param.name])
+            elif param.default != inspect.Parameter.empty:
+                # use default value
+                pass
+            else:
+                raise ValueError(f"Cannot automatically provide argument '{param.name}' for {func_name}")
 
-#         # Call the signal function
-#         result = func(*args_to_pass)
+        # Call the signal function
+        result = func(*args_to_pass)
 
-#         # Determine CSV file name
-#         if func_name == "candlestick_signal":
-#             result, pattern = result
-#             csv_name = f"{func_name}_{pattern.lower()}.csv"
-#         else:
-#             csv_name = f"{func_name}.csv"
+        # Determine CSV file name
+        if func_name == "candlestick_signal":
+            result, pattern = result
+            csv_name = f"{func_name}_{pattern.lower()}.csv"
+        else:
+            csv_name = f"{func_name}.csv"
 
-#         # Convert result to DataFrame
-#         if isinstance(result, tuple):
-#             df_signal = pd.DataFrame({"signals": r for i, r in enumerate(result)})
-#         elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
-#             df_signal = pd.DataFrame(result, columns=["signals" for i in range(result.shape[1])])
-#         else:
-#             df_signal = pd.DataFrame({"signals": result})
+        # Convert result to DataFrame
+        if isinstance(result, tuple):
+            df_signal = pd.DataFrame({"signals": r for i, r in enumerate(result)})
+        elif isinstance(result, np.ndarray) and result.ndim > 1 and result.shape[1] > 1:
+            df_signal = pd.DataFrame(result, columns=["signals" for i in range(result.shape[1])])
+        else:
+            df_signal = pd.DataFrame({"signals": result})
 
-#         df_signal.insert(0, "timestamp", df_1h["timestamp"])
+        df_signal.insert(0, "timestamp", df_1h["timestamp"])
 
-#         # Save to CSV
-#         output_csv = os.path.join(SIGNALS_FOLDER, csv_name)
-#         df_signal.to_csv(output_csv, index=False)
-#         logger.info(f"Saved {func_name} → {output_csv}")
+        # Save to CSV
+        output_csv = os.path.join(SIGNALS_FOLDER, csv_name)
+        df_signal.to_csv(output_csv, index=False)
+        logger.info(f"Saved {func_name} → {output_csv}")
 
-#     except Exception as e:
-#         logger.error(f"Error computing {func_name}: {e}")
+    except Exception as e:
+        logger.error(f"Error computing {func_name}: {e}")
 
-# # ---------------------------
-# # Backtesting example
-# # ---------------------------
+# ---------------------------
+# Backtesting example
+# ---------------------------
 os.makedirs(SIGNALS_FOLDER, exist_ok=True)
 signals_csv = os.path.join(SIGNALS_FOLDER, "bbands_signal.csv")  
 if not os.path.exists(signals_csv):
@@ -137,46 +136,32 @@ df_1m['timestamp'] = pd.to_datetime(df_1m['timestamp']).dt.tz_localize(None)
 df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp']).dt.tz_localize(None)
 bt = Backtest(df_1m, df_predictions,take_profit=3,stop_loss=1)
 df_ledger, final_balance, pnl_percent = bt.run()
-print("Final Balance:", final_balance)
-print("PnL %:", pnl_percent)
-df_ledger.to_csv("ledger1.csv", index=False)
-print("Results saved to ledger1.csv")
+logger.info(f"Final Balance: {final_balance}")
+logger.info(f"PnL %: {pnl_percent}")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  
+SIGNALS_FOLDER = os.path.join(BASE_DIR)  
+os.makedirs(SIGNALS_FOLDER, exist_ok=True)
+ledger_csv = "ledger1.csv"
+output_csv = os.path.join(SIGNALS_FOLDER, ledger_csv)
+df_ledger.to_csv(output_csv, index=False)
+logger.info("Results saved to ledger1.csv")
 
-# config = BacktestConfig(
-#         starting_balance=1000,
-#         leverage=1,
-#         transaction_fee=0.05,   # percent
-#         slippage=0.00,          # percent
-#         take_profit_pct=0.03,   # 3%
-#         stop_loss_pct=0.01,     # 1%
-#         buy_after_minutes=1,
-#         min_balance_pct=0.5
-#     )
-# bt = Backtester(config)
-# ledger_df, final_balance, total_pnl = bt.run(df_1m, signals_df)
-# print("\n===== BACKTEST RESULTS =====")
-# print("Final Balance:", final_balance)
-# print("Total PnL %:", total_pnl)
-# print("Number of Trades:", len(ledger_df))
-
-#     # Save trades
-# ledger_df.to_csv("ledger.csv", index=False)
-# print("\nTrade log saved to ledger.csv")
 bt = HighPerfBacktest(
     df_price = df_1m,
     df_predictions=signals_df,
     starting_balance=1000,
-    take_profit=3,    # 1% TP
-    stop_loss=1,      # 1% SL
-    buy_after_minutes=0,
+    take_profit=3,   
+    stop_loss=1,     
     fee=0.05,
     leverage=1,
     slippage=0
 )
 ledger, final_balance, total_pnl_percent = bt.run()
-ledger.to_csv("test.csv")
-print("Final Balance:", final_balance)
-print("Total PnL %:", total_pnl_percent)
-
+logger.info(f"Final Balance: {final_balance}")
+logger.info(f"Total PnL %: {total_pnl_percent}")
+os.makedirs(SIGNALS_FOLDER, exist_ok=True)
+csv = "ledger.csv"
+final_csv = os.path.join(SIGNALS_FOLDER, csv)
+ledger.to_csv(final_csv,index=False)
 
 

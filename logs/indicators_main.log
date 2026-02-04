@@ -5616,3 +5616,626 @@ LINE 2: ...SERT INTO talib_signals.btc_cdldoji_1h (timestamp,candlestic...
 2026-02-03 15:40:21,503 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
 2026-02-03 15:40:21,645 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
 2026-02-03 15:40:21,762 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:12:15,546 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:12:15,655 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:12:15,809 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:12:15,919 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:12:16,027 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:12:16,142 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:12:16,254 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:12:16,375 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:12:16,665 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:12:16,869 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:12:17,021 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:12:17,152 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:12:17,319 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:12:17,509 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:12:17,783 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:12:17,881 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:12:18,110 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:12:18,272 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:12:18,460 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:12:18,713 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:12:18,837 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:12:19,006 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:12:19,197 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:12:19,254 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:12:19,519 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:12:19,678 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:12:19,782 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:12:19,886 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:12:20,054 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:12:20,211 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:12:20,313 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:12:20,412 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:12:20,533 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:12:20,645 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:12:20,746 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:12:20,921 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:12:21,054 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:12:21,162 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:12:21,266 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:12:21,373 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:12:21,480 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:12:21,586 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:12:21,699 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:12:21,811 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:12:21,914 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:12:22,014 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:12:22,117 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:12:22,224 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:12:22,341 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:12:22,455 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:12:22,558 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:12:22,662 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:12:22,782 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:12:22,891 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:12:23,008 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:12:23,121 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:12:23,243 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:12:23,349 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:12:23,349 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:12:23,349 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:12:23,454 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:12:23,557 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:12:23,660 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:12:23,764 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:12:23,866 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:12:23,968 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:12:24,073 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:12:24,175 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:12:24,279 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:12:24,280 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:12:24,385 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:12:24,487 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:12:24,591 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:12:24,766 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:12:24,871 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:12:24,977 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:12:25,089 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:12:25,193 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:12:25,296 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:12:25,410 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:12:25,515 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:12:25,516 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:12:25,619 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:12:25,730 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:12:27,391 | INFO | indicators_main | Final Balance: {final_balance}
+2026-02-04 10:12:27,391 | INFO | indicators_main | PnL %: {pnl_percent}
+2026-02-04 10:12:27,396 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:12:29,208 | INFO | indicators_main | Final Balance: {final_balance}
+2026-02-04 10:12:29,209 | INFO | indicators_main | Total PnL %: {total_pnl_percent}
+2026-02-04 10:14:50,955 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:14:51,077 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:14:51,193 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:14:51,305 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:14:51,423 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:14:51,563 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:14:51,674 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:14:51,782 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:14:51,897 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:14:52,017 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:14:52,138 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:14:52,252 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:14:52,367 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:14:52,477 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:14:52,596 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:14:52,704 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:14:52,870 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:14:52,983 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:14:53,096 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:14:53,207 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:14:53,209 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:14:53,326 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:14:53,436 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:14:53,437 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:14:53,555 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:14:53,677 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:14:53,789 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:14:53,901 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:14:54,017 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:14:54,132 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:14:54,241 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:14:54,351 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:14:54,464 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:14:54,577 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:14:54,686 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:14:54,793 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:14:54,899 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:14:55,009 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:14:55,125 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:14:55,239 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:14:55,353 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:14:55,463 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:14:55,578 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:14:55,698 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:14:55,806 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:14:55,918 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:14:56,033 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:14:56,148 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:14:56,273 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:14:56,395 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:14:56,502 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:14:56,611 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:14:56,733 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:14:56,857 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:14:56,986 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:14:57,105 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:14:57,237 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:14:57,354 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:14:57,354 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:14:57,355 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:14:57,470 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:14:57,589 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:14:57,702 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:14:57,811 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:14:57,920 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:14:58,031 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:14:58,146 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:14:58,257 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:14:58,370 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:14:58,371 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:14:58,487 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:14:58,594 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:14:58,700 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:14:58,808 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:14:58,923 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:14:59,035 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:14:59,152 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:14:59,261 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:14:59,374 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:14:59,494 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:14:59,600 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:14:59,601 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:14:59,713 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:14:59,829 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:15:01,495 | INFO | indicators_main | Final Balance: -1000
+2026-02-04 10:15:01,496 | INFO | indicators_main | PnL %: -67.18
+2026-02-04 10:15:01,500 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:15:03,139 | INFO | indicators_main | Final Balance: 495.73
+2026-02-04 10:15:03,140 | INFO | indicators_main | Total PnL %: -68.61
+2026-02-04 10:21:22,565 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:21:22,683 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:21:22,799 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:21:22,911 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:21:23,025 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:21:23,142 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:21:23,256 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:21:23,371 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:21:23,486 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:21:23,603 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:21:23,724 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:21:23,843 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:21:23,961 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:21:24,075 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:21:24,199 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:21:24,315 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:21:24,432 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:21:24,532 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:21:24,645 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:21:24,760 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:21:24,762 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:21:24,880 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:21:24,992 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:21:24,992 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:21:25,107 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:21:25,229 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:21:25,353 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:21:25,468 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:21:25,585 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:21:25,702 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:21:25,815 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:21:25,925 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:21:26,034 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:21:26,145 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:21:26,257 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:21:26,374 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:21:26,485 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:21:26,600 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:21:26,712 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:21:26,827 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:21:26,940 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:21:27,057 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:21:27,196 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:21:27,327 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:21:27,450 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:21:27,573 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:21:27,698 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:21:27,824 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:21:27,967 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:21:28,106 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:21:28,242 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:21:28,370 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:21:28,506 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:21:28,638 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:21:28,790 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:21:28,921 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:21:29,072 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:21:29,205 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:21:29,205 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:21:29,206 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:21:29,335 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:21:29,461 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:21:29,587 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:21:29,709 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:21:29,832 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:21:29,955 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:21:30,079 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:21:30,206 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:21:30,331 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:21:30,332 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:21:30,460 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:21:30,579 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:21:30,704 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:21:30,826 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:21:30,950 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:21:31,075 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:21:31,206 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:21:31,332 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:21:31,458 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:21:31,592 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:21:31,719 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:21:31,720 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:21:31,853 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:21:31,986 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:21:34,001 | INFO | indicators_main | Final Balance: -1000
+2026-02-04 10:21:34,001 | INFO | indicators_main | PnL %: -67.18
+2026-02-04 10:21:34,007 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:21:36,053 | INFO | indicators_main | Final Balance: 495.73
+2026-02-04 10:21:36,054 | INFO | indicators_main | Total PnL %: -68.61
+2026-02-04 10:22:48,492 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:22:48,608 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:22:48,725 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:22:48,838 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:22:48,945 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:22:49,061 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:22:49,172 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:22:49,284 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:22:49,399 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:22:49,524 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:22:49,640 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:22:49,776 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:22:49,888 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:22:50,002 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:22:50,117 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:22:50,231 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:22:50,345 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:22:50,456 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:22:50,571 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:22:50,686 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:22:50,688 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:22:50,803 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:22:50,931 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:22:50,932 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:22:51,050 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:22:51,169 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:22:51,278 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:22:51,392 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:22:51,508 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:22:51,624 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:22:51,738 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:22:51,849 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:22:51,964 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:22:52,080 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:22:52,193 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:22:52,303 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:22:52,413 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:22:52,530 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:22:52,641 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:22:52,748 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:22:52,857 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:22:52,969 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:22:53,091 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:22:53,218 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:22:53,340 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:22:53,462 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:22:53,581 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:22:53,704 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:22:53,836 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:22:53,972 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:22:54,089 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:22:54,211 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:22:54,336 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:22:54,459 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:22:54,599 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:22:54,729 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:22:54,943 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:22:55,073 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:22:55,073 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:22:55,074 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:22:55,196 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:22:55,318 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:22:55,434 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:22:55,548 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:22:55,666 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:22:55,788 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:22:55,904 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:22:56,021 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:22:56,139 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:22:56,139 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:22:56,270 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:22:56,388 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:22:56,504 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:22:56,619 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:22:56,732 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:22:56,844 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:22:56,963 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:22:57,074 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:22:57,185 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:22:57,301 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:22:57,411 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:22:57,412 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:22:57,525 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:22:57,644 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:22:59,477 | INFO | indicators_main | Final Balance: -1000
+2026-02-04 10:22:59,478 | INFO | indicators_main | PnL %: -67.18
+2026-02-04 10:22:59,482 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:23:01,253 | INFO | indicators_main | Final Balance: 495.73
+2026-02-04 10:23:01,253 | INFO | indicators_main | Total PnL %: -68.61
+2026-02-04 10:24:59,142 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:24:59,257 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:24:59,372 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:24:59,482 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:24:59,588 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:24:59,700 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:24:59,813 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:24:59,922 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:25:00,040 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:25:00,160 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:25:00,279 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:25:00,388 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:25:00,494 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:25:00,607 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:25:00,725 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:25:00,834 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:25:00,944 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:25:01,053 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:25:01,164 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:25:01,277 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:25:01,278 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:25:01,385 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:25:01,497 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:25:01,497 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:25:01,612 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:25:01,732 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:25:01,855 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:25:01,973 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:25:02,092 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:25:02,230 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:25:02,347 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:25:02,464 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:25:02,580 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:25:02,693 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:25:02,807 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:25:02,928 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:25:03,046 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:25:03,169 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:25:03,288 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:25:03,403 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:25:03,513 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:25:03,630 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:25:03,771 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:25:03,896 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:25:04,013 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:25:04,131 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:25:04,246 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:25:04,359 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:25:04,488 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:25:04,607 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:25:04,719 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:25:04,832 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:25:04,955 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:25:05,073 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:25:05,199 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:25:05,314 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:25:05,449 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:25:05,562 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:25:05,562 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:25:05,563 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:25:05,683 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:25:05,803 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:25:05,919 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:25:06,036 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:25:06,149 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:25:06,263 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:25:06,383 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:25:06,500 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:25:06,613 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:25:06,614 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:25:06,723 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:25:06,835 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:25:06,945 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:25:07,056 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:25:07,166 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:25:07,281 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:25:07,402 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:25:07,518 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:25:07,725 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:25:07,843 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:25:07,953 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:25:07,954 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:25:08,069 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:25:08,189 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:25:09,892 | INFO | indicators_main | Final Balance: -1000
+2026-02-04 10:25:09,892 | INFO | indicators_main | PnL %: -67.18
+2026-02-04 10:25:09,899 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:25:11,529 | INFO | indicators_main | Final Balance: 495.73
+2026-02-04 10:25:11,529 | INFO | indicators_main | Total PnL %: -68.61
+2026-02-04 10:32:05,911 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:32:06,027 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:32:06,138 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:32:06,255 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:32:06,365 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:32:06,481 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:32:06,594 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:32:06,708 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:32:06,824 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:32:06,943 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:32:07,061 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:32:07,174 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:32:07,287 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:32:07,398 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:32:07,522 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:32:07,631 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:32:07,740 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:32:07,853 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:32:07,970 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:32:08,084 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:32:08,086 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:32:08,199 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:32:08,310 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:32:08,310 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:32:08,424 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:32:08,545 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:32:08,655 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:32:08,769 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:32:08,879 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:32:08,989 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:32:09,098 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:32:09,209 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:32:09,320 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:32:09,430 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:32:09,540 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:32:09,653 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:32:09,768 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:32:09,888 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:32:09,999 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:32:10,112 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:32:10,227 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:32:10,340 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:32:10,458 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:32:10,577 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:32:10,686 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:32:10,797 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:32:10,914 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:32:11,029 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:32:11,155 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:32:11,277 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:32:11,393 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:32:11,509 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:32:11,630 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:32:11,751 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:32:11,886 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:32:12,002 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:32:12,137 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:32:12,255 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:32:12,256 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:32:12,256 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:32:12,369 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:32:12,483 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:32:12,597 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:32:12,710 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:32:12,820 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:32:12,933 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:32:13,043 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:32:13,156 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:32:13,266 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:32:13,266 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:32:13,376 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:32:13,483 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:32:13,593 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:32:13,709 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:32:13,826 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:32:13,938 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:32:14,062 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:32:14,176 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:32:14,290 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:32:14,409 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:32:14,523 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:32:14,524 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:32:14,642 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:32:14,761 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:32:16,365 | INFO | indicators_main | Final Balance: -1000
+2026-02-04 10:32:16,365 | INFO | indicators_main | PnL %: -67.18
+2026-02-04 10:32:16,370 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:32:18,197 | INFO | indicators_main | Final Balance: 0.15
+2026-02-04 10:32:18,198 | INFO | indicators_main | Total PnL %: -863.21
+2026-02-04 10:36:36,496 | INFO | indicators_main | Saved sma_signal → D:\trading\TradeX\indicators\talib\signals_csv\sma_signal.csv
+2026-02-04 10:36:36,710 | INFO | indicators_main | Saved ema_signal → D:\trading\TradeX\indicators\talib\signals_csv\ema_signal.csv
+2026-02-04 10:36:36,838 | INFO | indicators_main | Saved dema_signal → D:\trading\TradeX\indicators\talib\signals_csv\dema_signal.csv
+2026-02-04 10:36:36,960 | INFO | indicators_main | Saved tema_signal → D:\trading\TradeX\indicators\talib\signals_csv\tema_signal.csv
+2026-02-04 10:36:37,091 | INFO | indicators_main | Saved trima_signal → D:\trading\TradeX\indicators\talib\signals_csv\trima_signal.csv
+2026-02-04 10:36:37,221 | INFO | indicators_main | Saved wma_signal → D:\trading\TradeX\indicators\talib\signals_csv\wma_signal.csv
+2026-02-04 10:36:37,338 | INFO | indicators_main | Saved kama_signal → D:\trading\TradeX\indicators\talib\signals_csv\kama_signal.csv
+2026-02-04 10:36:37,459 | INFO | indicators_main | Saved ma_signal → D:\trading\TradeX\indicators\talib\signals_csv\ma_signal.csv
+2026-02-04 10:36:37,577 | INFO | indicators_main | Saved ht_trendline_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendline_signal.csv
+2026-02-04 10:36:37,707 | INFO | indicators_main | Saved mama_signal → D:\trading\TradeX\indicators\talib\signals_csv\mama_signal.csv
+2026-02-04 10:36:37,832 | INFO | indicators_main | Saved bbands_signal → D:\trading\TradeX\indicators\talib\signals_csv\bbands_signal.csv
+2026-02-04 10:36:37,951 | INFO | indicators_main | Saved midpoint_signal → D:\trading\TradeX\indicators\talib\signals_csv\midpoint_signal.csv
+2026-02-04 10:36:38,070 | INFO | indicators_main | Saved midprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\midprice_signal.csv
+2026-02-04 10:36:38,194 | INFO | indicators_main | Saved sar_signal → D:\trading\TradeX\indicators\talib\signals_csv\sar_signal.csv
+2026-02-04 10:36:38,344 | INFO | indicators_main | Saved macd_signal → D:\trading\TradeX\indicators\talib\signals_csv\macd_signal.csv
+2026-02-04 10:36:38,532 | INFO | indicators_main | Saved apo_signal → D:\trading\TradeX\indicators\talib\signals_csv\apo_signal.csv
+2026-02-04 10:36:38,654 | INFO | indicators_main | Saved ppo_signal → D:\trading\TradeX\indicators\talib\signals_csv\ppo_signal.csv
+2026-02-04 10:36:38,780 | INFO | indicators_main | Saved rsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\rsi_signal.csv
+2026-02-04 10:36:38,907 | INFO | indicators_main | Saved cci_signal → D:\trading\TradeX\indicators\talib\signals_csv\cci_signal.csv
+2026-02-04 10:36:39,039 | INFO | indicators_main | Saved willr_signal → D:\trading\TradeX\indicators\talib\signals_csv\willr_signal.csv
+2026-02-04 10:36:39,041 | ERROR | indicators_main | Error computing adxr_signal: ADXR() takes at least 3 positional arguments (1 given)
+2026-02-04 10:36:39,165 | INFO | indicators_main | Saved aroon_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroon_signal.csv
+2026-02-04 10:36:39,303 | INFO | indicators_main | Saved aroonosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\aroonosc_signal.csv
+2026-02-04 10:36:39,303 | ERROR | indicators_main | Error computing bop_signal: Cannot automatically provide argument 'open_' for bop_signal
+2026-02-04 10:36:39,440 | INFO | indicators_main | Saved cmo_signal → D:\trading\TradeX\indicators\talib\signals_csv\cmo_signal.csv
+2026-02-04 10:36:39,572 | INFO | indicators_main | Saved macdext_signal → D:\trading\TradeX\indicators\talib\signals_csv\macdext_signal.csv
+2026-02-04 10:36:39,697 | INFO | indicators_main | Saved minus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_di_signal.csv
+2026-02-04 10:36:39,827 | INFO | indicators_main | Saved minus_dm_signal → D:\trading\TradeX\indicators\talib\signals_csv\minus_dm_signal.csv
+2026-02-04 10:36:39,950 | INFO | indicators_main | Saved mom_signal → D:\trading\TradeX\indicators\talib\signals_csv\mom_signal.csv
+2026-02-04 10:36:40,070 | INFO | indicators_main | Saved plus_di_signal → D:\trading\TradeX\indicators\talib\signals_csv\plus_di_signal.csv
+2026-02-04 10:36:40,186 | INFO | indicators_main | Saved mfi_signal → D:\trading\TradeX\indicators\talib\signals_csv\mfi_signal.csv
+2026-02-04 10:36:40,308 | INFO | indicators_main | Saved obv_signal → D:\trading\TradeX\indicators\talib\signals_csv\obv_signal.csv
+2026-02-04 10:36:40,428 | INFO | indicators_main | Saved ad_signal → D:\trading\TradeX\indicators\talib\signals_csv\ad_signal.csv
+2026-02-04 10:36:40,551 | INFO | indicators_main | Saved adosc_signal → D:\trading\TradeX\indicators\talib\signals_csv\adosc_signal.csv
+2026-02-04 10:36:40,666 | INFO | indicators_main | Saved natr_signal → D:\trading\TradeX\indicators\talib\signals_csv\natr_signal.csv
+2026-02-04 10:36:40,806 | INFO | indicators_main | Saved wclprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\wclprice_signal.csv
+2026-02-04 10:36:40,922 | INFO | indicators_main | Saved atr_signal → D:\trading\TradeX\indicators\talib\signals_csv\atr_signal.csv
+2026-02-04 10:36:41,039 | INFO | indicators_main | Saved trange_signal → D:\trading\TradeX\indicators\talib\signals_csv\trange_signal.csv
+2026-02-04 10:36:41,157 | INFO | indicators_main | Saved linearreg_angle_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_angle_signal.csv
+2026-02-04 10:36:41,273 | INFO | indicators_main | Saved stddev_signal → D:\trading\TradeX\indicators\talib\signals_csv\stddev_signal.csv
+2026-02-04 10:36:41,391 | INFO | indicators_main | Saved var_signal → D:\trading\TradeX\indicators\talib\signals_csv\var_signal.csv
+2026-02-04 10:36:41,512 | INFO | indicators_main | Saved ht_dcperiod_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcperiod_signal.csv
+2026-02-04 10:36:41,636 | INFO | indicators_main | Saved ht_dcphase_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_dcphase_signal.csv
+2026-02-04 10:36:41,766 | INFO | indicators_main | Saved ht_phasor_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_phasor_signal.csv
+2026-02-04 10:36:41,884 | INFO | indicators_main | Saved linearreg_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_signal.csv
+2026-02-04 10:36:42,007 | INFO | indicators_main | Saved linearreg_intercept_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_intercept_signal.csv
+2026-02-04 10:36:42,123 | INFO | indicators_main | Saved linearreg_slope_signal → D:\trading\TradeX\indicators\talib\signals_csv\linearreg_slope_signal.csv
+2026-02-04 10:36:42,242 | INFO | indicators_main | Saved tsf_signal → D:\trading\TradeX\indicators\talib\signals_csv\tsf_signal.csv
+2026-02-04 10:36:42,378 | INFO | indicators_main | Saved ht_sine_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_sine_signal.csv
+2026-02-04 10:36:42,509 | INFO | indicators_main | Saved ht_trendmode_signal → D:\trading\TradeX\indicators\talib\signals_csv\ht_trendmode_signal.csv
+2026-02-04 10:36:42,630 | INFO | indicators_main | Saved candlestick_signal → D:\trading\TradeX\indicators\talib\signals_csv\candlestick_signal_cdldoji.csv
+2026-02-04 10:36:42,759 | INFO | indicators_main | Saved asin_signal → D:\trading\TradeX\indicators\talib\signals_csv\asin_signal.csv
+2026-02-04 10:36:42,891 | INFO | indicators_main | Saved ceil_signal → D:\trading\TradeX\indicators\talib\signals_csv\ceil_signal.csv
+2026-02-04 10:36:43,018 | INFO | indicators_main | Saved cosh_signal → D:\trading\TradeX\indicators\talib\signals_csv\cosh_signal.csv
+2026-02-04 10:36:43,154 | INFO | indicators_main | Saved log10_signal → D:\trading\TradeX\indicators\talib\signals_csv\log10_signal.csv
+2026-02-04 10:36:43,284 | INFO | indicators_main | Saved sinh_signal → D:\trading\TradeX\indicators\talib\signals_csv\sinh_signal.csv
+2026-02-04 10:36:43,430 | INFO | indicators_main | Saved tan_signal → D:\trading\TradeX\indicators\talib\signals_csv\tan_signal.csv
+2026-02-04 10:36:43,552 | INFO | indicators_main | Saved tanh_signal → D:\trading\TradeX\indicators\talib\signals_csv\tanh_signal.csv
+2026-02-04 10:36:43,552 | ERROR | indicators_main | Error computing max_signal: Cannot automatically provide argument 'close1' for max_signal
+2026-02-04 10:36:43,553 | ERROR | indicators_main | Error computing min_signal: Cannot automatically provide argument 'close1' for min_signal
+2026-02-04 10:36:43,675 | INFO | indicators_main | Saved minindex_signal → D:\trading\TradeX\indicators\talib\signals_csv\minindex_signal.csv
+2026-02-04 10:36:43,807 | INFO | indicators_main | Saved acos_signal → D:\trading\TradeX\indicators\talib\signals_csv\acos_signal.csv
+2026-02-04 10:36:43,936 | INFO | indicators_main | Saved atan_signal → D:\trading\TradeX\indicators\talib\signals_csv\atan_signal.csv
+2026-02-04 10:36:44,056 | INFO | indicators_main | Saved cos_signal → D:\trading\TradeX\indicators\talib\signals_csv\cos_signal.csv
+2026-02-04 10:36:44,175 | INFO | indicators_main | Saved exp_signal → D:\trading\TradeX\indicators\talib\signals_csv\exp_signal.csv
+2026-02-04 10:36:44,299 | INFO | indicators_main | Saved floor_signal → D:\trading\TradeX\indicators\talib\signals_csv\floor_signal.csv
+2026-02-04 10:36:44,423 | INFO | indicators_main | Saved ln_signal → D:\trading\TradeX\indicators\talib\signals_csv\ln_signal.csv
+2026-02-04 10:36:44,540 | INFO | indicators_main | Saved sin_signal → D:\trading\TradeX\indicators\talib\signals_csv\sin_signal.csv
+2026-02-04 10:36:44,657 | INFO | indicators_main | Saved sqrt_signal → D:\trading\TradeX\indicators\talib\signals_csv\sqrt_signal.csv
+2026-02-04 10:36:44,657 | ERROR | indicators_main | Error computing avgprice_signal: Cannot automatically provide argument 'open_' for avgprice_signal
+2026-02-04 10:36:44,779 | INFO | indicators_main | Saved medprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\medprice_signal.csv
+2026-02-04 10:36:44,899 | INFO | indicators_main | Saved typprice_signal → D:\trading\TradeX\indicators\talib\signals_csv\typprice_signal.csv
+2026-02-04 10:36:45,058 | INFO | indicators_main | Saved adx_signal → D:\trading\TradeX\indicators\talib\signals_csv\adx_signal.csv
+2026-02-04 10:36:45,176 | INFO | indicators_main | Saved rocp_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocp_signal.csv
+2026-02-04 10:36:45,301 | INFO | indicators_main | Saved rocr_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr_signal.csv
+2026-02-04 10:36:45,419 | INFO | indicators_main | Saved rocr100_signal → D:\trading\TradeX\indicators\talib\signals_csv\rocr100_signal.csv
+2026-02-04 10:36:45,557 | INFO | indicators_main | Saved stochrsi_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochrsi_signal.csv
+2026-02-04 10:36:45,684 | INFO | indicators_main | Saved t3_signal → D:\trading\TradeX\indicators\talib\signals_csv\t3_signal.csv
+2026-02-04 10:36:45,802 | INFO | indicators_main | Saved roc_signal → D:\trading\TradeX\indicators\talib\signals_csv\roc_signal.csv
+2026-02-04 10:36:45,925 | INFO | indicators_main | Saved stochf_signal → D:\trading\TradeX\indicators\talib\signals_csv\stochf_signal.csv
+2026-02-04 10:36:46,042 | INFO | indicators_main | Saved trix_signal → D:\trading\TradeX\indicators\talib\signals_csv\trix_signal.csv
+2026-02-04 10:36:46,043 | ERROR | indicators_main | Error computing sarext_signal: SAREXT() got an unexpected keyword argument 'accelerationinit'
+2026-02-04 10:36:46,163 | INFO | indicators_main | Saved dx_signal → D:\trading\TradeX\indicators\talib\signals_csv\dx_signal.csv
+2026-02-04 10:36:46,288 | INFO | indicators_main | Saved stoch_signal → D:\trading\TradeX\indicators\talib\signals_csv\stoch_signal.csv
+2026-02-04 10:36:48,161 | INFO | indicators_main | Final Balance: -1000
+2026-02-04 10:36:48,162 | INFO | indicators_main | PnL %: -67.18
+2026-02-04 10:36:48,170 | INFO | indicators_main | Results saved to ledger1.csv
+2026-02-04 10:36:57,155 | INFO | indicators_main | Final Balance: 495.73
+2026-02-04 10:36:57,156 | INFO | indicators_main | Total PnL %: -68.61
