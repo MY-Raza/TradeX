@@ -114,9 +114,6 @@ if df_1m.empty:
     logger.error("OHLCV data empty. Exiting.")
     raise SystemExit
 
-df_1m["timestamp"] = pd.to_datetime(df_1m["datetime"])
-df_1m.drop(columns=["datetime"], inplace=True)
-
 # ============================
 # Output directory
 # ============================
@@ -140,7 +137,7 @@ for timeframe in TIMEFRAMES:
     low = df_tf["low"].values
     close = df_tf["close"].values
     volume = df_tf["volume"].values
-    timestamps = df_tf["timestamp"]
+    timestamps = df_tf["datetime"]
 
     # ----------------------------
     # Run strategies for timeframe
@@ -171,13 +168,13 @@ for timeframe in TIMEFRAMES:
 
         # Strategy ID (timeframe-aware)
         strategy_id = generate_strategy_id(flags, timeframe=timeframe)
-
+        print(signals.head())
         # Save signals
         save_df_to_db(
             df=signals,
             schema="strategy_signals",
             table_name=strategy_id,
-            time_column="timestamp",
+            time_column="datetime",
             is_timeseries=True
         )
 

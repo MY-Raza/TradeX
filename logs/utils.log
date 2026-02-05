@@ -11426,3 +11426,26 @@ First 5 rows from data_binance.btc_1m:
 2026-02-05 13:14:01,453 | INFO | utils | Database engine initialized
 2026-02-05 13:18:26,945 | INFO | utils | Database engine initialized
 2026-02-05 13:20:35,929 | INFO | utils | Database engine initialized
+2026-02-05 14:23:58,233 | INFO | utils | Schema 'data_binance' ready
+2026-02-05 14:23:59,502 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-02-05 14:23:59,574 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-02-05 14:32:18,276 | INFO | utils | Database engine initialized
+2026-02-05 14:32:18,602 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-05 14:32:18,676 | INFO | utils | Indexes ensured: sig_1h_btc_1_timestamp_uidx, sig_1h_btc_1_timestamp_desc_idx
+2026-02-05 14:32:18,731 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_1"
+2026-02-05 14:32:25,975 | INFO | utils | Inserted 17573 rows into strategy_signals.sig_1h_btc_1
+2026-02-05 14:32:28,548 | INFO | utils | Schema 'strategy_identifier' ready
+2026-02-05 14:37:21,797 | INFO | utils | Inserted 1626260 rows into data_binance.btc_1m
+2026-02-05 14:40:09,877 | INFO | utils | Database engine initialized
+2026-02-05 14:40:10,063 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-05 14:46:30,829 | INFO | utils | Database engine initialized
+2026-02-05 14:46:31,355 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-05 14:46:33,199 | INFO | utils | Indexes ensured: sig_1h_btc_1_datetime_uidx, sig_1h_btc_1_datetime_desc_idx
+2026-02-05 14:46:33,737 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_1"
+2026-02-05 14:46:38,632 | INFO | utils | Inserted 17573 rows into strategy_signals.sig_1h_btc_1
+2026-02-05 14:48:48,812 | INFO | utils | Database engine initialized
+2026-02-05 14:48:48,895 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-05 14:48:48,919 | INFO | utils | Indexes ensured: sig_1h_btc_1_datetime_uidx, sig_1h_btc_1_datetime_desc_idx
+2026-02-05 14:48:48,921 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_1"
+2026-02-05 14:48:49,038 | INFO | utils | No new rows to insert
+2026-02-05 14:48:52,562 | INFO | utils | Schema 'strategy_identifier' ready

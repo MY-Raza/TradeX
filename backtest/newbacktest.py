@@ -75,13 +75,13 @@ class HighPerfBacktest:
         # ==========================
 
         # Ensure timestamps are datetime objects
-        df_price['timestamp'] = pd.to_datetime(df_price['timestamp'])
+        df_price['datetime'] = pd.to_datetime(df_price['datetime'])
 
         # Convert price DataFrame to NumPy array for performance
         self.np_price = df_price.to_numpy()
 
         # Cache column indices for fast access
-        self.idx_time = df_price.columns.get_loc('timestamp')
+        self.idx_time = df_price.columns.get_loc('datetime')
         self.idx_open = df_price.columns.get_loc('open')
         self.idx_high = df_price.columns.get_loc('high')
         self.idx_low = df_price.columns.get_loc('low')
@@ -95,13 +95,13 @@ class HighPerfBacktest:
         # ==========================
 
         # Ensure prediction timestamps are datetime objects
-        df_predictions['timestamp'] = pd.to_datetime(df_predictions['timestamp'])
+        df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'])
 
         # Convert predictions to NumPy for speed
         self.np_pred = df_predictions.to_numpy()
 
         # Cache prediction column indices
-        self.idx_pred_time = df_predictions.columns.get_loc('timestamp')
+        self.idx_pred_time = df_predictions.columns.get_loc('datetime')
         self.idx_pred_signal = df_predictions.columns.get_loc('signals')
 
         # Store prediction timestamps separately

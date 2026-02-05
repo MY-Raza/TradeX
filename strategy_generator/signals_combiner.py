@@ -87,4 +87,4 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
     else:
         final_signal = np.zeros(len(timestamps), dtype=np.int8)
 
-    return pd.DataFrame({"timestamp": timestamps, "signals": final_signal})
+    return pd.DataFrame({"datetime": timestamps, "signals": final_signal})

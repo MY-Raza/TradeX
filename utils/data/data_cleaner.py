@@ -131,22 +131,22 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     df = df.copy()
 
     # Ensure timestamp column exists
-    if "timestamp" not in df.columns:
-        if df.index.name == "timestamp":
-            df["timestamp"] = df.index
+    if "datetime" not in df.columns:
+        if df.index.name == "datetime":
+            df["datetime"] = df.index
             df = df.reset_index(drop=True)
         else:
             raise KeyError("No timestamp column or index found")
 
     # Convert to datetime
-    if not pd.api.types.is_datetime64_any_dtype(df["timestamp"]):
-        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+    if not pd.api.types.is_datetime64_any_dtype(df["datetime"]):
+        df["datetime"] = pd.to_datetime(df["datetime"], unit="ms", utc=True)
 
     # Ensure numeric
     cols = ["open", "high", "low", "close", "volume"]
     df[cols] = df[cols].astype(float)
 
-    df = df.sort_values("timestamp").drop_duplicates(subset=["timestamp"])
+    df = df.sort_values("datetime").drop_duplicates(subset=["datetime"])
 
     # Interval → pandas freq
     def to_pandas_freq(interval: str) -> str:
@@ -165,22 +165,22 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     # --------------------------------------------------
     # Find FIRST aligned boundary AFTER first timestamp
     # --------------------------------------------------
-    first_ts = df["timestamp"].iloc[0]
+    first_ts = df["datetime"].iloc[0]
     offset = pd.tseries.frequencies.to_offset(freq)
 
     floored = first_ts.floor(freq)
     start_boundary = floored if floored == first_ts else floored + offset
 
     # Drop partial leading candles
-    df = df[df["timestamp"] >= start_boundary]
+    df = df[df["datetime"] >= start_boundary]
     if df.empty:
-        return pd.DataFrame(columns=["timestamp", "open", "high", "low", "close", "volume"])
+        return pd.DataFrame(columns=["datetime", "open", "high", "low", "close", "volume"])
 
     # --------------------------------------------------
     # Resample using anchored origin
     # --------------------------------------------------
     resampled = (
-        df.set_index("timestamp")
+        df.set_index("datetime")
           .groupby(
               pd.Grouper(
                   freq=freq,
