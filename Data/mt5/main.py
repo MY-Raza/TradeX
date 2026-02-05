@@ -8,6 +8,7 @@ from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from TradeX.utils.db.utils import save_df_to_db, get_last_date, drop_schema,read_df_from_db
 from TradeX.utils.common.logs import get_logger
+import pandas as pd
 
 # =========================================
 # LOGGER INITIALIZATION
@@ -63,17 +64,20 @@ fetcher = MetaTrader5FutureFetcher(
 # =========================================
 for symbol in raw_symbols:
     # Check the last timestamp in DB to do incremental fetch
-    last_ts = get_last_date(f"{symbol}_1m", schema=SCHEMA, time_column="timestamp")
-    
-    if last_ts:
-        # Incremental fetch starts from the next minute after last record
-        start_date = datetime.fromtimestamp(last_ts / 1000) + timedelta(minutes=1)
-        logger.info(f"Incremental fetch for {symbol} from {start_date}")
+    last_stored_date = get_last_date(
+        table_name=f"{symbol.lower()}_1m",
+        schema=SCHEMA,
+        time_column="datetime"
+    )
+
+    if last_stored_date:
+        # last_stored_date is already pd.Timestamp (UTC)
+        start_date = (last_stored_date + pd.Timedelta(milliseconds=1)).strftime("%Y-%m-%d %H:%M:%S")
+        logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
     else:
-        # If no data exists, fetch from the config start_date
-        if isinstance(start_date, str):
-            start_date = datetime.fromisoformat(start_date)
-        logger.info(f"No existing data for {symbol}. Fetching from {start_date}")
+        # Use default start date from config
+        start_date = start_date
+        logger.info(f"No existing data found for {symbol}. Using start_date={start_date}")
     
     # Update fetcher start date
     fetcher.utc_from = start_date

@@ -6,7 +6,7 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.db.utils import save_df_to_db, drop_schema, get_last_date,read_df_from_db
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
-from datetime import datetime, timezone
+import pandas as pd
 
 # ---------------------------
 # Initialize logger
@@ -57,19 +57,19 @@ def main():
 
         # Check last stored timestamp in DB
         last_stored_date = get_last_date(
-            table_name=f"{symbol}_1m", 
-            schema=SCHEMA, 
-            time_column="timestamp"
-        )
+        table_name=f"{symbol.lower()}_1m",
+        schema=SCHEMA,
+        time_column="datetime"
+    )
 
-        if last_stored_date:
-            # If existing data exists, start fetching from last timestamp
-            last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
-            start_date = last_stored_date_dt.strftime("%Y-%m-%d %H:%M:%S")
-            logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
-        else:
-            # No data exists; use configured start_date
-            logger.info(f"No existing data found for {symbol}. Using start_date={start_date}")
+    if last_stored_date:
+        # last_stored_date is already pd.Timestamp (UTC)
+        start_date = (last_stored_date + pd.Timedelta(milliseconds=1)).strftime("%Y-%m-%d %H:%M:%S")
+        logger.info(f"Found existing data for {symbol}. Setting start_date={start_date}")
+    else:
+        # Use default start date from config
+        start_date = start_date
+        logger.info(f"No existing data found for {symbol}. Using start_date={start_date}")
             
         # Initialize Kraken fetcher for this symbol
         fetcher = KrakenFuturesFetcher(symbol=kraken_symbol, interval="1m")
@@ -85,7 +85,7 @@ def main():
                 df=df,
                 table_name=f"{symbol.lower()}_1m",
                 schema=SCHEMA,
-                time_column="timestamp",
+                time_column="datetime",
                 is_timeseries=True
             )
             logger.info(f"Successfully saved data for {kraken_symbol}. Rows: {len(df)}")
