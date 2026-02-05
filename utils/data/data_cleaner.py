@@ -182,11 +182,9 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
 
 #     return resampled
 
-import pandas as pd
-
 def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     """
-    Resample OHLCV dataframe to a higher timeframe.
+    Resample OHLCV dataframe to a higher timeframe with proper time alignment.
 
     Parameters
     ----------
@@ -194,12 +192,12 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
         Must contain columns: timestamp, open, high, low, close, volume
         timestamp can be datetime or numeric (ms)
     interval : str
-        Timeframe string like "1m", "5m", "15m", "1h"
+        Timeframe string like "1m", "5m", "15m", "1h", "1d"
 
     Returns
     -------
     pd.DataFrame
-        Resampled OHLCV dataframe
+        Resampled OHLCV dataframe with aligned candles
     """
 
     if df.empty:
@@ -221,12 +219,13 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     # Convert numeric timestamps to datetime
     # --------------------------------------------------
     if not pd.api.types.is_datetime64_any_dtype(df["timestamp"]):
-        df["timestamp"] = pd.to_datetime(df["timestamp"], unit='ms')
+        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
 
     # --------------------------------------------------
     # Ensure numeric OHLCV
     # --------------------------------------------------
-    df[["open", "high", "low", "close", "volume"]] = df[["open", "high", "low", "close", "volume"]].astype(float)
+    ohlcv_cols = ["open", "high", "low", "close", "volume"]
+    df[ohlcv_cols] = df[ohlcv_cols].astype(float)
 
     # --------------------------------------------------
     # Sort & deduplicate
@@ -234,20 +233,42 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     df = df.sort_values("timestamp").drop_duplicates(subset=["timestamp"])
 
     # --------------------------------------------------
-    # Helper: convert interval to pandas frequency
+    # Convert interval to pandas frequency
     # --------------------------------------------------
     def to_pandas_freq(interval: str) -> str:
         interval = interval.lower()
         if interval.endswith("m"):
-            return interval[:-1] + "T"  # 5m -> 5T
+            return interval[:-1] + "min"  # minutes
         elif interval.endswith("h"):
-            return interval[:-1] + "H"  # 1h -> 1H
+            return interval[:-1] + "h"  # hours
         elif interval.endswith("d"):
-            return interval[:-1] + "D"  # 1d -> 1D
+            return interval[:-1] + "d"  # days
         else:
             raise ValueError(f"Unsupported interval: {interval}")
 
     freq = to_pandas_freq(interval)
+
+    # --------------------------------------------------
+    # Align start time to NEXT valid candle boundary
+    # --------------------------------------------------
+    print("FIRST TIMESTAMP:", df["timestamp"].iloc[0])
+    print("SECOND TIMESTAMP:", df["timestamp"].iloc[1])
+    print("DIFF:", df["timestamp"].iloc[1] - df["timestamp"].iloc[0])
+
+    def align_start_time(ts: pd.Series, freq: str) -> pd.Timestamp:
+        first = ts.iloc[0]
+        floored = first.floor(freq)
+        if floored == first:
+            return first  # already aligned
+        return floored + pd.tseries.frequencies.to_offset(freq)
+
+    start_boundary = align_start_time(df["timestamp"], freq)
+
+    # Drop partial leading data
+    df = df[df["timestamp"] >= start_boundary]
+
+    if df.empty:
+        return pd.DataFrame(columns=["timestamp", "open", "high", "low", "close", "volume"])
 
     # --------------------------------------------------
     # Bucket timestamps
@@ -259,16 +280,17 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     # --------------------------------------------------
     resampled = (
         df.groupby("bucket", sort=True)
-          .agg(
-              open=("open", "first"),
-              high=("high", "max"),
-              low=("low", "min"),
-              close=("close", "last"),
-              volume=("volume", "sum")
-          )
-          .reset_index()
-          .rename(columns={"bucket": "timestamp"})
+        .agg(
+            open=("open", "first"),
+            high=("high", "max"),
+            low=("low", "min"),
+            close=("close", "last"),
+            volume=("volume", "sum"),
+        )
+        .reset_index()
+        .rename(columns={"bucket": "timestamp"})
     )
 
     return resampled
+
 

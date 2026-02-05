@@ -29,7 +29,7 @@ class HighPerfBacktest:
         fee=0.05,
         leverage=1.0,
         slippage=0.0,
-        max_delay_minutes=5
+        max_delay_minutes=1
     ):
         """
         Initialize the backtest with price data, predictions, and trading parameters.
