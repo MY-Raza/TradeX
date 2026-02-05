@@ -138,7 +138,7 @@ for timeframe in TIMEFRAMES:
     # Resample OHLCV
     # ----------------------------
     df_tf = resample_ohlcv(df_1m, timeframe)
-
+    print(df_tf.head(3))
     open_ = df_tf["open"].values
     high = df_tf["high"].values
     low = df_tf["low"].values

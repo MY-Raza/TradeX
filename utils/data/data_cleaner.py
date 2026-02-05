@@ -183,31 +183,12 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
 #     return resampled
 
 def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
-    """
-    Resample OHLCV dataframe to a higher timeframe with proper time alignment.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Must contain columns: timestamp, open, high, low, close, volume
-        timestamp can be datetime or numeric (ms)
-    interval : str
-        Timeframe string like "1m", "5m", "15m", "1h", "1d"
-
-    Returns
-    -------
-    pd.DataFrame
-        Resampled OHLCV dataframe with aligned candles
-    """
-
     if df.empty:
         return df.copy()
 
     df = df.copy()
 
-    # --------------------------------------------------
     # Ensure timestamp column exists
-    # --------------------------------------------------
     if "timestamp" not in df.columns:
         if df.index.name == "timestamp":
             df["timestamp"] = df.index
@@ -215,82 +196,69 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
         else:
             raise KeyError("No timestamp column or index found")
 
-    # --------------------------------------------------
-    # Convert numeric timestamps to datetime
-    # --------------------------------------------------
+    # Convert to datetime
     if not pd.api.types.is_datetime64_any_dtype(df["timestamp"]):
-        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
+        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
 
-    # --------------------------------------------------
-    # Ensure numeric OHLCV
-    # --------------------------------------------------
-    ohlcv_cols = ["open", "high", "low", "close", "volume"]
-    df[ohlcv_cols] = df[ohlcv_cols].astype(float)
+    # Ensure numeric
+    cols = ["open", "high", "low", "close", "volume"]
+    df[cols] = df[cols].astype(float)
 
-    # --------------------------------------------------
-    # Sort & deduplicate
-    # --------------------------------------------------
     df = df.sort_values("timestamp").drop_duplicates(subset=["timestamp"])
 
-    # --------------------------------------------------
-    # Convert interval to pandas frequency
-    # --------------------------------------------------
+    # Interval → pandas freq
     def to_pandas_freq(interval: str) -> str:
         interval = interval.lower()
         if interval.endswith("m"):
-            return interval[:-1] + "min"  # minutes
+            return interval[:-1] + "min"
         elif interval.endswith("h"):
-            return interval[:-1] + "h"  # hours
+            return interval[:-1] + "h"
         elif interval.endswith("d"):
-            return interval[:-1] + "d"  # days
+            return interval[:-1] + "d"
         else:
             raise ValueError(f"Unsupported interval: {interval}")
 
     freq = to_pandas_freq(interval)
 
     # --------------------------------------------------
-    # Align start time to NEXT valid candle boundary
+    # Find FIRST aligned boundary AFTER first timestamp
     # --------------------------------------------------
-    print("FIRST TIMESTAMP:", df["timestamp"].iloc[0])
-    print("SECOND TIMESTAMP:", df["timestamp"].iloc[1])
-    print("DIFF:", df["timestamp"].iloc[1] - df["timestamp"].iloc[0])
+    first_ts = df["timestamp"].iloc[0]
+    offset = pd.tseries.frequencies.to_offset(freq)
 
-    def align_start_time(ts: pd.Series, freq: str) -> pd.Timestamp:
-        first = ts.iloc[0]
-        floored = first.floor(freq)
-        if floored == first:
-            return first  # already aligned
-        return floored + pd.tseries.frequencies.to_offset(freq)
+    floored = first_ts.floor(freq)
+    start_boundary = floored if floored == first_ts else floored + offset
 
-    start_boundary = align_start_time(df["timestamp"], freq)
-
-    # Drop partial leading data
+    # Drop partial leading candles
     df = df[df["timestamp"] >= start_boundary]
-
     if df.empty:
         return pd.DataFrame(columns=["timestamp", "open", "high", "low", "close", "volume"])
 
     # --------------------------------------------------
-    # Bucket timestamps
-    # --------------------------------------------------
-    df["bucket"] = df["timestamp"].dt.floor(freq)
-
-    # --------------------------------------------------
-    # Aggregate OHLCV
+    # Resample using anchored origin
     # --------------------------------------------------
     resampled = (
-        df.groupby("bucket", sort=True)
-        .agg(
-            open=("open", "first"),
-            high=("high", "max"),
-            low=("low", "min"),
-            close=("close", "last"),
-            volume=("volume", "sum"),
-        )
-        .reset_index()
-        .rename(columns={"bucket": "timestamp"})
+        df.set_index("timestamp")
+          .groupby(
+              pd.Grouper(
+                  freq=freq,
+                  origin=start_boundary,
+                  label="left",
+                  closed="left"
+              )
+          )
+          .agg(
+              open=("open", "first"),
+              high=("high", "max"),
+              low=("low", "min"),
+              close=("close", "last"),
+              volume=("volume", "sum"),
+          )
+          .dropna(subset=["open"])  # remove empty buckets
+          .reset_index()
     )
 
     return resampled
+
 
 
