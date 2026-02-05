@@ -135,7 +135,7 @@ for timeframe in TIMEFRAMES:
     open_ = df_tf["open"].values
     high = df_tf["high"].values
     low = df_tf["low"].values
-    close = df_tf["close"].values
+    close_ = df_tf["close"].values
     volume = df_tf["volume"].values
     timestamps = df_tf["datetime"]
 
@@ -156,7 +156,7 @@ for timeframe in TIMEFRAMES:
             open_,
             high,
             low,
-            close,
+            close_,
             volume,
             timestamps,
             window=window
@@ -168,7 +168,6 @@ for timeframe in TIMEFRAMES:
 
         # Strategy ID (timeframe-aware)
         strategy_id = generate_strategy_id(flags, timeframe=timeframe)
-        print(signals.head())
         # Save signals
         save_df_to_db(
             df=signals,
@@ -206,7 +205,8 @@ for timeframe in TIMEFRAMES:
 
         # Save strategy metadata
         strategy_df = pd.DataFrame([flags])
-        strategy_df.insert(0, "window", window)
+        strategy_df.insert(0, "pnl_sum", total_pnl_percent)
+        strategy_df.insert(0, "window_length", window)
         strategy_df.insert(0, "timehorizon", timeframe)
         strategy_df.insert(0, "symbol", "btc")
         strategy_df.insert(0, "sl", "1")
@@ -216,9 +216,9 @@ for timeframe in TIMEFRAMES:
 
         save_df_to_db(
             df=strategy_df,
-            table_name="strategies",
-            schema="strategy_identifier",
-            time_column="strategy",
+            table_name="strategy_registry",
+            schema="strategies",
+            time_column=None,
             is_timeseries=False
         )
 

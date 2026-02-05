@@ -18,7 +18,7 @@ def randomize_indicators(all_indicators):
 # ============================
 # Compute active signals with voting
 # ============================
-def run_active_signals_with_voting(flags, open_, high, low, close, volume, timestamps, window=14):
+def run_active_signals_with_voting(flags, open_, high, low, close_, volume, timestamps, window=14):
     """
     Compute signals for all active indicators using ThreadPoolExecutor
     and combine them with majority voting.
@@ -33,13 +33,13 @@ def run_active_signals_with_voting(flags, open_, high, low, close, volume, times
         pd.DataFrame: timestamp + signals
     """
     signals_dict = {}
-    data = {"open": open_, "high": high, "low": low, "close": close, "volume": volume}
+    data = {"open": open_, "high": high, "low": low, "close": close_, "volume": volume}
 
     def compute_signal(name):
         try:
             # Candlestick patterns
             if name.startswith("CDL"):
-                sig, _ = candlestick_signal(open_, high, low, close, name)
+                sig, _ = candlestick_signal(open_, high, low, close_, name)
                 return name, sig.astype(np.int8)
 
             # Regular indicators

@@ -163,12 +163,13 @@ def save_df_to_db(
     df: pd.DataFrame,
     table_name: str,
     schema: str | None = None,
-    time_column: str = "datetime",
+    time_column: str | None = "datetime",
     is_timeseries: bool = True
 ):
     """
     Save a DataFrame to the database.
     Stores datetime column directly as TIMESTAMP WITH TIME ZONE.
+    Handles cases where time_column is None or not datetime.
     """
     if df.empty:
         logger.warning("Empty DataFrame, skipping insert")
@@ -179,25 +180,38 @@ def save_df_to_db(
     create_schema(schema)
     table = table_name
 
-    # Ensure datetime column dtype
-    if not pd.api.types.is_datetime64_any_dtype(df[time_column]):
-        df[time_column] = pd.to_datetime(df[time_column], utc=True)
+    # Handle time_column
+    if time_column is None:
+        if "datetime" in df.columns:
+            time_column = "datetime"
+            logger.info("time_column not provided, using 'datetime' by default")
+        else:
+            time_column = None  # No time column available
+            logger.info("No time_column provided and 'datetime' column missing, proceeding without time indexing")
 
-    # Deduplicate
-    df = df.drop_duplicates(subset=[time_column])
+    # Convert time_column to datetime if it exists
+    if time_column:
+        if time_column not in df.columns:
+            raise ValueError(f"time_column '{time_column}' not found in DataFrame")
+        if not pd.api.types.is_datetime64_any_dtype(df[time_column]):
+            df[time_column] = pd.to_datetime(df[time_column], utc=True)
+
+        # Deduplicate by time_column
+        df = df.drop_duplicates(subset=[time_column])
 
     # Create table if missing
     df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
 
-    # Ensure indexes & hypertable
-    ensure_unique_index(table, schema, time_column)
-    if is_timeseries:
-        ensure_hypertable(table, schema, time_column)
+    # Ensure indexes & hypertable if applicable
+    if time_column:
+        ensure_unique_index(table, schema, time_column)
+        if is_timeseries:
+            ensure_hypertable(table, schema, time_column)
 
-    # Filter already ingested rows (incremental ingestion)
-    last_dt = get_last_date(table, schema, time_column)
-    if last_dt:
-        df = df[df[time_column] > last_dt]
+        # Filter already ingested rows (incremental ingestion)
+        last_dt = get_last_date(table, schema, time_column)
+        if last_dt:
+            df = df[df[time_column] > last_dt]
 
     if df.empty:
         logger.info("No new rows to insert")
@@ -206,15 +220,18 @@ def save_df_to_db(
     # Insert safely
     cols = ",".join(df.columns)
     placeholders = ",".join([f":{c}" for c in df.columns])
+    conflict_clause = f"ON CONFLICT ({time_column}) DO NOTHING" if time_column else ""
     insert_sql = text(f"""
         INSERT INTO {schema}.{table} ({cols})
         VALUES ({placeholders})
-        ON CONFLICT ({time_column}) DO NOTHING
+        {conflict_clause}
     """)
+
     with engine.begin() as conn:
         conn.execute(insert_sql, df.to_dict(orient="records"))
 
     logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
+
 
 
 # =====================================================
