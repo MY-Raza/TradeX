@@ -1,25 +1,11 @@
-@echo off
-REM =====================================
-REM Activate Conda environment
-REM =====================================
-CALL C:\Users\Raza\miniconda3\Scripts\activate.bat tradex_env
+set CONDAPATH=%CONDAPATH%
+set ENVNAME=tradex_env
 
-REM =====================================
-REM Move to project directory
-REM =====================================
-cd /d D:\trading\TradeX
+if %ENVNAME%==base (set ENVPATH=%CONDAPATH%) else (set ENVPATH=%CONDAPATH%\envs\%ENVNAME%)
 
-REM =====================================
-REM Infinite loop
-REM =====================================
-:loop
-echo =====================================
-echo Running main.py at %DATE% %TIME%
-echo =====================================
+call %CONDAPATH%\Scripts\activate.bat %ENVPATH%
 
+cd /d "%~dp0"
 python main.py
 
-echo Waiting 60 seconds before next run...
-timeout /t 60 /nobreak
-
-goto loop
+@pause

@@ -393,11 +393,12 @@ class HighPerfBacktest:
             open_price = np_interval[0, self.idx_open]
 
             # Handle direction changes
+            pred_time = self.np_pred[i, self.idx_pred_time]
             if self.in_position and current_pred_signal != self.last_signal:
-                self.sell(np_interval[0, self.idx_time], open_price, 'direction_change')
-                self.buy(np_interval, current_pred_signal)
+                self.sell(pred_time, open_price, 'direction_change')
+                self.buy(np_interval, current_pred_signal, timestamp=pred_time)
             elif not self.in_position:
-                self.buy(np_interval, current_pred_signal)
+                self.buy(np_interval, current_pred_signal, timestamp=pred_time)
 
             # Update last signal
             self.last_signal = current_pred_signal
