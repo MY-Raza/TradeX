@@ -11537,3 +11537,7 @@ LINE 3:                    '"strategy_signals"."sig_1h_btc_5"'::regc...
 2026-02-05 15:43:07,433 | INFO | utils | Schema 'strategies' ready
 2026-02-05 15:43:07,434 | INFO | utils | No time_column provided and 'datetime' column missing, proceeding without time indexing
 2026-02-05 15:43:07,512 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-05 15:44:07,956 | INFO | utils | Schema 'data_binance' ready
+2026-02-05 15:44:08,632 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-02-05 15:44:08,654 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-02-05 16:06:25,994 | INFO | utils | Inserted 1626337 rows into data_binance.eth_1m

@@ -1595,3 +1595,54 @@
 2026-02-05 15:40:27,895 | WARNING | signals_combiner | No signal function found for PLUS_DM
 2026-02-05 15:40:27,927 | WARNING | signals_combiner | Error calling AVGPRICE: avgprice_signal() missing 1 required positional argument: 'close'
 2026-02-05 15:40:28,164 | WARNING | signals_combiner | No signal function found for BETA
+2026-02-05 17:32:59,129 | WARNING | signals_combiner | Error calling BBANDS: not enough values to unpack (expected 4, got 2)
+2026-02-05 17:32:59,137 | WARNING | signals_combiner | Error calling HT_TRENDLINE: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,141 | WARNING | signals_combiner | Error calling SAR: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,155 | WARNING | signals_combiner | Error calling BOP: bop_signal() missing 2 required positional arguments: 'low' and 'close_'
+2026-02-05 17:32:59,156 | WARNING | signals_combiner | Error calling APO: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,159 | WARNING | signals_combiner | Error calling AROONOSC: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,160 | WARNING | signals_combiner | Error calling ATR: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,162 | WARNING | signals_combiner | Error calling AD: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,162 | WARNING | signals_combiner | Error calling ADOSC: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,163 | WARNING | signals_combiner | Error calling TRANGE: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,175 | WARNING | signals_combiner | Error calling HT_SINE: '>' not supported between instances of 'tuple' and 'NoneType'
+2026-02-05 17:32:59,177 | WARNING | signals_combiner | Error calling ACOS: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,180 | WARNING | signals_combiner | Error calling EXP: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,180 | WARNING | signals_combiner | Error calling FLOOR: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,184 | WARNING | signals_combiner | Error calling SQRT: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-05 17:32:59,185 | WARNING | signals_combiner | Error calling CDL3BLACKCROWS: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,186 | WARNING | signals_combiner | Error calling CDL3OUTSIDE: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,188 | WARNING | signals_combiner | Error calling CDL3STARSINSOUTH: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,189 | WARNING | signals_combiner | Error calling CDL3WHITESOLDIERS: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,189 | WARNING | signals_combiner | Error calling CDLABANDONEDBABY: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,190 | WARNING | signals_combiner | Error calling CDLADVANCEBLOCK: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,191 | WARNING | signals_combiner | Error calling CDLBELTHOLD: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,193 | WARNING | signals_combiner | Error calling CDLCOUNTERATTACK: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,193 | WARNING | signals_combiner | Error calling CDLDOJI: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,194 | WARNING | signals_combiner | Error calling CDLDOJISTAR: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,195 | WARNING | signals_combiner | Error calling CDLDRAGONFLYDOJI: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,195 | WARNING | signals_combiner | Error calling CDLENGULFING: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,196 | WARNING | signals_combiner | Error calling CDLEVENINGSTAR: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,197 | WARNING | signals_combiner | Error calling CDLGRAVESTONEDOJI: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,197 | WARNING | signals_combiner | Error calling CDLHAMMER: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,198 | WARNING | signals_combiner | Error calling CDLHARAMICROSS: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,200 | WARNING | signals_combiner | Error calling CDLHIGHWAVE: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,201 | WARNING | signals_combiner | Error calling CDLHIKKAKE: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,202 | WARNING | signals_combiner | Error calling CDLHOMINGPIGEON: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,203 | WARNING | signals_combiner | Error calling CDLIDENTICAL3CROWS: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,204 | WARNING | signals_combiner | Error calling CDLKICKING: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,205 | WARNING | signals_combiner | Error calling CDLKICKINGBYLENGTH: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,205 | WARNING | signals_combiner | Error calling CDLLADDERBOTTOM: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,206 | WARNING | signals_combiner | Error calling CDLLONGLINE: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,207 | WARNING | signals_combiner | Error calling CDLMATHOLD: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,208 | WARNING | signals_combiner | Error calling CDLMORNINGDOJISTAR: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,209 | WARNING | signals_combiner | Error calling CDLMORNINGSTAR: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,210 | WARNING | signals_combiner | Error calling CDLPIERCING: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,210 | WARNING | signals_combiner | Error calling CDLRISEFALL3METHODS: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,211 | WARNING | signals_combiner | Error calling CDLSEPARATINGLINES: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,212 | WARNING | signals_combiner | Error calling CDLSPINNINGTOP: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,213 | WARNING | signals_combiner | Error calling CDLTAKURI: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,213 | WARNING | signals_combiner | Error calling CDLTHRUSTING: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,214 | WARNING | signals_combiner | Error calling CDLTRISTAR: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,214 | WARNING | signals_combiner | Error calling CDLUNIQUE3RIVER: '>' not supported between instances of 'tuple' and 'int'
+2026-02-05 17:32:59,215 | WARNING | signals_combiner | Error calling CDLUPSIDEGAP2CROWS: '>' not supported between instances of 'tuple' and 'int'

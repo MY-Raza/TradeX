@@ -36,11 +36,11 @@ ALL_INDICATORS = (
     # -------------------------
     "ADX", "ADXR", "APO", "AROON", "AROONOSC",
     "BOP", "CCI", "CMO", "DX", "MACD",
-    "MACDEXT", "MACDFIX", "MFI", "MINUS_DI",
+    "MACDEXT", "MFI", "MINUS_DI",
     "MINUS_DM", "MOM", "PLUS_DI", "PLUS_DM",
     "PPO", "ROC", "ROCP", "ROCR", "ROCR100",
     "RSI", "STOCH", "STOCHF", "STOCHRSI",
-    "TRIX", "ULTOSC", "WILLR",
+    "TRIX", "WILLR",
     # -------------------------
     # Volume Indicators
     # -------------------------
@@ -61,7 +61,7 @@ ALL_INDICATORS = (
     # -------------------------
     # Statistic Indicators
     # -------------------------
-    "BETA", "CORREL", "LINEARREG", "LINEARREG_ANGLE",
+    "LINEARREG", "LINEARREG_ANGLE",
     "LINEARREG_INTERCEPT", "LINEARREG_SLOPE",
     "STDDEV", "TSF", "VAR",
     # -------------------------
@@ -148,10 +148,8 @@ for timeframe in TIMEFRAMES:
         # Random indicators
         flags = randomize_indicators(ALL_INDICATORS)
 
-        window = np.random.choice([7, 14, 21, 28])
-
         # Generate signals
-        signals = run_active_signals_with_voting(
+        signals, windows_dict = run_active_signals_with_voting(
             flags,
             open_,
             high,
@@ -159,7 +157,6 @@ for timeframe in TIMEFRAMES:
             close_,
             volume,
             timestamps,
-            window=window
         )
 
         if signals.empty:
@@ -203,16 +200,18 @@ for timeframe in TIMEFRAMES:
             index=False
         )
 
-        # Save strategy metadata
         strategy_df = pd.DataFrame([flags])
         strategy_df.insert(0, "pnl_sum", total_pnl_percent)
-        strategy_df.insert(0, "window_length", window)
         strategy_df.insert(0, "timehorizon", timeframe)
         strategy_df.insert(0, "symbol", "btc")
         strategy_df.insert(0, "sl", "1")
         strategy_df.insert(0, "tp", "3")
         strategy_df.insert(0, "strategy", strategy_id)
         strategy_df.columns = strategy_df.columns.str.lower()
+
+        # Add windows_dict as new columns
+        for key, value in windows_dict.items():
+            strategy_df[key] = value
 
         save_df_to_db(
             df=strategy_df,
