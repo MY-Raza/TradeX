@@ -136,20 +136,27 @@ def ensure_hypertable(table, schema, time_column):
 # =====================================================
 # Core DB Operations
 # =====================================================
-def get_last_date(table_name: str, schema: str, time_column: str) -> int | None:
+def get_last_date(table_name: str, schema: str, time_column: str) -> pd.Timestamp | None:
+    """
+    Get the last datetime stored in the table.
+    Returns pd.Timestamp in UTC.
+    """
     engine = get_engine()
     inspector = inspect(engine)
     if not inspector.has_table(table_name, schema=schema):
         return None
 
     query = f"""
-        SELECT {time_column}
+        SELECT {time_column} AT TIME ZONE 'UTC' AS last_dt
         FROM {schema}.{table_name}
         ORDER BY {time_column} DESC
         LIMIT 1
     """
     with engine.begin() as conn:
-        return conn.execute(text(query)).scalar()
+        result = conn.execute(text(query)).scalar()
+        if result:
+            return pd.to_datetime(result, utc=True)
+        return None
 
 
 def save_df_to_db(
@@ -160,7 +167,8 @@ def save_df_to_db(
     is_timeseries: bool = True
 ):
     """
-    Save a DataFrame to the database. Converts 'datetime' to integer Unix ms.
+    Save a DataFrame to the database.
+    Stores datetime column directly as TIMESTAMP WITH TIME ZONE.
     """
     if df.empty:
         logger.warning("Empty DataFrame, skipping insert")
@@ -171,9 +179,9 @@ def save_df_to_db(
     create_schema(schema)
     table = table_name
 
-    # Convert datetime -> timestamp (Unix ms) for DB storage
-    if pd.api.types.is_datetime64_any_dtype(df[time_column]):
-        df[time_column] = (df[time_column].astype("int64") // 1_000_000)
+    # Ensure datetime column dtype
+    if not pd.api.types.is_datetime64_any_dtype(df[time_column]):
+        df[time_column] = pd.to_datetime(df[time_column], utc=True)
 
     # Deduplicate
     df = df.drop_duplicates(subset=[time_column])
@@ -186,10 +194,10 @@ def save_df_to_db(
     if is_timeseries:
         ensure_hypertable(table, schema, time_column)
 
-    # Filter already ingested rows
-    last_ts = get_last_date(table, schema, time_column)
-    if last_ts:
-        df = df[df[time_column] > last_ts]
+    # Filter already ingested rows (incremental ingestion)
+    last_dt = get_last_date(table, schema, time_column)
+    if last_dt:
+        df = df[df[time_column] > last_dt]
 
     if df.empty:
         logger.info("No new rows to insert")
@@ -256,27 +264,18 @@ def fetch_ohlcv_df(
     table_name: str,
     schema: str,
     time_column: str = "datetime",
-    limit: int | None = None,
-    as_datetime: bool = True
+    limit: int | None = None
 ) -> pd.DataFrame:
     """
-    Fetch OHLCV data from DB.
-
-    Converts stored Unix timestamp to datetime automatically.
+    Fetch OHLCV data from DB with datetime column directly.
     """
     df = read_df_from_db(table_name, schema, limit)
     if df.empty:
         return df
 
-    # Ensure integer for filtering/sorting
-    if time_column in df.columns and pd.api.types.is_datetime64_any_dtype(df[time_column]):
-        df[time_column] = (df[time_column].view("int64") // 1_000_000)
+    # Ensure datetime dtype
+    if time_column in df.columns:
+        df[time_column] = pd.to_datetime(df[time_column], utc=True)
 
     df = df.sort_values(time_column)
-
-    # Convert to datetime column
-    if as_datetime:
-        df[time_column] = pd.to_datetime(df[time_column], unit="ms", utc=True)
-        df = df.rename(columns={time_column: "datetime"})
-
     return df
