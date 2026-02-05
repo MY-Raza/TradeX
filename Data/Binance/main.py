@@ -36,7 +36,7 @@ for symbol in symbols:
         schema=SCHEMA,
         time_column="datetime"
     )
-
+    print(last_stored_date)
     if last_stored_date:
         # last_stored_date is already pd.Timestamp (UTC)
         start_date = (last_stored_date + pd.Timedelta(milliseconds=1)).strftime("%Y-%m-%d %H:%M:%S")
