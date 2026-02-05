@@ -26,15 +26,6 @@ USER_SCHEMA: str | None = None
 # Database Engine
 # =====================================================
 def get_engine(db_url: str | None = None):
-    """
-    Create and return a singleton SQLAlchemy engine.
-
-    Args:
-        db_url (str | None): Optional database URL; defaults to DATABASE_URL in .env.
-
-    Returns:
-        sqlalchemy.Engine: Engine object for DB operations.
-    """
     global _ENGINE
 
     if _ENGINE:
@@ -53,15 +44,6 @@ def get_engine(db_url: str | None = None):
 # Schema Utilities
 # =====================================================
 def ensure_schema(schema: str | None) -> str:
-    """
-    Ensure a schema is defined. If not, prompt the user.
-
-    Args:
-        schema (str | None): Optional schema name.
-
-    Returns:
-        str: Valid schema name.
-    """
     global USER_SCHEMA
 
     if schema:
@@ -80,12 +62,6 @@ def ensure_schema(schema: str | None) -> str:
 
 
 def create_schema(schema: str | None = None):
-    """
-    Create a database schema if it does not exist.
-
-    Args:
-        schema (str | None): Optional schema name.
-    """
     engine = get_engine()
     schema = ensure_schema(schema)
 
@@ -96,12 +72,6 @@ def create_schema(schema: str | None = None):
 
 
 def drop_schema(schema: str | None = None):
-    """
-    Drop a database schema after user confirmation.
-
-    Args:
-        schema (str | None): Optional schema name.
-    """
     engine = get_engine()
     schema = ensure_schema(schema)
 
@@ -120,15 +90,6 @@ def drop_schema(schema: str | None = None):
 # Table Repair Helpers
 # =====================================================
 def ensure_unique_index(table_name: str, schema: str, time_column: str):
-    """
-    Ensure a UNIQUE index exists on a table for the time column.
-    Handles older tables or hypertables safely.
-
-    Args:
-        table_name (str): Table name.
-        schema (str): Schema name.
-        time_column (str): Timestamp column name.
-    """
     engine = get_engine()
     index_name = f"{table_name}_{time_column}_uidx"
     desc_index = f"{table_name}_{time_column}_desc_idx"
@@ -138,8 +99,6 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
             CREATE UNIQUE INDEX IF NOT EXISTS {index_name}
             ON {schema}.{table_name} ({time_column});
         """))
-
-        # For fast "last row" queries
         conn.execute(text(f"""
             CREATE INDEX IF NOT EXISTS {desc_index}
             ON {schema}.{table_name} ({time_column} DESC);
@@ -147,55 +106,37 @@ def ensure_unique_index(table_name: str, schema: str, time_column: str):
 
     logger.info(f"Indexes ensured: {index_name}, {desc_index}")
 
+
 def ensure_hypertable(table, schema, time_column):
     full_table_name = f'"{schema}"."{table}"'
-    time_col_sql = f'{time_column}'
-    
     engine = get_engine()
-    
+
     try:
         with engine.begin() as conn:
-            # First, ensure TimescaleDB extension is installed
+            # Ensure TimescaleDB extension is installed
             conn.execute(text("CREATE EXTENSION IF NOT EXISTS timescaledb;"))
-            
-            # Then create the hypertable
+
+            # Create hypertable if not exists
             query = text(f"""
                 SELECT create_hypertable(
                    '{full_table_name}'::regclass,
-                    '{time_col_sql}'::name,
-                    migrate_data => :migrate,
-                    if_not_exists => :if_not_exists
+                   '{time_column}'::name,
+                   migrate_data => :migrate,
+                   if_not_exists => :if_not_exists
                 );
             """)
-            
-            params = {
-                "migrate": True,
-                "if_not_exists": True
-            }
-            
+            params = {"migrate": True, "if_not_exists": True}
             conn.execute(query, params)
-            print(f"Hypertable created/verified for {full_table_name}")
-            
-    except Exception as e:
-        print(f"Hypertable check for {full_table_name} failed: {e}")
+            logger.info(f"Hypertable created/verified for {full_table_name}")
 
+    except Exception as e:
+        logger.warning(f"Hypertable check for {full_table_name} failed: {e}")
 
 
 # =====================================================
 # Core DB Operations
 # =====================================================
 def get_last_date(table_name: str, schema: str, time_column: str) -> int | None:
-    """
-    Get the last timestamp in a table.
-
-    Args:
-        table_name (str): Table name.
-        schema (str): Schema name.
-        time_column (str): Timestamp column name.
-
-    Returns:
-        int | None: Last timestamp (ms) or None if table doesn't exist.
-    """
     engine = get_engine()
     inspector = inspect(engine)
     if not inspector.has_table(table_name, schema=schema):
@@ -215,26 +156,11 @@ def save_df_to_db(
     df: pd.DataFrame,
     table_name: str,
     schema: str | None = None,
-    time_column: str = "timestamp",
+    time_column: str = "datetime",
     is_timeseries: bool = True
 ):
     """
-    Save a DataFrame to the database safely.
-
-    Steps:
-        1. Deduplicate batch.
-        2. Create table if missing.
-        3. Ensure unique index.
-        4. Convert to hypertable if needed.
-        5. Filter already ingested rows.
-        6. Insert remaining rows safely.
-
-    Args:
-        df (pd.DataFrame): DataFrame to insert.
-        table_name (str): Table name.
-        schema (str | None): Schema name.
-        time_column (str): Timestamp column name.
-        is_timeseries (bool): Convert table to Timescale hypertable if True.
+    Save a DataFrame to the database. Converts 'datetime' to integer Unix ms.
     """
     if df.empty:
         logger.warning("Empty DataFrame, skipping insert")
@@ -243,25 +169,24 @@ def save_df_to_db(
     engine = get_engine()
     schema = ensure_schema(schema)
     create_schema(schema)
-
     table = table_name
 
-    # 1. Deduplicate
+    # Convert datetime -> timestamp (Unix ms) for DB storage
+    if pd.api.types.is_datetime64_any_dtype(df[time_column]):
+        df[time_column] = (df[time_column].astype("int64") // 1_000_000)
+
+    # Deduplicate
     df = df.drop_duplicates(subset=[time_column])
 
-    # 2. Create table if missing
-    df.head(0).to_sql(
-        table, engine, 
-        schema=schema, 
-        if_exists="append", 
-        index=False)
+    # Create table if missing
+    df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
 
-    # 3. Self-heal
+    # Ensure indexes & hypertable
     ensure_unique_index(table, schema, time_column)
     if is_timeseries:
         ensure_hypertable(table, schema, time_column)
 
-    # 4. Filter already ingested rows
+    # Filter already ingested rows
     last_ts = get_last_date(table, schema, time_column)
     if last_ts:
         df = df[df[time_column] > last_ts]
@@ -270,7 +195,7 @@ def save_df_to_db(
         logger.info("No new rows to insert")
         return
 
-    # 5. Safe insert with ON CONFLICT DO NOTHING
+    # Insert safely
     cols = ",".join(df.columns)
     placeholders = ",".join([f":{c}" for c in df.columns])
     insert_sql = text(f"""
@@ -278,7 +203,6 @@ def save_df_to_db(
         VALUES ({placeholders})
         ON CONFLICT ({time_column}) DO NOTHING
     """)
-
     with engine.begin() as conn:
         conn.execute(insert_sql, df.to_dict(orient="records"))
 
@@ -289,17 +213,6 @@ def save_df_to_db(
 # Read Helpers
 # =====================================================
 def read_df_from_db(table_name: str, schema: str | None = None, limit: int | None = None) -> pd.DataFrame:
-    """
-    Read data from a table and log last 5 rows.
-
-    Args:
-        table_name (str): Table name.
-        schema (str | None): Schema name.
-        limit (int | None): Limit number of rows to fetch.
-
-    Returns:
-        pd.DataFrame: Retrieved rows.
-    """
     engine = get_engine()
     schema = ensure_schema(schema)
     table = table_name
@@ -309,10 +222,8 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
         query += f" LIMIT {limit}"
 
     df = pd.read_sql_query(query, engine)
-
     if not df.empty:
-        logger.info(f"\nFirst 5 rows from {schema}.{table}:\n")
-        logger.info(df.tail(5))
+        logger.info(f"\nLast 5 rows from {schema}.{table}:\n{df.tail(5)}")
     else:
         logger.info(f"No data found in {schema}.{table}")
 
@@ -323,13 +234,6 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
 # Drop Helpers
 # =====================================================
 def drop_table(table_name: str, schema: str | None = None):
-    """
-    Drop a table after user confirmation.
-
-    Args:
-        table_name (str): Table name.
-        schema (str | None): Schema name.
-    """
     engine = get_engine()
     schema = ensure_schema(schema)
     table = f"{table_name}_1h"
@@ -344,23 +248,35 @@ def drop_table(table_name: str, schema: str | None = None):
 
     logger.warning(f"Table {schema}.{table} dropped")
 
+
+# =====================================================
+# OHLCV Fetch Helper (returns datetime column)
+# =====================================================
 def fetch_ohlcv_df(
     table_name: str,
     schema: str,
-    time_column: str = "timestamp",
+    time_column: str = "datetime",
     limit: int | None = None,
+    as_datetime: bool = True
 ) -> pd.DataFrame:
     """
-    Fetch OHLCV data with UNIX timestamp column (int64).
+    Fetch OHLCV data from DB.
+
+    Converts stored Unix timestamp to datetime automatically.
     """
     df = read_df_from_db(table_name, schema, limit)
-
     if df.empty:
         return df
 
-    # Ensure correct dtype
-    df[time_column] = df[time_column].astype("int64")
+    # Ensure integer for filtering/sorting
+    if time_column in df.columns and pd.api.types.is_datetime64_any_dtype(df[time_column]):
+        df[time_column] = (df[time_column].view("int64") // 1_000_000)
 
-    # Sort but DO NOT set index
     df = df.sort_values(time_column)
+
+    # Convert to datetime column
+    if as_datetime:
+        df[time_column] = pd.to_datetime(df[time_column], unit="ms", utc=True)
+        df = df.rename(columns={time_column: "datetime"})
+
     return df

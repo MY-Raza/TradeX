@@ -180,4 +180,5 @@ class BinanceFuturesFetcher:
                 "taker_buy_base_volume", "taker_buy_quote_volume", "ignore"
             ]
         )
+        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
         return df

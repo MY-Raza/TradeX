@@ -42,7 +42,7 @@ end_date = config["end_date"]
 # -------------------------------------------------
 for symbol in symbols:
     logger.info(f"Starting data pipeline for symbol: {symbol}")
-    last_stored_date = get_last_date(table_name=f"{symbol}_1m", schema=SCHEMA, time_column="timestamp")
+    last_stored_date = get_last_date(table_name=f"{symbol}_1m", schema=SCHEMA, time_column="datetime")
 
     if last_stored_date:
           last_stored_date_dt = datetime.fromtimestamp(last_stored_date / 1000, tz=timezone.utc)
@@ -89,7 +89,7 @@ for symbol in symbols:
         df=df,
         table_name=f"{symbol.lower()}_1m",
         schema=SCHEMA,
-        time_column="timestamp",
+        time_column="datetime",
         is_timeseries=True
     )
 
