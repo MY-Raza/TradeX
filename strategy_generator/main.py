@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np 
 
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
@@ -69,11 +70,6 @@ ALL_INDICATORS = (
     "ACOS", "ASIN", "ATAN", "CEIL", "COS", "COSH",
     "EXP", "FLOOR", "LN", "LOG10", "SIN", "SINH",
     "SQRT", "TAN", "TANH",
-    # -------------------------
-    # Math Operators
-    # -------------------------
-    "ADD", "DIV", "MAX", "MAXINDEX", "MIN",
-    "MININDEX", "MULT", "SUB", "SUM",
     # ---------------------------
     # CANDLESTICK PATTERN 
     # --------------------------
@@ -155,6 +151,8 @@ for timeframe in TIMEFRAMES:
         # Random indicators
         flags = randomize_indicators(ALL_INDICATORS)
 
+        window = np.random.choice([7, 14, 21, 28])
+
         # Generate signals
         signals = run_active_signals_with_voting(
             flags,
@@ -163,7 +161,8 @@ for timeframe in TIMEFRAMES:
             low,
             close,
             volume,
-            timestamps
+            timestamps,
+            window=window
         )
 
         if signals.empty:
@@ -210,6 +209,7 @@ for timeframe in TIMEFRAMES:
 
         # Save strategy metadata
         strategy_df = pd.DataFrame([flags])
+        strategy_df.insert(0, "window", window)
         strategy_df.insert(0, "timehorizon", timeframe)
         strategy_df.insert(0, "symbol", "btc")
         strategy_df.insert(0, "sl", "1")
@@ -219,7 +219,7 @@ for timeframe in TIMEFRAMES:
 
         save_df_to_db(
             df=strategy_df,
-            table_name="strategy_registry",
+            table_name="strategies",
             schema="strategy_identifier",
             time_column="strategy",
             is_timeseries=False

@@ -93,7 +93,7 @@ ALL_INDICATORS = (
 # UNIVERSAL INDICATOR CALLER
 # ============================================================
 
-def call_indicator(name: str, *args, **kwargs):
+def call_indicator(name: str, *args, window=None, **kwargs):
     """
     Dynamically call any TA-Lib indicator or candlestick pattern.
 
@@ -103,6 +103,8 @@ def call_indicator(name: str, *args, **kwargs):
         TA-Lib function name (e.g., 'RSI', 'MACD', 'CDLENGULFING')
     *args :
         Positional inputs (price arrays)
+    window : int, optional
+        Time period or window to override the default
     **kwargs :
         Indicator parameters (timeperiod, fastperiod, etc.)
 
@@ -110,8 +112,16 @@ def call_indicator(name: str, *args, **kwargs):
     -------
     numpy.ndarray or tuple
     """
+    if window is not None:
+        # Override 'timeperiod' or 'period' if the indicator accepts them
+        if 'timeperiod' in kwargs:
+            kwargs['timeperiod'] = window
+        elif 'period' in kwargs:
+            kwargs['period'] = window
+
     if not hasattr(talib, name):
         raise ValueError(f"Indicator '{name}' not found in TA-Lib")
-
+    
     func = getattr(talib, name)
     return func(*args, **kwargs)
+
