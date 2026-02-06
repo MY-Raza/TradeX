@@ -181,31 +181,22 @@ def sar_signal(high, low, close, acceleration=0.02, maximum=0.2):
 # =========================================================
 
 def macd_signal(close):
-    result = call_indicator("MACD", close)
-    
-    # Normalize outputs
-    if isinstance(result, tuple):
-        if len(result) == 3:
-            macd, signal_line, _ = result
-        elif len(result) == 2:
-            macd, signal_line = result
-        else:
-            raise ValueError("Unexpected MACD output length")
-    else:
-        raise ValueError("MACD did not return a tuple")
+    values, window = call_indicator("MACD", close)
 
-    # Flatten and align to close length
+    # MACD always returns 3 arrays
+    macd, signal_line, hist = values
+
+    close = np.ravel(close)
     macd = np.ravel(macd)[:len(close)]
     signal_line = np.ravel(signal_line)[:len(close)]
-    
-    # Initialize signals
+
     signals = np.zeros_like(close, dtype=np.int8)
-    signals[crossover(macd, signal_line)[:len(close)]] = 1
-    signals[crossunder(macd, signal_line)[:len(close)]] = -1
+    signals[crossover(macd, signal_line)] = 1
+    signals[crossunder(macd, signal_line)] = -1
 
-    window = len(macd)
+    # window should be the MACD parameters, not data length
+    # example: (12, 26, 9)
     return signals, window
-
 
 
 
@@ -334,8 +325,22 @@ def adosc_signal(high, low, close, volume, fastperiod=3, slowperiod=10):
         "ADOSC", high, low, close, volume,
         fastperiod=fastperiod, slowperiod=slowperiod
     )
+
+    # 🔹 CLEAN WINDOW — keep only fast & slow periods
+    if isinstance(window, (list, tuple)):
+        # Remove None, "null", 0 or anything invalid
+        window = [w for w in window if isinstance(w, (int, float)) and w > 0]
+
+        # ADOSC should ONLY have 2 values
+        window = window[:2]
+
+    else:
+        window = [fastperiod, slowperiod]
+
     signal = np.where(adosc > 0, 1, np.where(adosc < 0, -1, 0))
+
     return signal, window
+
 
 def atr_signal(high, low, close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("ATR", 14)

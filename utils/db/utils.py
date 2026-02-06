@@ -206,6 +206,7 @@ def save_df_to_db(
 
     # Dynamically add missing columns ONLY for strategies.strategy_registry
     if schema == "strategies" and table == "strategy_registry":
+        df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
         inspector = inspect(engine)
         existing_cols = [col["name"] for col in inspector.get_columns(table, schema=schema)]
 

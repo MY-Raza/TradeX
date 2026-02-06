@@ -198,9 +198,8 @@ for timeframe in TIMEFRAMES:
             os.path.join(SIGNALS_FOLDER, f"{strategy_id}_ledger.csv"),
             index=False
         )
-
-        strategy_df = pd.DataFrame([flags])
-        strategy_df = pd.DataFrame([windows_dict])
+        row_data = {**flags, **windows_dict}
+        strategy_df = pd.DataFrame([row_data])
         strategy_df.insert(0, "pnl_sum", total_pnl_percent)
         strategy_df.insert(0, "timehorizon", timeframe)
         strategy_df.insert(0, "symbol", "btc")
@@ -208,6 +207,7 @@ for timeframe in TIMEFRAMES:
         strategy_df.insert(0, "tp", "3")
         strategy_df.insert(0, "strategy", strategy_id)
         strategy_df.columns = strategy_df.columns.str.lower()
+        
 
 
         save_df_to_db(
