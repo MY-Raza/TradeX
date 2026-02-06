@@ -11541,3 +11541,32 @@ LINE 3:                    '"strategy_signals"."sig_1h_btc_5"'::regc...
 2026-02-05 15:44:08,632 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
 2026-02-05 15:44:08,654 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
 2026-02-05 16:06:25,994 | INFO | utils | Inserted 1626337 rows into data_binance.eth_1m
+2026-02-06 12:40:32,651 | INFO | utils | Database engine initialized
+2026-02-06 12:40:32,963 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-06 12:40:33,132 | INFO | utils | Indexes ensured: sig_1h_btc_2_datetime_uidx, sig_1h_btc_2_datetime_desc_idx
+2026-02-06 12:40:33,225 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_2"
+2026-02-06 12:40:42,638 | INFO | utils | Inserted 17573 rows into strategy_signals.sig_1h_btc_2
+2026-02-06 12:43:02,789 | INFO | utils | Database engine initialized
+2026-02-06 12:43:03,012 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-06 12:43:03,067 | INFO | utils | Indexes ensured: sig_1h_btc_3_datetime_uidx, sig_1h_btc_3_datetime_desc_idx
+2026-02-06 12:43:03,077 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_3"
+2026-02-06 12:43:10,316 | INFO | utils | Inserted 17573 rows into strategy_signals.sig_1h_btc_3
+2026-02-06 12:43:15,627 | INFO | utils | Schema 'strategies' ready
+2026-02-06 12:43:15,627 | INFO | utils | No time_column provided and 'datetime' column missing, proceeding without time indexing
+2026-02-06 12:43:15,749 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-06 12:43:17,114 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-06 12:43:17,165 | INFO | utils | Indexes ensured: sig_15m_btc_1_datetime_uidx, sig_15m_btc_1_datetime_desc_idx
+2026-02-06 12:43:17,176 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_1"
+2026-02-06 12:43:47,830 | INFO | utils | Inserted 70294 rows into strategy_signals.sig_15m_btc_1
+2026-02-06 12:43:57,593 | INFO | utils | Schema 'strategies' ready
+2026-02-06 12:43:57,593 | INFO | utils | No time_column provided and 'datetime' column missing, proceeding without time indexing
+2026-02-06 12:51:10,288 | INFO | utils | Database engine initialized
+2026-02-06 12:51:10,400 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-06 12:55:13,296 | INFO | utils | Database engine initialized
+2026-02-06 12:55:13,405 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-06 12:55:13,430 | INFO | utils | Adding missing column 'datetime' to strategy_signals.sig_1h_btc_5
+2026-02-06 12:56:14,233 | INFO | utils | Database engine initialized
+2026-02-06 12:56:14,349 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-06 12:56:14,414 | INFO | utils | Indexes ensured: sig_1h_btc_6_datetime_uidx, sig_1h_btc_6_datetime_desc_idx
+2026-02-06 12:56:14,426 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_6"
+2026-02-06 12:56:21,937 | INFO | utils | Inserted 17573 rows into strategy_signals.sig_1h_btc_6

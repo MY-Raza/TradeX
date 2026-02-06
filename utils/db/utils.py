@@ -159,6 +159,13 @@ def get_last_date(table_name: str, schema: str, time_column: str) -> pd.Timestam
         return None
 
 
+from sqlalchemy import inspect, text
+import pandas as pd
+import json
+import logging
+
+logger = logging.getLogger("db_utils")
+
 def save_df_to_db(
     df: pd.DataFrame,
     table_name: str,
@@ -168,8 +175,9 @@ def save_df_to_db(
 ):
     """
     Save a DataFrame to the database.
-    Stores datetime column directly as TIMESTAMP WITH TIME ZONE.
-    Handles cases where time_column is None or not datetime.
+    - Automatically handles datetime columns for time-series.
+    - Dynamically adds missing columns for strategies.strategy_registry.
+    - Converts tuple/list columns to JSON for JSONB storage.
     """
     if df.empty:
         logger.warning("Empty DataFrame, skipping insert")
@@ -186,20 +194,47 @@ def save_df_to_db(
             time_column = "datetime"
             logger.info("time_column not provided, using 'datetime' by default")
         else:
-            time_column = None  # No time column available
-            logger.info("No time_column provided and 'datetime' column missing, proceeding without time indexing")
+            time_column = None
+            logger.info("No time_column provided and 'datetime' missing, proceeding without time indexing")
 
-    # Convert time_column to datetime if it exists
     if time_column:
         if time_column not in df.columns:
             raise ValueError(f"time_column '{time_column}' not found in DataFrame")
         if not pd.api.types.is_datetime64_any_dtype(df[time_column]):
             df[time_column] = pd.to_datetime(df[time_column], utc=True)
-
-        # Deduplicate by time_column
         df = df.drop_duplicates(subset=[time_column])
 
-    # Create table if missing
+    # Dynamically add missing columns ONLY for strategies.strategy_registry
+    if schema == "strategies" and table == "strategy_registry":
+        inspector = inspect(engine)
+        existing_cols = [col["name"] for col in inspector.get_columns(table, schema=schema)]
+
+        for col in df.columns:
+            if col not in existing_cols:
+                sample_value = df[col].iloc[0]
+                if isinstance(sample_value, (tuple, list)):
+                    col_type = "JSONB"
+                    df[col] = df[col].apply(lambda x: json.dumps(x) if x is not None else None)
+                elif pd.api.types.is_integer_dtype(df[col]):
+                    col_type = "BIGINT"
+                elif pd.api.types.is_float_dtype(df[col]):
+                    col_type = "DOUBLE PRECISION"
+                elif pd.api.types.is_datetime64_any_dtype(df[col]):
+                    col_type = "TIMESTAMP WITH TIME ZONE"
+                else:
+                    col_type = "TEXT"
+
+                alter_sql = text(f'ALTER TABLE {schema}.{table} ADD COLUMN IF NOT EXISTS "{col}" {col_type}')
+                with engine.begin() as conn:
+                    conn.execute(alter_sql)
+                logger.info(f"Added missing column '{col}' as {col_type}")
+
+    # Convert any tuple/list columns to JSON before insert (safety for JSONB columns)
+    for col in df.columns:
+        if df[col].apply(lambda x: isinstance(x, (tuple, list))).any():
+            df[col] = df[col].apply(lambda x: json.dumps(x) if x is not None else None)
+
+    # Create table if missing (head only)
     df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
 
     # Ensure indexes & hypertable if applicable
@@ -218,7 +253,7 @@ def save_df_to_db(
         return
 
     # Insert safely
-    cols = ",".join(df.columns)
+    cols = ",".join([f'"{c}"' for c in df.columns])
     placeholders = ",".join([f":{c}" for c in df.columns])
     conflict_clause = f"ON CONFLICT ({time_column}) DO NOTHING" if time_column else ""
     insert_sql = text(f"""
@@ -231,6 +266,7 @@ def save_df_to_db(
         conn.execute(insert_sql, df.to_dict(orient="records"))
 
     logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
+
 
 
 

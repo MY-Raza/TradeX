@@ -131,7 +131,6 @@ for timeframe in TIMEFRAMES:
     # Resample OHLCV
     # ----------------------------
     df_tf = resample_ohlcv(df_1m, timeframe)
-    print(df_tf.head(3))
     open_ = df_tf["open"].values
     high = df_tf["high"].values
     low = df_tf["low"].values
@@ -158,8 +157,6 @@ for timeframe in TIMEFRAMES:
             volume,
             timestamps,
         )
-        print(signals.head())
-        print(windows_dict)
 
         if signals.empty:
             logger.warning("Empty signals — skipping.")
@@ -203,6 +200,7 @@ for timeframe in TIMEFRAMES:
         )
 
         strategy_df = pd.DataFrame([flags])
+        strategy_df = pd.DataFrame([windows_dict])
         strategy_df.insert(0, "pnl_sum", total_pnl_percent)
         strategy_df.insert(0, "timehorizon", timeframe)
         strategy_df.insert(0, "symbol", "btc")
@@ -211,9 +209,6 @@ for timeframe in TIMEFRAMES:
         strategy_df.insert(0, "strategy", strategy_id)
         strategy_df.columns = strategy_df.columns.str.lower()
 
-        # Add windows_dict as new columns
-        for key, value in windows_dict.items():
-            strategy_df[key] = value
 
         save_df_to_db(
             df=strategy_df,

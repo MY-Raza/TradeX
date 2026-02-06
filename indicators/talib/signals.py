@@ -108,6 +108,8 @@ def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
 
 def bbands_signal(close, period=None, nbdev=2):
     period = period or TA_DEFAULT_WINDOWS.get("BBANDS", 20)
+    
+    # Get BBANDS output
     result = call_indicator("BBANDS", close, timeperiod=period, nbdevup=nbdev, nbdevdn=nbdev)
     
     # Normalize outputs
@@ -115,20 +117,38 @@ def bbands_signal(close, period=None, nbdev=2):
         if len(result) == 4:
             upper, mid, lower, window = result
         elif len(result) == 2:
+            # Some backends return (mid, window) only
             mid, window = result
-            upper = mid + nbdev * np.std(close)
-            lower = mid - nbdev * np.std(close)
+            std = np.std(close)
+            upper = mid + nbdev * std
+            lower = mid - nbdev * std
         else:
             raise ValueError("Unexpected BBANDS output length")
     else:
         raise ValueError("BBANDS did not return a tuple")
-
+    
+    # Ensure all arrays are 1D and same length as close
+    close = np.ravel(close)
+    upper = np.ravel(upper)[:len(close)]
+    mid = np.ravel(mid)[:len(close)]
+    lower = np.ravel(lower)[:len(close)]
+    
     # Initialize signals
     signals = np.zeros_like(close, dtype=np.int8)
-    signals[crossover(lower, close)] = 1
-    signals[crossunder(upper, close)] = -1
-
+    
+    # Safe crossover / crossunder
+    co = crossover(lower, close)
+    cu = crossunder(upper, close)
+    
+    # Make sure boolean mask matches length
+    co = co[:len(close)]
+    cu = cu[:len(close)]
+    
+    signals[co] = 1
+    signals[cu] = -1
+    
     return signals, window
+
 
 
 
