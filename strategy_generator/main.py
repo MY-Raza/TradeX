@@ -158,6 +158,8 @@ for timeframe in TIMEFRAMES:
             volume,
             timestamps,
         )
+        print(signals.head())
+        print(windows_dict)
 
         if signals.empty:
             logger.warning("Empty signals — skipping.")
