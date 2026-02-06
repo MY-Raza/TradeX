@@ -94,7 +94,7 @@ def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
     mask = mask[:len(close)]
     signals[mask] = -1
 
-    window = len(mama)
+    window = None
     return signals, window
 
 
