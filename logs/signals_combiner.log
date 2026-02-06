@@ -1700,3 +1700,11 @@
 2026-02-06 12:03:10,448 | WARNING | signals_combiner | Error calling APO: '>' not supported between instances of 'tuple' and 'int'
 2026-02-06 12:03:10,448 | WARNING | signals_combiner | Error calling BOP: bop_signal() missing 2 required positional arguments: 'low' and 'close_'
 2026-02-06 12:03:10,452 | WARNING | signals_combiner | No signal function found for PLUS_DM
+2026-02-06 12:09:05,065 | WARNING | signals_combiner | Error calling MAMA: not enough values to unpack (expected 3, got 2)
+2026-02-06 12:09:05,079 | WARNING | signals_combiner | Error calling MACD: not enough values to unpack (expected 3, got 2)
+2026-02-06 12:09:05,086 | WARNING | signals_combiner | No signal function found for PLUS_DM
+2026-02-06 12:09:05,099 | WARNING | signals_combiner | Error calling AVGPRICE: avgprice_signal() missing 1 required positional argument: 'close'
+2026-02-06 12:09:05,113 | WARNING | signals_combiner | Error calling WCLPRICE: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+2026-02-06 12:13:55,507 | WARNING | signals_combiner | Error calling MAMA: '>' not supported between instances of 'tuple' and 'int'
+2026-02-06 12:13:55,526 | WARNING | signals_combiner | No signal function found for PLUS_DM
+2026-02-06 12:16:26,937 | WARNING | signals_combiner | Error calling MAMA: too many indices for array: array is 1-dimensional, but 2 were indexed

@@ -82,12 +82,26 @@ def ht_trendline_signal(close):
 
 
 def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
+    # call_indicator returns two 1D arrays: mama and fama
     mama, fama = call_indicator("MAMA", close, fastlimit=fastlimit, slowlimit=slowlimit)
-    window = len(mama)  # optional: use length as a "window" proxy
-    signals = np.zeros_like(close)
+    
+    # Ensure they are 1D numpy arrays
+    mama = np.ravel(np.array(mama, dtype=float))
+    fama = np.ravel(np.array(fama, dtype=float))
+    
+    # Initialize signal array
+    signals = np.zeros_like(close, dtype=np.int8)
+    
+    # Safe crossover/crossunder using previous value
     signals[crossover(mama, fama)] = 1
     signals[crossunder(mama, fama)] = -1
+    
+    # Set window as the length of the series (or some default)
+    window = len(mama)
+    
     return signals, window
+
+
 
 
 
@@ -653,6 +667,7 @@ SIGNAL_FUNCTIONS = {
     "MINUS_DM": minus_dm_signal,
     "MOM": mom_signal,
     "PLUS_DI": plus_di_signal,
+    "PLUS_DM": plus_dm_signal,
 
     # -------------------------
     # Momentum
