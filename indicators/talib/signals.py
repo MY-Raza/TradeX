@@ -82,11 +82,13 @@ def ht_trendline_signal(close):
 
 
 def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
-    mama, fama, window = call_indicator("MAMA", close, fastlimit=fastlimit, slowlimit=slowlimit)
+    mama, fama = call_indicator("MAMA", close, fastlimit=fastlimit, slowlimit=slowlimit)
+    window = len(mama)  # optional: use length as a "window" proxy
     signals = np.zeros_like(close)
     signals[crossover(mama, fama)] = 1
     signals[crossunder(mama, fama)] = -1
     return signals, window
+
 
 
 # =========================================================
@@ -133,19 +135,23 @@ def sar_signal(high, low, close, acceleration=0.02, maximum=0.2):
 # =========================================================
 
 def macd_signal(close):
-    macd, signal, _ = call_indicator("MACD", close)
+    macd, signal_line = call_indicator("MACD", close)
     signals = np.zeros_like(close)
-    signals[crossover(macd, signal)] = 1
-    signals[crossunder(macd, signal)] = -1
-    return signals
+    signals[crossover(macd, signal_line)] = 1
+    signals[crossunder(macd, signal_line)] = -1
+    window = len(macd)
+    return signals, window
 
 def apo_signal(close):
-    apo = call_indicator("APO", close)
-    return np.where(apo > 0, 1, np.where(apo < 0, -1, 0))
+    apo, window = call_indicator("APO", close)
+    signal = np.where(apo > 0, 1, np.where(apo < 0, -1, 0))
+    return signal, window
+
 
 def ppo_signal(close):
-    ppo = call_indicator("PPO", close)
-    return np.where(ppo > 0, 1, np.where(ppo < 0, -1, 0))
+    ppo, window = call_indicator("PPO", close)
+    signal = np.where(ppo > 0, 1, np.where(ppo < 0, -1, 0))
+    return signal, window
 
 # =========================================================
 # MOMENTUM INDICATORS
@@ -186,10 +192,11 @@ def aroonosc_signal(high, low, period=14):
     signal = np.where(aroon_osc > 0, 1, np.where(aroon_osc < 0, -1, 0))
     return signal, window
 
-def bop_signal(open_, high, low, close_):
-    bop, window = call_indicator("BOP", open_, high, low, close_)
+def bop_signal(open, high, low, close):
+    bop, window = call_indicator("BOP", open, high, low, close)
     signal = np.where(bop > 0, 1, np.where(bop < 0, -1, 0))
-    return signal, window   
+    return signal, window
+ 
 
 def cmo_signal(close, period=14):
     cmo, window = call_indicator("CMO", close, timeperiod=period)
@@ -229,6 +236,12 @@ def plus_di_signal(high, low, close, period=14):
     pdi, window = call_indicator("PLUS_DI", high, low, close, timeperiod=period)
     signal = np.where(pdi > 0, 1, np.where(pdi < 0, -1, 0))
     return signal, window
+
+def plus_dm_signal(high, low, period=14):
+    pdm, window = call_indicator("PLUS_DM", high, low, timeperiod=period)
+    signal = np.where(pdm > 0, 1, np.where(pdm < 0, -1, 0))
+    return signal, window
+
 
 # =========================================================
 # VOLUME INDICATORS
@@ -274,9 +287,11 @@ def natr_signal(high, low, close, period=None):
 
 
 def wclprice_signal(high, low, close):
-    wcl = call_indicator("WCLPRICE", high, low, close)
+    wcl, window = call_indicator("WCLPRICE", high, low, close)
     price = (high + low + close) / 3
-    return np.where(price > wcl, 1, np.where(price < wcl, -1, 0))
+    signal = np.where(price > wcl, 1, np.where(price < wcl, -1, 0))
+    return signal, window
+
 
 # =========================================================
 # VOLATILITY
@@ -474,11 +489,12 @@ def sqrt_signal(close):
 # =====================================================
 # Price Transform
 # =====================================================
-def avgprice_signal(open_, high, low, close):
-    avg, window = call_indicator("AVGPRICE", open_, high, low, close)
-    price = (open_ + high + low + close) / 4
+def avgprice_signal(open, high, low, close):
+    avg, window = call_indicator("AVGPRICE", open, high, low, close)
+    price = (open + high + low + close) / 4
     signal = np.where(price > avg, 1, np.where(price < avg, -1, 0))
     return signal, window
+
 
 def medprice_signal(high, low):
     med, window = call_indicator("MEDPRICE", high, low)
@@ -556,18 +572,7 @@ def trix_signal(close, period=14):
     return signal, window
 
 def sarext_signal(high, low, close):
-    sar, window = call_indicator(
-        "SAREXT",
-        high, low,
-        startValue=0,
-        offsetOnReverse=0,
-        accelerationInitLong=0.02,
-        accelerationInitShort=0.02,
-        accelerationMaxLong=0.2,
-        accelerationMaxShort=0.2,
-        accelerationStepLong=0.02,
-        accelerationStepShort=0.02
-    )
+    sar, window = call_indicator("SAREXT", high, low)
     signal = np.where(close > sar, 1, np.where(close < sar, -1, 0))
     return signal, window
 

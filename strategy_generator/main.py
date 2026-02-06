@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import numpy as np 
+import numpy as np
 
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv

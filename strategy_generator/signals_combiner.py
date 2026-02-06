@@ -7,19 +7,11 @@ import numpy as np
 
 logger = get_logger("signals_combiner")
 
+
 # ============================
 # Randomize indicators
 # ============================
 def randomize_indicators(all_indicators):
-    """
-    Randomly activate or deactivate a list of indicators.
-
-    Args:
-        all_indicators (tuple/list): List of all indicator names.
-
-    Returns:
-        dict: Mapping of indicator name -> True/False (active/inactive)
-    """
     flags_array = np.random.choice([True, False], size=len(all_indicators))
     return dict(zip(all_indicators, flags_array))
 
@@ -29,30 +21,27 @@ def randomize_indicators(all_indicators):
 # ============================
 def run_active_signals_with_voting(flags, open_, high, low, close_, volume, timestamps):
     """
-    Computes signals for all active indicators in parallel using ThreadPoolExecutor
-    and combines them into a single final signal using majority voting.
+    Computes signals for all active indicators in parallel and combines them
+    into a final signal using majority voting.
 
     Returns:
         tuple: (DataFrame with final signals, windows dict)
     """
-    signals_dict = {}  # Stores signals for each indicator
-    windows_dict = {}  # Stores window/period per function
+    signals_dict = {}
+    windows_dict = {}
     data = {"open": open_, "high": high, "low": low, "close": close_, "volume": volume}
 
+    # ---------------------------
+    # Indicators that require special handling
+    # ---------------------------
     def compute_signal(name):
-        """
-        Compute the signal for a single indicator.
-
-        Returns:
-            tuple: (indicator_name, function_name, signal_array, window)
-        """
         try:
             # ---------------------------
-            # Candlestick patterns
+            # Candlestick
             # ---------------------------
             if name.startswith("CDL"):
-                sig, _ = candlestick_signal(open_, high, low, close_, name)
-                return name, "candlestick_signal", sig.astype(np.int8), None
+                sig, window = candlestick_signal(open_, high, low, close_, name)
+                return name, sig.astype(np.int8), window
 
             # ---------------------------
             # Regular indicators
@@ -60,28 +49,29 @@ def run_active_signals_with_voting(flags, open_, high, low, close_, volume, time
             func = SIGNAL_FUNCTIONS.get(name)
             if func is None:
                 logger.warning(f"No signal function found for {name}")
-                return None, None, None, None
+                return None, None, None
 
-            # Select arguments dynamically based on function signature
+            # Select arguments dynamically
             args = [data[arg] for arg in func.__code__.co_varnames if arg in data]
+            result = func(*args)
 
-            # Call the indicator function
-            sig = func(*args)
-
-            # If function returns (signal_array, window) tuple
-            if isinstance(sig, tuple) and len(sig) == 2:
-                signal_array, window = sig
+            # If tuple returned: (signal_array, window)
+            if isinstance(result, tuple):
+                if len(result) == 2:
+                    signal_array, window = result
+                else:
+                    signal_array, window = result[0], None
             else:
-                signal_array, window = sig, None
+                signal_array, window = result, None
 
-            return name, func.__name__, signal_array.astype(np.int8), window
+            return name, signal_array.astype(np.int8), window
 
         except Exception as e:
             logger.warning(f"Error calling {name}: {e}")
-            return None, None, None, None
+            return None, None, None
 
     # ---------------------------
-    # Parallel computation of active indicators
+    # Run active indicators in parallel
     # ---------------------------
     active_indicators = [name for name, active in flags.items() if active]
     with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
@@ -90,16 +80,19 @@ def run_active_signals_with_voting(flags, open_, high, low, close_, volume, time
     # ---------------------------
     # Collect results
     # ---------------------------
-    for name, func_name, sig, window in results:
+    for name, sig, window in results:
         if name is not None and sig is not None:
             signals_dict[name] = sig
-
             if window is not None:
-                base_name = func_name.replace("_signal", "")
+                # Convert rsi_signal -> rsi_window
+                if name.endswith("_signal"):
+                    base_name = name[:-7]
+                else:
+                    base_name = name
                 windows_dict[f"{base_name}_window"] = window
 
     # ---------------------------
-    # Voting to generate final signal
+    # Voting
     # ---------------------------
     if signals_dict:
         all_signals = np.column_stack(list(signals_dict.values()))
@@ -112,5 +105,4 @@ def run_active_signals_with_voting(flags, open_, high, low, close_, volume, time
     else:
         final_signal = np.zeros(len(timestamps), dtype=np.int8)
 
-    # Return final DataFrame and windows dict
     return pd.DataFrame({"datetime": timestamps, "signals": final_signal}), windows_dict

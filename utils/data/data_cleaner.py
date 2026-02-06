@@ -139,8 +139,7 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
             raise KeyError("No timestamp column or index found")
 
     # Convert to datetime
-    if not pd.api.types.is_datetime64_any_dtype(df["datetime"]):
-        df["datetime"] = pd.to_datetime(df["datetime"], unit="ms", utc=True)
+    df["datetime"] = ensure_datetime(df["datetime"])
 
     # Ensure numeric
     cols = ["open", "high", "low", "close", "volume"]
@@ -202,5 +201,12 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
 
     return resampled
 
+def ensure_datetime(series: pd.Series) -> pd.Series:
+    if pd.api.types.is_datetime64_any_dtype(series):
+        return series
+    try:
+        return pd.to_datetime(series, unit="ms", utc=True)
+    except (ValueError, TypeError):
+        return pd.to_datetime(series, utc=True, errors="coerce")
 
 
