@@ -1708,3 +1708,9 @@
 2026-02-06 12:13:55,507 | WARNING | signals_combiner | Error calling MAMA: '>' not supported between instances of 'tuple' and 'int'
 2026-02-06 12:13:55,526 | WARNING | signals_combiner | No signal function found for PLUS_DM
 2026-02-06 12:16:26,937 | WARNING | signals_combiner | Error calling MAMA: too many indices for array: array is 1-dimensional, but 2 were indexed
+2026-02-06 12:18:45,559 | WARNING | signals_combiner | Error calling MAMA: boolean index did not match indexed array along axis 0; size of axis is 17573 but size of corresponding boolean axis is 35146
+2026-02-06 12:18:45,570 | WARNING | signals_combiner | Error calling MACD: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()
+2026-02-06 12:21:06,150 | WARNING | signals_combiner | Error calling MACD: operands could not be broadcast together with shapes (17573,) (3,) 
+2026-02-06 12:23:07,155 | WARNING | signals_combiner | Error calling BBANDS: not enough values to unpack (expected 4, got 2)
+2026-02-06 12:23:07,179 | WARNING | signals_combiner | Error calling MACD: operands could not be broadcast together with shapes (17573,) (3,) 
+2026-02-06 12:28:32,809 | WARNING | signals_combiner | Error calling BBANDS: too many indices for array: array is 1-dimensional, but 2 were indexed

@@ -82,24 +82,21 @@ def ht_trendline_signal(close):
 
 
 def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
-    # call_indicator returns two 1D arrays: mama and fama
     mama, fama = call_indicator("MAMA", close, fastlimit=fastlimit, slowlimit=slowlimit)
+    mama = np.ravel(mama)[:len(close)]
+    fama = np.ravel(fama)[:len(close)]
     
-    # Ensure they are 1D numpy arrays
-    mama = np.ravel(np.array(mama, dtype=float))
-    fama = np.ravel(np.array(fama, dtype=float))
-    
-    # Initialize signal array
     signals = np.zeros_like(close, dtype=np.int8)
-    
-    # Safe crossover/crossunder using previous value
-    signals[crossover(mama, fama)] = 1
-    signals[crossunder(mama, fama)] = -1
-    
-    # Set window as the length of the series (or some default)
+    mask = crossover(mama, fama)
+    mask = mask[:len(close)]  # ensure same length
+    signals[mask] = 1
+    mask = crossunder(mama, fama)
+    mask = mask[:len(close)]
+    signals[mask] = -1
+
     window = len(mama)
-    
     return signals, window
+
 
 
 
@@ -111,13 +108,28 @@ def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
 
 def bbands_signal(close, period=None, nbdev=2):
     period = period or TA_DEFAULT_WINDOWS.get("BBANDS", 20)
-    upper, mid, lower, window = call_indicator(
-        "BBANDS", close, timeperiod=period, nbdevup=nbdev, nbdevdn=nbdev
-    )
-    signals = np.zeros_like(close)
+    result = call_indicator("BBANDS", close, timeperiod=period, nbdevup=nbdev, nbdevdn=nbdev)
+    
+    # Normalize outputs
+    if isinstance(result, tuple):
+        if len(result) == 4:
+            upper, mid, lower, window = result
+        elif len(result) == 2:
+            mid, window = result
+            upper = mid + nbdev * np.std(close)
+            lower = mid - nbdev * np.std(close)
+        else:
+            raise ValueError("Unexpected BBANDS output length")
+    else:
+        raise ValueError("BBANDS did not return a tuple")
+
+    # Initialize signals
+    signals = np.zeros_like(close, dtype=np.int8)
     signals[crossover(lower, close)] = 1
     signals[crossunder(upper, close)] = -1
+
     return signals, window
+
 
 
 def midpoint_signal(close, period=None):
@@ -149,12 +161,33 @@ def sar_signal(high, low, close, acceleration=0.02, maximum=0.2):
 # =========================================================
 
 def macd_signal(close):
-    macd, signal_line = call_indicator("MACD", close)
-    signals = np.zeros_like(close)
-    signals[crossover(macd, signal_line)] = 1
-    signals[crossunder(macd, signal_line)] = -1
+    result = call_indicator("MACD", close)
+    
+    # Normalize outputs
+    if isinstance(result, tuple):
+        if len(result) == 3:
+            macd, signal_line, _ = result
+        elif len(result) == 2:
+            macd, signal_line = result
+        else:
+            raise ValueError("Unexpected MACD output length")
+    else:
+        raise ValueError("MACD did not return a tuple")
+
+    # Flatten and align to close length
+    macd = np.ravel(macd)[:len(close)]
+    signal_line = np.ravel(signal_line)[:len(close)]
+    
+    # Initialize signals
+    signals = np.zeros_like(close, dtype=np.int8)
+    signals[crossover(macd, signal_line)[:len(close)]] = 1
+    signals[crossunder(macd, signal_line)[:len(close)]] = -1
+
     window = len(macd)
     return signals, window
+
+
+
 
 def apo_signal(close):
     apo, window = call_indicator("APO", close)
