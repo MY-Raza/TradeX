@@ -5,7 +5,7 @@ import numpy as np
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.newbacktest import HighPerfBacktest
-from TradeX.utils.db.utils import save_df_to_db
+from TradeX.utils.db.utils import save_df_to_db,get_profitable_strategies
 
 from strategy_counter import generate_strategy_id
 from signals_combiner import randomize_indicators, run_active_signals_with_voting
@@ -14,6 +14,14 @@ from signals_combiner import randomize_indicators, run_active_signals_with_votin
 # Logger
 # ============================
 logger = get_logger("strategy_main")
+
+profitable_strategies = get_profitable_strategies(100)
+
+for i, strat in enumerate(profitable_strategies, start=1):
+    logger.info(f"\nStrategy {i}")
+    for col, val in strat.items():
+        logger.info(f"  {col}: {val}")
+
 
 # ============================
 # Strategy configuration

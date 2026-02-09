@@ -333,3 +333,57 @@ def fetch_ohlcv_df(
 
     df = df.sort_values(time_column)
     return df
+
+#======================================
+# Strategy Fetcher Operation From DB
+#======================================
+
+def get_profitable_strategies(min_pnl: float = 100):
+    """
+    Fetch strategies where pnl_sum > min_pnl.
+    For each row, keep only columns where value is:
+      - True (boolean)
+      - OR non-null and non-zero (int/float)
+    
+    Returns:
+        List[Dict] → Filtered column:value pairs per strategy
+    """
+    engine = get_engine()
+
+    query = text("""
+        SELECT *
+        FROM strategies.strategy_registry
+        WHERE pnl_sum > :min_pnl
+    """)
+
+    with engine.begin() as conn:
+        result = conn.execute(query, {"min_pnl": min_pnl})
+        rows = result.fetchall()
+        columns = result.keys()
+
+    strategies = []
+
+    for row in rows:
+        row_dict = dict(zip(columns, row))
+
+        # Filter columns: keep True or non-zero, non-None, non-False
+        filtered_dict = {}
+        for k, v in row_dict.items():
+            if v is True:
+                filtered_dict[k] = v
+            elif isinstance(v, (int, float)) and v != 0:
+                filtered_dict[k] = v
+            elif v not in (None, False):
+                filtered_dict[k] = v
+
+        strategies.append(filtered_dict)
+
+        logger.info(
+            "Filtered Strategy → " +
+            ", ".join(f"{k}={v}" for k, v in filtered_dict.items())
+        )
+
+    logger.info(f"Total profitable strategies found: {len(strategies)}")
+    return strategies
+
+
