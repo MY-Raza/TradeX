@@ -5,6 +5,7 @@ import pandas as pd
 from sqlalchemy import create_engine, text, inspect
 from TradeX.utils.common.logs import get_logger
 from dotenv import load_dotenv
+from types import SimpleNamespace
 
 # ---------------------------
 # Initialize logger
@@ -337,16 +338,16 @@ def fetch_ohlcv_df(
 #======================================
 # Strategy Fetcher Operation From DB
 #======================================
-
 def get_profitable_strategies(min_pnl: float = 100):
     """
     Fetch strategies where pnl_sum > min_pnl.
     For each row, keep only columns where value is:
       - True (boolean)
-      - OR non-null and non-zero (int/float)
-    
+      - OR non-zero number (int/float)
+      - OR non-null and not False
+
     Returns:
-        List[Dict] → Filtered column:value pairs per strategy
+        List[SimpleNamespace] → Each strategy as an object with dynamic attributes
     """
     engine = get_engine()
 
@@ -376,7 +377,9 @@ def get_profitable_strategies(min_pnl: float = 100):
             elif v not in (None, False):
                 filtered_dict[k] = v
 
-        strategies.append(filtered_dict)
+        # Convert to SimpleNamespace for dot-access
+        strategy_obj = SimpleNamespace(**filtered_dict)
+        strategies.append(strategy_obj)
 
         logger.info(
             "Filtered Strategy → " +

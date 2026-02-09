@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-
+from types import SimpleNamespace
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.newbacktest import HighPerfBacktest
@@ -14,13 +14,13 @@ from signals_combiner import randomize_indicators, run_active_signals_with_votin
 # Logger
 # ============================
 logger = get_logger("strategy_main")
+# strategies = get_profitable_strategies(100)
 
-profitable_strategies = get_profitable_strategies(100)
+# for strategy in strategies:
+#     # iterate all dynamic columns
+#     for col, value in strategy.__dict__.items():
+#         print(f"{col} → {value}")
 
-for i, strat in enumerate(profitable_strategies, start=1):
-    logger.info(f"\nStrategy {i}")
-    for col, val in strat.items():
-        logger.info(f"  {col}: {val}")
 
 
 # ============================
@@ -206,7 +206,12 @@ for timeframe in TIMEFRAMES:
             os.path.join(SIGNALS_FOLDER, f"{strategy_id}_ledger.csv"),
             index=False
         )
-        row_data = {**flags, **windows_dict}
+        # Flatten windows_dict into row_data
+        row_data = {**flags}
+        for ind_name, params in windows_dict.items():
+             for param_name, value in params.items():
+        # e.g., MACD_window.fastperiod → 'MACD_fastperiod'
+                row_data[f"{ind_name}_{param_name}"] = value
         strategy_df = pd.DataFrame([row_data])
         strategy_df.insert(0, "pnl_sum", total_pnl_percent)
         strategy_df.insert(0, "timehorizon", timeframe)
