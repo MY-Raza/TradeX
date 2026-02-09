@@ -14,12 +14,12 @@ from signals_combiner import randomize_indicators, run_active_signals_with_votin
 # Logger
 # ============================
 logger = get_logger("strategy_main")
-# strategies = get_profitable_strategies(100)
+strategies = get_profitable_strategies(100)
 
-# for strategy in strategies:
-#     # iterate all dynamic columns
-#     for col, value in strategy.__dict__.items():
-#         print(f"{col} → {value}")
+for strategy in strategies:
+    # iterate all dynamic columns
+    for col, value in strategy.__dict__.items():
+        print(f"{col} → {value}")
 
 
 

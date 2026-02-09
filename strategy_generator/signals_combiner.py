@@ -57,13 +57,13 @@ def run_active_signals_with_voting(flags, open_, high, low, close_, volume, time
             if window is not None:
                 if isinstance(window, (list, tuple)):
                     # MACD / MACDEXT
-                    if ("MACD" in name or "PPO" in name) and len(window) == 3:
+                    if "MACD" in name and len(window) == 3:
                         unpacked_window = {"fastperiod": window[0], "slowperiod": window[1], "signalperiod": window[2]}
                     # ADOSC
-                    elif "ADOSC" in name and len(window) >= 2:
+                    elif ("ADOSC" in name or "PPO" in name or "STOCHF" in name) and len(window) >= 2:
                         unpacked_window = {"fastperiod": window[0], "slowperiod": window[1]}
                     # STOCH-style
-                    elif any(x in name for x in ["STOCH", "STOCHF", "STOCHRSI"]) and len(window) >= 3:
+                    elif any(x in name for x in ["STOCH", "STOCHRSI"]) and len(window) >= 3:
                         unpacked_window = {"fastk_period": window[0], "slowk_period": window[1], "slowd_period": window[2]}
                     # Fallback for other multi-value windows
                     else:
