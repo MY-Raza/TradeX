@@ -5,7 +5,7 @@ from types import SimpleNamespace
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.newbacktest import HighPerfBacktest
-from TradeX.utils.db.utils import save_df_to_db,get_profitable_strategies
+from TradeX.utils.db.utils import save_df_to_db,get_profitable_strategies,fetch_ohlcv_df
 
 from strategy_counter import generate_strategy_id
 from signals_combiner import randomize_indicators, run_active_signals_with_voting
@@ -14,12 +14,12 @@ from signals_combiner import randomize_indicators, run_active_signals_with_votin
 # Logger
 # ============================
 logger = get_logger("strategy_main")
-strategies = get_profitable_strategies(100)
+# strategies = get_profitable_strategies(100)
 
-for strategy in strategies:
-    # iterate all dynamic columns
-    for col, value in strategy.__dict__.items():
-        print(f"{col} → {value}")
+# for strategy in strategies:
+#     # iterate all dynamic columns
+#     for col, value in strategy.__dict__.items():
+#         print(f"{col} → {value}")
 
 
 
@@ -27,7 +27,7 @@ for strategy in strategies:
 # Strategy configuration
 # ============================
 TIMEFRAMES = ["1h", "15m", "5m"]
-RUNS_PER_TIMEFRAME = 1
+RUNS_PER_TIMEFRAME = 50
 
 # ============================
 # Indicators
@@ -115,8 +115,11 @@ ALL_INDICATORS = (
 # ============================
 # Load 1-minute OHLCV
 # ============================
-INPUT_CSV = r"D:\trading\TradeX\indicators\talib\btc_1m_data.csv"
-df_1m = pd.read_csv(INPUT_CSV)
+df_1m = fetch_ohlcv_df(
+    table_name="btc_1m",
+    schema="data_binance",
+    time_column="datetime",
+)
 
 if df_1m.empty:
     logger.error("OHLCV data empty. Exiting.")
