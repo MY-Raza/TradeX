@@ -18,57 +18,114 @@ def crossunder(a, b):
 def sma_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("SMA", 14)
     sma, window = call_indicator("SMA", close, timeperiod=period)
-    signal = np.where(close > sma, 1, np.where(close < sma, -1, 0))
+
+    signal = np.full_like(sma, np.nan, dtype=np.float32)
+    valid = ~np.isnan(sma) & ~np.isnan(close)
+
+    signal[valid & (close > sma)] = 1
+    signal[valid & (close < sma)] = -1
+    signal[valid & (close == sma)] = 0
+
     return signal, window
 
 
 def ema_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("EMA", 14)
     ema, window = call_indicator("EMA", close, timeperiod=period)
-    signal = np.where(close > ema, 1, np.where(close < ema, -1, 0))
+
+    signal = np.full_like(ema, np.nan, dtype=np.float32)
+    valid = ~np.isnan(ema) & ~np.isnan(close)
+
+    signal[valid & (close > ema)] = 1
+    signal[valid & (close < ema)] = -1
+    signal[valid & (close == ema)] = 0
+
     return signal, window
 
 
 def dema_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("DEMA", 14)
     dema, window = call_indicator("DEMA", close, timeperiod=period)
-    signal = np.where(close > dema, 1, np.where(close < dema, -1, 0))
-    return signal, window
 
+    signal = np.full_like(dema, np.nan, dtype=np.float32)
+    valid = ~np.isnan(dema) & ~np.isnan(close)
+
+    signal[valid & (close > dema)] = 1
+    signal[valid & (close < dema)] = -1
+    signal[valid & (close == dema)] = 0
+
+    return signal, window
 
 def tema_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("TEMA", 14)
     tema, window = call_indicator("TEMA", close, timeperiod=period)
-    signal = np.where(close > tema, 1, np.where(close < tema, -1, 0))
+
+    signal = np.full_like(tema, np.nan, dtype=np.float32)
+    valid = ~np.isnan(tema) & ~np.isnan(close)
+
+    signal[valid & (close > tema)] = 1
+    signal[valid & (close < tema)] = -1
+    signal[valid & (close == tema)] = 0
+
     return signal, window
 
 
 def trima_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("TRIMA", 14)
     trima, window = call_indicator("TRIMA", close, timeperiod=period)
-    signal = np.where(close > trima, 1, np.where(close < trima, -1, 0))
+
+    signal = np.full_like(trima, np.nan, dtype=np.float32)
+    valid = ~np.isnan(trima) & ~np.isnan(close)
+
+    signal[valid & (close > trima)] = 1
+    signal[valid & (close < trima)] = -1
+    signal[valid & (close == trima)] = 0
+
     return signal, window
 
 
 def wma_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("WMA", 14)
     wma, window = call_indicator("WMA", close, timeperiod=period)
-    signal = np.where(close > wma, 1, np.where(close < wma, -1, 0))
+
+    signal = np.full_like(wma, np.nan, dtype=np.float32)
+    valid = ~np.isnan(wma) & ~np.isnan(close)
+
+    signal[valid & (close > wma)] = 1
+    signal[valid & (close < wma)] = -1
+    signal[valid & (close == wma)] = 0
+
     return signal, window
+
 
 
 def kama_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("KAMA", 14)
     kama, window = call_indicator("KAMA", close, timeperiod=period)
-    signal = np.where(close > kama, 1, np.where(close < kama, -1, 0))
+
+    signal = np.full_like(kama, np.nan, dtype=np.float32)
+    valid = ~np.isnan(kama) & ~np.isnan(close)
+
+    signal[valid & (close > kama)] = 1
+    signal[valid & (close < kama)] = -1
+    signal[valid & (close == kama)] = 0
+
     return signal, window
 
 
 def ma_signal(close, period=None, ma_type=0):
     period = period or TA_DEFAULT_WINDOWS.get("MA", 14)
     ma, window = call_indicator("MA", close, timeperiod=period, matype=ma_type)
-    signal = np.where(close > ma, 1, np.where(close < ma, -1, 0))
+
+    signal = np.full_like(ma, np.nan, dtype=np.float32)
+    valid = ~np.isnan(ma) & ~np.isnan(close)
+
+    signal[valid & (close > ma)] = 1
+    signal[valid & (close < ma)] = -1
+    signal[valid & (close == ma)] = 0
+
     return signal, window
+
 
 
 # =========================================================
@@ -77,25 +134,40 @@ def ma_signal(close, period=None, ma_type=0):
 
 def ht_trendline_signal(close):
     trend, window = call_indicator("HT_TRENDLINE", close)
-    signal = np.where(close > trend, 1, np.where(close < trend, -1, 0))
+
+    signal = np.full_like(trend, np.nan, dtype=np.float32)
+    valid = ~np.isnan(trend) & ~np.isnan(close)
+
+    signal[valid & (close > trend)] = 1
+    signal[valid & (close < trend)] = -1
+    signal[valid & (close == trend)] = 0
+
     return signal, window
+
 
 
 def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
     mama, fama = call_indicator("MAMA", close, fastlimit=fastlimit, slowlimit=slowlimit)
     mama = np.ravel(mama)[:len(close)]
     fama = np.ravel(fama)[:len(close)]
-    
-    signals = np.zeros_like(close, dtype=np.int8)
-    mask = crossover(mama, fama)
-    mask = mask[:len(close)]  # ensure same length
-    signals[mask] = 1
-    mask = crossunder(mama, fama)
-    mask = mask[:len(close)]
-    signals[mask] = -1
+
+    signal = np.full(len(close), np.nan, dtype=np.float32)
+
+    # Only evaluate where both lines exist
+    valid = ~np.isnan(mama) & ~np.isnan(fama)
+
+    cross_up = crossover(mama, fama)[:len(close)]
+    cross_down = crossunder(mama, fama)[:len(close)]
+
+    signal[valid & cross_up] = 1
+    signal[valid & cross_down] = -1
+
+    # Optional: when valid but no crossover, mark neutral
+    neutral_mask = valid & ~(cross_up | cross_down)
+    signal[neutral_mask] = 0
 
     window = None
-    return signals, window
+    return signal, window
 
 
 
@@ -108,16 +180,13 @@ def mama_signal(close, fastlimit=0.5, slowlimit=0.05):
 
 def bbands_signal(close, period=None, nbdev=2):
     period = period or TA_DEFAULT_WINDOWS.get("BBANDS", 20)
-    
-    # Get BBANDS output
+
     result = call_indicator("BBANDS", close, timeperiod=period, nbdevup=nbdev, nbdevdn=nbdev)
-    
-    # Normalize outputs
+
     if isinstance(result, tuple):
         if len(result) == 4:
             upper, mid, lower, window = result
         elif len(result) == 2:
-            # Some backends return (mid, window) only
             mid, window = result
             std = np.std(close)
             upper = mid + nbdev * std
@@ -126,44 +195,62 @@ def bbands_signal(close, period=None, nbdev=2):
             raise ValueError("Unexpected BBANDS output length")
     else:
         raise ValueError("BBANDS did not return a tuple")
-    
-    # Ensure all arrays are 1D and same length as close
+
     close = np.ravel(close)
     upper = np.ravel(upper)[:len(close)]
-    mid = np.ravel(mid)[:len(close)]
+    mid   = np.ravel(mid)[:len(close)]
     lower = np.ravel(lower)[:len(close)]
-    
-    # Initialize signals
-    signals = np.zeros_like(close, dtype=np.int8)
-    
-    # Safe crossover / crossunder
-    co = crossover(lower, close)
-    cu = crossunder(upper, close)
-    
-    # Make sure boolean mask matches length
-    co = co[:len(close)]
-    cu = cu[:len(close)]
-    
-    signals[co] = 1
-    signals[cu] = -1
-    
-    return signals, window
 
+    signals = np.full(len(close), np.nan, dtype=np.float32)
+
+    valid = ~np.isnan(close) & ~np.isnan(upper) & ~np.isnan(lower)
+
+    co = crossover(lower, close)[:len(close)]
+    cu = crossunder(upper, close)[:len(close)]
+
+    signals[valid & co] = 1
+    signals[valid & cu] = -1
+
+    neutral_mask = valid & ~(co | cu)
+    signals[neutral_mask] = 0
+
+    return signals, window
 
 
 
 def midpoint_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("MIDPOINT", 14)
     mid, window = call_indicator("MIDPOINT", close, timeperiod=period)
-    signal = np.where(close > mid, 1, np.where(close < mid, -1, 0))
+
+    close = np.ravel(close)
+    mid = np.ravel(mid)[:len(close)]
+
+    signal = np.full_like(mid, np.nan, dtype=np.float32)
+    valid = ~np.isnan(mid) & ~np.isnan(close)
+
+    signal[valid & (close > mid)] = 1
+    signal[valid & (close < mid)] = -1
+    signal[valid & (close == mid)] = 0
+
     return signal, window
 
 
 def midprice_signal(high, low, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("MIDPRICE", 14)
     mid, window = call_indicator("MIDPRICE", high, low, timeperiod=period)
+
+    high = np.ravel(high)
+    low = np.ravel(low)
     price = (high + low) / 2
-    signal = np.where(price > mid, 1, np.where(price < mid, -1, 0))
+    mid = np.ravel(mid)[:len(price)]
+
+    signal = np.full_like(mid, np.nan, dtype=np.float32)
+    valid = ~np.isnan(mid) & ~np.isnan(price)
+
+    signal[valid & (price > mid)] = 1
+    signal[valid & (price < mid)] = -1
+    signal[valid & (price == mid)] = 0
+
     return signal, window
 
 
@@ -173,7 +260,17 @@ def midprice_signal(high, low, period=None):
 
 def sar_signal(high, low, close, acceleration=0.02, maximum=0.2):
     sar, window = call_indicator("SAR", high, low, acceleration=acceleration, maximum=maximum)
-    signal = np.where(close > sar, 1, np.where(close < sar, -1, 0))
+
+    close = np.ravel(close)
+    sar = np.ravel(sar)[:len(close)]
+
+    signal = np.full_like(sar, np.nan, dtype=np.float32)
+    valid = ~np.isnan(close) & ~np.isnan(sar)
+
+    signal[valid & (close > sar)] = 1
+    signal[valid & (close < sar)] = -1
+    signal[valid & (close == sar)] = 0
+
     return signal, window
 
 # =========================================================
@@ -182,33 +279,54 @@ def sar_signal(high, low, close, acceleration=0.02, maximum=0.2):
 
 def macd_signal(close):
     values, window = call_indicator("MACD", close)
-
-    # MACD always returns 3 arrays
     macd, signal_line, hist = values
 
     close = np.ravel(close)
     macd = np.ravel(macd)[:len(close)]
     signal_line = np.ravel(signal_line)[:len(close)]
 
-    signals = np.zeros_like(close, dtype=np.int8)
-    signals[crossover(macd, signal_line)] = 1
-    signals[crossunder(macd, signal_line)] = -1
+    signals = np.full(len(close), np.nan, dtype=np.float32)
 
-    # window should be the MACD parameters, not data length
-    # example: (12, 26, 9)
+    valid = ~np.isnan(macd) & ~np.isnan(signal_line)
+
+    co = crossover(macd, signal_line)[:len(close)]
+    cu = crossunder(macd, signal_line)[:len(close)]
+
+    signals[valid & co] = 1
+    signals[valid & cu] = -1
+
+    neutral_mask = valid & ~(co | cu)
+    signals[neutral_mask] = 0
+
     return signals, window
 
 
 
 def apo_signal(close):
     apo, window = call_indicator("APO", close)
-    signal = np.where(apo > 0, 1, np.where(apo < 0, -1, 0))
+
+    close = np.ravel(close)
+    apo = np.ravel(apo)[:len(close)]
+
+    signal = np.full_like(apo, np.nan, dtype=np.float32)
+    valid = ~np.isnan(apo)
+
+    signal[valid & (apo > 0)] = 1
+    signal[valid & (apo < 0)] = -1
+    signal[valid & (apo == 0)] = 0
+
     return signal, window
 
 
 def ppo_signal(close):
     ppo, window = call_indicator("PPO", close)
-    signal = np.where(ppo > 0, 1, np.where(ppo < 0, -1, 0))
+
+    signal = np.full_like(ppo, np.nan, dtype=np.float32)  # start with NaN everywhere
+
+    signal[ppo > 0] = 1
+    signal[ppo < 0] = -1
+    signal[ppo == 0] = 0  # optional, keeps exact zeros neutral
+
     return signal, window
 
 # =========================================================
@@ -218,87 +336,207 @@ def ppo_signal(close):
 def rsi_signal(close, period=None, overbought=70, oversold=30):
     period = period or TA_DEFAULT_WINDOWS.get("RSI", 14)
     rsi, window = call_indicator("RSI", close, timeperiod=period)
-    signal = np.where(rsi < oversold, 1, np.where(rsi > overbought, -1, 0))
+
+    rsi = np.ravel(rsi)
+
+    signal = np.full_like(rsi, np.nan, dtype=np.float32)
+    valid = ~np.isnan(rsi)
+
+    signal[valid & (rsi < oversold)] = 1
+    signal[valid & (rsi > overbought)] = -1
+    signal[valid & (rsi >= oversold) & (rsi <= overbought)] = 0
+
     return signal, window
 
 
 def cci_signal(high, low, close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("CCI", 14)
     cci, window = call_indicator("CCI", high, low, close, timeperiod=period)
-    signal = np.where(cci > 0, 1, np.where(cci < 0, -1, 0))
-    return signal, window
 
+    cci = np.ravel(cci)
+
+    signal = np.full_like(cci, np.nan, dtype=np.float32)
+    valid = ~np.isnan(cci)
+
+    signal[valid & (cci > 0)] = 1
+    signal[valid & (cci < 0)] = -1
+    signal[valid & (cci == 0)] = 0
+
+    return signal, window
 
 def willr_signal(high, low, close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("WILLR", 14)
     will, window = call_indicator("WILLR", high, low, close, timeperiod=period)
-    signal = np.where(will < -80, 1, np.where(will > -20, -1, 0))
+
+    will = np.ravel(will)
+
+    signal = np.full_like(will, np.nan, dtype=np.float32)
+    valid = ~np.isnan(will)
+
+    signal[valid & (will < -80)] = 1
+    signal[valid & (will > -20)] = -1
+    signal[valid & (will >= -80) & (will <= -20)] = 0
+
     return signal, window
 
 def adxr_signal(high, low, close, period=14):
     adxr, window = call_indicator("ADXR", high, low, close, timeperiod=period)
-    signal = np.where(adxr > 0, 1, np.where(adxr < 0, -1, 0))
+
+    adxr = np.ravel(adxr)
+
+    signal = np.full_like(adxr, np.nan, dtype=np.float32)
+    valid = ~np.isnan(adxr)
+
+    signal[valid & (adxr > 0)] = 1
+    signal[valid & (adxr < 0)] = -1
+    signal[valid & (adxr == 0)] = 0
+
     return signal, window
 
 def aroon_signal(high, low, period=14):
     (aroon_up, aroon_down), window = call_indicator("AROON", high, low, timeperiod=period)
-    signal = np.where(aroon_up > aroon_down, 1, np.where(aroon_up < aroon_down, -1, 0))
+
+    aroon_up = np.ravel(aroon_up)
+    aroon_down = np.ravel(aroon_down)
+
+    signal = np.full_like(aroon_up, np.nan, dtype=np.float32)
+    valid = ~np.isnan(aroon_up) & ~np.isnan(aroon_down)
+
+    signal[valid & (aroon_up > aroon_down)] = 1
+    signal[valid & (aroon_up < aroon_down)] = -1
+    signal[valid & (aroon_up == aroon_down)] = 0
+
     return signal, window
 
 def aroonosc_signal(high, low, period=14):
     aroon_osc, window = call_indicator("AROONOSC", high, low, timeperiod=period)
-    signal = np.where(aroon_osc > 0, 1, np.where(aroon_osc < 0, -1, 0))
+
+    aroon_osc = np.ravel(aroon_osc)
+
+    signal = np.full_like(aroon_osc, np.nan, dtype=np.float32)
+    valid = ~np.isnan(aroon_osc)
+
+    signal[valid & (aroon_osc > 0)] = 1
+    signal[valid & (aroon_osc < 0)] = -1
+    signal[valid & (aroon_osc == 0)] = 0
+
     return signal, window
 
-def bop_signal(open, high, low, close):
-    bop, window = call_indicator("BOP", open, high, low, close)
-    signal = np.where(bop > 0, 1, np.where(bop < 0, -1, 0))
+def bop_signal(open_, high, low, close):
+    bop, window = call_indicator("BOP", open_, high, low, close)
+
+    bop = np.ravel(bop)
+    signal = np.full_like(bop, np.nan, dtype=np.float32)
+    valid = ~np.isnan(bop)
+
+    signal[valid & (bop > 0)] = 1
+    signal[valid & (bop < 0)] = -1
+    signal[valid & (bop == 0)] = 0
+
     return signal, window
- 
 
 def cmo_signal(close, period=14):
     cmo, window = call_indicator("CMO", close, timeperiod=period)
-    signal = np.where(cmo > 0, 1, np.where(cmo < 0, -1, 0))
+
+    cmo = np.ravel(cmo)
+    signal = np.full_like(cmo, np.nan, dtype=np.float32)
+    valid = ~np.isnan(cmo)
+
+    signal[valid & (cmo > 0)] = 1
+    signal[valid & (cmo < 0)] = -1
+    signal[valid & (cmo == 0)] = 0
+
     return signal, window
+
 
 def macdext_signal(close, fastperiod=12, slowperiod=26, signalperiod=9):
     (macd, signal_line, _), window = call_indicator(
-        "MACDEXT",
-        close,
-        fastperiod=fastperiod,
-        slowperiod=slowperiod,
-        signalperiod=signalperiod
+        "MACDEXT", close, fastperiod=fastperiod, slowperiod=slowperiod, signalperiod=signalperiod
     )
 
-    signals = np.zeros_like(close)
-    signals[crossover(macd, signal_line)] = 1
-    signals[crossunder(macd, signal_line)] = -1
-    return signals, window 
+    close = np.ravel(close)
+    macd = np.ravel(macd)[:len(close)]
+    signal_line = np.ravel(signal_line)[:len(close)]
+
+    signal = np.full(len(close), np.nan, dtype=np.float32)
+    valid = ~np.isnan(macd) & ~np.isnan(signal_line)
+
+    co = crossover(macd, signal_line)[:len(close)]
+    cu = crossunder(macd, signal_line)[:len(close)]
+
+    signal[valid & co] = 1
+    signal[valid & cu] = -1
+    neutral_mask = valid & ~(co | cu)
+    signal[neutral_mask] = 0
+
+    return signal, window
 
 def minus_di_signal(high, low, close, period=14):
     mdi, window = call_indicator("MINUS_DI", high, low, close, timeperiod=period)
-    signal = np.where(mdi > 0, 1, np.where(mdi < 0, -1, 0))
+
+    mdi = np.ravel(mdi)
+    signal = np.full_like(mdi, np.nan, dtype=np.float32)
+    valid = ~np.isnan(mdi)
+
+    signal[valid & (mdi > 0)] = 1
+    signal[valid & (mdi < 0)] = -1
+    signal[valid & (mdi == 0)] = 0
+
     return signal, window
 
 def minus_dm_signal(high, low, period=14):
     mdm, window = call_indicator("MINUS_DM", high, low, timeperiod=period)
-    signal = np.where(mdm > 0, 1, np.where(mdm < 0, -1, 0))
+
+    mdm = np.ravel(mdm)
+    signal = np.full_like(mdm, np.nan, dtype=np.float32)
+    valid = ~np.isnan(mdm)
+
+    signal[valid & (mdm > 0)] = 1
+    signal[valid & (mdm < 0)] = -1
+    signal[valid & (mdm == 0)] = 0
+
     return signal, window
 
 def mom_signal(close, period=10):
     mom, window = call_indicator("MOM", close, timeperiod=period)
-    signal = np.where(mom > 0, 1, np.where(mom < 0, -1, 0))
+
+    mom = np.ravel(mom)
+    signal = np.full_like(mom, np.nan, dtype=np.float32)
+    valid = ~np.isnan(mom)
+
+    signal[valid & (mom > 0)] = 1
+    signal[valid & (mom < 0)] = -1
+    signal[valid & (mom == 0)] = 0
+
     return signal, window
 
 def plus_di_signal(high, low, close, period=14):
     pdi, window = call_indicator("PLUS_DI", high, low, close, timeperiod=period)
-    signal = np.where(pdi > 0, 1, np.where(pdi < 0, -1, 0))
+
+    pdi = np.ravel(pdi)
+    signal = np.full_like(pdi, np.nan, dtype=np.float32)
+    valid = ~np.isnan(pdi)
+
+    signal[valid & (pdi > 0)] = 1
+    signal[valid & (pdi < 0)] = -1
+    signal[valid & (pdi == 0)] = 0
+
     return signal, window
+
 
 def plus_dm_signal(high, low, period=14):
     pdm, window = call_indicator("PLUS_DM", high, low, timeperiod=period)
-    signal = np.where(pdm > 0, 1, np.where(pdm < 0, -1, 0))
+
+    pdm = np.ravel(pdm)
+    signal = np.full_like(pdm, np.nan, dtype=np.float32)
+    valid = ~np.isnan(pdm)
+
+    signal[valid & (pdm > 0)] = 1
+    signal[valid & (pdm < 0)] = -1
+    signal[valid & (pdm == 0)] = 0
+
     return signal, window
+
 
 
 # =========================================================
@@ -307,18 +545,52 @@ def plus_dm_signal(high, low, period=14):
 
 def mfi_signal(high, low, close, volume, period=14):
     mfi, window = call_indicator("MFI", high, low, close, volume, timeperiod=period)
-    signal = np.where(mfi < 20, 1, np.where(mfi > 80, -1, 0))
+
+    mfi = np.ravel(mfi)
+    signal = np.full_like(mfi, np.nan, dtype=np.float32)
+    valid = ~np.isnan(mfi)
+
+    signal[valid & (mfi < 20)] = 1
+    signal[valid & (mfi > 80)] = -1
+    signal[valid & (mfi >= 20) & (mfi <= 80)] = 0
+
     return signal, window
+
 
 def obv_signal(close, volume):
     obv, window = call_indicator("OBV", close, volume)
-    signal = np.where(obv > np.roll(obv, 1), 1, -1)
+
+    obv = np.ravel(obv)
+    signal = np.full_like(obv, np.nan, dtype=np.float32)
+    valid = ~np.isnan(obv)
+
+    prev = np.roll(obv, 1)
+    # avoid first element comparison (NaN)
+    valid[0] = False
+
+    signal[valid & (obv > prev)] = 1
+    signal[valid & (obv < prev)] = -1
+    signal[valid & (obv == prev)] = 0
+
     return signal, window
+
 
 def ad_signal(high, low, close, volume):
     ad, window = call_indicator("AD", high, low, close, volume)
-    signal = np.where(ad > np.roll(ad, 1), 1, -1)
+
+    ad = np.ravel(ad)
+    signal = np.full_like(ad, np.nan, dtype=np.float32)
+    valid = ~np.isnan(ad)
+
+    prev = np.roll(ad, 1)
+    valid[0] = False
+
+    signal[valid & (ad > prev)] = 1
+    signal[valid & (ad < prev)] = -1
+    signal[valid & (ad == prev)] = 0
+
     return signal, window
+
 
 def adosc_signal(high, low, close, volume, fastperiod=3, slowperiod=10):
     adosc, window = call_indicator(
@@ -326,141 +598,272 @@ def adosc_signal(high, low, close, volume, fastperiod=3, slowperiod=10):
         fastperiod=fastperiod, slowperiod=slowperiod
     )
 
-    # 🔹 CLEAN WINDOW — keep only fast & slow periods
+    adosc = np.ravel(adosc)
+    signal = np.full_like(adosc, np.nan, dtype=np.float32)
+    valid = ~np.isnan(adosc)
+
+    signal[valid & (adosc > 0)] = 1
+    signal[valid & (adosc < 0)] = -1
+    signal[valid & (adosc == 0)] = 0
+
+    # Clean window to only meaningful values
     if isinstance(window, (list, tuple)):
-        # Remove None, "null", 0 or anything invalid
-        window = [w for w in window if isinstance(w, (int, float)) and w > 0]
-
-        # ADOSC should ONLY have 2 values
-        window = window[:2]
-
+        window = [w for w in window if isinstance(w, (int, float)) and w > 0][:2]
     else:
         window = [fastperiod, slowperiod]
 
-    signal = np.where(adosc > 0, 1, np.where(adosc < 0, -1, 0))
-
     return signal, window
+
 
 
 def atr_signal(high, low, close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("ATR", 14)
     atr, window = call_indicator("ATR", high, low, close, timeperiod=period)
+
+    atr = np.ravel(atr)
     mean = np.nanmean(atr)
-    signal = np.where(atr > mean, 1, -1)
+    signal = np.full_like(atr, np.nan, dtype=np.float32)
+    valid = ~np.isnan(atr)
+
+    signal[valid & (atr > mean)] = 1
+    signal[valid & (atr <= mean)] = -1
+
     return signal, window
 
 
 def natr_signal(high, low, close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("NATR", 14)
     natr, window = call_indicator("NATR", high, low, close, timeperiod=period)
+
+    natr = np.ravel(natr)
     mean = np.nanmean(natr)
-    signal = np.where(natr > mean, 1, -1)
+    signal = np.full_like(natr, np.nan, dtype=np.float32)
+    valid = ~np.isnan(natr)
+
+    signal[valid & (natr > mean)] = 1
+    signal[valid & (natr <= mean)] = -1
+
     return signal, window
 
 
 def wclprice_signal(high, low, close):
     wcl, window = call_indicator("WCLPRICE", high, low, close)
+
     price = (high + low + close) / 3
-    signal = np.where(price > wcl, 1, np.where(price < wcl, -1, 0))
+    price = np.ravel(price)
+    wcl = np.ravel(wcl)[:len(price)]
+
+    signal = np.full_like(price, np.nan, dtype=np.float32)
+    valid = ~np.isnan(price) & ~np.isnan(wcl)
+
+    signal[valid & (price > wcl)] = 1
+    signal[valid & (price < wcl)] = -1
+    signal[valid & (price == wcl)] = 0
+
     return signal, window
+
 
 
 # =========================================================
 # VOLATILITY
 # =========================================================
 
-
 def trange_signal(high, low, close):
     tr, window = call_indicator("TRANGE", high, low, close)
+    tr = np.ravel(tr)
     mean = np.nanmean(tr)
-    signal = np.where(tr > mean, 1, -1)
+
+    signal = np.full_like(tr, np.nan, dtype=np.float32)
+    valid = ~np.isnan(tr)
+
+    signal[valid & (tr > mean)] = 1
+    signal[valid & (tr <= mean)] = -1
+
     return signal, window
+
 
 def linearreg_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("LINEARREG", 14)
     val, window = call_indicator("LINEARREG", close, timeperiod=period)
-    signal = np.where(close > val, 1, np.where(close < val, -1, 0))
-    return signal, window
+    
+    close = np.ravel(close)
+    val = np.ravel(val)[:len(close)]
 
+    signal = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val) & ~np.isnan(close)
+
+    signal[valid & (close > val)] = 1
+    signal[valid & (close < val)] = -1
+    signal[valid & (close == val)] = 0
+
+    return signal, window
 
 def linearreg_angle_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("LINEARREG_ANGLE", 14)
     val, window = call_indicator("LINEARREG_ANGLE", close, timeperiod=period)
-    signal = np.where(val > 0, 1, -1)
+    
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+
     return signal, window
 
 
 def linearreg_intercept_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("LINEARREG_INTERCEPT", 14)
     val, window = call_indicator("LINEARREG_INTERCEPT", close, timeperiod=period)
-    signal = np.where(val > 0, 1, -1)
-    return signal, window
+    
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
 
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+
+    return signal, window
 
 def linearreg_slope_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("LINEARREG_SLOPE", 14)
     val, window = call_indicator("LINEARREG_SLOPE", close, timeperiod=period)
-    signal = np.where(val > 0, 1, -1)
-    return signal, window
+    
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
 
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+
+    return signal, window
 
 def tsf_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("TSF", 14)
     val, window = call_indicator("TSF", close, timeperiod=period)
-    signal = np.where(close > val, 1, np.where(close < val, -1, 0))
-    return signal, window
 
+    close = np.ravel(close)
+    val = np.ravel(val)[:len(close)]
+
+    signal = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val) & ~np.isnan(close)
+
+    signal[valid & (close > val)] = 1
+    signal[valid & (close < val)] = -1
+    signal[valid & (close == val)] = 0
+
+    return signal, window
 
 def stddev_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("STDDEV", 5)
     val, window = call_indicator("STDDEV", close, timeperiod=period)
-    mean = np.nanmean(val)
-    signal = np.where(val > mean, 1, -1)
-    return signal, window
 
+    val = np.ravel(val)
+    mean = np.nanmean(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val <= mean)] = -1
+
+    return signal, window
 
 def var_signal(close, period=None):
     period = period or TA_DEFAULT_WINDOWS.get("VAR", 5)
     val, window = call_indicator("VAR", close, timeperiod=period)
+
+    val = np.ravel(val)
     mean = np.nanmean(val)
-    signal = np.where(val > mean, 1, -1)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val <= mean)] = -1
+
     return signal, window
-
-
 
 # ========================================================
 # Hilbert Transform
 # ========================================================
-
 def ht_dcperiod_signal(close):
     val, window = call_indicator("HT_DCPERIOD", close)
-    signal = np.where(val > np.roll(val, 1), 1, -1)
+    val = np.ravel(val)
+    
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    
+    prev = np.roll(val, 1)
+    valid[0] = False  # first element has no previous to compare
+
+    signal[valid & (val > prev)] = 1
+    signal[valid & (val <= prev)] = -1
+
     return signal, window
 
 def ht_dcphase_signal(close):
     val, window = call_indicator("HT_DCPHASE", close)
-    signal = np.where(val > np.roll(val, 1), 1, -1)
+    val = np.ravel(val)
+    
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    
+    prev = np.roll(val, 1)
+    valid[0] = False
+
+    signal[valid & (val > prev)] = 1
+    signal[valid & (val <= prev)] = -1
+
     return signal, window
 
 def ht_phasor_signal(close):
     (inphase, quadrature), window = call_indicator("HT_PHASOR", close)
-    signals = np.zeros_like(close)
-    signals[crossover(inphase, quadrature)] = 1
-    signals[crossunder(inphase, quadrature)] = -1
-    return signals, window
+    
+    close = np.ravel(close)
+    inphase = np.ravel(inphase)[:len(close)]
+    quadrature = np.ravel(quadrature)[:len(close)]
+
+    signal = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(inphase) & ~np.isnan(quadrature)
+
+    temp_signal = np.zeros_like(close)
+    temp_signal[crossover(inphase, quadrature)] = 1
+    temp_signal[crossunder(inphase, quadrature)] = -1
+
+    signal[valid] = temp_signal[valid]
+
+    return signal, window
 
 def ht_sine_signal(close):
     (sine, leadsine), window = call_indicator("HT_SINE", close)
-    signals = np.zeros_like(close)
-    signals[crossover(sine, leadsine)] = 1
-    signals[crossunder(sine, leadsine)] = -1
-    return signals, window
+    
+    close = np.ravel(close)
+    sine = np.ravel(sine)[:len(close)]
+    leadsine = np.ravel(leadsine)[:len(close)]
+
+    signal = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(sine) & ~np.isnan(leadsine)
+
+    temp_signal = np.zeros_like(close)
+    temp_signal[crossover(sine, leadsine)] = 1
+    temp_signal[crossunder(sine, leadsine)] = -1
+
+    signal[valid] = temp_signal[valid]
+
+    return signal, window
 
 def ht_trendmode_signal(close):
     val, window = call_indicator("HT_TRENDMODE", close)
-    signal = np.where(val == 1, 1, -1)
-    return signal, window
+    val = np.ravel(val)
 
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val == 1)] = 1
+    signal[valid & (val != 1)] = -1
+
+    return signal, window
 
 # =========================================================
 # CANDLESTICK PATTERNS
@@ -474,88 +877,242 @@ def candlestick_signal(open, high, low, close, pattern_name):
 # ============================================
 # Math Transform
 # ===========================================
-
 def asin_signal(close):
     val, window = call_indicator("ASIN", close)
-    signal = np.where(val > 0, 1, np.where(val < 0, -1, 0))
+    val = np.ravel(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+
     return signal, window
 
 def ceil_signal(close):
     val, window = call_indicator("CEIL", close)
-    return val, window
+    val = np.ravel(val)
+    # initialize signal array with NaN
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
 
 def cosh_signal(close):
     val, window = call_indicator("COSH", close)
-    return val, window
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
 
 def log10_signal(close):
     val, window = call_indicator("LOG10", close)
-    return val, window
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
 
 def sinh_signal(close):
     val, window = call_indicator("SINH", close)
-    return val, window
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
 
 def tan_signal(close):
     val, window = call_indicator("TAN", close)
-    return val, window
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
 
 def tanh_signal(close):
     val, window = call_indicator("TANH", close)
-    return val, window
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
+
+def minindex_signal(close, period=14):
+    val, window = call_indicator("MININDEX", close, timeperiod=period)
+    val = np.ravel(val)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
+    return signal, window
+
 
 def max_signal(close1, close2):
     val, window = call_indicator("MAX", close1, close2)
-    signal = np.where(close1 > close2, 1, -1)
+    close1 = np.ravel(close1)
+    close2 = np.ravel(close2)
+
+    signal = np.full_like(close1, np.nan, dtype=np.float32)
+    valid = ~np.isnan(close1) & ~np.isnan(close2)
+
+    signal[valid & (close1 > close2)] = 1
+    signal[valid & (close1 <= close2)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def min_signal(close1, close2):
     val, window = call_indicator("MIN", close1, close2)
-    signal = np.where(close1 < close2, 1, -1)
-    return signal, window
+    close1 = np.ravel(close1)
+    close2 = np.ravel(close2)
 
-def minindex_signal(close, period=14):
-    val, window = call_indicator("MININDEX", close, timeperiod=period)
-    return val, window
+    signal = np.full_like(close1, np.nan, dtype=np.float32)
+    valid = ~np.isnan(close1) & ~np.isnan(close2)
+
+    signal[valid & (close1 < close2)] = 1
+    signal[valid & (close1 >= close2)] = -1
+    signal[valid & (val == 0)] = 0
+
+
+    return signal, window
 
 def acos_signal(close):
     val, window = call_indicator("ACOS", close)
-    signal = np.where(val > 0, 1, -1)
+    val = np.ravel(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def atan_signal(close):
     val, window = call_indicator("ATAN", close)
-    signal = np.where(val > 0, 1, -1)
+    val = np.ravel(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def cos_signal(close):
     val, window = call_indicator("COS", close)
-    signal = np.where(val > 0, 1, -1)
+    val = np.ravel(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def exp_signal(close):
     val, window = call_indicator("EXP", close)
-    signal = np.where(val > np.mean(val), 1, -1)
+    val = np.ravel(val)
+    mean = np.nanmean(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val <= mean)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def floor_signal(close):
     val, window = call_indicator("FLOOR", close)
-    signal = np.where(val > np.mean(val), 1, -1)
+    val = np.ravel(val)
+    mean = np.nanmean(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val <= mean)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def ln_signal(close):
     val, window = call_indicator("LN", close)
-    signal = np.where(val > np.mean(val), 1, -1)
+    val = np.ravel(val)
+    mean = np.nanmean(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val <= mean)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
+
 
 def sin_signal(close):
     val, window = call_indicator("SIN", close)
-    signal = np.where(val > 0, 1, -1)
+    val = np.ravel(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val <= 0)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 def sqrt_signal(close):
     val, window = call_indicator("SQRT", close)
-    signal = np.where(val > np.mean(val), 1, -1)
+    val = np.ravel(val)
+    mean = np.nanmean(val)
+
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val <= mean)] = -1
+    signal[valid & (val == 0)] = 0
+
+
     return signal, window
 
 # =====================================================
@@ -564,42 +1121,76 @@ def sqrt_signal(close):
 def avgprice_signal(open, high, low, close):
     avg, window = call_indicator("AVGPRICE", open, high, low, close)
     price = (open + high + low + close) / 4
-    signal = np.where(price > avg, 1, np.where(price < avg, -1, 0))
+    signal = np.full_like(price, np.nan, dtype=np.float32)
+    valid = ~np.isnan(avg) & ~np.isnan(price)
+    signal[valid & (price > avg)] = 1
+    signal[valid & (price < avg)] = -1
+    signal[valid & (price == avg)] = 0
     return signal, window
 
 
 def medprice_signal(high, low):
     med, window = call_indicator("MEDPRICE", high, low)
     price = (high + low) / 2
-    signal = np.where(price > med, 1, np.where(price < med, -1, 0))
+    signal = np.full_like(price, np.nan, dtype=np.float32)
+    valid = ~np.isnan(med) & ~np.isnan(price)
+    signal[valid & (price > med)] = 1
+    signal[valid & (price < med)] = -1
+    signal[valid & (price == med)] = 0
     return signal, window
+
 
 def typprice_signal(high, low, close):
     typ, window = call_indicator("TYPPRICE", high, low, close)
     price = (high + low + close) / 3
-    signal = np.where(price > typ, 1, np.where(price < typ, -1, 0))
+    signal = np.full_like(price, np.nan, dtype=np.float32)
+    valid = ~np.isnan(typ) & ~np.isnan(price)
+    signal[valid & (price > typ)] = 1
+    signal[valid & (price < typ)] = -1
+    signal[valid & (price == typ)] = 0
     return signal, window
+
 
 def adx_signal(high, low, close, period=14):
     val, window = call_indicator("ADX", high, low, close, timeperiod=period)
     mean = np.nanmean(val)
-    signal = np.where(val > mean, 1, -1)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val < mean)] = -1
+    signal[valid & (val == mean)] = 0
     return signal, window
+
 
 def rocp_signal(close, period=10):
     val, window = call_indicator("ROCP", close, timeperiod=period)
-    signal = np.where(val > 0, 1, np.where(val < 0, -1, 0))
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
     return signal, window
+
 
 def rocr_signal(close, period=10):
     val, window = call_indicator("ROCR", close, timeperiod=period)
-    signal = np.where(val > 1, 1, np.where(val < 1, -1, 0))
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 1)] = 1
+    signal[valid & (val < 1)] = -1
+    signal[valid & (val == 1)] = 0
     return signal, window
+
 
 def rocr100_signal(close, period=10):
     val, window = call_indicator("ROCR100", close, timeperiod=period)
-    signal = np.where(val > 100, 1, np.where(val < 100, -1, 0))
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 100)] = 1
+    signal[valid & (val < 100)] = -1
+    signal[valid & (val == 100)] = 0
     return signal, window
+
 
 def stochrsi_signal(close, timeperiod=14, fastk_period=3, fastd_period=3, fastd_matype=0):
     (fastk, fastd), window = call_indicator(
@@ -610,20 +1201,33 @@ def stochrsi_signal(close, timeperiod=14, fastk_period=3, fastd_period=3, fastd_
         fastd_period=fastd_period,
         fastd_matype=fastd_matype
     )
-    signals = np.zeros_like(close)
-    signals[crossover(fastk, fastd)] = 1
-    signals[crossunder(fastk, fastd)] = -1
+    signals = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(fastk) & ~np.isnan(fastd)
+    signals[valid & crossover(fastk, fastd)] = 1
+    signals[valid & crossunder(fastk, fastd)] = -1
+    signals[valid & ~(crossover(fastk, fastd) | crossunder(fastk, fastd))] = 0
     return signals, window
+
 
 def t3_signal(close, period=14, vfactor=0.7):
     t3, window = call_indicator("T3", close, timeperiod=period, vfactor=vfactor)
-    signal = np.where(close > t3, 1, np.where(close < t3, -1, 0))
+    signal = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(t3) & ~np.isnan(close)
+    signal[valid & (close > t3)] = 1
+    signal[valid & (close < t3)] = -1
+    signal[valid & (close == t3)] = 0
     return signal, window
+
 
 def roc_signal(close, period=10):
     val, window = call_indicator("ROC", close, timeperiod=period)
-    signal = np.where(val > 0, 1, np.where(val < 0, -1, 0))
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
     return signal, window
+
 
 def stochf_signal(high, low, close, fastk_period=14, fastd_period=3, fastd_matype=0):
     (fastk, fastd), window = call_indicator(
@@ -633,26 +1237,44 @@ def stochf_signal(high, low, close, fastk_period=14, fastd_period=3, fastd_matyp
         fastd_period=fastd_period,
         fastd_matype=fastd_matype
     )
-    signals = np.zeros_like(close)
-    signals[crossover(fastk, fastd)] = 1
-    signals[crossunder(fastk, fastd)] = -1
+    signals = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(fastk) & ~np.isnan(fastd)
+    signals[valid & crossover(fastk, fastd)] = 1
+    signals[valid & crossunder(fastk, fastd)] = -1
+    signals[valid & ~(crossover(fastk, fastd) | crossunder(fastk, fastd))] = 0
     return signals, window
+
 
 def trix_signal(close, period=14):
     val, window = call_indicator("TRIX", close, timeperiod=period)
-    signal = np.where(val > 0, 1, np.where(val < 0, -1, 0))
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > 0)] = 1
+    signal[valid & (val < 0)] = -1
+    signal[valid & (val == 0)] = 0
     return signal, window
+
 
 def sarext_signal(high, low, close):
     sar, window = call_indicator("SAREXT", high, low)
-    signal = np.where(close > sar, 1, np.where(close < sar, -1, 0))
+    signal = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(sar) & ~np.isnan(close)
+    signal[valid & (close > sar)] = 1
+    signal[valid & (close < sar)] = -1
+    signal[valid & (close == sar)] = 0
     return signal, window
+
 
 def dx_signal(high, low, close, period=14):
     val, window = call_indicator("DX", high, low, close, timeperiod=period)
     mean = np.nanmean(val)
-    signal = np.where(val > mean, 1, -1)
+    signal = np.full_like(val, np.nan, dtype=np.float32)
+    valid = ~np.isnan(val)
+    signal[valid & (val > mean)] = 1
+    signal[valid & (val < mean)] = -1
+    signal[valid & (val == mean)] = 0
     return signal, window
+
 
 def stoch_signal(high, low, close, fastk_period=14, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0):
     (slowk, slowd), window = call_indicator(
@@ -664,9 +1286,11 @@ def stoch_signal(high, low, close, fastk_period=14, slowk_period=3, slowk_matype
         slowd_period=slowd_period,
         slowd_matype=slowd_matype
     )
-    signals = np.zeros_like(close)
-    signals[crossover(slowk, slowd)] = 1
-    signals[crossunder(slowk, slowd)] = -1
+    signals = np.full_like(close, np.nan, dtype=np.float32)
+    valid = ~np.isnan(slowk) & ~np.isnan(slowd)
+    signals[valid & crossover(slowk, slowd)] = 1
+    signals[valid & crossunder(slowk, slowd)] = -1
+    signals[valid & ~(crossover(slowk, slowd) | crossunder(slowk, slowd))] = 0
     return signals, window
 
 # =========================================================
