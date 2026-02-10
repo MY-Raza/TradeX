@@ -28,7 +28,7 @@ logger = get_logger("strategy_main")
 # ============================
 TIMEFRAMES = [
     "1h","15m", "5m"]
-RUNS_PER_TIMEFRAME = 50
+RUNS_PER_TIMEFRAME = 1
 
 # ============================
 # Indicators
@@ -73,12 +73,7 @@ ALL_INDICATORS = (
     "LINEARREG", "LINEARREG_ANGLE",
     "LINEARREG_INTERCEPT", "LINEARREG_SLOPE",
     "STDDEV", "TSF", "VAR",
-    # -------------------------
-    # Math Transform Indicators
-    # -------------------------
-    "ACOS", "ATAN", "CEIL", "COS", "COSH",
-    "EXP", "FLOOR", "LN", "LOG10", "SIN", "SINH",
-    "SQRT", "TAN", "TANH",
+  
     # ---------------------------
     # CANDLESTICK PATTERN 
     # --------------------------

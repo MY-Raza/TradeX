@@ -12008,3 +12008,84 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-10 15:38:22,199 | INFO | utils | Added missing column 'minus_di_period' as BIGINT
 2026-02-10 15:38:22,203 | INFO | utils | Added missing column 'linearreg_intercept_period' as BIGINT
 2026-02-10 15:38:22,377 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 15:40:28,164 | INFO | utils | Schema 'data_binance' ready
+2026-02-10 15:40:35,836 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-02-10 15:40:36,005 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-02-10 15:58:47,571 | INFO | utils | Inserted 1636413 rows into data_binance.bnb_1m
+2026-02-10 16:06:48,661 | INFO | utils | Database engine initialized
+2026-02-10 16:07:20,661 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 16:07:35,031 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 16:07:36,192 | INFO | utils | Indexes ensured: sig_1h_btc_1_datetime_uidx, sig_1h_btc_1_datetime_desc_idx
+2026-02-10 16:07:36,415 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_1"
+2026-02-10 16:07:51,403 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_1
+2026-02-10 16:07:58,116 | INFO | utils | Schema 'strategies' ready
+2026-02-10 16:07:58,116 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 16:07:58,963 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 16:10:32,906 | INFO | utils | Database engine initialized
+2026-02-10 16:10:52,354 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 16:11:08,199 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 16:11:08,709 | INFO | utils | Indexes ensured: sig_1h_btc_2_datetime_uidx, sig_1h_btc_2_datetime_desc_idx
+2026-02-10 16:11:08,795 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_2"
+2026-02-10 16:11:24,938 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_2
+2026-02-10 16:11:34,001 | INFO | utils | Schema 'strategies' ready
+2026-02-10 16:11:34,003 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 16:11:34,548 | INFO | utils | Added missing column 'ma_period' as BIGINT
+2026-02-10 16:11:34,556 | INFO | utils | Added missing column 'adx_period' as BIGINT
+2026-02-10 16:11:34,566 | INFO | utils | Added missing column 'adxr_period' as BIGINT
+2026-02-10 16:11:34,576 | INFO | utils | Added missing column 'aroonosc_period' as BIGINT
+2026-02-10 16:11:34,586 | INFO | utils | Added missing column 'macd_fastperiod' as BIGINT
+2026-02-10 16:11:34,594 | INFO | utils | Added missing column 'macd_slowperiod' as BIGINT
+2026-02-10 16:11:34,601 | INFO | utils | Added missing column 'macd_signalperiod' as BIGINT
+2026-02-10 16:11:34,611 | INFO | utils | Added missing column 'minus_di_period' as BIGINT
+2026-02-10 16:11:34,621 | INFO | utils | Added missing column 'minus_dm_period' as BIGINT
+2026-02-10 16:11:34,627 | INFO | utils | Added missing column 'ppo_fastperiod' as BIGINT
+2026-02-10 16:11:34,635 | INFO | utils | Added missing column 'ppo_slowperiod' as BIGINT
+2026-02-10 16:11:34,643 | INFO | utils | Added missing column 'rsi_period' as BIGINT
+2026-02-10 16:11:34,651 | INFO | utils | Added missing column 'atr_period' as BIGINT
+2026-02-10 16:11:34,659 | INFO | utils | Added missing column 'linearreg_period' as BIGINT
+2026-02-10 16:11:34,666 | INFO | utils | Added missing column 'var_period' as BIGINT
+2026-02-10 16:11:34,933 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 16:12:31,618 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 16:12:32,274 | INFO | utils | Indexes ensured: sig_15m_btc_1_datetime_uidx, sig_15m_btc_1_datetime_desc_idx
+2026-02-10 16:12:32,308 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_1"
+2026-02-10 16:13:23,133 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_1
+2026-02-10 16:13:39,543 | INFO | utils | Schema 'strategies' ready
+2026-02-10 16:13:39,543 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 16:13:39,757 | INFO | utils | Added missing column 'bbands_period' as BIGINT
+2026-02-10 16:13:39,769 | INFO | utils | Added missing column 'dema_period' as BIGINT
+2026-02-10 16:13:39,772 | INFO | utils | Added missing column 'kama_period' as BIGINT
+2026-02-10 16:13:39,778 | INFO | utils | Added missing column 'midprice_period' as BIGINT
+2026-02-10 16:13:39,778 | INFO | utils | Added missing column 'tema_period' as BIGINT
+2026-02-10 16:13:39,786 | INFO | utils | Added missing column 'aroon_period' as BIGINT
+2026-02-10 16:13:39,792 | INFO | utils | Added missing column 'dx_period' as BIGINT
+2026-02-10 16:13:39,792 | INFO | utils | Added missing column 'plus_dm_period' as BIGINT
+2026-02-10 16:13:39,792 | INFO | utils | Added missing column 'linearreg_angle_period' as BIGINT
+2026-02-10 16:13:39,807 | INFO | utils | Added missing column 'linearreg_slope_period' as BIGINT
+2026-02-10 16:13:39,811 | INFO | utils | Added missing column 'stddev_period' as BIGINT
+2026-02-10 16:13:40,064 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 16:17:50,465 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 16:17:52,602 | INFO | utils | Indexes ensured: sig_5m_btc_1_datetime_uidx, sig_5m_btc_1_datetime_desc_idx
+2026-02-10 16:17:52,842 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_1"
+2026-02-10 16:21:00,420 | INFO | utils | Schema 'data_binance' ready
+2026-02-10 16:21:16,022 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-02-10 16:21:16,038 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-02-10 16:21:17,116 | INFO | utils | Inserted 7 rows into data_binance.bnb_1m
+2026-02-10 16:21:21,998 | INFO | utils | Inserted 327159 rows into strategy_signals.sig_5m_btc_1
+2026-02-10 16:22:20,181 | INFO | utils | Schema 'strategies' ready
+2026-02-10 16:22:20,182 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 16:22:20,512 | INFO | utils | Added missing column 'tsf_period' as BIGINT
+2026-02-10 16:22:20,815 | INFO | utils | Inserted 1 rows into strategies.strategy_registry

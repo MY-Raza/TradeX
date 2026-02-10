@@ -362,16 +362,20 @@ def fetch_ohlcv_df(
 #======================================
 # Strategy Fetcher Operation From DB
 #======================================
-def get_profitable_strategies(min_pnl: float = 100):
+def get_profitable_strategies(timehorizon: str, min_pnl: float = 100):
     """
-    Fetch strategies where pnl_sum > min_pnl.
+    Fetch strategies for a given timeframe where pnl_sum > min_pnl.
     For each row, keep only columns where value is:
       - True (boolean)
       - OR non-zero number (int/float)
       - OR non-null and not False
 
+    Args:
+        timeframe (str): e.g. "1h", "15m"
+        min_pnl (float): minimum cumulative PnL
+
     Returns:
-        List[SimpleNamespace] → Each strategy as an object with dynamic attributes
+        List[SimpleNamespace]
     """
     engine = get_engine()
 
@@ -379,10 +383,17 @@ def get_profitable_strategies(min_pnl: float = 100):
         SELECT *
         FROM strategies.strategy_registry
         WHERE pnl_sum > :min_pnl
+          AND timehorizon = :timehorizon
     """)
 
     with engine.begin() as conn:
-        result = conn.execute(query, {"min_pnl": min_pnl})
+        result = conn.execute(
+            query,
+            {
+                "min_pnl": min_pnl,
+                "timehorizon": timehorizon
+            }
+        )
         rows = result.fetchall()
         columns = result.keys()
 
@@ -391,7 +402,6 @@ def get_profitable_strategies(min_pnl: float = 100):
     for row in rows:
         row_dict = dict(zip(columns, row))
 
-        # Filter columns: keep True or non-zero, non-None, non-False
         filtered_dict = {}
         for k, v in row_dict.items():
             if v is True:
@@ -401,7 +411,6 @@ def get_profitable_strategies(min_pnl: float = 100):
             elif v not in (None, False):
                 filtered_dict[k] = v
 
-        # Convert to SimpleNamespace for dot-access
         strategy_obj = SimpleNamespace(**filtered_dict)
         strategies.append(strategy_obj)
 
@@ -410,7 +419,11 @@ def get_profitable_strategies(min_pnl: float = 100):
             ", ".join(f"{k}={v}" for k, v in filtered_dict.items())
         )
 
-    logger.info(f"Total profitable strategies found: {len(strategies)}")
+    logger.info(
+        f"Total profitable strategies found for timeframe {timehorizon}: {len(strategies)}"
+    )
+
     return strategies
+
 
 
