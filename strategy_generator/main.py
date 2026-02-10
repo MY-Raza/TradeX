@@ -169,6 +169,8 @@ for timeframe in TIMEFRAMES:
             timestamps,
         )
 
+        print(signals.head())
+
         if signals.empty:
             logger.warning("Empty signals — skipping.")
             continue

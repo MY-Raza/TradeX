@@ -159,14 +159,6 @@ def get_last_date(table_name: str, schema: str, time_column: str) -> pd.Timestam
             return pd.to_datetime(result, utc=True)
         return None
 
-
-from sqlalchemy import inspect, text
-import pandas as pd
-import json
-import logging
-
-logger = logging.getLogger("db_utils")
-
 def save_df_to_db(
     df: pd.DataFrame,
     table_name: str,
@@ -184,36 +176,50 @@ def save_df_to_db(
         logger.warning("Empty DataFrame, skipping insert")
         return
 
+    print("DF in util.py")
+    print(df.head())
+
     engine = get_engine()
     schema = ensure_schema(schema)
     create_schema(schema)
     table = table_name
 
-    # Handle time_column
+    # --------------------------------------------------
+    # Handle time column safely (NO forced UTC conversion)
+    # --------------------------------------------------
     if time_column is None:
         if "datetime" in df.columns:
             time_column = "datetime"
             logger.info("time_column not provided, using 'datetime' by default")
         else:
             time_column = None
-            logger.info("No time_column provided and 'datetime' missing, proceeding without time indexing")
+            logger.info("No time_column provided and 'datetime' missing")
 
     if time_column:
         if time_column not in df.columns:
             raise ValueError(f"time_column '{time_column}' not found in DataFrame")
-        if not pd.api.types.is_datetime64_any_dtype(df[time_column]):
-            df[time_column] = pd.to_datetime(df[time_column], utc=True)
+
+        df[time_column] = pd.to_datetime(df[time_column])
+
+        # Localize ONLY if naive
+        if df[time_column].dt.tz is None:
+            df[time_column] = df[time_column].dt.tz_localize("UTC")
+
         df = df.drop_duplicates(subset=[time_column])
 
-    # Dynamically add missing columns ONLY for strategies.strategy_registry
+    # --------------------------------------------------
+    # Dynamically add missing columns (strategy_registry)
+    # --------------------------------------------------
     if schema == "strategies" and table == "strategy_registry":
         df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
+
         inspector = inspect(engine)
         existing_cols = [col["name"] for col in inspector.get_columns(table, schema=schema)]
 
         for col in df.columns:
             if col not in existing_cols:
                 sample_value = df[col].iloc[0]
+
                 if isinstance(sample_value, (tuple, list)):
                     col_type = "JSONB"
                     df[col] = df[col].apply(lambda x: json.dumps(x) if x is not None else None)
@@ -226,38 +232,57 @@ def save_df_to_db(
                 else:
                     col_type = "TEXT"
 
-                alter_sql = text(f'ALTER TABLE {schema}.{table} ADD COLUMN IF NOT EXISTS "{col}" {col_type}')
+                alter_sql = text(
+                    f'ALTER TABLE {schema}.{table} ADD COLUMN IF NOT EXISTS "{col}" {col_type}'
+                )
                 with engine.begin() as conn:
                     conn.execute(alter_sql)
+
                 logger.info(f"Added missing column '{col}' as {col_type}")
 
-    # Convert any tuple/list columns to JSON before insert (safety for JSONB columns)
+    # --------------------------------------------------
+    # Convert tuple/list columns to JSON (safety)
+    # --------------------------------------------------
     for col in df.columns:
         if df[col].apply(lambda x: isinstance(x, (tuple, list))).any():
             df[col] = df[col].apply(lambda x: json.dumps(x) if x is not None else None)
 
-    # Create table if missing (head only)
+    # --------------------------------------------------
+    # Create table if missing
+    # --------------------------------------------------
     df.head(0).to_sql(table, engine, schema=schema, if_exists="append", index=False)
 
-    # Ensure indexes & hypertable if applicable
+    # --------------------------------------------------
+    # Time-series handling
+    # --------------------------------------------------
     if time_column:
         ensure_unique_index(table, schema, time_column)
+
         if is_timeseries:
             ensure_hypertable(table, schema, time_column)
 
-        # Filter already ingested rows (incremental ingestion)
+        # Incremental ingestion (timezone-safe)
         last_dt = get_last_date(table, schema, time_column)
-        if last_dt:
+
+        if last_dt is not None:
+            last_dt = pd.to_datetime(last_dt)
+
+            if last_dt.tzinfo is None:
+                last_dt = last_dt.tz_localize("UTC")
+
             df = df[df[time_column] > last_dt]
 
     if df.empty:
         logger.info("No new rows to insert")
         return
 
+    # --------------------------------------------------
     # Insert safely
+    # --------------------------------------------------
     cols = ",".join([f'"{c}"' for c in df.columns])
     placeholders = ",".join([f":{c}" for c in df.columns])
     conflict_clause = f"ON CONFLICT ({time_column}) DO NOTHING" if time_column else ""
+
     insert_sql = text(f"""
         INSERT INTO {schema}.{table} ({cols})
         VALUES ({placeholders})
@@ -268,6 +293,7 @@ def save_df_to_db(
         conn.execute(insert_sql, df.to_dict(orient="records"))
 
     logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
+
 
 
 

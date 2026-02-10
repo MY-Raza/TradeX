@@ -151,7 +151,6 @@ def run_active_signals_with_voting(
     df = pd.DataFrame({"datetime": timestamps, "signals": final_signal})
     df = df.dropna(subset=["signals"]).reset_index(drop=True)
     df["signals"] = df["signals"].astype(np.int8)
-
     return df, windows_dict
 
 
