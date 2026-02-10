@@ -54,9 +54,8 @@ def run_active_signals_with_voting(
         NaN → Majority of indicators returned NaN
 
     NaNs in indicator outputs are handled:
-        - Majority NaN → final signal NaN
-        - Otherwise → majority vote ignoring NaNs
-        - Final DataFrame drops rows where signal is NaN.
+        - Rows with any NaN are dropped before voting
+        - Final DataFrame has no NaNs
 
     Args:
         flags (dict[str, bool]): Indicator activation map.
@@ -65,7 +64,7 @@ def run_active_signals_with_voting(
 
     Returns:
         tuple:
-            - pd.DataFrame: Columns = ["datetime", "signals"], NaNs dropped
+            - pd.DataFrame: Columns = ["datetime", "signals"], NaN rows dropped
             - dict: Indicator → window/parameter configuration
     """
 
@@ -126,32 +125,47 @@ def run_active_signals_with_voting(
                     windows_dict[name] = filtered_window
 
     # ---------------------------------------------------------
-    # Majority voting with NaN handling
+    # Create DataFrame of all signals
     # ---------------------------------------------------------
-    final_signal = np.full(len(timestamps), np.nan, dtype=np.float32)
-
     if signals_dict:
-        print(signals_dict)
         all_signals = np.column_stack(list(signals_dict.values())).astype(np.float32)
+        all_signals_df = pd.DataFrame(
+            all_signals,
+            columns=list(signals_dict.keys()),
+            index=pd.to_datetime(timestamps)
+        ).reset_index()
+        all_signals_df.rename(columns={"index": "datetime"}, inplace=True)
 
-        for i in range(all_signals.shape[0]):
-            row = all_signals[i, :]
-            n_total = len(row)
-            n_nan = np.isnan(row).sum()
-            n_valid = n_total - n_nan
-
-            if n_nan > n_valid:  # majority NaN → set NaN
-                final_signal[i] = np.nan
+        # Drop rows with any NaN values
+        all_signals_df = all_signals_df.dropna(axis=0, how='any').reset_index(drop=True)
+        # ---------------------------------------------------------
+        # Majority voting on valid rows
+        # ---------------------------------------------------------
+        final_signal = []
+        for i, row in all_signals_df.iterrows():
+            votes = row.iloc[1:].to_numpy(dtype=np.float32)
+    
+            buy_votes = np.sum(np.isclose(votes, 1))
+            sell_votes = np.sum(np.isclose(votes, -1))
+    
+            # Majority voting
+            if buy_votes > sell_votes:
+                final_signal.append(1)
+            elif sell_votes > buy_votes:
+                final_signal.append(-1)
             else:
-                # Majority voting ignoring NaNs
-                buy_votes = np.sum(row == 1)
-                sell_votes = np.sum(row == -1)
-                final_signal[i] = 1 if buy_votes > sell_votes else (-1 if sell_votes > buy_votes else 0)
+                final_signal.append(0)
+     
+        all_signals_df["signals"] = final_signal
 
-    # Build DataFrame and drop NaN rows
-    df = pd.DataFrame({"datetime": timestamps, "signals": final_signal})
-    df = df.dropna(subset=["signals"]).reset_index(drop=True)
-    df["signals"] = df["signals"].astype(np.int8)
-    return df, windows_dict
+        # Keep only datetime and final signals
+        final_df = all_signals_df[["datetime", "signals"]].copy()
+        final_df["signals"] = final_df["signals"].astype(np.int8)
+
+    else:
+        final_df = pd.DataFrame(columns=["datetime", "signals"])
+
+    return final_df, windows_dict
+
 
 
