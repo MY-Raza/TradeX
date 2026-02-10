@@ -11,6 +11,7 @@ def crossover(a, b):
 def crossunder(a, b):
     return (a < b) & (np.roll(a, 1) >= np.roll(b, 1))
 
+
 # =========================================================
 # MOVING AVERAGE SIGNALS
 # =========================================================

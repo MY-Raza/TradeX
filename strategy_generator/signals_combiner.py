@@ -131,6 +131,7 @@ def run_active_signals_with_voting(
     final_signal = np.full(len(timestamps), np.nan, dtype=np.float32)
 
     if signals_dict:
+        print(signals_dict)
         all_signals = np.column_stack(list(signals_dict.values())).astype(np.float32)
 
         for i in range(all_signals.shape[0]):
