@@ -26,8 +26,9 @@ logger = get_logger("strategy_main")
 # ============================
 # Strategy configuration
 # ============================
-TIMEFRAMES = ["1h", "15m", "5m"]
-RUNS_PER_TIMEFRAME = 1
+TIMEFRAMES = [
+    "1h","15m", "5m"]
+RUNS_PER_TIMEFRAME = 50
 
 # ============================
 # Indicators
@@ -75,7 +76,7 @@ ALL_INDICATORS = (
     # -------------------------
     # Math Transform Indicators
     # -------------------------
-    "ACOS", "ASIN", "ATAN", "CEIL", "COS", "COSH",
+    "ACOS", "ATAN", "CEIL", "COS", "COSH",
     "EXP", "FLOOR", "LN", "LOG10", "SIN", "SINH",
     "SQRT", "TAN", "TANH",
     # ---------------------------
@@ -168,8 +169,6 @@ for timeframe in TIMEFRAMES:
             volume,
             timestamps,
         )
-
-        print(signals.head())
 
         if signals.empty:
             logger.warning("Empty signals — skipping.")

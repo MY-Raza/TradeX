@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, text, inspect
 from TradeX.utils.common.logs import get_logger
 from dotenv import load_dotenv
 from types import SimpleNamespace
+import json
 
 # ---------------------------
 # Initialize logger
@@ -175,9 +176,6 @@ def save_df_to_db(
     if df.empty:
         logger.warning("Empty DataFrame, skipping insert")
         return
-
-    print("DF in util.py")
-    print(df.head())
 
     engine = get_engine()
     schema = ensure_schema(schema)

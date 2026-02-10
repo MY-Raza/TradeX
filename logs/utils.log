@@ -11779,3 +11779,232 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-10 13:59:40,903 | INFO | utils | Schema 'strategies' ready
 2026-02-10 13:59:40,904 | INFO | utils | No time_column provided and 'datetime' missing
 2026-02-10 13:59:41,837 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 14:03:18,069 | INFO | utils | Database engine initialized
+2026-02-10 14:03:50,139 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:04:09,495 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 14:04:09,872 | INFO | utils | Indexes ensured: sig_1h_btc_1_datetime_uidx, sig_1h_btc_1_datetime_desc_idx
+2026-02-10 14:04:10,197 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_1"
+2026-02-10 14:04:33,483 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_1
+2026-02-10 14:04:39,455 | INFO | utils | Schema 'strategies' ready
+2026-02-10 14:04:39,455 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 14:04:39,994 | INFO | utils | Added missing column 'dema_period' as BIGINT
+2026-02-10 14:04:40,000 | INFO | utils | Added missing column 'ema_period' as BIGINT
+2026-02-10 14:04:40,005 | INFO | utils | Added missing column 'midpoint_period' as BIGINT
+2026-02-10 14:04:40,011 | INFO | utils | Added missing column 'midprice_period' as BIGINT
+2026-02-10 14:04:40,017 | INFO | utils | Added missing column 'wma_period' as BIGINT
+2026-02-10 14:04:40,028 | INFO | utils | Added missing column 'apo_period' as BIGINT
+2026-02-10 14:04:40,034 | INFO | utils | Added missing column 'aroonosc_period' as BIGINT
+2026-02-10 14:04:40,039 | INFO | utils | Added missing column 'cci_period' as BIGINT
+2026-02-10 14:04:40,057 | INFO | utils | Added missing column 'minus_dm_period' as BIGINT
+2026-02-10 14:04:40,070 | INFO | utils | Added missing column 'plus_dm_period' as BIGINT
+2026-02-10 14:04:40,083 | INFO | utils | Added missing column 'ppo_fastperiod' as BIGINT
+2026-02-10 14:04:40,090 | INFO | utils | Added missing column 'ppo_slowperiod' as BIGINT
+2026-02-10 14:04:40,098 | INFO | utils | Added missing column 'roc_period' as BIGINT
+2026-02-10 14:04:40,106 | INFO | utils | Added missing column 'rocr_period' as BIGINT
+2026-02-10 14:04:40,114 | INFO | utils | Added missing column 'adosc_fastperiod' as BIGINT
+2026-02-10 14:04:40,120 | INFO | utils | Added missing column 'adosc_slowperiod' as BIGINT
+2026-02-10 14:04:40,124 | INFO | utils | Added missing column 'stddev_period' as BIGINT
+2026-02-10 14:04:40,134 | INFO | utils | Added missing column 'tsf_period' as BIGINT
+2026-02-10 14:04:41,003 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 14:33:23,858 | INFO | utils | Inserted 1636308 rows into data_binance.eth_1m
+2026-02-10 14:35:45,954 | INFO | utils | Database engine initialized
+2026-02-10 14:36:11,732 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:38:28,173 | INFO | utils | Database engine initialized
+2026-02-10 14:39:05,205 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:39:39,157 | INFO | utils | Schema 'data_binance' ready
+2026-02-10 14:40:34,190 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-02-10 14:40:34,364 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-02-10 14:40:35,649 | INFO | utils | No new rows to insert
+2026-02-10 14:40:38,191 | INFO | utils | Database engine initialized
+2026-02-10 14:41:04,900 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:43:07,229 | INFO | utils | Database engine initialized
+2026-02-10 14:43:41,364 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:46:27,626 | INFO | utils | Database engine initialized
+2026-02-10 14:46:44,289 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:47:43,425 | INFO | utils | Database engine initialized
+2026-02-10 14:47:55,188 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:48:15,905 | INFO | utils | Database engine initialized
+2026-02-10 14:48:27,569 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:49:10,735 | INFO | utils | Database engine initialized
+2026-02-10 14:49:22,856 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:51:58,766 | INFO | utils | Database engine initialized
+2026-02-10 14:52:15,975 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 14:55:40,507 | INFO | utils | Database engine initialized
+2026-02-10 14:56:00,977 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:02:31,351 | INFO | utils | Database engine initialized
+2026-02-10 15:02:56,489 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:05:50,399 | INFO | utils | Database engine initialized
+2026-02-10 15:06:12,103 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:17:36,151 | INFO | utils | Database engine initialized
+2026-02-10 15:18:03,121 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:21:46,868 | INFO | utils | Database engine initialized
+2026-02-10 15:22:12,632 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:22:58,245 | INFO | utils | Database engine initialized
+2026-02-10 15:23:12,619 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:23:43,171 | INFO | utils | Schema 'data_binance' ready
+2026-02-10 15:24:07,520 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-02-10 15:24:07,541 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-02-10 15:24:12,999 | INFO | utils | No new rows to insert
+2026-02-10 15:24:31,805 | INFO | utils | Database engine initialized
+2026-02-10 15:24:50,666 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:26:41,141 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 15:26:41,949 | INFO | utils | Indexes ensured: sig_15m_btc_1_datetime_uidx, sig_15m_btc_1_datetime_desc_idx
+2026-02-10 15:26:42,058 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_1"
+2026-02-10 15:26:58,803 | INFO | utils | Database engine initialized
+2026-02-10 15:27:07,641 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 15:27:57,741 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 15:27:58,187 | INFO | utils | Indexes ensured: sig_15m_btc_2_datetime_uidx, sig_15m_btc_2_datetime_desc_idx
+2026-02-10 15:27:58,201 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_2"
+2026-02-10 15:29:23,016 | INFO | utils | Inserted 109004 rows into strategy_signals.sig_15m_btc_2
+2026-02-10 15:29:30,332 | INFO | utils | Schema 'strategies' ready
+2026-02-10 15:29:30,332 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 15:29:30,724 | INFO | utils | Added missing column 'trima_period' as BIGINT
+2026-02-10 15:29:30,732 | INFO | utils | Added missing column 'adxr_period' as BIGINT
+2026-02-10 15:29:30,738 | INFO | utils | Added missing column 'aroon_period' as BIGINT
+2026-02-10 15:29:30,745 | INFO | utils | Added missing column 'rocp_period' as BIGINT
+2026-02-10 15:29:30,751 | INFO | utils | Added missing column 'stochf_fastperiod' as BIGINT
+2026-02-10 15:29:30,754 | INFO | utils | Added missing column 'stochf_slowperiod' as BIGINT
+2026-02-10 15:29:30,760 | INFO | utils | Added missing column 'stochrsi_period' as BIGINT
+2026-02-10 15:29:30,768 | INFO | utils | Added missing column 'natr_period' as BIGINT
+2026-02-10 15:29:30,775 | INFO | utils | Added missing column 'linearreg_slope_period' as BIGINT
+2026-02-10 15:29:30,985 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 15:33:35,156 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 15:33:39,598 | INFO | utils | Indexes ensured: sig_5m_btc_1_datetime_uidx, sig_5m_btc_1_datetime_desc_idx
+2026-02-10 15:33:39,692 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_1"
+2026-02-10 15:37:30,035 | INFO | utils | Inserted 327183 rows into strategy_signals.sig_5m_btc_1
+2026-02-10 15:38:21,967 | INFO | utils | Schema 'strategies' ready
+2026-02-10 15:38:21,969 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 15:38:22,167 | INFO | utils | Added missing column 'bbands_period' as BIGINT
+2026-02-10 15:38:22,175 | INFO | utils | Added missing column 'ma_period' as BIGINT
+2026-02-10 15:38:22,181 | INFO | utils | Added missing column 'macd_fastperiod' as BIGINT
+2026-02-10 15:38:22,184 | INFO | utils | Added missing column 'macd_slowperiod' as BIGINT
+2026-02-10 15:38:22,193 | INFO | utils | Added missing column 'macd_signalperiod' as BIGINT
+2026-02-10 15:38:22,199 | INFO | utils | Added missing column 'minus_di_period' as BIGINT
+2026-02-10 15:38:22,203 | INFO | utils | Added missing column 'linearreg_intercept_period' as BIGINT
+2026-02-10 15:38:22,377 | INFO | utils | Inserted 1 rows into strategies.strategy_registry

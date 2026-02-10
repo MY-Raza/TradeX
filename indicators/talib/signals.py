@@ -423,8 +423,8 @@ def aroonosc_signal(high, low, period=14):
 
     return signal, window
 
-def bop_signal(open_, high, low, close):
-    bop, window = call_indicator("BOP", open_, high, low, close)
+def bop_signal(open, high, low, close):
+    bop, window = call_indicator("BOP", open, high, low, close)
 
     bop = np.ravel(bop)
     signal = np.full_like(bop, np.nan, dtype=np.float32)
@@ -878,18 +878,6 @@ def candlestick_signal(open, high, low, close, pattern_name):
 # ============================================
 # Math Transform
 # ===========================================
-def asin_signal(close):
-    val, window = call_indicator("ASIN", close)
-    val = np.ravel(val)
-
-    signal = np.full_like(val, np.nan, dtype=np.float32)
-    valid = ~np.isnan(val)
-
-    signal[valid & (val > 0)] = 1
-    signal[valid & (val < 0)] = -1
-    signal[valid & (val == 0)] = 0
-
-    return signal, window
 
 def ceil_signal(close):
     val, window = call_indicator("CEIL", close)
@@ -1398,7 +1386,6 @@ SIGNAL_FUNCTIONS = {
     # Math Transform
     # -------------------------
     "ACOS": acos_signal,
-    "ASIN": asin_signal,
     "ATAN": atan_signal,
     "CEIL": ceil_signal,
     "COS": cos_signal,
