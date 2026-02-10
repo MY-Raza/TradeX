@@ -27,7 +27,7 @@ logger = get_logger("strategy_main")
 # ============================
 TIMEFRAMES = [
     "1h","15m", "5m"]
-RUNS_PER_TIMEFRAME = 1
+RUNS_PER_TIMEFRAME = 50
 
 # ============================
 # Indicators
