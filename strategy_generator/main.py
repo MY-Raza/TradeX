@@ -1,11 +1,10 @@
 import os
 import pandas as pd
 import numpy as np
-from types import SimpleNamespace
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.newbacktest import HighPerfBacktest
-from TradeX.utils.db.utils import save_df_to_db,get_profitable_strategies,fetch_ohlcv_df
+from TradeX.utils.db.utils import save_df_to_db,fetch_ohlcv_df
 
 from strategy_counter import generate_strategy_id
 from signals_combiner import randomize_indicators, run_active_signals_with_voting

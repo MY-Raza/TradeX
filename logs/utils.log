@@ -12089,3 +12089,10 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-10 16:22:20,182 | INFO | utils | No time_column provided and 'datetime' missing
 2026-02-10 16:22:20,512 | INFO | utils | Added missing column 'tsf_period' as BIGINT
 2026-02-10 16:22:20,815 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 16:42:18,960 | INFO | utils | Schema 'data_binance' ready
+2026-02-10 16:42:25,629 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-02-10 16:42:25,690 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-02-10 16:42:28,629 | INFO | utils | Inserted 44 rows into data_binance.bnb_1m
+2026-02-10 17:06:25,392 | INFO | utils | Schema 'data_binance' ready
+2026-02-10 17:06:57,119 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-02-10 17:06:57,704 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
