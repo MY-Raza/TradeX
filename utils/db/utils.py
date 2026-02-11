@@ -363,17 +363,24 @@ def fetch_ohlcv_df(
 #======================================
 # Strategy Fetcher Operation From DB
 #======================================
-def get_profitable_strategies(timehorizon: str, min_pnl: float = 100):
+def get_profitable_strategies(
+    timehorizon: str,
+    min_pnl: float = 100,
+    top_n: int = 5,
+    best: str = "highest"  # "highest" or "lowest"
+):
     """
-    Fetch strategies for a given timeframe where pnl_sum > min_pnl.
-    For each row, keep only columns where value is:
+    Fetch the top N profitable strategies for a given timeframe where pnl_sum > min_pnl.
+    Keeps only columns where value is:
       - True (boolean)
       - OR non-zero number (int/float)
       - OR non-null and not False
 
     Args:
-        timeframe (str): e.g. "1h", "15m"
+        timehorizon (str): e.g. "1h", "15m"
         min_pnl (float): minimum cumulative PnL
+        top_n (int): number of top strategies to return based on pnl_sum
+        best (str): "highest" for top PnL, "lowest" for lowest PnL
 
     Returns:
         List[SimpleNamespace]
@@ -390,19 +397,24 @@ def get_profitable_strategies(timehorizon: str, min_pnl: float = 100):
     with engine.begin() as conn:
         result = conn.execute(
             query,
-            {
-                "min_pnl": min_pnl,
-                "timehorizon": timehorizon
-            }
+            {"min_pnl": min_pnl, "timehorizon": timehorizon}
         )
         rows = result.fetchall()
         columns = result.keys()
 
+    # Convert rows to dicts
+    row_dicts = [dict(zip(columns, row)) for row in rows]
+
+    # Sort by pnl_sum
+    reverse_sort = True if best == "highest" else False
+    row_dicts.sort(key=lambda x: x.get("pnl_sum", 0), reverse=reverse_sort)
+
+    # Pick top N
+    row_dicts = row_dicts[:top_n]
+
     strategies = []
 
-    for row in rows:
-        row_dict = dict(zip(columns, row))
-
+    for row_dict in row_dicts:
         filtered_dict = {}
         for k, v in row_dict.items():
             if v is True:
@@ -416,15 +428,16 @@ def get_profitable_strategies(timehorizon: str, min_pnl: float = 100):
         strategies.append(strategy_obj)
 
         logger.info(
-            "Filtered Strategy → " +
-            ", ".join(f"{k}={v}" for k, v in filtered_dict.items())
+            f"Filtered Strategy → {', '.join(f'{k}={v}' for k, v in filtered_dict.items())}"
         )
 
     logger.info(
-        f"Total profitable strategies found for timeframe {timehorizon}: {len(strategies)}"
+        f"Total profitable strategies returned for timeframe {timehorizon}: {len(strategies)}"
     )
 
     return strategies
+
+
 
 
 

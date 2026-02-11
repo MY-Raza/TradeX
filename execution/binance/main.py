@@ -21,7 +21,8 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 # ============================================================
 strategies = get_profitable_strategies(
     timehorizon="1h",
-    min_pnl=100
+    min_pnl=100,
+    best="lowest"
 )
 
 if not strategies:
@@ -54,12 +55,11 @@ for strategy in strategies:
 # 3️⃣ Compute required 1m candles
 # ============================================================
 max_value = max(filter(None, strategy_max_values))
-SAFETY_BUFFER = 20
-
+CHECK_PARAMETER = 60
 required_1m = required_base_candles(
     target_tf="1h",
     base_tf="1m",
-    window=max_value + SAFETY_BUFFER
+    window=max_value + CHECK_PARAMETER
 )
 
 logger.info(f"Required 1m candles: {required_1m}")
@@ -116,5 +116,3 @@ if not results:
 latest_signals = get_latest_signals(results)
 
 logger.info(f"Latest Signals: {latest_signals}")
-
-print("Latest Signals:", latest_signals)

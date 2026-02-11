@@ -42,7 +42,6 @@ def extract_indicator_flags(strategy) -> Dict[str, bool]:
         elif col_lower.startswith("cdl"):
             flags[col] = True
 
-    print(f"[DEBUG] Strategy '{getattr(strategy, 'strategy', 'Unknown')}' flags extracted: {flags}")
     return flags
 
 
@@ -86,18 +85,15 @@ def execute_strategies_on_dataframe(
     close_ = df["close"].values
     volume = df["volume"].values
     timestamps = df["datetime"]
-    print(f"[DEBUG] OHLCV arrays prepared: {len(open_)} rows")
 
     results = {}
 
     for strategy in strategies:
         strategy_name = getattr(strategy, "strategy", "Unknown")
-        print(f"\n[DEBUG] Processing strategy: {strategy_name}")
 
         flags = extract_indicator_flags(strategy)
 
         if not flags:
-            print(f"[DEBUG] Strategy '{strategy_name}' has no valid active indicators. Skipping.")
             continue
 
         final_df, windows_used = run_active_signals_with_voting(
@@ -110,19 +106,13 @@ def execute_strategies_on_dataframe(
             timestamps=timestamps
         )
 
-        print(f"[DEBUG] Strategy '{strategy_name}' windows used: {windows_used}")
-        print(f"[DEBUG] Strategy '{strategy_name}' signals dataframe length: {len(final_df)}")
-
         latest_signal = int(final_df["signals"].iloc[-1]) if not final_df.empty else 0
-        print(f"[DEBUG] Strategy '{strategy_name}' latest signal: {latest_signal}")
-
+        # latest_signal = final_df["signals"].to_numpy(dtype=np.int8) if not final_df.empty else np.array([], dtype=np.int8)
         results[strategy_name] = {
             "signals_df": final_df,
             "windows": windows_used,
             "latest_signal": latest_signal
         }
-
-    print(f"\n[DEBUG] Total strategies processed: {len(results)}")
     return results
 
 
@@ -137,5 +127,4 @@ def get_latest_signals(results: Dict[str, Dict]) -> Dict[str, int]:
         {strategy_name: signal}
     """
     latest = {name: data["latest_signal"] for name, data in results.items()}
-    print(f"[DEBUG] Latest signals extracted: {latest}")
     return latest

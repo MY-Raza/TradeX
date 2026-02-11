@@ -26,7 +26,7 @@ logger = get_logger("strategy_main")
 # Strategy configuration
 # ============================
 TIMEFRAMES = [
-    "1h","15m", "5m"]
+     "5m"]
 RUNS_PER_TIMEFRAME = 50
 
 # ============================
@@ -197,12 +197,6 @@ for timeframe in TIMEFRAMES:
         logger.info(
             f" {strategy_id} | Balance={final_balance:.2f} | "
             f"PnL={total_pnl_percent:.2f}% | Trades={len(ledger)}"
-        )
-
-        # Save ledger CSV
-        ledger.to_csv(
-            os.path.join(SIGNALS_FOLDER, f"{strategy_id}_ledger.csv"),
-            index=False
         )
         # Flatten windows_dict into row_data
         row_data = {**flags}
