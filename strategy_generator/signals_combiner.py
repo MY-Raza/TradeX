@@ -1,7 +1,5 @@
-import os
 import pandas as pd
 import numpy as np
-from concurrent.futures import ThreadPoolExecutor
 
 # Signal generators
 from TradeX.indicators.talib.signals import candlestick_signal, SIGNAL_FUNCTIONS
@@ -136,7 +134,7 @@ def run_active_signals_with_voting(
             index=pd.to_datetime(timestamps)
         ).reset_index()
         all_signals_df.rename(columns={"index": "datetime"}, inplace=True)
-
+        all_signals_df["signals"] = all_signals_df["signals"].shift(1)
 
         # Drop rows with any NaN values
         all_signals_df = all_signals_df.dropna(axis=0, how='any').reset_index(drop=True)

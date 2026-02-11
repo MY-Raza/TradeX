@@ -1,7 +1,7 @@
 import sys
 import time
 from datetime import datetime, timedelta
-from TradeX.utils.db.utils import get_profitable_strategies, fetch_ohlcv_df,get_last_date
+from TradeX.utils.db.utils import get_profitable_strategies, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from TradeX.utils.data.data_cleaner import resample_ohlcv
@@ -13,11 +13,11 @@ from TradeX.execution.binance.strategy_signals_orchestrator import (
     execute_strategies_on_dataframe,
     get_latest_signals
 )
+import os 
+import subprocess 
 
 logger = get_logger("execution_binance_main")
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
-lastdate = get_last_date(table_name="btc_1m",schema=SCHEMA,time_column="datetime")
-print(lastdate)
 
 # -----------------------------
 # 0️⃣ Parse command-line argument
@@ -110,6 +110,10 @@ logger.info(f"Required 1m candles: {required_1m}")
 # ============================================================
 # 6️⃣ Fetch latest 1m candles
 # ============================================================
+script_path = os.path.abspath( os.path.join( os.path.dirname(__file__), # execution/binance/ 
+                        "..", "..", "data", "binance", "main.py" # relative path to data/binance/main.py 
+                         ) )
+subprocess.run([sys.executable, script_path])
 df_1m = fetch_ohlcv_df(
     table_name="btc_1m",
     schema=SCHEMA,
@@ -155,6 +159,6 @@ latest_signals = get_latest_signals(results)
 
 for strat, data in latest_signals.items():
     logger.info(
-        f"{strat} → Signal: {data['signal']} at {data['datetime']}"
+        f"Latest Signal: {strat} → Signal: {data['signal']} at {data['datetime']}"
     )
 
