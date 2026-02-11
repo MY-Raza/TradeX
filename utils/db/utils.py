@@ -310,7 +310,7 @@ def read_df_from_db(table_name: str, schema: str | None = None, limit: int | Non
 
     df = pd.read_sql_query(query, engine)
     if not df.empty:
-        logger.info(f"\nLast 5 rows from {schema}.{table}:\n{df.tail(5)}")
+        logger.info(f"Table Found")
     else:
         logger.info(f"No data found in {schema}.{table}")
 
@@ -348,15 +348,16 @@ def fetch_ohlcv_df(
     """
     Fetch OHLCV data from DB with datetime column directly.
     """
-    df = read_df_from_db(table_name, schema, limit)
+    df = read_df_from_db(table_name, schema)
     if df.empty:
         return df
 
     # Ensure datetime dtype
     if time_column in df.columns:
         df[time_column] = pd.to_datetime(df[time_column], utc=True)
-
     df = df.sort_values(time_column)
+    if limit:
+        df = df.tail(limit)
     return df
 
 #======================================
