@@ -28,7 +28,7 @@ def extract_indicator_flags(strategy) -> Dict[str, bool]:
 
     for col, value in strategy.__dict__.items():
         if not isinstance(value, bool) or not value:
-            continue  # skip non-bool or False flags
+            continue  # Skip non-bool or False flags
 
         col_lower = col.lower()
 
@@ -38,9 +38,10 @@ def extract_indicator_flags(strategy) -> Dict[str, bool]:
         )
         if matched_signal:
             flags[matched_signal] = True
-        # Special handling for candlestick patterns (assume column name starts with 'cdl')
+
+        # Special handling for candlestick patterns (CDL*)
         elif col_lower.startswith("cdl"):
-            flags[col] = True
+            flags[col.upper()] = True  # Normalize to uppercase
 
     return flags
 
@@ -65,13 +66,13 @@ def execute_strategies_on_dataframe(
             strategy_name: {
                 "signals_df": DataFrame,
                 "windows": dict,
-                "latest_signal": int
+                "latest_signal": int,
+                "latest_datetime": pd.Timestamp
             }
         }
     """
 
     if df.empty:
-        print("[DEBUG] Input dataframe is empty.")
         return {}
 
     required_cols = {"open", "high", "low", "close", "volume", "datetime"}
@@ -92,7 +93,6 @@ def execute_strategies_on_dataframe(
         strategy_name = getattr(strategy, "strategy", "Unknown")
 
         flags = extract_indicator_flags(strategy)
-
         if not flags:
             continue
 
@@ -106,25 +106,42 @@ def execute_strategies_on_dataframe(
             timestamps=timestamps
         )
 
-        latest_signal = int(final_df["signals"].iloc[-1]) if not final_df.empty else 0
-        # latest_signal = final_df["signals"].to_numpy(dtype=np.int8) if not final_df.empty else np.array([], dtype=np.int8)
+        if not final_df.empty:
+            latest_signal = int(final_df["signals"].iloc[-1])
+            latest_datetime = final_df["datetime"].iloc[-1]
+        else:
+            latest_signal = 0
+            latest_datetime = None
+
         results[strategy_name] = {
             "signals_df": final_df,
             "windows": windows_used,
-            "latest_signal": latest_signal
+            "latest_signal": latest_signal,
+            "latest_datetime": latest_datetime
         }
+
     return results
 
 
 # -------------------------------------------------------------
 # Utility: Get only latest live signals
 # -------------------------------------------------------------
-def get_latest_signals(results: Dict[str, Dict]) -> Dict[str, int]:
+def get_latest_signals(results: Dict[str, Dict]) -> Dict[str, Dict]:
     """
-    Extract only the latest signal per strategy.
+    Extract latest signal and timestamp per strategy.
 
     Returns:
-        {strategy_name: signal}
+        {
+            strategy_name: {
+                "signal": int,
+                "datetime": pd.Timestamp
+            }
+        }
     """
-    latest = {name: data["latest_signal"] for name, data in results.items()}
-    return latest
+    return {
+        name: {
+            "signal": data["latest_signal"],
+            "datetime": data["latest_datetime"]
+        }
+        for name, data in results.items()
+    }

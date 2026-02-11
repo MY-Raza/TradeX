@@ -117,7 +117,6 @@ def run_active_signals_with_voting(
     active_indicators = [name for name, active in flags.items() if active]
     results = [compute_signal(name) for name in active_indicators]
 
-
     for name, sig, window_params in results:
         if name is not None and sig is not None:
             signals_dict[name] = sig
@@ -137,6 +136,7 @@ def run_active_signals_with_voting(
             index=pd.to_datetime(timestamps)
         ).reset_index()
         all_signals_df.rename(columns={"index": "datetime"}, inplace=True)
+
 
         # Drop rows with any NaN values
         all_signals_df = all_signals_df.dropna(axis=0, how='any').reset_index(drop=True)

@@ -1,7 +1,7 @@
 import sys
 import time
 from datetime import datetime, timedelta
-from TradeX.utils.db.utils import get_profitable_strategies, fetch_ohlcv_df
+from TradeX.utils.db.utils import get_profitable_strategies, fetch_ohlcv_df,get_last_date
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 from TradeX.utils.data.data_cleaner import resample_ohlcv
@@ -16,6 +16,8 @@ from TradeX.execution.binance.strategy_signals_orchestrator import (
 
 logger = get_logger("execution_binance_main")
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
+lastdate = get_last_date(table_name="btc_1m",schema=SCHEMA,time_column="datetime")
+print(lastdate)
 
 # -----------------------------
 # 0️⃣ Parse command-line argument
@@ -101,7 +103,7 @@ max_value = max(filter(None, strategy_max_values))
 required_1m = required_base_candles(
     target_tf=timeframe,
     base_tf="1m",
-    window=max_value
+    window=max_value * 3
 )
 logger.info(f"Required 1m candles: {required_1m}")
 
@@ -114,7 +116,7 @@ df_1m = fetch_ohlcv_df(
     time_column="datetime",
     limit=required_1m
 )
-
+print(df_1m.tail())
 if df_1m.empty:
     logger.warning("No 1m data fetched.")
     exit()
@@ -142,7 +144,6 @@ results = execute_strategies_on_dataframe(
     df=df_resampled,
     strategies=strategies
 )
-
 if not results:
     logger.warning("No signals generated.")
     exit()
@@ -151,4 +152,9 @@ if not results:
 # 9️⃣ Get latest live signals
 # ============================================================
 latest_signals = get_latest_signals(results)
-logger.info(f"Latest Signals: {latest_signals}")
+
+for strat, data in latest_signals.items():
+    logger.info(
+        f"{strat} → Signal: {data['signal']} at {data['datetime']}"
+    )
+

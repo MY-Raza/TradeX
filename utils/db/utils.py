@@ -427,10 +427,6 @@ def get_profitable_strategies(
         strategy_obj = SimpleNamespace(**filtered_dict)
         strategies.append(strategy_obj)
 
-        logger.info(
-            f"Filtered Strategy → {', '.join(f'{k}={v}' for k, v in filtered_dict.items())}"
-        )
-
     logger.info(
         f"Total profitable strategies returned for timeframe {timehorizon}: {len(strategies)}"
     )

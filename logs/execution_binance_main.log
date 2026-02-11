@@ -5858,3 +5858,199 @@
 2026-02-11 13:27:32,996 | INFO | execution_binance_main | Fetched 5400 rows of 1m data.
 2026-02-11 13:27:33,037 | INFO | execution_binance_main | Resampled to 90 rows of 1h data.
 2026-02-11 13:27:33,271 | INFO | execution_binance_main | Latest Signals: {'sig_1h_btc_28': -1, 'sig_1h_btc_10': -1, 'sig_1h_btc_19': -1, 'sig_1h_btc_38': -1, 'sig_1h_btc_7': -1}
+2026-02-11 15:04:56,317 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:04:56,317 | INFO | execution_binance_main | Waiting 4 seconds until next valid 5m time...
+2026-02-11 15:05:00,332 | INFO | execution_binance_main | Current time 10:05:00 is valid for 5m execution.
+2026-02-11 15:05:00,492 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:05:00,493 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:05:00,493 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:05:00,493 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:05:00,494 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:05:00,494 | INFO | execution_binance_main | Required 1m candles: 150
+2026-02-11 15:05:18,617 | INFO | execution_binance_main | Fetched 150 rows of 1m data.
+2026-02-11 15:05:18,690 | INFO | execution_binance_main | Resampled to 30 rows of 5m data.
+2026-02-11 15:05:18,742 | INFO | execution_binance_main | Latest Signals: {'sig_5m_btc_3': 0, 'sig_5m_btc_4': 0, 'sig_5m_btc_6': 0, 'sig_5m_btc_7': 0, 'sig_5m_btc_1': 0}
+2026-02-11 15:07:25,767 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:07:25,767 | INFO | execution_binance_main | Waiting 155 seconds until next valid 5m time...
+2026-02-11 15:10:00,775 | INFO | execution_binance_main | Current time 10:10:00 is valid for 5m execution.
+2026-02-11 15:10:00,975 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:10:00,975 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:10:00,977 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:10:00,977 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:10:00,977 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:10:00,978 | INFO | execution_binance_main | Required 1m candles: 450
+2026-02-11 15:10:08,687 | INFO | execution_binance_main | Fetched 450 rows of 1m data.
+2026-02-11 15:10:08,705 | INFO | execution_binance_main | Resampled to 90 rows of 5m data.
+2026-02-11 15:10:08,751 | INFO | execution_binance_main | Latest Signals: {'sig_5m_btc_3': -1, 'sig_5m_btc_4': -1, 'sig_5m_btc_6': -1, 'sig_5m_btc_7': -1, 'sig_5m_btc_1': -1}
+2026-02-11 15:11:02,090 | INFO | execution_binance_main | Running strategy execution for timeframe: 15m
+2026-02-11 15:11:02,092 | INFO | execution_binance_main | Waiting 238 seconds until next valid 15m time...
+2026-02-11 15:15:00,102 | INFO | execution_binance_main | Current time 10:15:00 is valid for 15m execution.
+2026-02-11 15:15:00,365 | INFO | execution_binance_main | Strategy sig_15m_btc_11 → Highest window value: 30
+2026-02-11 15:15:00,365 | INFO | execution_binance_main | Strategy sig_15m_btc_9 → Highest window value: 30
+2026-02-11 15:15:00,365 | INFO | execution_binance_main | Strategy sig_15m_btc_5 → Highest window value: 30
+2026-02-11 15:15:00,365 | INFO | execution_binance_main | Strategy sig_15m_btc_4 → Highest window value: 30
+2026-02-11 15:15:00,365 | INFO | execution_binance_main | Strategy sig_15m_btc_6 → Highest window value: 30
+2026-02-11 15:15:00,365 | INFO | execution_binance_main | Required 1m candles: 1350
+2026-02-11 15:15:09,147 | INFO | execution_binance_main | Fetched 1350 rows of 1m data.
+2026-02-11 15:15:09,195 | INFO | execution_binance_main | Resampled to 90 rows of 15m data.
+2026-02-11 15:15:09,244 | INFO | execution_binance_main | Latest Signals: {'sig_15m_btc_11': -1, 'sig_15m_btc_9': -1, 'sig_15m_btc_5': -1, 'sig_15m_btc_4': 0, 'sig_15m_btc_6': -1}
+2026-02-11 15:19:40,790 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:19:40,790 | INFO | execution_binance_main | Waiting 20 seconds until next valid 5m time...
+2026-02-11 15:20:00,798 | INFO | execution_binance_main | Current time 10:20:00 is valid for 5m execution.
+2026-02-11 15:20:01,108 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:20:01,108 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:20:01,108 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:20:01,110 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:20:01,110 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:20:01,110 | INFO | execution_binance_main | Required 1m candles: 450
+2026-02-11 15:20:12,135 | INFO | execution_binance_main | Fetched 450 rows of 1m data.
+2026-02-11 15:20:12,209 | INFO | execution_binance_main | Resampled to 90 rows of 5m data.
+2026-02-11 15:20:12,287 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 15:20:12,288 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 15:20:12,288 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 15:20:12,288 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 15:20:12,289 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 15:24:27,735 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:24:27,735 | INFO | execution_binance_main | Waiting 33 seconds until next valid 5m time...
+2026-02-11 15:25:00,736 | INFO | execution_binance_main | Current time 10:25:00 is valid for 5m execution.
+2026-02-11 15:25:01,162 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:25:01,163 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:25:01,164 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:25:01,165 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:25:01,165 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:25:01,166 | INFO | execution_binance_main | Required 1m candles: 150
+2026-02-11 15:25:17,420 | INFO | execution_binance_main | Fetched 150 rows of 1m data.
+2026-02-11 15:25:17,508 | INFO | execution_binance_main | Resampled to 30 rows of 5m data.
+2026-02-11 15:25:17,571 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: 0 at None
+2026-02-11 15:25:17,571 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: 0 at None
+2026-02-11 15:25:17,572 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: 0 at None
+2026-02-11 15:25:17,572 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: 0 at None
+2026-02-11 15:25:17,572 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: 0 at None
+2026-02-11 15:26:32,033 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:26:32,033 | INFO | execution_binance_main | Waiting 208 seconds until next valid 5m time...
+2026-02-11 15:30:00,037 | INFO | execution_binance_main | Current time 10:30:00 is valid for 5m execution.
+2026-02-11 15:30:00,269 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:30:00,269 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:30:00,269 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:30:00,269 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:30:00,269 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:30:00,269 | INFO | execution_binance_main | Required 1m candles: 300
+2026-02-11 15:30:13,623 | INFO | execution_binance_main | Fetched 300 rows of 1m data.
+2026-02-11 15:30:13,728 | INFO | execution_binance_main | Resampled to 60 rows of 5m data.
+2026-02-11 15:30:13,799 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: 0 at None
+2026-02-11 15:30:13,799 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: 0 at None
+2026-02-11 15:30:13,800 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: 0 at None
+2026-02-11 15:30:13,800 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: 0 at None
+2026-02-11 15:30:13,800 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: 0 at None
+2026-02-11 15:32:20,160 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:32:20,160 | INFO | execution_binance_main | Waiting 160 seconds until next valid 5m time...
+2026-02-11 15:35:00,169 | INFO | execution_binance_main | Current time 10:35:00 is valid for 5m execution.
+2026-02-11 15:35:00,385 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:35:00,385 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:35:00,386 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:35:00,387 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:35:00,387 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:35:00,387 | INFO | execution_binance_main | Required 1m candles: 150
+2026-02-11 15:35:12,136 | INFO | execution_binance_main | Fetched 150 rows of 1m data.
+2026-02-11 15:35:12,216 | INFO | execution_binance_main | Resampled to 30 rows of 5m data.
+2026-02-11 15:35:12,302 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: 0 at None
+2026-02-11 15:35:12,305 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: 0 at None
+2026-02-11 15:35:12,305 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: 0 at None
+2026-02-11 15:35:12,306 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: 0 at None
+2026-02-11 15:35:12,306 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: 0 at None
+2026-02-11 15:37:17,878 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:37:17,878 | INFO | execution_binance_main | Waiting 163 seconds until next valid 5m time...
+2026-02-11 15:40:00,887 | INFO | execution_binance_main | Current time 10:40:00 is valid for 5m execution.
+2026-02-11 15:40:01,080 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:40:01,081 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:40:01,081 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:40:01,082 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:40:01,082 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:40:01,082 | INFO | execution_binance_main | Required 1m candles: 150
+2026-02-11 15:40:09,807 | INFO | execution_binance_main | Fetched 150 rows of 1m data.
+2026-02-11 15:40:09,860 | INFO | execution_binance_main | Resampled to 30 rows of 5m data.
+2026-02-11 15:40:09,925 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: 0 at None
+2026-02-11 15:40:09,926 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: 0 at None
+2026-02-11 15:40:09,926 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: 0 at None
+2026-02-11 15:40:09,926 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: 0 at None
+2026-02-11 15:40:09,926 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: 0 at None
+2026-02-11 15:44:47,599 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 15:44:47,599 | INFO | execution_binance_main | Waiting 13 seconds until next valid 5m time...
+2026-02-11 15:45:00,620 | INFO | execution_binance_main | Current time 10:45:00 is valid for 5m execution.
+2026-02-11 15:45:01,063 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 15:45:01,063 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 15:45:01,063 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 15:45:01,063 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 15:45:01,063 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 15:45:01,063 | INFO | execution_binance_main | Required 1m candles: 150
+2026-02-11 15:45:16,127 | INFO | execution_binance_main | Fetched 150 rows of 1m data.
+2026-02-11 15:45:16,256 | INFO | execution_binance_main | Resampled to 30 rows of 5m data.
+2026-02-11 15:45:17,291 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: 0 at None
+2026-02-11 15:45:17,291 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: 0 at None
+2026-02-11 15:45:17,292 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: 0 at None
+2026-02-11 15:45:17,292 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: 0 at None
+2026-02-11 15:45:17,292 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: 0 at None
+2026-02-11 16:05:10,555 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 16:05:10,555 | INFO | execution_binance_main | Current time 11:05:10 is valid for 5m execution.
+2026-02-11 16:05:11,076 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 16:05:11,081 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 16:05:11,081 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 16:05:11,081 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 16:05:11,083 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 16:05:11,084 | INFO | execution_binance_main | Required 1m candles: 450
+2026-02-11 16:05:28,315 | INFO | execution_binance_main | Fetched 450 rows of 1m data.
+2026-02-11 16:05:28,404 | INFO | execution_binance_main | Resampled to 90 rows of 5m data.
+2026-02-11 16:05:29,717 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:05:29,717 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:05:29,717 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:05:29,717 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:05:29,717 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:07:19,147 | INFO | execution_binance_main | Running strategy execution for timeframe: 15m
+2026-02-11 16:07:19,147 | INFO | execution_binance_main | Waiting 461 seconds until next valid 15m time...
+2026-02-11 16:15:00,242 | INFO | execution_binance_main | Current time 11:15:00 is valid for 15m execution.
+2026-02-11 16:15:01,757 | INFO | execution_binance_main | Strategy sig_15m_btc_11 → Highest window value: 30
+2026-02-11 16:15:01,757 | INFO | execution_binance_main | Strategy sig_15m_btc_9 → Highest window value: 30
+2026-02-11 16:15:01,757 | INFO | execution_binance_main | Strategy sig_15m_btc_5 → Highest window value: 30
+2026-02-11 16:15:01,757 | INFO | execution_binance_main | Strategy sig_15m_btc_4 → Highest window value: 30
+2026-02-11 16:15:01,762 | INFO | execution_binance_main | Strategy sig_15m_btc_6 → Highest window value: 30
+2026-02-11 16:15:01,762 | INFO | execution_binance_main | Required 1m candles: 1350
+2026-02-11 16:15:18,991 | INFO | execution_binance_main | Fetched 1350 rows of 1m data.
+2026-02-11 16:15:19,105 | INFO | execution_binance_main | Resampled to 90 rows of 15m data.
+2026-02-11 16:15:20,851 | INFO | execution_binance_main | sig_15m_btc_11 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:15:20,851 | INFO | execution_binance_main | sig_15m_btc_9 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:15:20,853 | INFO | execution_binance_main | sig_15m_btc_5 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:15:20,853 | INFO | execution_binance_main | sig_15m_btc_4 → Signal: 0 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:15:20,856 | INFO | execution_binance_main | sig_15m_btc_6 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:18:12,130 | ERROR | execution_binance_main | Usage: python main.py <timeframe> (e.g., 1h, 15m, 5m)
+2026-02-11 16:19:15,225 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 16:19:15,225 | INFO | execution_binance_main | Waiting 45 seconds until next valid 5m time...
+2026-02-11 16:20:00,236 | INFO | execution_binance_main | Current time 11:20:00 is valid for 5m execution.
+2026-02-11 16:20:00,746 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 16:20:00,746 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 16:20:00,746 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 16:20:00,751 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 16:20:00,752 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 16:20:00,752 | INFO | execution_binance_main | Required 1m candles: 450
+2026-02-11 16:20:15,803 | INFO | execution_binance_main | Fetched 450 rows of 1m data.
+2026-02-11 16:20:15,910 | INFO | execution_binance_main | Resampled to 90 rows of 5m data.
+2026-02-11 16:20:16,002 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:20:16,006 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:20:16,006 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:20:16,006 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:20:16,006 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:22:28,077 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-11 16:22:28,077 | INFO | execution_binance_main | Waiting 152 seconds until next valid 5m time...
+2026-02-11 16:25:00,077 | INFO | execution_binance_main | Current time 11:25:00 is valid for 5m execution.
+2026-02-11 16:25:00,529 | INFO | execution_binance_main | Strategy sig_5m_btc_3 → Highest window value: 30
+2026-02-11 16:25:00,532 | INFO | execution_binance_main | Strategy sig_5m_btc_4 → Highest window value: 30
+2026-02-11 16:25:00,532 | INFO | execution_binance_main | Strategy sig_5m_btc_6 → Highest window value: 30
+2026-02-11 16:25:00,532 | INFO | execution_binance_main | Strategy sig_5m_btc_7 → Highest window value: 30
+2026-02-11 16:25:00,535 | INFO | execution_binance_main | Strategy sig_5m_btc_1 → Highest window value: 30
+2026-02-11 16:25:00,535 | INFO | execution_binance_main | Required 1m candles: 450
+2026-02-11 16:25:16,411 | INFO | execution_binance_main | Fetched 450 rows of 1m data.
+2026-02-11 16:25:16,505 | INFO | execution_binance_main | Resampled to 90 rows of 5m data.
+2026-02-11 16:25:16,589 | INFO | execution_binance_main | sig_5m_btc_3 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:25:16,589 | INFO | execution_binance_main | sig_5m_btc_4 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:25:16,589 | INFO | execution_binance_main | sig_5m_btc_6 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:25:16,591 | INFO | execution_binance_main | sig_5m_btc_7 → Signal: -1 at 2026-02-11 05:00:00+00:00
+2026-02-11 16:25:16,591 | INFO | execution_binance_main | sig_5m_btc_1 → Signal: -1 at 2026-02-11 05:00:00+00:00
