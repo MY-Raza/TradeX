@@ -12109,3 +12109,494 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-10 17:37:32,797 | INFO | utils | Filtered Strategy → strategy=sig_1h_btc_1, tp=3, sl=1, symbol=btc, timehorizon=1h, pnl_sum=3076.96, ema=True, mama=True, midpoint=True, sar=True, sma=True, t3=True, trima=True, wma=True, apo=True, bop=True, cci=True, cmo=True, macdext=True, mfi=True, plus_di=True, roc=True, rocp=True, rocr100=True, stoch=True, stochf=True, stochrsi=True, trix=True, willr=True, ad=True, adosc=True, obv=True, natr=True, medprice=True, typprice=True, wclprice=True, ht_sine=True, linearreg_intercept=True, ceil=True, cosh=True, floor=True, sqrt=True, tan=True, tanh=True, cdl2crows=True, cdl3inside=True, cdl3starsinsouth=True, cdlabandonedbaby=True, cdlbelthold=True, cdlclosingmarubozu=True, cdlconcealbabyswall=True, cdldarkcloudcover=True, cdldojistar=True, cdldragonflydoji=True, cdleveningdojistar=True, cdlhammer=True, cdlharami=True, cdlhighwave=True, cdlhikkake=True, cdlhikkakemod=True, cdlhomingpigeon=True, cdlinneck=True, cdlkicking=True, cdlkickingbylength=True, cdllongline=True, cdlmatchinglow=True, cdlmathold=True, cdlmorningstar=True, cdlspinningtop=True, cdltakuri=True, cdlthrusting=True, cdlupsidegap2crows=True, ema_period=30, midpoint_period=14, sma_period=30, t3_period=14, trima_period=30, wma_period=30, apo_period=12, cci_period=14, cmo_period=14, macdext_fastperiod=12, macdext_slowperiod=26, macdext_signalperiod=9, mfi_period=14, plus_di_period=14, roc_period=10, rocp_period=10, rocr100_period=10, stoch_fastk_period=14, stoch_slowk_period=3, stoch_slowd_period=3, stochf_fastperiod=14, stochf_slowperiod=3, stochrsi_period=14, trix_period=14, willr_period=14, adosc_fastperiod=3, adosc_slowperiod=10, natr_period=14, linearreg_intercept_period=14
 2026-02-10 17:37:32,801 | INFO | utils | Filtered Strategy → strategy=sig_1h_btc_2, tp=3, sl=1, symbol=btc, timehorizon=1h, pnl_sum=2635.23, ma=True, mama=True, sar=True, t3=True, trima=True, wma=True, adx=True, adxr=True, apo=True, aroonosc=True, cci=True, cmo=True, macd=True, macdext=True, minus_di=True, minus_dm=True, plus_di=True, ppo=True, rsi=True, stochf=True, stochrsi=True, willr=True, ad=True, atr=True, avgprice=True, medprice=True, wclprice=True, ht_dcphase=True, ht_phasor=True, ht_sine=True, ht_trendmode=True, linearreg=True, var=True, cdl3blackcrows=True, cdl3linestrike=True, cdl3outside=True, cdlabandonedbaby=True, cdlbelthold=True, cdlclosingmarubozu=True, cdlcounterattack=True, cdldoji=True, cdldragonflydoji=True, cdlengulfing=True, cdlgapsidesidewhite=True, cdlgravestonedoji=True, cdlhammer=True, cdlharamicross=True, cdlhighwave=True, cdlhikkake=True, cdlhikkakemod=True, cdlinneck=True, cdlkickingbylength=True, cdllongleggeddoji=True, cdlmarubozu=True, cdlmathold=True, cdlonneck=True, cdlpiercing=True, cdlrickshawman=True, cdlseparatinglines=True, cdlshootingstar=True, cdltasukigap=True, cdlthrusting=True, cdltristar=True, cdlunique3river=True, t3_period=14, trima_period=30, wma_period=30, apo_period=12, cci_period=14, cmo_period=14, macdext_fastperiod=12, macdext_slowperiod=26, macdext_signalperiod=9, plus_di_period=14, stochf_fastperiod=14, stochf_slowperiod=3, stochrsi_period=14, willr_period=14, ma_period=30, adx_period=14, adxr_period=14, aroonosc_period=14, macd_fastperiod=12, macd_slowperiod=26, macd_signalperiod=9, minus_di_period=14, minus_dm_period=14, ppo_fastperiod=12, ppo_slowperiod=26, rsi_period=14, atr_period=14, linearreg_period=14, var_period=5
 2026-02-10 17:37:32,801 | INFO | utils | Total profitable strategies found for timeframe 1h: 2
+2026-02-10 18:01:09,700 | INFO | utils | Database engine initialized
+2026-02-10 18:01:26,559 | INFO | utils | 
+Last 5 rows from data_binance.btc_1m:
+                         datetime     open     high      low    close   volume
+1636226 2026-02-10 01:26:00+00:00  70278.5  70344.7  70278.4  70308.5  252.633
+1636227 2026-02-10 01:27:00+00:00  70308.6  70435.2  70308.6  70382.3  217.640
+1636228 2026-02-10 01:28:00+00:00  70382.4  70395.8  70342.6  70342.7   69.794
+1636229 2026-02-10 01:29:00+00:00  70342.7  70343.4  70308.7  70328.3   62.263
+1636230 2026-02-10 01:30:00+00:00  70328.4  70328.4  70272.4  70309.7   79.108
+2026-02-10 18:01:37,759 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:01:37,895 | INFO | utils | Indexes ensured: sig_1h_btc_1_datetime_uidx, sig_1h_btc_1_datetime_desc_idx
+2026-02-10 18:01:37,940 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_1"
+2026-02-10 18:01:49,181 | INFO | utils | Inserted 27230 rows into strategy_signals.sig_1h_btc_1
+2026-02-10 18:01:53,189 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:01:53,189 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:01:53,605 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:02:04,977 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:02:05,094 | INFO | utils | Indexes ensured: sig_1h_btc_2_datetime_uidx, sig_1h_btc_2_datetime_desc_idx
+2026-02-10 18:02:05,094 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_2"
+2026-02-10 18:02:16,433 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_2
+2026-02-10 18:02:20,736 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:02:20,736 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:02:20,856 | INFO | utils | Added missing column 'bbands_period' as BIGINT
+2026-02-10 18:02:20,856 | INFO | utils | Added missing column 'dema_period' as BIGINT
+2026-02-10 18:02:20,856 | INFO | utils | Added missing column 'kama_period' as BIGINT
+2026-02-10 18:02:20,870 | INFO | utils | Added missing column 'sma_period' as BIGINT
+2026-02-10 18:02:20,874 | INFO | utils | Added missing column 'tema_period' as BIGINT
+2026-02-10 18:02:20,879 | INFO | utils | Added missing column 'adxr_period' as BIGINT
+2026-02-10 18:02:20,883 | INFO | utils | Added missing column 'apo_period' as BIGINT
+2026-02-10 18:02:20,887 | INFO | utils | Added missing column 'aroon_period' as BIGINT
+2026-02-10 18:02:20,892 | INFO | utils | Added missing column 'macdext_fastperiod' as BIGINT
+2026-02-10 18:02:20,897 | INFO | utils | Added missing column 'macdext_slowperiod' as BIGINT
+2026-02-10 18:02:20,902 | INFO | utils | Added missing column 'macdext_signalperiod' as BIGINT
+2026-02-10 18:02:20,906 | INFO | utils | Added missing column 'mfi_period' as BIGINT
+2026-02-10 18:02:20,907 | INFO | utils | Added missing column 'mom_period' as BIGINT
+2026-02-10 18:02:20,915 | INFO | utils | Added missing column 'rocr_period' as BIGINT
+2026-02-10 18:02:20,919 | INFO | utils | Added missing column 'rsi_period' as BIGINT
+2026-02-10 18:02:20,926 | INFO | utils | Added missing column 'atr_period' as BIGINT
+2026-02-10 18:02:20,930 | INFO | utils | Added missing column 'natr_period' as BIGINT
+2026-02-10 18:02:20,938 | INFO | utils | Added missing column 'linearreg_period' as BIGINT
+2026-02-10 18:02:20,941 | INFO | utils | Added missing column 'linearreg_angle_period' as BIGINT
+2026-02-10 18:02:21,116 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:02:31,741 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:02:31,888 | INFO | utils | Indexes ensured: sig_1h_btc_3_datetime_uidx, sig_1h_btc_3_datetime_desc_idx
+2026-02-10 18:02:31,898 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_3"
+2026-02-10 18:02:45,529 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_3
+2026-02-10 18:02:50,067 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:02:50,067 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:02:50,223 | INFO | utils | Added missing column 'ma_period' as BIGINT
+2026-02-10 18:02:50,231 | INFO | utils | Added missing column 't3_period' as BIGINT
+2026-02-10 18:02:50,237 | INFO | utils | Added missing column 'cmo_period' as BIGINT
+2026-02-10 18:02:50,245 | INFO | utils | Added missing column 'macd_fastperiod' as BIGINT
+2026-02-10 18:02:50,253 | INFO | utils | Added missing column 'macd_slowperiod' as BIGINT
+2026-02-10 18:02:50,263 | INFO | utils | Added missing column 'macd_signalperiod' as BIGINT
+2026-02-10 18:02:50,271 | INFO | utils | Added missing column 'minus_di_period' as BIGINT
+2026-02-10 18:02:50,279 | INFO | utils | Added missing column 'rocp_period' as BIGINT
+2026-02-10 18:02:50,289 | INFO | utils | Added missing column 'stoch_fastk_period' as BIGINT
+2026-02-10 18:02:50,296 | INFO | utils | Added missing column 'stoch_slowk_period' as BIGINT
+2026-02-10 18:02:50,304 | INFO | utils | Added missing column 'stoch_slowd_period' as BIGINT
+2026-02-10 18:02:50,311 | INFO | utils | Added missing column 'stochrsi_period' as BIGINT
+2026-02-10 18:02:50,550 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:03:01,204 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:03:01,312 | INFO | utils | Indexes ensured: sig_1h_btc_4_datetime_uidx, sig_1h_btc_4_datetime_desc_idx
+2026-02-10 18:03:01,321 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_4"
+2026-02-10 18:03:12,362 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_4
+2026-02-10 18:03:17,002 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:03:17,002 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:03:17,157 | INFO | utils | Added missing column 'adx_period' as BIGINT
+2026-02-10 18:03:17,584 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:03:28,487 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:03:28,602 | INFO | utils | Indexes ensured: sig_1h_btc_5_datetime_uidx, sig_1h_btc_5_datetime_desc_idx
+2026-02-10 18:03:28,606 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_5"
+2026-02-10 18:03:40,543 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_5
+2026-02-10 18:03:45,220 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:03:45,221 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:03:45,371 | INFO | utils | Added missing column 'dx_period' as BIGINT
+2026-02-10 18:03:45,576 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:03:56,668 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:03:56,780 | INFO | utils | Indexes ensured: sig_1h_btc_6_datetime_uidx, sig_1h_btc_6_datetime_desc_idx
+2026-02-10 18:03:56,798 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_6"
+2026-02-10 18:04:08,845 | INFO | utils | Inserted 27206 rows into strategy_signals.sig_1h_btc_6
+2026-02-10 18:04:13,475 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:04:13,475 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:04:13,614 | INFO | utils | Added missing column 'rocr100_period' as BIGINT
+2026-02-10 18:04:13,789 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:04:25,710 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:04:25,838 | INFO | utils | Indexes ensured: sig_1h_btc_7_datetime_uidx, sig_1h_btc_7_datetime_desc_idx
+2026-02-10 18:04:25,845 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_7"
+2026-02-10 18:04:38,328 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_7
+2026-02-10 18:04:42,623 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:04:42,637 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:04:42,923 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:04:55,046 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:04:55,169 | INFO | utils | Indexes ensured: sig_1h_btc_8_datetime_uidx, sig_1h_btc_8_datetime_desc_idx
+2026-02-10 18:04:55,182 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_8"
+2026-02-10 18:05:08,973 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_8
+2026-02-10 18:05:15,152 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:05:15,152 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:05:15,326 | INFO | utils | Added missing column 'linearreg_intercept_period' as BIGINT
+2026-02-10 18:05:15,571 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:05:29,549 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:05:29,732 | INFO | utils | Indexes ensured: sig_1h_btc_9_datetime_uidx, sig_1h_btc_9_datetime_desc_idx
+2026-02-10 18:05:29,735 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_9"
+2026-02-10 18:05:44,488 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_9
+2026-02-10 18:05:49,490 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:05:49,490 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:05:49,904 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:06:01,010 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:06:01,174 | INFO | utils | Indexes ensured: sig_1h_btc_10_datetime_uidx, sig_1h_btc_10_datetime_desc_idx
+2026-02-10 18:06:01,199 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_10"
+2026-02-10 18:06:13,379 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_10
+2026-02-10 18:06:18,169 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:06:18,169 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:06:18,482 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:06:29,590 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:06:29,712 | INFO | utils | Indexes ensured: sig_1h_btc_11_datetime_uidx, sig_1h_btc_11_datetime_desc_idx
+2026-02-10 18:06:29,715 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_11"
+2026-02-10 18:06:42,435 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_11
+2026-02-10 18:06:47,012 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:06:47,014 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:06:47,331 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:06:58,453 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:06:58,628 | INFO | utils | Indexes ensured: sig_1h_btc_12_datetime_uidx, sig_1h_btc_12_datetime_desc_idx
+2026-02-10 18:06:58,635 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_12"
+2026-02-10 18:07:11,708 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_12
+2026-02-10 18:07:16,331 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:07:16,334 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:07:16,663 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:07:27,966 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:07:28,084 | INFO | utils | Indexes ensured: sig_1h_btc_13_datetime_uidx, sig_1h_btc_13_datetime_desc_idx
+2026-02-10 18:07:28,086 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_13"
+2026-02-10 18:07:40,977 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_13
+2026-02-10 18:07:45,588 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:07:45,588 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:07:45,925 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:07:57,042 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:07:57,166 | INFO | utils | Indexes ensured: sig_1h_btc_14_datetime_uidx, sig_1h_btc_14_datetime_desc_idx
+2026-02-10 18:07:57,172 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_14"
+2026-02-10 18:08:09,935 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_14
+2026-02-10 18:08:14,292 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:08:14,292 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:08:14,607 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:08:25,681 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:08:25,806 | INFO | utils | Indexes ensured: sig_1h_btc_15_datetime_uidx, sig_1h_btc_15_datetime_desc_idx
+2026-02-10 18:08:25,816 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_15"
+2026-02-10 18:08:38,322 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_15
+2026-02-10 18:08:42,940 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:08:42,940 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:08:43,279 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:08:54,697 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:08:54,823 | INFO | utils | Indexes ensured: sig_1h_btc_16_datetime_uidx, sig_1h_btc_16_datetime_desc_idx
+2026-02-10 18:08:54,827 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_16"
+2026-02-10 18:09:07,585 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_16
+2026-02-10 18:09:12,125 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:09:12,125 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:09:12,451 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:09:23,587 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:09:23,702 | INFO | utils | Indexes ensured: sig_1h_btc_17_datetime_uidx, sig_1h_btc_17_datetime_desc_idx
+2026-02-10 18:09:23,710 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_17"
+2026-02-10 18:09:36,044 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_17
+2026-02-10 18:09:41,430 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:09:41,430 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:09:41,721 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:09:59,419 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:09:59,568 | INFO | utils | Indexes ensured: sig_1h_btc_18_datetime_uidx, sig_1h_btc_18_datetime_desc_idx
+2026-02-10 18:09:59,568 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_18"
+2026-02-10 18:10:09,903 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_18
+2026-02-10 18:10:15,771 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:10:15,771 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:10:16,085 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:10:28,354 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:10:28,528 | INFO | utils | Indexes ensured: sig_1h_btc_19_datetime_uidx, sig_1h_btc_19_datetime_desc_idx
+2026-02-10 18:10:28,532 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_19"
+2026-02-10 18:10:39,135 | INFO | utils | Inserted 27206 rows into strategy_signals.sig_1h_btc_19
+2026-02-10 18:10:45,112 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:10:45,112 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:10:45,574 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:11:03,515 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:11:03,826 | INFO | utils | Indexes ensured: sig_1h_btc_20_datetime_uidx, sig_1h_btc_20_datetime_desc_idx
+2026-02-10 18:11:03,869 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_20"
+2026-02-10 18:11:16,794 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_20
+2026-02-10 18:11:22,598 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:11:22,598 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:11:22,992 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:11:35,458 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:11:35,609 | INFO | utils | Indexes ensured: sig_1h_btc_21_datetime_uidx, sig_1h_btc_21_datetime_desc_idx
+2026-02-10 18:11:35,647 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_21"
+2026-02-10 18:11:46,369 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_21
+2026-02-10 18:11:51,980 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:11:51,993 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:11:52,332 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:12:05,497 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:12:05,621 | INFO | utils | Indexes ensured: sig_1h_btc_22_datetime_uidx, sig_1h_btc_22_datetime_desc_idx
+2026-02-10 18:12:05,639 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_22"
+2026-02-10 18:12:16,785 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_22
+2026-02-10 18:12:22,748 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:12:22,748 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:12:23,141 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:12:35,546 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:12:35,668 | INFO | utils | Indexes ensured: sig_1h_btc_23_datetime_uidx, sig_1h_btc_23_datetime_desc_idx
+2026-02-10 18:12:35,674 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_23"
+2026-02-10 18:12:46,508 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_23
+2026-02-10 18:12:51,852 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:12:51,852 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:12:52,139 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:13:05,332 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:13:05,492 | INFO | utils | Indexes ensured: sig_1h_btc_24_datetime_uidx, sig_1h_btc_24_datetime_desc_idx
+2026-02-10 18:13:05,500 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_24"
+2026-02-10 18:13:16,435 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_24
+2026-02-10 18:13:21,609 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:13:21,609 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:13:21,956 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:13:34,420 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:13:34,560 | INFO | utils | Indexes ensured: sig_1h_btc_25_datetime_uidx, sig_1h_btc_25_datetime_desc_idx
+2026-02-10 18:13:34,566 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_25"
+2026-02-10 18:13:45,287 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_25
+2026-02-10 18:13:50,798 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:13:50,810 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:13:51,075 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:14:03,726 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:14:03,874 | INFO | utils | Indexes ensured: sig_1h_btc_26_datetime_uidx, sig_1h_btc_26_datetime_desc_idx
+2026-02-10 18:14:03,880 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_26"
+2026-02-10 18:14:14,905 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_26
+2026-02-10 18:14:20,403 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:14:20,403 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:14:20,682 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:14:33,062 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:14:33,450 | INFO | utils | Indexes ensured: sig_1h_btc_27_datetime_uidx, sig_1h_btc_27_datetime_desc_idx
+2026-02-10 18:14:33,459 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_27"
+2026-02-10 18:14:44,181 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_27
+2026-02-10 18:14:49,953 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:14:49,968 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:14:50,280 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:15:04,677 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:15:04,810 | INFO | utils | Indexes ensured: sig_1h_btc_28_datetime_uidx, sig_1h_btc_28_datetime_desc_idx
+2026-02-10 18:15:04,816 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_28"
+2026-02-10 18:15:15,474 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_28
+2026-02-10 18:15:21,003 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:15:21,003 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:15:21,450 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:15:33,441 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:15:33,597 | INFO | utils | Indexes ensured: sig_1h_btc_29_datetime_uidx, sig_1h_btc_29_datetime_desc_idx
+2026-02-10 18:15:33,597 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_29"
+2026-02-10 18:15:44,478 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_29
+2026-02-10 18:15:50,128 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:15:50,128 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:15:50,485 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:16:02,540 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:16:02,725 | INFO | utils | Indexes ensured: sig_1h_btc_30_datetime_uidx, sig_1h_btc_30_datetime_desc_idx
+2026-02-10 18:16:02,759 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_30"
+2026-02-10 18:16:13,498 | INFO | utils | Inserted 27206 rows into strategy_signals.sig_1h_btc_30
+2026-02-10 18:16:19,124 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:16:19,124 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:16:19,503 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:16:32,056 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:16:32,208 | INFO | utils | Indexes ensured: sig_1h_btc_31_datetime_uidx, sig_1h_btc_31_datetime_desc_idx
+2026-02-10 18:16:32,208 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_31"
+2026-02-10 18:16:43,418 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_31
+2026-02-10 18:16:48,811 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:16:48,811 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:16:49,175 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:17:02,161 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:17:02,334 | INFO | utils | Indexes ensured: sig_1h_btc_32_datetime_uidx, sig_1h_btc_32_datetime_desc_idx
+2026-02-10 18:17:02,349 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_32"
+2026-02-10 18:17:14,895 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_32
+2026-02-10 18:17:22,672 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:17:22,673 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:17:23,175 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:17:41,774 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:17:41,947 | INFO | utils | Indexes ensured: sig_1h_btc_33_datetime_uidx, sig_1h_btc_33_datetime_desc_idx
+2026-02-10 18:17:41,960 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_33"
+2026-02-10 18:17:55,419 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_33
+2026-02-10 18:18:01,375 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:18:01,375 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:18:01,712 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:18:16,207 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:18:16,345 | INFO | utils | Indexes ensured: sig_1h_btc_34_datetime_uidx, sig_1h_btc_34_datetime_desc_idx
+2026-02-10 18:18:16,345 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_34"
+2026-02-10 18:18:27,870 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_34
+2026-02-10 18:18:33,695 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:18:33,695 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:18:34,083 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:18:48,318 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:18:48,470 | INFO | utils | Indexes ensured: sig_1h_btc_35_datetime_uidx, sig_1h_btc_35_datetime_desc_idx
+2026-02-10 18:18:48,477 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_35"
+2026-02-10 18:18:59,736 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_35
+2026-02-10 18:19:06,006 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:19:06,008 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:19:06,374 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:19:20,943 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:19:21,073 | INFO | utils | Indexes ensured: sig_1h_btc_36_datetime_uidx, sig_1h_btc_36_datetime_desc_idx
+2026-02-10 18:19:21,089 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_36"
+2026-02-10 18:19:32,203 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_36
+2026-02-10 18:19:37,969 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:19:37,969 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:19:38,323 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:19:53,436 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:19:53,644 | INFO | utils | Indexes ensured: sig_1h_btc_37_datetime_uidx, sig_1h_btc_37_datetime_desc_idx
+2026-02-10 18:19:53,648 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_37"
+2026-02-10 18:20:06,053 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_37
+2026-02-10 18:20:12,009 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:20:12,011 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:20:12,381 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:20:26,629 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:20:26,811 | INFO | utils | Indexes ensured: sig_1h_btc_38_datetime_uidx, sig_1h_btc_38_datetime_desc_idx
+2026-02-10 18:20:26,821 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_38"
+2026-02-10 18:20:37,972 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_38
+2026-02-10 18:20:43,653 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:20:43,653 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:20:44,055 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:20:58,008 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:20:58,241 | INFO | utils | Indexes ensured: sig_1h_btc_39_datetime_uidx, sig_1h_btc_39_datetime_desc_idx
+2026-02-10 18:20:58,260 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_39"
+2026-02-10 18:21:09,760 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_39
+2026-02-10 18:21:15,195 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:21:15,195 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:21:15,556 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:21:31,482 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:21:31,955 | INFO | utils | Indexes ensured: sig_1h_btc_40_datetime_uidx, sig_1h_btc_40_datetime_desc_idx
+2026-02-10 18:21:31,994 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_40"
+2026-02-10 18:21:46,684 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_40
+2026-02-10 18:21:53,137 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:21:53,148 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:21:53,562 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:22:07,610 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:22:07,790 | INFO | utils | Indexes ensured: sig_1h_btc_41_datetime_uidx, sig_1h_btc_41_datetime_desc_idx
+2026-02-10 18:22:07,794 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_41"
+2026-02-10 18:22:19,199 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_41
+2026-02-10 18:22:25,036 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:22:25,042 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:22:25,441 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:22:40,907 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:22:41,078 | INFO | utils | Indexes ensured: sig_1h_btc_42_datetime_uidx, sig_1h_btc_42_datetime_desc_idx
+2026-02-10 18:22:41,095 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_42"
+2026-02-10 18:22:52,771 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_42
+2026-02-10 18:23:02,847 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:23:02,847 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:23:03,209 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:23:17,832 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:23:18,016 | INFO | utils | Indexes ensured: sig_1h_btc_43_datetime_uidx, sig_1h_btc_43_datetime_desc_idx
+2026-02-10 18:23:18,016 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_43"
+2026-02-10 18:23:29,192 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_43
+2026-02-10 18:23:35,585 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:23:35,585 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:23:35,974 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:23:50,204 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:23:50,308 | INFO | utils | Indexes ensured: sig_1h_btc_44_datetime_uidx, sig_1h_btc_44_datetime_desc_idx
+2026-02-10 18:23:50,326 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_44"
+2026-02-10 18:24:01,817 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_44
+2026-02-10 18:24:07,273 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:24:07,273 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:24:07,648 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:24:22,072 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:24:22,194 | INFO | utils | Indexes ensured: sig_1h_btc_45_datetime_uidx, sig_1h_btc_45_datetime_desc_idx
+2026-02-10 18:24:22,203 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_45"
+2026-02-10 18:24:33,745 | INFO | utils | Inserted 27207 rows into strategy_signals.sig_1h_btc_45
+2026-02-10 18:24:40,028 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:24:40,028 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:24:40,419 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:24:55,570 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:24:55,766 | INFO | utils | Indexes ensured: sig_1h_btc_46_datetime_uidx, sig_1h_btc_46_datetime_desc_idx
+2026-02-10 18:24:55,776 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_46"
+2026-02-10 18:25:08,412 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_46
+2026-02-10 18:25:15,062 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:25:15,062 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:25:15,415 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:25:31,164 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:25:31,376 | INFO | utils | Indexes ensured: sig_1h_btc_47_datetime_uidx, sig_1h_btc_47_datetime_desc_idx
+2026-02-10 18:25:31,392 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_47"
+2026-02-10 18:25:43,234 | INFO | utils | Inserted 27192 rows into strategy_signals.sig_1h_btc_47
+2026-02-10 18:25:49,367 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:25:49,367 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:25:49,852 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:26:05,753 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:26:06,021 | INFO | utils | Indexes ensured: sig_1h_btc_48_datetime_uidx, sig_1h_btc_48_datetime_desc_idx
+2026-02-10 18:26:06,047 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_48"
+2026-02-10 18:26:17,872 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_48
+2026-02-10 18:26:23,934 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:26:23,934 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:26:24,369 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:26:40,120 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:26:40,329 | INFO | utils | Indexes ensured: sig_1h_btc_49_datetime_uidx, sig_1h_btc_49_datetime_desc_idx
+2026-02-10 18:26:40,331 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_49"
+2026-02-10 18:26:52,542 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_49
+2026-02-10 18:26:58,944 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:26:58,944 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:26:59,417 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:27:16,833 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:27:16,990 | INFO | utils | Indexes ensured: sig_1h_btc_50_datetime_uidx, sig_1h_btc_50_datetime_desc_idx
+2026-02-10 18:27:16,998 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_50"
+2026-02-10 18:27:30,059 | INFO | utils | Inserted 27183 rows into strategy_signals.sig_1h_btc_50
+2026-02-10 18:27:37,095 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:27:37,095 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:27:37,583 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-10 18:28:46,300 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-10 18:28:46,763 | INFO | utils | Indexes ensured: sig_15m_btc_1_datetime_uidx, sig_15m_btc_1_datetime_desc_idx
+2026-02-10 18:28:46,779 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_1"
+2026-02-10 18:29:28,367 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_1
+2026-02-10 18:29:40,860 | INFO | utils | Schema 'strategies' ready
+2026-02-10 18:29:40,860 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-10 18:29:41,224 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 05:06:02,837 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 05:06:07,604 | INFO | utils | Indexes ensured: sig_15m_btc_2_datetime_uidx, sig_15m_btc_2_datetime_desc_idx
+2026-02-11 05:06:08,296 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_2"
+2026-02-11 09:41:16,019 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_2
+2026-02-11 09:41:38,754 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:41:38,754 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:41:39,320 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:42:16,419 | INFO | utils | Database engine initialized
+2026-02-11 09:42:22,965 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 09:42:23,044 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-02-11 09:42:23,054 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-02-11 09:42:23,751 | INFO | utils | Inserted 1331 rows into data_binance.btc_1m
+2026-02-11 09:42:27,887 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:42:29,836 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 09:42:29,997 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-02-11 09:42:30,001 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-02-11 09:42:31,049 | INFO | utils | Inserted 1254 rows into data_binance.eth_1m
+2026-02-11 09:42:31,167 | INFO | utils | Indexes ensured: sig_15m_btc_3_datetime_uidx, sig_15m_btc_3_datetime_desc_idx
+2026-02-11 09:42:31,232 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_3"
+2026-02-11 09:42:37,073 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 09:42:37,093 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-02-11 09:42:37,095 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-02-11 09:42:37,572 | INFO | utils | Inserted 1098 rows into data_binance.bnb_1m
+2026-02-11 09:42:43,288 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 09:42:43,311 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-02-11 09:42:43,313 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-02-11 09:42:43,858 | INFO | utils | Inserted 1064 rows into data_binance.ada_1m
+2026-02-11 09:43:11,086 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_3
+2026-02-11 09:43:23,656 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:43:23,656 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:43:24,051 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:44:04,489 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:44:05,131 | INFO | utils | Indexes ensured: sig_15m_btc_4_datetime_uidx, sig_15m_btc_4_datetime_desc_idx
+2026-02-11 09:44:05,190 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_4"
+2026-02-11 09:44:44,449 | INFO | utils | Inserted 109018 rows into strategy_signals.sig_15m_btc_4
+2026-02-11 09:44:52,942 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:44:52,942 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:44:53,239 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:45:33,214 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:45:33,801 | INFO | utils | Indexes ensured: sig_15m_btc_5_datetime_uidx, sig_15m_btc_5_datetime_desc_idx
+2026-02-11 09:45:33,801 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_5"
+2026-02-11 09:46:12,890 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_5
+2026-02-11 09:46:21,260 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:46:21,260 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:46:21,558 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:47:03,587 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:47:03,988 | INFO | utils | Indexes ensured: sig_15m_btc_6_datetime_uidx, sig_15m_btc_6_datetime_desc_idx
+2026-02-11 09:47:03,999 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_6"
+2026-02-11 09:47:43,285 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_6
+2026-02-11 09:47:51,782 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:47:51,782 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:47:52,073 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:48:34,977 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:48:35,366 | INFO | utils | Indexes ensured: sig_15m_btc_7_datetime_uidx, sig_15m_btc_7_datetime_desc_idx
+2026-02-11 09:48:35,394 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_7"
+2026-02-11 09:49:14,425 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_7
+2026-02-11 09:49:23,401 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:49:23,403 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:49:23,704 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:50:02,975 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:50:03,309 | INFO | utils | Indexes ensured: sig_15m_btc_8_datetime_uidx, sig_15m_btc_8_datetime_desc_idx
+2026-02-11 09:50:03,320 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_8"
+2026-02-11 09:50:47,132 | INFO | utils | Inserted 109019 rows into strategy_signals.sig_15m_btc_8
+2026-02-11 09:50:55,776 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:50:55,776 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:50:56,109 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:51:35,823 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:51:36,169 | INFO | utils | Indexes ensured: sig_15m_btc_9_datetime_uidx, sig_15m_btc_9_datetime_desc_idx
+2026-02-11 09:51:36,180 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_9"
+2026-02-11 09:52:24,646 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_9
+2026-02-11 09:52:36,863 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:52:36,863 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:52:37,231 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:53:37,214 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:53:37,611 | INFO | utils | Indexes ensured: sig_15m_btc_10_datetime_uidx, sig_15m_btc_10_datetime_desc_idx
+2026-02-11 09:53:37,634 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_10"
+2026-02-11 09:54:16,474 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_10
+2026-02-11 09:54:30,144 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:54:30,145 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:54:30,490 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:55:16,690 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:55:17,048 | INFO | utils | Indexes ensured: sig_15m_btc_11_datetime_uidx, sig_15m_btc_11_datetime_desc_idx
+2026-02-11 09:55:17,059 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_11"
+2026-02-11 09:56:03,294 | INFO | utils | Inserted 108995 rows into strategy_signals.sig_15m_btc_11
+2026-02-11 09:56:18,982 | INFO | utils | Schema 'strategies' ready
+2026-02-11 09:56:18,982 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 09:56:19,465 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 09:57:15,448 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 09:57:16,296 | INFO | utils | Indexes ensured: sig_15m_btc_12_datetime_uidx, sig_15m_btc_12_datetime_desc_idx
+2026-02-11 09:57:16,317 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_15m_btc_12"
