@@ -74,7 +74,9 @@ def run_active_signals_with_voting(
 
     def compute_signal(name):
         try:
-            if name.startswith("CDL"):
+            if name.lower().startswith("cdl"):
+                if name.islower():
+                    name = name.upper()
                 sig, window = candlestick_signal(open_, high, low, close_, name)
                 return name, sig.astype(np.float32), {"window": window}
 
