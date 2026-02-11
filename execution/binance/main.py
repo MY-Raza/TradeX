@@ -30,12 +30,9 @@ for i, strategy in enumerate(strategies, start=1):
 
     # Determine max value safely
     max_value = max(numeric_values) if numeric_values else None
-    logger.info(f"Strategy {strategy_name} → ALL columns:")
+    strategy_name = getattr(strategy, "strategy", "Unknown")
 
-    for key, value in attr_dict.items():
-        logger.info(f"    {key}: {value}")
-
-    strategy_name = getattr(strategy, "strategy", "Unknown")  # replace "strategy" with actual column name
+      # replace "strategy" with actual column name
     logger.info(f"Strategy {strategy_name} → Highest window value among specified patterns: {max_value}")
 
 script_path = os.path.abspath(
