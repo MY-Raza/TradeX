@@ -115,8 +115,8 @@ def run_active_signals_with_voting(
 
     # Run active indicators in parallel
     active_indicators = [name for name, active in flags.items() if active]
-    with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
-        results = executor.map(compute_signal, active_indicators)
+    results = [compute_signal(name) for name in active_indicators]
+
 
     for name, sig, window_params in results:
         if name is not None and sig is not None:

@@ -13634,3 +13634,52 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-11 13:27:24,764 | INFO | utils | Filtered Strategy → strategy=sig_1h_btc_7, tp=3, sl=1, symbol=btc, timehorizon=1h, pnl_sum=2353.71, ma=True, mama=True, sarext=True, t3=True, tema=True, trima=True, apo=True, cci=True, macdext=True, mfi=True, minus_dm=True, roc=True, rocp=True, rocr=True, rocr100=True, stochrsi=True, trix=True, obv=True, atr=True, trange=True, wclprice=True, linearreg_angle=True, linearreg_slope=True, cdl2crows=True, cdl3blackcrows=True, cdl3starsinsouth=True, cdl3whitesoldiers=True, cdlabandonedbaby=True, cdladvanceblock=True, cdlbreakaway=True, cdlclosingmarubozu=True, cdlconcealbabyswall=True, cdlengulfing=True, cdleveningdojistar=True, cdlgravestonedoji=True, cdlhammer=True, cdlhangingman=True, cdlhikkakemod=True, cdlhomingpigeon=True, cdlinvertedhammer=True, cdlkickingbylength=True, cdlladderbottom=True, cdllongleggeddoji=True, cdlmatchinglow=True, cdlmathold=True, cdlmorningdojistar=True, cdlmorningstar=True, cdlonneck=True, cdlrisefall3methods=True, cdlseparatinglines=True, cdlshootingstar=True, cdlspinningtop=True, cdltakuri=True, cdltristar=True, cdlunique3river=True, cdlupsidegap2crows=True, trima_period=30, cci_period=14, minus_dm_period=14, roc_period=10, trix_period=14, linearreg_slope_period=14, tema_period=30, apo_period=12, macdext_fastperiod=12, macdext_slowperiod=26, macdext_signalperiod=9, mfi_period=14, rocr_period=10, atr_period=14, linearreg_angle_period=14, ma_period=30, t3_period=14, rocp_period=10, stochrsi_period=14, rocr100_period=10
 2026-02-11 13:27:24,766 | INFO | utils | Total profitable strategies returned for timeframe 1h: 5
 2026-02-11 13:27:32,878 | INFO | utils | Table Found
+2026-02-11 13:33:47,412 | INFO | utils | Database engine initialized
+2026-02-11 13:34:01,569 | INFO | utils | Table Found
+2026-02-11 13:36:08,579 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 13:36:10,248 | INFO | utils | Indexes ensured: sig_5m_btc_1_datetime_uidx, sig_5m_btc_1_datetime_desc_idx
+2026-02-11 13:36:11,016 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_1"
+2026-02-11 13:40:23,380 | INFO | utils | Inserted 327473 rows into strategy_signals.sig_5m_btc_1
+2026-02-11 13:40:39,311 | INFO | utils | Schema 'strategies' ready
+2026-02-11 13:40:39,311 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 13:40:40,270 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 13:42:56,185 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 13:42:57,692 | INFO | utils | Indexes ensured: sig_5m_btc_2_datetime_uidx, sig_5m_btc_2_datetime_desc_idx
+2026-02-11 13:42:57,749 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_2"
+2026-02-11 13:47:13,551 | INFO | utils | Inserted 327511 rows into strategy_signals.sig_5m_btc_2
+2026-02-11 13:47:30,645 | INFO | utils | Schema 'strategies' ready
+2026-02-11 13:47:30,645 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 13:47:31,137 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 13:49:35,842 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 13:49:36,922 | INFO | utils | Indexes ensured: sig_5m_btc_3_datetime_uidx, sig_5m_btc_3_datetime_desc_idx
+2026-02-11 13:49:36,982 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_3"
+2026-02-11 13:53:48,856 | INFO | utils | Inserted 327464 rows into strategy_signals.sig_5m_btc_3
+2026-02-11 13:54:11,846 | INFO | utils | Schema 'strategies' ready
+2026-02-11 13:54:11,854 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 13:54:12,340 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 13:56:37,891 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 13:56:41,976 | INFO | utils | Indexes ensured: sig_5m_btc_4_datetime_uidx, sig_5m_btc_4_datetime_desc_idx
+2026-02-11 13:56:42,194 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_4"
+2026-02-11 13:59:20,662 | INFO | utils | Inserted 327473 rows into strategy_signals.sig_5m_btc_4
+2026-02-11 13:59:51,104 | INFO | utils | Schema 'strategies' ready
+2026-02-11 13:59:51,111 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 13:59:51,538 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 14:02:46,174 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-11 14:02:48,014 | INFO | utils | Indexes ensured: sig_5m_btc_5_datetime_uidx, sig_5m_btc_5_datetime_desc_idx
+2026-02-11 14:02:48,343 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_5m_btc_5"
+2026-02-11 14:05:00,481 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 14:05:12,123 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-02-11 14:05:12,224 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-02-11 14:05:52,915 | INFO | utils | Inserted 327464 rows into strategy_signals.sig_5m_btc_5
+2026-02-11 14:07:16,812 | INFO | utils | Schema 'strategies' ready
+2026-02-11 14:07:16,820 | INFO | utils | No time_column provided and 'datetime' missing
+2026-02-11 14:07:19,504 | INFO | utils | Inserted 1 rows into strategies.strategy_registry
+2026-02-11 14:09:22,427 | INFO | utils | Database engine initialized
+2026-02-11 14:09:26,658 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 14:09:26,739 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-02-11 14:09:26,759 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-02-11 14:09:26,986 | INFO | utils | Inserted 69 rows into data_binance.btc_1m
+2026-02-11 14:09:31,127 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 14:09:31,155 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-02-11 14:09:31,157 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-02-11 14:09:31,265 | INFO | utils | Inserted 69 rows into data_binance.eth_1m

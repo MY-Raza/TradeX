@@ -1,3 +1,4 @@
+import sys
 from TradeX.utils.db.utils import get_profitable_strategies, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
@@ -12,15 +13,24 @@ from TradeX.execution.binance.strategy_signals_orchestrator import (
 )
 
 logger = get_logger("execution_binance_main")
-
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
+
+# ------------------------------------------------------------
+# 0️⃣ Parse command-line argument for timeframe
+# ------------------------------------------------------------
+if len(sys.argv) < 2:
+    logger.error("Usage: python main.py <timeframe> (e.g., 1h, 15m)")
+    exit()
+
+timeframe = sys.argv[1]  # e.g., "1h"
+logger.info(f"Running strategy execution for timeframe: {timeframe}")
 
 
 # ============================================================
 # 1️⃣ Fetch profitable strategies
 # ============================================================
 strategies = get_profitable_strategies(
-    timehorizon="1h",
+    timehorizon=timeframe,
     min_pnl=100,
     best="lowest"
 )
@@ -57,7 +67,7 @@ for strategy in strategies:
 max_value = max(filter(None, strategy_max_values))
 CHECK_PARAMETER = 60
 required_1m = required_base_candles(
-    target_tf="1h",
+    target_tf=timeframe,
     base_tf="1m",
     window=max_value + CHECK_PARAMETER
 )
@@ -83,25 +93,25 @@ logger.info(f"Fetched {len(df_1m)} rows of 1m data.")
 
 
 # ============================================================
-# 5️⃣ Resample to 1h
+# 5️⃣ Resample to target timeframe
 # ============================================================
-df_1h = resample_ohlcv(
+df_resampled = resample_ohlcv(
     df=df_1m,
-    interval="1h"
+    interval=timeframe
 )
 
-if df_1h.empty:
-    logger.warning("Resampled 1h dataframe is empty.")
+if df_resampled.empty:
+    logger.warning(f"Resampled {timeframe} dataframe is empty.")
     exit()
 
-logger.info(f"Resampled to {len(df_1h)} rows of 1h data.")
+logger.info(f"Resampled to {len(df_resampled)} rows of {timeframe} data.")
 
 
 # ============================================================
-# 6️⃣ Execute strategies on 1h data
+# 6️⃣ Execute strategies on resampled data
 # ============================================================
 results = execute_strategies_on_dataframe(
-    df=df_1h,
+    df=df_resampled,
     strategies=strategies
 )
 
@@ -114,5 +124,4 @@ if not results:
 # 7️⃣ Get latest live signals
 # ============================================================
 latest_signals = get_latest_signals(results)
-
 logger.info(f"Latest Signals: {latest_signals}")
