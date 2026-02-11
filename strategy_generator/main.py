@@ -5,6 +5,7 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.backtest.newbacktest import HighPerfBacktest
 from TradeX.utils.db.utils import save_df_to_db,fetch_ohlcv_df
+from TradeX.indicators.talib.indicators import ALL_INDICATORS
 
 from strategy_counter import generate_strategy_id
 from signals_combiner import randomize_indicators, run_active_signals_with_voting
@@ -30,84 +31,6 @@ TIMEFRAMES = [
 RUNS_PER_TIMEFRAME = 50
 
 # ============================
-# Indicators
-# ============================
-ALL_INDICATORS = (
-    # -------------------------
-    # Overlap Studies
-    # -------------------------
-    "BBANDS", "DEMA", "EMA", "HT_TRENDLINE", "KAMA",
-    "MA", "MAMA", "MIDPOINT", "MIDPRICE", "SAR",
-    "SAREXT", "SMA", "T3", "TEMA", "TRIMA", "WMA",
-    # -------------------------
-    # Momentum Indicators
-    # -------------------------
-    "ADX", "ADXR", "APO", "AROON", "AROONOSC",
-    "BOP", "CCI", "CMO", "DX", "MACD",
-    "MACDEXT", "MFI", "MINUS_DI",
-    "MINUS_DM", "MOM", "PLUS_DI", "PLUS_DM",
-    "PPO", "ROC", "ROCP", "ROCR", "ROCR100",
-    "RSI", "STOCH", "STOCHF", "STOCHRSI",
-    "TRIX", "WILLR",
-    # -------------------------
-    # Volume Indicators
-    # -------------------------
-    "AD", "ADOSC", "OBV",
-    # -------------------------
-    # Volatility Indicators
-    # -------------------------
-     "ATR", "NATR", "TRANGE",
-    # -------------------------
-    # Price Transform Indicators
-    # -------------------------
-    "AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE",
-    # -------------------------
-    # Cycle Indicators
-    # -------------------------
-    "HT_DCPERIOD", "HT_DCPHASE", "HT_PHASOR",
-    "HT_SINE", "HT_TRENDMODE",
-    # -------------------------
-    # Statistic Indicators
-    # -------------------------
-    "LINEARREG", "LINEARREG_ANGLE",
-    "LINEARREG_INTERCEPT", "LINEARREG_SLOPE",
-    "STDDEV", "TSF", "VAR",
-  
-    # ---------------------------
-    # CANDLESTICK PATTERN 
-    # --------------------------
-    "CDL2CROWS", "CDL3BLACKCROWS", "CDL3INSIDE",
-    "CDL3LINESTRIKE", "CDL3OUTSIDE", "CDL3STARSINSOUTH",
-    "CDL3WHITESOLDIERS", "CDLABANDONEDBABY",
-    "CDLADVANCEBLOCK", "CDLBELTHOLD", "CDLBREAKAWAY",
-    "CDLCLOSINGMARUBOZU", "CDLCONCEALBABYSWALL",
-    "CDLCOUNTERATTACK", "CDLDARKCLOUDCOVER",
-    "CDLDOJI", "CDLDOJISTAR", "CDLDRAGONFLYDOJI",
-    "CDLENGULFING", "CDLEVENINGDOJISTAR",
-    "CDLEVENINGSTAR", "CDLGAPSIDESIDEWHITE",
-    "CDLGRAVESTONEDOJI", "CDLHAMMER",
-    "CDLHANGINGMAN", "CDLHARAMI",
-    "CDLHARAMICROSS", "CDLHIGHWAVE",
-    "CDLHIKKAKE", "CDLHIKKAKEMOD",
-    "CDLHOMINGPIGEON", "CDLIDENTICAL3CROWS",
-    "CDLINNECK", "CDLINVERTEDHAMMER",
-    "CDLKICKING", "CDLKICKINGBYLENGTH",
-    "CDLLADDERBOTTOM", "CDLLONGLEGGEDDOJI",
-    "CDLLONGLINE", "CDLMARUBOZU",
-    "CDLMATCHINGLOW", "CDLMATHOLD",
-    "CDLMORNINGDOJISTAR", "CDLMORNINGSTAR",
-    "CDLONNECK", "CDLPIERCING",
-    "CDLRICKSHAWMAN", "CDLRISEFALL3METHODS",
-    "CDLSEPARATINGLINES", "CDLSHOOTINGSTAR",
-    "CDLSHORTLINE", "CDLSPINNINGTOP",
-    "CDLSTALLEDPATTERN", "CDLSTICKSANDWICH",
-    "CDLTAKURI", "CDLTASUKIGAP",
-    "CDLTHRUSTING", "CDLTRISTAR",
-    "CDLUNIQUE3RIVER", "CDLUPSIDEGAP2CROWS",
-    "CDLXSIDEGAP3METHODS"
-)
-
-# ============================
 # Load 1-minute OHLCV
 # ============================
 df_1m = fetch_ohlcv_df(
@@ -119,14 +42,6 @@ df_1m = fetch_ohlcv_df(
 if df_1m.empty:
     logger.error("OHLCV data empty. Exiting.")
     raise SystemExit
-
-# ============================
-# Output directory
-# ============================
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SIGNALS_FOLDER = os.path.join(BASE_DIR, "strategy_csv")
-os.makedirs(SIGNALS_FOLDER, exist_ok=True)
-
 # ============================
 # Multi-timeframe strategy loop
 # ============================
