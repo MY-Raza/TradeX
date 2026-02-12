@@ -33,9 +33,14 @@ if not mt5.initialize(login=MT5_LOGIN, password=MT5_PASSWORD, server=MT5_SERVER)
 logger.info("✅ MT5 initialized successfully")
 
 # =========================================
+# LOAD CONSTANTS
+# =========================================
+SCHEMA = EXCHANGE_SCHEMA_MAP["metatrader5"]  # Database schema for MT5 data
+
+# =========================================
 # LOAD CONFIGURATION FILE
 # =========================================
-config = read_config("config.yml")           # Reads config.yml for symbols and date ranges
+config = read_config(exchange_name=SCHEMA)           # Reads config.yml for symbols and date ranges
 raw_symbols = config["symbols"]              # List of symbols to fetch
 start_date = config["start_date"]            # Start date for fetching data
 end_date = config["end_date"]                # End date or "now" for current timestamp
@@ -43,11 +48,6 @@ end_date = config["end_date"]                # End date or "now" for current tim
 # Convert start and end date strings to datetime objects
 utc_from = datetime.fromisoformat(start_date)
 utc_to = datetime.now() if end_date == "now" else datetime.fromisoformat(end_date)
-
-# =========================================
-# LOAD CONSTANTS
-# =========================================
-SCHEMA = EXCHANGE_SCHEMA_MAP["metatrader5"]  # Database schema for MT5 data
 
 # =========================================
 # CREATE MT5 FUTURES FETCHER INSTANCE

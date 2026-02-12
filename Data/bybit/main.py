@@ -32,7 +32,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["bybit"]
 # ---------------------------
 # Load Configuration
 # ---------------------------
-config = read_config()
+config = read_config(exchange_name=SCHEMA)
 symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]

@@ -15,7 +15,7 @@ from TradeX.utils.common.config_loader import read_config
 # -------------------------------------------------
 # Load Configuration
 # -------------------------------------------------
-config = read_config()
+config = read_config(exchange_name="binance")
 symbols = config["symbols"]
 
 

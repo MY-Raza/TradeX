@@ -1,41 +1,36 @@
 import yaml
 from TradeX.utils.common.logs import get_logger
 import os
-import inspect
 
 logger = get_logger("config_loader")
 
-def read_config(filename: str = "config.yml") -> dict:
+def read_config(
+    exchange_name: str,
+    filename: str = "config.yml"
+) -> dict:
     """
-    Load exchange configuration from a YAML file.
-    Automatically resolves the path relative to the caller's file.
-
-    Args:
-        filename (str): Config file name (default "config.yml")
-
-    Returns:
-        dict: Dictionary with keys:
-            - exchange_name (str)
-            - symbols (list[str])
-            - start_date (str)
-            - end_date (str)
-
-    Raises:
-        FileNotFoundError: If the YAML file does not exist.
-        ValueError: If required keys are missing.
-        yaml.YAMLError: If YAML is malformed.
+    Load exchange configuration from:
+    TradeX/data/<exchange_name>/config.yml
     """
 
     try:
         # ---------------------------
-        # Get the caller's file location
+        # Resolve project root
         # ---------------------------
-        caller_frame = inspect.stack()[1]
-        caller_file = caller_frame.filename
-        caller_dir = os.path.dirname(os.path.abspath(caller_file))
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.abspath(
+            os.path.join(current_dir, "..", "..", "..")
+        )
 
-        # Build config path relative to caller
-        config_path = os.path.join(caller_dir, filename)
+        # ---------------------------
+        # Build path: TradeX/data/<exchange>/config.yml
+        # ---------------------------
+        config_path = os.path.join(
+            project_root,
+            "data",
+            exchange_name.lower(),
+            filename
+        )
 
         if not os.path.exists(config_path):
             raise FileNotFoundError(f"Config file not found: {config_path}")
@@ -66,9 +61,6 @@ def read_config(filename: str = "config.yml") -> dict:
             "end_date": end_date
         }
 
-    except FileNotFoundError:
-        logger.exception(f"Config file not found: {config_path}")
-        raise
-    except yaml.YAMLError:
-        logger.exception(f"Error parsing YAML file: {config_path}")
+    except Exception:
+        logger.exception("Failed to load config.")
         raise
