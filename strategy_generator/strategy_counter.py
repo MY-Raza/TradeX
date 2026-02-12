@@ -43,7 +43,7 @@ def _save_counters(counters):
 # ============================
 # Generate unique strategy ID
 # ============================
-def generate_strategy_id(flags: dict, timeframe="1h"):
+def generate_strategy_id(symbol: str, flags: dict, timeframe="1h",):
     """
     Generate a unique strategy ID for a given timeframe.
 
@@ -68,4 +68,4 @@ def generate_strategy_id(flags: dict, timeframe="1h"):
     _save_counters(counters)
 
     # Return unique strategy ID
-    return f"sig_{timeframe}_btc_{counters[timeframe]}"
+    return f"sig_{timeframe}_{symbol.lower()}_{counters[timeframe]}"

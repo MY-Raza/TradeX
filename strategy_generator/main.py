@@ -9,133 +9,156 @@ from TradeX.indicators.talib.indicators import ALL_INDICATORS
 
 from strategy_counter import generate_strategy_id
 from signals_combiner import randomize_indicators, run_active_signals_with_voting
+from TradeX.utils.common.config_loader import read_config
+
+
+# -------------------------------------------------
+# Load Configuration
+# -------------------------------------------------
+config = read_config()
+symbols = config["symbols"]
+
 
 # ============================
 # Logger
 # ============================
 logger = get_logger("strategy_main")
-# strategies = get_profitable_strategies(100)
-
-# for strategy in strategies:
-#     # iterate all dynamic columns
-#     for col, value in strategy.__dict__.items():
-#         print(f"{col} → {value}")
-
-
 
 # ============================
 # Strategy configuration
 # ============================
 TIMEFRAMES = [
-     "5m"]
-RUNS_PER_TIMEFRAME = 50
+     "1h","15m","5m"]
+RUNS_PER_TIMEFRAME = 7
 
 # ============================
-# Load 1-minute OHLCV
+# Multi-Symbol Loop
 # ============================
-df_1m = fetch_ohlcv_df(
-    table_name="btc_1m",
-    schema="data_binance",
-    time_column="datetime",
-)
+for symbol in symbols:
 
-if df_1m.empty:
-    logger.error("OHLCV data empty. Exiting.")
-    raise SystemExit
-# ============================
-# Multi-timeframe strategy loop
-# ============================
-for timeframe in TIMEFRAMES:
-    logger.info(f"\n⏱ Processing timeframe: {timeframe}")
+    logger.info(f"\n🚀 Processing Symbol: {symbol}")
 
-    # ----------------------------
-    # Resample OHLCV
-    # ----------------------------
-    df_tf = resample_ohlcv(df_1m, timeframe)
-    open_ = df_tf["open"].values
-    high = df_tf["high"].values
-    low = df_tf["low"].values
-    close_ = df_tf["close"].values
-    volume = df_tf["volume"].values
-    timestamps = df_tf["datetime"]
+    # -----------------------------------
+    # Load 1-minute OHLCV for this symbol
+    # -----------------------------------
+    df_1m = fetch_ohlcv_df(
+        table_name=f"{symbol.lower()}_1m",
+        schema="data_binance",
+        time_column="datetime",
+    )
 
-    # ----------------------------
-    # Run strategies for timeframe
-    # ----------------------------
-    for run_idx in range(1, RUNS_PER_TIMEFRAME + 1):
-        logger.info(f" {timeframe} | Strategy {run_idx}/{RUNS_PER_TIMEFRAME}")
+    if df_1m.empty:
+        logger.warning(f"{symbol} OHLCV data empty. Skipping.")
+        continue
 
-        # Random indicators
-        flags = randomize_indicators(ALL_INDICATORS)
+    # ============================
+    # Multi-timeframe loop
+    # ============================
+    for timeframe in TIMEFRAMES:
+        logger.info(f"⏱ {symbol} | Timeframe: {timeframe}")
 
-        # Generate signals
-        signals, windows_dict = run_active_signals_with_voting(
-            flags,
-            open_,
-            high,
-            low,
-            close_,
-            volume,
-            timestamps,
-        )
+        # ----------------------------
+        # Resample OHLCV
+        # ----------------------------
+        df_tf = resample_ohlcv(df_1m, timeframe)
 
-        if signals.empty:
-            logger.warning("Empty signals — skipping.")
-            continue
+        open_ = df_tf["open"].values
+        high = df_tf["high"].values
+        low = df_tf["low"].values
+        close_ = df_tf["close"].values
+        volume = df_tf["volume"].values
+        timestamps = df_tf["datetime"]
 
-        # Strategy ID (timeframe-aware)
-        strategy_id = generate_strategy_id(flags, timeframe=timeframe)
-        # Save signals
-        save_df_to_db(
-            df=signals,
-            schema="strategy_signals",
-            table_name=strategy_id,
-            time_column="datetime",
-            is_timeseries=True
-        )
+        # ----------------------------
+        # Strategy Runs
+        # ----------------------------
+        for run_idx in range(1, RUNS_PER_TIMEFRAME + 1):
+            logger.info(
+                f"{symbol} | {timeframe} | Strategy {run_idx}/{RUNS_PER_TIMEFRAME}"
+            )
 
-        # Backtest (still uses 1m execution)
-        bt = HighPerfBacktest(
-            df_price=df_1m,
-            df_predictions=signals,
-            starting_balance=1000,
-            take_profit=3,
-            stop_loss=1,
-            fee=0.05,
-            leverage=1,
-            slippage=0
-        )
+            flags = randomize_indicators(ALL_INDICATORS)
 
-        ledger, final_balance, total_pnl_percent = bt.run()
+            signals, windows_dict = run_active_signals_with_voting(
+                flags,
+                open_,
+                high,
+                low,
+                close_,
+                volume,
+                timestamps,
+            )
 
-        # Log result
-        logger.info(
-            f" {strategy_id} | Balance={final_balance:.2f} | "
-            f"PnL={total_pnl_percent:.2f}% | Trades={len(ledger)}"
-        )
-        # Flatten windows_dict into row_data
-        row_data = {**flags}
-        for ind_name, params in windows_dict.items():
-             for param_name, value in params.items():
-        # e.g., MACD_window.fastperiod → 'MACD_fastperiod'
-                row_data[f"{ind_name}_{param_name}"] = value
-        strategy_df = pd.DataFrame([row_data])
-        strategy_df.insert(0, "pnl_sum", total_pnl_percent)
-        strategy_df.insert(0, "timehorizon", timeframe)
-        strategy_df.insert(0, "symbol", "btc")
-        strategy_df.insert(0, "sl", "1")
-        strategy_df.insert(0, "tp", "3")
-        strategy_df.insert(0, "strategy", strategy_id)
-        strategy_df.columns = strategy_df.columns.str.lower()
-        
+            if signals.empty:
+                logger.warning("Empty signals — skipping.")
+                continue
 
+            # Make strategy ID symbol-aware
+            strategy_id = generate_strategy_id(
+                symbol,
+                flags,
+                timeframe=timeframe,
+            )
 
-        save_df_to_db(
-            df=strategy_df,
-            table_name="strategy_registry",
-            schema="strategies",
-            time_column=None,
-            is_timeseries=False
-        )
+            # Save signals
+            save_df_to_db(
+                df=signals,
+                schema="strategy_signals",
+                table_name=strategy_id,
+                time_column="datetime",
+                is_timeseries=True,
+            )
 
-logger.info("\n All timeframes completed successfully.")
+            # ----------------------------
+            # Backtest (1m execution)
+            # ----------------------------
+            bt = HighPerfBacktest(
+                df_price=df_1m,
+                df_predictions=signals,
+                starting_balance=1000,
+                take_profit=3,
+                stop_loss=1,
+                fee=0.05,
+                leverage=1,
+                slippage=0,
+            )
+
+            ledger, final_balance, total_pnl_percent = bt.run()
+
+            logger.info(
+                f"{symbol} | {strategy_id} | "
+                f"Balance={final_balance:.2f} | "
+                f"PnL={total_pnl_percent:.2f}% | "
+                f"Trades={len(ledger)}"
+            )
+
+            # ----------------------------
+            # Save strategy metadata
+            # ----------------------------
+            row_data = {**flags}
+
+            for ind_name, params in windows_dict.items():
+                for param_name, value in params.items():
+                    row_data[f"{ind_name}_{param_name}"] = value
+
+            strategy_df = pd.DataFrame([row_data])
+
+            strategy_df.insert(0, "pnl_sum", total_pnl_percent)
+            strategy_df.insert(0, "timehorizon", timeframe)
+            strategy_df.insert(0, "symbol", symbol.lower())
+            strategy_df.insert(0, "sl", "1")
+            strategy_df.insert(0, "tp", "3")
+            strategy_df.insert(0, "strategy", strategy_id)
+
+            strategy_df.columns = strategy_df.columns.str.lower()
+
+            save_df_to_db(
+                df=strategy_df,
+                table_name="strategy_registry",
+                schema="strategies",
+                time_column=None,
+                is_timeseries=False,
+            )
+
+logger.info("\nAll symbols and timeframes completed successfully.")
+

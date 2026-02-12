@@ -364,10 +364,11 @@ def fetch_ohlcv_df(
 # Strategy Fetcher Operation From DB
 #======================================
 def get_profitable_strategies(
+    symbol: str,    
     timehorizon: str,
     min_pnl: float = 100,
     top_n: int = 5,
-    best: str = "highest"  # "highest" or "lowest"
+    best: str = "highest" 
 ):
     """
     Fetch the top N profitable strategies for a given timeframe where pnl_sum > min_pnl.
@@ -392,12 +393,13 @@ def get_profitable_strategies(
         FROM strategies.strategy_registry
         WHERE pnl_sum > :min_pnl
           AND timehorizon = :timehorizon
+          AND symbol = :symbol
     """)
 
     with engine.begin() as conn:
         result = conn.execute(
             query,
-            {"min_pnl": min_pnl, "timehorizon": timehorizon}
+            {"min_pnl": min_pnl, "timehorizon": timehorizon, "symbol": symbol}
         )
         rows = result.fetchall()
         columns = result.keys()

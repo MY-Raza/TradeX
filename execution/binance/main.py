@@ -15,6 +15,7 @@ from TradeX.execution.binance.strategy_signals_orchestrator import (
 )
 import os 
 import subprocess 
+from TradeX.utils.common.config_loader import read_config
 
 logger = get_logger("execution_binance_main")
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
@@ -69,9 +70,10 @@ wait_for_next_interval(timeframe_minutes[timeframe])
 # 3️⃣ Fetch profitable strategies
 # ============================================================
 strategies = get_profitable_strategies(
+    symbol="btc",
     timehorizon=timeframe,
     min_pnl=100,
-    best="lowest"
+    best="highest"
 )
 
 if not strategies:
@@ -114,6 +116,8 @@ script_path = os.path.abspath( os.path.join( os.path.dirname(__file__), # execut
                         "..", "..", "data", "binance", "main.py" # relative path to data/binance/main.py 
                          ) )
 subprocess.run([sys.executable, script_path])
+
+
 df_1m = fetch_ohlcv_df(
     table_name="btc_1m",
     schema=SCHEMA,

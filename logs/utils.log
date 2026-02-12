@@ -13831,3 +13831,7 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-11 16:25:16,164 | INFO | utils | Table Found
 2026-02-11 16:25:44,555 | INFO | utils | Inserted 1637884 rows into data_binance.dot_1m
 2026-02-11 16:27:35,889 | INFO | utils | Database engine initialized
+2026-02-11 17:00:42,707 | INFO | utils | Schema 'data_binance' ready
+2026-02-11 17:00:50,148 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-02-11 17:00:50,963 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-02-11 17:12:10,348 | INFO | utils | Inserted 892242 rows into data_binance.matic_1m
