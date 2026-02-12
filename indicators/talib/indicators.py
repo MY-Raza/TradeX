@@ -16,11 +16,11 @@ ALL_INDICATORS = (
     # -------------------------
     "ADX", "ADXR", "APO", "AROON", "AROONOSC",
     "BOP", "CCI", "CMO", "DX", "MACD",
-    "MACDEXT", "MACDFIX", "MFI", "MINUS_DI",
+    "MACDEXT", "MFI", "MINUS_DI",
     "MINUS_DM", "MOM", "PLUS_DI", "PLUS_DM",
     "PPO", "ROC", "ROCP", "ROCR", "ROCR100",
     "RSI", "STOCH", "STOCHF", "STOCHRSI",
-    "TRIX", "ULTOSC", "WILLR",
+    "TRIX", "WILLR",
     # -------------------------
     # Volume Indicators
     # -------------------------
@@ -41,20 +41,10 @@ ALL_INDICATORS = (
     # -------------------------
     # Statistic Indicators
     # -------------------------
-    "BETA", "CORREL", "LINEARREG", "LINEARREG_ANGLE",
+    "LINEARREG", "LINEARREG_ANGLE",
     "LINEARREG_INTERCEPT", "LINEARREG_SLOPE",
     "STDDEV", "TSF", "VAR",
-    # -------------------------
-    # Math Transform Indicators
-    # -------------------------
-    "ACOS", "ASIN", "ATAN", "CEIL", "COS", "COSH",
-    "EXP", "FLOOR", "LN", "LOG10", "SIN", "SINH",
-    "SQRT", "TAN", "TANH",
-    # -------------------------
-    # Math Operators
-    # -------------------------
-    "ADD", "DIV", "MAX", "MAXINDEX", "MIN",
-    "MININDEX", "MULT", "SUB", "SUM",
+
     # ---------------------------
     # CANDLESTICK PATTERN 
     # --------------------------

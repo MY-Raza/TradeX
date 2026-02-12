@@ -55,7 +55,7 @@ class BinanceFuturesFetcher:
         start_date: str,
         end_date: str = "now",
         interval: str = "1m",
-        limit: int = 1000,
+        limit: int = 100,
         sleep_seconds: float = 2,
     ):
         """

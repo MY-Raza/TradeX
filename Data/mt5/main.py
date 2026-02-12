@@ -40,7 +40,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["metatrader5"]  # Database schema for MT5 data
 # =========================================
 # LOAD CONFIGURATION FILE
 # =========================================
-config = read_config(exchange_name=SCHEMA)           # Reads config.yml for symbols and date ranges
+config = read_config(exchange_name="mt5")           # Reads config.yml for symbols and date ranges
 raw_symbols = config["symbols"]              # List of symbols to fetch
 start_date = config["start_date"]            # Start date for fetching data
 end_date = config["end_date"]                # End date or "now" for current timestamp

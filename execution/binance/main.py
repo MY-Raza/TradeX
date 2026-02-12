@@ -19,7 +19,8 @@ from TradeX.utils.common.config_loader import read_config
 
 logger = get_logger("execution_binance_main")
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
-
+config = read_config(exchange_name="binance")
+symbols = config["symbols"]
 # -----------------------------
 # 0️⃣ Parse command-line argument
 # -----------------------------
@@ -69,100 +70,112 @@ wait_for_next_interval(timeframe_minutes[timeframe])
 # ============================================================
 # 3️⃣ Fetch profitable strategies
 # ============================================================
-strategies = get_profitable_strategies(
-    symbol="btc",
-    timehorizon=timeframe,
-    min_pnl=100,
-    best="highest"
-)
+for symbol in symbols:
 
-if not strategies:
-    logger.warning("No profitable strategies found.")
-    exit()
+    logger.info(f"Processing symbol: {symbol}")
 
-# ============================================================
-# 4️⃣ Analyze strategies → find max required window
-# ============================================================
-strategy_max_values = []
-active_strategies = {}
-
-for strategy in strategies:
-    result = analyze_strategy(strategy)
-
-    strategy_name = result["strategy_name"]
-    max_window = result["max_window"]
-    active_flags = result["active_flags"]
-
-    active_strategies[strategy_name] = active_flags
-    strategy_max_values.append(max_window)
-
-    logger.info(f"Strategy {strategy_name} → Highest window value: {max_window}")
-
-# ============================================================
-# 5️⃣ Compute required 1m candles
-# ============================================================
-max_value = max(filter(None, strategy_max_values))
-required_1m = required_base_candles(
-    target_tf=timeframe,
-    base_tf="1m",
-    window=max_value * 3
-)
-logger.info(f"Required 1m candles: {required_1m}")
-
-# ============================================================
-# 6️⃣ Fetch latest 1m candles
-# ============================================================
-script_path = os.path.abspath( os.path.join( os.path.dirname(__file__), # execution/binance/ 
-                        "..", "..", "data", "binance", "main.py" # relative path to data/binance/main.py 
-                         ) )
-subprocess.run([sys.executable, script_path])
-
-
-df_1m = fetch_ohlcv_df(
-    table_name="btc_1m",
-    schema=SCHEMA,
-    time_column="datetime",
-    limit=required_1m
-)
-print(df_1m.tail())
-if df_1m.empty:
-    logger.warning("No 1m data fetched.")
-    exit()
-
-logger.info(f"Fetched {len(df_1m)} rows of 1m data.")
-
-# ============================================================
-# 7️⃣ Resample to target timeframe
-# ============================================================
-df_resampled = resample_ohlcv(
-    df=df_1m,
-    interval=timeframe
-)
-
-if df_resampled.empty:
-    logger.warning(f"Resampled {timeframe} dataframe is empty.")
-    exit()
-
-logger.info(f"Resampled to {len(df_resampled)} rows of {timeframe} data.")
-
-# ============================================================
-# 8️⃣ Execute strategies on resampled data
-# ============================================================
-results = execute_strategies_on_dataframe(
-    df=df_resampled,
-    strategies=strategies
-)
-if not results:
-    logger.warning("No signals generated.")
-    exit()
-
-# ============================================================
-# 9️⃣ Get latest live signals
-# ============================================================
-latest_signals = get_latest_signals(results)
-
-for strat, data in latest_signals.items():
-    logger.info(
-        f"Latest Signal: {strat} → Signal: {data['signal']} at {data['datetime']}"
+    strategies = get_profitable_strategies(
+        symbol=symbol.lower(),
+        timehorizon=timeframe,
+        min_pnl=100,
+        best="highest"
     )
+
+    if not strategies:
+        logger.warning(f"No profitable strategies found for {symbol}.")
+        continue   # ← FIXED (was exit())
+
+    # ============================================================
+    # 4️⃣ Analyze strategies → find max required window
+    # ============================================================
+    strategy_max_values = []
+    active_strategies = {}
+
+    for strategy in strategies:
+        result = analyze_strategy(strategy)
+
+        strategy_name = result["strategy_name"]
+        max_window = result["max_window"]
+        active_flags = result["active_flags"]
+
+        active_strategies[strategy_name] = active_flags
+        strategy_max_values.append(max_window)
+
+        logger.info(f"{symbol} | {strategy_name} → Highest window: {max_window}")
+
+    # ============================================================
+    # 5️⃣ Compute required 1m candles
+    # ============================================================
+    max_value = max(filter(None, strategy_max_values))
+
+    required_1m = required_base_candles(
+        target_tf=timeframe,
+        base_tf="1m",
+        window=max_value * 3
+    )
+
+    logger.info(f"{symbol} | Required 1m candles: {required_1m}")
+
+    # ============================================================
+    # 6️⃣ Fetch latest 1m candles
+    # ============================================================
+    script_path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "data", "binance", "main.py"
+        )
+    )
+
+    subprocess.run([sys.executable, script_path])
+
+    df_1m = fetch_ohlcv_df(
+        table_name=f"{symbol.lower()}_1m",   # ← FIXED
+        schema=SCHEMA,
+        time_column="datetime",
+        limit=required_1m
+    )
+    print(df_1m.tail())
+    if df_1m.empty:
+        logger.warning(f"{symbol} | No 1m data fetched.")
+        continue
+
+    logger.info(f"{symbol} | Fetched {len(df_1m)} rows of 1m data.")
+
+    # ============================================================
+    # 7️⃣ Resample
+    # ============================================================
+    df_resampled = resample_ohlcv(
+        df=df_1m,
+        interval=timeframe
+    )
+
+    if df_resampled.empty:
+        logger.warning(f"{symbol} | Resampled {timeframe} dataframe is empty.")
+        continue
+    print(df_resampled.tail())
+    logger.info(f"{symbol} | Resampled to {len(df_resampled)} rows.")
+
+    # ============================================================
+    # 8️⃣ Execute strategies
+    # ============================================================
+    results = execute_strategies_on_dataframe(
+        df=df_resampled,
+        strategies=strategies
+    )
+
+    if not results:
+        logger.warning(f"{symbol} | No signals generated.")
+        continue
+
+    # ============================================================
+    # 9️⃣ Latest signals
+    # ============================================================
+    latest_signals = get_latest_signals(results)
+
+    for strat, data in latest_signals.items():
+        logger.info(
+            f"{symbol} | Latest Signal: {strat} → "
+            f"{data['signal']} at {data['datetime']}"
+        )
+
 

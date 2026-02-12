@@ -34,7 +34,7 @@ def main():
     # -----------------------------
     # Load config
     # -----------------------------
-    config = read_config(exchange_name=SCHEMA)
+    config = read_config(exchange_name="kraken")
     exchange_name = config.get("exchange_name")
     symbols = config.get("symbols", [])
     start_date = config.get("start_date")

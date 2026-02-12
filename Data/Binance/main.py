@@ -19,7 +19,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 # -------------------------------------------------
 # Load Configuration
 # -------------------------------------------------
-config = read_config(exchange_name=SCHEMA)
+config = read_config(exchange_name="binance")
 symbols = config["symbols"]
 default_start_date = config["start_date"]
 end_date = config["end_date"]

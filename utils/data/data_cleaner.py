@@ -33,25 +33,6 @@ def convert_ohlcv_to_float(df: pd.DataFrame) -> pd.DataFrame:
 # Clean OHLCV Data (epoch ms only)
 # -------------------------------------------------
 def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
-    """
-    Clean raw OHLCV data with Unix epoch timestamps (milliseconds).
-
-    Steps:
-        1. Validate required columns.
-        2. Convert types to numeric.
-        3. Sort and remove duplicates.
-        4. Drop last (potentially incomplete) candle.
-        5. Reindex to fill missing timestamps.
-        6. Forward/backward fill OHLCV columns.
-        7. Restore timestamp column if needed.
-
-    Args:
-        df (pd.DataFrame): Raw OHLCV DataFrame.
-        interval (str): OHLCV interval; used to calculate missing timestamps.
-
-    Returns:
-        pd.DataFrame: Cleaned OHLCV DataFrame.
-    """
     if df.empty:
         logger.warning("Received empty DataFrame for cleaning.")
         return df
@@ -62,67 +43,44 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
     interval_ms = INTERVAL_MS_MAP[interval]
     df = df.copy()
 
-    # ---------------------------
-    # Ensure required columns
-    # ---------------------------
-    if "time" in df.columns:
-        df = df.rename(columns={"time": "timestamp"})
     required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
-    missing = set(required_cols) - set(df.columns)
-    if missing:
-        raise ValueError(f"Missing required columns: {missing}")
-
     df = df[required_cols]
 
-    # ---------------------------
     # Convert numeric columns
-    # ---------------------------
-    df["timestamp"] = df["timestamp"]  # keep as int64
     df = convert_ohlcv_to_float(df)
 
-    # ---------------------------
-    # Sort by timestamp & remove duplicates
-    # ---------------------------
+    # Sort + dedupe
     df = df.sort_values("timestamp").drop_duplicates(subset=["timestamp"])
 
-    # ---------------------------
-    # Drop last candle (often incomplete)
-    # ---------------------------
-    if len(df) > 1:
-        df = df.iloc[:-1]
+    # 🔥 DO NOT DROP LAST CANDLE — Binance already sends closed candles
 
-    # ---------------------------
-    # Fill missing timestamps
-    # ---------------------------
-    start_ts = df["timestamp"].iloc[0]
-    end_ts = df["timestamp"].iloc[-1]
+    # ✅ Convert to proper UTC datetime BEFORE reindexing
+    df["datetime"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+    df = df.drop(columns=["timestamp"]).set_index("datetime")
+
+    # Build full expected timeline
     full_range = pd.date_range(
-    start=start_ts,
-    end=end_ts,
-    freq=pd.Timedelta(milliseconds=interval_ms)
+        start=df.index[0],
+        end=df.index[-1],
+        freq=pd.Timedelta(milliseconds=interval_ms),
+        tz="UTC"
     )
 
+    if len(full_range) <= 10_000_000:
+        df = df.reindex(full_range)
 
-    if len(full_range) > 10_000_000:  # safety threshold
-        logger.warning("Skipping full reindexing due to huge number of rows")
-    else:
-        df = df.set_index("timestamp").reindex(full_range)
+    # Fill gaps safely
+    df[["open", "high", "low", "close", "volume"]] = (
+        df[["open", "high", "low", "close", "volume"]]
+        .ffill()
+        .bfill()
+    )
 
-    # ---------------------------
-    # Forward/backward fill OHLCV values
-    # ---------------------------
-    df = convert_ohlcv_to_float(df)
-    df[["open", "high", "low", "close", "volume"]] = df[
-        ["open", "high", "low", "close", "volume"]
-    ].ffill().bfill()
-
-    # ---------------------------
-    # Restore timestamp column
-    # ---------------------------
     df = df.reset_index().rename(columns={"index": "datetime"})
 
     logger.info(f"Cleaned OHLCV data | rows: {len(df)}")
     return df
+
 
 def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     if df.empty:
