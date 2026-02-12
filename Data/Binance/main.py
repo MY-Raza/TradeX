@@ -24,6 +24,7 @@ symbols = config["symbols"]
 default_start_date = config["start_date"]
 end_date = config["end_date"]
 
+
 # -------------------------------------------------
 # Fetch, Clean & Store Data
 # -------------------------------------------------

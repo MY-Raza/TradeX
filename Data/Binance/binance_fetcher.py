@@ -2,7 +2,7 @@
 
 import os
 import time
-from datetime import datetime
+from datetime import datetime,timezone
 import pandas as pd
 from binance.client import Client
 from dotenv import load_dotenv
@@ -107,7 +107,7 @@ class BinanceFuturesFetcher:
 
         # Parse end_date
         if self.end_date.lower() == "now":
-            end_ts = int(datetime.utcnow().timestamp() * 1000)
+            end_ts = int(datetime.now(timezone.utc).timestamp() * 1000)
         else:
             try:
                 end_dt = datetime.strptime(self.end_date, "%Y-%m-%d %H:%M:%S")

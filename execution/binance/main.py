@@ -1,6 +1,6 @@
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timezone
 from TradeX.utils.db.utils import get_profitable_strategies, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
@@ -50,7 +50,7 @@ if timeframe not in timeframe_minutes:
 # -----------------------------
 def wait_for_next_interval(valid_minutes):
     while True:
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         minute = now.minute
         second = now.second
 
@@ -66,6 +66,14 @@ def wait_for_next_interval(valid_minutes):
         time.sleep(wait_seconds)
 
 wait_for_next_interval(timeframe_minutes[timeframe])
+script_path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "data", "binance", "main.py"
+        )
+    )
+
+subprocess.run([sys.executable, script_path])
 
 # ============================================================
 # 3️⃣ Fetch profitable strategies
@@ -119,22 +127,12 @@ for symbol in symbols:
     # ============================================================
     # 6️⃣ Fetch latest 1m candles
     # ============================================================
-    script_path = os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            "..", "..", "data", "binance", "main.py"
-        )
-    )
-
-    subprocess.run([sys.executable, script_path])
-
     df_1m = fetch_ohlcv_df(
         table_name=f"{symbol.lower()}_1m",   # ← FIXED
         schema=SCHEMA,
         time_column="datetime",
         limit=required_1m
     )
-    print(df_1m.tail())
     if df_1m.empty:
         logger.warning(f"{symbol} | No 1m data fetched.")
         continue
@@ -152,7 +150,6 @@ for symbol in symbols:
     if df_resampled.empty:
         logger.warning(f"{symbol} | Resampled {timeframe} dataframe is empty.")
         continue
-    print(df_resampled.tail())
     logger.info(f"{symbol} | Resampled to {len(df_resampled)} rows.")
 
     # ============================================================

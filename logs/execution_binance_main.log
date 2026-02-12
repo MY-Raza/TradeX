@@ -6320,3 +6320,415 @@
 2026-02-12 13:24:34,520 | WARNING | execution_binance_main | No profitable strategies found for matic.
 2026-02-12 13:24:34,520 | INFO | execution_binance_main | Processing symbol: link
 2026-02-12 13:24:34,524 | WARNING | execution_binance_main | No profitable strategies found for link.
+2026-02-12 13:39:30,877 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 13:39:30,877 | INFO | execution_binance_main | Waiting 30 seconds until next valid 5m time...
+2026-02-12 13:40:00,884 | INFO | execution_binance_main | Current time 08:40:00 is valid for 5m execution.
+2026-02-12 13:40:00,886 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 13:40:01,418 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 13:40:01,418 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 13:40:01,420 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 13:40:01,420 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 13:40:01,422 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 13:40:01,422 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 13:43:11,757 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 13:43:11,909 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 13:43:12,082 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:43:12,086 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:43:12,097 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:43:12,099 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:43:12,099 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:43:12,102 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 13:43:12,118 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 13:43:12,118 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 13:43:12,120 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 13:43:12,120 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 13:43:12,122 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 13:43:12,122 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 13:45:37,324 | INFO | execution_binance_main | eth | Fetched 450 rows of 1m data.
+2026-02-12 13:45:37,467 | INFO | execution_binance_main | eth | Resampled to 90 rows.
+2026-02-12 13:45:37,591 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_15 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:45:37,591 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_16 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:45:37,591 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_19 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:45:37,591 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_20 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:45:37,600 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_18 → -1 at 2026-02-12 08:40:00+00:00
+2026-02-12 13:45:37,600 | INFO | execution_binance_main | Processing symbol: bnb
+2026-02-12 13:45:37,633 | INFO | execution_binance_main | bnb | sig_5m_bnb_25 → Highest window: 30
+2026-02-12 13:45:37,633 | INFO | execution_binance_main | bnb | sig_5m_bnb_28 → Highest window: 30
+2026-02-12 13:45:37,640 | INFO | execution_binance_main | bnb | sig_5m_bnb_27 → Highest window: 30
+2026-02-12 13:45:37,640 | INFO | execution_binance_main | bnb | sig_5m_bnb_22 → Highest window: 30
+2026-02-12 13:45:37,642 | INFO | execution_binance_main | bnb | sig_5m_bnb_26 → Highest window: 30
+2026-02-12 13:45:37,642 | INFO | execution_binance_main | bnb | Required 1m candles: 450
+2026-02-12 13:48:01,055 | INFO | execution_binance_main | bnb | Fetched 450 rows of 1m data.
+2026-02-12 13:48:01,269 | INFO | execution_binance_main | bnb | Resampled to 90 rows.
+2026-02-12 13:48:01,486 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_25 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:48:01,487 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_28 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:48:01,487 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_27 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:48:01,487 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_22 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:48:01,487 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_26 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:48:01,487 | INFO | execution_binance_main | Processing symbol: ada
+2026-02-12 13:48:01,535 | INFO | execution_binance_main | ada | sig_5m_ada_30 → Highest window: 30
+2026-02-12 13:48:01,537 | INFO | execution_binance_main | ada | sig_5m_ada_29 → Highest window: 30
+2026-02-12 13:48:01,537 | INFO | execution_binance_main | ada | sig_5m_ada_31 → Highest window: 30
+2026-02-12 13:48:01,537 | INFO | execution_binance_main | ada | sig_5m_ada_32 → Highest window: 30
+2026-02-12 13:48:01,541 | INFO | execution_binance_main | ada | sig_5m_ada_33 → Highest window: 30
+2026-02-12 13:48:01,541 | INFO | execution_binance_main | ada | Required 1m candles: 450
+2026-02-12 13:50:31,120 | INFO | execution_binance_main | ada | Fetched 450 rows of 1m data.
+2026-02-12 13:50:31,312 | INFO | execution_binance_main | ada | Resampled to 90 rows.
+2026-02-12 13:50:31,478 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_30 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:50:31,482 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_29 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:50:31,482 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_31 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:50:31,482 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_32 → -1 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:50:31,484 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_33 → 0 at 2026-02-12 08:45:00+00:00
+2026-02-12 13:50:31,484 | INFO | execution_binance_main | Processing symbol: xrp
+2026-02-12 13:50:31,615 | WARNING | execution_binance_main | No profitable strategies found for xrp.
+2026-02-12 13:50:31,618 | INFO | execution_binance_main | Processing symbol: doge
+2026-02-12 13:50:31,623 | WARNING | execution_binance_main | No profitable strategies found for doge.
+2026-02-12 13:50:31,623 | INFO | execution_binance_main | Processing symbol: sol
+2026-02-12 13:50:31,631 | WARNING | execution_binance_main | No profitable strategies found for sol.
+2026-02-12 13:50:31,631 | INFO | execution_binance_main | Processing symbol: dot
+2026-02-12 13:50:31,641 | WARNING | execution_binance_main | No profitable strategies found for dot.
+2026-02-12 13:50:31,641 | INFO | execution_binance_main | Processing symbol: matic
+2026-02-12 13:50:31,645 | WARNING | execution_binance_main | No profitable strategies found for matic.
+2026-02-12 13:50:31,647 | INFO | execution_binance_main | Processing symbol: link
+2026-02-12 13:50:31,652 | WARNING | execution_binance_main | No profitable strategies found for link.
+2026-02-12 13:59:04,622 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 13:59:04,632 | INFO | execution_binance_main | Aligning execution, waiting 4 seconds...
+2026-02-12 13:59:08,645 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 13:59:10,832 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 13:59:10,834 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 13:59:10,834 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 13:59:10,834 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 13:59:10,836 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 13:59:10,836 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 14:01:14,752 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 14:01:14,831 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 14:01:14,906 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-12 08:55:00+00:00
+2026-02-12 14:01:14,906 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → 1 at 2026-02-12 08:55:00+00:00
+2026-02-12 14:01:14,914 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → 1 at 2026-02-12 08:55:00+00:00
+2026-02-12 14:01:14,914 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → 1 at 2026-02-12 08:55:00+00:00
+2026-02-12 14:01:14,914 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → 1 at 2026-02-12 08:55:00+00:00
+2026-02-12 14:01:14,914 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 14:01:14,933 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 14:01:14,937 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 14:01:14,937 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 14:01:14,937 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 14:01:14,937 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 14:01:14,937 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 14:03:29,326 | INFO | execution_binance_main | eth | Fetched 450 rows of 1m data.
+2026-02-12 14:03:29,495 | INFO | execution_binance_main | eth | Resampled to 90 rows.
+2026-02-12 14:03:29,693 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_15 → -1 at 2026-02-12 09:00:00+00:00
+2026-02-12 14:03:29,693 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_16 → -1 at 2026-02-12 09:00:00+00:00
+2026-02-12 14:03:29,693 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_19 → -1 at 2026-02-12 09:00:00+00:00
+2026-02-12 14:03:29,693 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_20 → -1 at 2026-02-12 09:00:00+00:00
+2026-02-12 14:03:29,693 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_18 → -1 at 2026-02-12 09:00:00+00:00
+2026-02-12 14:03:29,693 | INFO | execution_binance_main | Processing symbol: bnb
+2026-02-12 14:03:29,799 | INFO | execution_binance_main | bnb | sig_5m_bnb_25 → Highest window: 30
+2026-02-12 14:03:29,801 | INFO | execution_binance_main | bnb | sig_5m_bnb_28 → Highest window: 30
+2026-02-12 14:03:29,803 | INFO | execution_binance_main | bnb | sig_5m_bnb_27 → Highest window: 30
+2026-02-12 14:03:29,803 | INFO | execution_binance_main | bnb | sig_5m_bnb_22 → Highest window: 30
+2026-02-12 14:03:29,805 | INFO | execution_binance_main | bnb | sig_5m_bnb_26 → Highest window: 30
+2026-02-12 14:03:29,805 | INFO | execution_binance_main | bnb | Required 1m candles: 450
+2026-02-12 14:10:00,435 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 14:10:00,435 | INFO | execution_binance_main | Current time 09:10:00 is valid for 5m execution.
+2026-02-12 14:10:00,435 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 14:10:00,868 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 14:10:00,871 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 14:10:00,871 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 14:10:00,871 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 14:10:00,871 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 14:10:00,871 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 14:12:00,819 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 14:12:01,073 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 14:12:01,373 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:12:01,490 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → -1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:12:01,490 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → -1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:12:01,490 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → -1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:12:01,491 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → -1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:12:01,491 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 14:12:02,615 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 14:12:02,615 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 14:12:02,616 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 14:12:02,616 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 14:12:02,618 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 14:12:02,618 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 14:13:19,421 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 14:13:19,421 | INFO | execution_binance_main | Aligning execution, waiting 19 seconds...
+2026-02-12 14:13:38,425 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 14:13:38,637 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 14:13:38,637 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 14:13:38,641 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 14:13:38,641 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 14:13:38,641 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 14:13:38,641 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 14:15:37,169 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 14:15:37,290 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 14:15:37,519 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:15:37,519 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → 1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:15:37,519 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → 1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:15:37,519 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → 1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:15:37,524 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → 1 at 2026-02-12 09:10:00+00:00
+2026-02-12 14:15:37,524 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 14:15:37,532 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 14:15:37,535 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 14:15:37,535 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 14:15:37,537 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 14:15:37,537 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 14:15:37,537 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 14:57:13,715 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 14:57:13,717 | INFO | execution_binance_main | Aligning execution, waiting 13 seconds...
+2026-02-12 14:59:19,678 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 14:59:19,863 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 14:59:19,863 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 14:59:19,865 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 14:59:19,865 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 14:59:19,866 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 14:59:19,866 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 14:59:33,697 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 14:59:33,908 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 14:59:34,094 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:34,111 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:34,111 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:34,111 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:34,111 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:34,111 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 14:59:34,118 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 14:59:34,118 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 14:59:34,123 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 14:59:34,123 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 14:59:34,123 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 14:59:34,123 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 14:59:48,947 | INFO | execution_binance_main | eth | Fetched 450 rows of 1m data.
+2026-02-12 14:59:48,976 | INFO | execution_binance_main | eth | Resampled to 90 rows.
+2026-02-12 14:59:49,048 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_15 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:49,048 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_16 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:49,048 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_19 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:49,048 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_20 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:49,048 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_18 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 14:59:49,048 | INFO | execution_binance_main | Processing symbol: bnb
+2026-02-12 14:59:49,054 | INFO | execution_binance_main | bnb | sig_5m_bnb_25 → Highest window: 30
+2026-02-12 14:59:49,058 | INFO | execution_binance_main | bnb | sig_5m_bnb_28 → Highest window: 30
+2026-02-12 14:59:49,059 | INFO | execution_binance_main | bnb | sig_5m_bnb_27 → Highest window: 30
+2026-02-12 14:59:49,060 | INFO | execution_binance_main | bnb | sig_5m_bnb_22 → Highest window: 30
+2026-02-12 14:59:49,060 | INFO | execution_binance_main | bnb | sig_5m_bnb_26 → Highest window: 30
+2026-02-12 14:59:49,060 | INFO | execution_binance_main | bnb | Required 1m candles: 450
+2026-02-12 15:00:12,613 | INFO | execution_binance_main | bnb | Fetched 450 rows of 1m data.
+2026-02-12 15:00:12,743 | INFO | execution_binance_main | bnb | Resampled to 90 rows.
+2026-02-12 15:00:12,893 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_25 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:12,893 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_28 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:12,895 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_27 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:12,896 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_22 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:12,896 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_26 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:12,898 | INFO | execution_binance_main | Processing symbol: ada
+2026-02-12 15:00:12,909 | INFO | execution_binance_main | ada | sig_5m_ada_34 → Highest window: 30
+2026-02-12 15:00:12,911 | INFO | execution_binance_main | ada | sig_5m_ada_30 → Highest window: 30
+2026-02-12 15:00:12,913 | INFO | execution_binance_main | ada | sig_5m_ada_35 → Highest window: 30
+2026-02-12 15:00:12,916 | INFO | execution_binance_main | ada | sig_5m_ada_29 → Highest window: 30
+2026-02-12 15:00:12,916 | INFO | execution_binance_main | ada | sig_5m_ada_31 → Highest window: 30
+2026-02-12 15:00:12,916 | INFO | execution_binance_main | ada | Required 1m candles: 450
+2026-02-12 15:00:36,449 | INFO | execution_binance_main | ada | Fetched 450 rows of 1m data.
+2026-02-12 15:00:36,489 | INFO | execution_binance_main | ada | Resampled to 90 rows.
+2026-02-12 15:00:36,634 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_34 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:36,634 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_30 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:36,634 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_35 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:36,634 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_29 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:36,634 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_31 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:36,634 | INFO | execution_binance_main | Processing symbol: xrp
+2026-02-12 15:00:36,657 | INFO | execution_binance_main | xrp | sig_5m_xrp_37 → Highest window: 30
+2026-02-12 15:00:36,657 | INFO | execution_binance_main | xrp | sig_5m_xrp_36 → Highest window: 30
+2026-02-12 15:00:36,660 | INFO | execution_binance_main | xrp | sig_5m_xrp_40 → Highest window: 30
+2026-02-12 15:00:36,660 | INFO | execution_binance_main | xrp | sig_5m_xrp_38 → Highest window: 30
+2026-02-12 15:00:36,660 | INFO | execution_binance_main | xrp | sig_5m_xrp_39 → Highest window: 30
+2026-02-12 15:00:36,660 | INFO | execution_binance_main | xrp | Required 1m candles: 450
+2026-02-12 15:00:54,513 | INFO | execution_binance_main | xrp | Fetched 450 rows of 1m data.
+2026-02-12 15:00:54,518 | INFO | execution_binance_main | xrp | Resampled to 90 rows.
+2026-02-12 15:00:54,616 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_37 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:54,616 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_36 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:54,618 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_40 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:54,618 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_38 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:54,618 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_39 → 1 at 2026-02-12 09:55:00+00:00
+2026-02-12 15:00:54,618 | INFO | execution_binance_main | Processing symbol: doge
+2026-02-12 15:00:54,623 | WARNING | execution_binance_main | No profitable strategies found for doge.
+2026-02-12 15:00:54,623 | INFO | execution_binance_main | Processing symbol: sol
+2026-02-12 15:00:54,625 | WARNING | execution_binance_main | No profitable strategies found for sol.
+2026-02-12 15:00:54,628 | INFO | execution_binance_main | Processing symbol: dot
+2026-02-12 15:00:54,633 | WARNING | execution_binance_main | No profitable strategies found for dot.
+2026-02-12 15:00:54,634 | INFO | execution_binance_main | Processing symbol: matic
+2026-02-12 15:00:54,638 | WARNING | execution_binance_main | No profitable strategies found for matic.
+2026-02-12 15:00:54,638 | INFO | execution_binance_main | Processing symbol: link
+2026-02-12 15:00:54,642 | WARNING | execution_binance_main | No profitable strategies found for link.
+2026-02-12 15:02:23,082 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 15:02:23,082 | INFO | execution_binance_main | Waiting 157 seconds until next valid 5m time...
+2026-02-12 15:05:00,086 | INFO | execution_binance_main | Current time 10:05:00 is valid for 5m execution.
+2026-02-12 15:06:52,128 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 15:06:52,671 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 15:06:52,671 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 15:06:52,671 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 15:06:52,671 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 15:06:52,671 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 15:06:52,671 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 15:07:08,331 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 15:07:08,373 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 15:07:08,483 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:08,483 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:08,483 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:08,483 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:08,483 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:08,483 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 15:07:08,503 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 15:07:08,505 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 15:07:08,505 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 15:07:08,505 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 15:07:08,505 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 15:07:08,508 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 15:07:23,175 | INFO | execution_binance_main | eth | Fetched 450 rows of 1m data.
+2026-02-12 15:07:23,234 | INFO | execution_binance_main | eth | Resampled to 90 rows.
+2026-02-12 15:07:23,296 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_15 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:23,297 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_16 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:23,297 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_19 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:23,298 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_20 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:23,298 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_18 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:23,298 | INFO | execution_binance_main | Processing symbol: bnb
+2026-02-12 15:07:23,305 | INFO | execution_binance_main | bnb | sig_5m_bnb_25 → Highest window: 30
+2026-02-12 15:07:23,306 | INFO | execution_binance_main | bnb | sig_5m_bnb_28 → Highest window: 30
+2026-02-12 15:07:23,306 | INFO | execution_binance_main | bnb | sig_5m_bnb_27 → Highest window: 30
+2026-02-12 15:07:23,307 | INFO | execution_binance_main | bnb | sig_5m_bnb_22 → Highest window: 30
+2026-02-12 15:07:23,308 | INFO | execution_binance_main | bnb | sig_5m_bnb_26 → Highest window: 30
+2026-02-12 15:07:23,308 | INFO | execution_binance_main | bnb | Required 1m candles: 450
+2026-02-12 15:07:40,698 | INFO | execution_binance_main | bnb | Fetched 450 rows of 1m data.
+2026-02-12 15:07:40,718 | INFO | execution_binance_main | bnb | Resampled to 90 rows.
+2026-02-12 15:07:40,820 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_25 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:40,820 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_28 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:40,821 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_27 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:40,821 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_22 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:40,821 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_26 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:40,822 | INFO | execution_binance_main | Processing symbol: ada
+2026-02-12 15:07:40,828 | INFO | execution_binance_main | ada | sig_5m_ada_34 → Highest window: 30
+2026-02-12 15:07:40,829 | INFO | execution_binance_main | ada | sig_5m_ada_30 → Highest window: 30
+2026-02-12 15:07:40,829 | INFO | execution_binance_main | ada | sig_5m_ada_35 → Highest window: 30
+2026-02-12 15:07:40,831 | INFO | execution_binance_main | ada | sig_5m_ada_29 → Highest window: 30
+2026-02-12 15:07:40,832 | INFO | execution_binance_main | ada | sig_5m_ada_31 → Highest window: 30
+2026-02-12 15:07:40,832 | INFO | execution_binance_main | ada | Required 1m candles: 450
+2026-02-12 15:07:56,972 | INFO | execution_binance_main | ada | Fetched 450 rows of 1m data.
+2026-02-12 15:07:56,996 | INFO | execution_binance_main | ada | Resampled to 90 rows.
+2026-02-12 15:07:57,065 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_34 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:57,066 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_30 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:57,066 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_35 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:57,067 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_29 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:57,067 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_31 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:07:57,068 | INFO | execution_binance_main | Processing symbol: xrp
+2026-02-12 15:07:57,076 | INFO | execution_binance_main | xrp | sig_5m_xrp_37 → Highest window: 30
+2026-02-12 15:07:57,076 | INFO | execution_binance_main | xrp | sig_5m_xrp_36 → Highest window: 30
+2026-02-12 15:07:57,076 | INFO | execution_binance_main | xrp | sig_5m_xrp_40 → Highest window: 30
+2026-02-12 15:07:57,078 | INFO | execution_binance_main | xrp | sig_5m_xrp_38 → Highest window: 30
+2026-02-12 15:07:57,078 | INFO | execution_binance_main | xrp | sig_5m_xrp_41 → Highest window: 30
+2026-02-12 15:07:57,078 | INFO | execution_binance_main | xrp | Required 1m candles: 450
+2026-02-12 15:08:17,786 | INFO | execution_binance_main | xrp | Fetched 450 rows of 1m data.
+2026-02-12 15:08:17,914 | INFO | execution_binance_main | xrp | Resampled to 90 rows.
+2026-02-12 15:08:18,080 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_37 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:08:18,080 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_36 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:08:18,090 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_40 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:08:18,090 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_38 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:08:18,090 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_41 → 1 at 2026-02-12 10:05:00+00:00
+2026-02-12 15:08:18,090 | INFO | execution_binance_main | Processing symbol: doge
+2026-02-12 15:08:18,098 | WARNING | execution_binance_main | No profitable strategies found for doge.
+2026-02-12 15:08:18,098 | INFO | execution_binance_main | Processing symbol: sol
+2026-02-12 15:08:18,108 | WARNING | execution_binance_main | No profitable strategies found for sol.
+2026-02-12 15:08:18,108 | INFO | execution_binance_main | Processing symbol: dot
+2026-02-12 15:08:18,117 | WARNING | execution_binance_main | No profitable strategies found for dot.
+2026-02-12 15:08:18,117 | INFO | execution_binance_main | Processing symbol: matic
+2026-02-12 15:08:18,122 | WARNING | execution_binance_main | No profitable strategies found for matic.
+2026-02-12 15:08:18,122 | INFO | execution_binance_main | Processing symbol: link
+2026-02-12 15:08:18,129 | WARNING | execution_binance_main | No profitable strategies found for link.
+2026-02-12 15:36:01,998 | INFO | execution_binance_main | Running strategy execution for timeframe: 5m
+2026-02-12 15:36:02,000 | INFO | execution_binance_main | Waiting 238 seconds until next valid 5m time...
+2026-02-12 15:40:00,069 | INFO | execution_binance_main | Current time 10:40:00 is valid for 5m execution.
+2026-02-12 15:41:57,287 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-12 15:41:57,690 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-12 15:41:57,692 | INFO | execution_binance_main | btc | sig_5m_btc_9 → Highest window: 30
+2026-02-12 15:41:57,694 | INFO | execution_binance_main | btc | sig_5m_btc_8 → Highest window: 30
+2026-02-12 15:41:57,696 | INFO | execution_binance_main | btc | sig_5m_btc_2 → Highest window: 30
+2026-02-12 15:41:57,696 | INFO | execution_binance_main | btc | sig_5m_btc_1 → Highest window: 30
+2026-02-12 15:41:57,696 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-12 15:42:10,198 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-12 15:42:10,279 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-12 15:42:10,378 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:10,378 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_9 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:10,378 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_8 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:10,378 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_2 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:10,378 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_1 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:10,378 | INFO | execution_binance_main | Processing symbol: eth
+2026-02-12 15:42:10,384 | INFO | execution_binance_main | eth | sig_5m_eth_15 → Highest window: 30
+2026-02-12 15:42:10,386 | INFO | execution_binance_main | eth | sig_5m_eth_16 → Highest window: 30
+2026-02-12 15:42:10,386 | INFO | execution_binance_main | eth | sig_5m_eth_19 → Highest window: 30
+2026-02-12 15:42:10,386 | INFO | execution_binance_main | eth | sig_5m_eth_20 → Highest window: 30
+2026-02-12 15:42:10,386 | INFO | execution_binance_main | eth | sig_5m_eth_18 → Highest window: 30
+2026-02-12 15:42:10,388 | INFO | execution_binance_main | eth | Required 1m candles: 450
+2026-02-12 15:42:29,704 | INFO | execution_binance_main | eth | Fetched 450 rows of 1m data.
+2026-02-12 15:42:30,052 | INFO | execution_binance_main | eth | Resampled to 90 rows.
+2026-02-12 15:42:30,187 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_15 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:30,189 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_16 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:30,189 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_19 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:30,190 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_20 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:30,192 | INFO | execution_binance_main | eth | Latest Signal: sig_5m_eth_18 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:30,192 | INFO | execution_binance_main | Processing symbol: bnb
+2026-02-12 15:42:30,211 | INFO | execution_binance_main | bnb | sig_5m_bnb_25 → Highest window: 30
+2026-02-12 15:42:30,213 | INFO | execution_binance_main | bnb | sig_5m_bnb_28 → Highest window: 30
+2026-02-12 15:42:30,214 | INFO | execution_binance_main | bnb | sig_5m_bnb_27 → Highest window: 30
+2026-02-12 15:42:30,214 | INFO | execution_binance_main | bnb | sig_5m_bnb_22 → Highest window: 30
+2026-02-12 15:42:30,214 | INFO | execution_binance_main | bnb | sig_5m_bnb_26 → Highest window: 30
+2026-02-12 15:42:30,219 | INFO | execution_binance_main | bnb | Required 1m candles: 450
+2026-02-12 15:42:53,139 | INFO | execution_binance_main | bnb | Fetched 450 rows of 1m data.
+2026-02-12 15:42:53,182 | INFO | execution_binance_main | bnb | Resampled to 90 rows.
+2026-02-12 15:42:53,351 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_25 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:53,353 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_28 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:53,353 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_27 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:53,353 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_22 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:53,353 | INFO | execution_binance_main | bnb | Latest Signal: sig_5m_bnb_26 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:42:53,356 | INFO | execution_binance_main | Processing symbol: ada
+2026-02-12 15:42:53,366 | INFO | execution_binance_main | ada | sig_5m_ada_34 → Highest window: 30
+2026-02-12 15:42:53,368 | INFO | execution_binance_main | ada | sig_5m_ada_30 → Highest window: 30
+2026-02-12 15:42:53,368 | INFO | execution_binance_main | ada | sig_5m_ada_35 → Highest window: 30
+2026-02-12 15:42:53,368 | INFO | execution_binance_main | ada | sig_5m_ada_29 → Highest window: 30
+2026-02-12 15:42:53,368 | INFO | execution_binance_main | ada | sig_5m_ada_31 → Highest window: 30
+2026-02-12 15:42:53,373 | INFO | execution_binance_main | ada | Required 1m candles: 450
+2026-02-12 15:43:14,441 | INFO | execution_binance_main | ada | Fetched 450 rows of 1m data.
+2026-02-12 15:43:14,500 | INFO | execution_binance_main | ada | Resampled to 90 rows.
+2026-02-12 15:43:14,618 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_34 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:14,618 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_30 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:14,618 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_35 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:14,618 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_29 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:14,618 | INFO | execution_binance_main | ada | Latest Signal: sig_5m_ada_31 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:14,618 | INFO | execution_binance_main | Processing symbol: xrp
+2026-02-12 15:43:14,638 | INFO | execution_binance_main | xrp | sig_5m_xrp_37 → Highest window: 30
+2026-02-12 15:43:14,638 | INFO | execution_binance_main | xrp | sig_5m_xrp_36 → Highest window: 30
+2026-02-12 15:43:14,640 | INFO | execution_binance_main | xrp | sig_5m_xrp_40 → Highest window: 30
+2026-02-12 15:43:14,642 | INFO | execution_binance_main | xrp | sig_5m_xrp_38 → Highest window: 30
+2026-02-12 15:43:14,642 | INFO | execution_binance_main | xrp | sig_5m_xrp_41 → Highest window: 30
+2026-02-12 15:43:14,644 | INFO | execution_binance_main | xrp | Required 1m candles: 450
+2026-02-12 15:43:38,683 | INFO | execution_binance_main | xrp | Fetched 450 rows of 1m data.
+2026-02-12 15:43:38,711 | INFO | execution_binance_main | xrp | Resampled to 90 rows.
+2026-02-12 15:43:38,860 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_37 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:38,860 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_36 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:38,862 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_40 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:38,862 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_38 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:38,862 | INFO | execution_binance_main | xrp | Latest Signal: sig_5m_xrp_41 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:43:38,864 | INFO | execution_binance_main | Processing symbol: doge
+2026-02-12 15:43:38,870 | INFO | execution_binance_main | doge | sig_5m_doge_44 → Highest window: 30
+2026-02-12 15:43:38,870 | INFO | execution_binance_main | doge | sig_5m_doge_46 → Highest window: 30
+2026-02-12 15:43:38,870 | INFO | execution_binance_main | doge | sig_5m_doge_43 → Highest window: 30
+2026-02-12 15:43:38,870 | INFO | execution_binance_main | doge | sig_5m_doge_45 → Highest window: 30
+2026-02-12 15:43:38,870 | INFO | execution_binance_main | doge | Required 1m candles: 450
+2026-02-12 15:44:04,693 | INFO | execution_binance_main | doge | Fetched 450 rows of 1m data.
+2026-02-12 15:44:04,730 | INFO | execution_binance_main | doge | Resampled to 90 rows.
+2026-02-12 15:44:04,832 | INFO | execution_binance_main | doge | Latest Signal: sig_5m_doge_44 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:44:04,832 | INFO | execution_binance_main | doge | Latest Signal: sig_5m_doge_46 → -1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:44:04,832 | INFO | execution_binance_main | doge | Latest Signal: sig_5m_doge_43 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:44:04,832 | INFO | execution_binance_main | doge | Latest Signal: sig_5m_doge_45 → 1 at 2026-02-12 10:40:00+00:00
+2026-02-12 15:44:04,832 | INFO | execution_binance_main | Processing symbol: sol
+2026-02-12 15:44:04,845 | WARNING | execution_binance_main | No profitable strategies found for sol.
+2026-02-12 15:44:04,847 | INFO | execution_binance_main | Processing symbol: dot
+2026-02-12 15:44:04,853 | WARNING | execution_binance_main | No profitable strategies found for dot.
+2026-02-12 15:44:04,855 | INFO | execution_binance_main | Processing symbol: matic
+2026-02-12 15:44:04,862 | WARNING | execution_binance_main | No profitable strategies found for matic.
+2026-02-12 15:44:04,862 | INFO | execution_binance_main | Processing symbol: link
+2026-02-12 15:44:04,870 | WARNING | execution_binance_main | No profitable strategies found for link.
