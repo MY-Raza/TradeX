@@ -1,126 +1,205 @@
-from binance.um_futures import UMFutures
-from dotenv import load_dotenv
 import os
-import time
+import csv
+from datetime import datetime, timezone
+from binance.um_futures import UMFutures
 
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'..', '..', '.env'))
-load_dotenv(dotenv_path)
 
-API_KEY = os.getenv("BINANCE_DEMO_API_KEY")
-API_SECRET = os.getenv("BINANCE_DEMO_SECRET_KEY")
+class FuturesTrader:
 
-class BinanceTrader:
-    def __init__(self, api_key: str, api_secret: str, testnet: bool = True):
-        base_url = "https://testnet.binancefuture.com" if testnet else None
-        self.client = UMFutures(key=api_key, secret=api_secret, base_url=base_url)
+    def __init__(self, api_key, api_secret, symbol):
 
-    def open_trade(self, symbol: str, signal: int, quantity: float = 0.001, tp_percent: float = 3, sl_percent: float = 1):
-        if signal == 0:
-            print(f"{symbol} → Signal is HOLD. No trade.")
-            return None, None
+        self.client = UMFutures(
+            key=api_key,
+            secret=api_secret,
+            base_url="https://testnet.binancefuture.com"
+        )
 
-        positions = self.client.position_information(symbol=symbol)
-        entry_qty = float(positions[0]["positionAmt"]) if positions else 0
-        if entry_qty != 0:
-            print(f"{symbol} → Already in position ({entry_qty}). Skipping open trade.")
-            return None, None
+        self.symbol = symbol
+        self.active_trade = None
+        self.pnl_sum = 0
+        self.csv_file = "trade_log.csv"
+
+        # Create CSV file if not exists
+        if not os.path.exists(self.csv_file):
+            with open(self.csv_file, mode="w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow([
+                    "datetime_utc",
+                    "predicted_direction",
+                    "action",
+                    "buy_price",
+                    "sell_price",
+                    "fee",
+                    "pnl",
+                    "pnl_sum"
+                ])
+
+    # =========================================
+    # OPEN TRADE
+    # =========================================
+    def open_trade(self, signal, quantity):
+
+        if self.active_trade:
+            return
 
         side = "BUY" if signal == 1 else "SELL"
-        opposite_side = "SELL" if side == "BUY" else "BUY"
+        direction = "LONG" if signal == 1 else "SHORT"
 
-        order = self.client.new_order(symbol=symbol, side=side, type="MARKET", quantity=quantity)
-        print(f"{symbol} → Opened {side} MARKET order: {order['orderId']}")
+        order = self.client.new_order(
+            symbol=self.symbol,
+            side=side,
+            type="MARKET",
+            quantity=quantity
+        )
 
-        executed_price = float(order["avgFillPrice"] if "avgFillPrice" in order else order["fills"][0]["price"])
+        executed_price = float(order["avgPrice"])
 
-        if signal == 1:  # LONG
-            tp_price = round(executed_price * (1 + tp_percent / 100), 2)
-            sl_price = round(executed_price * (1 - sl_percent / 100), 2)
-        else:  # SHORT
-            tp_price = round(executed_price * (1 - tp_percent / 100), 2)
-            sl_price = round(executed_price * (1 + sl_percent / 100), 2)
+        self.active_trade = {
+            "direction": direction,
+            "entry_price": executed_price,
+            "quantity": quantity
+        }
 
-        self.client.new_order(symbol=symbol, side=opposite_side, type="TAKE_PROFIT_MARKET", stopPrice=tp_price, closePosition=True)
-        self.client.new_order(symbol=symbol, side=opposite_side, type="STOP_MARKET", stopPrice=sl_price, closePosition=True)
+        self.log_trade(
+            direction=direction,
+            action=f"{side}-OPEN",
+            buy_price=executed_price if side == "BUY" else "",
+            sell_price=executed_price if side == "SELL" else "",
+            fee=0,
+            pnl=0
+        )
 
-        print(f"{symbol} → TP set at {tp_price}, SL set at {sl_price}")
-        return tp_price, sl_price
+    # =========================================
+    # CLOSE TRADE
+    # =========================================
+    def close_trade(self, reason="Direction Change"):
 
-    def close_trade(self, symbol: str, prev_signal: int, new_signal: int):
-        if new_signal == 0 or prev_signal == 0 or new_signal == prev_signal:
-            print(f"{symbol} → No opposite signal detected. Skipping close trade.")
+        if not self.active_trade:
             return
 
-        positions = self.client.position_information(symbol=symbol)
-        if not positions:
-            print(f"{symbol} → No position info found. Skipping close trade.")
+        positions = self.client.position_information(symbol=self.symbol)
+        position_qty = float(positions[0]["positionAmt"])
+
+        if position_qty == 0:
             return
 
-        pos = positions[0]
-        entry_qty = float(pos["positionAmt"])
-        if entry_qty == 0:
-            print(f"{symbol} → No open position. Skipping close trade.")
+        side_to_close = "SELL" if position_qty > 0 else "BUY"
+
+        order = self.client.new_order(
+            symbol=self.symbol,
+            side=side_to_close,
+            type="MARKET",
+            quantity=abs(position_qty)
+        )
+
+        exit_price = float(order["avgPrice"])
+
+        entry_price = self.active_trade["entry_price"]
+        quantity = self.active_trade["quantity"]
+        direction = self.active_trade["direction"]
+
+        # Calculate PnL before fee
+        if direction == "LONG":
+            pnl = (exit_price - entry_price) * quantity
+        else:
+            pnl = (entry_price - exit_price) * quantity
+
+        # ============================
+        # GET REAL COMMISSION
+        # ============================
+        trades = self.client.get_account_trades(symbol=self.symbol)
+
+        closing_trade = next(
+            trade for trade in reversed(trades)
+            if float(trade["qty"]) == abs(position_qty)
+        )
+
+        fee = float(closing_trade["commission"])
+
+        pnl -= fee
+        self.pnl_sum += pnl
+
+        self.log_trade(
+            direction=direction,
+            action=f"{side_to_close}-{reason}",
+            buy_price=entry_price if direction == "LONG" else exit_price,
+            sell_price=exit_price if direction == "LONG" else entry_price,
+            fee=round(fee, 6),
+            pnl=round(pnl, 6)
+        )
+
+        self.active_trade = None
+
+    # =========================================
+    # TP / SL CHECK
+    # =========================================
+    def tp_sl_check(self, tp_percent=3, sl_percent=1):
+
+        if not self.active_trade:
             return
 
-        side_to_close = "SELL" if entry_qty > 0 else "BUY"
-        order = self.client.new_order(symbol=symbol, side=side_to_close, type="MARKET", quantity=abs(entry_qty))
-        print(f"{symbol} → Closed position with MARKET order {order['orderId']} (Prev: {prev_signal}, New: {new_signal})")
+        ticker = self.client.ticker_price(symbol=self.symbol)
+        current_price = float(ticker["price"])
 
-    def tp_sl_check(self, symbol: str, tp_price: float, sl_price: float, quantity: float = 0.001, check_interval: int = 5):
-        print(f"{symbol} → Starting TP/SL monitor. TP: {tp_price}, SL: {sl_price}")
-        while True:
-            ticker = self.client.mark_price(symbol=symbol)
-            mark_price = float(ticker["markPrice"])
+        entry_price = self.active_trade["entry_price"]
+        direction = self.active_trade["direction"]
 
-            positions = self.client.position_information(symbol=symbol)
-            if not positions:
-                print(f"{symbol} → No position info. Exiting monitor.")
-                break
+        if direction == "LONG":
+            tp_price = entry_price * (1 + tp_percent / 100)
+            sl_price = entry_price * (1 - sl_percent / 100)
 
-            pos = positions[0]
-            entry_qty = float(pos["positionAmt"])
-            if entry_qty == 0:
-                print(f"{symbol} → Position closed already. Exiting monitor.")
-                break
+            if current_price >= tp_price:
+                self.close_trade("Take Profit Hit")
 
-            if entry_qty > 0:  # LONG
-                if mark_price >= tp_price:
-                    print(f"{symbol} → LONG TP hit at {mark_price}. Closing position.")
-                    self.client.new_order(symbol=symbol, side="SELL", type="MARKET", quantity=abs(entry_qty))
-                    break
-                elif mark_price <= sl_price:
-                    print(f"{symbol} → LONG SL hit at {mark_price}. Closing position.")
-                    self.client.new_order(symbol=symbol, side="SELL", type="MARKET", quantity=abs(entry_qty))
-                    break
-            elif entry_qty < 0:  # SHORT
-                if mark_price <= tp_price:
-                    print(f"{symbol} → SHORT TP hit at {mark_price}. Closing position.")
-                    self.client.new_order(symbol=symbol, side="BUY", type="MARKET", quantity=abs(entry_qty))
-                    break
-                elif mark_price >= sl_price:
-                    print(f"{symbol} → SHORT SL hit at {mark_price}. Closing position.")
-                    self.client.new_order(symbol=symbol, side="BUY", type="MARKET", quantity=abs(entry_qty))
-                    break
+            elif current_price <= sl_price:
+                self.close_trade("Stop Loss Hit")
 
-            sleep(check_interval)
+        else:
+            tp_price = entry_price * (1 - tp_percent / 100)
+            sl_price = entry_price * (1 + sl_percent / 100)
 
-    # ==========================
-    # 4️⃣ Master executor
-    # ==========================
-    def execute_signal(self, symbol: str, prev_signal: int, new_signal: int, quantity: float = 0.001):
-        """
-        This function decides:
-        1️⃣ Close trade if opposite
-        2️⃣ Open trade if none
-        3️⃣ Monitor TP/SL for current trade
-        """
-        # Step 1: Close if opposite
-        self.close_trade(symbol, prev_signal, new_signal)
+            if current_price <= tp_price:
+                self.close_trade("Take Profit Hit")
 
-        # Step 2: Open new trade if no position
-        tp, sl = self.open_trade(symbol, new_signal, quantity)
+            elif current_price >= sl_price:
+                self.close_trade("Stop Loss Hit")
 
-        # Step 3: Monitor TP/SL if trade exists
-        if tp and sl:
-            self.tp_sl_check(symbol, tp, sl, quantity)
+    # =========================================
+    # MAIN SIGNAL PROCESSOR
+    # =========================================
+    def process_signal(self, signal, quantity):
 
+        # First check TP/SL
+        self.tp_sl_check()
+
+        if self.active_trade:
+
+            current_direction = self.active_trade["direction"]
+
+            if (current_direction == "LONG" and signal == -1) or \
+               (current_direction == "SHORT" and signal == 1):
+
+                self.close_trade("Direction Change")
+                self.open_trade(signal, quantity)
+
+        else:
+            if signal in [1, -1]:
+                self.open_trade(signal, quantity)
+
+    # =========================================
+    # CSV LOGGER
+    # =========================================
+    def log_trade(self, direction, action, buy_price, sell_price, fee, pnl):
+
+        with open(self.csv_file, mode="a", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+                direction,
+                action,
+                buy_price,
+                sell_price,
+                fee,
+                pnl,
+                round(self.pnl_sum, 6)
+            ])
