@@ -79,6 +79,7 @@ step_size = float(symbol_info["filters"][2]["stepSize"])  # lot size step
 def format_quantity(qty):
     return int(qty / step_size) * step_size  # round down to allowed precision
 
+signals = [-1]
 # -----------------------------
 # Continuous loop
 # -----------------------------
@@ -151,11 +152,13 @@ while True:
                 logger.warning(f"{symbol} | No signals generated.")
                 continue
 
-            latest_signals = get_latest_signals(results)
 
-            for strat, data in latest_signals.items():
-                logger.info(f"{symbol} | Latest Signal: {strat} → {data['signal']} at {data['datetime']}")
-                signal = data["signal"]
+            # latest_signals = get_latest_signals(results)
+
+            # for strat, data in latest_signals.items():
+            #     logger.info(f"{symbol} | Latest Signal: {strat} → {data['signal']} at {data['datetime']}")
+            #     signal = data["signal"]
+            for signal in signals:
                 if signal in [1, -1]:
                     qty = format_quantity(0.01)  # Adjust quantity to allowed precision
                     trader.process_signal(signal, quantity=qty)
