@@ -12,6 +12,7 @@ class FuturesTrader:
             secret=api_secret,
             base_url="https://testnet.binancefuture.com"
         )
+
         self.symbol = symbol
         self.active_trade = None
         self.pnl_sum = 0
@@ -23,35 +24,70 @@ class FuturesTrader:
                 writer = csv.writer(f)
                 writer.writerow([
                     "datetime_utc",
-                    "predicted_direction",
+                    "direction",
                     "action",
                     "buy_price",
                     "sell_price",
-                    "fee",
+                    "fee_total",
                     "pnl",
                     "pnl_sum",
-                    "current_balance"   # New column
+                    "order_id"
                 ])
 
     # =========================================
-    # GET CURRENT BALANCE
+    # WAIT FOR ORDER TO BE FILLED
     # =========================================
-    def get_current_balance(self):
-        try:
-            balances = self.client.balance()
-            for b in balances:
-                if b["asset"] == "USDT":
-                    return float(b["balance"])
-        except Exception:
-            return 0
-        return 0
+    def wait_for_fill(self, order_id, timeout=10):
+        start_time = datetime.now()
+
+        while (datetime.now() - start_time).seconds < timeout:
+            order = self.client.query_order(
+                symbol=self.symbol,
+                orderId=order_id
+            )
+
+            if order["status"] == "FILLED":
+                return order
+
+            sleep(0.2)
+
+        raise RuntimeError(f"Order {order_id} not filled within timeout.")
+
+    # =========================================
+    # GET ACTUAL EXECUTION DETAILS
+    # =========================================
+    def get_execution_details(self, order_id):
+        trades = self.client.get_account_trades(
+            symbol=self.symbol,
+            orderId=order_id
+        )
+
+        if not trades:
+            raise RuntimeError(f"No trades found for order {order_id}")
+
+        executed_qty = 0.0
+        total_cost = 0.0
+        total_fee = 0.0
+
+        for t in trades:
+            qty = float(t["qty"])
+            price = float(t["price"])
+            commission = float(t["commission"])
+
+            executed_qty += qty
+            total_cost += qty * price
+            total_fee += commission
+
+        avg_price = total_cost / executed_qty
+
+        return avg_price, executed_qty, total_fee
 
     # =========================================
     # OPEN TRADE
     # =========================================
     def open_trade(self, signal, quantity):
         if self.active_trade:
-            return None, None
+            return
 
         side = "BUY" if signal == 1 else "SELL"
         direction = "LONG" if signal == 1 else "SHORT"
@@ -63,23 +99,19 @@ class FuturesTrader:
             quantity=quantity
         )
 
-        sleep(0.5)
+        order_id = order["orderId"]
 
-        # Fetch executed price
-        try:
-            executed_price = float(order.get("avgPrice", 0))
-            if executed_price == 0:
-                trades = self.client.get_account_trades(symbol=self.symbol)
-                last_trade = trades[-1]
-                executed_price = float(last_trade["price"])
-        except Exception:
-            ticker = self.client.ticker_price(symbol=self.symbol)
-            executed_price = float(ticker["price"])
+        # Wait until Binance confirms FILLED
+        self.wait_for_fill(order_id)
+
+        executed_price, executed_qty, entry_fee = \
+            self.get_execution_details(order_id)
 
         self.active_trade = {
             "direction": direction,
             "entry_price": executed_price,
-            "quantity": quantity
+            "quantity": executed_qty,
+            "entry_fee": entry_fee
         }
 
         self.log_trade(
@@ -87,11 +119,10 @@ class FuturesTrader:
             action=f"{side}-OPEN",
             buy_price=executed_price if side == "BUY" else "",
             sell_price=executed_price if side == "SELL" else "",
-            fee=0,
-            pnl=0
+            fee=round(entry_fee, 6),
+            pnl=0,
+            order_id=order_id
         )
-
-        return executed_price, executed_price
 
     # =========================================
     # CLOSE TRADE
@@ -100,57 +131,48 @@ class FuturesTrader:
         if not self.active_trade:
             return
 
-        position_qty = float(self.active_trade["quantity"])
         direction = self.active_trade["direction"]
-        side_to_close = "SELL" if direction == "LONG" else "BUY"
+        quantity = self.active_trade["quantity"]
+        side = "SELL" if direction == "LONG" else "BUY"
 
         order = self.client.new_order(
             symbol=self.symbol,
-            side=side_to_close,
+            side=side,
             type="MARKET",
-            quantity=position_qty
+            quantity=quantity
         )
 
-        sleep(0.5)
+        order_id = order["orderId"]
 
-        # Get exit price
-        try:
-            exit_price = float(order.get("avgPrice", 0))
-            if exit_price == 0:
-                trades = self.client.get_account_trades(symbol=self.symbol)
-                closing_trade = trades[-1]
-                exit_price = float(closing_trade["price"])
-                fee = float(closing_trade["commission"])
-            else:
-                fee = 0
-        except Exception:
-            ticker = self.client.ticker_price(symbol=self.symbol)
-            exit_price = float(ticker["price"])
-            fee = 0
+        self.wait_for_fill(order_id)
+
+        exit_price, executed_qty, exit_fee = \
+            self.get_execution_details(order_id)
 
         entry_price = self.active_trade["entry_price"]
-        quantity = self.active_trade["quantity"]
+        entry_fee = self.active_trade["entry_fee"]
 
-        # Calculate PnL
+        total_fee = entry_fee + exit_fee
+
         if direction == "LONG":
-            pnl = (exit_price - entry_price) * quantity
+            pnl = (exit_price - entry_price) * quantity - total_fee
             buy_price = entry_price
             sell_price = exit_price
         else:
-            pnl = (entry_price - exit_price) * quantity
+            pnl = (entry_price - exit_price) * quantity - total_fee
             buy_price = exit_price
             sell_price = entry_price
 
-        pnl -= fee
         self.pnl_sum += pnl
 
         self.log_trade(
             direction=direction,
-            action=f"{side_to_close}-{reason}",
+            action=f"{side}-{reason}",
             buy_price=round(buy_price, 6),
             sell_price=round(sell_price, 6),
-            fee=round(fee, 6),
-            pnl=round(pnl, 6)
+            fee=round(total_fee, 6),
+            pnl=round(pnl, 6),
+            order_id=order_id
         )
 
         self.active_trade = None
@@ -158,7 +180,7 @@ class FuturesTrader:
     # =========================================
     # TP / SL CHECK
     # =========================================
-    def tp_sl_check(self, tp_percent=0.01, sl_percent=0.01):
+    def tp_sl_check(self, tp_percent=3, sl_percent=1):
         if not self.active_trade:
             return
 
@@ -171,13 +193,16 @@ class FuturesTrader:
         if direction == "LONG":
             tp_price = entry_price * (1 + tp_percent / 100)
             sl_price = entry_price * (1 - sl_percent / 100)
+
             if current_price >= tp_price:
                 self.close_trade("Take Profit Hit")
             elif current_price <= sl_price:
                 self.close_trade("Stop Loss Hit")
+
         else:
             tp_price = entry_price * (1 - tp_percent / 100)
             sl_price = entry_price * (1 + sl_percent / 100)
+
             if current_price <= tp_price:
                 self.close_trade("Take Profit Hit")
             elif current_price >= sl_price:
@@ -191,10 +216,13 @@ class FuturesTrader:
 
         if self.active_trade:
             current_direction = self.active_trade["direction"]
+
             if (current_direction == "LONG" and signal == -1) or \
                (current_direction == "SHORT" and signal == 1):
+
                 self.close_trade("Direction Change")
                 self.open_trade(signal, quantity)
+
         else:
             if signal in [1, -1]:
                 self.open_trade(signal, quantity)
@@ -202,8 +230,10 @@ class FuturesTrader:
     # =========================================
     # LOG TO CSV
     # =========================================
-    def log_trade(self, direction, action, buy_price, sell_price, fee, pnl):
-        current_balance = self.get_current_balance()
+    def log_trade(self, direction, action,
+                  buy_price, sell_price,
+                  fee, pnl, order_id):
+
         with open(self.csv_file, mode="a", newline="") as f:
             writer = csv.writer(f)
             writer.writerow([
@@ -213,7 +243,7 @@ class FuturesTrader:
                 buy_price,
                 sell_price,
                 fee,
-                pnl,
+                round(pnl, 6),
                 round(self.pnl_sum, 6),
-                round(current_balance, 6)   # Add current balance
+                order_id
             ])
