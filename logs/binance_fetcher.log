@@ -57845,3 +57845,1104 @@ ValueError: unconverted data remains:  01:29:00
 2026-02-12 15:41:54,304 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 10:05:00.001000 | interval=1m
 2026-02-12 15:41:56,557 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 10:41:00.001000 | interval=1m
 2026-02-12 15:41:56,815 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:55:02,430 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 12:55:03,939 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-12 10:40:00 | end=now
+2026-02-13 12:55:03,939 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 05:40:00 | interval=1m
+2026-02-13 12:55:06,272 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 07:19:00.001000 | interval=1m
+2026-02-13 12:55:08,500 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 08:59:00.001000 | interval=1m
+2026-02-13 12:55:10,727 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 10:39:00.001000 | interval=1m
+2026-02-13 12:55:12,949 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 12:19:00.001000 | interval=1m
+2026-02-13 12:55:15,181 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 13:59:00.001000 | interval=1m
+2026-02-13 12:55:17,412 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 15:39:00.001000 | interval=1m
+2026-02-13 12:55:19,659 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 17:19:00.001000 | interval=1m
+2026-02-13 12:55:21,887 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 18:59:00.001000 | interval=1m
+2026-02-13 12:55:24,121 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 20:39:00.001000 | interval=1m
+2026-02-13 12:55:26,347 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 22:19:00.001000 | interval=1m
+2026-02-13 12:55:28,574 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-12 23:59:00.001000 | interval=1m
+2026-02-13 12:55:30,804 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 01:39:00.001000 | interval=1m
+2026-02-13 12:55:33,022 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 03:19:00.001000 | interval=1m
+2026-02-13 12:55:35,248 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:59:00.001000 | interval=1m
+2026-02-13 12:55:37,476 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:39:00.001000 | interval=1m
+2026-02-13 12:55:39,701 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:55:00.001000 | interval=1m
+2026-02-13 12:55:39,918 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:55:42,002 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-12 10:40:00 | end=now
+2026-02-13 12:55:42,002 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 05:40:00 | interval=1m
+2026-02-13 12:55:44,228 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 07:19:00.001000 | interval=1m
+2026-02-13 12:55:46,456 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 08:59:00.001000 | interval=1m
+2026-02-13 12:55:48,721 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 10:39:00.001000 | interval=1m
+2026-02-13 12:55:50,956 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 12:19:00.001000 | interval=1m
+2026-02-13 12:55:53,177 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 13:59:00.001000 | interval=1m
+2026-02-13 12:55:55,404 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 15:39:00.001000 | interval=1m
+2026-02-13 12:55:57,614 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 17:19:00.001000 | interval=1m
+2026-02-13 12:55:59,842 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 18:59:00.001000 | interval=1m
+2026-02-13 12:56:02,069 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 20:39:00.001000 | interval=1m
+2026-02-13 12:56:04,288 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 22:19:00.001000 | interval=1m
+2026-02-13 12:56:06,515 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-12 23:59:00.001000 | interval=1m
+2026-02-13 12:56:08,742 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 01:39:00.001000 | interval=1m
+2026-02-13 12:56:10,970 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 03:19:00.001000 | interval=1m
+2026-02-13 12:56:13,196 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:59:00.001000 | interval=1m
+2026-02-13 12:56:15,431 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:39:00.001000 | interval=1m
+2026-02-13 12:56:17,646 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:55:00.001000 | interval=1m
+2026-02-13 12:56:17,865 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:56:19,756 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-12 10:40:00 | end=now
+2026-02-13 12:56:19,762 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 05:40:00 | interval=1m
+2026-02-13 12:56:21,985 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 07:19:00.001000 | interval=1m
+2026-02-13 12:56:24,212 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 08:59:00.001000 | interval=1m
+2026-02-13 12:56:26,439 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 10:39:00.001000 | interval=1m
+2026-02-13 12:56:28,722 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 12:19:00.001000 | interval=1m
+2026-02-13 12:56:30,949 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 13:59:00.001000 | interval=1m
+2026-02-13 12:56:33,179 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 15:39:00.001000 | interval=1m
+2026-02-13 12:56:35,402 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 17:19:00.001000 | interval=1m
+2026-02-13 12:56:37,628 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 18:59:00.001000 | interval=1m
+2026-02-13 12:56:39,865 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 20:39:00.001000 | interval=1m
+2026-02-13 12:56:42,092 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 22:19:00.001000 | interval=1m
+2026-02-13 12:56:44,302 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-12 23:59:00.001000 | interval=1m
+2026-02-13 12:56:46,530 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 01:39:00.001000 | interval=1m
+2026-02-13 12:56:48,757 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 03:19:00.001000 | interval=1m
+2026-02-13 12:56:50,992 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:59:00.001000 | interval=1m
+2026-02-13 12:56:53,219 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:39:00.001000 | interval=1m
+2026-02-13 12:56:55,445 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:56:00.001000 | interval=1m
+2026-02-13 12:56:55,659 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:56:57,494 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-12 10:40:00 | end=now
+2026-02-13 12:56:57,494 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 05:40:00 | interval=1m
+2026-02-13 12:56:59,724 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 07:19:00.001000 | interval=1m
+2026-02-13 12:57:01,957 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 08:59:00.001000 | interval=1m
+2026-02-13 12:57:04,189 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 10:39:00.001000 | interval=1m
+2026-02-13 12:57:06,415 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 12:19:00.001000 | interval=1m
+2026-02-13 12:57:08,641 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 13:59:00.001000 | interval=1m
+2026-02-13 12:57:10,867 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 15:39:00.001000 | interval=1m
+2026-02-13 12:57:13,093 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 17:19:00.001000 | interval=1m
+2026-02-13 12:57:15,305 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 18:59:00.001000 | interval=1m
+2026-02-13 12:57:17,558 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 20:39:00.001000 | interval=1m
+2026-02-13 12:57:19,786 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 22:19:00.001000 | interval=1m
+2026-02-13 12:57:22,010 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-12 23:59:00.001000 | interval=1m
+2026-02-13 12:57:24,228 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 01:39:00.001000 | interval=1m
+2026-02-13 12:57:26,458 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 03:19:00.001000 | interval=1m
+2026-02-13 12:57:28,685 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:59:00.001000 | interval=1m
+2026-02-13 12:57:30,912 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:39:00.001000 | interval=1m
+2026-02-13 12:57:33,138 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:56:00.001000 | interval=1m
+2026-02-13 12:57:33,353 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:57:35,546 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-12 10:40:00 | end=now
+2026-02-13 12:57:35,546 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 05:40:00 | interval=1m
+2026-02-13 12:57:37,775 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 07:19:00.001000 | interval=1m
+2026-02-13 12:57:40,002 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 08:59:00.001000 | interval=1m
+2026-02-13 12:57:42,243 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 10:39:00.001000 | interval=1m
+2026-02-13 12:57:44,455 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 12:19:00.001000 | interval=1m
+2026-02-13 12:57:46,693 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 13:59:00.001000 | interval=1m
+2026-02-13 12:57:48,935 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 15:39:00.001000 | interval=1m
+2026-02-13 12:57:51,152 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 17:19:00.001000 | interval=1m
+2026-02-13 12:57:53,408 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 18:59:00.001000 | interval=1m
+2026-02-13 12:57:55,641 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 20:39:00.001000 | interval=1m
+2026-02-13 12:57:57,869 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 22:19:00.001000 | interval=1m
+2026-02-13 12:58:00,225 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-12 23:59:00.001000 | interval=1m
+2026-02-13 12:58:02,440 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 01:39:00.001000 | interval=1m
+2026-02-13 12:58:04,661 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 03:19:00.001000 | interval=1m
+2026-02-13 12:58:06,896 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:59:00.001000 | interval=1m
+2026-02-13 12:58:09,107 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:39:00.001000 | interval=1m
+2026-02-13 12:58:11,330 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:57:00.001000 | interval=1m
+2026-02-13 12:58:11,540 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:58:14,331 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-12 10:41:00 | end=now
+2026-02-13 12:58:14,347 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 05:41:00 | interval=1m
+2026-02-13 12:58:17,622 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 07:20:00.001000 | interval=1m
+2026-02-13 12:58:19,852 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 09:00:00.001000 | interval=1m
+2026-02-13 12:58:22,083 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 10:40:00.001000 | interval=1m
+2026-02-13 12:58:24,303 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 12:20:00.001000 | interval=1m
+2026-02-13 12:58:26,526 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 14:00:00.001000 | interval=1m
+2026-02-13 12:58:28,748 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 15:40:00.001000 | interval=1m
+2026-02-13 12:58:30,971 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 17:20:00.001000 | interval=1m
+2026-02-13 12:58:33,191 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 19:00:00.001000 | interval=1m
+2026-02-13 12:58:35,407 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 20:40:00.001000 | interval=1m
+2026-02-13 12:58:37,623 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-12 22:20:00.001000 | interval=1m
+2026-02-13 12:58:39,849 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 00:00:00.001000 | interval=1m
+2026-02-13 12:58:42,080 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 01:40:00.001000 | interval=1m
+2026-02-13 12:58:44,303 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 03:20:00.001000 | interval=1m
+2026-02-13 12:58:46,522 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:00:00.001000 | interval=1m
+2026-02-13 12:58:48,734 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:40:00.001000 | interval=1m
+2026-02-13 12:58:50,946 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:58:00.001000 | interval=1m
+2026-02-13 12:58:51,174 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:58:52,801 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-12 10:41:00 | end=now
+2026-02-13 12:58:52,802 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 05:41:00 | interval=1m
+2026-02-13 12:58:55,036 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 07:20:00.001000 | interval=1m
+2026-02-13 12:58:57,265 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 09:00:00.001000 | interval=1m
+2026-02-13 12:58:59,479 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 10:40:00.001000 | interval=1m
+2026-02-13 12:59:01,691 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 12:20:00.001000 | interval=1m
+2026-02-13 12:59:03,904 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 14:00:00.001000 | interval=1m
+2026-02-13 12:59:06,138 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 15:40:00.001000 | interval=1m
+2026-02-13 12:59:08,357 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 17:20:00.001000 | interval=1m
+2026-02-13 12:59:10,572 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 19:00:00.001000 | interval=1m
+2026-02-13 12:59:12,805 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 20:40:00.001000 | interval=1m
+2026-02-13 12:59:15,052 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-12 22:20:00.001000 | interval=1m
+2026-02-13 12:59:17,267 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 00:00:00.001000 | interval=1m
+2026-02-13 12:59:19,487 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 01:40:00.001000 | interval=1m
+2026-02-13 12:59:22,747 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 03:20:00.001000 | interval=1m
+2026-02-13 12:59:24,972 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:00:00.001000 | interval=1m
+2026-02-13 12:59:27,198 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:40:00.001000 | interval=1m
+2026-02-13 12:59:29,425 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:58:00.001000 | interval=1m
+2026-02-13 12:59:29,635 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 12:59:31,160 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-12 10:41:00 | end=now
+2026-02-13 12:59:31,160 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 05:41:00 | interval=1m
+2026-02-13 12:59:33,397 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 07:20:00.001000 | interval=1m
+2026-02-13 12:59:35,608 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 09:00:00.001000 | interval=1m
+2026-02-13 12:59:37,839 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 10:40:00.001000 | interval=1m
+2026-02-13 12:59:40,060 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 12:20:00.001000 | interval=1m
+2026-02-13 12:59:42,318 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 14:00:00.001000 | interval=1m
+2026-02-13 12:59:44,552 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 15:40:00.001000 | interval=1m
+2026-02-13 12:59:46,770 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 17:20:00.001000 | interval=1m
+2026-02-13 12:59:48,993 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 19:00:00.001000 | interval=1m
+2026-02-13 12:59:51,222 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 20:40:00.001000 | interval=1m
+2026-02-13 12:59:53,584 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-12 22:20:00.001000 | interval=1m
+2026-02-13 12:59:55,813 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 00:00:00.001000 | interval=1m
+2026-02-13 12:59:58,044 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 01:40:00.001000 | interval=1m
+2026-02-13 13:00:00,269 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 03:20:00.001000 | interval=1m
+2026-02-13 13:00:02,727 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:00:00.001000 | interval=1m
+2026-02-13 13:00:05,013 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:40:00.001000 | interval=1m
+2026-02-13 13:00:07,242 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 13:00:07,483 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:00:08,507 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 13:00:08,507 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 13:00:10,732 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 13:00:12,966 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 13:00:15,292 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 13:00:17,664 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 13:00:17,880 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:00:18,896 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-12 10:41:00 | end=now
+2026-02-13 13:00:18,896 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 05:41:00 | interval=1m
+2026-02-13 13:00:21,130 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 07:20:00.001000 | interval=1m
+2026-02-13 13:00:23,352 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 09:00:00.001000 | interval=1m
+2026-02-13 13:31:01,020 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 10:40:00.001000 | interval=1m
+2026-02-13 13:35:03,579 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 13:35:04,367 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 07:55:00 | end=now
+2026-02-13 13:35:04,369 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 02:55:00 | interval=1m
+2026-02-13 13:35:06,713 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:34:00.001000 | interval=1m
+2026-02-13 13:35:08,940 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 13:35:11,167 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 13:35:13,392 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:35:13,609 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:35:14,931 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 07:55:00 | end=now
+2026-02-13 13:35:14,931 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 02:55:00 | interval=1m
+2026-02-13 13:35:17,154 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:34:00.001000 | interval=1m
+2026-02-13 13:35:19,376 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 13:35:21,603 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 13:35:23,830 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:35:24,034 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:35:24,540 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 07:56:00 | end=now
+2026-02-13 13:35:24,540 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 02:56:00 | interval=1m
+2026-02-13 13:35:26,762 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:35:00.001000 | interval=1m
+2026-02-13 13:35:28,984 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:15:00.001000 | interval=1m
+2026-02-13 13:35:31,227 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:55:00.001000 | interval=1m
+2026-02-13 13:35:33,451 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:35:33,671 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:35:34,143 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 07:56:00 | end=now
+2026-02-13 13:35:34,145 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 02:56:00 | interval=1m
+2026-02-13 13:35:36,380 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:35:00.001000 | interval=1m
+2026-02-13 13:35:38,623 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:15:00.001000 | interval=1m
+2026-02-13 13:35:40,850 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:55:00.001000 | interval=1m
+2026-02-13 13:35:43,091 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:35:43,309 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:35:43,709 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 07:57:00 | end=now
+2026-02-13 13:35:43,711 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 02:57:00 | interval=1m
+2026-02-13 13:35:45,957 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:36:00.001000 | interval=1m
+2026-02-13 13:35:48,183 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:16:00.001000 | interval=1m
+2026-02-13 13:35:50,444 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:56:00.001000 | interval=1m
+2026-02-13 13:35:52,684 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:35:52,903 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:35:53,338 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 07:58:00 | end=now
+2026-02-13 13:35:53,338 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 02:58:00 | interval=1m
+2026-02-13 13:35:55,565 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:37:00.001000 | interval=1m
+2026-02-13 13:35:57,791 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:17:00.001000 | interval=1m
+2026-02-13 13:36:00,003 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:57:00.001000 | interval=1m
+2026-02-13 13:36:02,229 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:36:02,444 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:36:02,904 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 07:58:00 | end=now
+2026-02-13 13:36:02,904 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 02:58:00 | interval=1m
+2026-02-13 13:36:05,126 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:37:00.001000 | interval=1m
+2026-02-13 13:36:07,354 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:17:00.001000 | interval=1m
+2026-02-13 13:36:09,578 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:57:00.001000 | interval=1m
+2026-02-13 13:36:11,804 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:36:00.001000 | interval=1m
+2026-02-13 13:36:12,024 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:36:12,483 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 07:59:00 | end=now
+2026-02-13 13:36:12,485 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 02:59:00 | interval=1m
+2026-02-13 13:36:14,703 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:38:00.001000 | interval=1m
+2026-02-13 13:36:16,929 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:18:00.001000 | interval=1m
+2026-02-13 13:36:19,156 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:58:00.001000 | interval=1m
+2026-02-13 13:36:21,381 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:36:00.001000 | interval=1m
+2026-02-13 13:36:21,587 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:36:21,824 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 13:36:21,824 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 13:36:24,056 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 13:36:26,282 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 13:36:28,505 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 13:36:30,737 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 13:36:30,962 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:36:31,346 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-12 10:41:00 | end=now
+2026-02-13 13:36:31,346 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 05:41:00 | interval=1m
+2026-02-13 13:36:33,583 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 07:20:00.001000 | interval=1m
+2026-02-13 13:36:35,805 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 09:00:00.001000 | interval=1m
+2026-02-13 13:36:38,020 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 10:40:00.001000 | interval=1m
+2026-02-13 13:36:40,248 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 12:20:00.001000 | interval=1m
+2026-02-13 13:36:42,475 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 14:00:00.001000 | interval=1m
+2026-02-13 13:36:44,695 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 15:40:00.001000 | interval=1m
+2026-02-13 13:36:46,925 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 17:20:00.001000 | interval=1m
+2026-02-13 13:36:49,149 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 19:00:00.001000 | interval=1m
+2026-02-13 13:36:51,375 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 20:40:00.001000 | interval=1m
+2026-02-13 13:36:53,597 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-12 22:20:00.001000 | interval=1m
+2026-02-13 13:36:55,823 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 00:00:00.001000 | interval=1m
+2026-02-13 13:36:58,049 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 01:40:00.001000 | interval=1m
+2026-02-13 13:37:00,276 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 03:20:00.001000 | interval=1m
+2026-02-13 13:37:02,496 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:00:00.001000 | interval=1m
+2026-02-13 13:37:04,720 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:40:00.001000 | interval=1m
+2026-02-13 13:37:06,949 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:20:00.001000 | interval=1m
+2026-02-13 13:37:09,177 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:36:00.001000 | interval=1m
+2026-02-13 13:37:09,387 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:45:02,285 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 13:45:02,950 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 08:35:00 | end=now
+2026-02-13 13:45:02,950 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 03:35:00 | interval=1m
+2026-02-13 13:45:05,335 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:14:00.001000 | interval=1m
+2026-02-13 13:45:07,552 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:54:00.001000 | interval=1m
+2026-02-13 13:45:09,779 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:34:00.001000 | interval=1m
+2026-02-13 13:45:12,004 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:45:12,211 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:45:12,562 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 08:35:00 | end=now
+2026-02-13 13:45:12,562 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 03:35:00 | interval=1m
+2026-02-13 13:45:14,796 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:14:00.001000 | interval=1m
+2026-02-13 13:45:17,023 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:54:00.001000 | interval=1m
+2026-02-13 13:45:19,243 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:34:00.001000 | interval=1m
+2026-02-13 13:45:21,454 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:45:21,670 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:45:22,021 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 08:35:00 | end=now
+2026-02-13 13:45:22,021 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 03:35:00 | interval=1m
+2026-02-13 13:45:24,258 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:14:00.001000 | interval=1m
+2026-02-13 13:45:26,473 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:54:00.001000 | interval=1m
+2026-02-13 13:45:28,711 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:34:00.001000 | interval=1m
+2026-02-13 13:45:30,936 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:45:31,150 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:45:31,496 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 08:35:00 | end=now
+2026-02-13 13:45:31,496 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 03:35:00 | interval=1m
+2026-02-13 13:45:33,726 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:14:00.001000 | interval=1m
+2026-02-13 13:45:35,971 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:54:00.001000 | interval=1m
+2026-02-13 13:45:38,200 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:34:00.001000 | interval=1m
+2026-02-13 13:45:40,434 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:45:40,648 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:45:41,066 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 08:35:00 | end=now
+2026-02-13 13:45:41,066 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 03:35:00 | interval=1m
+2026-02-13 13:45:43,297 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:14:00.001000 | interval=1m
+2026-02-13 13:45:45,517 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:54:00.001000 | interval=1m
+2026-02-13 13:45:47,745 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:34:00.001000 | interval=1m
+2026-02-13 13:45:49,994 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:45:50,221 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:45:50,581 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 08:35:00 | end=now
+2026-02-13 13:45:50,581 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 03:35:00 | interval=1m
+2026-02-13 13:45:52,808 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:14:00.001000 | interval=1m
+2026-02-13 13:45:55,042 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:54:00.001000 | interval=1m
+2026-02-13 13:45:57,274 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:34:00.001000 | interval=1m
+2026-02-13 13:45:59,490 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:45:59,708 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:46:00,087 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 08:36:00 | end=now
+2026-02-13 13:46:00,087 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 03:36:00 | interval=1m
+2026-02-13 13:46:02,320 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:15:00.001000 | interval=1m
+2026-02-13 13:46:04,546 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:55:00.001000 | interval=1m
+2026-02-13 13:46:06,785 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:46:09,012 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:46:00.001000 | interval=1m
+2026-02-13 13:46:09,233 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:46:09,564 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 08:36:00 | end=now
+2026-02-13 13:46:09,565 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 03:36:00 | interval=1m
+2026-02-13 13:46:11,798 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:15:00.001000 | interval=1m
+2026-02-13 13:46:14,023 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:55:00.001000 | interval=1m
+2026-02-13 13:46:16,247 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:46:18,480 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:46:00.001000 | interval=1m
+2026-02-13 13:46:18,702 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:46:18,914 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 13:46:18,914 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 13:46:21,141 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 13:46:23,359 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 13:46:25,586 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 13:46:27,790 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 13:46:28,009 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:46:28,317 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 08:36:00 | end=now
+2026-02-13 13:46:28,317 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 03:36:00 | interval=1m
+2026-02-13 13:46:30,541 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:15:00.001000 | interval=1m
+2026-02-13 13:46:32,771 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:55:00.001000 | interval=1m
+2026-02-13 13:46:34,992 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:35:00.001000 | interval=1m
+2026-02-13 13:46:37,219 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:46:00.001000 | interval=1m
+2026-02-13 13:46:37,436 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:50:02,359 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 13:50:02,907 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 08:45:00 | end=now
+2026-02-13 13:50:02,908 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 03:45:00 | interval=1m
+2026-02-13 13:50:05,286 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:24:00.001000 | interval=1m
+2026-02-13 13:50:07,509 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:04:00.001000 | interval=1m
+2026-02-13 13:50:09,752 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:44:00.001000 | interval=1m
+2026-02-13 13:50:11,975 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:50:12,191 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:50:12,610 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 08:45:00 | end=now
+2026-02-13 13:50:12,610 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 03:45:00 | interval=1m
+2026-02-13 13:50:14,845 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:24:00.001000 | interval=1m
+2026-02-13 13:50:17,065 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:04:00.001000 | interval=1m
+2026-02-13 13:50:19,294 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:44:00.001000 | interval=1m
+2026-02-13 13:50:21,519 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:50:21,733 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:50:22,171 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 08:45:00 | end=now
+2026-02-13 13:50:22,171 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 03:45:00 | interval=1m
+2026-02-13 13:50:24,387 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:24:00.001000 | interval=1m
+2026-02-13 13:50:26,700 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:04:00.001000 | interval=1m
+2026-02-13 13:50:28,932 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:44:00.001000 | interval=1m
+2026-02-13 13:50:31,159 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:50:31,375 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:50:31,712 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 08:45:00 | end=now
+2026-02-13 13:50:31,712 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 03:45:00 | interval=1m
+2026-02-13 13:50:33,947 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:24:00.001000 | interval=1m
+2026-02-13 13:50:36,188 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:04:00.001000 | interval=1m
+2026-02-13 13:50:38,412 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:44:00.001000 | interval=1m
+2026-02-13 13:50:40,642 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:50:40,848 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:50:41,161 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 08:45:00 | end=now
+2026-02-13 13:50:41,161 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 03:45:00 | interval=1m
+2026-02-13 13:50:43,393 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:24:00.001000 | interval=1m
+2026-02-13 13:50:45,630 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:04:00.001000 | interval=1m
+2026-02-13 13:50:47,863 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:44:00.001000 | interval=1m
+2026-02-13 13:50:50,090 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:50:50,306 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:50:50,638 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 08:45:00 | end=now
+2026-02-13 13:50:50,638 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 03:45:00 | interval=1m
+2026-02-13 13:50:52,871 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:24:00.001000 | interval=1m
+2026-02-13 13:50:55,105 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:04:00.001000 | interval=1m
+2026-02-13 13:50:57,325 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:44:00.001000 | interval=1m
+2026-02-13 13:50:59,553 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:50:59,760 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:51:00,139 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 08:46:00 | end=now
+2026-02-13 13:51:00,141 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 03:46:00 | interval=1m
+2026-02-13 13:51:02,368 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:25:00.001000 | interval=1m
+2026-02-13 13:51:04,588 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:05:00.001000 | interval=1m
+2026-02-13 13:51:06,817 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:51:09,049 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:51:00.001000 | interval=1m
+2026-02-13 13:51:09,253 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:51:09,568 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 08:46:00 | end=now
+2026-02-13 13:51:09,568 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 03:46:00 | interval=1m
+2026-02-13 13:51:11,799 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:25:00.001000 | interval=1m
+2026-02-13 13:51:14,022 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:05:00.001000 | interval=1m
+2026-02-13 13:51:16,249 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:51:18,469 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:51:00.001000 | interval=1m
+2026-02-13 13:51:18,684 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:51:18,926 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 13:51:18,926 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 13:51:21,155 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 13:51:23,376 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 13:51:25,633 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 13:51:27,859 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 13:51:28,082 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:51:28,390 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 08:46:00 | end=now
+2026-02-13 13:51:28,390 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 03:46:00 | interval=1m
+2026-02-13 13:51:30,620 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:25:00.001000 | interval=1m
+2026-02-13 13:51:32,837 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:05:00.001000 | interval=1m
+2026-02-13 13:51:35,051 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:45:00.001000 | interval=1m
+2026-02-13 13:51:37,285 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:51:00.001000 | interval=1m
+2026-02-13 13:51:37,499 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:01,923 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 13:55:02,399 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 08:50:00 | end=now
+2026-02-13 13:55:02,402 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 03:50:00 | interval=1m
+2026-02-13 13:55:04,755 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:29:00.001000 | interval=1m
+2026-02-13 13:55:06,986 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:09:00.001000 | interval=1m
+2026-02-13 13:55:09,213 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:49:00.001000 | interval=1m
+2026-02-13 13:55:11,434 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:55:11,651 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:11,952 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 08:50:00 | end=now
+2026-02-13 13:55:11,952 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 03:50:00 | interval=1m
+2026-02-13 13:55:14,190 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:29:00.001000 | interval=1m
+2026-02-13 13:55:16,416 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:09:00.001000 | interval=1m
+2026-02-13 13:55:18,647 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:49:00.001000 | interval=1m
+2026-02-13 13:55:20,866 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:55:21,080 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:21,401 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 08:50:00 | end=now
+2026-02-13 13:55:21,401 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 03:50:00 | interval=1m
+2026-02-13 13:55:23,620 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:29:00.001000 | interval=1m
+2026-02-13 13:55:25,845 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:09:00.001000 | interval=1m
+2026-02-13 13:55:28,070 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:49:00.001000 | interval=1m
+2026-02-13 13:55:30,275 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:55:30,474 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:30,800 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 08:50:00 | end=now
+2026-02-13 13:55:30,800 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 03:50:00 | interval=1m
+2026-02-13 13:55:33,019 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:29:00.001000 | interval=1m
+2026-02-13 13:55:35,246 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:09:00.001000 | interval=1m
+2026-02-13 13:55:37,469 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:49:00.001000 | interval=1m
+2026-02-13 13:55:39,693 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:55:39,905 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:40,240 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 08:50:00 | end=now
+2026-02-13 13:55:40,240 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 03:50:00 | interval=1m
+2026-02-13 13:55:42,484 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:29:00.001000 | interval=1m
+2026-02-13 13:55:44,711 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:09:00.001000 | interval=1m
+2026-02-13 13:55:46,931 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:49:00.001000 | interval=1m
+2026-02-13 13:55:49,154 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:55:49,367 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:49,696 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 08:50:00 | end=now
+2026-02-13 13:55:49,696 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 03:50:00 | interval=1m
+2026-02-13 13:55:51,929 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:29:00.001000 | interval=1m
+2026-02-13 13:55:54,160 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:09:00.001000 | interval=1m
+2026-02-13 13:55:56,380 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:49:00.001000 | interval=1m
+2026-02-13 13:55:58,600 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:55:58,813 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:55:59,161 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 08:51:00 | end=now
+2026-02-13 13:55:59,161 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 03:51:00 | interval=1m
+2026-02-13 13:56:01,393 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:30:00.001000 | interval=1m
+2026-02-13 13:56:03,624 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:10:00.001000 | interval=1m
+2026-02-13 13:56:05,841 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:56:08,065 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 13:56:08,270 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:56:08,567 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 08:51:00 | end=now
+2026-02-13 13:56:08,567 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 03:51:00 | interval=1m
+2026-02-13 13:56:10,809 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:30:00.001000 | interval=1m
+2026-02-13 13:56:13,048 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:10:00.001000 | interval=1m
+2026-02-13 13:56:15,253 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:56:17,481 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:56:00.001000 | interval=1m
+2026-02-13 13:56:17,697 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:56:17,935 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 13:56:17,935 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 13:56:20,161 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 13:56:22,370 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 13:56:24,589 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 13:56:26,811 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 13:56:27,026 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 13:56:27,313 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 08:51:00 | end=now
+2026-02-13 13:56:27,315 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 03:51:00 | interval=1m
+2026-02-13 13:56:29,537 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:30:00.001000 | interval=1m
+2026-02-13 13:56:31,758 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:10:00.001000 | interval=1m
+2026-02-13 13:56:33,985 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:50:00.001000 | interval=1m
+2026-02-13 13:56:36,195 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:56:00.001000 | interval=1m
+2026-02-13 13:56:36,406 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:10:07,582 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:10:08,083 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:10:08,083 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:10:10,595 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:10:12,837 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:10:15,058 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:10:17,293 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:10:17,509 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:10:17,879 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:10:17,879 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:10:20,111 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:10:22,343 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:10:24,572 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:10:26,805 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:10:27,021 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:10:27,400 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:10:27,400 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:10:29,628 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:10:31,850 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:10:34,072 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:10:36,301 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:10:36,522 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:10:36,890 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:10:36,890 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:10:39,120 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:10:41,346 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:10:43,568 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:10:45,778 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:10:45,991 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:10:46,360 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:10:46,360 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:10:48,604 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:10:50,825 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:10:53,047 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:10:55,273 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:10:55,512 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:10:55,806 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:10:55,806 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:10:58,037 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:11:00,259 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:11:02,473 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:11:04,709 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:11:04,919 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:11:05,367 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 08:55:00 | end=now
+2026-02-13 14:11:05,367 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 03:55:00 | interval=1m
+2026-02-13 14:11:07,593 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:34:00.001000 | interval=1m
+2026-02-13 14:11:09,824 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:14:00.001000 | interval=1m
+2026-02-13 14:11:12,048 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:54:00.001000 | interval=1m
+2026-02-13 14:11:14,278 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:11:00.001000 | interval=1m
+2026-02-13 14:11:14,495 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:11:15,066 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 08:56:00 | end=now
+2026-02-13 14:11:15,066 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 03:56:00 | interval=1m
+2026-02-13 14:11:17,289 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:35:00.001000 | interval=1m
+2026-02-13 14:11:19,521 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:15:00.001000 | interval=1m
+2026-02-13 14:11:21,743 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 14:11:23,965 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:11:00.001000 | interval=1m
+2026-02-13 14:11:24,177 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:11:24,414 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:11:24,416 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:11:26,690 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:11:28,915 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:11:31,143 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:11:33,363 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:11:33,581 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:11:33,896 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 08:56:00 | end=now
+2026-02-13 14:11:33,912 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 03:56:00 | interval=1m
+2026-02-13 14:11:36,136 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:35:00.001000 | interval=1m
+2026-02-13 14:11:38,368 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:15:00.001000 | interval=1m
+2026-02-13 14:11:40,591 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:55:00.001000 | interval=1m
+2026-02-13 14:11:42,813 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:11:00.001000 | interval=1m
+2026-02-13 14:11:43,022 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:01,630 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:15:02,206 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:10:00 | end=now
+2026-02-13 14:15:02,206 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:10:00 | interval=1m
+2026-02-13 14:15:04,628 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:49:00.001000 | interval=1m
+2026-02-13 14:15:06,860 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:29:00.001000 | interval=1m
+2026-02-13 14:15:09,090 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:09:00.001000 | interval=1m
+2026-02-13 14:15:11,330 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:15:11,542 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:11,867 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:10:00 | end=now
+2026-02-13 14:15:11,868 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:10:00 | interval=1m
+2026-02-13 14:15:14,082 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:49:00.001000 | interval=1m
+2026-02-13 14:15:16,306 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:29:00.001000 | interval=1m
+2026-02-13 14:15:18,530 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:09:00.001000 | interval=1m
+2026-02-13 14:15:20,751 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:15:20,961 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:21,375 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:10:00 | end=now
+2026-02-13 14:15:21,375 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:10:00 | interval=1m
+2026-02-13 14:15:23,732 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:49:00.001000 | interval=1m
+2026-02-13 14:15:25,960 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:29:00.001000 | interval=1m
+2026-02-13 14:15:28,173 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:09:00.001000 | interval=1m
+2026-02-13 14:15:30,401 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:15:30,618 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:30,917 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:10:00 | end=now
+2026-02-13 14:15:30,917 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:10:00 | interval=1m
+2026-02-13 14:15:33,138 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:49:00.001000 | interval=1m
+2026-02-13 14:15:35,360 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:29:00.001000 | interval=1m
+2026-02-13 14:15:37,588 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:09:00.001000 | interval=1m
+2026-02-13 14:15:39,816 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:15:40,020 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:40,392 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:10:00 | end=now
+2026-02-13 14:15:40,392 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:10:00 | interval=1m
+2026-02-13 14:15:42,631 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:49:00.001000 | interval=1m
+2026-02-13 14:15:44,877 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:29:00.001000 | interval=1m
+2026-02-13 14:15:47,112 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:09:00.001000 | interval=1m
+2026-02-13 14:15:49,327 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:15:49,527 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:49,846 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:10:00 | end=now
+2026-02-13 14:15:49,846 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:10:00 | interval=1m
+2026-02-13 14:15:52,065 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:49:00.001000 | interval=1m
+2026-02-13 14:15:54,304 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:29:00.001000 | interval=1m
+2026-02-13 14:15:56,540 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:09:00.001000 | interval=1m
+2026-02-13 14:15:58,761 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:15:58,969 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:15:59,284 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:11:00 | end=now
+2026-02-13 14:15:59,284 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:11:00 | interval=1m
+2026-02-13 14:16:01,518 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:50:00.001000 | interval=1m
+2026-02-13 14:16:03,735 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:30:00.001000 | interval=1m
+2026-02-13 14:16:05,968 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:16:08,201 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:16:08,413 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:16:08,739 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:11:00 | end=now
+2026-02-13 14:16:08,739 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:11:00 | interval=1m
+2026-02-13 14:16:10,963 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:50:00.001000 | interval=1m
+2026-02-13 14:16:13,198 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:30:00.001000 | interval=1m
+2026-02-13 14:16:15,418 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:16:17,657 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:16:00.001000 | interval=1m
+2026-02-13 14:16:17,879 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:16:18,079 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:16:18,079 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:16:20,309 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:16:22,540 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:16:24,771 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:16:27,007 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:16:27,221 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:16:27,516 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:11:00 | end=now
+2026-02-13 14:16:27,516 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:11:00 | interval=1m
+2026-02-13 14:16:29,746 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:50:00.001000 | interval=1m
+2026-02-13 14:16:31,979 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:30:00.001000 | interval=1m
+2026-02-13 14:16:34,203 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:10:00.001000 | interval=1m
+2026-02-13 14:16:36,447 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:16:00.001000 | interval=1m
+2026-02-13 14:16:36,663 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:02,351 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:20:02,811 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:02,811 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:20:05,170 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:20:07,400 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:20:09,612 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:20:11,831 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:20:12,048 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:12,410 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:12,410 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:20:14,632 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:20:16,851 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:20:19,074 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:20:21,299 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:20:21,520 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:21,853 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:21,860 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:20:24,077 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:20:26,322 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:20:28,544 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:20:30,776 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:20:30,990 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:31,316 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:31,316 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:20:33,537 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:20:35,774 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:20:38,006 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:20:40,219 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:20:40,431 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:40,835 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:40,835 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:20:43,071 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:20:45,302 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:20:47,516 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:20:49,731 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:20:49,940 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:50,299 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:50,299 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:20:52,535 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:20:54,745 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:20:57,031 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:20:59,247 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:20:59,453 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:20:59,791 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:15:00 | end=now
+2026-02-13 14:20:59,791 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:15:00 | interval=1m
+2026-02-13 14:21:02,013 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:54:00.001000 | interval=1m
+2026-02-13 14:21:04,234 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:34:00.001000 | interval=1m
+2026-02-13 14:21:06,459 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:14:00.001000 | interval=1m
+2026-02-13 14:21:08,679 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:21:08,896 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:21:09,258 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:16:00 | end=now
+2026-02-13 14:21:09,258 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:16:00 | interval=1m
+2026-02-13 14:21:11,493 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 05:55:00.001000 | interval=1m
+2026-02-13 14:21:13,726 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:35:00.001000 | interval=1m
+2026-02-13 14:21:15,954 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:21:18,170 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:21:00.001000 | interval=1m
+2026-02-13 14:21:18,376 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:21:18,583 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:21:18,583 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:21:20,804 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:21:23,012 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:21:25,237 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:21:27,463 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:21:27,760 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:21:28,080 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:16:00 | end=now
+2026-02-13 14:21:28,080 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:16:00 | interval=1m
+2026-02-13 14:21:30,330 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 05:55:00.001000 | interval=1m
+2026-02-13 14:21:32,671 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:35:00.001000 | interval=1m
+2026-02-13 14:21:35,237 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:15:00.001000 | interval=1m
+2026-02-13 14:21:37,511 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:21:00.001000 | interval=1m
+2026-02-13 14:21:37,741 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:25:02,489 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:25:03,115 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:25:03,115 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:25:05,472 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:25:07,734 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:25:09,969 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:25:12,185 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:25:12,428 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:25:12,803 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:25:12,803 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:25:15,045 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:25:17,278 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:25:19,512 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:25:21,735 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:25:21,952 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:25:22,373 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:25:22,373 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:25:24,605 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:25:26,820 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:25:29,043 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:25:31,269 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:25:31,473 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:25:31,818 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:25:31,818 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:25:34,073 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:25:36,320 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:25:38,550 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:25:40,771 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:25:40,981 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:25:41,358 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:25:41,358 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:25:43,595 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:25:45,815 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:25:48,029 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:25:50,244 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:25:50,464 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:25:50,786 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:25:50,786 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:25:53,019 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:25:55,239 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:25:57,462 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:25:59,708 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:25:59,937 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:26:00,285 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:20:00 | end=now
+2026-02-13 14:26:00,285 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:20:00 | interval=1m
+2026-02-13 14:26:02,493 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 05:59:00.001000 | interval=1m
+2026-02-13 14:26:04,723 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:39:00.001000 | interval=1m
+2026-02-13 14:26:06,948 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:19:00.001000 | interval=1m
+2026-02-13 14:26:09,181 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:26:00.001000 | interval=1m
+2026-02-13 14:26:09,399 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:26:09,708 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:21:00 | end=now
+2026-02-13 14:26:09,708 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:21:00 | interval=1m
+2026-02-13 14:26:12,017 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:00:00.001000 | interval=1m
+2026-02-13 14:26:14,232 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:40:00.001000 | interval=1m
+2026-02-13 14:26:16,457 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:26:18,662 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:26:00.001000 | interval=1m
+2026-02-13 14:26:18,872 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:26:19,096 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:26:19,098 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:26:21,295 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:26:23,518 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:26:25,755 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:26:27,970 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:26:28,189 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:26:28,503 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:21:00 | end=now
+2026-02-13 14:26:28,503 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:21:00 | interval=1m
+2026-02-13 14:26:30,730 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:00:00.001000 | interval=1m
+2026-02-13 14:26:32,953 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:40:00.001000 | interval=1m
+2026-02-13 14:26:35,178 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:20:00.001000 | interval=1m
+2026-02-13 14:26:37,386 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:26:00.001000 | interval=1m
+2026-02-13 14:26:37,623 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:02,032 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:30:02,693 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:25:00 | end=now
+2026-02-13 14:30:02,693 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:25:00 | interval=1m
+2026-02-13 14:30:05,074 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:04:00.001000 | interval=1m
+2026-02-13 14:30:07,315 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:44:00.001000 | interval=1m
+2026-02-13 14:30:09,539 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:24:00.001000 | interval=1m
+2026-02-13 14:30:11,758 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:30:11,977 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:12,535 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:25:00 | end=now
+2026-02-13 14:30:12,535 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:25:00 | interval=1m
+2026-02-13 14:30:14,764 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:04:00.001000 | interval=1m
+2026-02-13 14:30:16,970 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:44:00.001000 | interval=1m
+2026-02-13 14:30:19,191 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:24:00.001000 | interval=1m
+2026-02-13 14:30:21,412 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:30:21,647 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:21,996 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:25:00 | end=now
+2026-02-13 14:30:21,996 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:25:00 | interval=1m
+2026-02-13 14:30:24,228 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:04:00.001000 | interval=1m
+2026-02-13 14:30:26,472 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:44:00.001000 | interval=1m
+2026-02-13 14:30:28,708 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:24:00.001000 | interval=1m
+2026-02-13 14:30:30,943 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:30:31,154 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:31,516 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:25:00 | end=now
+2026-02-13 14:30:31,518 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:25:00 | interval=1m
+2026-02-13 14:30:33,739 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:04:00.001000 | interval=1m
+2026-02-13 14:30:35,952 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:44:00.001000 | interval=1m
+2026-02-13 14:30:38,178 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:24:00.001000 | interval=1m
+2026-02-13 14:30:40,405 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:30:40,624 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:40,915 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:25:00 | end=now
+2026-02-13 14:30:40,915 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:25:00 | interval=1m
+2026-02-13 14:30:43,148 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:04:00.001000 | interval=1m
+2026-02-13 14:30:45,383 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:44:00.001000 | interval=1m
+2026-02-13 14:30:47,667 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:24:00.001000 | interval=1m
+2026-02-13 14:30:49,915 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:30:50,132 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:50,433 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:25:00 | end=now
+2026-02-13 14:30:50,433 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:25:00 | interval=1m
+2026-02-13 14:30:52,663 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:04:00.001000 | interval=1m
+2026-02-13 14:30:54,896 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:44:00.001000 | interval=1m
+2026-02-13 14:30:57,125 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:24:00.001000 | interval=1m
+2026-02-13 14:30:59,330 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:30:59,548 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:30:59,918 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:26:00 | end=now
+2026-02-13 14:30:59,918 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:26:00 | interval=1m
+2026-02-13 14:31:02,149 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:05:00.001000 | interval=1m
+2026-02-13 14:31:04,377 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:45:00.001000 | interval=1m
+2026-02-13 14:31:06,602 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:31:08,833 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:31:09,049 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:31:09,399 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:26:00 | end=now
+2026-02-13 14:31:09,399 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:26:00 | interval=1m
+2026-02-13 14:31:11,625 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:05:00.001000 | interval=1m
+2026-02-13 14:31:13,849 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:45:00.001000 | interval=1m
+2026-02-13 14:31:16,072 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:31:18,282 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:31:00.001000 | interval=1m
+2026-02-13 14:31:18,496 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:31:18,729 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:31:18,729 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:31:20,980 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:31:23,197 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:31:25,433 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:31:27,660 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:31:27,860 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:31:28,208 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:26:00 | end=now
+2026-02-13 14:31:28,208 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:26:00 | interval=1m
+2026-02-13 14:31:30,436 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:05:00.001000 | interval=1m
+2026-02-13 14:31:32,672 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:45:00.001000 | interval=1m
+2026-02-13 14:31:34,895 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:25:00.001000 | interval=1m
+2026-02-13 14:31:37,114 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:31:00.001000 | interval=1m
+2026-02-13 14:31:37,318 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:02,317 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:35:02,781 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:02,797 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:35:05,168 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:35:07,379 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:35:09,606 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:35:11,804 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:35:12,027 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:12,395 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:12,395 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:35:14,618 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:35:16,848 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:35:19,084 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:35:21,311 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:35:21,516 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:21,906 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:21,906 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:35:24,130 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:35:26,364 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:35:28,593 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:35:30,808 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:35:31,037 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:31,403 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:31,403 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:35:33,645 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:35:35,871 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:35:38,110 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:35:40,329 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:35:40,533 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:40,899 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:40,899 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:35:43,133 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:35:45,359 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:35:47,587 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:35:49,819 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:35:50,035 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:50,409 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:50,409 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:35:52,631 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:35:54,864 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:35:57,079 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:35:59,305 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:35:59,541 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:35:59,927 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:30:00 | end=now
+2026-02-13 14:35:59,928 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:30:00 | interval=1m
+2026-02-13 14:36:02,157 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:09:00.001000 | interval=1m
+2026-02-13 14:36:04,391 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:49:00.001000 | interval=1m
+2026-02-13 14:36:06,613 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:29:00.001000 | interval=1m
+2026-02-13 14:36:08,841 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:36:09,079 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:36:09,443 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:31:00 | end=now
+2026-02-13 14:36:09,443 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:31:00 | interval=1m
+2026-02-13 14:36:11,686 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:10:00.001000 | interval=1m
+2026-02-13 14:36:13,938 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:50:00.001000 | interval=1m
+2026-02-13 14:36:16,167 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:36:18,402 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:36:00.001000 | interval=1m
+2026-02-13 14:36:18,613 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:36:18,868 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:36:18,869 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:36:21,083 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:36:23,315 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:36:25,541 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:36:27,773 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:36:27,990 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:36:28,341 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:31:00 | end=now
+2026-02-13 14:36:28,341 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:31:00 | interval=1m
+2026-02-13 14:36:30,561 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:10:00.001000 | interval=1m
+2026-02-13 14:36:32,785 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:50:00.001000 | interval=1m
+2026-02-13 14:36:35,004 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:30:00.001000 | interval=1m
+2026-02-13 14:36:37,223 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:36:00.001000 | interval=1m
+2026-02-13 14:36:37,447 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:40:02,599 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:40:03,360 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:40:03,360 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:40:05,781 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:40:08,012 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:40:10,245 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:40:12,478 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:40:12,696 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:40:13,181 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:40:13,183 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:40:15,409 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:40:17,642 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:40:19,873 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:40:22,106 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:40:22,316 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:40:22,727 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:40:22,728 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:40:24,951 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:40:27,170 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:40:29,396 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:40:31,612 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:40:31,819 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:40:32,171 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:40:32,171 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:40:34,401 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:40:36,633 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:40:38,849 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:40:41,081 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:40:41,301 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:40:41,700 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:40:41,700 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:40:43,930 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:40:46,195 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:40:48,411 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:40:50,643 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:40:50,859 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:40:51,260 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:40:51,260 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:40:53,491 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:40:55,724 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:40:57,951 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:41:00,188 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:41:00,408 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:41:00,895 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:35:00 | end=now
+2026-02-13 14:41:00,895 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:35:00 | interval=1m
+2026-02-13 14:41:03,124 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:14:00.001000 | interval=1m
+2026-02-13 14:41:05,341 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 07:54:00.001000 | interval=1m
+2026-02-13 14:41:07,579 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:34:00.001000 | interval=1m
+2026-02-13 14:41:09,810 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:41:00.001000 | interval=1m
+2026-02-13 14:41:10,033 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:41:10,435 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:36:00 | end=now
+2026-02-13 14:41:10,435 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:36:00 | interval=1m
+2026-02-13 14:41:12,648 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:15:00.001000 | interval=1m
+2026-02-13 14:41:14,879 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 07:55:00.001000 | interval=1m
+2026-02-13 14:41:17,114 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:41:19,338 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:41:00.001000 | interval=1m
+2026-02-13 14:41:19,557 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:41:19,805 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:41:19,805 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:41:22,044 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:41:24,277 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:41:26,510 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:41:28,736 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:41:28,954 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:41:29,354 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:36:00 | end=now
+2026-02-13 14:41:29,354 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:36:00 | interval=1m
+2026-02-13 14:41:31,574 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:15:00.001000 | interval=1m
+2026-02-13 14:41:33,806 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 07:55:00.001000 | interval=1m
+2026-02-13 14:41:36,038 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:35:00.001000 | interval=1m
+2026-02-13 14:41:38,292 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:41:00.001000 | interval=1m
+2026-02-13 14:41:38,509 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:45:02,263 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:45:02,923 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:40:00 | end=now
+2026-02-13 14:45:02,923 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:40:00 | interval=1m
+2026-02-13 14:45:05,265 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:19:00.001000 | interval=1m
+2026-02-13 14:45:07,492 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 14:45:09,741 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:39:00.001000 | interval=1m
+2026-02-13 14:45:11,990 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:45:12,207 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:45:12,548 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:40:00 | end=now
+2026-02-13 14:45:12,548 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:40:00 | interval=1m
+2026-02-13 14:45:14,788 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:19:00.001000 | interval=1m
+2026-02-13 14:45:17,021 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 14:45:19,270 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:39:00.001000 | interval=1m
+2026-02-13 14:45:21,490 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:45:21,704 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:45:22,102 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:40:00 | end=now
+2026-02-13 14:45:22,103 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:40:00 | interval=1m
+2026-02-13 14:45:24,331 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:19:00.001000 | interval=1m
+2026-02-13 14:45:26,567 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 14:45:28,799 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:39:00.001000 | interval=1m
+2026-02-13 14:45:31,031 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:45:31,249 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:45:31,577 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:40:00 | end=now
+2026-02-13 14:45:31,577 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:40:00 | interval=1m
+2026-02-13 14:45:33,813 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:19:00.001000 | interval=1m
+2026-02-13 14:45:36,062 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 14:45:38,313 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:39:00.001000 | interval=1m
+2026-02-13 14:45:40,517 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:45:40,762 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:45:41,160 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:40:00 | end=now
+2026-02-13 14:45:41,161 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:40:00 | interval=1m
+2026-02-13 14:45:43,392 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:19:00.001000 | interval=1m
+2026-02-13 14:45:45,641 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 14:45:47,875 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:39:00.001000 | interval=1m
+2026-02-13 14:45:50,106 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:45:50,308 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:45:50,708 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:40:00 | end=now
+2026-02-13 14:45:50,708 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:40:00 | interval=1m
+2026-02-13 14:45:52,938 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:19:00.001000 | interval=1m
+2026-02-13 14:45:55,171 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 07:59:00.001000 | interval=1m
+2026-02-13 14:45:57,391 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:39:00.001000 | interval=1m
+2026-02-13 14:45:59,615 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:45:59,835 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:46:00,192 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:41:00 | end=now
+2026-02-13 14:46:00,192 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:41:00 | interval=1m
+2026-02-13 14:46:02,427 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:20:00.001000 | interval=1m
+2026-02-13 14:46:04,649 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:00:00.001000 | interval=1m
+2026-02-13 14:46:06,871 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:46:09,098 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:46:00.001000 | interval=1m
+2026-02-13 14:46:09,321 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:46:09,704 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:41:00 | end=now
+2026-02-13 14:46:09,704 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:41:00 | interval=1m
+2026-02-13 14:46:11,946 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:20:00.001000 | interval=1m
+2026-02-13 14:46:14,179 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:00:00.001000 | interval=1m
+2026-02-13 14:46:16,411 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:46:18,626 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:46:00.001000 | interval=1m
+2026-02-13 14:46:18,845 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:46:19,084 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:46:19,084 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:46:21,308 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:46:23,541 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:46:25,759 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:46:27,988 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:46:28,207 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:46:28,497 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:41:00 | end=now
+2026-02-13 14:46:28,497 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:41:00 | interval=1m
+2026-02-13 14:46:30,723 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:20:00.001000 | interval=1m
+2026-02-13 14:46:32,953 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:00:00.001000 | interval=1m
+2026-02-13 14:46:35,185 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:40:00.001000 | interval=1m
+2026-02-13 14:46:37,418 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:46:00.001000 | interval=1m
+2026-02-13 14:46:37,639 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:02,282 | INFO | binance_fetcher | Binance Client initialized.
+2026-02-13 14:50:02,756 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BTCUSDT | interval=1m | start=2026-02-13 09:45:00 | end=now
+2026-02-13 14:50:02,756 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 04:45:00 | interval=1m
+2026-02-13 14:50:05,190 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 06:24:00.001000 | interval=1m
+2026-02-13 14:50:07,413 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 08:04:00.001000 | interval=1m
+2026-02-13 14:50:09,633 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:44:00.001000 | interval=1m
+2026-02-13 14:50:11,876 | INFO | binance_fetcher | Fetching BTCUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:50:12,097 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:12,432 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ETHUSDT | interval=1m | start=2026-02-13 09:45:00 | end=now
+2026-02-13 14:50:12,432 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 04:45:00 | interval=1m
+2026-02-13 14:50:14,662 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 06:24:00.001000 | interval=1m
+2026-02-13 14:50:16,883 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 08:04:00.001000 | interval=1m
+2026-02-13 14:50:19,117 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:44:00.001000 | interval=1m
+2026-02-13 14:50:21,343 | INFO | binance_fetcher | Fetching ETHUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:50:21,565 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:21,898 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=BNBUSDT | interval=1m | start=2026-02-13 09:45:00 | end=now
+2026-02-13 14:50:21,898 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 04:45:00 | interval=1m
+2026-02-13 14:50:24,119 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 06:24:00.001000 | interval=1m
+2026-02-13 14:50:26,343 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 08:04:00.001000 | interval=1m
+2026-02-13 14:50:28,577 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:44:00.001000 | interval=1m
+2026-02-13 14:50:30,809 | INFO | binance_fetcher | Fetching BNBUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:50:31,028 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:31,374 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=ADAUSDT | interval=1m | start=2026-02-13 09:45:00 | end=now
+2026-02-13 14:50:31,374 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 04:45:00 | interval=1m
+2026-02-13 14:50:33,608 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 06:24:00.001000 | interval=1m
+2026-02-13 14:50:35,844 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 08:04:00.001000 | interval=1m
+2026-02-13 14:50:38,072 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:44:00.001000 | interval=1m
+2026-02-13 14:50:40,304 | INFO | binance_fetcher | Fetching ADAUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:50:40,510 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:40,913 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=XRPUSDT | interval=1m | start=2026-02-13 09:45:00 | end=now
+2026-02-13 14:50:40,913 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 04:45:00 | interval=1m
+2026-02-13 14:50:43,139 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 06:24:00.001000 | interval=1m
+2026-02-13 14:50:45,380 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 08:04:00.001000 | interval=1m
+2026-02-13 14:50:47,620 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:44:00.001000 | interval=1m
+2026-02-13 14:50:49,849 | INFO | binance_fetcher | Fetching XRPUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:50:50,054 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:50,517 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOGEUSDT | interval=1m | start=2026-02-13 09:45:00 | end=now
+2026-02-13 14:50:50,517 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 04:45:00 | interval=1m
+2026-02-13 14:50:52,750 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 06:24:00.001000 | interval=1m
+2026-02-13 14:50:54,981 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 08:04:00.001000 | interval=1m
+2026-02-13 14:50:57,216 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:44:00.001000 | interval=1m
+2026-02-13 14:50:59,432 | INFO | binance_fetcher | Fetching DOGEUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:50:59,650 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:50:59,983 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=SOLUSDT | interval=1m | start=2026-02-13 09:46:00 | end=now
+2026-02-13 14:50:59,983 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 04:46:00 | interval=1m
+2026-02-13 14:51:02,212 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 06:25:00.001000 | interval=1m
+2026-02-13 14:51:04,436 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 08:05:00.001000 | interval=1m
+2026-02-13 14:51:06,672 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:51:08,903 | INFO | binance_fetcher | Fetching SOLUSDT | 2026-02-13 09:50:00.001000 | interval=1m
+2026-02-13 14:51:09,106 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:51:09,573 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=DOTUSDT | interval=1m | start=2026-02-13 09:46:00 | end=now
+2026-02-13 14:51:09,573 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 04:46:00 | interval=1m
+2026-02-13 14:51:11,805 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 06:25:00.001000 | interval=1m
+2026-02-13 14:51:14,039 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 08:05:00.001000 | interval=1m
+2026-02-13 14:51:16,268 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:51:18,488 | INFO | binance_fetcher | Fetching DOTUSDT | 2026-02-13 09:51:00.001000 | interval=1m
+2026-02-13 14:51:18,702 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:51:18,943 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=MATICUSDT | interval=1m | start=2024-09-11 09:42:00 | end=now
+2026-02-13 14:51:18,943 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 04:42:00 | interval=1m
+2026-02-13 14:51:21,167 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 06:21:00.001000 | interval=1m
+2026-02-13 14:51:23,394 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 08:01:00.001000 | interval=1m
+2026-02-13 14:51:25,622 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:41:00.001000 | interval=1m
+2026-02-13 14:51:27,833 | INFO | binance_fetcher | Fetching MATICUSDT | 2024-09-11 09:42:00.001000 | interval=1m
+2026-02-13 14:51:28,064 | WARNING | binance_fetcher | No more data returned from Binance.
+2026-02-13 14:51:28,363 | INFO | binance_fetcher | BinanceFuturesFetcher initialized | symbol=LINKUSDT | interval=1m | start=2026-02-13 09:46:00 | end=now
+2026-02-13 14:51:28,363 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 04:46:00 | interval=1m
+2026-02-13 14:51:30,576 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 06:25:00.001000 | interval=1m
+2026-02-13 14:51:32,813 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 08:05:00.001000 | interval=1m
+2026-02-13 14:51:35,105 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:45:00.001000 | interval=1m
+2026-02-13 14:51:37,331 | INFO | binance_fetcher | Fetching LINKUSDT | 2026-02-13 09:51:00.001000 | interval=1m
+2026-02-13 14:51:37,533 | WARNING | binance_fetcher | No more data returned from Binance.

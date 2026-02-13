@@ -6732,3 +6732,38 @@
 2026-02-12 15:44:04,862 | WARNING | execution_binance_main | No profitable strategies found for matic.
 2026-02-12 15:44:04,862 | INFO | execution_binance_main | Processing symbol: link
 2026-02-12 15:44:04,870 | WARNING | execution_binance_main | No profitable strategies found for link.
+2026-02-13 12:53:01,001 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-13 12:53:01,009 | INFO | execution_binance_main | Waiting 119 seconds until next valid 5m time...
+2026-02-13 12:55:00,020 | INFO | execution_binance_main | Current time 07:55:00 is valid for 5m execution.
+2026-02-13 12:55:00,021 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-13 12:55:00,697 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-13 12:55:00,699 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-13 13:31:25,876 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-13 13:31:25,967 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-13 13:31:25,998 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-13 07:55:00+00:00
+2026-02-13 13:31:28,724 | INFO | execution_binance_main | Waiting 212 seconds until next valid 5m time...
+2026-02-13 13:35:00,731 | INFO | execution_binance_main | Current time 08:35:00 is valid for 5m execution.
+2026-02-13 13:35:00,731 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-13 13:35:00,741 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-13 13:35:00,741 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-13 13:37:18,560 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-13 13:37:18,578 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-13 13:37:18,589 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-13 08:35:00+00:00
+2026-02-13 13:37:19,577 | ERROR | execution_binance_main | Error in continuous execution loop: (400, -1111, 'Precision is over the maximum defined for this asset.', {'Content-Type': 'application/json', 'Content-Length': '76', 'Connection': 'keep-alive', 'Date': 'Fri, 13 Feb 2026 08:37:19 GMT', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Server': 'Bengine', 'x-mbx-used-weight-1m': '-1', 'x-mbx-order-count-10s': '1', 'x-mbx-order-count-1m': '1', 'x-response-time': '2ms', 'Access-Control-Allow-Origin': '*', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 50d7319a270c165be8b0fd6273c8a806.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DXB53-P2', 'X-Amz-Cf-Id': 'OawqpIq3V_CMSajHUxs1nyntiitqJ_8jNgg2RYKW9m_LrRR23kHIZg=='})
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 153, in <module>
+    trader.process_signal(signal, quantity=0.01)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 223, in process_signal
+    self.close_trade("Direction Change")
+  File "D:\trading\TradeX\execution\binance\executor.py", line 138, in close_trade
+    order = self.client.new_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\um_futures\account.py", line 116, in new_order
+    return self.sign_request("POST", url_path, params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 83, in sign_request
+    return self.send_request(http_method, url_path, payload, special)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 118, in send_request
+    self._handle_exception(response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 172, in _handle_exception
+    raise ClientError(status_code, err["code"], err["msg"], response.headers)
+binance.error.ClientError: (400, -1111, 'Precision is over the maximum defined for this asset.', {'Content-Type': 'application/json', 'Content-Length': '76', 'Connection': 'keep-alive', 'Date': 'Fri, 13 Feb 2026 08:37:19 GMT', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Server': 'Bengine', 'x-mbx-used-weight-1m': '-1', 'x-mbx-order-count-10s': '1', 'x-mbx-order-count-1m': '1', 'x-response-time': '2ms', 'Access-Control-Allow-Origin': '*', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 50d7319a270c165be8b0fd6273c8a806.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DXB53-P2', 'X-Amz-Cf-Id': 'OawqpIq3V_CMSajHUxs1nyntiitqJ_8jNgg2RYKW9m_LrRR23kHIZg=='})
+2026-02-13 13:37:24,600 | INFO | execution_binance_main | Waiting 156 seconds until next valid 5m time...

@@ -367,7 +367,7 @@ def get_profitable_strategies(
     symbol: str,    
     timehorizon: str,
     min_pnl: float = 100,
-    top_n: int = 5,
+    top_n: int = 1,
     best: str = "highest" 
 ):
     """
