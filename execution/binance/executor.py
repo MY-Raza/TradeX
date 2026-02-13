@@ -34,6 +34,9 @@ class FuturesTrader:
                     "order_id"
                 ])
 
+        self.tp_order_id = None
+        self.sl_order_id = None
+
     # =========================================
     # WAIT FOR ORDER TO BE FILLED
     # =========================================
@@ -54,7 +57,7 @@ class FuturesTrader:
         raise RuntimeError(f"Order {order_id} not filled within timeout.")
 
     # =========================================
-    # GET ACTUAL EXECUTION DETAILS
+    # GET EXECUTION DETAILS
     # =========================================
     def get_execution_details(self, order_id):
         trades = self.client.get_account_trades(
@@ -79,8 +82,54 @@ class FuturesTrader:
             total_fee += commission
 
         avg_price = total_cost / executed_qty
-
         return avg_price, executed_qty, total_fee
+
+    # =========================================
+    # PLACE TP AND SL ORDERS ON BINANCE
+    # =========================================
+    def place_tp_sl_orders(self, direction, entry_price, quantity):
+        # Cancel existing TP/SL orders if any
+        for oid in [self.tp_order_id, self.sl_order_id]:
+            if oid:
+                try:
+                    self.client.cancel_order(symbol=self.symbol, orderId=oid)
+                except:
+                    pass
+
+        if direction == "LONG":
+            tp_price = round(entry_price * 1.03, 2)
+            sl_price = round(entry_price * 0.99, 2)
+            self.tp_order_id = self.client.new_order(
+                symbol=self.symbol,
+                side="SELL",
+                type="TAKE_PROFIT_MARKET",
+                stopPrice=tp_price,
+                closePosition=True
+            )["orderId"]
+            self.sl_order_id = self.client.new_order(
+                symbol=self.symbol,
+                side="SELL",
+                type="STOP_MARKET",
+                stopPrice=sl_price,
+                closePosition=True
+            )["orderId"]
+        else:  # SHORT
+            tp_price = round(entry_price * 0.97, 2)
+            sl_price = round(entry_price * 1.01, 2)
+            self.tp_order_id = self.client.new_order(
+                symbol=self.symbol,
+                side="BUY",
+                type="TAKE_PROFIT_MARKET",
+                stopPrice=tp_price,
+                closePosition=True
+            )["orderId"]
+            self.sl_order_id = self.client.new_order(
+                symbol=self.symbol,
+                side="BUY",
+                type="STOP_MARKET",
+                stopPrice=sl_price,
+                closePosition=True
+            )["orderId"]
 
     # =========================================
     # OPEN TRADE
@@ -98,14 +147,10 @@ class FuturesTrader:
             type="MARKET",
             quantity=quantity
         )
-
         order_id = order["orderId"]
 
-        # Wait until Binance confirms FILLED
         self.wait_for_fill(order_id)
-
-        executed_price, executed_qty, entry_fee = \
-            self.get_execution_details(order_id)
+        executed_price, executed_qty, entry_fee = self.get_execution_details(order_id)
 
         self.active_trade = {
             "direction": direction,
@@ -113,6 +158,9 @@ class FuturesTrader:
             "quantity": executed_qty,
             "entry_fee": entry_fee
         }
+
+        # Place TP and SL on Binance
+        self.place_tp_sl_orders(direction, executed_price, executed_qty)
 
         self.log_trade(
             direction=direction,
@@ -127,7 +175,7 @@ class FuturesTrader:
     # =========================================
     # CLOSE TRADE
     # =========================================
-    def close_trade(self, reason="Direction Change"):
+    def close_trade(self, reason="Manual Close"):
         if not self.active_trade:
             return
 
@@ -141,17 +189,13 @@ class FuturesTrader:
             type="MARKET",
             quantity=quantity
         )
-
         order_id = order["orderId"]
 
         self.wait_for_fill(order_id)
-
-        exit_price, executed_qty, exit_fee = \
-            self.get_execution_details(order_id)
+        exit_price, executed_qty, exit_fee = self.get_execution_details(order_id)
 
         entry_price = self.active_trade["entry_price"]
         entry_fee = self.active_trade["entry_fee"]
-
         total_fee = entry_fee + exit_fee
 
         if direction == "LONG":
@@ -175,54 +219,27 @@ class FuturesTrader:
             order_id=order_id
         )
 
+        # Cancel TP/SL orders on close
+        for oid in [self.tp_order_id, self.sl_order_id]:
+            if oid:
+                try:
+                    self.client.cancel_order(symbol=self.symbol, orderId=oid)
+                except:
+                    pass
+        self.tp_order_id = None
+        self.sl_order_id = None
         self.active_trade = None
-
-    # =========================================
-    # TP / SL CHECK
-    # =========================================
-    def tp_sl_check(self, tp_percent=3, sl_percent=1):
-        if not self.active_trade:
-            return
-
-        ticker = self.client.ticker_price(symbol=self.symbol)
-        current_price = float(ticker["price"])
-
-        entry_price = self.active_trade["entry_price"]
-        direction = self.active_trade["direction"]
-
-        if direction == "LONG":
-            tp_price = entry_price * (1 + tp_percent / 100)
-            sl_price = entry_price * (1 - sl_percent / 100)
-
-            if current_price >= tp_price:
-                self.close_trade("Take Profit Hit")
-            elif current_price <= sl_price:
-                self.close_trade("Stop Loss Hit")
-
-        else:
-            tp_price = entry_price * (1 - tp_percent / 100)
-            sl_price = entry_price * (1 + sl_percent / 100)
-
-            if current_price <= tp_price:
-                self.close_trade("Take Profit Hit")
-            elif current_price >= sl_price:
-                self.close_trade("Stop Loss Hit")
 
     # =========================================
     # PROCESS SIGNAL
     # =========================================
     def process_signal(self, signal, quantity):
-        self.tp_sl_check()
-
         if self.active_trade:
             current_direction = self.active_trade["direction"]
-
             if (current_direction == "LONG" and signal == -1) or \
                (current_direction == "SHORT" and signal == 1):
-
                 self.close_trade("Direction Change")
                 self.open_trade(signal, quantity)
-
         else:
             if signal in [1, -1]:
                 self.open_trade(signal, quantity)
