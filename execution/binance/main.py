@@ -16,8 +16,27 @@ from TradeX.execution.binance.strategy_signals_orchestrator import (
 import os 
 import subprocess 
 from TradeX.utils.common.config_loader import read_config
-
+from TradeX.execution.binance.executor import FuturesTrader
+from dotenv import load_dotenv
 logger = get_logger("execution_binance_main")
+dotenv_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+)
+load_dotenv(dotenv_path)
+
+API_KEY = os.getenv("BINANCE_DEMO_API_KEY")
+API_SECRET = os.getenv("BINANCE_DEMO_SECRET_KEY")
+
+trader = FuturesTrader(API_KEY, API_SECRET, "BTCUSDT")
+
+# Hardcoded signal sequence
+test_signals = [1, 0, 1, -1, -1, 1]
+for signal in test_signals:
+    print(f"Processing signal: {signal}")
+    
+    trader.process_signal(signal, quantity=0.01)
+
+    time.sleep(10)
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 config = read_config(exchange_name="binance")
 symbols = config["symbols"]
