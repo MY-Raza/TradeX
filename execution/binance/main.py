@@ -99,7 +99,7 @@ while True:
                 symbol="btc",
                 timehorizon=timeframe,
                 min_pnl=100,
-                best="lowest"
+                best="highest"
             )
 
             if not strategies:

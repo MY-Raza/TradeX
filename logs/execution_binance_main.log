@@ -7166,3 +7166,248 @@ AttributeError: 'FuturesTrader' object has no attribute 'process_signal'
 2026-02-13 17:21:53,013 | INFO | execution_binance_main | btc | Resampled to 90 rows.
 2026-02-13 17:21:53,020 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-13 12:20:00+00:00
 2026-02-13 17:21:59,848 | INFO | execution_binance_main | Waiting 181 seconds until next valid 5m time...
+2026-02-16 10:18:28,768 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 10:18:30,515 | INFO | execution_binance_main | Waiting 90 seconds until next valid 5m time...
+2026-02-16 10:20:00,529 | INFO | execution_binance_main | Current time 05:20:00 is valid for 5m execution.
+2026-02-16 10:35:28,798 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 10:35:29,920 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 10:35:29,920 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 10:35:44,195 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 10:35:44,285 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 10:35:44,318 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 05:20:00+00:00
+2026-02-16 10:35:47,267 | ERROR | execution_binance_main | Error in continuous execution loop: (400, -1106, "Parameter 'reduceonly' sent when not required.", {'Content-Type': 'application/json', 'Content-Length': '69', 'Connection': 'keep-alive', 'Date': 'Mon, 16 Feb 2026 05:35:47 GMT', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Server': 'Bengine', 'x-mbx-used-weight-1m': '-1', 'x-mbx-order-count-10s': '2', 'x-mbx-order-count-1m': '2', 'x-response-time': '0ms', 'Access-Control-Allow-Origin': '*', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 e72271b7c8cb777dcacd6e49dcfab458.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MCT50-P3', 'X-Amz-Cf-Id': '1O-xaP1HIKBNiTlnqoGHkeB6AjtrFBa6SYh5uH5vf0zRX4HjYjBRhg=='})
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 260, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 234, in open_trade
+    self.place_tp_sl_orders(direction, price)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 119, in place_tp_sl_orders
+    tp = self.client.new_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\um_futures\account.py", line 116, in new_order
+    return self.sign_request("POST", url_path, params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 83, in sign_request
+    return self.send_request(http_method, url_path, payload, special)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 118, in send_request
+    self._handle_exception(response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 172, in _handle_exception
+    raise ClientError(status_code, err["code"], err["msg"], response.headers)
+binance.error.ClientError: (400, -1106, "Parameter 'reduceonly' sent when not required.", {'Content-Type': 'application/json', 'Content-Length': '69', 'Connection': 'keep-alive', 'Date': 'Mon, 16 Feb 2026 05:35:47 GMT', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Server': 'Bengine', 'x-mbx-used-weight-1m': '-1', 'x-mbx-order-count-10s': '2', 'x-mbx-order-count-1m': '2', 'x-response-time': '0ms', 'Access-Control-Allow-Origin': '*', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 e72271b7c8cb777dcacd6e49dcfab458.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MCT50-P3', 'X-Amz-Cf-Id': '1O-xaP1HIKBNiTlnqoGHkeB6AjtrFBa6SYh5uH5vf0zRX4HjYjBRhg=='})
+2026-02-16 10:35:52,295 | INFO | execution_binance_main | Current time 05:35:52 is valid for 5m execution.
+2026-02-16 10:37:33,738 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 10:37:33,847 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 10:37:33,849 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 10:37:52,504 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 10:37:52,595 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 10:37:52,631 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 05:35:00+00:00
+2026-02-16 10:37:53,244 | ERROR | execution_binance_main | Error in continuous execution loop: list index out of range
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 251, in process_signal
+    self.check_position_closed()
+  File "D:\trading\TradeX\execution\binance\executor.py", line 152, in check_position_closed
+    pos = self.client.get_position_risk(symbol=self.symbol)[0]
+IndexError: list index out of range
+2026-02-16 10:37:58,254 | INFO | execution_binance_main | Waiting 122 seconds until next valid 5m time...
+2026-02-16 10:40:00,270 | INFO | execution_binance_main | Current time 05:40:00 is valid for 5m execution.
+2026-02-16 10:41:38,399 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 10:41:38,575 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 10:41:38,575 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 10:41:54,286 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 10:41:54,344 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 10:41:54,383 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 05:40:00+00:00
+2026-02-16 10:41:55,260 | ERROR | execution_binance_main | Error in continuous execution loop: list index out of range
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 251, in process_signal
+    current_direction = self.active_trade["direction"]
+  File "D:\trading\TradeX\execution\binance\executor.py", line 152, in check_position_closed
+IndexError: list index out of range
+2026-02-16 10:42:00,271 | INFO | execution_binance_main | Waiting 180 seconds until next valid 5m time...
+2026-02-16 10:45:00,281 | INFO | execution_binance_main | Current time 05:45:00 is valid for 5m execution.
+2026-02-16 10:46:44,024 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 10:46:44,100 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 10:46:44,101 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 10:46:58,890 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 10:46:59,059 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 10:46:59,197 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 05:45:00+00:00
+2026-02-16 10:47:00,154 | ERROR | execution_binance_main | Error in continuous execution loop: list index out of range
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 251, in process_signal
+    buy_price, sell_price,
+  File "D:\trading\TradeX\execution\binance\executor.py", line 152, in check_position_closed
+    self.wait_for_fill(order_id)
+IndexError: list index out of range
+2026-02-16 10:47:05,202 | INFO | execution_binance_main | Waiting 175 seconds until next valid 5m time...
+2026-02-16 10:50:00,245 | INFO | execution_binance_main | Current time 05:50:00 is valid for 5m execution.
+2026-02-16 10:51:48,439 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 10:51:48,815 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 10:51:48,818 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 10:52:08,572 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 10:52:08,669 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 10:52:08,736 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 05:50:00+00:00
+2026-02-16 10:52:09,588 | ERROR | execution_binance_main | Error in continuous execution loop: list index out of range
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 251, in process_signal
+  File "D:\trading\TradeX\execution\binance\executor.py", line 152, in check_position_closed
+    entry_price = self.active_trade["entry_price"]
+IndexError: list index out of range
+2026-02-16 10:52:14,609 | INFO | execution_binance_main | Waiting 166 seconds until next valid 5m time...
+2026-02-16 10:55:00,635 | INFO | execution_binance_main | Current time 05:55:00 is valid for 5m execution.
+2026-02-16 10:56:41,483 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 10:56:41,523 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 10:56:41,524 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 10:56:53,185 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 10:56:53,233 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 10:56:53,274 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 05:55:00+00:00
+2026-02-16 10:56:53,955 | ERROR | execution_binance_main | Error in continuous execution loop: list index out of range
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 251, in process_signal
+  File "D:\trading\TradeX\execution\binance\executor.py", line 152, in check_position_closed
+    symbol=self.symbol,
+IndexError: list index out of range
+2026-02-16 10:56:58,972 | INFO | execution_binance_main | Waiting 182 seconds until next valid 5m time...
+2026-02-16 10:58:21,313 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 10:58:22,253 | INFO | execution_binance_main | Waiting 98 seconds until next valid 5m time...
+2026-02-16 11:00:00,268 | INFO | execution_binance_main | Current time 06:00:00 is valid for 5m execution.
+2026-02-16 11:01:38,482 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:01:38,659 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:01:38,660 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:01:48,418 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:01:48,446 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:01:48,455 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 06:00:00+00:00
+2026-02-16 11:01:51,025 | INFO | execution_binance_main | Waiting 189 seconds until next valid 5m time...
+2026-02-16 11:05:00,035 | INFO | execution_binance_main | Current time 06:05:00 is valid for 5m execution.
+2026-02-16 11:06:38,636 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:06:38,660 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:06:38,660 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:06:49,788 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:06:49,828 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:06:49,855 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 06:05:00+00:00
+2026-02-16 11:06:51,346 | INFO | execution_binance_main | Waiting 189 seconds until next valid 5m time...
+2026-02-16 11:07:13,620 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 11:07:14,038 | INFO | execution_binance_main | Waiting 166 seconds until next valid 5m time...
+2026-02-16 11:10:00,048 | INFO | execution_binance_main | Current time 06:10:00 is valid for 5m execution.
+2026-02-16 11:11:37,581 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:11:37,727 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:11:37,727 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:11:46,469 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:11:46,508 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:11:46,532 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 06:10:00+00:00
+2026-02-16 11:11:48,134 | ERROR | execution_binance_main | Error in continuous execution loop: (400, -1106, "Parameter 'reduceonly' sent when not required.", {'Content-Type': 'application/json', 'Content-Length': '69', 'Connection': 'keep-alive', 'Date': 'Mon, 16 Feb 2026 06:11:48 GMT', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Server': 'Bengine', 'x-mbx-used-weight-1m': '-1', 'x-mbx-order-count-10s': '2', 'x-mbx-order-count-1m': '2', 'x-response-time': '2ms', 'Access-Control-Allow-Origin': '*', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 8dd746184895b782ccc160a21809c2d8.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MCT50-P3', 'X-Amz-Cf-Id': 'ajM-zL0J7Mgkx3ZMhRd0s5jqPfUTcqnikWO3FpNjtJlsb_3SwJ81aw=='})
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 161, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 188, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 127, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 83, in place_tp_sl
+    tp = self.client.new_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\um_futures\account.py", line 116, in new_order
+    return self.sign_request("POST", url_path, params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 83, in sign_request
+    return self.send_request(http_method, url_path, payload, special)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 118, in send_request
+    self._handle_exception(response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\api.py", line 172, in _handle_exception
+    raise ClientError(status_code, err["code"], err["msg"], response.headers)
+binance.error.ClientError: (400, -1106, "Parameter 'reduceonly' sent when not required.", {'Content-Type': 'application/json', 'Content-Length': '69', 'Connection': 'keep-alive', 'Date': 'Mon, 16 Feb 2026 06:11:48 GMT', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', 'Server': 'Bengine', 'x-mbx-used-weight-1m': '-1', 'x-mbx-order-count-10s': '2', 'x-mbx-order-count-1m': '2', 'x-response-time': '2ms', 'Access-Control-Allow-Origin': '*', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 8dd746184895b782ccc160a21809c2d8.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'MCT50-P3', 'X-Amz-Cf-Id': 'ajM-zL0J7Mgkx3ZMhRd0s5jqPfUTcqnikWO3FpNjtJlsb_3SwJ81aw=='})
+2026-02-16 11:11:53,151 | INFO | execution_binance_main | Waiting 187 seconds until next valid 5m time...
+2026-02-16 11:19:23,673 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 11:19:24,348 | INFO | execution_binance_main | Waiting 36 seconds until next valid 5m time...
+2026-02-16 11:20:00,352 | INFO | execution_binance_main | Current time 06:20:00 is valid for 5m execution.
+2026-02-16 11:21:39,044 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:21:39,198 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:21:39,199 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:21:55,451 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:21:55,505 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:21:55,530 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 06:20:00+00:00
+2026-02-16 11:21:57,762 | INFO | execution_binance_main | Waiting 183 seconds until next valid 5m time...
+2026-02-16 11:25:00,777 | INFO | execution_binance_main | Current time 06:25:00 is valid for 5m execution.
+2026-02-16 11:26:39,291 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:26:39,302 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:26:39,302 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:26:52,097 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:26:52,122 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:26:52,143 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 06:25:00+00:00
+2026-02-16 11:26:54,779 | INFO | execution_binance_main | Waiting 186 seconds until next valid 5m time...
+2026-02-16 11:30:00,784 | INFO | execution_binance_main | Current time 06:30:00 is valid for 5m execution.
+2026-02-16 11:31:38,565 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:31:38,792 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:31:38,795 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:31:56,629 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:31:56,690 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:31:56,738 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 0 at 2026-02-16 06:30:00+00:00
+2026-02-16 11:31:57,753 | INFO | execution_binance_main | Waiting 183 seconds until next valid 5m time...
+2026-02-16 11:34:14,475 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 11:34:15,020 | INFO | execution_binance_main | Waiting 45 seconds until next valid 5m time...
+2026-02-16 11:35:00,034 | INFO | execution_binance_main | Current time 06:35:00 is valid for 5m execution.
+2026-02-16 11:36:38,048 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:36:38,220 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:36:38,220 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:36:52,055 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:36:52,136 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:36:52,176 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 1 at 2026-02-16 06:35:00+00:00
+2026-02-16 11:36:54,473 | INFO | execution_binance_main | Waiting 186 seconds until next valid 5m time...
+2026-02-16 11:38:53,564 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 11:38:54,268 | INFO | execution_binance_main | Waiting 66 seconds until next valid 5m time...
+2026-02-16 11:40:00,274 | INFO | execution_binance_main | Current time 06:40:00 is valid for 5m execution.
+2026-02-16 11:41:37,384 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:41:37,655 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:41:37,655 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:41:49,541 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:41:49,605 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:41:49,631 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 1 at 2026-02-16 06:40:00+00:00
+2026-02-16 11:41:51,824 | INFO | execution_binance_main | Waiting 189 seconds until next valid 5m time...
+2026-02-16 11:45:00,834 | INFO | execution_binance_main | Current time 06:45:00 is valid for 5m execution.
+2026-02-16 11:46:38,132 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:46:38,155 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:46:38,163 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:46:49,181 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:46:49,202 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:46:49,228 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 1 at 2026-02-16 06:45:00+00:00
+2026-02-16 11:46:51,342 | INFO | execution_binance_main | Waiting 189 seconds until next valid 5m time...
+2026-02-16 11:50:00,357 | INFO | execution_binance_main | Current time 06:50:00 is valid for 5m execution.
+2026-02-16 11:51:39,547 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:51:39,591 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:51:39,593 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:52:02,974 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:52:03,129 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:52:03,184 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → -1 at 2026-02-16 06:50:00+00:00
+2026-02-16 11:52:06,925 | INFO | execution_binance_main | Waiting 174 seconds until next valid 5m time...
+2026-02-16 11:55:00,928 | INFO | execution_binance_main | Current time 06:55:00 is valid for 5m execution.
+2026-02-16 11:56:41,448 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 11:56:41,483 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 11:56:41,483 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 11:56:54,240 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 11:56:54,273 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 11:56:54,306 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 1 at 2026-02-16 06:55:00+00:00
+2026-02-16 11:56:56,143 | INFO | execution_binance_main | Waiting 184 seconds until next valid 5m time...
+2026-02-16 12:00:00,146 | INFO | execution_binance_main | Current time 07:00:00 is valid for 5m execution.
+2026-02-16 12:01:39,793 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 12:01:39,826 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 12:01:39,827 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 12:01:53,275 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 12:01:53,307 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 12:01:53,332 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 1 at 2026-02-16 07:00:00+00:00
+2026-02-16 12:01:56,609 | INFO | execution_binance_main | Waiting 184 seconds until next valid 5m time...
+2026-02-16 12:03:06,581 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 12:03:07,308 | INFO | execution_binance_main | Waiting 113 seconds until next valid 5m time...
+2026-02-16 12:05:00,319 | INFO | execution_binance_main | Current time 07:05:00 is valid for 5m execution.
+2026-02-16 12:06:37,663 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 12:06:37,822 | INFO | execution_binance_main | btc | sig_5m_btc_10 → Highest window: 30
+2026-02-16 12:06:37,822 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 12:06:46,955 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 12:06:47,005 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 12:06:47,043 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_10 → 1 at 2026-02-16 07:05:00+00:00
+2026-02-16 12:06:49,355 | INFO | execution_binance_main | Waiting 191 seconds until next valid 5m time...
