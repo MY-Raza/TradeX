@@ -10,15 +10,20 @@ class FuturesTrader:
         self.client = UMFutures(
             key=api_key,
             secret=api_secret,
-            base_url="https://testnet.binancefuture.com"
+            base_url="https://testnet.binancefuture.com"  # change for live
         )
 
-        self.symbol = symbol
+        self.symbol = symbol.upper()
         self.active_trade = None
         self.pnl_sum = 0
         self.csv_file = "trade_log.csv"
+        self.tp_order_id = None
+        self.sl_order_id = None
 
-        # Create CSV file if it doesn't exist
+        # Get symbol precision
+        self.price_precision, self.qty_precision = self.get_symbol_precision()
+
+        # Create CSV if not exists
         if not os.path.exists(self.csv_file):
             with open(self.csv_file, mode="w", newline="") as f:
                 writer = csv.writer(f)
@@ -34,27 +39,32 @@ class FuturesTrader:
                     "order_id"
                 ])
 
-        self.tp_order_id = None
-        self.sl_order_id = None
+    # =========================================
+    # GET SYMBOL PRECISION
+    # =========================================
+    def get_symbol_precision(self):
+        info = self.client.exchange_info()
+        for s in info["symbols"]:
+            if s["symbol"] == self.symbol:
+                return s["pricePrecision"], s["quantityPrecision"]
+        raise ValueError("Symbol not found")
 
     # =========================================
-    # WAIT FOR ORDER TO BE FILLED
+    # WAIT FOR ORDER FILL
     # =========================================
     def wait_for_fill(self, order_id, timeout=10):
-        start_time = datetime.now()
+        start = datetime.now()
 
-        while (datetime.now() - start_time).seconds < timeout:
+        while (datetime.now() - start).seconds < timeout:
             order = self.client.query_order(
                 symbol=self.symbol,
                 orderId=order_id
             )
-
             if order["status"] == "FILLED":
                 return order
-
             sleep(0.2)
 
-        raise RuntimeError(f"Order {order_id} not filled within timeout.")
+        raise RuntimeError(f"Order {order_id} not filled")
 
     # =========================================
     # GET EXECUTION DETAILS
@@ -66,29 +76,30 @@ class FuturesTrader:
         )
 
         if not trades:
-            raise RuntimeError(f"No trades found for order {order_id}")
+            raise RuntimeError(f"No trades for order {order_id}")
 
-        executed_qty = 0.0
-        total_cost = 0.0
-        total_fee = 0.0
+        qty_sum = 0
+        cost_sum = 0
+        fee_sum = 0
 
         for t in trades:
             qty = float(t["qty"])
             price = float(t["price"])
             commission = float(t["commission"])
 
-            executed_qty += qty
-            total_cost += qty * price
-            total_fee += commission
+            qty_sum += qty
+            cost_sum += qty * price
+            fee_sum += commission
 
-        avg_price = total_cost / executed_qty
-        return avg_price, executed_qty, total_fee
+        avg_price = cost_sum / qty_sum
+        return avg_price, qty_sum, fee_sum
 
     # =========================================
-    # PLACE TP AND SL ORDERS ON BINANCE
+    # PLACE TP & SL (PROPER VERSION)
     # =========================================
-    def place_tp_sl_orders(self, direction, entry_price, quantity):
-        # Cancel existing TP/SL orders if any
+    def place_tp_sl_orders(self, direction, entry_price):
+
+        # Cancel previous TP/SL
         for oid in [self.tp_order_id, self.sl_order_id]:
             if oid:
                 try:
@@ -97,105 +108,70 @@ class FuturesTrader:
                     pass
 
         if direction == "LONG":
-            tp_price = round(entry_price * 1.03, 2)
-            sl_price = round(entry_price * 0.99, 2)
-            self.tp_order_id = self.client.new_order(
-                symbol=self.symbol,
-                side="SELL",
-                type="TAKE_PROFIT_MARKET",
-                stopPrice=tp_price,
-                closePosition=True
-            )["orderId"]
-            self.sl_order_id = self.client.new_order(
-                symbol=self.symbol,
-                side="SELL",
-                type="STOP_MARKET",
-                stopPrice=sl_price,
-                closePosition=True
-            )["orderId"]
-        else:  # SHORT
-            tp_price = round(entry_price * 0.97, 2)
-            sl_price = round(entry_price * 1.01, 2)
-            self.tp_order_id = self.client.new_order(
-                symbol=self.symbol,
-                side="BUY",
-                type="TAKE_PROFIT_MARKET",
-                stopPrice=tp_price,
-                closePosition=True
-            )["orderId"]
-            self.sl_order_id = self.client.new_order(
-                symbol=self.symbol,
-                side="BUY",
-                type="STOP_MARKET",
-                stopPrice=sl_price,
-                closePosition=True
-            )["orderId"]
+            tp_price = round(entry_price * 1.03, self.price_precision)
+            sl_price = round(entry_price * 0.99, self.price_precision)
+            side = "SELL"
+        else:
+            tp_price = round(entry_price * 0.97, self.price_precision)
+            sl_price = round(entry_price * 1.01, self.price_precision)
+            side = "BUY"
 
-    # =========================================
-    # OPEN TRADE
-    # =========================================
-    def open_trade(self, signal, quantity):
-        if self.active_trade:
-            return
-
-        side = "BUY" if signal == 1 else "SELL"
-        direction = "LONG" if signal == 1 else "SHORT"
-
-        order = self.client.new_order(
+        tp = self.client.new_order(
             symbol=self.symbol,
             side=side,
-            type="MARKET",
-            quantity=quantity
-        )
-        order_id = order["orderId"]
-
-        self.wait_for_fill(order_id)
-        executed_price, executed_qty, entry_fee = self.get_execution_details(order_id)
-
-        self.active_trade = {
-            "direction": direction,
-            "entry_price": executed_price,
-            "quantity": executed_qty,
-            "entry_fee": entry_fee
-        }
-
-        # Place TP and SL on Binance
-        self.place_tp_sl_orders(direction, executed_price, executed_qty)
-
-        self.log_trade(
-            direction=direction,
-            action=f"{side}-OPEN",
-            buy_price=executed_price if side == "BUY" else "",
-            sell_price=executed_price if side == "SELL" else "",
-            fee=round(entry_fee, 6),
-            pnl=0,
-            order_id=order_id
+            type="TAKE_PROFIT_MARKET",
+            stopPrice=tp_price,
+            closePosition=True,
+            reduceOnly=True,
+            workingType="MARK_PRICE"
         )
 
+        sl = self.client.new_order(
+            symbol=self.symbol,
+            side=side,
+            type="STOP_MARKET",
+            stopPrice=sl_price,
+            closePosition=True,
+            reduceOnly=True,
+            workingType="MARK_PRICE"
+        )
+
+        self.tp_order_id = tp["orderId"]
+        self.sl_order_id = sl["orderId"]
+
+        print(f"TP placed at {tp_price}")
+        print(f"SL placed at {sl_price}")
+
     # =========================================
-    # CLOSE TRADE
+    # CHECK IF POSITION CLOSED BY TP/SL
     # =========================================
-    def close_trade(self, reason="Manual Close"):
+    def check_position_closed(self):
         if not self.active_trade:
             return
 
+        pos = self.client.get_position_risk(symbol=self.symbol)[0]
+        position_amt = float(pos["positionAmt"])
+
+        if position_amt == 0:
+            print("Position closed by TP/SL")
+            self.handle_auto_close()
+
+    # =========================================
+    # HANDLE AUTO CLOSE (TP OR SL HIT)
+    # =========================================
+    def handle_auto_close(self):
         direction = self.active_trade["direction"]
-        quantity = self.active_trade["quantity"]
-        side = "SELL" if direction == "LONG" else "BUY"
-
-        order = self.client.new_order(
-            symbol=self.symbol,
-            side=side,
-            type="MARKET",
-            quantity=quantity
-        )
-        order_id = order["orderId"]
-
-        self.wait_for_fill(order_id)
-        exit_price, executed_qty, exit_fee = self.get_execution_details(order_id)
-
         entry_price = self.active_trade["entry_price"]
+        quantity = self.active_trade["quantity"]
         entry_fee = self.active_trade["entry_fee"]
+
+        # Get latest trades
+        trades = self.client.get_account_trades(symbol=self.symbol)
+        last_trade = trades[-1]
+
+        exit_price = float(last_trade["price"])
+        exit_fee = float(last_trade["commission"])
+
         total_fee = entry_fee + exit_fee
 
         if direction == "LONG":
@@ -210,36 +186,75 @@ class FuturesTrader:
         self.pnl_sum += pnl
 
         self.log_trade(
-            direction=direction,
-            action=f"{side}-{reason}",
-            buy_price=round(buy_price, 6),
-            sell_price=round(sell_price, 6),
-            fee=round(total_fee, 6),
-            pnl=round(pnl, 6),
-            order_id=order_id
+            direction,
+            "AUTO-CLOSE",
+            round(buy_price, self.price_precision),
+            round(sell_price, self.price_precision),
+            round(total_fee, 6),
+            round(pnl, 6),
+            "TP/SL"
         )
 
-        # Cancel TP/SL orders on close
-        for oid in [self.tp_order_id, self.sl_order_id]:
-            if oid:
-                try:
-                    self.client.cancel_order(symbol=self.symbol, orderId=oid)
-                except:
-                    pass
+        self.active_trade = None
         self.tp_order_id = None
         self.sl_order_id = None
-        self.active_trade = None
+
+    # =========================================
+    # OPEN TRADE
+    # =========================================
+    def open_trade(self, signal, quantity):
+
+        if self.active_trade:
+            return
+
+        side = "BUY" if signal == 1 else "SELL"
+        direction = "LONG" if signal == 1 else "SHORT"
+
+        quantity = round(quantity, self.qty_precision)
+
+        order = self.client.new_order(
+            symbol=self.symbol,
+            side=side,
+            type="MARKET",
+            quantity=quantity
+        )
+
+        order_id = order["orderId"]
+        self.wait_for_fill(order_id)
+
+        price, qty, fee = self.get_execution_details(order_id)
+
+        self.active_trade = {
+            "direction": direction,
+            "entry_price": price,
+            "quantity": qty,
+            "entry_fee": fee
+        }
+
+        self.place_tp_sl_orders(direction, price)
+
+        self.log_trade(
+            direction,
+            f"{side}-OPEN",
+            price if side == "BUY" else "",
+            price if side == "SELL" else "",
+            round(fee, 6),
+            0,
+            order_id
+        )
 
     # =========================================
     # PROCESS SIGNAL
     # =========================================
     def process_signal(self, signal, quantity):
+
+        self.check_position_closed()
+
         if self.active_trade:
             current_direction = self.active_trade["direction"]
             if (current_direction == "LONG" and signal == -1) or \
                (current_direction == "SHORT" and signal == 1):
-                self.close_trade("Direction Change")
-                self.open_trade(signal, quantity)
+                print("Direction change detected")
         else:
             if signal in [1, -1]:
                 self.open_trade(signal, quantity)
