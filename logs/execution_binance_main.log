@@ -7774,3 +7774,475 @@ requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected(
 2026-02-16 15:32:02,647 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 10:30:00+00:00
 2026-02-16 15:32:05,955 | INFO | execution_binance_main | Waiting 175 seconds until next valid 5m time...
 2026-02-16 15:34:00,020 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 15:36:24,948 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 15:36:26,005 | INFO | execution_binance_main | Waiting 214 seconds until next valid 5m time...
+2026-02-16 15:40:00,017 | INFO | execution_binance_main | Current time 10:40:00 is valid for 5m execution.
+2026-02-16 15:41:42,934 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 15:41:43,468 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 15:41:43,468 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 15:42:08,243 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 15:42:08,305 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 15:42:08,340 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 10:40:00+00:00
+2026-02-16 15:42:08,761 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2015): Invalid API-key, IP, or permissions for action
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 180, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 88, in open_trade
+    order = self.client.futures_create_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7867, in futures_create_order
+    return self._request_futures_api("post", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action
+2026-02-16 15:42:13,786 | INFO | execution_binance_main | Waiting 167 seconds until next valid 5m time...
+2026-02-16 15:45:00,797 | INFO | execution_binance_main | Current time 10:45:00 is valid for 5m execution.
+2026-02-16 15:46:46,723 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 15:46:46,761 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 15:46:46,761 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 15:46:58,860 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 15:46:58,985 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 15:46:59,048 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 10:45:00+00:00
+2026-02-16 15:46:59,685 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2015): Invalid API-key, IP, or permissions for action
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 180, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 88, in open_trade
+    order = self.client.futures_create_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7867, in futures_create_order
+    return self._request_futures_api("post", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action
+2026-02-16 15:47:09,193 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 15:47:10,573 | INFO | execution_binance_main | Waiting 170 seconds until next valid 5m time...
+2026-02-16 15:50:00,579 | INFO | execution_binance_main | Current time 10:50:00 is valid for 5m execution.
+2026-02-16 15:51:44,022 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 15:51:44,212 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 15:51:44,212 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 15:51:55,827 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 15:51:55,912 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 15:51:55,937 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 10:50:00+00:00
+2026-02-16 15:51:57,844 | ERROR | execution_binance_main | Error in continuous execution loop: 'orderId'
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 180, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 95, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 82, in place_tp_sl
+    return tp["orderId"], sl["orderId"]
+KeyError: 'orderId'
+2026-02-16 15:52:02,863 | INFO | execution_binance_main | Waiting 178 seconds until next valid 5m time...
+2026-02-16 15:55:00,885 | INFO | execution_binance_main | Current time 10:55:00 is valid for 5m execution.
+2026-02-16 15:56:50,310 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 15:56:50,597 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 15:56:50,597 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 15:57:16,082 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 15:57:16,199 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 15:57:16,257 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 10:55:00+00:00
+2026-02-16 15:57:17,869 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-4130): An open stop or take profit order with GTE and closePosition in the direction is existing.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 180, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 95, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 73, in place_tp_sl
+    tp = self.client.futures_create_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7862, in futures_create_order
+    return self._request_futures_api("post", "algoOrder", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-4130): An open stop or take profit order with GTE and closePosition in the direction is existing.
+2026-02-16 15:57:22,903 | INFO | execution_binance_main | Waiting 158 seconds until next valid 5m time...
+2026-02-16 16:00:00,936 | INFO | execution_binance_main | Current time 11:00:00 is valid for 5m execution.
+2026-02-16 16:01:52,143 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:01:52,411 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:01:52,415 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:02:11,738 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:02:11,822 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:02:11,866 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:00:00+00:00
+2026-02-16 16:02:14,002 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-4130): An open stop or take profit order with GTE and closePosition in the direction is existing.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 180, in process_signal
+    else:
+  File "D:\trading\TradeX\execution\binance\executor.py", line 95, in open_trade
+    raise
+  File "D:\trading\TradeX\execution\binance\executor.py", line 73, in place_tp_sl
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7862, in futures_create_order
+    return self._request_futures_api("post", "algoOrder", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-4130): An open stop or take profit order with GTE and closePosition in the direction is existing.
+2026-02-16 16:02:19,032 | INFO | execution_binance_main | Waiting 161 seconds until next valid 5m time...
+2026-02-16 16:02:46,926 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 16:02:48,378 | INFO | execution_binance_main | Waiting 132 seconds until next valid 5m time...
+2026-02-16 16:05:00,396 | INFO | execution_binance_main | Current time 11:05:00 is valid for 5m execution.
+2026-02-16 16:06:42,276 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:06:42,438 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:06:42,438 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:06:51,359 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:06:51,433 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:06:51,499 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:05:00+00:00
+2026-02-16 16:06:53,111 | ERROR | execution_binance_main | Error in continuous execution loop: TP or SL order failed: TP={'algoId': 1000000014276552, 'clientAlgoId': 'x-Cb7ytekJ42be5d70c03c7b76a412c3', 'algoType': 'CONDITIONAL', 'orderType': 'TAKE_PROFIT_MARKET', 'symbol': 'BTCUSDT', 'side': 'BUY', 'positionSide': 'BOTH', 'timeInForce': 'GTE_GTC', 'quantity': '0.000', 'algoStatus': 'NEW', 'triggerPrice': '68732.40', 'price': '0.00', 'icebergQuantity': None, 'selfTradePreventionMode': 'EXPIRE_MAKER', 'workingType': 'MARK_PRICE', 'priceMatch': 'NONE', 'closePosition': True, 'priceProtect': False, 'reduceOnly': True, 'createTime': 1771240012761, 'updateTime': 1771240012761, 'triggerTime': 0, 'goodTillDate': 0}, SL={'algoId': 1000000014276554, 'clientAlgoId': 'x-Cb7ytekJ240d1ee5cbd744421fffc', 'algoType': 'CONDITIONAL', 'orderType': 'STOP_MARKET', 'symbol': 'BTCUSDT', 'side': 'BUY', 'positionSide': 'BOTH', 'timeInForce': 'GTE_GTC', 'quantity': '0.000', 'algoStatus': 'NEW', 'triggerPrice': '68870.00', 'price': '0.00', 'icebergQuantity': None, 'selfTradePreventionMode': 'EXPIRE_MAKER', 'workingType': 'MARK_PRICE', 'priceMatch': 'NONE', 'closePosition': True, 'priceProtect': False, 'reduceOnly': True, 'createTime': 1771240013061, 'updateTime': 1771240013078, 'triggerTime': 0, 'goodTillDate': 0}
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 193, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 108, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 89, in place_tp_sl
+    raise RuntimeError(f"TP or SL order failed: TP={tp}, SL={sl}")
+RuntimeError: TP or SL order failed: TP={'algoId': 1000000014276552, 'clientAlgoId': 'x-Cb7ytekJ42be5d70c03c7b76a412c3', 'algoType': 'CONDITIONAL', 'orderType': 'TAKE_PROFIT_MARKET', 'symbol': 'BTCUSDT', 'side': 'BUY', 'positionSide': 'BOTH', 'timeInForce': 'GTE_GTC', 'quantity': '0.000', 'algoStatus': 'NEW', 'triggerPrice': '68732.40', 'price': '0.00', 'icebergQuantity': None, 'selfTradePreventionMode': 'EXPIRE_MAKER', 'workingType': 'MARK_PRICE', 'priceMatch': 'NONE', 'closePosition': True, 'priceProtect': False, 'reduceOnly': True, 'createTime': 1771240012761, 'updateTime': 1771240012761, 'triggerTime': 0, 'goodTillDate': 0}, SL={'algoId': 1000000014276554, 'clientAlgoId': 'x-Cb7ytekJ240d1ee5cbd744421fffc', 'algoType': 'CONDITIONAL', 'orderType': 'STOP_MARKET', 'symbol': 'BTCUSDT', 'side': 'BUY', 'positionSide': 'BOTH', 'timeInForce': 'GTE_GTC', 'quantity': '0.000', 'algoStatus': 'NEW', 'triggerPrice': '68870.00', 'price': '0.00', 'icebergQuantity': None, 'selfTradePreventionMode': 'EXPIRE_MAKER', 'workingType': 'MARK_PRICE', 'priceMatch': 'NONE', 'closePosition': True, 'priceProtect': False, 'reduceOnly': True, 'createTime': 1771240013061, 'updateTime': 1771240013078, 'triggerTime': 0, 'goodTillDate': 0}
+2026-02-16 16:06:58,134 | INFO | execution_binance_main | Waiting 182 seconds until next valid 5m time...
+2026-02-16 16:16:33,068 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 16:19:54,928 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 16:19:56,327 | INFO | execution_binance_main | Waiting 4 seconds until next valid 5m time...
+2026-02-16 16:20:00,329 | INFO | execution_binance_main | Current time 11:20:00 is valid for 5m execution.
+2026-02-16 16:21:46,188 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:21:46,384 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:21:46,386 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:22:06,713 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:22:06,832 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:22:06,879 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:20:00+00:00
+2026-02-16 16:22:08,016 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2021): Order would immediately trigger.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 196, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 133, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction, qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 95, in place_tp_sl
+    tp = self.client.futures_create_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7862, in futures_create_order
+    return self._request_futures_api("post", "algoOrder", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2021): Order would immediately trigger.
+2026-02-16 16:22:13,047 | INFO | execution_binance_main | Waiting 167 seconds until next valid 5m time...
+2026-02-16 16:25:00,063 | INFO | execution_binance_main | Current time 11:25:00 is valid for 5m execution.
+2026-02-16 16:26:44,914 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:26:45,110 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:26:45,113 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:27:02,335 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:27:02,484 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:27:02,534 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:25:00+00:00
+2026-02-16 16:27:04,286 | ERROR | execution_binance_main | Error in continuous execution loop: 'orderId'
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 196, in process_signal
+    type="MARKET",
+  File "D:\trading\TradeX\execution\binance\executor.py", line 133, in open_trade
+    workingType="MARK_PRICE"
+  File "D:\trading\TradeX\execution\binance\executor.py", line 115, in place_tp_sl
+    try:
+KeyError: 'orderId'
+2026-02-16 16:27:09,304 | INFO | execution_binance_main | Waiting 171 seconds until next valid 5m time...
+2026-02-16 16:28:09,569 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 16:28:11,370 | INFO | execution_binance_main | Waiting 109 seconds until next valid 5m time...
+2026-02-16 16:30:00,381 | INFO | execution_binance_main | Current time 11:30:00 is valid for 5m execution.
+2026-02-16 16:31:38,776 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:31:39,034 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:31:39,034 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:31:48,705 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:31:48,746 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:31:48,777 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:30:00+00:00
+2026-02-16 16:31:49,961 | ERROR | execution_binance_main | Error in continuous execution loop: TP/SL placement failed: APIError(code=-1106): Parameter 'reduceonly' sent when not required.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\executor.py", line 116, in place_tp_sl
+    tp = self.client.futures_create_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7862, in futures_create_order
+    return self._request_futures_api("post", "algoOrder", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-1106): Parameter 'reduceonly' sent when not required.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 221, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 158, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction, qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 139, in place_tp_sl
+    raise RuntimeError(f"TP/SL placement failed: {e}")
+RuntimeError: TP/SL placement failed: APIError(code=-1106): Parameter 'reduceonly' sent when not required.
+2026-02-16 16:31:54,987 | INFO | execution_binance_main | Waiting 186 seconds until next valid 5m time...
+2026-02-16 16:34:09,466 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 16:34:10,830 | INFO | execution_binance_main | Waiting 50 seconds until next valid 5m time...
+2026-02-16 16:35:00,837 | INFO | execution_binance_main | Current time 11:35:00 is valid for 5m execution.
+2026-02-16 16:36:45,564 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:36:46,789 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:36:46,843 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:37:04,243 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:37:04,322 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:37:04,355 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:35:00+00:00
+2026-02-16 16:37:07,122 | INFO | execution_binance_main | Waiting 173 seconds until next valid 5m time...
+2026-02-16 16:40:00,145 | INFO | execution_binance_main | Current time 11:40:00 is valid for 5m execution.
+2026-02-16 16:41:42,657 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:41:42,880 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:41:42,881 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:42:04,488 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:42:04,590 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:42:04,634 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 0 at 2026-02-16 11:40:00+00:00
+2026-02-16 16:42:05,637 | INFO | execution_binance_main | Waiting 175 seconds until next valid 5m time...
+2026-02-16 16:45:00,648 | INFO | execution_binance_main | Current time 11:45:00 is valid for 5m execution.
+2026-02-16 16:46:41,871 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:46:42,080 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:46:42,089 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:47:06,586 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:47:06,780 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:47:06,847 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 11:45:00+00:00
+2026-02-16 16:47:12,118 | INFO | execution_binance_main | Waiting 168 seconds until next valid 5m time...
+2026-02-16 16:50:00,141 | INFO | execution_binance_main | Current time 11:50:00 is valid for 5m execution.
+2026-02-16 16:51:43,631 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:51:43,873 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:51:43,873 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:52:12,740 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:52:12,975 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:52:13,036 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-16 11:50:00+00:00
+2026-02-16 16:52:17,140 | INFO | execution_binance_main | Waiting 163 seconds until next valid 5m time...
+2026-02-16 16:55:00,144 | INFO | execution_binance_main | Current time 11:55:00 is valid for 5m execution.
+2026-02-16 16:56:40,885 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 16:56:40,934 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 16:56:40,935 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 16:56:54,885 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 16:56:54,924 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 16:56:54,966 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 11:55:00+00:00
+2026-02-16 16:56:55,973 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2022): ReduceOnly Order is rejected.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    qty = format_quantity(0.01)  # Adjust quantity to allowed precision
+  File "D:\trading\TradeX\execution\binance\executor.py", line 225, in process_signal
+    if signal != 0:
+  File "D:\trading\TradeX\execution\binance\executor.py", line 191, in close_active_trade_market
+    self.client.futures_cancel_order(symbol=self.symbol, orderId=oid)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7867, in futures_create_order
+    return self._request_futures_api("post", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2022): ReduceOnly Order is rejected.
+2026-02-16 16:57:01,001 | INFO | execution_binance_main | Waiting 179 seconds until next valid 5m time...
+2026-02-16 17:00:00,006 | INFO | execution_binance_main | Current time 12:00:00 is valid for 5m execution.
+2026-02-16 17:01:41,184 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:01:41,225 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:01:41,232 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:01:56,850 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:01:56,954 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:01:57,003 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:00:00+00:00
+2026-02-16 17:01:58,147 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2022): ReduceOnly Order is rejected.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 164, in <module>
+    qty = format_quantity(0.01)  # Adjust quantity to allowed precision
+  File "D:\trading\TradeX\execution\binance\executor.py", line 225, in process_signal
+    if signal != 0:
+  File "D:\trading\TradeX\execution\binance\executor.py", line 191, in close_active_trade_market
+    self.client.futures_cancel_order(symbol=self.symbol, orderId=oid)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7867, in futures_create_order
+    return self._request_futures_api("post", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2022): ReduceOnly Order is rejected.
+2026-02-16 17:02:03,164 | INFO | execution_binance_main | Waiting 177 seconds until next valid 5m time...
+2026-02-16 17:05:01,230 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:05:02,822 | INFO | execution_binance_main | Current time 12:05:02 is valid for 5m execution.
+2026-02-16 17:06:47,257 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:06:47,629 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:06:47,633 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:07:03,985 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:07:04,113 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:07:04,242 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:05:00+00:00
+2026-02-16 17:07:10,080 | INFO | execution_binance_main | Waiting 170 seconds until next valid 5m time...
+2026-02-16 17:10:00,088 | INFO | execution_binance_main | Current time 12:10:00 is valid for 5m execution.
+2026-02-16 17:11:42,599 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:11:42,629 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:11:42,630 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:11:52,862 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:11:52,887 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:11:52,903 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:10:00+00:00
+2026-02-16 17:11:53,950 | INFO | execution_binance_main | Waiting 187 seconds until next valid 5m time...
+2026-02-16 17:15:00,180 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:15:01,949 | INFO | execution_binance_main | Current time 12:15:01 is valid for 5m execution.
+2026-02-16 17:16:43,740 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:16:44,046 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:16:44,049 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:17:02,807 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:17:02,938 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:17:02,981 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:15:00+00:00
+2026-02-16 17:17:10,118 | INFO | execution_binance_main | Waiting 170 seconds until next valid 5m time...
+2026-02-16 17:20:00,126 | INFO | execution_binance_main | Current time 12:20:00 is valid for 5m execution.
+2026-02-16 17:21:47,960 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:21:48,174 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:21:48,176 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:22:11,288 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:22:11,484 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:22:11,596 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:20:00+00:00
+2026-02-16 17:22:13,542 | INFO | execution_binance_main | Waiting 167 seconds until next valid 5m time...
+2026-02-16 17:25:00,572 | INFO | execution_binance_main | Current time 12:25:00 is valid for 5m execution.
+2026-02-16 17:26:45,043 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:26:45,102 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:26:45,102 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:27:03,300 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:27:03,352 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:27:03,377 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:25:00+00:00
+2026-02-16 17:27:04,459 | INFO | execution_binance_main | Waiting 176 seconds until next valid 5m time...
+2026-02-16 17:29:14,657 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:29:16,073 | INFO | execution_binance_main | Waiting 44 seconds until next valid 5m time...
+2026-02-16 17:30:00,085 | INFO | execution_binance_main | Current time 12:30:00 is valid for 5m execution.
+2026-02-16 17:31:39,584 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:31:39,785 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:31:39,785 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:31:58,890 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:31:59,007 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:31:59,039 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:30:00+00:00
+2026-02-16 17:32:01,986 | INFO | execution_binance_main | Waiting 179 seconds until next valid 5m time...
+2026-02-16 17:33:45,758 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:35:01,080 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:35:02,479 | INFO | execution_binance_main | Current time 12:35:02 is valid for 5m execution.
+2026-02-16 17:36:41,161 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:36:41,331 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:36:41,332 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:36:56,827 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:36:56,971 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:36:57,041 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:35:00+00:00
+2026-02-16 17:36:59,124 | ERROR | execution_binance_main | Error in continuous execution loop: Must pass 2-d input. shape=(1, 1, 9)
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 203, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 141, in open_trade
+    self.log_trade(direction, f"{side}-OPEN", entry_price if direction == "LONG" else None,
+  File "D:\trading\TradeX\execution\binance\executor.py", line 231, in log_trade
+    new_df = pd.DataFrame([new_row], columns=self.trade_log.columns)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 871, in __init__
+    mgr = ndarray_to_mgr(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 319, in ndarray_to_mgr
+    values = _prep_ndarraylike(values, copy=copy_on_sanitize)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 582, in _prep_ndarraylike
+    return _ensure_2d(values)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 592, in _ensure_2d
+    raise ValueError(f"Must pass 2-d input. shape={values.shape}")
+ValueError: Must pass 2-d input. shape=(1, 1, 9)
+2026-02-16 17:37:04,171 | INFO | execution_binance_main | Waiting 176 seconds until next valid 5m time...
+2026-02-16 17:39:33,038 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:39:34,494 | INFO | execution_binance_main | Waiting 26 seconds until next valid 5m time...
+2026-02-16 17:40:00,496 | INFO | execution_binance_main | Current time 12:40:00 is valid for 5m execution.
+2026-02-16 17:41:40,513 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:41:40,855 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:41:40,855 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:42:02,684 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:42:02,783 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:42:02,823 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:40:00+00:00
+2026-02-16 17:42:04,767 | ERROR | execution_binance_main | Error in continuous execution loop: Must pass 2-d input. shape=(1, 1, 9)
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 203, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 141, in open_trade
+    self.log_trade(direction, f"{side}-OPEN", entry_price if direction == "LONG" else None,
+  File "D:\trading\TradeX\execution\binance\executor.py", line 231, in log_trade
+    new_df = pd.DataFrame([new_row])
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 871, in __init__
+    mgr = ndarray_to_mgr(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 319, in ndarray_to_mgr
+    values = _prep_ndarraylike(values, copy=copy_on_sanitize)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 582, in _prep_ndarraylike
+    return _ensure_2d(values)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 592, in _ensure_2d
+    raise ValueError(f"Must pass 2-d input. shape={values.shape}")
+ValueError: Must pass 2-d input. shape=(1, 1, 9)
+2026-02-16 17:42:09,800 | INFO | execution_binance_main | Waiting 171 seconds until next valid 5m time...
+2026-02-16 17:45:00,813 | INFO | execution_binance_main | Current time 12:45:00 is valid for 5m execution.
+2026-02-16 17:46:46,720 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:46:46,792 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:46:46,793 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:47:04,783 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:47:04,857 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:47:04,898 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:45:00+00:00
+2026-02-16 17:47:07,247 | ERROR | execution_binance_main | Error in continuous execution loop: Must pass 2-d input. shape=(1, 1, 9)
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 203, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 141, in open_trade
+    self.log_trade(direction, f"{side}-OPEN", entry_price if direction == "LONG" else None,
+  File "D:\trading\TradeX\execution\binance\executor.py", line 231, in log_trade
+    new_df = pd.DataFrame([new_row])
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 871, in __init__
+    mgr = ndarray_to_mgr(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 319, in ndarray_to_mgr
+    values = _prep_ndarraylike(values, copy=copy_on_sanitize)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 582, in _prep_ndarraylike
+    return _ensure_2d(values)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\internals\construction.py", line 592, in _ensure_2d
+    raise ValueError(f"Must pass 2-d input. shape={values.shape}")
+ValueError: Must pass 2-d input. shape=(1, 1, 9)
+2026-02-16 17:47:12,253 | INFO | execution_binance_main | Waiting 168 seconds until next valid 5m time...
+2026-02-16 17:49:12,929 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-16 17:49:14,425 | INFO | execution_binance_main | Waiting 46 seconds until next valid 5m time...
+2026-02-16 17:50:00,440 | INFO | execution_binance_main | Current time 12:50:00 is valid for 5m execution.
+2026-02-16 17:51:43,317 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-16 17:51:43,488 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-16 17:51:43,492 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-16 17:52:00,358 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-16 17:52:00,444 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-16 17:52:00,478 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-16 12:50:00+00:00
+2026-02-16 17:52:02,742 | ERROR | execution_binance_main | Error in continuous execution loop: FuturesTrader.log_trade() takes 2 positional arguments but 8 were given
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 203, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 141, in open_trade
+    self.log_trade(direction, f"{side}-OPEN", entry_price if direction == "LONG" else None,
+TypeError: FuturesTrader.log_trade() takes 2 positional arguments but 8 were given
+2026-02-16 17:52:07,748 | INFO | execution_binance_main | Waiting 173 seconds until next valid 5m time...
+2026-02-16 17:55:00,798 | INFO | execution_binance_main | Current time 12:55:00 is valid for 5m execution.

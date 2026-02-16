@@ -18,6 +18,7 @@ import subprocess
 from TradeX.utils.common.config_loader import read_config
 from TradeX.execution.binance.executor import FuturesTrader
 from dotenv import load_dotenv
+from TradeX.utils.db.utils import save_df_to_db
 
 logger = get_logger("execution_binance_main")
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
@@ -162,7 +163,15 @@ while True:
                 if signal in [1, -1]:
                     qty = format_quantity(0.01)  # Adjust quantity to allowed precision
                     trader.process_signal(signal, quantity=qty)
-
+        trade_df = trader.get_trade_log_df()
+        if not trade_df.empty:
+            save_df_to_db(
+            df=trade_df,
+            table_name="btc_trades",
+            schema="execution",
+            time_column="datetime",
+            is_timeseries=True
+        )
         # Wait 1 second before next iteration to avoid busy loop
         time.sleep(1)
 
