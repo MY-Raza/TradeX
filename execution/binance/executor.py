@@ -79,7 +79,7 @@ class FuturesTrader:
     def get_mark_price(self):
         return float(self.client.futures_mark_price(symbol=self.symbol)["markPrice"])
 
-    def place_tp_sl(self, entry_price, direction, qty, tp_pct=0.1, sl_pct=0.1):
+    def place_tp_sl(self, entry_price, direction, qty, tp_pct=3, sl_pct=1):
         """Place TP/SL with a small buffer to avoid instant trigger."""
         BUFFER = 0.001  # 0.1% safety
 
@@ -111,6 +111,54 @@ class FuturesTrader:
         )
 
         return tp.get("algoId"), sl.get("algoId")
+    
+    def check_auto_closed_trade(self):
+        """
+    Check if the current active_trade has been closed automatically
+    by TP or SL. If so, log it and reset active_trade.
+    """
+        if not self._validate_trade():
+            return  # No active trade or already closed
+
+        positions = self.client.futures_position_information(symbol=self.symbol)
+        pos = next((p for p in positions if p["symbol"] == self.symbol), None)
+        if pos and float(pos["positionAmt"]) == 0:
+        # Position fully closed automatically
+            entry = self.active_trade["entry_price"]
+            total_fee = self.active_trade["entry_fee"]  # entry fee; exit fee already paid via TP/SL
+        # Calculate PnL from last trades
+        # Get last exit trade info
+            trades = self.client.futures_account_trades(symbol=self.symbol)
+            exit_trades = [t for t in trades if t["orderId"] in [self.active_trade["tp_id"], self.active_trade["sl_id"]]]
+            exit_cost = exit_qty = exit_fee = 0.0
+            for t in exit_trades:
+                q = float(t["qty"])
+                p = float(t["price"])
+                f = float(t["commission"])
+                exit_qty += q
+                exit_cost += q * p
+                exit_fee += f
+            if exit_qty > 0:
+                exit_price = exit_cost / exit_qty
+                total_fee += exit_fee
+                pnl = (exit_price - entry) * exit_qty - total_fee if self.active_trade["direction"] == "LONG" else (entry - exit_price) * exit_qty - total_fee
+                buy, sell = (entry, exit_price) if self.active_trade["direction"] == "LONG" else (exit_price, entry)
+            
+                self.pnl_sum += pnl
+            # Log the auto-closed trade
+                self.log_trade({
+                "direction": self.active_trade["direction"],
+                "action": "TP-HIT" if exit_price > entry else "SL-HIT",
+                "buy": buy,
+                "sell": sell,
+                "fee": total_fee,
+                "pnl": pnl,
+                "order_id": exit_trades[-1]["orderId"] if exit_trades else None
+            })
+
+        # Reset active trade
+            self.active_trade = None
+
 
     # -------------------- TRADE FLOW --------------------
     def open_trade(self, signal, quantity):
@@ -216,6 +264,7 @@ class FuturesTrader:
         - Reverse direction if opposite signal
         - Re-open if previous trade auto-closed
         """
+        self.check_auto_closed_trade()
         if not self._validate_trade():
             if signal != 0:
                 self.open_trade(signal, quantity)
