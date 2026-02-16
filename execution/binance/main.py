@@ -74,7 +74,10 @@ API_SECRET = os.getenv("BINANCE_DEMO_SECRET_KEY")
 trader = FuturesTrader(API_KEY, API_SECRET, "BTCUSDT")
 
 # Get symbol info once to handle precision
-symbol_info = next(s for s in trader.client.exchange_info()["symbols"] if s["symbol"] == "BTCUSDT")
+symbol_info = next(
+    s for s in trader.client.futures_exchange_info()["symbols"]
+    if s["symbol"] == "BTCUSDT"
+)
 step_size = float(symbol_info["filters"][2]["stepSize"])  # lot size step
 def format_quantity(qty):
     return int(qty / step_size) * step_size  # round down to allowed precision
