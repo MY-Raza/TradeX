@@ -1,6 +1,5 @@
 import pandas as pd
-from TradeX.indicators import call_indicator
-from TradeX.indicators import ALL_INDICATORS
+from TradeX.indicators.talib.indicators import ALL_INDICATORS,call_indicator
 
 
 def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
