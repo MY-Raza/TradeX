@@ -80,7 +80,7 @@ class FuturesTrader:
     # TP / SL
     # ---------------------------------------------------------
 
-    def place_tp_sl(self, entry_price, direction, qty, tp_pct=0.1, sl_pct=0.1):
+    def place_tp_sl(self, entry_price, direction, qty, tp_pct=3, sl_pct=1):
 
         if direction == "LONG":
             tp_price = entry_price * (1 + tp_pct / 100)
