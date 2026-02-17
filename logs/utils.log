@@ -25682,3 +25682,8 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-17 17:01:40,660 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
 2026-02-17 17:01:40,713 | INFO | utils | Inserted 5 rows into data_binance.link_1m
 2026-02-17 17:01:40,980 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-02-17 17:01:53,514 | INFO | utils | Table Found
+2026-02-17 17:01:58,933 | INFO | utils | Schema 'execution' ready
+2026-02-17 17:01:58,967 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-02-17 17:01:58,968 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-02-17 17:01:58,994 | INFO | utils | Inserted 2 rows into execution.btc_trades
