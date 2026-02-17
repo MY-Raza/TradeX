@@ -1,17 +1,113 @@
-from TradeX.utils.db.utils import fetch_ohlcv_df
-from TradeX.ai.ml.models.feature_engineering import generate_features
-from TradeX.ai.ml.models.target import create_target
-from TradeX.ai.ml.models.dataset import prepare_ml_data
-from TradeX.ai.ml.models.model import train_model, save_model
+import pandas as pd
 
+from TradeX.utils.db.utils import fetch_ohlcv_df
+from TradeX.indicators.talib.indicators import call_indicator
+from TradeX.ai.ml.models.model import train_model, save_model
+from TradeX.utils.common.config_loader import get_logger
+
+
+# ============================================================
+# FEATURE ENGINEERING
+# ============================================================
+
+def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
+    """
+    Generate TA-Lib indicators and append them to the dataframe.
+    """
+    df = df.copy()
+
+    for ind in indicators:
+        try:
+            if ind in ["RSI", "EMA", "SMA", "ATR", "ADX", "CCI", "MOM"]:
+                values, window = call_indicator(
+                    ind,
+                    df["close"].values,
+                    timeperiod=14
+                )
+                df[f"{ind}_{window}"] = values
+
+            elif ind == "MACD":
+                macd, signal, hist = call_indicator(
+                    "MACD",
+                    df["close"].values,
+                    fastperiod=12,
+                    slowperiod=26,
+                    signalperiod=9
+                )[0]
+
+                df["MACD"] = macd
+                df["MACD_SIGNAL"] = signal
+                df["MACD_HIST"] = hist
+
+            elif ind == "BBANDS":
+                upper, middle, lower = call_indicator(
+                    "BBANDS",
+                    df["close"].values,
+                    timeperiod=20
+                )[0]
+
+                df["BB_UPPER"] = upper
+                df["BB_MIDDLE"] = middle
+                df["BB_LOWER"] = lower
+
+        except Exception as e:
+            print(f"Indicator {ind} failed: {e}")
+
+    return df
+
+
+# ============================================================
+# TARGET CREATION
+# ============================================================
+
+def create_target(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Create binary target:
+    1 if next candle close > current close
+    0 otherwise
+    """
+    df = df.copy()
+
+    df["future_close"] = df["close"].shift(-1)
+    df["target"] = (df["future_close"] > df["close"]).astype(int)
+
+    df.dropna(inplace=True)
+
+    return df
+
+
+# ============================================================
+# DATASET PREPARATION
+# ============================================================
+
+def prepare_ml_data(df: pd.DataFrame):
+
+    df = df.copy()
+
+    drop_cols = ["datetime", "future_close"]
+    df = df.drop(columns=[c for c in drop_cols if c in df.columns])
+
+    df = df.dropna()
+
+    X = df.drop("target", axis=1)
+    y = df["target"]
+
+    return X, y
+
+
+# ============================================================
+# MAIN PIPELINE
+# ============================================================
 
 def main():
 
-    print("Fetching data from database...")
+    logger = get_logger("model_main")
+
+    logger.info("Fetching data from database...")
 
     df = fetch_ohlcv_df(
-        table_name="btc_1h",       # change if needed
-        schema="market_data",      # change if needed
+        table_name="btc_1m",
+        schema="data_binance",
         limit=5000
     )
 
@@ -19,20 +115,25 @@ def main():
         print("No data found.")
         return
 
-    print("Generating indicators...")
-    df = generate_features(df)
+    logger.info("Generating indicators...")
+    indicators = ["RSI", "EMA", "MACD", "BBANDS", "ATR"]
+    df = generate_features(df, indicators)
 
-    print("Creating target...")
+    logger.info("Creating target...")
     df = create_target(df)
 
-    print("Preparing dataset...")
+    logger.info("Preparing dataset...")
     X, y = prepare_ml_data(df)
 
-    print("Training model...")
+    logger.info("Training model...")
     model = train_model(X, y)
 
     save_model(model)
 
+    logger.info("Model training complete.")
+
+
+# ============================================================
 
 if __name__ == "__main__":
     main()

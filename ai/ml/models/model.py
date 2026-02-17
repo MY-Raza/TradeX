@@ -32,13 +32,3 @@ def train_model(X, y):
     print(classification_report(y_test, predictions))
 
     return model
-
-
-def save_model(model, path="models/btc_1h_model.pkl"):
-    os.makedirs("models", exist_ok=True)
-    joblib.dump(model, path)
-    print(f"Model saved at {path}")
-
-
-def load_model(path="models/btc_1h_model.pkl"):
-    return joblib.load(path)
