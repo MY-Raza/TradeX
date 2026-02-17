@@ -9228,3 +9228,19 @@ binance.exceptions.BinanceAPIException: APIError(code=-4509): Time in Force (TIF
 2026-02-17 16:46:49,224 | INFO | execution_binance_main | btc | Resampled to 90 rows.
 2026-02-17 16:46:49,242 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-17 11:45:00+00:00
 2026-02-17 16:46:56,038 | INFO | execution_binance_main | Waiting 184 seconds until next valid 5m time...
+2026-02-17 16:50:00,039 | INFO | execution_binance_main | Current time 11:50:00 is valid for 5m execution.
+2026-02-17 16:51:37,682 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-17 16:51:37,718 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-17 16:51:37,718 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-17 16:51:52,198 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-17 16:51:52,234 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-17 16:51:52,253 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → -1 at 2026-02-17 11:50:00+00:00
+2026-02-17 16:51:54,391 | INFO | execution_binance_main | Waiting 186 seconds until next valid 5m time...
+2026-02-17 16:55:00,404 | INFO | execution_binance_main | Current time 11:55:00 is valid for 5m execution.
+2026-02-17 16:56:42,881 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-17 16:56:42,885 | INFO | execution_binance_main | btc | sig_5m_btc_5 → Highest window: 30
+2026-02-17 16:56:42,885 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-17 16:56:54,059 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-17 16:56:54,076 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-17 16:56:54,084 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-17 11:55:00+00:00
+2026-02-17 16:57:00,822 | INFO | execution_binance_main | Waiting 180 seconds until next valid 5m time...
