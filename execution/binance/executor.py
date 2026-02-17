@@ -4,6 +4,9 @@ from time import sleep
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 import pandas as pd
+from TradeX.utils.common.config_loader import get_logger
+
+logger = get_logger("executor")
 
 
 class FuturesTrader:
@@ -140,7 +143,6 @@ class FuturesTrader:
 
         trades = self.client.futures_account_trades(symbol=self.symbol)
 
-    # Get last trades (most recent first)
         trades = sorted(trades, key=lambda x: x["time"], reverse=True)
 
         exit_qty = 0.0
@@ -153,11 +155,8 @@ class FuturesTrader:
             side = t["side"]  # BUY or SELL
             qty = float(t["qty"])
 
-        # LONG closes with SELL
             if direction == "LONG" and side != "SELL":
                 continue
-
-        # SHORT closes with BUY
             if direction == "SHORT" and side != "BUY":
                 continue
 
@@ -173,7 +172,7 @@ class FuturesTrader:
                 break
 
         if exit_qty == 0:
-            print("Warning: Position closed but no exit trades found")
+            logger.info("Warning: Position closed but no exit trades found")
             self.active_trade = None
             return
 
@@ -189,37 +188,25 @@ class FuturesTrader:
 
         self.pnl_sum += pnl
 
-    # Detect TP vs SL
-        if direction == "LONG":
-            if exit_price > entry_price:
-                hit_type = "TP-HIT"
-            else:
-                hit_type = "SL-HIT"
-        else:  # SHORT
-            if exit_price < entry_price:
-                hit_type = "TP-HIT"
-            else:
-                hit_type = "SL-HIT"
+        hit_type = "TP-HIT" if (direction == "LONG" and exit_price > entry_price) or (direction == "SHORT" and exit_price < entry_price) else "SL-HIT"
 
         self.log_trade({
-        "direction": direction,
-        "action": hit_type,
-        "buy": buy,
-        "sell": sell,
-        "fee": total_fee,
-        "pnl": pnl,
-        "order_id": exit_order_id
+            "direction": direction,
+            "action": hit_type,
+            "buy": buy,
+            "sell": sell,
+            "fee": total_fee,
+            "pnl": pnl,
+            "order_id": exit_order_id
         })
 
         self.active_trade = None
-
 
     # ---------------------------------------------------------
     # TRADE FLOW
     # ---------------------------------------------------------
 
     def open_trade(self, signal, quantity):
-
         side = "BUY" if signal == 1 else "SELL"
         direction = "LONG" if signal == 1 else "SHORT"
 
@@ -259,25 +246,19 @@ class FuturesTrader:
             "order_id": order_id
         })
 
-    def close_active_trade_market(self, reason="DIRECTION CHANGE"):
+    def close_active_trade_market(self, reason="MARKET CLOSE"):
 
         if not self._validate_trade():
             self.active_trade = None
             return
 
-        # Cancel TP/SL safely (handles normal + algo)
+        # Cancel TP/SL safely
         for oid in [self.active_trade["tp_id"], self.active_trade["sl_id"]]:
             try:
-                self.client.futures_cancel_order(
-                    symbol=self.symbol,
-                    orderId=oid
-                )
+                self.client.futures_cancel_order(symbol=self.symbol, orderId=oid)
             except Exception:
                 try:
-                    self.client.futures_cancel_algo_order(
-                        symbol=self.symbol,
-                        algoId=oid
-                    )
+                    self.client.futures_cancel_algo_order(symbol=self.symbol, algoId=oid)
                 except Exception:
                     pass
 
@@ -312,12 +293,8 @@ class FuturesTrader:
         entry = self.active_trade["entry_price"]
         total_fee = self.active_trade["entry_fee"] + exit_fee
 
-        if direction == "LONG":
-            pnl = (exit_price - entry) * qty_filled - total_fee
-            buy, sell = entry, exit_price
-        else:
-            pnl = (entry - exit_price) * qty_filled - total_fee
-            buy, sell = exit_price, entry
+        pnl = (exit_price - entry) * qty_filled - total_fee if direction == "LONG" else (entry - exit_price) * qty_filled - total_fee
+        buy, sell = (entry, exit_price) if direction == "LONG" else (exit_price, entry)
 
         self.pnl_sum += pnl
 
@@ -338,48 +315,80 @@ class FuturesTrader:
     # ---------------------------------------------------------
 
     def process_signal(self, signal, quantity):
+        """
+        signal:
+        1  = LONG
+        -1 = SHORT
+        0  = no action
+        """
 
+    # First check if trade was auto-closed (TP/SL hit)
         self.check_auto_closed_trade()
 
+    # -------------------------------------------------
+    # CASE 1: No active trade
+    # -------------------------------------------------
         if not self._validate_trade():
-            if signal != 0:
+            if signal in [1, -1]:
                 self.open_trade(signal, quantity)
             return
 
+    # There is an active trade
         current_dir = self.active_trade["direction"]
 
-        if (signal == 1 and current_dir == "SHORT") or \
-           (signal == -1 and current_dir == "LONG"):
+    # -------------------------------------------------
+    # CASE 2: Same direction → IGNORE
+    # -------------------------------------------------
+        if (signal == 1 and current_dir == "LONG") or \
+            (signal == -1 and current_dir == "SHORT"):
 
-            self.close_active_trade_market("DIRECTION CHANGE")
+            logger.info("Signal same as current position. Ignoring.")
+            return
+
+    # -------------------------------------------------
+    # CASE 3: Opposite direction → Reverse
+    # -------------------------------------------------
+        if (signal == 1 and current_dir == "SHORT") or \
+            (signal == -1 and current_dir == "LONG"):
+
+            logger.info("Direction change detected. Reversing position.")
+
+            self.close_active_trade_market(reason="DIRECTION CHANGE")
             self.open_trade(signal, quantity)
+            return
+
+    # -------------------------------------------------
+    # CASE 4: signal = 0 → do nothing
+    # -------------------------------------------------
+        logger.info("Neutral signal. No action.")
+
+
+        # Signal matches current trade, do nothing
 
     # ---------------------------------------------------------
     # LOGGING
     # ---------------------------------------------------------
 
     def log_trade(self, trade):
-
         buy_price = trade.get("buy")
         sell_price = trade.get("sell")
 
         row = {
-        "datetime": datetime.now(timezone.utc),
-        "direction": trade.get("direction"),
-        "action": trade.get("action"),
-        "buy_price": round(buy_price, 6) if buy_price is not None else 0.0,
-        "sell_price": round(sell_price, 6) if sell_price is not None else 0.0,
-        "fee_total": round(trade.get("fee", 0), 6),
-        "pnl": round(trade.get("pnl", 0), 6),
-        "pnl_sum": round(self.pnl_sum, 6),
-        "order_id": trade.get("order_id")
+            "datetime": datetime.now(timezone.utc),
+            "direction": trade.get("direction"),
+            "action": trade.get("action"),
+            "buy_price": round(buy_price, 6) if buy_price is not None else 0.0,
+            "sell_price": round(sell_price, 6) if sell_price is not None else 0.0,
+            "fee_total": round(trade.get("fee", 0), 6),
+            "pnl": round(trade.get("pnl", 0), 6),
+            "pnl_sum": round(self.pnl_sum, 6),
+            "order_id": trade.get("order_id")
         }
 
         self.trade_log = pd.concat(
             [self.trade_log, pd.DataFrame([row])],
             ignore_index=True
-        )  
-
+        )
 
     def get_trade_log_df(self):
         return self.trade_log.copy()

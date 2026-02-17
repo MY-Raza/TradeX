@@ -1045,7 +1045,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:54:29,308 | INFO | kraken_main | Fetching data for PF_ETHUSD from 2026-01-16 to now
@@ -1055,7 +1055,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:54:39,228 | INFO | kraken_main | Fetching data for PF_BNBUSD from 2026-01-16 to now
@@ -1065,7 +1065,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:54:46,060 | INFO | kraken_main | Fetching data for PF_ADAUSD from 2026-01-16 to now
@@ -1075,7 +1075,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:54:53,328 | INFO | kraken_main | Fetching data for PF_XRPUSD from 2026-01-16 to now
@@ -1085,7 +1085,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:54:58,670 | INFO | kraken_main | Fetching data for PF_DOGEUSD from 2026-01-16 to now
@@ -1095,7 +1095,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:55:07,000 | INFO | kraken_main | Fetching data for PF_SOLUSD from 2026-01-16 to now
@@ -1105,7 +1105,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:55:13,255 | INFO | kraken_main | Fetching data for PF_DOTUSD from 2026-01-16 to now
@@ -1115,7 +1115,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:55:21,300 | INFO | kraken_main | Fetching data for PF_LINKUSD from 2026-01-16 to now
@@ -1125,7 +1125,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:55:28,697 | INFO | kraken_main | Fetching data for PF_LTCUSD from 2026-01-16 to now
@@ -1135,7 +1135,7 @@ Traceback (most recent call last):
     df = fetcher.fetch(start_date=start_date, end_date=end_date)
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\Users\Yasir Raza Attari\Desktop\trading\TradeX\data\kraken\kraken_fetcher.py", line 98, in fetch
-    print(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
+    logger.info(f"Start: {datetime.utcfromtimestamp(df['timestamp'].min())}")
                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ValueError: Invalid value NaN (not a number)
 2026-01-22 11:56:45,037 | INFO | kraken_main | Fetching data for PF_XBTUSD from 2026-01-16 to now
