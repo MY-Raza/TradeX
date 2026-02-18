@@ -12,3 +12,202 @@
 2026-02-17 17:32:17,878 | INFO | model_main | Preparing dataset...
 2026-02-17 17:32:17,882 | INFO | model_main | Training model...
 2026-02-17 17:32:19,582 | INFO | model_main | Model training complete.
+2026-02-18 10:39:09,133 | INFO | model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h | limit=5000
+2026-02-18 10:39:09,134 | INFO | model_main | Fetching data for btc from database...
+2026-02-18 10:39:21,812 | INFO | model_main | Generating indicators for btc...
+2026-02-18 10:39:21,833 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:39:21,833 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:39:21,837 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:39:21,842 | INFO | model_main | Creating target for btc...
+2026-02-18 10:39:21,846 | INFO | model_main | Preparing dataset for btc...
+2026-02-18 10:39:21,861 | INFO | model_main | Training classifier: logistic for btc
+2026-02-18 10:39:22,272 | INFO | model_main | Training classifier: ridge for btc
+2026-02-18 10:39:22,411 | INFO | model_main | Training classifier: perceptron for btc
+2026-02-18 10:39:22,451 | INFO | model_main | Training classifier: knn for btc
+2026-02-18 10:39:22,494 | INFO | model_main | Training classifier: gaussian_nb for btc
+2026-02-18 10:39:22,514 | INFO | model_main | Training classifier: multinomial_nb for btc
+2026-02-18 10:42:39,371 | INFO | model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h | limit=5000
+2026-02-18 10:42:39,371 | INFO | model_main | Fetching data for btc from database...
+2026-02-18 10:42:50,207 | INFO | model_main | Generating indicators for btc...
+2026-02-18 10:42:50,221 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:42:50,221 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:42:50,224 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:42:50,224 | INFO | model_main | Creating target for btc...
+2026-02-18 10:42:50,231 | INFO | model_main | Preparing dataset for btc...
+2026-02-18 10:42:50,234 | INFO | model_main | Training classifier: logistic for btc
+2026-02-18 10:42:50,941 | INFO | model_main | Training classifier: ridge for btc
+2026-02-18 10:42:51,176 | INFO | model_main | Training classifier: perceptron for btc
+2026-02-18 10:42:51,233 | INFO | model_main | Training classifier: knn for btc
+2026-02-18 10:42:51,282 | INFO | model_main | Training classifier: gaussian_nb for btc
+2026-02-18 10:42:51,317 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:42:51,317 | INFO | model_main | Training classifier: bernoulli_nb for btc
+2026-02-18 10:42:51,354 | INFO | model_main | Training classifier: svc for btc
+2026-02-18 10:42:51,385 | INFO | model_main | Training classifier: linear_svc for btc
+2026-02-18 10:42:51,416 | INFO | model_main | Training classifier: decision_tree for btc
+2026-02-18 10:42:51,455 | INFO | model_main | Training classifier: extra_tree for btc
+2026-02-18 10:50:45,853 | INFO | model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h | limit=5000
+2026-02-18 10:50:45,867 | INFO | model_main | Fetching data for btc from database...
+2026-02-18 10:50:54,279 | INFO | model_main | Generating indicators for btc...
+2026-02-18 10:50:54,283 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:50:54,283 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:50:54,285 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:50:54,285 | INFO | model_main | Creating target for btc...
+2026-02-18 10:50:54,291 | INFO | model_main | Preparing dataset for btc...
+2026-02-18 10:50:54,297 | INFO | model_main | Training classifier: logistic for btc
+2026-02-18 10:50:55,128 | INFO | model_main | Training classifier: ridge for btc
+2026-02-18 10:50:55,163 | INFO | model_main | Training classifier: perceptron for btc
+2026-02-18 10:50:55,189 | INFO | model_main | Training classifier: knn for btc
+2026-02-18 10:50:55,341 | INFO | model_main | Training classifier: gaussian_nb for btc
+2026-02-18 10:50:55,362 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:50:55,362 | INFO | model_main | Training classifier: bernoulli_nb for btc
+2026-02-18 10:50:55,393 | INFO | model_main | Training classifier: svc for btc
+2026-02-18 10:50:58,237 | INFO | model_main | Training classifier: linear_svc for btc
+2026-02-18 10:50:58,343 | INFO | model_main | Training classifier: decision_tree for btc
+2026-02-18 10:50:58,861 | INFO | model_main | Training classifier: extra_tree for btc
+2026-02-18 10:54:06,510 | INFO | model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h | limit=5000
+2026-02-18 10:54:06,510 | INFO | model_main | Fetching data for btc from database...
+2026-02-18 10:54:14,842 | INFO | model_main | Generating indicators for btc...
+2026-02-18 10:54:14,856 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:54:14,856 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:54:14,858 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:54:14,858 | INFO | model_main | Creating target for btc...
+2026-02-18 10:54:14,863 | INFO | model_main | Preparing dataset for btc...
+2026-02-18 10:54:14,870 | INFO | model_main | Training classifier: logistic for btc
+2026-02-18 10:54:15,677 | INFO | model_main | Training classifier: ridge for btc
+2026-02-18 10:54:15,703 | INFO | model_main | Training classifier: perceptron for btc
+2026-02-18 10:54:15,731 | INFO | model_main | Training classifier: knn for btc
+2026-02-18 10:54:15,880 | INFO | model_main | Training classifier: gaussian_nb for btc
+2026-02-18 10:54:15,904 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:54:15,906 | INFO | model_main | Training classifier: bernoulli_nb for btc
+2026-02-18 10:54:15,931 | INFO | model_main | Training classifier: svc for btc
+2026-02-18 10:54:18,798 | INFO | model_main | Training classifier: linear_svc for btc
+2026-02-18 10:54:18,882 | INFO | model_main | Training classifier: decision_tree for btc
+2026-02-18 10:54:19,428 | INFO | model_main | Training classifier: extra_tree for btc
+2026-02-18 10:54:19,456 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-18 10:54:22,944 | INFO | model_main | Training classifier: extra_trees for btc
+2026-02-18 10:54:24,474 | INFO | model_main | Training classifier: adaboost for btc
+2026-02-18 10:54:25,629 | INFO | model_main | Training classifier: gradient_boost for btc
+2026-02-18 10:54:30,735 | INFO | model_main | Training classifier: mlp for btc
+2026-02-18 10:54:31,264 | INFO | model_main | Training classifier: lda for btc
+2026-02-18 10:54:31,339 | INFO | model_main | Training classifier: qda for btc
+2026-02-18 10:54:31,428 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-18 10:54:33,153 | INFO | model_main | Training classifier: lightgbm for btc
+2026-02-18 10:54:34,628 | INFO | model_main | Training classifier: catboost for btc
+2026-02-18 10:54:39,052 | INFO | model_main | Model training complete for btc.
+2026-02-18 10:54:39,052 | INFO | model_main | Fetching data for eth from database...
+2026-02-18 10:54:52,516 | INFO | model_main | Generating indicators for eth...
+2026-02-18 10:54:52,519 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:54:52,519 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:54:52,523 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:54:52,523 | INFO | model_main | Creating target for eth...
+2026-02-18 10:54:52,530 | INFO | model_main | Preparing dataset for eth...
+2026-02-18 10:54:52,557 | INFO | model_main | Training classifier: logistic for eth
+2026-02-18 10:54:53,762 | INFO | model_main | Training classifier: ridge for eth
+2026-02-18 10:54:53,805 | INFO | model_main | Training classifier: perceptron for eth
+2026-02-18 10:54:53,852 | INFO | model_main | Training classifier: knn for eth
+2026-02-18 10:54:54,074 | INFO | model_main | Training classifier: gaussian_nb for eth
+2026-02-18 10:54:54,109 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:54:54,111 | INFO | model_main | Training classifier: bernoulli_nb for eth
+2026-02-18 10:54:54,147 | INFO | model_main | Training classifier: svc for eth
+2026-02-18 10:54:58,953 | INFO | model_main | Training classifier: linear_svc for eth
+2026-02-18 10:54:59,029 | INFO | model_main | Training classifier: decision_tree for eth
+2026-02-18 10:54:59,470 | INFO | model_main | Training classifier: extra_tree for eth
+2026-02-18 10:54:59,507 | INFO | model_main | Training classifier: random_forest for eth
+2026-02-18 10:55:03,347 | INFO | model_main | Training classifier: extra_trees for eth
+2026-02-18 10:55:05,001 | INFO | model_main | Training classifier: adaboost for eth
+2026-02-18 10:55:06,185 | INFO | model_main | Training classifier: gradient_boost for eth
+2026-02-18 10:55:11,337 | INFO | model_main | Training classifier: mlp for eth
+2026-02-18 10:55:12,767 | INFO | model_main | Training classifier: lda for eth
+2026-02-18 10:55:12,806 | INFO | model_main | Training classifier: qda for eth
+2026-02-18 10:55:12,847 | INFO | model_main | Training classifier: xgboost for eth
+2026-02-18 10:55:14,490 | INFO | model_main | Training classifier: lightgbm for eth
+2026-02-18 10:55:15,527 | INFO | model_main | Training classifier: catboost for eth
+2026-02-18 10:55:19,570 | INFO | model_main | Model training complete for eth.
+2026-02-18 10:55:19,580 | INFO | model_main | Fetching data for bnb from database...
+2026-02-18 10:55:32,097 | INFO | model_main | Generating indicators for bnb...
+2026-02-18 10:55:32,102 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:55:32,103 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:55:32,105 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:55:32,105 | INFO | model_main | Creating target for bnb...
+2026-02-18 10:55:32,110 | INFO | model_main | Preparing dataset for bnb...
+2026-02-18 10:55:32,123 | INFO | model_main | Training classifier: logistic for bnb
+2026-02-18 10:55:33,203 | INFO | model_main | Training classifier: ridge for bnb
+2026-02-18 10:55:33,240 | INFO | model_main | Training classifier: perceptron for bnb
+2026-02-18 10:55:33,283 | INFO | model_main | Training classifier: knn for bnb
+2026-02-18 10:55:33,479 | INFO | model_main | Training classifier: gaussian_nb for bnb
+2026-02-18 10:55:33,503 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:55:33,505 | INFO | model_main | Training classifier: bernoulli_nb for bnb
+2026-02-18 10:55:33,537 | INFO | model_main | Training classifier: svc for bnb
+2026-02-18 10:55:38,407 | INFO | model_main | Training classifier: linear_svc for bnb
+2026-02-18 10:55:38,473 | INFO | model_main | Training classifier: decision_tree for bnb
+2026-02-18 10:55:38,859 | INFO | model_main | Training classifier: extra_tree for bnb
+2026-02-18 10:55:38,888 | INFO | model_main | Training classifier: random_forest for bnb
+2026-02-18 10:55:42,856 | INFO | model_main | Training classifier: extra_trees for bnb
+2026-02-18 10:55:44,432 | INFO | model_main | Training classifier: adaboost for bnb
+2026-02-18 10:55:45,597 | INFO | model_main | Training classifier: gradient_boost for bnb
+2026-02-18 10:55:51,016 | INFO | model_main | Training classifier: mlp for bnb
+2026-02-18 10:55:52,086 | INFO | model_main | Training classifier: lda for bnb
+2026-02-18 10:55:52,125 | INFO | model_main | Training classifier: qda for bnb
+2026-02-18 10:55:52,163 | INFO | model_main | Training classifier: xgboost for bnb
+2026-02-18 10:55:53,902 | INFO | model_main | Training classifier: lightgbm for bnb
+2026-02-18 10:55:55,104 | INFO | model_main | Training classifier: catboost for bnb
+2026-02-18 10:55:59,270 | INFO | model_main | Model training complete for bnb.
+2026-02-18 10:55:59,270 | INFO | model_main | Fetching data for ada from database...
+2026-02-18 10:56:14,674 | INFO | model_main | Generating indicators for ada...
+2026-02-18 10:56:14,679 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:56:14,679 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:56:14,679 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:56:14,679 | INFO | model_main | Creating target for ada...
+2026-02-18 10:56:14,691 | INFO | model_main | Preparing dataset for ada...
+2026-02-18 10:56:14,701 | INFO | model_main | Training classifier: logistic for ada
+2026-02-18 10:56:14,739 | INFO | model_main | Training classifier: ridge for ada
+2026-02-18 10:56:14,821 | INFO | model_main | Training classifier: perceptron for ada
+2026-02-18 10:56:14,876 | INFO | model_main | Training classifier: knn for ada
+2026-02-18 10:56:15,096 | INFO | model_main | Training classifier: gaussian_nb for ada
+2026-02-18 10:56:15,124 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:56:15,126 | INFO | model_main | Training classifier: bernoulli_nb for ada
+2026-02-18 10:56:15,158 | INFO | model_main | Training classifier: svc for ada
+2026-02-18 10:56:19,161 | INFO | model_main | Training classifier: linear_svc for ada
+2026-02-18 10:56:19,187 | INFO | model_main | Training classifier: decision_tree for ada
+2026-02-18 10:56:19,701 | INFO | model_main | Training classifier: extra_tree for ada
+2026-02-18 10:56:19,738 | INFO | model_main | Training classifier: random_forest for ada
+2026-02-18 10:56:23,766 | INFO | model_main | Training classifier: extra_trees for ada
+2026-02-18 10:56:25,644 | INFO | model_main | Training classifier: adaboost for ada
+2026-02-18 10:56:26,888 | INFO | model_main | Training classifier: gradient_boost for ada
+2026-02-18 10:56:32,220 | INFO | model_main | Training classifier: mlp for ada
+2026-02-18 10:56:32,986 | INFO | model_main | Training classifier: lda for ada
+2026-02-18 10:56:33,029 | INFO | model_main | Training classifier: qda for ada
+2026-02-18 10:56:33,078 | INFO | model_main | Training classifier: xgboost for ada
+2026-02-18 10:56:35,230 | INFO | model_main | Training classifier: lightgbm for ada
+2026-02-18 10:56:36,542 | INFO | model_main | Training classifier: catboost for ada
+2026-02-18 10:56:40,965 | INFO | model_main | Model training complete for ada.
+2026-02-18 10:56:40,965 | INFO | model_main | Fetching data for xrp from database...
+2026-02-18 10:56:55,941 | INFO | model_main | Generating indicators for xrp...
+2026-02-18 10:56:55,952 | INFO | model_main | Indicator ADX failed: ADX() takes at least 3 positional arguments (1 given)
+2026-02-18 10:56:55,952 | INFO | model_main | Indicator CCI failed: CCI() takes at least 3 positional arguments (1 given)
+2026-02-18 10:56:55,952 | INFO | model_main | Indicator ATR failed: ATR() takes at least 3 positional arguments (1 given)
+2026-02-18 10:56:55,952 | INFO | model_main | Creating target for xrp...
+2026-02-18 10:56:55,963 | INFO | model_main | Preparing dataset for xrp...
+2026-02-18 10:56:55,969 | INFO | model_main | Training classifier: logistic for xrp
+2026-02-18 10:56:56,007 | INFO | model_main | Training classifier: ridge for xrp
+2026-02-18 10:56:56,041 | INFO | model_main | Training classifier: perceptron for xrp
+2026-02-18 10:56:56,084 | INFO | model_main | Training classifier: knn for xrp
+2026-02-18 10:56:56,317 | INFO | model_main | Training classifier: gaussian_nb for xrp
+2026-02-18 10:56:56,356 | INFO | model_main | Skipping multinomial_nb because features contain negative values
+2026-02-18 10:56:56,358 | INFO | model_main | Training classifier: bernoulli_nb for xrp
+2026-02-18 10:56:56,397 | INFO | model_main | Training classifier: svc for xrp
+2026-02-18 10:57:01,080 | INFO | model_main | Training classifier: linear_svc for xrp
+2026-02-18 10:57:01,108 | INFO | model_main | Training classifier: decision_tree for xrp
+2026-02-18 10:57:01,527 | INFO | model_main | Training classifier: extra_tree for xrp
+2026-02-18 10:57:01,562 | INFO | model_main | Training classifier: random_forest for xrp
+2026-02-18 10:57:05,771 | INFO | model_main | Training classifier: extra_trees for xrp
+2026-02-18 10:57:07,383 | INFO | model_main | Training classifier: adaboost for xrp
+2026-02-18 10:57:08,540 | INFO | model_main | Training classifier: gradient_boost for xrp
+2026-02-18 10:57:13,737 | INFO | model_main | Training classifier: mlp for xrp
+2026-02-18 10:57:14,967 | INFO | model_main | Training classifier: lda for xrp
+2026-02-18 10:57:15,007 | INFO | model_main | Training classifier: qda for xrp
+2026-02-18 10:57:15,045 | INFO | model_main | Training classifier: xgboost for xrp
+2026-02-18 10:57:16,765 | INFO | model_main | Training classifier: lightgbm for xrp
+2026-02-18 10:57:17,933 | INFO | model_main | Training classifier: catboost for xrp
+2026-02-18 10:57:22,999 | INFO | model_main | Model training complete for xrp.
+2026-02-18 10:57:22,999 | INFO | model_main | Fetching data for doge from database...
