@@ -24,6 +24,7 @@ def train(df, target_col="target", split_date="2024-01-01 00:00"):
         raise ValueError("DataFrame must have a 'datetime' column for string slicing.")
 
     # Split based on string date
+    split_date = pd.to_datetime(split_date, utc=True)
     train_df = df[df["datetime"] < split_date]
     test_df = df[df["datetime"] >= split_date]
 

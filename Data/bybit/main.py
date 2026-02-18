@@ -34,7 +34,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["bybit"]
 # Load Configuration
 # ---------------------------
 current_dir = os.path.dirname(os.path.abspath(__file__))
-bybit_config_path = os.path.join(current_dir, "..", "data", "bybit", "config.yml")
+bybit_config_path = os.path.join(current_dir, "config.yml")
 config = read_config(bybit_config_path)
 symbols = config["symbols"]
 start_date = config["start_date"]

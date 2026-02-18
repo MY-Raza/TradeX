@@ -484,3 +484,15 @@ ValueError: Config must include 'symbols' and 'start_date'.
 2026-02-18 10:42:39,371 | INFO | config_loader | Configuration loaded |symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=None | end_date=now | timehorizon=1h | limit=5000 | path=D:\trading\TradeX\ai\ml\config.yml
 2026-02-18 10:50:45,853 | INFO | config_loader | Configuration loaded |symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=None | end_date=now | timehorizon=1h | limit=5000 | path=D:\trading\TradeX\ai\ml\config.yml
 2026-02-18 10:54:06,502 | INFO | config_loader | Configuration loaded |symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=None | end_date=now | timehorizon=1h | limit=5000 | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 17:44:27,945 | ERROR | config_loader | Failed to load config.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\utils\common\config_loader.py", line 21, in read_config
+    raise FileNotFoundError(f"Config file not found at: {config_path}")
+FileNotFoundError: Config file not found at: D:\trading\TradeX\ai\ml\..\ai\ml\config.yml
+2026-02-18 17:47:25,094 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 17:47:54,267 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 17:48:16,396 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 17:48:56,652 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 17:51:07,556 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 18:00:14,141 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
+2026-02-18 18:03:22,538 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml

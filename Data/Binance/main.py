@@ -21,7 +21,7 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
 # Load Configuration
 # -------------------------------------------------
 current_dir = os.path.dirname(os.path.abspath(__file__))
-binance_config_path = os.path.join(current_dir, "..", "data", "binance", "config.yml")
+binance_config_path = os.path.join(current_dir, "config.yml")
 config = read_config(binance_config_path)
 symbols = config["symbols"]
 default_start_date = config["start_date"]

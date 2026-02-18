@@ -5,7 +5,8 @@ import numpy as np
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.model_trainer import train_model, save_model
-from TradeX.utils.common.config_loader import get_logger, read_config
+from TradeX.utils.common.config_loader import read_config
+from TradeX.utils.common.logs import get_logger 
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 import os
 
@@ -19,11 +20,21 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
     df = df.copy()
     for ind in indicators:
         try:
-            if ind in ["RSI", "EMA", "SMA", "ATR", "ADX", "CCI", "MOM"]:
+            if ind in ["RSI", "EMA", "SMA", "MOM"]:  # single-series indicators
                 values, window = call_indicator(ind, df["close"].values, timeperiod=14)
                 df[f"{ind}_{window}"] = values
 
-            elif ind == "MACD":
+            elif ind in ["ATR", "ADX", "CCI"]:  # require high, low, close
+                values, window = call_indicator(
+                    ind,
+                    high=df["high"].values,
+                    low=df["low"].values,
+                    close=df["close"].values,
+                    timeperiod=14
+                )
+                df[f"{ind}_{window}"] = values
+
+            elif ind == "MACD":  # MACD needs only close
                 macd, signal, hist = call_indicator(
                     "MACD",
                     df["close"].values,
@@ -35,7 +46,7 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
                 df["MACD_SIGNAL"] = signal
                 df["MACD_HIST"] = hist
 
-            elif ind == "BBANDS":
+            elif ind == "BBANDS":  # BBANDS needs only close
                 upper, middle, lower = call_indicator(
                     "BBANDS",
                     df["close"].values,
@@ -49,6 +60,7 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             logger.info(f"Indicator {ind} failed: {e}")
 
     return df
+
 
 
 # ----------------------------
@@ -95,7 +107,7 @@ def prepare_ml_data(df: pd.DataFrame):
 # ----------------------------
 def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    ml_config_path = os.path.join(current_dir, "..", "ai", "ml", "config.yml")
+    ml_config_path = os.path.join(current_dir, "config.yml")
     config = read_config(ml_config_path)
 
     start_date = config.get("start_date")

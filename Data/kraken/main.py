@@ -36,7 +36,7 @@ def main():
     # Load config
     # -----------------------------
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    kraken_config_path = os.path.join(current_dir, "..", "data", "kraken", "config.yml")
+    kraken_config_path = os.path.join(current_dir,"config.yml")
     config = read_config(kraken_config_path)
     exchange_name = config.get("exchange_name")
     symbols = config.get("symbols", [])
