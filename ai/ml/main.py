@@ -5,7 +5,7 @@ import os
 import pickle
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
-from TradeX.ai.ml.models.models import train_classifier, train_regressor, get_classifier, get_regressor
+from TradeX.ai.ml.models.model_trainer import train_classifier, train_regressor, get_classifier, get_regressor
 from TradeX.utils.common.config_loader import get_logger, read_config
 from TradeX.indicators.talib.indicators import ALL_INDICATORS
 from TradeX.utils.data.data_cleaner import resample_ohlcv
