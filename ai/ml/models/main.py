@@ -2,10 +2,10 @@ import pandas as pd
 
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
-from TradeX.ai.ml.models.model import train_model, save_model
+from TradeX.ai.ml.models.models import train_model
 from TradeX.utils.common.config_loader import get_logger
 
-
+logger = get_logger("model_main")
 # ============================================================
 # FEATURE ENGINEERING
 # ============================================================
@@ -51,7 +51,7 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
                 df["BB_LOWER"] = lower
 
         except Exception as e:
-            print(f"Indicator {ind} failed: {e}")
+            logger.info(f"Indicator {ind} failed: {e}")
 
     return df
 
@@ -101,8 +101,6 @@ def prepare_ml_data(df: pd.DataFrame):
 
 def main():
 
-    logger = get_logger("model_main")
-
     logger.info("Fetching data from database...")
 
     df = fetch_ohlcv_df(
@@ -112,7 +110,7 @@ def main():
     )
 
     if df.empty:
-        print("No data found.")
+        logger.info("No data found.")
         return
 
     logger.info("Generating indicators...")
@@ -127,8 +125,6 @@ def main():
 
     logger.info("Training model...")
     model = train_model(X, y)
-
-    save_model(model)
 
     logger.info("Model training complete.")
 
