@@ -5,6 +5,7 @@ from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 import pandas as pd
+import os
 
 logger = get_logger("bybit_main")
 
@@ -32,7 +33,9 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["bybit"]
 # ---------------------------
 # Load Configuration
 # ---------------------------
-config = read_config(exchange_name="bybit")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+bybit_config_path = os.path.join(current_dir, "..", "data", "bybit", "config.yml")
+config = read_config(bybit_config_path)
 symbols = config["symbols"]
 start_date = config["start_date"]
 end_date = config["end_date"]

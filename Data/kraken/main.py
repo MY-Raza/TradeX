@@ -7,6 +7,7 @@ from TradeX.utils.data.data_cleaner import clean_df
 from TradeX.utils.db.utils import save_df_to_db, drop_schema, get_last_date,read_df_from_db
 from TradeX.utils.common.constants import EXCHANGE_SCHEMA_MAP
 import pandas as pd
+import os
 
 # ---------------------------
 # Initialize logger
@@ -34,7 +35,9 @@ def main():
     # -----------------------------
     # Load config
     # -----------------------------
-    config = read_config(exchange_name="kraken")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    kraken_config_path = os.path.join(current_dir, "..", "data", "kraken", "config.yml")
+    config = read_config(kraken_config_path)
     exchange_name = config.get("exchange_name")
     symbols = config.get("symbols", [])
     start_date = config.get("start_date")

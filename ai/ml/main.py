@@ -7,8 +7,10 @@ from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.model_trainer import train_model, save_model
 from TradeX.utils.common.config_loader import get_logger, read_config
 from TradeX.utils.data.data_cleaner import resample_ohlcv
+import os
 
 logger = get_logger("model_main")
+
 
 # ----------------------------
 # FEATURE ENGINEERING
@@ -48,40 +50,30 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
 
     return df
 
+
 # ----------------------------
 # TARGET CREATION
 # ----------------------------
 def create_classification_target(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Binary target for classification: 1 if price goes up, 0 if down.
-    """
     df = df.copy()
     df["future_close"] = df["close"].shift(-1)
     df["target"] = (df["future_close"] > df["close"]).astype(int)
     df.dropna(inplace=True)
     return df
 
+
 def create_regression_target(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Continuous target for regression: percentage return.
-    """
     df = df.copy()
     df["future_close"] = df["close"].shift(-1)
     df["target"] = (df["future_close"] - df["close"]) / df["close"]
     df.dropna(inplace=True)
     return df
 
+
 # ----------------------------
 # DATASET PREPARATION WITH LOG-DIFF SCALING
 # ----------------------------
 def prepare_ml_data(df: pd.DataFrame):
-    """
-    Prepare ML data with log-difference scaling for features.
-
-    Returns:
-        X_scaled: log-differenced feature matrix
-        y: target series
-    """
     df = df.copy()
     drop_cols = ["datetime", "future_close"]
     df = df.drop(columns=[c for c in drop_cols if c in df.columns], errors='ignore')
@@ -97,21 +89,28 @@ def prepare_ml_data(df: pd.DataFrame):
 
     return X_scaled, y
 
+
 # ----------------------------
 # MAIN PIPELINE
 # ----------------------------
 def main():
-    config = read_config()
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    ml_config_path = os.path.join(current_dir, "..", "ai", "ml", "config.yml")
+    config = read_config(ml_config_path)
 
     start_date = config.get("start_date")
     end_date = config.get("end_date")
-    split_date = config.get("split_date")  # for string-based train/test split
+    split_date = config.get("split_date")
 
     symbols = config.get("symbols", ["btc"])
     timehorizon = config.get("timehorizon", "1h")
     indicators_config = config.get("indicators", {})
     classifiers_config = config.get("classifiers", {})
     regressors_config = config.get("regressors", {})
+
+    # Optional hyperparameters for XGBoost models
+    xgb_params_clf = config.get("xgboost_classifier_params", {})
+    xgb_params_reg = config.get("xgboost_regressor_params", {})
 
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 
@@ -150,12 +149,16 @@ def main():
                 df_clf = create_classification_target(df)
                 X, y = prepare_ml_data(df_clf)
 
+                # Pass XGBoost params dynamically
+                kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
+
                 model, preds = train_model(
                     model_type="classifier",
                     model_name=clf_name,
                     df=df_clf,
                     target_col="target",
-                    split_date=split_date
+                    split_date=split_date,
+                    **kwargs
                 )
 
                 save_model(
@@ -179,12 +182,16 @@ def main():
                 df_reg = create_regression_target(df)
                 X, y = prepare_ml_data(df_reg)
 
+                # Pass XGBoost params dynamically
+                kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
+
                 model, preds = train_model(
                     model_type="regressor",
                     model_name=reg_name,
                     df=df_reg,
                     target_col="target",
-                    split_date=split_date
+                    split_date=split_date,
+                    **kwargs
                 )
 
                 save_model(
@@ -197,6 +204,7 @@ def main():
                 logger.error(f"Regressor {reg_name} failed for {symbol}: {e}")
 
         logger.info(f"Model training complete for {symbol}.")
+
 
 # ============================================================
 if __name__ == "__main__":

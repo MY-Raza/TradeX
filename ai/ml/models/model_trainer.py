@@ -20,22 +20,11 @@ REGRESSORS = {
 }
 
 
-def train_model(model_type: str, model_name: str, df, target_col="target", split_date="2024-01-01 00:00"):
+def train_model(model_type: str, model_name: str, df, target_col="target",
+                split_date="2024-01-01 00:00", **kwargs):
     """
-    Train a model using the corresponding trainer with string-based date split.
-
-    Args:
-        model_type (str): 'classifier' or 'regressor'
-        model_name (str): 'random_forest' or 'xgboost'
-        df (pd.DataFrame): DataFrame containing features, target, and datetime column
-        target_col (str): Target column name
-        split_date (str): Date string to split train/test
-
-    Returns:
-        model: trained model
-        preds: predictions on the test set
+    Train a model with string-based train/test split and optional hyperparameters.
     """
-
     if model_type == "classifier":
         trainer = CLASSIFIERS.get(model_name)
     elif model_type == "regressor":
@@ -46,9 +35,11 @@ def train_model(model_type: str, model_name: str, df, target_col="target", split
     if trainer is None:
         raise ValueError(f"Unknown model name: {model_name}")
 
-    # Call the trainer with string-based splitting
-    model, preds = trainer(df, target_col=target_col, split_date=split_date)
+    # Call trainer with kwargs (XGBoost params)
+    model, preds = trainer(df, target_col=target_col, split_date=split_date, **kwargs)
     return model, preds
+
+
 
 
 def save_model(model, feature_columns, symbol, model_name, folder="saved_models"):

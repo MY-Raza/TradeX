@@ -1,15 +1,15 @@
 from xgboost import XGBRegressor
 import pandas as pd
 
-def train(df, target_col="target", split_date="2024-01-01 00:00"):
+def train(df, target_col="target", split_date="2024-01-01 00:00", **xgb_params):
     """
-    Train XGBRegressor using a string-based date split.
+    Train XGBRegressor using string-based date split and dynamic hyperparameters.
 
     Args:
         df (pd.DataFrame): Input dataframe with features and target
         target_col (str): Name of the target column
         split_date (str): Date string to split train/test
-                          All rows before this are train, after are test
+        **xgb_params: XGBoost hyperparameters (n_estimators, max_depth, etc.)
 
     Returns:
         model: trained XGBRegressor
@@ -23,7 +23,7 @@ def train(df, target_col="target", split_date="2024-01-01 00:00"):
     else:
         raise ValueError("DataFrame must have a 'datetime' column for string slicing.")
 
-    # Split based on string date
+    # Split data
     train_df = df[df["datetime"] < split_date]
     test_df = df[df["datetime"] >= split_date]
 
@@ -33,19 +33,10 @@ def train(df, target_col="target", split_date="2024-01-01 00:00"):
     X_test = test_df.drop(columns=[target_col, "datetime"])
     y_test = test_df[target_col]
 
-    # Train model
-    model = XGBRegressor(
-        n_estimators=500,
-        max_depth=6,
-        learning_rate=0.05,
-        subsample=0.8,
-        colsample_bytree=0.8,
-        random_state=42,
-        n_jobs=-1
-    )
+    # Train model with dynamic params
+    model = XGBRegressor(**xgb_params)
     model.fit(X_train, y_train)
 
-    # Predictions
     preds = model.predict(X_test)
 
     return model, preds

@@ -40,7 +40,9 @@ SCHEMA = EXCHANGE_SCHEMA_MAP["metatrader5"]  # Database schema for MT5 data
 # =========================================
 # LOAD CONFIGURATION FILE
 # =========================================
-config = read_config(exchange_name="mt5")           # Reads config.yml for symbols and date ranges
+current_dir = os.path.dirname(os.path.abspath(__file__))
+mt5_config_path = os.path.join(current_dir, "..", "data", "mt5", "config.yml")
+config = read_config(mt5_config_path)          # Reads config.yml for symbols and date ranges
 raw_symbols = config["symbols"]              # List of symbols to fetch
 start_date = config["start_date"]            # Start date for fetching data
 end_date = config["end_date"]                # End date or "now" for current timestamp
