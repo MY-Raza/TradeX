@@ -1,7 +1,8 @@
 import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
-
+import os
+import pickle
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.models import train_classifier, train_regressor, get_classifier, get_regressor
@@ -93,6 +94,19 @@ def calculate_limit(timehorizon: str, days: int = 365) -> int:
     total_candles = int(candles_per_day * days)
     return total_candles
 
+def save_model(model, feature_columns, symbol, model_name, folder="saved_models"):
+    """
+    Save the trained model and its input features to a .pkl file
+    """
+    os.makedirs(folder, exist_ok=True)
+    file_path = os.path.join(folder, f"{symbol}_{model_name}.pkl")
+    
+    with open(file_path, "wb") as f:
+        pickle.dump({"model": model, "features": feature_columns}, f)
+    
+    logger.info(f"Saved model {model_name} for {symbol} at {file_path}")
+
+
 
 # ----------------------------
 # MAIN PIPELINE
@@ -154,17 +168,19 @@ def main():
                 model = get_classifier(clf_name)
                 if model is not None:
                     logger.info(f"Training classifier: {clf_name} for {symbol}")
-                    train_classifier(model, X, y)
+                    trained_model = train_classifier(model, X, y)
+                    save_model(trained_model, X.columns.tolist(), f"{symbol}_classifier", clf_name)
 
         # ----------------------------
         # Train all active regressors
         # ----------------------------
-        # for reg_name, is_active in regressors_config.items():
-        #     if is_active:
-        #         model = get_regressor(reg_name)
-        #         if model:
-        #             logger.info(f"Training regressor: {reg_name} for {symbol}")
-        #             train_regressor(model, X, y)
+        for reg_name, is_active in regressors_config.items():
+            if is_active:
+                model = get_regressor(reg_name)
+                if model:
+                    logger.info(f"Training regressor: {reg_name} for {symbol}")
+                    trained_model = train_regressor(model, X, y)
+                    save_model(trained_model,X.columns.tolist(),f"{symbol}_regressor", reg_name)
 
         logger.info(f"Model training complete for {symbol}.")
 
