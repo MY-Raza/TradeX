@@ -4,6 +4,7 @@ from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.models import train_model
 from TradeX.utils.common.config_loader import get_logger
+from TradeX.indicators.talib.indicators import ALL_INDICATORS
 
 logger = get_logger("model_main")
 # ============================================================
@@ -114,8 +115,8 @@ def main():
         return
 
     logger.info("Generating indicators...")
-    indicators = ["RSI", "EMA", "MACD", "BBANDS", "ATR"]
-    df = generate_features(df, indicators)
+    
+    df = generate_features(df, ALL_INDICATORS)
 
     logger.info("Creating target...")
     df = create_target(df)

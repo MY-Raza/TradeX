@@ -1,0 +1,258 @@
+classifiers:
+
+  # Linear
+  logistic: true
+  ridge: true
+  perceptron: true
+
+  # Distance
+  knn: true
+
+  # Naive Bayes
+  gaussian_nb: true
+  multinomial_nb: true
+  bernoulli_nb: true
+
+  # SVM
+  svc: true
+  linear_svc: true
+
+  # Trees
+  decision_tree: true
+  extra_tree: true
+
+  # Ensembles
+  random_forest: true
+  extra_trees: true
+  adaboost: true
+  gradient_boost: true
+
+  # Neural
+  mlp: true
+
+  # Discriminant
+  lda: true
+  qda: true
+
+  # Boosting
+  xgboost: true
+  lightgbm: true
+  catboost: true
+
+
+regressors:
+
+  # Linear
+  linear: true
+  ridge: true
+  lasso: true
+  elastic: true
+  bayesian_ridge: true
+
+  # Distance
+  knn: true
+
+  # SVM
+  svr: true
+
+  # Trees
+  decision_tree: true
+  extra_tree: true
+
+  # Ensembles
+  random_forest: true
+  extra_trees: true
+  adaboost: true
+  gradient_boost: true
+
+  # Neural
+  mlp: true
+
+  # Specialized
+  gpr: true
+  poisson: true
+  gamma: true
+  tweedie: true
+
+  # Boosting
+  xgboost: true
+  lightgbm: true
+  catboost: true
+
+indicators:
+
+  # =========================
+  # Overlap Studies
+  # =========================
+  BBANDS: true
+  DEMA: false
+  EMA: true
+  HT_TRENDLINE: false
+  KAMA: true
+  MA: false
+  MAMA: false
+  MIDPOINT: false
+  MIDPRICE: false
+  SAR: true
+  SAREXT: false
+  SMA: true
+  T3: false
+  TEMA: false
+  TRIMA: false
+  WMA: true
+
+  # =========================
+  # Momentum Indicators
+  # =========================
+  ADX: true
+  ADXR: false
+  APO: false
+  AROON: true
+  AROONOSC: false
+  BOP: false
+  CCI: true
+  CMO: false
+  DX: false
+  MACD: true
+  MACDEXT: false
+  MFI: true
+  MINUS_DI: false
+  MINUS_DM: false
+  MOM: true
+  PLUS_DI: false
+  PLUS_DM: false
+  PPO: false
+  ROC: true
+  ROCP: false
+  ROCR: false
+  ROCR100: false
+  RSI: true
+  STOCH: true
+  STOCHF: false
+  STOCHRSI: false
+  TRIX: false
+  WILLR: false
+
+  # =========================
+  # Volume Indicators
+  # =========================
+  AD: false
+  ADOSC: true
+  OBV: true
+
+  # =========================
+  # Volatility Indicators
+  # =========================
+  ATR: true
+  NATR: false
+  TRANGE: false
+
+  # =========================
+  # Price Transform
+  # =========================
+  AVGPRICE: false
+  MEDPRICE: false
+  TYPPRICE: false
+  WCLPRICE: false
+
+  # =========================
+  # Cycle Indicators
+  # =========================
+  HT_DCPERIOD: false
+  HT_DCPHASE: false
+  HT_PHASOR: false
+  HT_SINE: false
+  HT_TRENDMODE: false
+
+  # =========================
+  # Statistic Indicators
+  # =========================
+  LINEARREG: true
+  LINEARREG_ANGLE: false
+  LINEARREG_INTERCEPT: false
+  LINEARREG_SLOPE: true
+  STDDEV: true
+  TSF: false
+  VAR: false
+
+  # =========================
+  # Candlestick Patterns
+  # =========================
+  CDLENGULFING: true
+  CDLHAMMER: true
+  CDLSHOOTINGSTAR: true
+  CDLDOJI: true
+  CDLMORNINGSTAR: true
+  CDLEVENINGSTAR: true
+
+  # Most patterns disabled by default
+  CDL2CROWS: false
+  CDL3BLACKCROWS: false
+  CDL3INSIDE: false
+  CDL3LINESTRIKE: false
+  CDL3OUTSIDE: false
+  CDL3STARSINSOUTH: false
+  CDL3WHITESOLDIERS: false
+  CDLABANDONEDBABY: false
+  CDLADVANCEBLOCK: false
+  CDLBELTHOLD: false
+  CDLBREAKAWAY: false
+  CDLCLOSINGMARUBOZU: false
+  CDLCONCEALBABYSWALL: false
+  CDLCOUNTERATTACK: false
+  CDLDARKCLOUDCOVER: false
+  CDLDOJISTAR: false
+  CDLDRAGONFLYDOJI: false
+  CDLEVENINGDOJISTAR: false
+  CDLGAPSIDESIDEWHITE: false
+  CDLGRAVESTONEDOJI: false
+  CDLHANGINGMAN: false
+  CDLHARAMI: false
+  CDLHARAMICROSS: false
+  CDLHIGHWAVE: false
+  CDLHIKKAKE: false
+  CDLHIKKAKEMOD: false
+  CDLHOMINGPIGEON: false
+  CDLIDENTICAL3CROWS: false
+  CDLINNECK: false
+  CDLINVERTEDHAMMER: false
+  CDLKICKING: false
+  CDLKICKINGBYLENGTH: false
+  CDLLADDERBOTTOM: false
+  CDLLONGLEGGEDDOJI: false
+  CDLLONGLINE: false
+  CDLMARUBOZU: false
+  CDLMATCHINGLOW: false
+  CDLMATHOLD: false
+  CDLMORNINGDOJISTAR: false
+  CDLONNECK: false
+  CDLPIERCING: false
+  CDLRICKSHAWMAN: false
+  CDLRISEFALL3METHODS: false
+  CDLSEPARATINGLINES: false
+  CDLSHORTLINE: false
+  CDLSPINNINGTOP: false
+  CDLSTALLEDPATTERN: false
+  CDLSTICKSANDWICH: false
+  CDLTAKURI: false
+  CDLTASUKIGAP: false
+  CDLTHRUSTING: false
+  CDLTRISTAR: false
+  CDLUNIQUE3RIVER: false
+  CDLUPSIDEGAP2CROWS: false
+  CDLXSIDEGAP3METHODS: false
+
+symbols:
+  - btc
+  - eth
+  - bnb
+  - ada
+  - xrp
+  - doge
+  - sol
+  - dot
+  - matic
+  - link
+
+timehorizon: "1h"   # 1m, 5m, 15m, 1h, 4h, 1d
+limit: 5000
