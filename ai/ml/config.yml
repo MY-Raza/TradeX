@@ -1,83 +1,20 @@
 classifiers:
 
-  # Linear
-  logistic: true
-  ridge: true
-  perceptron: true
-
-  # Distance
-  knn: true
-
-  # Naive Bayes
-  gaussian_nb: true
-  multinomial_nb: true
-  bernoulli_nb: true
-
-  # SVM
-  svc: true
-  linear_svc: true
-
-  # Trees
-  decision_tree: true
-  extra_tree: true
-
   # Ensembles
   random_forest: true
-  extra_trees: true
-  adaboost: true
-  gradient_boost: true
-
-  # Neural
-  mlp: true
-
-  # Discriminant
-  lda: true
-  qda: true
 
   # Boosting
   xgboost: true
-  lightgbm: true
-  catboost: true
 
 
 regressors:
 
-  # Linear
-  linear: true
-  ridge: true
-  lasso: true
-  elastic: true
-  bayesian_ridge: true
-
-  # Distance
-  knn: true
-
-  # SVM
-  svr: true
-
-  # Trees
-  decision_tree: true
-  extra_tree: true
-
   # Ensembles
   random_forest: true
-  extra_trees: true
-  adaboost: true
-  gradient_boost: true
-
-  # Neural
-  mlp: true
-
-  # Specialized
-  gpr: true
-  poisson: true
-  gamma: true
-  tweedie: true
 
   # Boosting
   xgboost: true
-  lightgbm: true
-  catboost: true
+
 
 indicators:
 
@@ -254,5 +191,8 @@ symbols:
   - matic
   - link
 
+start_date: '2023-01-01' 
+end_date: '2026-02-17'
+split_date: '2025-01-01'
+
 timehorizon: "1h"   # 1m, 5m, 15m, 1h, 4h, 1d
-limit: 5000

@@ -1,14 +1,39 @@
 from xgboost import XGBRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
+import pandas as pd
 
+def train(df, target_col="target", split_date="2024-01-01 00:00"):
+    """
+    Train XGBRegressor using a string-based date split.
 
-def train(X, y):
+    Args:
+        df (pd.DataFrame): Input dataframe with features and target
+        target_col (str): Name of the target column
+        split_date (str): Date string to split train/test
+                          All rows before this are train, after are test
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, shuffle=False
-    )
+    Returns:
+        model: trained XGBRegressor
+        preds: predictions on the test set
+    """
 
+    # Ensure datetime column exists
+    if "datetime" in df.columns:
+        df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
+        df = df.sort_values("datetime")
+    else:
+        raise ValueError("DataFrame must have a 'datetime' column for string slicing.")
+
+    # Split based on string date
+    train_df = df[df["datetime"] < split_date]
+    test_df = df[df["datetime"] >= split_date]
+
+    X_train = train_df.drop(columns=[target_col, "datetime"])
+    y_train = train_df[target_col]
+
+    X_test = test_df.drop(columns=[target_col, "datetime"])
+    y_test = test_df[target_col]
+
+    # Train model
     model = XGBRegressor(
         n_estimators=500,
         max_depth=6,
@@ -18,9 +43,9 @@ def train(X, y):
         random_state=42,
         n_jobs=-1
     )
-
     model.fit(X_train, y_train)
 
+    # Predictions
     preds = model.predict(X_test)
 
-    return model
+    return model, preds

@@ -343,22 +343,46 @@ def fetch_ohlcv_df(
     table_name: str,
     schema: str,
     time_column: str = "datetime",
-    limit: int | None = None
+    start_date: str | None = None,
+    end_date: str | None = None,
 ) -> pd.DataFrame:
     """
-    Fetch OHLCV data from DB with datetime column directly.
+    Fetch OHLCV data from DB filtered by datetime range.
+
+    Args:
+        table_name (str): Table name
+        schema (str): DB schema
+        time_column (str): Datetime column name
+        start_date (str | None): e.g. "2024-01-01"
+        end_date (str | None): e.g. "2024-12-31"
+
+    Returns:
+        pd.DataFrame
     """
+
     df = read_df_from_db(table_name, schema)
+
     if df.empty:
         return df
 
-    # Ensure datetime dtype
+    # Ensure datetime type (UTC safe)
     if time_column in df.columns:
         df[time_column] = pd.to_datetime(df[time_column], utc=True)
+
     df = df.sort_values(time_column)
-    if limit:
-        df = df.tail(limit)
-    return df
+
+    # -------------------------
+    # Apply Date Filtering
+    # -------------------------
+    if start_date:
+        start_date = pd.to_datetime(start_date, utc=True)
+        df = df[df[time_column] >= start_date]
+
+    if end_date:
+        end_date = pd.to_datetime(end_date, utc=True)
+        df = df[df[time_column] <= end_date]
+
+    return df.reset_index(drop=True)
 
 #======================================
 # Strategy Fetcher Operation From DB
