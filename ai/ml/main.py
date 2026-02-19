@@ -1,14 +1,15 @@
-import pandas as pd
+import pandas as pd # pyright: ignore[reportMissingModuleSource]
 import warnings
 warnings.filterwarnings("ignore")
-import numpy as np
+import numpy as np # type: ignore
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
-from TradeX.ai.ml.models.model_trainer import train_model, save_model
+from TradeX.ai.ml.models.model_trainer import train_model, save_model, prepare_predictions
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.logs import get_logger 
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 import os
+from TradeX.backtest.newbacktest import HighPerfBacktest
 
 logger = get_logger("model_main")
 
@@ -114,7 +115,7 @@ def main():
     end_date = config.get("end_date")
     split_date = config.get("split_date")
 
-    symbols = config.get("symbols", ["btc"])
+    symbols = ["btc"]
     timehorizon = config.get("timehorizon", "1h")
     indicators_config = config.get("indicators", {})
     classifiers_config = config.get("classifiers", {})
@@ -172,7 +173,17 @@ def main():
                     split_date=split_date,
                     **kwargs
                 )
-
+                df_predictions = prepare_predictions(df_clf,preds,model_type="classifier")
+                bt = HighPerfBacktest(
+                    df_clf,
+                    df_predictions,
+                    take_profit=3,
+                    stop_loss=1
+                )
+                ledger, final_balance, pnl = bt.run()
+                logger.info(f"Ledger Head: {ledger.head()}")
+                logger.info(f"Final Balance: {final_balance}")
+                logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
                     model,
                     X.columns.tolist(),
@@ -205,7 +216,7 @@ def main():
                     split_date=split_date,
                     **kwargs
                 )
-
+                df_predictions = prepare_predictions(df_reg,preds,model_type="regressor")
                 save_model(
                     model,
                     X.columns.tolist(),

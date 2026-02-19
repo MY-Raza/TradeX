@@ -5,6 +5,8 @@ import pickle
 from TradeX.ai.ml.models import randomforest_clf, xgboost_clf
 from TradeX.ai.ml.models import randomforest_reg, xgboost_reg
 from TradeX.utils.common.config_loader import get_logger
+import numpy as np  # pyright: ignore[reportMissingImports, reportMissingModuleSource]
+import pandas as pd # pyright: ignore[reportMissingModuleSource]
 
 logger = get_logger("model_trainer")
 
@@ -63,3 +65,23 @@ def save_model(model, feature_columns, symbol, model_name, folder="saved_models"
         }, f)
 
     logger.info(f"Saved model {model_name} for {symbol} at {file_path}")
+
+def prepare_predictions(df, preds, model_type, threshold=0.0):
+    """
+    Convert raw model predictions into backtest-ready DataFrame.
+    """
+    df_test = df[df["datetime"] >= "2024-01-01 00:00"].copy()
+
+    if model_type == "classifier":
+        signals = preds
+
+    elif model_type == "regressor":
+        signals = np.where(preds > threshold, 1,
+                  np.where(preds < -threshold, -1, 0))
+
+    df_predictions = pd.DataFrame({
+        "datetime": df_test["datetime"].values,
+        "signals": signals
+    })
+
+    return df_predictions
