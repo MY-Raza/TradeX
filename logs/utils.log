@@ -26348,3 +26348,13 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-19 13:24:27,345 | INFO | utils | Inserted 681 rows into models.xgboost_regressor
 2026-02-19 14:16:17,210 | INFO | utils | Database engine initialized
 2026-02-19 14:16:33,465 | INFO | utils | Table Found
+2026-02-19 14:27:13,773 | INFO | utils | Database engine initialized
+2026-02-19 14:27:24,324 | INFO | utils | Table Found
+2026-02-19 14:27:39,127 | INFO | utils | Schema 'models' ready
+2026-02-19 14:27:39,306 | INFO | utils | Indexes ensured: random_forest_classifier_datetime_uidx, random_forest_classifier_datetime_desc_idx
+2026-02-19 14:27:39,848 | INFO | utils | Hypertable created/verified for "models"."random_forest_classifier"
+2026-02-19 14:27:40,040 | INFO | utils | Inserted 2 rows into models.random_forest_classifier
+2026-02-19 14:27:45,227 | INFO | utils | Schema 'models' ready
+2026-02-19 14:27:45,265 | INFO | utils | Indexes ensured: xgboost_classifier_datetime_uidx, xgboost_classifier_datetime_desc_idx
+2026-02-19 14:27:45,282 | INFO | utils | Hypertable created/verified for "models"."xgboost_classifier"
+2026-02-19 14:27:45,334 | INFO | utils | Inserted 2 rows into models.xgboost_classifier

@@ -190,31 +190,35 @@ class HighPerfBacktest:
         self.current_direction = 0        # 1 = long, -1 = short
         self.ledger = []                  # Trade history
         self.last_signal = 0              # Last non-zero signal used
-        self.entry_candle_idx = None
 
     # ==========================
     # BUY LOGIC
     # ==========================
     def buy(self, np_interval, direction, timestamp=None):
         """
-        Open a new position. No-op if already in a position.
+        Open a new position.
+
+        Parameters
+        ----------
+        np_interval : np.ndarray
+            Slice of price data for the prediction interval
+
+        direction : int
+            1 for long, -1 for short
+
+        timestamp : optional
+            Explicit timestamp for trade entry
         """
 
-        # INVARIANT GUARD: never open a second position
-        if self.in_position:
-            logger.warning("buy() called while already in position — skipping.")
-            return
-
+        # Safety check: do nothing if no data
         if len(np_interval) == 0:
             return
 
         # Choose entry candle after optional delay
-        entry_idx = min(self.buy_after_minutes, len(np_interval) - 1)
+        idx = min(self.buy_after_minutes, len(np_interval) - 1)
 
-        # Store entry candle index so TP/SL knows where to start scanning
-        self.entry_candle_idx = entry_idx  # NEW: persisted for check_tp_sl
-
-        self.buy_price = np_interval[entry_idx, self.idx_open]
+        # Set trade state
+        self.buy_price = np_interval[idx, self.idx_open]
         self.sell_price = 0
         self.current_direction = direction
         self.in_position = True
@@ -223,89 +227,57 @@ class HighPerfBacktest:
         pnl = -self.fee - self.slippage
         self.balance += self.balance * pnl / 100
 
-        buy_time = timestamp if timestamp else np_interval[entry_idx, self.idx_time]
-        self.record_trade(buy_time, 'buy', pnl)
+        # Determine actual buy timestamp
+        buy_time = timestamp if timestamp else np_interval[idx, self.idx_time]
 
+        # Record the trade
+        self.record_trade(buy_time, 'buy', pnl)
 
     # ==========================
     # SELL LOGIC
     # ==========================
     def sell(self, timestamp, price, reason):
         """
-        Close the current position. No-op if not in a position.
+        Close the current position.
+
+        Parameters
+        ----------
+        timestamp : datetime
+            Time of exit
+
+        price : float
+            Exit price
+
+        reason : str
+            Reason for exit (TP, SL, direction change, end of test)
         """
 
-        # INVARIANT GUARD: already correct, but now also resets entry_candle_idx
+        # Prevent accidental double-sell
         if not self.in_position:
-            logger.warning(f"sell() called while not in position (reason={reason}) — skipping.")
             return
 
         self.sell_price = price
 
+        # Direction-aware PnL calculation
         if self.current_direction > 0:  # long
             pnl = (self.sell_price - self.buy_price) / self.buy_price * 100
         else:  # short
             pnl = (self.buy_price - self.sell_price) / self.buy_price * 100
 
+        # Apply leverage
         pnl *= self.leverage
+
+        # Subtract exit costs
         pnl -= (self.fee + self.slippage)
 
+        # Update balance
         self.balance += self.balance * pnl / 100
+
+        # Reset position state
         self.in_position = False
-        self.entry_candle_idx = None  # NEW: reset on close
 
+        # Record the trade
         self.record_trade(timestamp, f'sell - {reason}', pnl)
-
-
-    # ==========================
-    # TAKE-PROFIT / STOP-LOSS
-    # ==========================
-    def check_tp_sl(self, np_interval):
-        """
-        Scan for the first TP or SL hit, starting strictly AFTER the entry candle.
-        """
-
-        if not self.in_position:
-            return
-
-        # INVARIANT: only evaluate candles after the entry candle
-        # entry_candle_idx is set by buy(); default to 0 if somehow missing
-        scan_start = (self.entry_candle_idx + 1) if self.entry_candle_idx is not None else 1
-
-        # Nothing to scan if entry was on the last candle of the interval
-        if scan_start >= len(np_interval):
-            return
-
-        # Slice to post-entry candles only
-        np_scan = np_interval[scan_start:]
-
-        highs = np_scan[:, self.idx_high]
-        lows = np_scan[:, self.idx_low]
-        timestamps = np_scan[:, self.idx_time]
-
-        if self.current_direction > 0:  # long
-            tp_price = self.buy_price * (1 + self.take_profit)
-            sl_price = self.buy_price * (1 - self.stop_loss)
-            tp_hits = np.where(highs >= tp_price)[0]
-            sl_hits = np.where(lows <= sl_price)[0]
-        else:  # short
-            tp_price = self.buy_price * (1 - self.take_profit)
-            sl_price = self.buy_price * (1 + self.stop_loss)
-            tp_hits = np.where(lows <= tp_price)[0]
-            sl_hits = np.where(highs >= sl_price)[0]
-
-        first_tp = tp_hits[0] if len(tp_hits) > 0 else None
-        first_sl = sl_hits[0] if len(sl_hits) > 0 else None
-
-        if first_tp is not None and first_sl is not None:
-            if first_tp <= first_sl:
-                self.sell(timestamps[first_tp], tp_price, 'take_profit')
-            else:
-                self.sell(timestamps[first_sl], sl_price, 'stop_loss')
-        elif first_tp is not None:
-            self.sell(timestamps[first_tp], tp_price, 'take_profit')
-        elif first_sl is not None:
-            self.sell(timestamps[first_sl], sl_price, 'stop_loss')
 
     # ==========================
     # RECORD TRADE
@@ -320,10 +292,57 @@ class HighPerfBacktest:
             'predicted_direction': 'long' if self.current_direction > 0 else 'short',
             'action': action,
             'buy_price': self.buy_price,
-            'sell_price': self.sell_price if 'sell' in action else 0,
+            'sell_price': self.sell_price if 'sell' in action else 0.0,
             'balance': self.balance,
             'pnl': pnl
         })
+
+    # ==========================
+    # TAKE-PROFIT / STOP-LOSS
+    # ==========================
+    def check_tp_sl(self, np_interval):
+        """
+        Scan the price interval for the first TP or SL hit.
+        """
+
+        if not self.in_position:
+            return
+
+        highs = np_interval[:, self.idx_high]
+        lows = np_interval[:, self.idx_low]
+        timestamps = np_interval[:, self.idx_time]
+
+        # Compute TP and SL price levels
+        if self.current_direction > 0:  # long
+            tp_price = self.buy_price * (1 + self.take_profit)
+            sl_price = self.buy_price * (1 - self.stop_loss)
+        else:  # short
+            tp_price = self.buy_price * (1 - self.take_profit)
+            sl_price = self.buy_price * (1 + self.stop_loss)
+
+        # Find indices where TP or SL is hit
+        tp_hits = np.where(
+            highs >= tp_price if self.current_direction > 0 else lows <= tp_price
+        )[0]
+
+        sl_hits = np.where(
+            lows <= sl_price if self.current_direction > 0 else highs >= sl_price
+        )[0]
+
+        # Determine which one happens first
+        first_hit = None
+        if len(tp_hits) > 0 and len(sl_hits) > 0:
+            first_hit = tp_hits[0] if tp_hits[0] < sl_hits[0] else sl_hits[0]
+        elif len(tp_hits) > 0:
+            first_hit = tp_hits[0]
+        elif len(sl_hits) > 0:
+            first_hit = sl_hits[0]
+
+        # Execute exit if TP or SL is triggered
+        if first_hit is not None:
+            price = tp_price if first_hit in tp_hits else sl_price
+            reason = 'take_profit' if first_hit in tp_hits else 'stop_loss'
+            self.sell(timestamps[first_hit], price, reason)
 
     # ==========================
     # RUN BACKTEST
@@ -375,16 +394,16 @@ class HighPerfBacktest:
 
             # Handle direction changes
             pred_time = self.np_pred[i, self.idx_pred_time]
-
-            if self.in_position and current_pred_signal != self.current_direction:
-                # Atomic flip: close at interval open, reopen immediately
+            if self.in_position and current_pred_signal != self.last_signal:
                 self.sell(pred_time, open_price, 'direction_change')
                 self.buy(np_interval, current_pred_signal, timestamp=pred_time)
             elif not self.in_position:
                 self.buy(np_interval, current_pred_signal, timestamp=pred_time)
-            # else: in_position and same direction → hold, do nothing
 
+            # Update last signal
             self.last_signal = current_pred_signal
+
+            # Check TP/SL within this interval
             self.check_tp_sl(np_interval)
 
             # Stop if balance collapses
