@@ -1,5 +1,3 @@
-import sys
-print(sys.executable)
 import pandas as pd 
 import warnings
 warnings.filterwarnings("ignore")
@@ -177,6 +175,7 @@ def main():
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+                print(df_predictions.head(100))
                 bt = HighPerfBacktest(
                     df_clf,
                     df_predictions,
@@ -221,6 +220,7 @@ def main():
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+                print(df_predictions.head(100))
                 bt = HighPerfBacktest(
                     df_clf,
                     df_predictions,

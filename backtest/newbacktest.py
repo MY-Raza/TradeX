@@ -213,7 +213,9 @@ class HighPerfBacktest:
         # Safety check: do nothing if no data
         if len(np_interval) == 0:
             return
-
+        
+        if self.in_position == True:
+            return
         # Choose entry candle after optional delay
         idx = min(self.buy_after_minutes, len(np_interval) - 1)
 
