@@ -1,7 +1,9 @@
-import pandas as pd # pyright: ignore[reportMissingModuleSource]
+import sys
+print(sys.executable)
+import pandas as pd 
 import warnings
 warnings.filterwarnings("ignore")
-import numpy as np # type: ignore
+import numpy as np
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.model_trainer import train_model, save_model, prepare_predictions
@@ -165,7 +167,7 @@ def main():
                 # Pass XGBoost params dynamically
                 kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
 
-                model, preds = train_model(
+                model, preds, test_index = train_model(
                     model_type="classifier",
                     model_name=clf_name,
                     df=df_clf,
@@ -173,7 +175,7 @@ def main():
                     split_date=split_date,
                     **kwargs
                 )
-                df_predictions = prepare_predictions(df_clf,preds,model_type="classifier")
+                df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 bt = HighPerfBacktest(
                     df_clf,
                     df_predictions,
@@ -208,7 +210,7 @@ def main():
                 # Pass XGBoost params dynamically
                 kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
 
-                model, preds = train_model(
+                model, preds, test_index = train_model(
                     model_type="regressor",
                     model_name=reg_name,
                     df=df_reg,
@@ -216,7 +218,7 @@ def main():
                     split_date=split_date,
                     **kwargs
                 )
-                df_predictions = prepare_predictions(df_reg,preds,model_type="regressor")
+                df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 save_model(
                     model,
                     X.columns.tolist(),

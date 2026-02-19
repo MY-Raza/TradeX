@@ -38,11 +38,8 @@ def train_model(model_type: str, model_name: str, df, target_col="target",
         raise ValueError(f"Unknown model name: {model_name}")
 
     # Call trainer with kwargs (XGBoost params)
-    model, preds = trainer(df, target_col=target_col, split_date=split_date, **kwargs)
-    return model, preds
-
-
-
+    model, preds, test_index = trainer(df, target_col=target_col, split_date=split_date, **kwargs)
+    return model, preds, test_index
 
 def save_model(model, feature_columns, symbol, model_name, folder="saved_models"):
     """
@@ -66,11 +63,7 @@ def save_model(model, feature_columns, symbol, model_name, folder="saved_models"
 
     logger.info(f"Saved model {model_name} for {symbol} at {file_path}")
 
-def prepare_predictions(df, preds, model_type, threshold=0.0):
-    """
-    Convert raw model predictions into backtest-ready DataFrame.
-    """
-    df_test = df[df["datetime"] >= "2024-01-01 00:00"].copy()
+def prepare_predictions(df, preds, test_index, model_type, threshold=0.0):
 
     if model_type == "classifier":
         signals = preds
@@ -80,8 +73,10 @@ def prepare_predictions(df, preds, model_type, threshold=0.0):
                   np.where(preds < -threshold, -1, 0))
 
     df_predictions = pd.DataFrame({
-        "datetime": df_test["datetime"].values,
+        "datetime": df.loc[test_index, "datetime"].values,
         "signals": signals
     })
 
     return df_predictions
+
+

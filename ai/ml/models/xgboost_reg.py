@@ -40,4 +40,4 @@ def train(df, target_col="target", split_date="2024-01-01 00:00", **xgb_params):
 
     preds = model.predict(X_test)
 
-    return model, preds
+    return model, preds,X_test.index
