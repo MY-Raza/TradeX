@@ -26184,3 +26184,65 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-19 10:10:35,319 | INFO | utils | Table Found
 2026-02-19 10:42:32,945 | INFO | utils | Database engine initialized
 2026-02-19 10:42:48,331 | INFO | utils | Table Found
+2026-02-19 10:54:16,861 | INFO | utils | Database engine initialized
+2026-02-19 10:54:25,267 | INFO | utils | Table Found
+2026-02-19 10:58:34,340 | INFO | utils | Database engine initialized
+2026-02-19 10:58:42,738 | INFO | utils | Table Found
+2026-02-19 11:05:26,229 | INFO | utils | Database engine initialized
+2026-02-19 11:05:34,871 | INFO | utils | Table Found
+2026-02-19 11:11:46,411 | INFO | utils | Database engine initialized
+2026-02-19 11:11:54,587 | INFO | utils | Table Found
+2026-02-19 11:18:59,065 | INFO | utils | Database engine initialized
+2026-02-19 11:19:07,690 | INFO | utils | Table Found
+2026-02-19 11:19:22,480 | INFO | utils | Schema 'models' ready
+2026-02-19 11:19:22,715 | INFO | utils | Indexes ensured: random_forest_classifier_datetime_uidx, random_forest_classifier_datetime_desc_idx
+2026-02-19 11:19:24,091 | INFO | utils | Hypertable created/verified for "models"."random_forest_classifier"
+2026-02-19 11:19:27,459 | INFO | utils | Inserted 906 rows into models.random_forest_classifier
+2026-02-19 11:19:31,370 | INFO | utils | Schema 'models' ready
+2026-02-19 11:19:31,454 | INFO | utils | Indexes ensured: xgboost_classifier_datetime_uidx, xgboost_classifier_datetime_desc_idx
+2026-02-19 11:19:31,485 | INFO | utils | Hypertable created/verified for "models"."xgboost_classifier"
+2026-02-19 11:19:34,371 | INFO | utils | Inserted 906 rows into models.xgboost_classifier
+2026-02-19 11:22:06,040 | INFO | utils | Schema 'models' ready
+2026-02-19 11:22:06,130 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-19 11:22:06,169 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-19 11:22:07,118 | INFO | utils | Inserted 531 rows into models.xgboost_regressor
+2026-02-19 11:22:22,240 | INFO | utils | Schema 'models' ready
+2026-02-19 11:22:22,262 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-19 11:22:22,267 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-19 11:22:22,317 | INFO | utils | No new rows to insert
+2026-02-19 11:33:15,509 | INFO | utils | Database engine initialized
+2026-02-19 11:33:27,698 | INFO | utils | Table Found
+2026-02-19 11:33:41,742 | INFO | utils | Schema 'models' ready
+2026-02-19 11:33:41,945 | INFO | utils | Indexes ensured: random_forest_classifier_datetime_uidx, random_forest_classifier_datetime_desc_idx
+2026-02-19 11:33:42,302 | INFO | utils | Hypertable created/verified for "models"."random_forest_classifier"
+2026-02-19 11:33:45,182 | INFO | utils | Inserted 906 rows into models.random_forest_classifier
+2026-02-19 11:33:50,348 | INFO | utils | Schema 'models' ready
+2026-02-19 11:33:50,402 | INFO | utils | Indexes ensured: xgboost_classifier_datetime_uidx, xgboost_classifier_datetime_desc_idx
+2026-02-19 11:33:50,421 | INFO | utils | Hypertable created/verified for "models"."xgboost_classifier"
+2026-02-19 11:33:53,549 | INFO | utils | Inserted 906 rows into models.xgboost_classifier
+2026-02-19 11:36:29,928 | INFO | utils | Schema 'models' ready
+2026-02-19 11:36:30,016 | INFO | utils | Indexes ensured: random_forest_regressor_datetime_uidx, random_forest_regressor_datetime_desc_idx
+2026-02-19 11:36:30,057 | INFO | utils | Hypertable created/verified for "models"."random_forest_regressor"
+2026-02-19 11:36:30,943 | INFO | utils | Inserted 531 rows into models.random_forest_regressor
+2026-02-19 11:36:45,945 | INFO | utils | Schema 'models' ready
+2026-02-19 11:36:46,004 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-19 11:36:46,038 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-19 11:36:46,570 | INFO | utils | Inserted 329 rows into models.xgboost_regressor
+2026-02-19 11:41:49,642 | INFO | utils | Database engine initialized
+2026-02-19 11:41:57,889 | INFO | utils | Table Found
+2026-02-19 11:42:11,294 | INFO | utils | Schema 'models' ready
+2026-02-19 11:42:11,560 | INFO | utils | Indexes ensured: random_forest_classifier_datetime_uidx, random_forest_classifier_datetime_desc_idx
+2026-02-19 11:42:11,935 | INFO | utils | Hypertable created/verified for "models"."random_forest_classifier"
+2026-02-19 11:42:14,908 | INFO | utils | Inserted 906 rows into models.random_forest_classifier
+2026-02-19 11:42:19,417 | INFO | utils | Schema 'models' ready
+2026-02-19 11:42:19,487 | INFO | utils | Indexes ensured: xgboost_classifier_datetime_uidx, xgboost_classifier_datetime_desc_idx
+2026-02-19 11:42:19,519 | INFO | utils | Hypertable created/verified for "models"."xgboost_classifier"
+2026-02-19 11:42:22,289 | INFO | utils | Inserted 906 rows into models.xgboost_classifier
+2026-02-19 11:44:59,746 | INFO | utils | Schema 'models' ready
+2026-02-19 11:44:59,937 | INFO | utils | Indexes ensured: random_forest_regressor_datetime_uidx, random_forest_regressor_datetime_desc_idx
+2026-02-19 11:45:00,033 | INFO | utils | Hypertable created/verified for "models"."random_forest_regressor"
+2026-02-19 11:45:01,015 | INFO | utils | Inserted 531 rows into models.random_forest_regressor
+2026-02-19 11:45:15,940 | INFO | utils | Schema 'models' ready
+2026-02-19 11:45:15,989 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-19 11:45:16,011 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-19 11:45:16,591 | INFO | utils | Inserted 329 rows into models.xgboost_regressor

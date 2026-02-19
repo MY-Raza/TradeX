@@ -12,7 +12,7 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 import os
 from TradeX.backtest.newbacktest import HighPerfBacktest
-
+from TradeX.utils.db.utils import save_df_to_db
 logger = get_logger("model_main")
 
 
@@ -176,6 +176,7 @@ def main():
                     **kwargs
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
+                df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
                 bt = HighPerfBacktest(
                     df_clf,
                     df_predictions,
@@ -183,7 +184,7 @@ def main():
                     stop_loss=1
                 )
                 ledger, final_balance, pnl = bt.run()
-                logger.info(f"Ledger Head: {ledger.head()}")
+                save_df_to_db(ledger,table_name=f"{clf_name}_classifier",schema="models",time_column="datetime",is_timeseries=True)
                 logger.info(f"Final Balance: {final_balance}")
                 logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
@@ -219,6 +220,17 @@ def main():
                     **kwargs
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
+                df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+                bt = HighPerfBacktest(
+                    df_clf,
+                    df_predictions,
+                    take_profit=3,
+                    stop_loss=1
+                )
+                ledger, final_balance, pnl = bt.run()
+                save_df_to_db(ledger,table_name=f"{reg_name}_regressor",schema="models",time_column="datetime",is_timeseries=True)
+                logger.info(f"Final Balance: {final_balance}")
+                logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
                     model,
                     X.columns.tolist(),

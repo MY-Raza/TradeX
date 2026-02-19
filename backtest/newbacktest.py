@@ -292,7 +292,7 @@ class HighPerfBacktest:
             'predicted_direction': 'long' if self.current_direction > 0 else 'short',
             'action': action,
             'buy_price': self.buy_price,
-            'sell_price': self.sell_price if 'sell' in action else None,
+            'sell_price': self.sell_price if 'sell' in action else 0.0,
             'balance': self.balance,
             'pnl': pnl
         })

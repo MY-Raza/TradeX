@@ -259,3 +259,93 @@
 2026-02-19 10:43:01,716 | ERROR | model_main | Classifier random_forest failed for btc: All arrays must be of the same length
 2026-02-19 10:43:01,716 | INFO | model_main | Training classifier: xgboost for btc
 2026-02-19 10:43:04,913 | ERROR | model_main | Classifier xgboost failed for btc: All arrays must be of the same length
+2026-02-19 10:54:16,725 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 10:54:16,725 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 10:54:26,267 | INFO | model_main | Generating indicators for btc...
+2026-02-19 10:54:26,287 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 10:54:38,378 | ERROR | model_main | Classifier random_forest failed for btc: too many values to unpack (expected 2)
+2026-02-19 10:54:38,383 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 10:54:41,326 | ERROR | model_main | Classifier xgboost failed for btc: too many values to unpack (expected 2)
+2026-02-19 10:58:34,201 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 10:58:34,201 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 10:58:43,619 | INFO | model_main | Generating indicators for btc...
+2026-02-19 10:58:43,628 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 10:58:57,359 | ERROR | model_main | Classifier random_forest failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-19 10:58:57,362 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 10:59:00,449 | ERROR | model_main | Classifier xgboost failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-19 11:05:26,071 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 11:05:26,071 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 11:05:35,809 | INFO | model_main | Generating indicators for btc...
+2026-02-19 11:05:35,826 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 11:05:49,759 | ERROR | model_main | Classifier random_forest failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-19 11:05:49,779 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 11:05:53,061 | ERROR | model_main | Classifier xgboost failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-19 11:11:46,275 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 11:11:46,277 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 11:11:55,534 | INFO | model_main | Generating indicators for btc...
+2026-02-19 11:11:55,543 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 11:12:08,433 | INFO | model_main | Ledger Head:                    datetime predicted_direction              action  ...  balance   pnl  pnl_sum
+0 2025-01-01 01:00:00+00:00                long                 buy  ...   999.50 -0.05    -0.05
+1 2025-01-01 08:00:00+00:00                long    sell - stop_loss  ...   989.01 -1.05    -1.10
+2 2025-01-01 09:00:00+00:00                long                 buy  ...   988.51 -0.05    -1.15
+3 2025-01-02 08:00:00+00:00                long  sell - take_profit  ...  1017.67  2.95     1.80
+4 2025-01-02 09:00:00+00:00                long                 buy  ...  1017.16 -0.05     1.75
+
+[5 rows x 8 columns]
+2026-02-19 11:12:08,446 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:12:08,446 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:12:09,011 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 11:12:12,679 | INFO | model_main | Ledger Head:                    datetime predicted_direction              action  ...  balance   pnl  pnl_sum
+0 2025-01-01 01:00:00+00:00                long                 buy  ...   999.50 -0.05    -0.05
+1 2025-01-01 08:00:00+00:00                long    sell - stop_loss  ...   989.01 -1.05    -1.10
+2 2025-01-01 09:00:00+00:00                long                 buy  ...   988.51 -0.05    -1.15
+3 2025-01-02 08:00:00+00:00                long  sell - take_profit  ...  1017.67  2.95     1.80
+4 2025-01-02 09:00:00+00:00                long                 buy  ...  1017.16 -0.05     1.75
+
+[5 rows x 8 columns]
+2026-02-19 11:12:12,685 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:12:12,704 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:18:58,899 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 11:18:58,899 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 11:19:08,700 | INFO | model_main | Generating indicators for btc...
+2026-02-19 11:19:08,719 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 11:19:27,461 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:19:27,461 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:19:28,381 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 11:19:34,374 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:19:34,376 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:19:34,403 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-19 11:22:19,563 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-19 11:22:22,354 | INFO | model_main | Model training complete for btc.
+2026-02-19 11:33:15,241 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 11:33:15,241 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 11:33:28,955 | INFO | model_main | Generating indicators for btc...
+2026-02-19 11:33:29,013 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 11:33:45,182 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:33:45,184 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:33:46,678 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 11:33:53,553 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:33:53,555 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:33:53,585 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-19 11:36:30,944 | INFO | model_main | Final Balance: 495.92
+2026-02-19 11:36:30,944 | INFO | model_main | Cummulative PnL: -68.5
+2026-02-19 11:36:42,866 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-19 11:36:46,578 | INFO | model_main | Final Balance: 496.74
+2026-02-19 11:36:46,578 | INFO | model_main | Cummulative PnL: -69.0
+2026-02-19 11:36:46,618 | INFO | model_main | Model training complete for btc.
+2026-02-19 11:41:49,448 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-19 11:41:49,448 | INFO | model_main | Fetching data for btc from database...
+2026-02-19 11:41:58,839 | INFO | model_main | Generating indicators for btc...
+2026-02-19 11:41:58,854 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-19 11:42:14,908 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:42:14,908 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:42:16,381 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-19 11:42:22,290 | INFO | model_main | Final Balance: 497.73
+2026-02-19 11:42:22,291 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-19 11:42:22,331 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-19 11:45:01,015 | INFO | model_main | Final Balance: 495.92
+2026-02-19 11:45:01,027 | INFO | model_main | Cummulative PnL: -68.5
+2026-02-19 11:45:12,972 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-19 11:45:16,591 | INFO | model_main | Final Balance: 496.74
+2026-02-19 11:45:16,591 | INFO | model_main | Cummulative PnL: -69.0
+2026-02-19 11:45:16,623 | INFO | model_main | Model training complete for btc.

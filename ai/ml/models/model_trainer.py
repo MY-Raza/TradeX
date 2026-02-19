@@ -65,6 +65,9 @@ def save_model(model, feature_columns, symbol, model_name, folder="saved_models"
 
 def prepare_predictions(df, preds, test_index, model_type, threshold=0.0):
 
+    # 🔥 Ensure datetime is UTC-aware (important)
+    df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
+
     if model_type == "classifier":
         signals = preds
 
@@ -78,5 +81,6 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=0.0):
     })
 
     return df_predictions
+
 
 
