@@ -778,3 +778,33 @@
 2026-02-20 12:17:32,545 | INFO | model_main | Training classifier: xgboost for btc
 2026-02-20 12:17:38,537 | INFO | model_main | Final Balance: 338.5
 2026-02-20 12:17:38,539 | INFO | model_main | Cummulative PnL: -101.48
+2026-02-20 13:44:23,073 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-20 13:44:23,073 | INFO | model_main | Fetching data for btc from database...
+2026-02-20 13:44:38,740 | INFO | model_main | Generating indicators for btc...
+2026-02-20 13:44:38,778 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-20 13:44:56,365 | INFO | model_main | Final Balance: 497.73
+2026-02-20 13:44:56,365 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-20 13:44:58,315 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-20 13:45:05,180 | INFO | model_main | Final Balance: 497.73
+2026-02-20 13:45:05,180 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-20 13:45:05,221 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-20 13:47:34,411 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-20 13:47:34,411 | INFO | model_main | Fetching data for btc from database...
+2026-02-20 13:47:48,783 | INFO | model_main | Generating indicators for btc...
+2026-02-20 13:47:48,800 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-20 13:49:08,168 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-20 13:49:08,168 | INFO | model_main | Fetching data for btc from database...
+2026-02-20 13:49:18,247 | INFO | model_main | Generating indicators for btc...
+2026-02-20 13:49:18,263 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-20 13:49:31,894 | ERROR | model_main | Classifier random_forest failed for btc: cannot unpack non-iterable NoneType object
+2026-02-20 13:49:31,894 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-20 13:49:35,250 | ERROR | model_main | Classifier xgboost failed for btc: cannot unpack non-iterable NoneType object
+2026-02-20 13:50:25,249 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-20 13:50:25,249 | INFO | model_main | Fetching data for btc from database...
+2026-02-20 13:50:36,651 | INFO | model_main | Generating indicators for btc...
+2026-02-20 13:50:36,668 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-20 13:50:53,700 | INFO | model_main | Final Balance: 497.73
+2026-02-20 13:50:53,702 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-20 13:50:53,906 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-20 13:50:59,426 | INFO | model_main | Final Balance: 497.73
+2026-02-20 13:50:59,426 | INFO | model_main | Cummulative PnL: -62.4

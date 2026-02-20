@@ -382,6 +382,8 @@ class HighPerfBacktest:
                 continue
 
             # Carry forward last signal if current is neutral
+            if current_pred_signal == self.last_signal:
+                continue
             if current_pred_signal == 0:
                 current_pred_signal = self.last_signal
 
