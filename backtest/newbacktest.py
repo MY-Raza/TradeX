@@ -190,8 +190,6 @@ class HighPerfBacktest:
         self.sell_price = 0.0             # Exit price
         self.current_direction = 0        # 1 = long, -1 = short
         self.ledger = []                  # Trade history
-        self.last_signal = 0              # Last non-zero signal used
-        self.entry_consumed_for_interval = False
 
     # ==========================
     # BUY LOGIC
@@ -244,46 +242,32 @@ class HighPerfBacktest:
     def sell(self, timestamp, price, reason):
         """
         Close the current position.
-
-        Parameters
-        ----------
-        timestamp : datetime
-            Time of exit
-
-        price : float
-            Exit price
-
-        reason : str
-            Reason for exit (TP, SL, direction change, end of test)
         """
-        self.last_exit_reason = reason
-        logger.info(f"SELL CALLED | reason:{reason}")
-        # Prevent accidental double-sell
+
         if not self.in_position:
             return
 
+        self.last_exit_reason = reason
         self.sell_price = price
 
-        # Direction-aware PnL calculation
+        # Direction-aware PnL
         if self.current_direction > 0:  # long
             pnl = (self.sell_price - self.buy_price) / self.buy_price * 100
         else:  # short
             pnl = (self.buy_price - self.sell_price) / self.buy_price * 100
 
-        # Apply leverage
         pnl *= self.leverage
-
-        # Subtract exit costs
         pnl -= (self.fee + self.slippage)
 
-        # Update balance
         self.balance += self.balance * pnl / 100
 
-        # Reset position state
-        self.in_position = False
-
-        # Record the trade
+        # Record before resetting direction
         self.record_trade(timestamp, f'sell - {reason}', pnl)
+
+        # Reset state
+        self.in_position = False
+        self.current_direction = 0
+
 
     # ==========================
     # RECORD TRADE
@@ -350,6 +334,7 @@ class HighPerfBacktest:
             reason = 'take_profit' if first_hit in tp_hits else 'stop_loss'
             self.sell(timestamps[first_hit], price, reason)
 
+
     # ==========================
     # RUN BACKTEST
     # ==========================
@@ -358,92 +343,55 @@ class HighPerfBacktest:
         Execute the backtest loop and return results.
         """
 
-        # Find first actionable signal
-        first_non_zero_idx = None
-        for i in range(len(self.np_pred)):
-            self.entry_consumed_for_interval = False
-            if self.np_pred[i, self.idx_pred_signal] != 0:
-                first_non_zero_idx = i
-                break
+        for i in range(len(self.interval_indices)):
 
-        if first_non_zero_idx is None:
-            logger.info("No non-zero signals found!")
-            return pd.DataFrame(self.ledger), self.balance, 0
-
-        start_idx = max(0, first_non_zero_idx - 1)
-
-        for i in range(start_idx, len(self.np_pred) - 1):
             raw_signal = self.np_pred[i, self.idx_pred_signal]
 
-            # Carry forward last signal if neutral
-            current_signal = raw_signal if raw_signal != 0 else self.last_signal
-
-            if current_signal == 0:
+            # Skip neutral signals
+            if raw_signal == 0:
                 continue
 
             start_price_idx, end_price_idx = self.interval_indices[i]
+
             if start_price_idx < 0 or end_price_idx <= start_price_idx:
                 continue
 
             np_interval = self.np_price[start_price_idx:end_price_idx]
+
             if len(np_interval) <= self.buy_after_minutes:
                 continue
 
             pred_time = self.np_pred[i, self.idx_pred_time]
             open_price = np_interval[0, self.idx_open]
 
-            # ==========================
-            # 1. TP / SL CHECK FIRST
-            # ==========================
-            self.check_tp_sl(np_interval)
+            # ==============================
+            # 1. CHECK TP / SL IF IN TRADE
+            # ==============================
+            if self.in_position:
+                self.check_tp_sl(np_interval)
 
-            # Reset entry flag after TP/SL exit
-            if not self.in_position:
-                self.entry_consumed_for_interval = False
-
-            # ==========================
-            # 2. DIRECTION CHANGE EXIT
-            # ==========================
-            if self.in_position and current_signal != self.last_signal:
+            # ==============================
+            # 2. IF SIGNAL FLIPPED → CLOSE
+            # ==============================
+            if self.in_position and raw_signal != self.current_direction:
                 self.sell(pred_time, open_price, 'direction_change')
-                self.entry_consumed_for_interval = False  # allow re-entry
 
-            # ==========================
-            # 3. ENTRY LOGIC
-            # ==========================
-            if not self.in_position and not self.entry_consumed_for_interval:
-                should_enter = False
+            # ==============================
+            # 3. IF NOT IN POSITION → ENTER
+            # ==============================
+            if not self.in_position:
+                self.buy(np_interval, raw_signal, timestamp=pred_time)
 
-                # First ever trade
-                if self.last_signal == 0:
-                    should_enter = True
-
-                # Direction change
-                elif current_signal != self.last_signal:
-                    should_enter = True
-
-                # Re-entry after TP / SL
-                elif self.last_exit_reason in ('take_profit', 'stop_loss'):
-                    should_enter = True
-
-                if should_enter:
-                    self.buy(np_interval, current_signal, timestamp=pred_time)
-                    self.entry_consumed_for_interval = True
-
-            # ==========================
-            # 4. UPDATE SIGNAL STATE
-            # ==========================
-            self.last_signal = current_signal
-
-            # ==========================
-            # 5. RISK STOP
-            # ==========================
+            # ==============================
+            # 4. RISK STOP
+            # ==============================
             if self.balance < self.breaking_balance:
                 logger.info("Breaking balance reached. Stopping backtest.")
                 break
 
-        
-        # Force close at end
+        # ==============================
+        # FORCE CLOSE AT END
+        # ==============================
         if self.in_position and len(self.np_price) > 0:
             self.sell(
                 self.np_price[-1, self.idx_time],
@@ -452,6 +400,7 @@ class HighPerfBacktest:
             )
 
         df_ledger = pd.DataFrame(self.ledger)
+
         if len(df_ledger) > 0:
             df_ledger['pnl_sum'] = df_ledger['pnl'].cumsum()
             df_ledger[['balance', 'pnl', 'pnl_sum']] = df_ledger[
@@ -464,5 +413,6 @@ class HighPerfBacktest:
         )
 
         return df_ledger, final_balance, total_pnl_percent
+
 
 
