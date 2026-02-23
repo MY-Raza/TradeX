@@ -26740,3 +26740,84 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-20 13:53:53,101 | INFO | utils | Indexes ensured: xgboost_classifier_datetime_uidx, xgboost_classifier_datetime_desc_idx
 2026-02-20 13:53:53,121 | INFO | utils | Hypertable created/verified for "models"."xgboost_classifier"
 2026-02-20 13:53:55,398 | INFO | utils | Inserted 561 rows into models.xgboost_classifier
+2026-02-20 14:00:42,386 | INFO | utils | Database engine initialized
+2026-02-20 14:00:54,935 | INFO | utils | Table Found
+2026-02-20 14:03:47,470 | INFO | utils | Schema 'models' ready
+2026-02-20 14:03:47,682 | INFO | utils | Indexes ensured: random_forest_regressor_datetime_uidx, random_forest_regressor_datetime_desc_idx
+2026-02-20 14:03:47,872 | INFO | utils | Hypertable created/verified for "models"."random_forest_regressor"
+2026-02-20 14:03:49,618 | INFO | utils | Inserted 974 rows into models.random_forest_regressor
+2026-02-20 14:04:07,517 | INFO | utils | Schema 'models' ready
+2026-02-20 14:04:07,591 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-20 14:04:07,604 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-20 14:04:08,967 | INFO | utils | Inserted 943 rows into models.xgboost_regressor
+2026-02-23 10:14:07,823 | INFO | utils | Database engine initialized
+2026-02-23 10:15:57,678 | INFO | utils | Database engine initialized
+2026-02-23 10:16:18,951 | INFO | utils | Table Found
+2026-02-23 10:18:57,857 | INFO | utils | Schema 'models' ready
+2026-02-23 10:18:58,089 | INFO | utils | Indexes ensured: random_forest_regressor_datetime_uidx, random_forest_regressor_datetime_desc_idx
+2026-02-23 10:18:59,099 | INFO | utils | Hypertable created/verified for "models"."random_forest_regressor"
+2026-02-23 10:19:01,676 | INFO | utils | Inserted 974 rows into models.random_forest_regressor
+2026-02-23 10:19:17,305 | INFO | utils | Schema 'models' ready
+2026-02-23 10:19:17,369 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-23 10:19:17,405 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-23 10:19:19,426 | INFO | utils | Inserted 943 rows into models.xgboost_regressor
+2026-02-23 10:19:52,619 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:19:53,474 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-02-23 10:19:53,518 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-02-23 10:19:59,948 | INFO | utils | Inserted 7236 rows into data_binance.btc_1m
+2026-02-23 10:23:07,696 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:23:07,804 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-02-23 10:23:07,809 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-02-23 10:23:11,344 | INFO | utils | Inserted 7242 rows into data_binance.eth_1m
+2026-02-23 10:26:06,889 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:26:07,026 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-02-23 10:26:07,033 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-02-23 10:26:09,710 | INFO | utils | Inserted 7243 rows into data_binance.bnb_1m
+2026-02-23 10:29:04,509 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:29:04,602 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-02-23 10:29:04,608 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-02-23 10:29:07,491 | INFO | utils | Inserted 7245 rows into data_binance.ada_1m
+2026-02-23 10:31:23,426 | INFO | utils | Database engine initialized
+2026-02-23 10:31:38,306 | INFO | utils | Table Found
+2026-02-23 10:34:49,726 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:34:49,970 | INFO | utils | Schema 'models' ready
+2026-02-23 10:34:49,991 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-02-23 10:34:50,002 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-02-23 10:34:50,289 | INFO | utils | Indexes ensured: random_forest_regressor_datetime_uidx, random_forest_regressor_datetime_desc_idx
+2026-02-23 10:34:50,477 | INFO | utils | Hypertable created/verified for "models"."random_forest_regressor"
+2026-02-23 10:34:53,897 | INFO | utils | Inserted 1397 rows into models.random_forest_regressor
+2026-02-23 10:34:56,731 | INFO | utils | Inserted 7248 rows into data_binance.xrp_1m
+2026-02-23 10:35:11,716 | INFO | utils | Schema 'models' ready
+2026-02-23 10:35:11,796 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-23 10:35:11,822 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-23 10:35:12,562 | INFO | utils | Inserted 681 rows into models.xgboost_regressor
+2026-02-23 10:38:01,741 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:38:01,901 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-02-23 10:38:01,909 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-02-23 10:38:04,789 | INFO | utils | Inserted 7253 rows into data_binance.doge_1m
+2026-02-23 10:40:57,748 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:40:58,178 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-02-23 10:40:58,178 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-02-23 10:41:00,912 | INFO | utils | Inserted 7256 rows into data_binance.sol_1m
+2026-02-23 10:43:52,953 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:43:53,010 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-02-23 10:43:53,015 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-02-23 10:43:55,287 | INFO | utils | Inserted 7258 rows into data_binance.dot_1m
+2026-02-23 10:44:05,125 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:44:05,139 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-02-23 10:44:05,145 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-02-23 10:44:05,155 | INFO | utils | No new rows to insert
+2026-02-23 10:46:57,309 | INFO | utils | Schema 'data_binance' ready
+2026-02-23 10:46:57,392 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-02-23 10:46:57,394 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-02-23 10:47:00,098 | INFO | utils | Inserted 7260 rows into data_binance.link_1m
+2026-02-23 10:58:19,338 | INFO | utils | Database engine initialized
+2026-02-23 10:58:31,657 | INFO | utils | Table Found
+2026-02-23 11:01:11,259 | INFO | utils | Schema 'models' ready
+2026-02-23 11:01:11,381 | INFO | utils | Indexes ensured: random_forest_regressor_datetime_uidx, random_forest_regressor_datetime_desc_idx
+2026-02-23 11:01:11,573 | INFO | utils | Hypertable created/verified for "models"."random_forest_regressor"
+2026-02-23 11:01:14,009 | INFO | utils | Inserted 1397 rows into models.random_forest_regressor
+2026-02-23 11:01:28,851 | INFO | utils | Schema 'models' ready
+2026-02-23 11:01:28,923 | INFO | utils | Indexes ensured: xgboost_regressor_datetime_uidx, xgboost_regressor_datetime_desc_idx
+2026-02-23 11:01:28,955 | INFO | utils | Hypertable created/verified for "models"."xgboost_regressor"
+2026-02-23 11:01:29,851 | INFO | utils | Inserted 681 rows into models.xgboost_regressor
