@@ -817,3 +817,27 @@
 2026-02-20 13:53:48,852 | INFO | model_main | Training classifier: xgboost for btc
 2026-02-20 13:53:55,399 | INFO | model_main | Final Balance: 1674.0
 2026-02-20 13:53:55,400 | INFO | model_main | Cummulative PnL: 56.57
+2026-02-20 14:00:40,970 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-20 14:00:40,970 | INFO | model_main | Fetching data for btc from database...
+2026-02-20 14:00:56,072 | INFO | model_main | Generating indicators for btc...
+2026-02-20 14:00:56,096 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-20 14:03:49,618 | INFO | model_main | Final Balance: 1563.84
+2026-02-20 14:03:49,618 | INFO | model_main | Cummulative PnL: 51.49
+2026-02-20 14:04:02,367 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-20 14:04:08,968 | INFO | model_main | Final Balance: 497.74
+2026-02-20 14:04:08,970 | INFO | model_main | Cummulative PnL: -65.55
+2026-02-20 14:04:08,991 | INFO | model_main | Model training complete for btc.
+2026-02-23 10:15:57,471 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-23 10:15:57,471 | INFO | model_main | Fetching data for btc from database...
+2026-02-23 10:16:20,524 | INFO | model_main | Generating indicators for btc...
+2026-02-23 10:16:20,551 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-23 10:19:01,696 | INFO | model_main | Final Balance: 1563.84
+2026-02-23 10:19:01,696 | INFO | model_main | Cummulative PnL: 51.49
+2026-02-23 10:19:13,229 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-23 10:19:19,427 | INFO | model_main | Final Balance: 497.74
+2026-02-23 10:19:19,429 | INFO | model_main | Cummulative PnL: -65.55
+2026-02-23 10:19:19,467 | INFO | model_main | Model training complete for btc.
+2026-02-23 10:31:23,232 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-23 10:31:23,232 | INFO | model_main | Fetching data for btc from database...
+2026-02-23 10:31:39,572 | INFO | model_main | Generating indicators for btc...
+2026-02-23 10:31:39,610 | INFO | model_main | Training regressor: random_forest for btc
