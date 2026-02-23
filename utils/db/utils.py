@@ -203,8 +203,6 @@ def save_df_to_db(
         if df[time_column].dt.tz is None:
             df[time_column] = df[time_column].dt.tz_localize("UTC")
 
-        df = df.drop_duplicates(subset=[time_column])
-
     # --------------------------------------------------
     # Dynamically add missing columns (strategy_registry)
     # --------------------------------------------------
@@ -291,9 +289,6 @@ def save_df_to_db(
         conn.execute(insert_sql, df.to_dict(orient="records"))
 
     logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
-
-
-
 
 
 # =====================================================

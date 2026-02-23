@@ -153,46 +153,45 @@ def main():
         # ----------------------------
         # Train Classifiers
         # ----------------------------
-        # for clf_name, is_active in classifiers_config.items():
-        #     if not is_active:
-        #         continue
+        for clf_name, is_active in classifiers_config.items():
+            if not is_active:
+                continue
 
-        #     logger.info(f"Training classifier: {clf_name} for {symbol}")
-        #     try:
-        #         df_clf = create_classification_target(df_gf)
-        #         X, y = prepare_ml_data(df_clf)
+            logger.info(f"Training classifier: {clf_name} for {symbol}")
+            try:
+                df_clf = create_classification_target(df_gf)
+                X, y = prepare_ml_data(df_clf)
 
-        #         # Pass XGBoost params dynamically
-        #         kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
+                # Pass XGBoost params dynamically
+                kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
 
-        #         model, preds, test_index = train_model(
-        #             model_type="classifier",
-        #             model_name=clf_name,
-        #             df=df_clf,
-        #             target_col="target",
-        #             split_date=split_date,
-        #             **kwargs
-        #         )
-        #         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
-        #         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-        #         bt = HighPerfBacktest(
-        #             df_1m,
-        #             df_predictions,
-        #             take_profit=3,
-        #             stop_loss=1
-        #         )
-        #         ledger, final_balance, pnl = bt.run()
-        #         save_df_to_db(ledger,table_name=f"{clf_name}_classifier",schema="models",time_column="datetime",is_timeseries=True)
-        #         logger.info(f"Final Balance: {final_balance}")
-        #         logger.info(f"Cummulative PnL: {pnl}")
-        #         save_model(
-        #             model,
-        #             X.columns.tolist(),
-        #             symbol,
-        #             f"{clf_name}_classifier"
-        #         )
-        #     except Exception as e:
-        #         logger.error(f"Classifier {clf_name} failed for {symbol}: {e}")
+                model, preds, test_index = train_model(
+                    model_type="classifier",
+                    model_name=clf_name,
+                    df=df_clf,
+                    target_col="target",
+                    split_date=split_date,
+                    **kwargs
+                )
+                df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
+                df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+                bt = HighPerfBacktest(
+                    df_1m,
+                    df_predictions,
+                    take_profit=3,
+                    stop_loss=1
+                )
+                ledger, final_balance, pnl = bt.run()
+                logger.info(f"Final Balance: {final_balance}")
+                logger.info(f"Cummulative PnL: {pnl}")
+                save_model(
+                    model,
+                    X.columns.tolist(),
+                    symbol,
+                    f"{clf_name}_classifier"
+                )
+            except Exception as e:
+                logger.error(f"Classifier {clf_name} failed for {symbol}: {e}")
 
         # ----------------------------
         # Train Regressors
@@ -219,7 +218,6 @@ def main():
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-                df_predictions.to_csv(f"{reg_name}.csv")
                 print(df_predictions.head(100))
                 bt = HighPerfBacktest(
                     df_1m,
@@ -228,7 +226,6 @@ def main():
                     stop_loss=1
                 )
                 ledger, final_balance, pnl = bt.run()
-                save_df_to_db(ledger,table_name=f"{reg_name}_regressor",schema="models",time_column="datetime",is_timeseries=True)
                 logger.info(f"Final Balance: {final_balance}")
                 logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
