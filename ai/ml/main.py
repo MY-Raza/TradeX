@@ -131,7 +131,7 @@ def main():
 
     for symbol in symbols:
         logger.info(f"Fetching data for {symbol} from database...")
-        df = fetch_ohlcv_df(
+        df_1m = fetch_ohlcv_df(
             table_name=f"{symbol}_1m",
             schema="data_binance",
             time_column="datetime",
@@ -139,16 +139,16 @@ def main():
             end_date=end_date
         )
 
-        if df.empty:
+        if df_1m.empty:
             logger.info(f"No data found for {symbol}. Skipping.")
             continue
 
         # Resample to desired timeframe
-        df = resample_ohlcv(df, timehorizon)
+        df_1h = resample_ohlcv(df_1m, timehorizon)
 
         # Feature Engineering
         logger.info(f"Generating indicators for {symbol}...")
-        df = generate_features(df, active_indicators)
+        df_gf = generate_features(df_1h, active_indicators)
 
         # ----------------------------
         # Train Classifiers
@@ -159,7 +159,7 @@ def main():
 
         #     logger.info(f"Training classifier: {clf_name} for {symbol}")
         #     try:
-        #         df_clf = create_classification_target(df)
+        #         df_clf = create_classification_target(df_gf)
         #         X, y = prepare_ml_data(df_clf)
 
         #         # Pass XGBoost params dynamically
@@ -176,7 +176,7 @@ def main():
         #         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
         #         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
         #         bt = HighPerfBacktest(
-        #             df_clf,
+        #             df_1m,
         #             df_predictions,
         #             take_profit=3,
         #             stop_loss=1
@@ -203,7 +203,7 @@ def main():
 
             logger.info(f"Training regressor: {reg_name} for {symbol}")
             try:
-                df_reg = create_regression_target(df)
+                df_reg = create_regression_target(df_gf)
                 X, y = prepare_ml_data(df_reg)
 
                 # Pass XGBoost params dynamically
@@ -222,7 +222,7 @@ def main():
                 df_predictions.to_csv(f"{reg_name}.csv")
                 print(df_predictions.head(100))
                 bt = HighPerfBacktest(
-                    df_reg,
+                    df_1m,
                     df_predictions,
                     take_profit=3,
                     stop_loss=1
