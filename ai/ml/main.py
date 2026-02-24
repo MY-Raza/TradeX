@@ -170,8 +170,7 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10,
-                    df_1m=df_1m
+                    n_trails=10
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
@@ -223,8 +222,7 @@ def main():
                     df=df_reg,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10,
-                    df_1m=df_1m
+                    n_trails=10
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)

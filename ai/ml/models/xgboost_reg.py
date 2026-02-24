@@ -2,19 +2,21 @@ from xgboost import XGBRegressor
 import pandas as pd
 import numpy as np
 import optuna
+
 from TradeX.backtest.backtest import BackTest
+from TradeX.ai.ml.models.model_trainer import prepare_predictions
 
 
-def train(df,
-          target_col="target",
-          split_date="2024-01-01 00:00",
-          n_trials=50,
-          df_ohlcv_1m=None,      # <-- REQUIRED for backtest
-          take_profit=3,
-          stop_loss=1,
-          k=0.5):                # threshold multiplier
+def train(
+    df,
+    df_1m,
+    target_col="target",
+    split_date="2024-01-01 00:00",
+    n_trials=50,
+    k=0.5
+):
     """
-    Train XGBRegressor optimizing for Backtest PnL.
+    Train XGBRegressor using PnL-based Optuna optimization.
     """
 
     # ----------------------------
@@ -38,7 +40,7 @@ def train(df,
     y_test = test_df[target_col]
 
     # ==================================================
-    # OPTUNA OBJECTIVE — MAXIMIZE PnL
+    # OPTUNA SECTION (PnL optimization)
     # ==================================================
     def objective(trial):
 
@@ -48,11 +50,13 @@ def train(df,
             "learning_rate": trial.suggest_float("learning_rate", 0.01, 0.3),
             "subsample": trial.suggest_float("subsample", 0.5, 1.0),
             "colsample_bytree": trial.suggest_float("colsample_bytree", 0.5, 1.0),
-            "gamma": trial.suggest_float("gamma", 0, 5),
-            "reg_alpha": trial.suggest_float("reg_alpha", 0, 5),
-            "reg_lambda": trial.suggest_float("reg_lambda", 0, 5),
+            "gamma": trial.suggest_float("gamma", 0.0, 5.0),
+            "reg_alpha": trial.suggest_float("reg_alpha", 0.0, 5.0),
+            "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 5.0),
+            "objective": "reg:squarederror",
+            "tree_method": "hist",
+            "n_jobs": -1,
             "random_state": 42,
-            "n_jobs": -1
         }
 
         model = XGBRegressor(**params)
@@ -60,38 +64,37 @@ def train(df,
 
         preds = model.predict(X_test)
 
-        # ----------------------------
-        # Convert regression output → trading signals
-        # ----------------------------
-        threshold = k * np.std(preds)
+        # --------------------------------------------------
+        # Convert predictions → trading signals
+        # --------------------------------------------------
+        df_preds = prepare_predictions(
+            df,
+            preds,
+            X_test.index,
+            model_type="regressor",
+            threshold=None,
+            k=k
+        )
 
-        signals = np.where(preds > threshold, 1,
-                  np.where(preds < -threshold, -1, 0))
-
-        df_predictions = pd.DataFrame({
-            "datetime": test_df["datetime"].values,
-            "signals": signals
-        })
-
-        # ----------------------------
-        # Run Backtest
-        # ----------------------------
+        # --------------------------------------------------
+        # Backtest
+        # --------------------------------------------------
         bt = BackTest(
-            df_ohlcv_1m,
-            df_predictions,
-            take_profit=take_profit,
-            stop_loss=stop_loss
+            df_1m,
+            df_preds,
+            take_profit=3,
+            stop_loss=1
         )
 
         _, _, pnl = bt.run()
 
-        return pnl  # maximize pnl
+        return pnl  # 🔥 maximize PROFIT, not MSE
 
     study = optuna.create_study(direction="maximize")
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    print(f"Best PnL Parameters: {best_params}")
+    print(f"Best Optuna Parameters (PnL): {best_params}")
 
     # ==================================================
     # FINAL TRAINING

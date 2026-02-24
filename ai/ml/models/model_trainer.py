@@ -22,7 +22,7 @@ REGRESSORS = {
 }
 
 
-def train_model(model_type: str, model_name: str, df, target_col="target", n_trails = 0 , df_1m = None,
+def train_model(model_type: str, model_name: str, df, target_col="target", n_trails = 0 ,
                 split_date="2024-01-01 00:00"):
     """
     Train a model with string-based train/test split and optional hyperparameters.
@@ -38,7 +38,7 @@ def train_model(model_type: str, model_name: str, df, target_col="target", n_tra
         raise ValueError(f"Unknown model name: {model_name}")
 
     # Call trainer with kwargs (XGBoost params)
-    model, preds, test_index = trainer(df, target_col=target_col, split_date=split_date, n_trials=n_trails ,df_ohlcv_1m=df_1m)
+    model, preds, test_index = trainer(df, target_col=target_col, split_date=split_date, n_trials=n_trails)
     return model, preds, test_index
 
 def save_model(model, feature_columns, symbol, model_name, folder="saved_models"):
