@@ -1210,3 +1210,15 @@ LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
 2026-02-24 14:31:23,051 | INFO | model_main | Training regressor: xgboost for btc
 2026-02-24 14:31:26,774 | ERROR | model_main | Regressor xgboost failed for btc: Cannot compare tz-naive and tz-aware timestamps
 2026-02-24 14:31:26,774 | INFO | model_main | Model training complete for btc.
+2026-02-24 15:00:31,049 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 15:00:31,049 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 15:00:47,631 | INFO | model_main | Generating indicators for btc...
+2026-02-24 15:00:47,640 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 15:01:15,519 | ERROR | model_main | Classifier random_forest failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-24 15:01:15,519 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 15:01:20,118 | ERROR | model_main | Classifier xgboost failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-24 15:01:20,118 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 15:02:00,217 | ERROR | model_main | Regressor random_forest failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-24 15:02:00,217 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-24 15:02:04,295 | ERROR | model_main | Regressor xgboost failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-02-24 15:02:04,295 | INFO | model_main | Model training complete for btc.

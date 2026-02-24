@@ -4,7 +4,8 @@ warnings.filterwarnings("ignore")
 import numpy as np
 from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db
 from TradeX.indicators.talib.indicators import call_indicator
-from TradeX.ai.ml.models.model_trainer import train_model, save_model, prepare_predictions
+from TradeX.ai.ml.models.model_trainer import train_model, save_model
+from TradeX.ai.ml.utils import prepare_predictions
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.logs import get_logger 
 from TradeX.utils.data.data_cleaner import resample_ohlcv
@@ -170,7 +171,8 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10
+                    n_trails=10,
+                    df_1m=df_1m
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
@@ -220,6 +222,7 @@ def main():
                     model_type="regressor",
                     model_name=reg_name,
                     df=df_reg,
+                    df_1m=df_1m,
                     target_col="target",
                     split_date=split_date,
                     n_trails=10

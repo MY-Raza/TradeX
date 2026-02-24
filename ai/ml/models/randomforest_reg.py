@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import optuna
 from TradeX.backtest.backtest import BackTest
-from TradeX.ai.ml.models.model_trainer import prepare_predictions
+from TradeX.ai.ml.utils import prepare_predictions
 
 
 def train(df, df_1m,target_col="target", split_date="2024-01-01 00:00", n_trials=50,k=0.5):
@@ -77,6 +77,7 @@ def train(df, df_1m,target_col="target", split_date="2024-01-01 00:00", n_trials
             threshold=None,
             k=k
         )
+        df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
 
         # --------------------------------------------------
         # Run Backtest
