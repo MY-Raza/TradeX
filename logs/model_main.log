@@ -1166,3 +1166,35 @@ LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
 2026-02-24 11:35:24,395 | INFO | model_main | Fetching data for btc from database...
 2026-02-24 11:35:36,434 | INFO | model_main | Generating indicators for btc...
 2026-02-24 11:35:36,458 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 12:00:21,866 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 12:00:21,866 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 12:00:37,766 | INFO | model_main | Generating indicators for btc...
+2026-02-24 12:00:37,784 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 12:00:37,832 | ERROR | model_main | Classifier random_forest failed for btc: train() got an unexpected keyword argument 'use_optuna'
+2026-02-24 12:00:37,832 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 12:00:37,882 | ERROR | model_main | Classifier xgboost failed for btc: train() got an unexpected keyword argument 'use_optuna'
+2026-02-24 12:00:37,882 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 12:00:37,937 | ERROR | model_main | Regressor random_forest failed for btc: train() got an unexpected keyword argument 'use_optuna'
+2026-02-24 12:00:37,937 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-24 12:00:37,996 | ERROR | model_main | Regressor xgboost failed for btc: train() got an unexpected keyword argument 'use_optuna'
+2026-02-24 12:00:37,996 | INFO | model_main | Model training complete for btc.
+2026-02-24 12:01:32,352 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 12:01:32,352 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 12:01:43,708 | INFO | model_main | Generating indicators for btc...
+2026-02-24 12:01:43,731 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 12:59:03,297 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 12:59:03,299 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 12:59:39,049 | INFO | model_main | Generating indicators for btc...
+2026-02-24 12:59:39,109 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 13:19:05,857 | INFO | model_main | Final Balance: 495.92
+2026-02-24 13:19:05,857 | INFO | model_main | Cummulative PnL: -66.7
+2026-02-24 13:19:05,982 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 13:19:32,803 | INFO | model_main | Final Balance: 497.7
+2026-02-24 13:19:32,803 | INFO | model_main | Cummulative PnL: -66.8
+2026-02-24 13:19:32,830 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 13:39:50,469 | INFO | model_main | Final Balance: 677.07
+2026-02-24 13:39:50,479 | INFO | model_main | Cummulative PnL: -27.74
+2026-02-24 13:39:50,529 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-24 13:40:01,815 | INFO | model_main | Final Balance: 497.73
+2026-02-24 13:40:01,815 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-24 13:40:01,825 | INFO | model_main | Model training complete for btc.

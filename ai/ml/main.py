@@ -169,9 +169,9 @@ def main():
                     model_name=clf_name,
                     df=df_clf,
                     target_col="target",
-                    use_optuna=True,
                     split_date=split_date,
-                    **kwargs
+                    n_trails=10,
+                    df_1m=df_1m
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
@@ -222,9 +222,9 @@ def main():
                     model_name=reg_name,
                     df=df_reg,
                     target_col="target",
-                    use_optuna=True,
                     split_date=split_date,
-                    **kwargs
+                    n_trails=10,
+                    df_1m=df_1m
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)

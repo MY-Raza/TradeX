@@ -2,23 +2,18 @@ from xgboost import XGBClassifier
 import pandas as pd
 import numpy as np
 import optuna
-from sklearn.metrics import accuracy_score
+from TradeX.backtest.backtest import BackTest
 
-def train(df, target_col="target", split_date="2024-01-01 00:00", n_trials=50):
+
+def train(df,
+          target_col="target",
+          split_date="2024-01-01 00:00",
+          n_trials=50,
+          df_ohlcv_1m=None,     # <-- pass 1m data
+          take_profit=3,
+          stop_loss=1):
     """
-    Train XGBClassifier using time-based split with Optuna hyperparameter optimization.
-
-    Args:
-        df (pd.DataFrame): Input dataframe with features and target
-        target_col (str): Name of target column
-        split_date (str): Date string to split train/test
-        n_trials (int): Number of Optuna trials for hyperparameter search
-        **xgb_params: Extra XGBClassifier hyperparameters to override
-
-    Returns:
-        model: trained XGBClassifier
-        preds: predictions on test set
-        test_index: indices of test set
+    Train XGBClassifier optimizing for Backtest PnL.
     """
 
     # ----------------------------
@@ -26,10 +21,12 @@ def train(df, target_col="target", split_date="2024-01-01 00:00", n_trials=50):
     # ----------------------------
     if "datetime" not in df.columns:
         raise ValueError("DataFrame must have a 'datetime' column.")
+
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime")
 
     split_date = pd.to_datetime(split_date, utc=True)
+
     train_df = df[df["datetime"] < split_date]
     test_df = df[df["datetime"] >= split_date]
 
@@ -40,7 +37,7 @@ def train(df, target_col="target", split_date="2024-01-01 00:00", n_trials=50):
     y_test = test_df[target_col]
 
     # ==================================================
-    # OPTUNA SECTION
+    # OPTUNA OBJECTIVE — MAXIMIZE PnL
     # ==================================================
     def objective(trial):
 
@@ -54,27 +51,47 @@ def train(df, target_col="target", split_date="2024-01-01 00:00", n_trials=50):
             "reg_alpha": trial.suggest_float("reg_alpha", 0, 5),
             "reg_lambda": trial.suggest_float("reg_lambda", 0, 5),
             "use_label_encoder": False,
-            "eval_metric": "logloss"
+            "eval_metric": "logloss",
+            "random_state": 42,
+            "n_jobs": -1
         }
-
 
         model = XGBClassifier(**params)
         model.fit(X_train, y_train)
+
         preds = model.predict(X_test)
 
-        acc = accuracy_score(y_test, preds)
-        return acc  # maximize accuracy
+        # ----------------------------
+        # Build prediction dataframe
+        # ----------------------------
+        df_predictions = pd.DataFrame({
+            "datetime": test_df["datetime"].values,
+            "signals": preds
+        })
+
+        # ----------------------------
+        # Run Backtest
+        # ----------------------------
+        bt = BackTest(
+            df_ohlcv_1m,
+            df_predictions,
+            take_profit=take_profit,
+            stop_loss=stop_loss
+        )
+
+        _, _, pnl = bt.run()
+
+        return pnl  # maximize pnl
 
     study = optuna.create_study(direction="maximize")
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    print(f"Best Optuna Parameters: {best_params}")
+    print(f"Best PnL Parameters: {best_params}")
 
     # ==================================================
     # FINAL TRAINING
     # ==================================================
-
     model = XGBClassifier(**best_params)
     model.fit(X_train, y_train)
     preds = model.predict(X_test)
