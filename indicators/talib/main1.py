@@ -7,7 +7,7 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.indicators.talib.signals import *
 from TradeX.backtest.backtest1 import Backtest
-from TradeX.backtest.newbacktest import HighPerfBacktest
+from TradeX.backtest.backtest import BackTest
 import os
 
 # ---------------------------
@@ -146,7 +146,7 @@ output_csv = os.path.join(SIGNALS_FOLDER, ledger_csv)
 df_ledger.to_csv(output_csv, index=False)
 logger.info("Results saved to ledger1.csv")
 
-bt = HighPerfBacktest(
+bt = BackTest(
     df_price = df_1m,
     df_predictions=signals_df,
     starting_balance=1000,

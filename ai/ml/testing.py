@@ -1,5 +1,5 @@
 import pandas as pd
-from TradeX.backtest.newbacktest import HighPerfBacktest
+from TradeX.backtest.backtest import BackTest
 from TradeX.utils.db.utils import fetch_ohlcv_df
 # Read CSV file
 df = pd.read_csv("signals_audit.csv")
@@ -25,7 +25,7 @@ df_1m = fetch_ohlcv_df(
             end_date='2026-02-17'
 )
 
-bt = HighPerfBacktest(
+bt = BackTest(
                     df_1m,
                     signal_df,
                     take_profit=3,

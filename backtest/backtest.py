@@ -6,7 +6,7 @@ from TradeX.utils.common.logs import get_logger
 logger = get_logger("backtest_class")
 
 
-class HighPerfBacktest:
+class BackTest:
     """
     High-performance backtesting engine for direction-based trading strategies.
 

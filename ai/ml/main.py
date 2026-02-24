@@ -9,42 +9,10 @@ from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.logs import get_logger 
 from TradeX.utils.data.data_cleaner import resample_ohlcv
 import os
-from TradeX.backtest.newbacktest import HighPerfBacktest
+from TradeX.backtest.backtest import BackTest
 logger = get_logger("model_main")
-
-
 import os
 from datetime import datetime
-
-def save_ledger_to_csv(ledger_df: pd.DataFrame, clf_name: str, folder: str = "ledgers"):
-    """
-    Save ledger DataFrame as CSV with filename:
-    YYYYMMDD_HHMMSS_clf_name.csv
-    """
-
-    if ledger_df.empty:
-        print("Ledger is empty. Nothing saved.")
-        return
-
-    # Create folder if it doesn't exist
-    os.makedirs(folder, exist_ok=True)
-
-    # Current datetime
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-    # Clean classifier name (optional safety)
-    clf_name_clean = clf_name.replace(" ", "_")
-
-    # File name
-    filename = f"{timestamp}_{clf_name_clean}.csv"
-    filepath = os.path.join(folder, filename)
-
-    # Save CSV
-    ledger_df.to_csv(filepath, index=False)
-
-    logger.info(f"Ledger saved to: {filepath}")
-
-
 # ----------------------------
 # FEATURE ENGINEERING
 # ----------------------------
@@ -206,7 +174,7 @@ def main():
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-                bt = HighPerfBacktest(
+                bt = BackTest(
                     df_1m,
                     df_predictions,
                     take_profit=3,
@@ -222,7 +190,6 @@ def main():
                     enforce_unique_time=False,
                     use_on_conflict=False
                 )
-                save_ledger_to_csv(ledger,f"{clf_name}_clf")
                 logger.info(f"Final Balance: {final_balance}")
                 logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
@@ -259,14 +226,13 @@ def main():
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-                bt = HighPerfBacktest(
+                bt = BackTest(
                     df_1m,
                     df_predictions,
                     take_profit=3,
                     stop_loss=1
                 )
                 ledger, final_balance, pnl = bt.run()
-                save_ledger_to_csv(ledger,f"{reg_name}_reg")
                 save_df_to_db(
                     df=ledger,
                     schema="models",

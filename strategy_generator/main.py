@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.backtest.newbacktest import HighPerfBacktest
+from TradeX.backtest.backtest import BackTest
 from TradeX.utils.db.utils import save_df_to_db,fetch_ohlcv_df
 from TradeX.indicators.talib.indicators import ALL_INDICATORS
 
@@ -112,7 +112,7 @@ for symbol in symbols:
             # ----------------------------
             # Backtest (1m execution)
             # ----------------------------
-            bt = HighPerfBacktest(
+            bt = BackTest(
                 df_price=df_1m,
                 df_predictions=signals,
                 starting_balance=1000,

@@ -443,9 +443,9 @@
 2026-02-19 14:16:17,001 | INFO | model_main | Fetching data for btc from database...
 2026-02-19 14:16:34,586 | INFO | model_main | Generating indicators for btc...
 2026-02-19 14:16:34,623 | INFO | model_main | Training classifier: random_forest for btc
-2026-02-19 14:16:48,648 | ERROR | model_main | Classifier random_forest failed for btc: 'HighPerfBacktest' object has no attribute 'record_trade'
+2026-02-19 14:16:48,648 | ERROR | model_main | Classifier random_forest failed for btc: 'BackTest' object has no attribute 'record_trade'
 2026-02-19 14:16:48,648 | INFO | model_main | Training classifier: xgboost for btc
-2026-02-19 14:16:52,557 | ERROR | model_main | Classifier xgboost failed for btc: 'HighPerfBacktest' object has no attribute 'record_trade'
+2026-02-19 14:16:52,557 | ERROR | model_main | Classifier xgboost failed for btc: 'BackTest' object has no attribute 'record_trade'
 2026-02-19 14:16:52,557 | INFO | model_main | Training regressor: random_forest for btc
 2026-02-19 14:27:13,582 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
 2026-02-19 14:27:13,582 | INFO | model_main | Fetching data for btc from database...
@@ -1128,3 +1128,23 @@ LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
 [parameters: [{'datetime': Timestamp('2025-01-01 01:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 94363.6, 'sell_price': 0.0, 'balance': 999.5, 'pnl': -0.05, 'pnl_sum': -0.05}, {'datetime': Timestamp('2025-01-01 08:27:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - stop_loss', 'buy_price': 94363.6, 'sell_price': 93419.964, 'balance': 989.01, 'pnl': -1.05, 'pnl_sum': -1.1}, {'datetime': Timestamp('2025-01-01 09:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 93398.2, 'sell_price': 0.0, 'balance': 988.51, 'pnl': -0.05, 'pnl_sum': -1.15}, {'datetime': Timestamp('2025-01-02 08:57:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 93398.2, 'sell_price': 96200.146, 'balance': 1017.67, 'pnl': 2.95, 'pnl_sum': 1.8}, {'datetime': Timestamp('2025-01-02 13:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 96830.0, 'sell_price': 0.0, 'balance': 1017.16, 'pnl': -0.05, 'pnl_sum': 1.75}, {'datetime': Timestamp('2025-01-06 05:34:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 96830.0, 'sell_price': 99734.90000000001, 'balance': 1047.17, 'pnl': 2.95, 'pnl_sum': 4.7}, {'datetime': Timestamp('2025-01-06 10:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 98968.4, 'sell_price': 0.0, 'balance': 1046.65, 'pnl': -0.05, 'pnl_sum': 4.65}, {'datetime': Timestamp('2025-01-06 15:45:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 98968.4, 'sell_price': 101937.45199999999, 'balance': 1077.52, 'pnl': 2.95, 'pnl_sum': 7.6}  ... displaying 10 of 844 total bound parameter sets ...  {'datetime': Timestamp('2025-10-16 11:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 111422.3, 'sell_price': 0.0, 'balance': 500.55, 'pnl': -0.05, 'pnl_sum': -63.15}, {'datetime': Timestamp('2025-10-16 14:10:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - stop_loss', 'buy_price': 111422.3, 'sell_price': 110308.077, 'balance': 495.29, 'pnl': -1.05, 'pnl_sum': -64.2}]]
 (Background on this error at: https://sqlalche.me/e/20/f405)
 2026-02-24 09:38:48,757 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 09:42:30,844 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 09:42:30,844 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 09:42:41,955 | INFO | model_main | Generating indicators for btc...
+2026-02-24 09:42:41,969 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 09:43:00,409 | INFO | model_main | Ledger saved to: ledgers\20260224_094300_random_forest_clf.csv
+2026-02-24 09:43:00,409 | INFO | model_main | Final Balance: 390.14
+2026-02-24 09:43:00,410 | INFO | model_main | Cummulative PnL: -83.99
+2026-02-24 09:43:04,815 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 09:43:12,899 | INFO | model_main | Ledger saved to: ledgers\20260224_094312_xgboost_clf.csv
+2026-02-24 09:43:12,901 | INFO | model_main | Final Balance: 495.29
+2026-02-24 09:43:12,901 | INFO | model_main | Cummulative PnL: -64.2
+2026-02-24 09:43:12,920 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 09:46:04,378 | INFO | model_main | Ledger saved to: ledgers\20260224_094604_random_forest_reg.csv
+2026-02-24 09:46:05,444 | INFO | model_main | Final Balance: 791.82
+2026-02-24 09:46:05,447 | INFO | model_main | Cummulative PnL: -14.41
+2026-02-24 09:46:18,061 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-24 09:46:27,246 | INFO | model_main | Ledger saved to: ledgers\20260224_094627_xgboost_reg.csv
+2026-02-24 09:46:27,692 | INFO | model_main | Final Balance: 496.29
+2026-02-24 09:46:27,692 | INFO | model_main | Cummulative PnL: -66.7
+2026-02-24 09:46:27,724 | INFO | model_main | Model training complete for btc.
