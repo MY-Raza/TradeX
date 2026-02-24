@@ -1087,3 +1087,44 @@
 2026-02-23 15:38:06,269 | INFO | model_main | Final Balance: 496.29
 2026-02-23 15:38:06,270 | INFO | model_main | Cummulative PnL: -66.7
 2026-02-23 15:38:06,287 | INFO | model_main | Model training complete for btc.
+2026-02-24 09:27:55,723 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 09:27:55,723 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 09:28:09,648 | INFO | model_main | Generating indicators for btc...
+2026-02-24 09:28:09,678 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 09:28:39,649 | ERROR | model_main | Classifier random_forest failed for btc: time_column 'True' not found in DataFrame
+2026-02-24 09:28:39,649 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 09:28:46,887 | ERROR | model_main | Classifier xgboost failed for btc: time_column 'True' not found in DataFrame
+2026-02-24 09:28:46,888 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 09:30:56,806 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 09:30:56,806 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 09:31:08,267 | INFO | model_main | Generating indicators for btc...
+2026-02-24 09:31:08,292 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 09:31:26,729 | INFO | model_main | Ledger saved to: ledgers\20260224_093126_random_forest_clf.csv
+2026-02-24 09:38:14,342 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 09:38:14,342 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 09:38:24,547 | INFO | model_main | Generating indicators for btc...
+2026-02-24 09:38:24,563 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 09:38:41,681 | ERROR | model_main | Classifier random_forest failed for btc: (psycopg2.errors.SyntaxError) trailing junk after numeric literal at or near ".20260224_093814_random_forest_clf"
+LINE 2:         INSERT INTO models.20260224_093814_random_forest_clf...
+                                  ^
+
+[SQL: 
+        INSERT INTO models.20260224_093814_random_forest_clf ("datetime","predicted_direction","action","buy_price","sell_price","balance","pnl","pnl_sum")
+        VALUES (%(datetime)s,%(predicted_direction)s,%(action)s,%(buy_price)s,%(sell_price)s,%(balance)s,%(pnl)s,%(pnl_sum)s)
+        
+    ]
+[parameters: [{'datetime': Timestamp('2025-01-01 01:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 94363.6, 'sell_price': 0.0, 'balance': 999.5, 'pnl': -0.05, 'pnl_sum': -0.05}, {'datetime': Timestamp('2025-01-01 08:27:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - stop_loss', 'buy_price': 94363.6, 'sell_price': 93419.964, 'balance': 989.01, 'pnl': -1.05, 'pnl_sum': -1.1}, {'datetime': Timestamp('2025-01-01 09:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 93398.2, 'sell_price': 0.0, 'balance': 988.51, 'pnl': -0.05, 'pnl_sum': -1.15}, {'datetime': Timestamp('2025-01-02 08:57:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 93398.2, 'sell_price': 96200.146, 'balance': 1017.67, 'pnl': 2.95, 'pnl_sum': 1.8}, {'datetime': Timestamp('2025-01-02 13:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 96830.0, 'sell_price': 0.0, 'balance': 1017.16, 'pnl': -0.05, 'pnl_sum': 1.75}, {'datetime': Timestamp('2025-01-06 05:34:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 96830.0, 'sell_price': 99734.90000000001, 'balance': 1047.17, 'pnl': 2.95, 'pnl_sum': 4.7}, {'datetime': Timestamp('2025-01-06 14:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 99452.4, 'sell_price': 0.0, 'balance': 1046.65, 'pnl': -0.05, 'pnl_sum': 4.65}, {'datetime': Timestamp('2025-01-06 15:53:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 99452.4, 'sell_price': 102435.972, 'balance': 1077.52, 'pnl': 2.95, 'pnl_sum': 7.6}  ... displaying 10 of 1002 total bound parameter sets ...  {'datetime': Timestamp('2025-12-15 00:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 88118.8, 'sell_price': 0.0, 'balance': 499.77, 'pnl': -0.05, 'pnl_sum': -62.05}, {'datetime': Timestamp('2026-02-17 00:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - end_of_backtest', 'buy_price': 88118.8, 'sell_price': 68832.9, 'balance': 390.14, 'pnl': -21.94, 'pnl_sum': -83.99}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-02-24 09:38:41,681 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 09:38:48,749 | ERROR | model_main | Classifier xgboost failed for btc: (psycopg2.errors.SyntaxError) trailing junk after numeric literal at or near ".20260224_093814_xgboost_clf"
+LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
+                                  ^
+
+[SQL: 
+        INSERT INTO models.20260224_093814_xgboost_clf ("datetime","predicted_direction","action","buy_price","sell_price","balance","pnl","pnl_sum")
+        VALUES (%(datetime)s,%(predicted_direction)s,%(action)s,%(buy_price)s,%(sell_price)s,%(balance)s,%(pnl)s,%(pnl_sum)s)
+        
+    ]
+[parameters: [{'datetime': Timestamp('2025-01-01 01:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 94363.6, 'sell_price': 0.0, 'balance': 999.5, 'pnl': -0.05, 'pnl_sum': -0.05}, {'datetime': Timestamp('2025-01-01 08:27:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - stop_loss', 'buy_price': 94363.6, 'sell_price': 93419.964, 'balance': 989.01, 'pnl': -1.05, 'pnl_sum': -1.1}, {'datetime': Timestamp('2025-01-01 09:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 93398.2, 'sell_price': 0.0, 'balance': 988.51, 'pnl': -0.05, 'pnl_sum': -1.15}, {'datetime': Timestamp('2025-01-02 08:57:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 93398.2, 'sell_price': 96200.146, 'balance': 1017.67, 'pnl': 2.95, 'pnl_sum': 1.8}, {'datetime': Timestamp('2025-01-02 13:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 96830.0, 'sell_price': 0.0, 'balance': 1017.16, 'pnl': -0.05, 'pnl_sum': 1.75}, {'datetime': Timestamp('2025-01-06 05:34:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 96830.0, 'sell_price': 99734.90000000001, 'balance': 1047.17, 'pnl': 2.95, 'pnl_sum': 4.7}, {'datetime': Timestamp('2025-01-06 10:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 98968.4, 'sell_price': 0.0, 'balance': 1046.65, 'pnl': -0.05, 'pnl_sum': 4.65}, {'datetime': Timestamp('2025-01-06 15:45:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - take_profit', 'buy_price': 98968.4, 'sell_price': 101937.45199999999, 'balance': 1077.52, 'pnl': 2.95, 'pnl_sum': 7.6}  ... displaying 10 of 844 total bound parameter sets ...  {'datetime': Timestamp('2025-10-16 11:00:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'buy', 'buy_price': 111422.3, 'sell_price': 0.0, 'balance': 500.55, 'pnl': -0.05, 'pnl_sum': -63.15}, {'datetime': Timestamp('2025-10-16 14:10:00+0000', tz='UTC'), 'predicted_direction': 'long', 'action': 'sell - stop_loss', 'buy_price': 111422.3, 'sell_price': 110308.077, 'balance': 495.29, 'pnl': -1.05, 'pnl_sum': -64.2}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-02-24 09:38:48,757 | INFO | model_main | Training regressor: random_forest for btc

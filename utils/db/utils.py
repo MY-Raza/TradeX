@@ -165,7 +165,9 @@ def save_df_to_db(
     table_name: str,
     schema: str | None = None,
     time_column: str | None = "datetime",
-    is_timeseries: bool = True
+    is_timeseries: bool = True,
+    enforce_unique_time: bool = True,  
+    use_on_conflict: bool = True
 ):
     """
     Save a DataFrame to the database.
@@ -251,7 +253,7 @@ def save_df_to_db(
     # --------------------------------------------------
     # Time-series handling
     # --------------------------------------------------
-    if time_column:
+    if time_column and enforce_unique_time:
         ensure_unique_index(table, schema, time_column)
 
         if is_timeseries:
@@ -277,7 +279,9 @@ def save_df_to_db(
     # --------------------------------------------------
     cols = ",".join([f'"{c}"' for c in df.columns])
     placeholders = ",".join([f":{c}" for c in df.columns])
-    conflict_clause = f"ON CONFLICT ({time_column}) DO NOTHING" if time_column else ""
+    conflict_clause = ""
+    if time_column and enforce_unique_time and use_on_conflict:
+        conflict_clause = f"ON CONFLICT ({time_column}) DO NOTHING" if time_column else ""
 
     insert_sql = text(f"""
         INSERT INTO {schema}.{table} ({cols})

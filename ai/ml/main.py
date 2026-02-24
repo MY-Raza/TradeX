@@ -2,7 +2,7 @@ import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
 import numpy as np
-from TradeX.utils.db.utils import fetch_ohlcv_df
+from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.model_trainer import train_model, save_model, prepare_predictions
 from TradeX.utils.common.config_loader import read_config
@@ -133,7 +133,7 @@ def prepare_ml_data(df: pd.DataFrame):
 
     return X_scaled, y
 
-
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 # ----------------------------
 # MAIN PIPELINE
 # ----------------------------
@@ -213,6 +213,15 @@ def main():
                     stop_loss=1
                 )
                 ledger, final_balance, pnl = bt.run()
+                save_df_to_db(
+                    df=ledger,
+                    schema="models",
+                    table_name=f"{clf_name}_clf_{timestamp}",
+                    time_column="datetime",
+                    is_timeseries=True,
+                    enforce_unique_time=False,
+                    use_on_conflict=False
+                )
                 save_ledger_to_csv(ledger,f"{clf_name}_clf")
                 logger.info(f"Final Balance: {final_balance}")
                 logger.info(f"Cummulative PnL: {pnl}")
@@ -258,6 +267,15 @@ def main():
                 )
                 ledger, final_balance, pnl = bt.run()
                 save_ledger_to_csv(ledger,f"{reg_name}_reg")
+                save_df_to_db(
+                    df=ledger,
+                    schema="models",
+                    table_name=f"{reg_name}_reg_{timestamp}",
+                    time_column="datetime",
+                    is_timeseries=True,
+                    enforce_unique_time=False,
+                    use_on_conflict=False
+                )
                 logger.info(f"Final Balance: {final_balance}")
                 logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
