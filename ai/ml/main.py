@@ -169,6 +169,7 @@ def main():
                     model_name=clf_name,
                     df=df_clf,
                     target_col="target",
+                    use_optuna=True,
                     split_date=split_date,
                     **kwargs
                 )
@@ -196,7 +197,7 @@ def main():
                     model,
                     X.columns.tolist(),
                     symbol,
-                    f"{clf_name}_classifier"
+                    f"{clf_name}_classifier_{timestamp}"
                 )
             except Exception as e:
                 logger.error(f"Classifier {clf_name} failed for {symbol}: {e}")
@@ -221,6 +222,7 @@ def main():
                     model_name=reg_name,
                     df=df_reg,
                     target_col="target",
+                    use_optuna=True,
                     split_date=split_date,
                     **kwargs
                 )
@@ -248,7 +250,7 @@ def main():
                     model,
                     X.columns.tolist(),
                     symbol,
-                    f"{reg_name}_regressor"
+                    f"{reg_name}_regressor_{timestamp}"
                 )
             except Exception as e:
                 logger.error(f"Regressor {reg_name} failed for {symbol}: {e}")

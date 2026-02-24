@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestRegressor
 import pandas as pd
 
-def train(df, target_col="target", split_date="2024-01-01 00:00"):
+def train(df, target_col="target", split_date="2024-01-01 00:00",**model_params):
     """
     Train RandomForestRegressor using a string-based date split.
 
@@ -35,7 +35,7 @@ def train(df, target_col="target", split_date="2024-01-01 00:00"):
     y_test = test_df[target_col]
 
     # Train model
-    model = RandomForestRegressor(n_estimators=300, random_state=42, n_jobs=-1)
+    model = RandomForestRegressor(**model_params)
     model.fit(X_train, y_train)
 
     # Predictions

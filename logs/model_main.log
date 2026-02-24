@@ -1148,3 +1148,17 @@ LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
 2026-02-24 09:46:27,692 | INFO | model_main | Final Balance: 496.29
 2026-02-24 09:46:27,692 | INFO | model_main | Cummulative PnL: -66.7
 2026-02-24 09:46:27,724 | INFO | model_main | Model training complete for btc.
+2026-02-24 11:25:02,840 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-24 11:25:02,840 | INFO | model_main | Fetching data for btc from database...
+2026-02-24 11:25:19,527 | INFO | model_main | Generating indicators for btc...
+2026-02-24 11:25:19,550 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-24 11:25:19,836 | ERROR | model_main | Classifier random_forest failed for btc: train() got an unexpected keyword argument 'n_estimators'
+2026-02-24 11:25:19,836 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-24 11:28:23,495 | INFO | model_main | Final Balance: 495.29
+2026-02-24 11:28:23,495 | INFO | model_main | Cummulative PnL: -64.2
+2026-02-24 11:28:23,524 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-24 11:28:23,600 | ERROR | model_main | Regressor random_forest failed for btc: train() got an unexpected keyword argument 'n_estimators'
+2026-02-24 11:28:23,601 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-24 11:32:10,753 | INFO | model_main | Final Balance: 497.66
+2026-02-24 11:32:10,753 | INFO | model_main | Cummulative PnL: -65.19
+2026-02-24 11:32:10,859 | INFO | model_main | Model training complete for btc.
