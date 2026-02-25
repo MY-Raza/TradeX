@@ -1252,3 +1252,34 @@ LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
 2026-02-25 10:49:10,044 | INFO | model_main | Fetching data for btc from database...
 2026-02-25 10:49:53,158 | INFO | model_main | Generating indicators for btc...
 2026-02-25 10:49:53,223 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-25 11:24:05,858 | INFO | model_main | Final Balance: 498.23
+2026-02-25 11:24:05,858 | INFO | model_main | Cummulative PnL: -61.9
+2026-02-25 11:24:08,231 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-25 11:25:48,536 | INFO | model_main | Final Balance: 499.94
+2026-02-25 11:25:48,541 | INFO | model_main | Cummulative PnL: -62.7
+2026-02-25 11:25:48,584 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-25 11:39:01,897 | INFO | model_main | Final Balance: 498.62
+2026-02-25 11:39:01,909 | INFO | model_main | Cummulative PnL: -64.07
+2026-02-25 11:39:01,997 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-25 11:40:23,469 | INFO | model_main | Final Balance: 497.73
+2026-02-25 11:40:23,469 | INFO | model_main | Cummulative PnL: -62.4
+2026-02-25 11:40:23,494 | INFO | model_main | Model training complete for btc.
+2026-02-25 11:44:56,606 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 11:44:56,606 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 11:45:13,647 | INFO | model_main | Generating indicators for btc...
+2026-02-25 11:45:13,710 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-25 11:47:08,739 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 11:47:08,739 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 11:47:17,528 | INFO | model_main | Generating indicators for btc...
+2026-02-25 11:47:17,535 | WARNING | model_main | Unsupported indicator: MA
+2026-02-25 11:47:17,535 | WARNING | model_main | Unsupported indicator: MAMA
+2026-02-25 11:47:17,535 | WARNING | model_main | Unsupported indicator: MIDPOINT
+2026-02-25 11:47:17,535 | WARNING | model_main | Unsupported indicator: MIDPRICE
+2026-02-25 12:02:53,681 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 12:02:53,681 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 12:03:02,929 | INFO | model_main | Generating indicators for btc...
+2026-02-25 12:05:46,257 | WARNING | model_main | Unsupported indicator: BOP
+2026-02-25 12:05:46,383 | WARNING | model_main | Unsupported indicator: CMO
+2026-02-25 12:05:46,561 | ERROR | model_main | Indicator MINUS_DM failed: MINUS_DM() got an unexpected keyword argument 'close'
+2026-02-25 12:05:46,600 | ERROR | model_main | Indicator PLUS_DM failed: PLUS_DM() got an unexpected keyword argument 'close'
+2026-02-25 12:26:34,698 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'high'

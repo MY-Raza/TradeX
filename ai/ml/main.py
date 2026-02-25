@@ -5,7 +5,7 @@ import numpy as np
 from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.model_trainer import train_model, save_model
-from TradeX.ai.ml.utils import prepare_predictions
+from TradeX.ai.ml.utils import prepare_predictions, pnl_permutation_importance
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.logs import get_logger 
 from TradeX.utils.data.data_cleaner import resample_ohlcv
@@ -282,7 +282,7 @@ def main():
                 # Pass XGBoost params dynamically
                 kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
 
-                model, preds, test_index = train_model(
+                model, preds, test_index, X_test = train_model(
                     model_type="classifier",
                     model_name=clf_name,
                     df=df_clf,
@@ -300,6 +300,17 @@ def main():
                     stop_loss=1
                 )
                 ledger, final_balance, pnl = bt.run()
+                pnl_importance_df = pnl_permutation_importance(
+                    model=model,
+                    X_test=X_test,
+                    df=df_clf,
+                    df_1m=df_1m,
+                    base_pnl=pnl,
+                    model_type="classifier",
+                    k=0.5,
+                    n_repeats=3
+                )
+                print(pnl_importance_df.head())
                 save_df_to_db(
                     df=ledger,
                     schema="models",
@@ -335,7 +346,7 @@ def main():
                 # Pass XGBoost params dynamically
                 kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
 
-                model, preds, test_index = train_model(
+                model, preds, test_index, X_test = train_model(
                     model_type="regressor",
                     model_name=reg_name,
                     df=df_reg,
@@ -353,6 +364,17 @@ def main():
                     stop_loss=1
                 )
                 ledger, final_balance, pnl = bt.run()
+                pnl_importance_df = pnl_permutation_importance(
+                    model=model,
+                    X_test=X_test,
+                    df=df_reg,
+                    df_1m=df_1m,
+                    base_pnl=pnl,
+                    model_type="regressor",
+                    k=0.5,
+                    n_repeats=3
+                )
+                print(pnl_importance_df.head())
                 save_df_to_db(
                     df=ledger,
                     schema="models",

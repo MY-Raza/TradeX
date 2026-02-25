@@ -38,8 +38,8 @@ def train_model(model_type: str, model_name: str, df, df_1m,target_col="target",
         raise ValueError(f"Unknown model name: {model_name}")
 
     # Call trainer with kwargs (XGBoost params)
-    model, preds, test_index = trainer(df, df_1m,target_col=target_col, split_date=split_date, n_trials=n_trails)
-    return model, preds, test_index
+    model, preds, test_index, X_test = trainer(df, df_1m,target_col=target_col, split_date=split_date, n_trials=n_trails)
+    return model, preds, test_index, X_test
 
 def save_model(model, feature_columns, symbol, model_name, folder="saved_models"):
     """

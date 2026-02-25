@@ -9336,3 +9336,1461 @@ Traceback (most recent call last):
     df_1m = fetch_ohlcv_df(
 TypeError: fetch_ohlcv_df() got an unexpected keyword argument 'limit'
 2026-02-25 11:12:11,576 | INFO | execution_binance_main | Waiting 2869 seconds until next valid 1h time...
+2026-02-25 11:28:49,446 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 1h
+2026-02-25 11:28:51,943 | INFO | execution_binance_main | Waiting 1869 seconds until next valid 1h time...
+2026-02-25 12:00:01,050 | INFO | execution_binance_main | Current time 07:00:00 is valid for 1h execution.
+2026-02-25 12:01:56,797 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:01:57,781 | INFO | execution_binance_main | btc | sig_1h_btc_22 → Highest window: 30
+2026-02-25 12:01:57,781 | INFO | execution_binance_main | btc | Required 1m candles: 5400
+2026-02-25 12:02:17,495 | INFO | execution_binance_main | btc | Fetched 5400 rows of 1m data.
+2026-02-25 12:02:17,623 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-25 12:02:17,672 | INFO | execution_binance_main | btc | Latest Signal: sig_1h_btc_22 → 1 at 2026-02-25 07:00:00+00:00
+2026-02-25 12:02:18,661 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2013): Order does not exist.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 333, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 224, in open_trade
+    self.wait_for_fill(order_id)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 55, in wait_for_fill
+    order = self.client.futures_get_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7997, in futures_get_order
+    return self._request_futures_api("get", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2013): Order does not exist.
+2026-02-25 12:02:23,688 | INFO | execution_binance_main | Waiting 3457 seconds until next valid 1h time...
+2026-02-25 12:13:58,882 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-25 12:14:00,908 | INFO | execution_binance_main | Waiting 60 seconds until next valid 5m time...
+2026-02-25 12:15:00,924 | INFO | execution_binance_main | Current time 07:15:00 is valid for 5m execution.
+2026-02-25 12:16:43,272 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:16:43,654 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-25 12:16:43,654 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-25 12:17:00,359 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-25 12:17:00,459 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-25 12:17:00,500 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → -1 at 2026-02-25 07:15:00+00:00
+2026-02-25 12:17:00,974 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2013): Order does not exist.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 333, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 224, in open_trade
+    self.wait_for_fill(order_id)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 55, in wait_for_fill
+    order = self.client.futures_get_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7997, in futures_get_order
+    return self._request_futures_api("get", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2013): Order does not exist.
+2026-02-25 12:17:05,990 | INFO | execution_binance_main | Waiting 175 seconds until next valid 5m time...
+2026-02-25 12:20:01,002 | INFO | execution_binance_main | Current time 07:20:00 is valid for 5m execution.
+2026-02-25 12:21:45,151 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:21:45,257 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-25 12:21:45,259 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-25 12:22:03,651 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-25 12:22:03,732 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-25 12:22:03,776 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-25 07:20:00+00:00
+2026-02-25 12:22:05,347 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-4509): Time in Force (TIF) GTE can only be used with open positions. Please ensure that positions are available.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 333, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 228, in open_trade
+    tp_id, sl_id = self.place_tp_sl(entry_price, direction, qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 97, in place_tp_sl
+    tp = self.client.futures_create_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7862, in futures_create_order
+    return self._request_futures_api("post", "algoOrder", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-4509): Time in Force (TIF) GTE can only be used with open positions. Please ensure that positions are available.
+2026-02-25 12:22:10,356 | INFO | execution_binance_main | Waiting 170 seconds until next valid 5m time...
+2026-02-25 12:25:00,363 | INFO | execution_binance_main | Current time 07:25:00 is valid for 5m execution.
+2026-02-25 12:26:39,535 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:26:39,579 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-25 12:26:39,580 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-25 12:26:54,551 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-25 12:26:54,618 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-25 12:26:54,638 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-25 07:25:00+00:00
+2026-02-25 12:26:57,760 | INFO | execution_binance_main | Waiting 183 seconds until next valid 5m time...
+2026-02-25 12:30:00,782 | INFO | execution_binance_main | Current time 07:30:00 is valid for 5m execution.
+2026-02-25 12:30:05,632 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:05,737 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1311, in _checkout
+    raise exc.InvalidatePoolError()
+sqlalchemy.exc.InvalidatePoolError: ()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1345, in _checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1342, in _checkout
+    fairy._connection_record.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1345, in _checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1342, in _checkout
+    fairy._connection_record.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:10,776 | INFO | execution_binance_main | Current time 07:30:10 is valid for 5m execution.
+2026-02-25 12:30:13,023 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:13,075 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:18,109 | INFO | execution_binance_main | Current time 07:30:18 is valid for 5m execution.
+2026-02-25 12:30:20,780 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:20,948 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:25,965 | INFO | execution_binance_main | Current time 07:30:25 is valid for 5m execution.
+2026-02-25 12:30:28,794 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:28,854 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:33,861 | INFO | execution_binance_main | Current time 07:30:33 is valid for 5m execution.
+2026-02-25 12:30:36,468 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:36,538 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:41,547 | INFO | execution_binance_main | Current time 07:30:41 is valid for 5m execution.
+2026-02-25 12:30:44,723 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:44,791 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:49,850 | INFO | execution_binance_main | Current time 07:30:49 is valid for 5m execution.
+2026-02-25 12:30:53,191 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:30:53,271 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:30:58,283 | INFO | execution_binance_main | Current time 07:30:58 is valid for 5m execution.
+2026-02-25 12:31:01,355 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:31:01,421 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:31:06,429 | INFO | execution_binance_main | Waiting 234 seconds until next valid 5m time...
+2026-02-25 12:35:00,430 | INFO | execution_binance_main | Current time 07:35:00 is valid for 5m execution.
+2026-02-25 12:35:03,185 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:03,252 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:08,271 | INFO | execution_binance_main | Current time 07:35:08 is valid for 5m execution.
+2026-02-25 12:35:11,198 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:11,263 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:16,272 | INFO | execution_binance_main | Current time 07:35:16 is valid for 5m execution.
+2026-02-25 12:35:18,902 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:19,070 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:24,089 | INFO | execution_binance_main | Current time 07:35:24 is valid for 5m execution.
+2026-02-25 12:35:26,877 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:26,938 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:31,942 | INFO | execution_binance_main | Current time 07:35:31 is valid for 5m execution.
+2026-02-25 12:35:34,577 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:34,632 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:39,649 | INFO | execution_binance_main | Current time 07:35:39 is valid for 5m execution.
+2026-02-25 12:35:42,359 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:42,430 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:47,440 | INFO | execution_binance_main | Current time 07:35:47 is valid for 5m execution.
+2026-02-25 12:35:50,469 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:50,568 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:35:55,587 | INFO | execution_binance_main | Current time 07:35:55 is valid for 5m execution.
+2026-02-25 12:35:58,623 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 12:35:58,694 | ERROR | execution_binance_main | Error in continuous execution loop: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 102, in <module>
+    strategies = get_profitable_strategies(
+  File "D:\trading\TradeX\utils\db\utils.py", line 425, in get_profitable_strategies
+    with engine.begin() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\contextlib.py", line 135, in __enter__
+    return next(self.gen)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3249, in begin
+    with self.connect() as conn:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 716, in checkout
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 714, in checkout
+    dbapi_connection = rec.get_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 836, in get_connection
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is in recovery mode
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-02-25 12:36:03,701 | INFO | execution_binance_main | Waiting 237 seconds until next valid 5m time...

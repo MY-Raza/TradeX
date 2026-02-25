@@ -100,4 +100,4 @@ def train(
     model.fit(X_train, y_train)
     preds = model.predict(X_test)
 
-    return model, preds, X_test.index
+    return model, preds, X_test.index, X_test

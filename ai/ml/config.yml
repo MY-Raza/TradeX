@@ -22,58 +22,58 @@ indicators:
   # Overlap Studies
   # =========================
   BBANDS: true
-  DEMA: false
+  DEMA: true
   EMA: true
-  HT_TRENDLINE: false
+  HT_TRENDLINE: true
   KAMA: true
-  MA: false
-  MAMA: false
-  MIDPOINT: false
-  MIDPRICE: false
+  MA: true
+  MAMA: true
+  MIDPOINT: true
+  MIDPRICE: true
   SAR: true
-  SAREXT: false
+  SAREXT: true
   SMA: true
-  T3: false
-  TEMA: false
-  TRIMA: false
+  T3: true
+  TEMA: true
+  TRIMA: true
   WMA: true
 
   # =========================
   # Momentum Indicators
   # =========================
   ADX: true
-  ADXR: false
-  APO: false
+  ADXR: true
+  APO: true
   AROON: true
-  AROONOSC: false
-  BOP: false
+  AROONOSC: true
+  BOP: true
   CCI: true
-  CMO: false
-  DX: false
+  CMO: true
+  DX: true
   MACD: true
-  MACDEXT: false
+  MACDEXT: true
   MFI: true
-  MINUS_DI: false
-  MINUS_DM: false
+  MINUS_DI: true
+  MINUS_DM: true
   MOM: true
-  PLUS_DI: false
-  PLUS_DM: false
-  PPO: false
+  PLUS_DI: true
+  PLUS_DM: true
+  PPO: true
   ROC: true
-  ROCP: false
-  ROCR: false
-  ROCR100: false
+  ROCP: true
+  ROCR: true
+  ROCR100: true
   RSI: true
   STOCH: true
-  STOCHF: false
-  STOCHRSI: false
-  TRIX: false
-  WILLR: false
+  STOCHF: true
+  STOCHRSI: true
+  TRIX: true
+  WILLR: true
 
   # =========================
   # Volume Indicators
   # =========================
-  AD: false
+  AD: true
   ADOSC: true
   OBV: true
 
@@ -81,36 +81,36 @@ indicators:
   # Volatility Indicators
   # =========================
   ATR: true
-  NATR: false
-  TRANGE: false
+  NATR: true
+  TRANGE: true
 
   # =========================
   # Price Transform
   # =========================
-  AVGPRICE: false
-  MEDPRICE: false
-  TYPPRICE: false
-  WCLPRICE: false
+  AVGPRICE: true
+  MEDPRICE: true
+  TYPPRICE: true
+  WCLPRICE: true
 
   # =========================
   # Cycle Indicators
   # =========================
-  HT_DCPERIOD: false
-  HT_DCPHASE: false
-  HT_PHASOR: false
-  HT_SINE: false
-  HT_TRENDMODE: false
+  HT_DCPERIOD: true
+  HT_DCPHASE: true
+  HT_PHASOR: true
+  HT_SINE: true
+  HT_TRENDMODE: true
 
   # =========================
   # Statistic Indicators
   # =========================
   LINEARREG: true
-  LINEARREG_ANGLE: false
-  LINEARREG_INTERCEPT: false
+  LINEARREG_ANGLE: true
+  LINEARREG_INTERCEPT: true
   LINEARREG_SLOPE: true
   STDDEV: true
-  TSF: false
-  VAR: false
+  TSF: true
+  VAR: true
 
   # =========================
   # Candlestick Patterns
@@ -123,61 +123,61 @@ indicators:
   CDLEVENINGSTAR: true
 
   # Most patterns disabled by default
-  CDL2CROWS: false
-  CDL3BLACKCROWS: false
-  CDL3INSIDE: false
-  CDL3LINESTRIKE: false
-  CDL3OUTSIDE: false
-  CDL3STARSINSOUTH: false
-  CDL3WHITESOLDIERS: false
-  CDLABANDONEDBABY: false
-  CDLADVANCEBLOCK: false
-  CDLBELTHOLD: false
-  CDLBREAKAWAY: false
-  CDLCLOSINGMARUBOZU: false
-  CDLCONCEALBABYSWALL: false
-  CDLCOUNTERATTACK: false
-  CDLDARKCLOUDCOVER: false
-  CDLDOJISTAR: false
-  CDLDRAGONFLYDOJI: false
-  CDLEVENINGDOJISTAR: false
-  CDLGAPSIDESIDEWHITE: false
-  CDLGRAVESTONEDOJI: false
-  CDLHANGINGMAN: false
-  CDLHARAMI: false
-  CDLHARAMICROSS: false
-  CDLHIGHWAVE: false
-  CDLHIKKAKE: false
-  CDLHIKKAKEMOD: false
-  CDLHOMINGPIGEON: false
-  CDLIDENTICAL3CROWS: false
-  CDLINNECK: false
-  CDLINVERTEDHAMMER: false
-  CDLKICKING: false
-  CDLKICKINGBYLENGTH: false
-  CDLLADDERBOTTOM: false
-  CDLLONGLEGGEDDOJI: false
-  CDLLONGLINE: false
-  CDLMARUBOZU: false
-  CDLMATCHINGLOW: false
-  CDLMATHOLD: false
-  CDLMORNINGDOJISTAR: false
-  CDLONNECK: false
-  CDLPIERCING: false
-  CDLRICKSHAWMAN: false
-  CDLRISEFALL3METHODS: false
-  CDLSEPARATINGLINES: false
-  CDLSHORTLINE: false
-  CDLSPINNINGTOP: false
-  CDLSTALLEDPATTERN: false
-  CDLSTICKSANDWICH: false
-  CDLTAKURI: false
-  CDLTASUKIGAP: false
-  CDLTHRUSTING: false
-  CDLTRISTAR: false
-  CDLUNIQUE3RIVER: false
-  CDLUPSIDEGAP2CROWS: false
-  CDLXSIDEGAP3METHODS: false
+  CDL2CROWS: true
+  CDL3BLACKCROWS: true
+  CDL3INSIDE: true
+  CDL3LINESTRIKE: true
+  CDL3OUTSIDE: true
+  CDL3STARSINSOUTH: true
+  CDL3WHITESOLDIERS: true
+  CDLABANDONEDBABY: true
+  CDLADVANCEBLOCK: true
+  CDLBELTHOLD: true
+  CDLBREAKAWAY: true
+  CDLCLOSINGMARUBOZU: true
+  CDLCONCEALBABYSWALL: true
+  CDLCOUNTERATTACK: true
+  CDLDARKCLOUDCOVER: true
+  CDLDOJISTAR: true
+  CDLDRAGONFLYDOJI: true
+  CDLEVENINGDOJISTAR: true
+  CDLGAPSIDESIDEWHITE: true
+  CDLGRAVESTONEDOJI: true
+  CDLHANGINGMAN: true
+  CDLHARAMI: true
+  CDLHARAMICROSS: true
+  CDLHIGHWAVE: true
+  CDLHIKKAKE: true
+  CDLHIKKAKEMOD: true
+  CDLHOMINGPIGEON: true
+  CDLIDENTICAL3CROWS: true
+  CDLINNECK: true
+  CDLINVERTEDHAMMER: true
+  CDLKICKING: true
+  CDLKICKINGBYLENGTH: true
+  CDLLADDERBOTTOM: true
+  CDLLONGLEGGEDDOJI: true
+  CDLLONGLINE: true
+  CDLMARUBOZU: true
+  CDLMATCHINGLOW: true
+  CDLMATHOLD: true
+  CDLMORNINGDOJISTAR: true
+  CDLONNECK: true
+  CDLPIERCING: true
+  CDLRICKSHAWMAN: true
+  CDLRISEFALL3METHODS: true
+  CDLSEPARATINGLINES: true
+  CDLSHORTLINE: true
+  CDLSPINNINGTOP: true
+  CDLSTALLEDPATTERN: true
+  CDLSTICKSANDWICH: true
+  CDLTAKURI: true
+  CDLTASUKIGAP: true
+  CDLTHRUSTING: true
+  CDLTRISTAR: true
+  CDLUNIQUE3RIVER: true
+  CDLUPSIDEGAP2CROWS: true
+  CDLXSIDEGAP3METHODS: true
 
 symbols:
   - btc
