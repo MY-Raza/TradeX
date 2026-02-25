@@ -19,46 +19,162 @@ from datetime import datetime
 # ----------------------------
 def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
     df = df.copy()
+
+    close = df["close"].values
+    high = df["high"].values
+    low = df["low"].values
+    open_ = df["open"].values
+    volume = df["volume"].values
+
     for ind in indicators:
         try:
-            if ind in ["RSI", "EMA", "SMA", "MOM"]:  # single-series indicators
-                values, window = call_indicator(ind, df["close"].values, timeperiod=14)
+            # =========================
+            # Single-series indicators
+            # =========================
+            if ind in {
+                "RSI", "EMA", "SMA", "WMA", "DEMA", "TEMA", "TRIMA",
+                "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
+                "LINEARREG", "LINEARREG_SLOPE", "LINEARREG_ANGLE",
+                "LINEARREG_INTERCEPT", "STDDEV", "VAR", "TSF"
+            }:
+                values, window = call_indicator(ind, close, timeperiod=14)
                 df[f"{ind}_{window}"] = values
 
-            elif ind in ["ATR", "ADX", "CCI"]:  # require high, low, close
+            # =========================
+            # High / Low / Close
+            # =========================
+            elif ind in {
+                "ATR", "NATR", "TRANGE",
+                "ADX", "ADXR", "DX",
+                "CCI",
+                "PLUS_DI", "MINUS_DI",
+                "PLUS_DM", "MINUS_DM",
+                "WILLR"
+            }:
                 values, window = call_indicator(
                     ind,
-                    high=df["high"].values,
-                    low=df["low"].values,
-                    close=df["close"].values,
+                    high=high,
+                    low=low,
+                    close=close,
                     timeperiod=14
                 )
                 df[f"{ind}_{window}"] = values
 
-            elif ind == "MACD":  # MACD needs only close
-                macd, signal, hist = call_indicator(
-                    "MACD",
-                    df["close"].values,
-                    fastperiod=12,
-                    slowperiod=26,
-                    signalperiod=9
-                )[0]
-                df["MACD"] = macd
-                df["MACD_SIGNAL"] = signal
-                df["MACD_HIST"] = hist
+            # =========================
+            # MACD family
+            # =========================
+            elif ind in {"MACD", "MACDEXT", "PPO", "APO", "TRIX"}:
+                out = call_indicator(ind, close)
+                for i, arr in enumerate(out[0]):
+                    df[f"{ind}_{i}"] = arr
 
-            elif ind == "BBANDS":  # BBANDS needs only close
-                upper, middle, lower = call_indicator(
-                    "BBANDS",
-                    df["close"].values,
-                    timeperiod=20
-                )[0]
+            # =========================
+            # Bollinger Bands
+            # =========================
+            elif ind == "BBANDS":
+                upper, mid, lower = call_indicator("BBANDS", close, timeperiod=20)[0]
                 df["BB_UPPER"] = upper
-                df["BB_MIDDLE"] = middle
+                df["BB_MIDDLE"] = mid
                 df["BB_LOWER"] = lower
 
+            # =========================
+            # Stochastic family
+            # =========================
+            elif ind in {"STOCH", "STOCHF", "STOCHRSI"}:
+                slowk, slowd = call_indicator(
+                    ind,
+                    high=high,
+                    low=low,
+                    close=close
+                )[0]
+                df[f"{ind}_K"] = slowk
+                df[f"{ind}_D"] = slowd
+
+            # =========================
+            # Volume indicators
+            # =========================
+            elif ind in {"OBV", "AD"}:
+                df[ind] = call_indicator(ind, close, volume)[0]
+
+            elif ind == "ADOSC":
+                df["ADOSC"] = call_indicator(
+                    "ADOSC",
+                    high=high,
+                    low=low,
+                    close=close,
+                    volume=volume
+                )[0]
+
+            elif ind == "MFI":
+                df["MFI_14"] = call_indicator(
+                    "MFI",
+                    high=high,
+                    low=low,
+                    close=close,
+                    volume=volume,
+                    timeperiod=14
+                )[0]
+
+            # =========================
+            # Aroon
+            # =========================
+            elif ind in {"AROON", "AROONOSC"}:
+                out = call_indicator(
+                    ind,
+                    high=high,
+                    low=low,
+                    timeperiod=14
+                )[0]
+                if ind == "AROON":
+                    df["AROON_UP"], df["AROON_DOWN"] = out
+                else:
+                    df["AROONOSC"] = out
+
+            # =========================
+            # SAR
+            # =========================
+            elif ind in {"SAR", "SAREXT"}:
+                df[ind] = call_indicator(
+                    ind,
+                    high=high,
+                    low=low
+                )[0]
+
+            # =========================
+            # Price transforms
+            # =========================
+            elif ind in {"AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE"}:
+                df[ind] = call_indicator(
+                    ind,
+                    open=open_,
+                    high=high,
+                    low=low,
+                    close=close
+                )[0]
+
+            # =========================
+            # Hilbert Transform (Cycle)
+            # =========================
+            elif ind.startswith("HT_"):
+                df[ind] = call_indicator(ind, close)[0]
+
+            # =========================
+            # Candlestick patterns
+            # =========================
+            elif ind.startswith("CDL"):
+                df[ind] = call_indicator(
+                    ind,
+                    open=open_,
+                    high=high,
+                    low=low,
+                    close=close
+                )[0]
+
+            else:
+                logger.warning(f"Unsupported indicator: {ind}")
+
         except Exception as e:
-            logger.info(f"Indicator {ind} failed: {e}")
+            logger.error(f"Indicator {ind} failed: {e}")
 
     return df
 
@@ -149,6 +265,7 @@ def main():
         # Feature Engineering
         logger.info(f"Generating indicators for {symbol}...")
         df_gf = generate_features(df_1h, active_indicators)
+
 
         # ----------------------------
         # Train Classifiers

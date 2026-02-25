@@ -344,6 +344,7 @@ def fetch_ohlcv_df(
     time_column: str = "datetime",
     start_date: str | None = None,
     end_date: str | None = None,
+    limit: int | None = None,
 ) -> pd.DataFrame:
     """
     Fetch OHLCV data from DB filtered by datetime range.
@@ -381,6 +382,8 @@ def fetch_ohlcv_df(
         end_date = pd.to_datetime(end_date, utc=True)
         df = df[df[time_column] <= end_date]
 
+    if limit:
+        df = df.tail(limit)
     return df.reset_index(drop=True)
 
 #======================================

@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from TradeX.backtest.backtest import BackTest
+
 
 def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5):
     """
@@ -57,3 +59,68 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
     })
 
     return df_predictions
+
+def pnl_permutation_importance(
+    model,
+    X_test,
+    df,
+    df_1m,
+    base_pnl,
+    model_type="regressor",
+    k=0.5,
+    threshold=0.5,
+    n_repeats=3
+):
+
+    results = []
+
+    for col in X_test.columns:
+        pnl_scores = []
+
+        for _ in range(n_repeats):
+            X_perm = X_test.copy()
+            X_perm[col] = np.random.permutation(X_perm[col])
+
+            # ----------------------------
+            # Generate predictions
+            # ----------------------------
+            if model_type == "classifier":
+                if hasattr(model, "predict_proba"):
+                    preds = model.predict_proba(X_perm)[:, 1]
+                else:
+                    preds = model.predict(X_perm)
+            else:
+                preds = model.predict(X_perm)
+
+            # ----------------------------
+            # Convert → trades
+            # ----------------------------
+            df_preds = prepare_predictions(
+                df,
+                preds,
+                X_perm.index,
+                model_type=model_type,
+                threshold=threshold,
+                k=k
+            )
+
+            df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
+
+            bt = BackTest(
+                df_1m,
+                df_preds,
+                take_profit=3,
+                stop_loss=1
+            )
+            _, _, pnl = bt.run()
+
+            pnl_scores.append(pnl)
+
+        pnl_drop = base_pnl - np.mean(pnl_scores)
+
+        results.append({
+            "feature": col,
+            "pnl_drop": pnl_drop
+        })
+
+    return pd.DataFrame(results).sort_values("pnl_drop", ascending=False)

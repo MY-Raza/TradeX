@@ -9324,3 +9324,15 @@ binance.exceptions.BinanceAPIException: APIError(code=-4509): Time in Force (TIF
 2026-02-18 03:22:36,185 | INFO | execution_binance_main | btc | Resampled to 90 rows.
 2026-02-18 03:22:36,366 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_5 → 1 at 2026-02-17 12:45:00+00:00
 2026-02-18 03:22:42,622 | INFO | execution_binance_main | Waiting 138 seconds until next valid 5m time...
+2026-02-25 10:27:12,106 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 1h
+2026-02-25 10:27:14,532 | INFO | execution_binance_main | Waiting 1966 seconds until next valid 1h time...
+2026-02-25 11:00:00,792 | INFO | execution_binance_main | Current time 06:00:00 is valid for 1h execution.
+2026-02-25 11:12:03,904 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-25 11:12:06,560 | INFO | execution_binance_main | btc | sig_1h_btc_22 → Highest window: 30
+2026-02-25 11:12:06,564 | INFO | execution_binance_main | btc | Required 1m candles: 5400
+2026-02-25 11:12:06,564 | ERROR | execution_binance_main | Error in continuous execution loop: fetch_ohlcv_df() got an unexpected keyword argument 'limit'
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 136, in <module>
+    df_1m = fetch_ohlcv_df(
+TypeError: fetch_ohlcv_df() got an unexpected keyword argument 'limit'
+2026-02-25 11:12:11,576 | INFO | execution_binance_main | Waiting 2869 seconds until next valid 1h time...
