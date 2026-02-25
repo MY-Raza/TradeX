@@ -27047,3 +27047,9 @@ Last 5 rows from data_binance.btc_1m:
 2026-02-24 15:45:33,786 | INFO | utils | Inserted 2066 rows into models.random_forest_reg_20260224_150355
 2026-02-24 15:46:27,374 | INFO | utils | Schema 'models' ready
 2026-02-24 15:46:27,711 | INFO | utils | Inserted 1008 rows into models.xgboost_reg_20260224_150355
+2026-02-25 10:20:31,977 | INFO | utils | Database engine initialized
+2026-02-25 10:20:48,960 | INFO | utils | Table Found
+2026-02-25 10:20:54,034 | INFO | utils | Schema 'strategy_signals' ready
+2026-02-25 10:20:54,322 | INFO | utils | Indexes ensured: sig_1h_btc_115_datetime_uidx, sig_1h_btc_115_datetime_desc_idx
+2026-02-25 10:20:55,001 | INFO | utils | Hypertable created/verified for "strategy_signals"."sig_1h_btc_115"
+2026-02-25 10:23:43,115 | INFO | utils | Database engine initialized
