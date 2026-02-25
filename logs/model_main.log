@@ -1283,3 +1283,64 @@ LINE 2:         INSERT INTO models.20260224_093814_xgboost_clf ("dat...
 2026-02-25 12:05:46,561 | ERROR | model_main | Indicator MINUS_DM failed: MINUS_DM() got an unexpected keyword argument 'close'
 2026-02-25 12:05:46,600 | ERROR | model_main | Indicator PLUS_DM failed: PLUS_DM() got an unexpected keyword argument 'close'
 2026-02-25 12:26:34,698 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'high'
+2026-02-25 12:47:57,835 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 12:47:57,835 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 12:48:13,059 | INFO | model_main | Generating indicators for btc...
+2026-02-25 12:48:13,074 | WARNING | model_main | Unsupported indicator: MA
+2026-02-25 12:48:13,075 | WARNING | model_main | Unsupported indicator: MAMA
+2026-02-25 12:48:13,075 | WARNING | model_main | Unsupported indicator: MIDPOINT
+2026-02-25 12:48:13,077 | WARNING | model_main | Unsupported indicator: MIDPRICE
+2026-02-25 12:53:02,195 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 12:53:02,195 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 12:53:16,376 | INFO | model_main | Generating indicators for btc...
+2026-02-25 12:53:16,394 | ERROR | model_main | Indicator MAMA failed: not enough values to unpack (expected 3, got 2)
+2026-02-25 12:53:16,395 | ERROR | model_main | Indicator MIDPOINT failed: MIDPOINT() got an unexpected keyword argument 'high'
+2026-02-25 12:56:49,777 | WARNING | model_main | Unsupported indicator: BOP
+2026-02-25 12:56:49,857 | WARNING | model_main | Unsupported indicator: CMO
+2026-02-25 12:56:50,063 | ERROR | model_main | Indicator MINUS_DM failed: MINUS_DM() got an unexpected keyword argument 'close'
+2026-02-25 12:56:50,106 | ERROR | model_main | Indicator PLUS_DM failed: PLUS_DM() got an unexpected keyword argument 'close'
+2026-02-25 12:57:35,726 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 12:57:35,726 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 12:57:49,968 | INFO | model_main | Generating indicators for btc...
+2026-02-25 12:57:49,985 | ERROR | model_main | Indicator MAMA failed: Length of values (2) does not match length of index (27433)
+2026-02-25 12:57:49,985 | ERROR | model_main | Indicator MIDPOINT failed: MIDPOINT() got an unexpected keyword argument 'high'
+2026-02-25 13:01:42,760 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 13:01:42,762 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 13:02:15,730 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 13:02:15,730 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 13:02:29,366 | INFO | model_main | Generating indicators for btc...
+2026-02-25 13:02:29,378 | ERROR | model_main | Indicator MAMA failed: Length of values (2) does not match length of index (27433)
+2026-02-25 13:02:29,382 | ERROR | model_main | Indicator MIDPRICE failed: MIDPRICE() takes at least 2 positional arguments (1 given)
+2026-02-25 13:06:22,880 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 13:06:22,880 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 13:06:40,267 | INFO | model_main | Generating indicators for btc...
+2026-02-25 13:06:40,292 | ERROR | model_main | Indicator MAMA failed: all the input arrays must have same number of dimensions, but the array at index 0 has 1 dimension(s) and the array at index 1 has 2 dimension(s)
+2026-02-25 13:09:25,747 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 13:09:25,749 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 13:09:43,687 | INFO | model_main | Generating indicators for btc...
+2026-02-25 13:09:43,692 | ERROR | model_main | Indicator MAMA failed: Length of values (54866) does not match length of index (27433)
+2026-02-25 13:14:40,891 | WARNING | model_main | Unsupported indicator: BOP
+2026-02-25 13:14:41,014 | WARNING | model_main | Unsupported indicator: CMO
+2026-02-25 13:14:41,298 | ERROR | model_main | Indicator MINUS_DM failed: MINUS_DM() got an unexpected keyword argument 'close'
+2026-02-25 13:14:41,369 | ERROR | model_main | Indicator PLUS_DM failed: PLUS_DM() got an unexpected keyword argument 'close'
+2026-02-25 13:24:04,320 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 13:24:04,321 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 13:24:23,529 | INFO | model_main | Generating indicators for btc...
+2026-02-25 13:24:23,552 | ERROR | model_main | Indicator MAMA failed: Length of values (1) does not match length of index (27433)
+2026-02-25 13:28:02,472 | ERROR | model_main | Indicator BOP failed: BOP() got an unexpected keyword argument 'timeperiod'
+2026-02-25 13:39:00,460 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-25 13:39:00,460 | INFO | model_main | Fetching data for btc from database...
+2026-02-25 13:39:12,997 | INFO | model_main | Generating indicators for btc...
+2026-02-25 13:39:13,014 | ERROR | model_main | Indicator MAMA failed: Length of values (1) does not match length of index (27433)
+2026-02-25 13:42:14,719 | ERROR | model_main | Indicator BOP failed: BOP() got an unexpected keyword argument 'timeperiod'
+2026-02-25 13:42:15,105 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'high'
+2026-02-25 13:42:15,413 | ERROR | model_main | Indicator MEDPRICE failed: MEDPRICE() got an unexpected keyword argument 'open'
+2026-02-25 13:42:15,706 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-25 13:43:02,237 | ERROR | model_main | Classifier random_forest failed for btc: Unable to allocate 5.62 GiB for an array with shape (27477, 27433) and data type float64
+2026-02-25 13:43:10,621 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-25 13:43:52,092 | ERROR | model_main | Classifier xgboost failed for btc: Unable to allocate 5.62 GiB for an array with shape (27477, 27433) and data type float64
+2026-02-25 13:44:01,791 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-25 13:48:04,129 | ERROR | model_main | Regressor random_forest failed for btc: Unable to allocate 5.62 GiB for an array with shape (27477, 27433) and data type float64
+2026-02-25 13:48:24,792 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-25 13:50:04,449 | ERROR | model_main | Regressor xgboost failed for btc: Unable to allocate 5.62 GiB for an array with shape (27477, 27433) and data type float64
+2026-02-25 13:50:14,703 | INFO | model_main | Model training complete for btc.

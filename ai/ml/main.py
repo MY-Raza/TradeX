@@ -18,52 +18,105 @@ from datetime import datetime
 # FEATURE ENGINEERING
 # ----------------------------
 def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
-    df = df.copy()
+    """
+    Generate technical indicator features for a DataFrame.
+    Supports price, volume, momentum, volatility, cycle, and candlestick indicators.
 
+    Args:
+        df (pd.DataFrame): Must contain columns ['open', 'high', 'low', 'close', 'volume']
+        indicators (list[str]): List of indicator names to compute
+
+    Returns:
+        pd.DataFrame: Original DataFrame with new indicator columns added
+    """
+    df = df.copy()
     close = df["close"].values
     high = df["high"].values
     low = df["low"].values
     open_ = df["open"].values
     volume = df["volume"].values
 
+    # =========================
+    # Indicator categories
+    # =========================
+    single_series = {
+        "RSI", "EMA", "SMA", "WMA", "DEMA", "TEMA", "TRIMA",
+        "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
+        "LINEARREG", "LINEARREG_SLOPE", "LINEARREG_ANGLE",
+        "LINEARREG_INTERCEPT", "STDDEV", "VAR", "TSF",
+        "MA","BOP", "CMO"
+    }
+
+    hlc_series = {
+        "ATR", "NATR", "TRANGE", "ADX", "ADXR", "DX", "CCI",
+        "PLUS_DI", "MINUS_DI", "PLUS_DM", "MINUS_DM", "WILLR"
+    }
+
+    macd_series = {"MACD", "MACDEXT", "PPO", "APO", "TRIX"}
+    bband_series = {"BBANDS"}
+    stochastic_series = {"STOCH", "STOCHF", "STOCHRSI"}
+    volume_series = {"OBV", "AD", "ADOSC", "MFI"}
+    aroon_series = {"AROON", "AROONOSC"}
+    sar_series = {"SAR", "SAREXT"}
+    price_transforms = {"AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE"}
+    cycle_series = {ind for ind in indicators if ind.startswith("HT_")}
+    candle_patterns = {ind for ind in indicators if ind.startswith("CDL")}
+
     for ind in indicators:
         try:
             # =========================
             # Single-series indicators
             # =========================
-            if ind in {
-                "RSI", "EMA", "SMA", "WMA", "DEMA", "TEMA", "TRIMA",
-                "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
-                "LINEARREG", "LINEARREG_SLOPE", "LINEARREG_ANGLE",
-                "LINEARREG_INTERCEPT", "STDDEV", "VAR", "TSF"
-            }:
+            if ind in single_series:
                 values, window = call_indicator(ind, close, timeperiod=14)
                 df[f"{ind}_{window}"] = values
 
             # =========================
-            # High / Low / Close
+            # MAMA special case
             # =========================
-            elif ind in {
-                "ATR", "NATR", "TRANGE",
-                "ADX", "ADXR", "DX",
-                "CCI",
-                "PLUS_DI", "MINUS_DI",
-                "PLUS_DM", "MINUS_DM",
-                "WILLR"
-            }:
-                values, window = call_indicator(
-                    ind,
-                    high=high,
-                    low=low,
-                    close=close,
-                    timeperiod=14
-                )
-                df[f"{ind}_{window}"] = values
+            elif ind == "MAMA":
+                close_arr = np.asarray(close, dtype=np.float64)
+                out = call_indicator("MAMA", close, fastlimit=0.5, slowlimit=0.05)
+                mama = np.ravel(out[0])  # flatten to 1D
+                fama = np.ravel(out[1])  # flatten to 1D
+
+                # Pad with NaN if needed
+                if len(mama) != len(df):
+                    if len(mama) > len(df):
+                        mama =  mama[-len(df):]
+                    else:
+                        pad_len = len(df) - len(mama)
+                        mama = np.concatenate([np.full(pad_len, np.nan), mama])
+                        fama = np.concatenate([np.full(pad_len, np.nan), fama])
+
+                df["MAMA"] = mama
+                df["FAMA"] = fama
+
+            # =========================
+            # MIDPOINT / MIDPRICE
+            # =========================
+            elif ind == "MIDPOINT":
+                df["MIDPOINT_14"] = call_indicator("MIDPOINT", close, timeperiod=14)[0]
+            elif ind == "MIDPRICE":
+                midprice = call_indicator("MIDPRICE", high, low, timeperiod=14)[0]
+                df["MIDPRICE_14"] = midprice
+
+            # =========================
+            # High / Low / Close indicators
+            # =========================
+            elif ind in hlc_series:
+                if ind == "MINUS_DM":
+                    df[ind] = call_indicator("MINUS_DM", high=high, low=low, timeperiod=14)[0]
+                elif ind == "PLUS_DM":
+                    df[ind] = call_indicator("PLUS_DM", high=high, low=low, timeperiod=14)[0]
+                else:
+                    values, window = call_indicator(ind, high=high, low=low, close=close, timeperiod=14)
+                    df[f"{ind}_{window}"] = values
 
             # =========================
             # MACD family
             # =========================
-            elif ind in {"MACD", "MACDEXT", "PPO", "APO", "TRIX"}:
+            elif ind in macd_series:
                 out = call_indicator(ind, close)
                 for i, arr in enumerate(out[0]):
                     df[f"{ind}_{i}"] = arr
@@ -71,60 +124,33 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             # =========================
             # Bollinger Bands
             # =========================
-            elif ind == "BBANDS":
+            elif ind in bband_series:
                 upper, mid, lower = call_indicator("BBANDS", close, timeperiod=20)[0]
-                df["BB_UPPER"] = upper
-                df["BB_MIDDLE"] = mid
-                df["BB_LOWER"] = lower
+                df["BB_UPPER"], df["BB_MIDDLE"], df["BB_LOWER"] = upper, mid, lower
 
             # =========================
             # Stochastic family
             # =========================
-            elif ind in {"STOCH", "STOCHF", "STOCHRSI"}:
-                slowk, slowd = call_indicator(
-                    ind,
-                    high=high,
-                    low=low,
-                    close=close
-                )[0]
-                df[f"{ind}_K"] = slowk
-                df[f"{ind}_D"] = slowd
+            elif ind in stochastic_series:
+                slowk, slowd = call_indicator(ind, high=high, low=low, close=close)[0]
+                df[f"{ind}_K"], df[f"{ind}_D"] = slowk, slowd
 
             # =========================
             # Volume indicators
             # =========================
-            elif ind in {"OBV", "AD"}:
-                df[ind] = call_indicator(ind, close, volume)[0]
-
-            elif ind == "ADOSC":
-                df["ADOSC"] = call_indicator(
-                    "ADOSC",
-                    high=high,
-                    low=low,
-                    close=close,
-                    volume=volume
-                )[0]
-
-            elif ind == "MFI":
-                df["MFI_14"] = call_indicator(
-                    "MFI",
-                    high=high,
-                    low=low,
-                    close=close,
-                    volume=volume,
-                    timeperiod=14
-                )[0]
+            elif ind in volume_series:
+                if ind in {"OBV", "AD"}:
+                    df[ind] = call_indicator(ind, close, volume)[0]
+                elif ind == "ADOSC":
+                    df[ind] = call_indicator("ADOSC", high=high, low=low, close=close, volume=volume)[0]
+                elif ind == "MFI":
+                    df[f"{ind}_14"] = call_indicator("MFI", high=high, low=low, close=close, volume=volume, timeperiod=14)[0]
 
             # =========================
             # Aroon
             # =========================
-            elif ind in {"AROON", "AROONOSC"}:
-                out = call_indicator(
-                    ind,
-                    high=high,
-                    low=low,
-                    timeperiod=14
-                )[0]
+            elif ind in aroon_series:
+                out = call_indicator(ind, high=high, low=low, timeperiod=14)[0]
                 if ind == "AROON":
                     df["AROON_UP"], df["AROON_DOWN"] = out
                 else:
@@ -133,42 +159,26 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             # =========================
             # SAR
             # =========================
-            elif ind in {"SAR", "SAREXT"}:
-                df[ind] = call_indicator(
-                    ind,
-                    high=high,
-                    low=low
-                )[0]
+            elif ind in sar_series:
+                df[ind] = call_indicator(ind, high=high, low=low)[0]
 
             # =========================
             # Price transforms
             # =========================
-            elif ind in {"AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE"}:
-                df[ind] = call_indicator(
-                    ind,
-                    open=open_,
-                    high=high,
-                    low=low,
-                    close=close
-                )[0]
+            elif ind in price_transforms:
+                df[ind] = call_indicator(ind, open=open_, high=high, low=low, close=close)[0]
 
             # =========================
             # Hilbert Transform (Cycle)
             # =========================
-            elif ind.startswith("HT_"):
+            elif ind in cycle_series:
                 df[ind] = call_indicator(ind, close)[0]
 
             # =========================
             # Candlestick patterns
             # =========================
-            elif ind.startswith("CDL"):
-                df[ind] = call_indicator(
-                    ind,
-                    open=open_,
-                    high=high,
-                    low=low,
-                    close=close
-                )[0]
+            elif ind in candle_patterns:
+                df[ind] = call_indicator(ind, open=open_, high=high, low=low, close=close)[0]
 
             else:
                 logger.warning(f"Unsupported indicator: {ind}")
@@ -177,8 +187,6 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             logger.error(f"Indicator {ind} failed: {e}")
 
     return df
-
-
 
 # ----------------------------
 # TARGET CREATION
