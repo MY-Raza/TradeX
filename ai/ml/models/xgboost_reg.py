@@ -6,18 +6,17 @@ import optuna
 from TradeX.backtest.backtest import BackTest
 from TradeX.ai.ml.utils import prepare_predictions
 
+
 def train(
     df,
     df_1m,
     target_col="target",
     split_date="2024-01-01 00:00",
     n_trials=50,
-    k=0.5,
-    pnl_drop_threshold=7.0  # % PnL drop threshold for pruning features
+    k=0.5
 ):
     """
-    Train XGBRegressor using PnL-based Optuna optimization with data pruning.
-    Includes log-diff feature transformation.
+    Train XGBRegressor using PnL-based Optuna optimization with pruning.
 
     Args:
         df (pd.DataFrame): Feature dataframe
@@ -26,13 +25,12 @@ def train(
         split_date (str): Date string to split train/test
         n_trials (int): Number of Optuna trials
         k (float): Threshold for converting predictions to trading signals
-        pnl_drop_threshold (float): Minimum PnL drop (%) to keep a feature
 
     Returns:
-        final_model: trained XGBRegressor
-        final_preds: predictions on test set
-        X_test.index: indices of test set
-        X_test: test features after pruning
+        model: trained XGBRegressor
+        preds: predictions on test set
+        test_index: indices of test set
+        X_test: features of test set
     """
 
     # ----------------------------
@@ -63,7 +61,7 @@ def train(
     # ----------------------------
     split_date = pd.to_datetime(split_date, utc=True)
     train_df = df[df["datetime"] < split_date]
-    test_df  = df[df["datetime"] >= split_date]
+    test_df = df[df["datetime"] >= split_date]
 
     if train_df.empty or test_df.empty:
         raise ValueError("Train/Test split resulted in empty dataset.")
@@ -76,7 +74,7 @@ def train(
     y_test = test_df[target_col]
 
     # ----------------------------
-    # OPTUNA OBJECTIVE (PnL Optimization)
+    # OPTUNA OBJECTIVE (PnL Optimization with pruning)
     # ----------------------------
     def objective(trial):
         params = {
@@ -109,50 +107,39 @@ def train(
         )
         df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
 
-        # Run Backtest
-        bt = BackTest(df_1m, df_preds, take_profit=3, stop_loss=1)
-        _, _, pnl = bt.run()
-        return pnl  # maximize profit
+        # ----------------------------
+        # Backtest in chunks for pruning
+        # ----------------------------
+        total_rows = len(df_preds)
+        n_chunks = 5  # split test set into 5 cumulative chunks
+        pnl_so_far = 0
+
+        for i in range(n_chunks):
+            end_idx = (i + 1) * total_rows // n_chunks
+            df_chunk = df_preds.iloc[:end_idx]
+
+            bt = BackTest(df_1m, df_chunk, take_profit=3, stop_loss=1)
+            _, _, pnl_chunk = bt.run()
+            pnl_so_far = pnl_chunk
+
+            trial.report(pnl_so_far, step=i)  # report intermediate PnL
+            if trial.should_prune():
+                raise optuna.TrialPruned()
+
+        return pnl_so_far
 
     # ----------------------------
-    # Run Optuna
+    # Run Optuna with MedianPruner
     # ----------------------------
-    study = optuna.create_study(direction="maximize")
+    pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=1)
+    study = optuna.create_study(direction="maximize", pruner=pruner)
     study.optimize(objective, n_trials=n_trials)
+
     best_params = study.best_params
     print(f"Best Optuna Parameters: {best_params}")
 
     # ----------------------------
-    # DATA PRUNING BASED ON PNL DROP
-    # ----------------------------
-    base_model = XGBRegressor(**best_params)
-    base_model.fit(X_train, y_train)
-    base_preds = base_model.predict(X_test)
-    df_base_preds = prepare_predictions(df, base_preds, X_test.index, model_type="regressor", k=k)
-    bt_base = BackTest(df_1m, df_base_preds, take_profit=3, stop_loss=1)
-    _, _, base_pnl = bt_base.run()
-
-    pnl_drop_list = []
-    for col in X_train.columns:
-        X_train_temp = X_train.drop(columns=[col])
-        X_test_temp = X_test.drop(columns=[col])
-        temp_model = XGBRegressor(**best_params)
-        temp_model.fit(X_train_temp, y_train)
-        preds_temp = temp_model.predict(X_test_temp)
-        df_preds_temp = prepare_predictions(df, preds_temp, X_test_temp.index, model_type="regressor", k=k)
-        bt_temp = BackTest(df_1m, df_preds_temp, take_profit=3, stop_loss=1)
-        _, _, pnl_temp = bt_temp.run()
-        pnl_drop_percent = 100 * (base_pnl - pnl_temp) / abs(base_pnl)
-        pnl_drop_list.append((col, pnl_drop_percent))
-
-    keep_features = [f for f, drop in pnl_drop_list if drop >= pnl_drop_threshold]
-    print("Features kept after data pruning:", keep_features)
-
-    X_train = X_train[keep_features]
-    X_test  = X_test[keep_features]
-
-    # ----------------------------
-    # FINAL MODEL TRAINING
+    # Final Model Training
     # ----------------------------
     final_model = XGBRegressor(**best_params)
     final_model.fit(X_train, y_train)

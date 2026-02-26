@@ -15,7 +15,7 @@ def train(
     k=0.5
 ):
     """
-    Train RandomForestRegressor using time-based split with PnL-based Optuna optimization.
+    Train RandomForestRegressor using time-based split with PnL-based Optuna optimization and pruning.
 
     Args:
         df (pd.DataFrame): Input dataframe with features and target
@@ -74,9 +74,10 @@ def train(
     y_test = test_df[target_col]
 
     # ----------------------------
-    # OPTUNA OBJECTIVE (PnL Optimization)
+    # OPTUNA OBJECTIVE (PnL Optimization with Pruning)
     # ----------------------------
     def objective(trial):
+        # Suggest hyperparameters
         params = {
             "n_estimators": trial.suggest_int("n_estimators", 100, 800),
             "max_depth": trial.suggest_int("max_depth", 3, 40),
@@ -106,34 +107,49 @@ def train(
         )
         df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
 
-        # Backtest
-        bt = BackTest(
-            df_1m,
-            df_preds,
-            take_profit=3,
-            stop_loss=1
-        )
-        _, _, pnl = bt.run()
-        return pnl  # maximize PnL
+        # ----------------------------
+        # Backtest in chunks for pruning
+        # ----------------------------
+        total_rows = len(df_preds)
+        n_chunks = 5  # split test set into 5 chunks for intermediate reporting
+
+        pnl_so_far = 0
+        for i in range(n_chunks):
+            end_idx = (i + 1) * total_rows // n_chunks
+            df_chunk = df_preds.iloc[:end_idx]  # cumulative backtest
+
+            bt = BackTest(df_1m, df_chunk, take_profit=3, stop_loss=1)
+            _, _, pnl_chunk = bt.run()
+            pnl_so_far = pnl_chunk
+
+            # Report intermediate PnL to Optuna
+            trial.report(pnl_so_far, step=i)
+
+            # Prune unpromising trials
+            if trial.should_prune():
+                raise optuna.TrialPruned()
+
+        return pnl_so_far  # maximize profit
 
     # ----------------------------
-    # Run Optuna
+    # Run Optuna with MedianPruner
     # ----------------------------
-    study = optuna.create_study(direction="maximize")
+    pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=1)
+    study = optuna.create_study(direction="maximize", pruner=pruner)
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
     print(f"Best Optuna Parameters: {best_params}")
 
     # ----------------------------
-    # FINAL MODEL TRAINING
+    # Final Model Training
     # ----------------------------
-    model = RandomForestRegressor(
+    final_model = RandomForestRegressor(
         random_state=42,
         n_jobs=-1,
         **best_params
     )
-    model.fit(X_train, y_train)
-    preds = model.predict(X_test)
+    final_model.fit(X_train, y_train)
+    final_preds = final_model.predict(X_test)
 
-    return model, preds, X_test.index, X_test
+    return final_model, final_preds, X_test.index, X_test
