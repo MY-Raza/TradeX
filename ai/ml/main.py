@@ -5,7 +5,7 @@ import numpy as np
 from TradeX.utils.db.utils import fetch_ohlcv_df,save_df_to_db
 from TradeX.indicators.talib.indicators import call_indicator
 from TradeX.ai.ml.models.model_trainer import train_model, save_model
-from TradeX.ai.ml.utils import prepare_predictions, pnl_permutation_importance
+from TradeX.ai.ml.utils import prepare_predictions, pnl_permutation_importance,extract_important_features
 from TradeX.utils.common.config_loader import read_config
 from TradeX.utils.common.logs import get_logger 
 from TradeX.utils.data.data_cleaner import resample_ohlcv
@@ -301,9 +301,15 @@ def main():
                 pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
                 pnl_importance_wide.insert(0, "pnl", pnl)
                 table_name_clf = f"{clf_name}_clf_{timestamp}"
+                important_features_df = extract_important_features(
+                                        pnl_importance_wide,
+                                        table_name_clf
+                                        )
+                print(important_features_df.head())
+                table_name_clf = f"{clf_name}_clf_{timestamp}"
                 save_df_to_db(
-                    df=pnl_importance_wide,
-                    table_name=table_name_clf,
+                    df=important_features_df,
+                    table_name="best_features",
                     schema= "ml_features",
                     time_column= None,
                     is_timeseries=False
@@ -359,6 +365,7 @@ def main():
                     take_profit=3,
                     stop_loss=1
                 )
+                
                 ledger, final_balance, pnl = bt.run()
                 pnl_importance_df = pnl_permutation_importance(
                     model=model,

@@ -37,6 +37,8 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
 
     if model_type == "classifier":
+        if threshold is None:
+            threshold = 0.5
         signals = (preds > threshold).astype(int)
 
     elif model_type == "regressor":
@@ -128,3 +130,15 @@ def pnl_permutation_importance(
         })
 
     return pd.DataFrame(results).sort_values("pnl_drop", ascending=False)
+
+def extract_important_features(pnl_importance_wide: pd.DataFrame, model_name: str):
+    # Drop pnl column
+    feature_row = pnl_importance_wide.drop(columns=["pnl"], errors="ignore").iloc[0]
+
+    # Keep only features with value > 0
+    important_features = feature_row[feature_row > 0].index.tolist()
+
+    return pd.DataFrame({
+        "model_name": [model_name],
+        "important_features": [important_features]
+    })
