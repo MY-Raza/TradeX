@@ -1465,3 +1465,50 @@ Feature names seen at fit time, yet now missing:
 2026-02-26 14:19:52,085 | INFO | model_main | Final Balance: 578.47
 2026-02-26 14:19:52,085 | INFO | model_main | Cummulative PnL: -50.92
 2026-02-26 14:19:52,365 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-26 14:24:19,902 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-26 14:24:19,902 | INFO | model_main | Fetching data for btc from database...
+2026-02-26 14:24:29,716 | INFO | model_main | Generating indicators for btc...
+2026-02-26 14:24:29,735 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-26 14:26:07,835 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-26 14:26:07,835 | INFO | model_main | Fetching data for btc from database...
+2026-02-26 14:26:16,721 | INFO | model_main | Generating indicators for btc...
+2026-02-26 14:26:16,724 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-26 14:30:10,770 | INFO | model_main | Final Balance: 496.87
+2026-02-26 14:30:10,770 | INFO | model_main | Cummulative PnL: -62.0
+2026-02-26 14:30:11,071 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-26 14:33:04,603 | INFO | model_main | Final Balance: 495.52
+2026-02-26 14:33:04,603 | INFO | model_main | Cummulative PnL: -62.1
+2026-02-26 14:33:04,610 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-26 14:38:45,813 | INFO | model_main | Final Balance: 497.07
+2026-02-26 14:38:45,813 | INFO | model_main | Cummulative PnL: -66.67
+2026-02-26 14:38:45,851 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-26 14:41:53,299 | INFO | model_main | Final Balance: 496.37
+2026-02-26 14:41:53,300 | INFO | model_main | Cummulative PnL: -62.5
+2026-02-26 14:41:53,320 | INFO | model_main | Model training complete for btc.
+2026-02-26 14:48:05,079 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-26 14:48:05,079 | INFO | model_main | Fetching data for btc from database...
+2026-02-26 14:48:20,947 | INFO | model_main | Generating indicators for btc...
+2026-02-26 14:48:20,980 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'high'
+2026-02-26 14:48:20,989 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-26 14:50:16,948 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-26 14:50:16,948 | INFO | model_main | Fetching data for btc from database...
+2026-02-26 14:50:26,774 | INFO | model_main | Generating indicators for btc...
+2026-02-26 14:50:26,788 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'high'
+2026-02-26 14:50:26,798 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-26 14:59:52,559 | INFO | model_main | Final Balance: 496.84
+2026-02-26 14:59:52,559 | INFO | model_main | Cummulative PnL: -66.4
+2026-02-26 14:59:53,210 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-26 15:06:47,536 | INFO | model_main | Final Balance: 499.13
+2026-02-26 15:06:47,537 | INFO | model_main | Cummulative PnL: -66.0
+2026-02-26 15:06:47,557 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-26 15:17:47,005 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-26 15:17:47,005 | INFO | model_main | Fetching data for btc from database...
+2026-02-26 15:18:00,354 | INFO | model_main | Generating indicators for btc...
+2026-02-26 15:18:00,400 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'high'
+2026-02-26 15:18:00,403 | INFO | model_main | Training classifier: random_forest for btc
+2026-02-26 15:24:53,983 | INFO | model_main | Final Balance: 499.56
+2026-02-26 15:24:53,983 | INFO | model_main | Cummulative PnL: -66.2
+2026-02-26 15:24:54,382 | INFO | model_main | Training classifier: xgboost for btc
+2026-02-26 15:31:23,235 | INFO | model_main | Final Balance: 499.13
+2026-02-26 15:31:23,236 | INFO | model_main | Cummulative PnL: -66.0
+2026-02-26 15:31:23,303 | INFO | model_main | Training regressor: random_forest for btc

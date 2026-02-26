@@ -22,21 +22,21 @@ indicators:
   # Overlap Studies
   # =========================
   BBANDS: false
-  DEMA: false
+  DEMA: true
   EMA: true
   HT_TRENDLINE: false
-  KAMA: false
-  MA: false
+  KAMA: true
+  MA: true
   MAMA: false
   MIDPOINT: false
   MIDPRICE: false
-  SAR: false
-  SAREXT: false
+  SAR: true
+  SAREXT: true
   SMA: true
   T3: false
-  TEMA: false
+  TEMA: true
   TRIMA: false
-  WMA: false
+  WMA: true
 
   # =========================
   # Momentum Indicators
@@ -44,12 +44,12 @@ indicators:
   ADX: true
   ADXR: false
   APO: false
-  AROON: false
+  AROON: true
   AROONOSC: false
   BOP: false
   CCI: false
   CMO: false
-  DX: false
+  DX: true
   MACD: true
   MACDEXT: false
   MFI: false
@@ -65,8 +65,8 @@ indicators:
   ROCR100: false
   RSI: true
   STOCH: false
-  STOCHF: false
-  STOCHRSI: false
+  STOCHF: true
+  STOCHRSI: true
   TRIX: false
   WILLR: false
 
@@ -74,14 +74,14 @@ indicators:
   # Volume Indicators
   # =========================
   AD: false
-  ADOSC: false
-  OBV: false
+  ADOSC: true
+  OBV: true
 
   # =========================
   # Volatility Indicators
   # =========================
   ATR: true
-  NATR: false
+  NATR: true
   TRANGE: false
 
   # =========================
@@ -119,12 +119,12 @@ indicators:
   CDLHAMMER: false
   CDLSHOOTINGSTAR: false
   CDLDOJI: true
-  CDLMORNINGSTAR: false
+  CDLMORNINGSTAR: true
   CDLEVENINGSTAR: false
 
   # Most patterns disabled by default
   CDL2CROWS: false
-  CDL3BLACKCROWS: false
+  CDL3BLACKCROWS: true
   CDL3INSIDE: false
   CDL3LINESTRIKE: false
   CDL3OUTSIDE: false
@@ -136,7 +136,7 @@ indicators:
   CDLBREAKAWAY: false
   CDLCLOSINGMARUBOZU: false
   CDLCONCEALBABYSWALL: false
-  CDLCOUNTERATTACK: false
+  CDLCOUNTERATTACK: true
   CDLDARKCLOUDCOVER: false
   CDLDOJISTAR: false
   CDLDRAGONFLYDOJI: false
@@ -193,7 +193,7 @@ symbols:
 
 start_date: '2023-01-01' 
 end_date: '2026-02-17'
-split_date: '2025-01-01'
+split_date: '2025-07-01'
 
 xgboost_classifier_params:
     n_estimators: 500

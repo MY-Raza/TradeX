@@ -37,8 +37,7 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
 
     if model_type == "classifier":
-        # Use predictions directly
-        signals = preds
+        signals = (preds > threshold).astype(int)
 
     elif model_type == "regressor":
         # Auto-compute threshold if not provided
@@ -66,7 +65,7 @@ def pnl_permutation_importance(
     df,
     df_1m,
     base_pnl,
-    model_type="regressor",
+    model_type="classifier",
     k=0.5,
     threshold=0.5,
     n_repeats=3
@@ -74,12 +73,15 @@ def pnl_permutation_importance(
 
     results = []
 
+    # 🔥 align df once
+    df_test = df.loc[X_test.index].copy()
+
     for col in X_test.columns:
         pnl_scores = []
 
         for _ in range(n_repeats):
             X_perm = X_test.copy()
-            X_perm[col] = np.random.permutation(X_perm[col])
+            X_perm[col] = np.random.permutation(X_perm[col].values)
 
             # ----------------------------
             # Generate predictions
@@ -95,9 +97,8 @@ def pnl_permutation_importance(
             # ----------------------------
             # Convert → trades
             # ----------------------------
-            
             df_preds = prepare_predictions(
-                df,
+                df_test,
                 preds,
                 X_perm.index,
                 model_type=model_type,
@@ -105,7 +106,9 @@ def pnl_permutation_importance(
                 k=k
             )
 
-            df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
+            df_preds["datetime"] = pd.to_datetime(
+                df_preds["datetime"], utc=True
+            )
 
             bt = BackTest(
                 df_1m,
