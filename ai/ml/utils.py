@@ -95,6 +95,7 @@ def pnl_permutation_importance(
             # ----------------------------
             # Convert → trades
             # ----------------------------
+            
             df_preds = prepare_predictions(
                 df,
                 preds,

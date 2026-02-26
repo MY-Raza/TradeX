@@ -17,33 +17,66 @@ def train(
 ):
     """
     Train XGBRegressor using PnL-based Optuna optimization.
+
+    Args:
+        df (pd.DataFrame): Feature dataframe
+        df_1m (pd.DataFrame): 1-minute OHLCV dataframe for backtesting
+        target_col (str): Target column name
+        split_date (str): Date string to split train/test
+        n_trials (int): Number of Optuna trials
+        k (float): Threshold for converting predictions to trading signals
+
+    Returns:
+        model: trained XGBRegressor
+        preds: predictions on test set
+        test_index: indices of test set
+        X_test: features of test set
     """
 
     # ----------------------------
-    # Ensure datetime column
+    # Ensure datetime column & sort
     # ----------------------------
     if "datetime" not in df.columns:
         raise ValueError("DataFrame must have a 'datetime' column.")
 
+    df = df.copy()
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
-    df = df.sort_values("datetime")
+    df = df.sort_values("datetime").reset_index(drop=True)
 
+    # ----------------------------
+    # LOG-DIFF TRANSFORMATION
+    # ----------------------------
+    price_cols = ["open", "high", "low", "close"]
+    for col in price_cols:
+        if col in df.columns:
+            df[col] = np.log(df[col]).diff()
+
+    if "volume" in df.columns:
+        df["volume"] = np.log1p(df["volume"]).diff()
+
+    df = df.dropna().reset_index(drop=True)
+
+    # ----------------------------
+    # Train/Test Split
+    # ----------------------------
     split_date = pd.to_datetime(split_date, utc=True)
-
     train_df = df[df["datetime"] < split_date]
-    test_df = df[df["datetime"] >= split_date]
+    test_df  = df[df["datetime"] >= split_date]
 
-    X_train = train_df.drop(columns=[target_col, "datetime"])
+    if train_df.empty or test_df.empty:
+        raise ValueError("Train/Test split resulted in empty dataset.")
+
+    drop_cols = [target_col, "datetime", "future_close"]
+    X_train = train_df.drop(columns=[c for c in drop_cols if c in train_df.columns])
     y_train = train_df[target_col]
 
-    X_test = test_df.drop(columns=[target_col, "datetime"])
+    X_test = test_df.drop(columns=[c for c in drop_cols if c in test_df.columns])
     y_test = test_df[target_col]
 
-    # ==================================================
-    # OPTUNA SECTION (PnL optimization)
-    # ==================================================
+    # ----------------------------
+    # OPTUNA OBJECTIVE (PnL Optimization)
+    # ----------------------------
     def objective(trial):
-
         params = {
             "n_estimators": trial.suggest_int("n_estimators", 100, 800),
             "max_depth": trial.suggest_int("max_depth", 3, 12),
@@ -61,12 +94,9 @@ def train(
 
         model = XGBRegressor(**params)
         model.fit(X_train, y_train)
-
         preds = model.predict(X_test)
 
-        # --------------------------------------------------
         # Convert predictions → trading signals
-        # --------------------------------------------------
         df_preds = prepare_predictions(
             df,
             preds,
@@ -77,31 +107,30 @@ def train(
         )
         df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
 
-        # --------------------------------------------------
-        # Backtest
-        # --------------------------------------------------
+        # Run Backtest
         bt = BackTest(
             df_1m,
             df_preds,
             take_profit=3,
             stop_loss=1
         )
-
         _, _, pnl = bt.run()
+        return pnl  # maximize profit
 
-        return pnl  # 🔥 maximize PROFIT, not MSE
-
+    # ----------------------------
+    # Run Optuna
+    # ----------------------------
     study = optuna.create_study(direction="maximize")
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    print(f"Best Optuna Parameters (PnL): {best_params}")
+    print(f"Best Optuna Parameters: {best_params}")
 
-    # ==================================================
+    # ----------------------------
     # FINAL TRAINING
-    # ==================================================
+    # ----------------------------
     model = XGBRegressor(**best_params)
     model.fit(X_train, y_train)
     preds = model.predict(X_test)
 
-    return model, preds, X_test.index
+    return model, preds, X_test.index, X_test

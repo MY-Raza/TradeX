@@ -206,26 +206,6 @@ def create_regression_target(df: pd.DataFrame) -> pd.DataFrame:
     df.dropna(inplace=True)
     return df
 
-
-# ----------------------------
-# DATASET PREPARATION WITH LOG-DIFF SCALING
-# ----------------------------
-def prepare_ml_data(df: pd.DataFrame):
-    df = df.copy()
-    drop_cols = ["datetime", "future_close"]
-    df = df.drop(columns=[c for c in drop_cols if c in df.columns], errors='ignore')
-    df = df.dropna()
-
-    y = df["target"]
-    X = df.drop("target", axis=1)
-
-    # Apply log-difference scaling to positive columns
-    X_scaled = X.apply(lambda col: np.log(col).diff() if np.all(col > 0) else col)
-    X_scaled = X_scaled.dropna()
-    y = y.loc[X_scaled.index]
-
-    return X_scaled, y
-
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 # ----------------------------
 # MAIN PIPELINE
@@ -285,7 +265,6 @@ def main():
             logger.info(f"Training classifier: {clf_name} for {symbol}")
             try:
                 df_clf = create_classification_target(df_gf)
-                X, y = prepare_ml_data(df_clf)
 
                 # Pass XGBoost params dynamically
                 kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
@@ -296,7 +275,7 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10,
+                    n_trails=1,
                     df_1m=df_1m
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -307,6 +286,7 @@ def main():
                     take_profit=3,
                     stop_loss=1
                 )
+                
                 ledger, final_balance, pnl = bt.run()
                 pnl_importance_df = pnl_permutation_importance(
                     model=model,
@@ -318,7 +298,7 @@ def main():
                     k=0.5,
                     n_repeats=3
                 )
-                print(pnl_importance_df.head())
+                print(pnl_importance_df.head(18))
                 save_df_to_db(
                     df=ledger,
                     schema="models",
@@ -332,7 +312,7 @@ def main():
                 logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
                     model,
-                    X.columns.tolist(),
+                    X_test.columns.tolist(),
                     symbol,
                     f"{clf_name}_classifier_{timestamp}"
                 )
@@ -349,7 +329,6 @@ def main():
             logger.info(f"Training regressor: {reg_name} for {symbol}")
             try:
                 df_reg = create_regression_target(df_gf)
-                X, y = prepare_ml_data(df_reg)
 
                 # Pass XGBoost params dynamically
                 kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
@@ -396,7 +375,7 @@ def main():
                 logger.info(f"Cummulative PnL: {pnl}")
                 save_model(
                     model,
-                    X.columns.tolist(),
+                    X_test.columns.tolist(),
                     symbol,
                     f"{reg_name}_regressor_{timestamp}"
                 )
