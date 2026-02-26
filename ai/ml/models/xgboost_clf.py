@@ -5,17 +5,18 @@ import optuna
 from TradeX.backtest.backtest import BackTest
 from TradeX.ai.ml.utils import prepare_predictions
 
-
 def train(
     df,
     df_1m,
     target_col="target",
     split_date="2024-01-01 00:00",
     n_trials=50,
-    k=0.5
+    k=0.5,
+    pnl_drop_threshold=7.0  # Features with pnl_drop below this % will be pruned
 ):
     """
-    Train XGBClassifier using PnL-based Optuna optimization.
+    Train XGBClassifier using PnL-based Optuna optimization with data pruning.
+    Includes log-diff feature transformation.
 
     Args:
         df (pd.DataFrame): Input dataframe with features and target
@@ -24,12 +25,13 @@ def train(
         split_date (str): Date string to split train/test
         n_trials (int): Number of Optuna trials
         k (float): Optional threshold for preparing signals
+        pnl_drop_threshold (float): Minimum % PnL drop to keep feature
 
     Returns:
         model: trained XGBClassifier
         preds: predictions on test set
         test_index: indices of the test set
-        X_test: features of the test set
+        X_test: features of the test set after pruning
     """
 
     # ----------------------------
@@ -49,10 +51,8 @@ def train(
     for col in price_cols:
         if col in df.columns:
             df[col] = np.log(df[col]).diff()
-
     if "volume" in df.columns:
         df["volume"] = np.log1p(df["volume"]).diff()
-
     df = df.dropna().reset_index(drop=True)
 
     # ----------------------------
@@ -110,12 +110,7 @@ def train(
         df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
 
         # Run Backtest
-        bt = BackTest(
-            df_1m,
-            df_preds,
-            take_profit=3,
-            stop_loss=1
-        )
+        bt = BackTest(df_1m, df_preds, take_profit=3, stop_loss=1)
         _, _, pnl = bt.run()
         return pnl  # maximize PnL
 
@@ -124,15 +119,44 @@ def train(
     # ----------------------------
     study = optuna.create_study(direction="maximize")
     study.optimize(objective, n_trials=n_trials)
-
     best_params = study.best_params
     print(f"Best Optuna Parameters: {best_params}")
 
     # ----------------------------
-    # FINAL TRAINING
+    # DATA PRUNING BASED ON PNL DROP
     # ----------------------------
-    model = XGBClassifier(**best_params)
-    model.fit(X_train, y_train)
-    preds = model.predict(X_test)
+    base_model = XGBClassifier(**best_params)
+    base_model.fit(X_train, y_train)
+    base_preds = base_model.predict(X_test)
+    df_base_preds = prepare_predictions(df, base_preds, X_test.index, model_type="classifier", k=k)
+    bt_base = BackTest(df_1m, df_base_preds, take_profit=3, stop_loss=1)
+    _, _, base_pnl = bt_base.run()
 
-    return model, preds, X_test.index, X_test
+    pnl_drop_list = []
+    for col in X_train.columns:
+        X_train_temp = X_train.drop(columns=[col])
+        X_test_temp = X_test.drop(columns=[col])
+        temp_model = XGBClassifier(**best_params)
+        temp_model.fit(X_train_temp, y_train)
+        preds_temp = temp_model.predict(X_test_temp)
+        df_preds_temp = prepare_predictions(df, preds_temp, X_test_temp.index, model_type="classifier", k=k)
+        bt_temp = BackTest(df_1m, df_preds_temp, take_profit=3, stop_loss=1)
+        _, _, pnl_temp = bt_temp.run()
+        pnl_drop_percent = 100 * (base_pnl - pnl_temp) / abs(base_pnl)
+        pnl_drop_list.append((col, pnl_drop_percent))
+
+    # Keep only features above threshold
+    keep_features = [f for f, drop in pnl_drop_list if drop >= pnl_drop_threshold]
+    print("Features kept after data pruning:", keep_features)
+
+    X_train = X_train[keep_features]
+    X_test  = X_test[keep_features]
+
+    # ----------------------------
+    # FINAL MODEL TRAINING
+    # ----------------------------
+    final_model = XGBClassifier(**best_params)
+    final_model.fit(X_train, y_train)
+    final_preds = final_model.predict(X_test)
+
+    return final_model, final_preds, X_test.index, X_test

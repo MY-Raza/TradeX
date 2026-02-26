@@ -275,7 +275,7 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=1,
+                    n_trails=2,
                     df_1m=df_1m
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -298,11 +298,20 @@ def main():
                     k=0.5,
                     n_repeats=3
                 )
-                print(pnl_importance_df.head(18))
+                pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
+                pnl_importance_wide.insert(0, "pnl", pnl)
+                table_name = f"{clf_name}_clf_{timestamp}"
+                save_df_to_db(
+                    df=pnl_importance_wide,
+                    table_name=table_name,
+                    schema= "ml_features",
+                    time_column= None,
+                    is_timeseries=False
+                )
                 save_df_to_db(
                     df=ledger,
                     schema="models",
-                    table_name=f"{clf_name}_clf_{timestamp}",
+                    table_name=table_name,
                     time_column="datetime",
                     is_timeseries=True,
                     enforce_unique_time=False,
@@ -340,7 +349,7 @@ def main():
                     df_1m=df_1m,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10
+                    n_trails=2
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
@@ -361,11 +370,20 @@ def main():
                     k=0.5,
                     n_repeats=3
                 )
-                print(pnl_importance_df.head())
+                pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
+                pnl_importance_wide.insert(0, "pnl", pnl)
+                table_name = f"{reg_name}_clf_{timestamp}"
+                save_df_to_db(
+                    df=pnl_importance_wide,
+                    table_name=table_name,
+                    schema= "ml_features",
+                    time_column= None,
+                    is_timeseries=False
+                )
                 save_df_to_db(
                     df=ledger,
                     schema="models",
-                    table_name=f"{reg_name}_reg_{timestamp}",
+                    table_name=table_name,
                     time_column="datetime",
                     is_timeseries=True,
                     enforce_unique_time=False,
