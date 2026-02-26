@@ -300,10 +300,10 @@ def main():
                 )
                 pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
                 pnl_importance_wide.insert(0, "pnl", pnl)
-                table_name = f"{clf_name}_clf_{timestamp}"
+                table_name_clf = f"{clf_name}_clf_{timestamp}"
                 save_df_to_db(
                     df=pnl_importance_wide,
-                    table_name=table_name,
+                    table_name=table_name_clf,
                     schema= "ml_features",
                     time_column= None,
                     is_timeseries=False
@@ -311,7 +311,7 @@ def main():
                 save_df_to_db(
                     df=ledger,
                     schema="models",
-                    table_name=table_name,
+                    table_name=table_name_clf,
                     time_column="datetime",
                     is_timeseries=True,
                     enforce_unique_time=False,
@@ -372,10 +372,10 @@ def main():
                 )
                 pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
                 pnl_importance_wide.insert(0, "pnl", pnl)
-                table_name = f"{reg_name}_clf_{timestamp}"
+                table_name_reg = f"{reg_name}_reg_{timestamp}"
                 save_df_to_db(
                     df=pnl_importance_wide,
-                    table_name=table_name,
+                    table_name=table_name_reg,
                     schema= "ml_features",
                     time_column= None,
                     is_timeseries=False
@@ -383,7 +383,7 @@ def main():
                 save_df_to_db(
                     df=ledger,
                     schema="models",
-                    table_name=table_name,
+                    table_name=table_name_reg,
                     time_column="datetime",
                     is_timeseries=True,
                     enforce_unique_time=False,
