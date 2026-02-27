@@ -11309,3 +11309,66 @@ binance.exceptions.BinanceAPIException: APIError(code=-4509): Time in Force (TIF
 2026-02-27 12:41:56,505 | INFO | execution_binance_main | btc | Resampled to 90 rows.
 2026-02-27 12:41:56,527 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 0 at 2026-02-27 07:40:00+00:00
 2026-02-27 12:41:57,567 | INFO | execution_binance_main | Waiting 183 seconds until next valid 5m time...
+2026-02-27 12:45:00,575 | INFO | execution_binance_main | Current time 07:45:00 is valid for 5m execution.
+2026-02-27 12:46:42,056 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 12:46:42,073 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 12:46:42,074 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 12:46:51,797 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 12:46:51,823 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 12:46:51,836 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → -1 at 2026-02-27 07:45:00+00:00
+2026-02-27 12:46:53,928 | INFO | execution_binance_main | Waiting 187 seconds until next valid 5m time...
+2026-02-27 12:50:00,944 | INFO | execution_binance_main | Current time 07:50:00 is valid for 5m execution.
+2026-02-27 12:51:39,757 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 12:51:39,764 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 12:51:39,764 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 12:51:48,709 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 12:51:48,831 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 12:51:48,844 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 07:50:00+00:00
+2026-02-27 12:51:51,609 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2013): Order does not exist.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 368, in process_signal
+    self.close_active_trade_market(reason="DIRECTION CHANGE")
+  File "D:\trading\TradeX\execution\binance\executor.py", line 301, in close_active_trade_market
+    self.wait_for_fill(order_id)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 63, in wait_for_fill
+    order = self.client.futures_get_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7997, in futures_get_order
+    return self._request_futures_api("get", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2013): Order does not exist.
+2026-02-27 12:51:56,633 | INFO | execution_binance_main | Waiting 184 seconds until next valid 5m time...
+2026-02-27 12:55:00,643 | INFO | execution_binance_main | Current time 07:55:00 is valid for 5m execution.
+2026-02-27 12:56:38,305 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 12:56:38,312 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 12:56:38,312 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 12:56:53,746 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 12:56:53,773 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 12:56:53,789 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 07:55:00+00:00
+2026-02-27 12:56:54,978 | ERROR | execution_binance_main | Error in continuous execution loop: APIError(code=-2013): Order does not exist.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 165, in <module>
+    trader.process_signal(signal, quantity=qty)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 345, in process_signal
+    self.open_trade(signal, quantity)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 232, in open_trade
+    self.wait_for_fill(order_id)
+  File "D:\trading\TradeX\execution\binance\executor.py", line 63, in wait_for_fill
+    order = self.client.futures_get_order(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 7997, in futures_get_order
+    return self._request_futures_api("get", "order", True, data=params)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 143, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 106, in _request
+    return self._handle_response(self.response)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\binance\client.py", line 115, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2013): Order does not exist.
+2026-02-27 12:56:59,986 | INFO | execution_binance_main | Waiting 181 seconds until next valid 5m time...
+2026-02-27 13:00:00,998 | INFO | execution_binance_main | Current time 08:00:00 is valid for 5m execution.

@@ -229,7 +229,7 @@ class FuturesTrader:
         if not order_id:
             raise RuntimeError(f"Market order failed: {order}")
 
-        self.wait_for_fill(order_id)
+        sleep(0.3)
 
         entry_price, qty, entry_fee = self.get_execution_details(order_id)
 
@@ -298,7 +298,7 @@ class FuturesTrader:
         if not order_id:
             raise RuntimeError(f"Close order failed: {order}")
 
-        self.wait_for_fill(order_id)
+        sleep(0.3)
 
         exit_price, qty_filled, exit_fee = self.get_execution_details(order_id)
 
