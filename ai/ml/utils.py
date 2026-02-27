@@ -45,10 +45,17 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
         # Auto-compute threshold if not provided
         if threshold is None:
             threshold = k * np.std(preds)
-        
+            print("Pred mean:", np.mean(preds))
+            print("Pred std:", np.std(preds))
+            print("Min:", np.min(preds))
+            print("Max:", np.max(preds))
+
+            print("Threshold:", threshold)
         # Convert continuous predictions into discrete signals
         signals = np.where(preds > threshold, 1,
                   np.where(preds < -threshold, -1, 0))
+        print("Unique signals:", np.unique(signals))
+        
 
     else:
         raise ValueError("model_type must be 'classifier' or 'regressor'")

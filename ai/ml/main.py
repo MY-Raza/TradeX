@@ -133,7 +133,7 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             # =========================
             elif ind in stochastic_series:
                 if ind == "STOCHRSI":
-                    slowk, slowd = call_indicator(ind, close=close)[0]
+                    slowk, slowd = call_indicator(ind, close)[0]
                 else:
                     slowk, slowd = call_indicator(ind, high=high, low=low, close=close)[0]
 
@@ -206,7 +206,7 @@ def create_classification_target(df: pd.DataFrame) -> pd.DataFrame:
 def create_regression_target(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df["future_close"] = df["close"].shift(-1)
-    df["target"] = (df["future_close"] - df["close"]) / df["close"]
+    df["target"] = ((df["future_close"] - df["close"]) / df["close"]) * 1000
     df.dropna(inplace=True)
     return df
 

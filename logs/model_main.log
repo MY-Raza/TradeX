@@ -1566,3 +1566,31 @@ Feature names seen at fit time, yet now missing:
 2026-02-27 10:23:57,264 | INFO | model_main | Final Balance: 496.42
 2026-02-27 10:23:57,264 | INFO | model_main | Cummulative PnL: -66.2
 2026-02-27 10:23:57,282 | INFO | model_main | Model training complete for btc.
+2026-02-27 10:35:04,097 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-27 10:35:04,097 | INFO | model_main | Fetching data for btc from database...
+2026-02-27 10:35:27,558 | INFO | model_main | Generating indicators for btc...
+2026-02-27 10:35:27,582 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'close'
+2026-02-27 10:35:27,594 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-27 10:35:35,909 | ERROR | model_main | Regressor random_forest failed for btc: local variable 'signals' referenced before assignment
+2026-02-27 10:35:35,909 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-27 10:35:37,657 | ERROR | model_main | Regressor xgboost failed for btc: local variable 'signals' referenced before assignment
+2026-02-27 10:35:37,657 | INFO | model_main | Model training complete for btc.
+2026-02-27 10:37:07,080 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-27 10:37:07,080 | INFO | model_main | Fetching data for btc from database...
+2026-02-27 10:37:15,507 | INFO | model_main | Generating indicators for btc...
+2026-02-27 10:37:15,524 | ERROR | model_main | Indicator STOCHRSI failed: STOCHRSI() got an unexpected keyword argument 'close'
+2026-02-27 10:37:15,540 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-27 10:44:19,534 | INFO | model_main | Final Balance: 499.65
+2026-02-27 10:44:19,534 | INFO | model_main | Cummulative PnL: -65.85
+2026-02-27 10:44:19,594 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-27 10:46:59,001 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-27 10:46:59,001 | INFO | model_main | Fetching data for btc from database...
+2026-02-27 10:47:10,214 | INFO | model_main | Generating indicators for btc...
+2026-02-27 10:47:10,246 | INFO | model_main | Training regressor: random_forest for btc
+2026-02-27 10:53:16,519 | INFO | model_main | Final Balance: 678.65
+2026-02-27 10:53:16,519 | INFO | model_main | Cummulative PnL: -34.79
+2026-02-27 10:53:16,552 | INFO | model_main | Training regressor: xgboost for btc
+2026-02-27 10:56:51,795 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-02-27 10:56:51,796 | INFO | model_main | Fetching data for btc from database...
+2026-02-27 10:57:03,061 | INFO | model_main | Generating indicators for btc...
+2026-02-27 10:57:03,120 | INFO | model_main | Training regressor: random_forest for btc
