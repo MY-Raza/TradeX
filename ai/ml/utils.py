@@ -37,20 +37,19 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
 
     if model_type == "classifier":
-        if threshold is None:
-            threshold = 0.5
-        signals = (preds > threshold).astype(int)
+        # Convert probability into 3 trading zones
+        upper = 0.55
+        lower = 0.45
+
+        signals = np.where(preds > upper, 1,
+              np.where(preds < lower, -1, 0))
+
+        print("Unique signals:", np.unique(signals))
 
     elif model_type == "regressor":
         # Auto-compute threshold if not provided
         if threshold is None:
             threshold = k * np.std(preds)
-            print("Pred mean:", np.mean(preds))
-            print("Pred std:", np.std(preds))
-            print("Min:", np.min(preds))
-            print("Max:", np.max(preds))
-
-            print("Threshold:", threshold)
         # Convert continuous predictions into discrete signals
         signals = np.where(preds > threshold, 1,
                   np.where(preds < -threshold, -1, 0))

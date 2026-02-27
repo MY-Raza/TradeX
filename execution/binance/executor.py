@@ -43,7 +43,15 @@ class FuturesTrader:
             return False
 
     def _validate_trade(self):
-        return isinstance(self.active_trade, dict) and self.has_open_position()
+        if not isinstance(self.active_trade, dict):
+            return False
+
+        if not self.has_open_position():
+        # TP / SL must have hit → clear stale trade
+            self.active_trade = None
+            return False
+
+        return True
 
     # ---------------------------------------------------------
     # ORDER HELPERS
@@ -247,6 +255,10 @@ class FuturesTrader:
         })
 
     def close_active_trade_market(self, reason="MARKET CLOSE"):
+
+        if not self.has_open_position():
+            self.active_trade = None
+            return
 
         if not self._validate_trade():
             self.active_trade = None

@@ -9419,3 +9419,437 @@
 2026-02-27 11:12:08,970 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:06:00
 2026-02-27 11:12:18,159 | INFO | binance_main | RAW data fetched for link | rows=307
 2026-02-27 11:12:18,276 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:15:04,081 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:15:07,287 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:10:00
+2026-02-27 11:15:16,913 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:15:17,062 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:15:22,950 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:10:00
+2026-02-27 11:15:32,007 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:15:32,127 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:15:37,385 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:10:00
+2026-02-27 11:15:46,431 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:15:46,556 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:15:52,797 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:10:00
+2026-02-27 11:16:01,877 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:16:01,990 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:16:07,153 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:11:00
+2026-02-27 11:16:16,264 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:16:16,398 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:16:21,278 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:11:00
+2026-02-27 11:16:30,374 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:16:30,537 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:16:35,077 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:11:00
+2026-02-27 11:16:44,124 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:16:44,219 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:16:48,503 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:11:00
+2026-02-27 11:16:57,590 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:16:57,694 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:17:00,175 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:17:09,269 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:17:09,411 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:17:14,536 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:12:00
+2026-02-27 11:17:23,678 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:17:23,886 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:20:04,525 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:20:12,790 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:15:00
+2026-02-27 11:20:24,673 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:20:24,962 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:20:26,211 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:15:00
+2026-02-27 11:20:35,282 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:20:35,361 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:20:36,614 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:15:00
+2026-02-27 11:20:45,628 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:20:45,699 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:20:47,417 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:15:00
+2026-02-27 11:20:56,475 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:20:56,546 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:20:57,286 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:16:00
+2026-02-27 11:21:06,382 | INFO | binance_main | RAW data fetched for xrp | rows=305
+2026-02-27 11:21:06,452 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:21:06,918 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:16:00
+2026-02-27 11:21:16,027 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:21:16,100 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:21:16,613 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:16:00
+2026-02-27 11:21:25,668 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:21:25,733 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:21:26,223 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:16:00
+2026-02-27 11:21:35,272 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:21:35,326 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:21:35,526 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:21:44,618 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:21:44,655 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:21:45,077 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:17:00
+2026-02-27 11:21:54,112 | INFO | binance_main | RAW data fetched for link | rows=305
+2026-02-27 11:21:54,176 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:25:03,296 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:25:03,934 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:20:00
+2026-02-27 11:25:13,232 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:25:13,424 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:25:13,840 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:20:00
+2026-02-27 11:25:22,971 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:25:23,055 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:25:23,464 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:20:00
+2026-02-27 11:25:32,544 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:25:32,639 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:25:32,989 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:20:00
+2026-02-27 11:25:42,077 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:25:42,165 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:25:42,475 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:20:00
+2026-02-27 11:25:51,548 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:25:51,634 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:25:52,055 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:21:00
+2026-02-27 11:26:01,136 | INFO | binance_main | RAW data fetched for doge | rows=305
+2026-02-27 11:26:01,245 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:26:01,610 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:21:00
+2026-02-27 11:26:10,708 | INFO | binance_main | RAW data fetched for sol | rows=305
+2026-02-27 11:26:10,782 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:26:11,089 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:21:00
+2026-02-27 11:26:20,151 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:26:20,220 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:26:20,380 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:26:29,471 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:26:29,512 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:26:29,851 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:21:00
+2026-02-27 11:26:38,954 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:26:39,066 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:30:02,133 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:30:02,753 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:30:12,036 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:30:12,118 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:30:12,491 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:30:21,595 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:30:21,664 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:30:22,038 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:30:31,129 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:30:31,202 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:30:31,558 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:30:40,619 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:30:40,675 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:30:40,979 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:30:50,109 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:30:50,167 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:30:50,488 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:30:59,595 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:30:59,660 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:30:59,962 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:25:00
+2026-02-27 11:31:09,039 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:31:09,102 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:31:09,423 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:26:00
+2026-02-27 11:31:18,544 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:31:18,631 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:31:18,811 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:31:27,926 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:31:27,970 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:31:28,207 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:26:00
+2026-02-27 11:31:37,318 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:31:37,381 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:35:03,947 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:35:04,752 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:35:14,040 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:35:14,150 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:35:14,634 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:35:23,724 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:35:23,794 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:35:24,658 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:35:33,713 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:35:33,789 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:35:34,242 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:35:43,340 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:35:43,437 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:35:44,616 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:35:53,688 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:35:53,746 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:35:54,217 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:36:03,313 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:36:03,366 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:36:03,815 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:30:00
+2026-02-27 11:36:12,895 | INFO | binance_main | RAW data fetched for sol | rows=307
+2026-02-27 11:36:13,129 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:36:15,021 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:31:00
+2026-02-27 11:36:24,087 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:36:24,140 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:36:24,315 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:36:33,445 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:36:33,504 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:36:34,340 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:31:00
+2026-02-27 11:36:43,420 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:36:43,480 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:40:05,174 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:40:07,892 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:35:00
+2026-02-27 11:40:17,415 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:40:17,615 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:40:18,567 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:35:00
+2026-02-27 11:40:27,659 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:40:27,871 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:40:28,836 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:35:00
+2026-02-27 11:40:37,902 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:40:38,019 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:40:39,263 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:35:00
+2026-02-27 11:40:48,368 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:40:48,473 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:40:49,559 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:35:00
+2026-02-27 11:40:58,634 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:40:58,760 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:40:59,697 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:35:00
+2026-02-27 11:41:08,840 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:41:09,037 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:41:09,953 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:36:00
+2026-02-27 11:41:18,986 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:41:19,122 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:41:20,350 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:36:00
+2026-02-27 11:41:29,498 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:41:29,607 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:41:30,047 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:41:39,144 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:41:39,268 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:41:40,235 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:36:00
+2026-02-27 11:41:49,309 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:41:49,422 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:45:03,406 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:45:04,477 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:40:00
+2026-02-27 11:45:14,079 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:45:14,201 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:45:14,856 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:40:00
+2026-02-27 11:45:23,956 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:45:24,053 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:45:24,787 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:40:00
+2026-02-27 11:45:34,284 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:45:34,380 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:45:35,122 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:40:00
+2026-02-27 11:45:44,187 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:45:44,285 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:45:45,022 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:40:00
+2026-02-27 11:45:54,058 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:45:54,158 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:45:54,894 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:40:00
+2026-02-27 11:46:04,024 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:46:04,145 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:46:09,029 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:41:00
+2026-02-27 11:46:18,278 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:46:18,413 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:46:23,316 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:41:00
+2026-02-27 11:46:32,468 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:46:32,590 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:46:34,670 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:46:43,815 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:46:43,972 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:46:46,013 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:41:00
+2026-02-27 11:46:55,054 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:46:55,157 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:50:03,115 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:50:03,832 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:45:00
+2026-02-27 11:50:13,111 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:50:13,184 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:50:13,461 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:45:00
+2026-02-27 11:50:22,584 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:50:22,639 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:50:22,935 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:45:00
+2026-02-27 11:50:32,046 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:50:32,140 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:50:32,515 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:45:00
+2026-02-27 11:50:41,594 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:50:41,664 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:50:42,046 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:45:00
+2026-02-27 11:50:51,126 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:50:51,178 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:50:51,418 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:45:00
+2026-02-27 11:51:00,576 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:51:00,674 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:51:00,994 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:46:00
+2026-02-27 11:51:10,139 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:51:10,247 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:51:10,509 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:46:00
+2026-02-27 11:51:19,670 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:51:19,734 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:51:19,889 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:51:28,998 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:51:29,063 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:51:29,476 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:46:00
+2026-02-27 11:51:38,563 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:51:38,619 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 11:55:03,832 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 11:55:04,445 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:50:00
+2026-02-27 11:55:13,707 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 11:55:13,833 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 11:55:14,201 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:50:00
+2026-02-27 11:55:23,296 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 11:55:23,369 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 11:55:23,681 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:50:00
+2026-02-27 11:55:32,762 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 11:55:32,820 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 11:55:33,092 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:50:00
+2026-02-27 11:55:42,174 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 11:55:42,248 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 11:55:42,535 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:50:00
+2026-02-27 11:55:51,632 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 11:55:51,703 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 11:55:52,019 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:50:00
+2026-02-27 11:56:01,121 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 11:56:01,190 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 11:56:01,473 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:51:00
+2026-02-27 11:56:10,623 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 11:56:10,799 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 11:56:11,175 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:51:00
+2026-02-27 11:56:20,289 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 11:56:20,347 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 11:56:20,517 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 11:56:29,654 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 11:56:29,703 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 11:56:29,991 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:51:00
+2026-02-27 11:56:39,158 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 11:56:39,209 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 12:00:03,612 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 12:00:04,514 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 06:55:00
+2026-02-27 12:00:13,721 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 12:00:13,818 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 12:00:14,246 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 06:55:00
+2026-02-27 12:00:23,306 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 12:00:23,360 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 12:00:23,694 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 06:55:00
+2026-02-27 12:00:32,790 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 12:00:32,882 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 12:00:33,401 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 06:55:00
+2026-02-27 12:00:42,523 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 12:00:42,608 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 12:00:43,087 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 06:55:00
+2026-02-27 12:00:52,201 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 12:00:52,284 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 12:00:52,903 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 06:55:00
+2026-02-27 12:01:01,991 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 12:01:02,078 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 12:01:02,741 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 06:56:00
+2026-02-27 12:01:11,915 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 12:01:12,028 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 12:01:12,857 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 06:56:00
+2026-02-27 12:01:21,916 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 12:01:22,034 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 12:01:22,522 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 12:01:31,667 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 12:01:31,723 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 12:01:32,050 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 06:56:00
+2026-02-27 12:01:41,126 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 12:01:41,226 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 12:05:03,263 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 12:05:04,127 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 07:00:00
+2026-02-27 12:05:13,317 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 12:05:14,800 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 12:05:17,022 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 07:00:00
+2026-02-27 12:05:26,138 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 12:05:26,199 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 12:05:26,555 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 07:00:00
+2026-02-27 12:05:35,687 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 12:05:35,832 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 12:05:36,527 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 07:00:00
+2026-02-27 12:05:45,675 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 12:05:45,789 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 12:05:46,627 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 07:00:00
+2026-02-27 12:05:55,777 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 12:05:55,899 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 12:05:57,234 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 07:00:00
+2026-02-27 12:06:06,378 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 12:06:06,541 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 12:06:07,840 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 07:01:00
+2026-02-27 12:06:17,007 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 12:06:17,099 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 12:06:17,842 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 07:01:00
+2026-02-27 12:06:26,995 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 12:06:27,087 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 12:06:27,457 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 12:06:36,762 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 12:06:36,835 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 12:06:37,561 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 07:01:00
+2026-02-27 12:06:46,701 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 12:06:46,796 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 12:10:04,433 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 12:10:05,293 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 07:05:00
+2026-02-27 12:10:14,601 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 12:10:14,740 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 12:10:15,247 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 07:05:00
+2026-02-27 12:10:24,326 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 12:10:24,393 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 12:10:24,865 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 07:05:00
+2026-02-27 12:10:33,974 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 12:10:34,090 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 12:10:34,777 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 07:05:00
+2026-02-27 12:10:43,850 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 12:10:43,910 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 12:10:44,680 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 07:05:00
+2026-02-27 12:10:53,729 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 12:10:53,787 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 12:10:54,161 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 07:05:00
+2026-02-27 12:11:03,253 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 12:11:03,462 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 12:11:04,388 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 07:06:00
+2026-02-27 12:11:13,533 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 12:11:13,599 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 12:11:14,543 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 07:06:00
+2026-02-27 12:11:23,594 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 12:11:23,665 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 12:11:23,905 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 12:11:33,024 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 12:11:33,372 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 12:11:36,033 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 07:06:00
+2026-02-27 12:11:45,502 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 12:11:45,792 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 12:15:03,149 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 12:15:04,204 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 07:10:00
+2026-02-27 12:15:13,581 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 12:15:13,743 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 12:15:14,298 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 07:10:00
+2026-02-27 12:15:23,425 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 12:15:23,499 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 12:15:23,965 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 07:10:00
+2026-02-27 12:15:33,019 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 12:15:33,083 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 12:15:33,525 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 07:10:00
+2026-02-27 12:15:42,591 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 12:15:42,655 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 12:15:43,101 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 07:10:00
+2026-02-27 12:15:52,422 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 12:15:52,473 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 12:15:52,943 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 07:10:00
+2026-02-27 12:16:01,999 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 12:16:02,109 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 12:16:02,532 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 07:11:00
+2026-02-27 12:16:11,619 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 12:16:11,684 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 12:16:12,437 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 07:11:00
+2026-02-27 12:16:21,485 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 12:16:21,558 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 12:16:22,151 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 12:16:31,285 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 12:16:31,318 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 12:16:31,852 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 07:11:00
+2026-02-27 12:16:40,921 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 12:16:40,974 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
+2026-02-27 12:20:03,281 | INFO | binance_main | Starting data pipeline for symbol: btc
+2026-02-27 12:20:03,982 | INFO | binance_main | Found existing data for btc. Setting start_date=2026-02-27 07:15:00
+2026-02-27 12:20:13,247 | INFO | binance_main | RAW data fetched for btc | rows=306
+2026-02-27 12:20:13,374 | INFO | binance_main | Starting data pipeline for symbol: eth
+2026-02-27 12:20:13,985 | INFO | binance_main | Found existing data for eth. Setting start_date=2026-02-27 07:15:00
+2026-02-27 12:20:23,110 | INFO | binance_main | RAW data fetched for eth | rows=306
+2026-02-27 12:20:23,219 | INFO | binance_main | Starting data pipeline for symbol: bnb
+2026-02-27 12:20:23,861 | INFO | binance_main | Found existing data for bnb. Setting start_date=2026-02-27 07:15:00
+2026-02-27 12:20:32,977 | INFO | binance_main | RAW data fetched for bnb | rows=306
+2026-02-27 12:20:33,029 | INFO | binance_main | Starting data pipeline for symbol: ada
+2026-02-27 12:20:33,355 | INFO | binance_main | Found existing data for ada. Setting start_date=2026-02-27 07:15:00
+2026-02-27 12:20:42,460 | INFO | binance_main | RAW data fetched for ada | rows=306
+2026-02-27 12:20:42,543 | INFO | binance_main | Starting data pipeline for symbol: xrp
+2026-02-27 12:20:42,777 | INFO | binance_main | Found existing data for xrp. Setting start_date=2026-02-27 07:15:00
+2026-02-27 12:20:51,902 | INFO | binance_main | RAW data fetched for xrp | rows=306
+2026-02-27 12:20:52,023 | INFO | binance_main | Starting data pipeline for symbol: doge
+2026-02-27 12:20:52,698 | INFO | binance_main | Found existing data for doge. Setting start_date=2026-02-27 07:15:00
+2026-02-27 12:21:01,823 | INFO | binance_main | RAW data fetched for doge | rows=306
+2026-02-27 12:21:01,896 | INFO | binance_main | Starting data pipeline for symbol: sol
+2026-02-27 12:21:02,206 | INFO | binance_main | Found existing data for sol. Setting start_date=2026-02-27 07:16:00
+2026-02-27 12:21:11,271 | INFO | binance_main | RAW data fetched for sol | rows=306
+2026-02-27 12:21:11,389 | INFO | binance_main | Starting data pipeline for symbol: dot
+2026-02-27 12:21:11,615 | INFO | binance_main | Found existing data for dot. Setting start_date=2026-02-27 07:16:00
+2026-02-27 12:21:20,689 | INFO | binance_main | RAW data fetched for dot | rows=306
+2026-02-27 12:21:20,788 | INFO | binance_main | Starting data pipeline for symbol: matic
+2026-02-27 12:21:20,948 | INFO | binance_main | Found existing data for matic. Setting start_date=2024-09-11 09:42:00
+2026-02-27 12:21:30,094 | INFO | binance_main | RAW data fetched for matic | rows=301
+2026-02-27 12:21:30,145 | INFO | binance_main | Starting data pipeline for symbol: link
+2026-02-27 12:21:30,512 | INFO | binance_main | Found existing data for link. Setting start_date=2026-02-27 07:16:00
+2026-02-27 12:21:39,626 | INFO | binance_main | RAW data fetched for link | rows=306
+2026-02-27 12:21:39,726 | INFO | binance_main | Binance Futures data ingestion pipeline completed successfully.
