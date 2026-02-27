@@ -69,14 +69,12 @@ def pnl_permutation_importance(
     base_pnl,
     model_type="classifier",
     k=0.5,
-    threshold=0.5,
+    threshold=None,
     n_repeats=3
 ):
 
     results = []
 
-    # 🔥 align df once
-    df_test = df.loc[X_test.index].copy()
 
     for col in X_test.columns:
         pnl_scores = []
@@ -100,7 +98,7 @@ def pnl_permutation_importance(
             # Convert → trades
             # ----------------------------
             df_preds = prepare_predictions(
-                df_test,
+                df,
                 preds,
                 X_perm.index,
                 model_type=model_type,
