@@ -11655,3 +11655,11 @@ binance.exceptions.BinanceAPIException: APIError(code=-2013): Order does not exi
 2026-03-02 11:17:07,192 | INFO | execution_binance_main | btc | Resampled to 90 rows.
 2026-03-02 11:17:07,229 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → -1 at 2026-03-02 06:15:00+00:00
 2026-03-02 11:17:09,260 | INFO | execution_binance_main | Waiting 171 seconds until next valid 5m time...
+2026-03-02 11:20:00,270 | INFO | execution_binance_main | Current time 06:20:00 is valid for 5m execution.
+2026-03-02 11:21:42,558 | INFO | execution_binance_main | Processing symbol: btc
+2026-03-02 11:21:42,586 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-03-02 11:21:42,588 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-03-02 11:21:56,648 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-03-02 11:21:56,680 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-03-02 11:21:56,696 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → -1 at 2026-03-02 06:20:00+00:00
+2026-03-02 11:21:58,521 | INFO | execution_binance_main | Waiting 182 seconds until next valid 5m time...

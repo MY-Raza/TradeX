@@ -144,8 +144,6 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
         signals = np.where(preds > upper, 1,
               np.where(preds < lower, -1, 0))
 
-        print("Unique signals:", np.unique(signals))
-
     elif model_type == "regressor":
         # Auto-compute threshold if not provided
         if threshold is None:
@@ -153,7 +151,6 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
         # Convert continuous predictions into discrete signals
         signals = np.where(preds > threshold, 1,
                   np.where(preds < -threshold, -1, 0))
-        print("Unique signals:", np.unique(signals))
         
 
     else:

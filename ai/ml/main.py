@@ -319,9 +319,14 @@ def main():
                 )
                 stats_df = compute_trade_statistics(ledger)
                 stats_df.insert(0, "pnl", pnl)
-                print(stats_df.head())
-                logger.info(f"Final Balance: {final_balance}")
-                logger.info(f"Cummulative PnL: {pnl}")
+                stats_df.insert(0,"model_name",table_name_clf)
+                save_df_to_db(
+                    df=stats_df,
+                    table_name="models_stats",
+                    schema= "ml_results",
+                    time_column= None,
+                    is_timeseries=False
+                )
                 save_model(
                     model,
                     X_test.columns.tolist(),
@@ -334,72 +339,80 @@ def main():
         # ----------------------------
         # Train Regressors
         # ----------------------------
-        # for reg_name, is_active in regressors_config.items():
-        #     if not is_active:
-        #         continue
+        for reg_name, is_active in regressors_config.items():
+            if not is_active:
+                continue
 
-        #     logger.info(f"Training regressor: {reg_name} for {symbol}")
-        #     try:
-        #         df_reg = create_regression_target(df_gf)
+            logger.info(f"Training regressor: {reg_name} for {symbol}")
+            try:
+                df_reg = create_regression_target(df_gf)
 
-        #         # Pass XGBoost params dynamically
-        #         kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
+                # Pass XGBoost params dynamically
+                kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
 
-        #         model, preds, test_index, X_test = train_model(
-        #             model_type="regressor",
-        #             model_name=reg_name,
-        #             df=df_reg,
-        #             df_1m=df_1m,
-        #             target_col="target",
-        #             split_date=split_date,
-        #             n_trails=2
-        #         )
-        #         df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
-        #         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-        #         bt = BackTest(
-        #             df_1m,
-        #             df_predictions,
-        #             take_profit=3,
-        #             stop_loss=1
-        #         )
+                model, preds, test_index, X_test = train_model(
+                    model_type="regressor",
+                    model_name=reg_name,
+                    df=df_reg,
+                    df_1m=df_1m,
+                    target_col="target",
+                    split_date=split_date,
+                    n_trails=2
+                )
+                df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
+                df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+                bt = BackTest(
+                    df_1m,
+                    df_predictions,
+                    take_profit=3,
+                    stop_loss=1
+                )
                 
-        #         ledger, final_balance, pnl = bt.run()
-        #         pnl_importance_df = pnl_permutation_importance(
-        #             model=model,
-        #             X_test=X_test,
-        #             df=df_reg,
-        #             df_1m=df_1m,
-        #             base_pnl=pnl,
-        #             model_type="regressor",
-        #             k=0.5,
-        #             n_repeats=3
-        #         )
-        #         pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
-        #         pnl_importance_wide.insert(0, "pnl", pnl)
-        #         table_name_reg = f"{reg_name}_reg_{timestamp}"
-        #         important_features_df_reg = extract_important_features(
-        #                                 pnl_importance_wide,
-        #                                 table_name_reg
-        #                                 )  
-        #         save_df_to_db(
-        #             df=important_features_df_reg,
-        #             table_name="best_features",
-        #             schema= "ml_features",
-        #             time_column= None,
-        #             is_timeseries=False
-        #         )
-        #         logger.info(f"Final Balance: {final_balance}")
-        #         logger.info(f"Cummulative PnL: {pnl}")
-        #         save_model(
-        #             model,
-        #             X_test.columns.tolist(),
-        #             symbol,
-        #             f"{reg_name}_regressor_{timestamp}"
-        #         )
-        #     except Exception as e:
-        #         logger.error(f"Regressor {reg_name} failed for {symbol}: {e}")
+                ledger, final_balance, pnl = bt.run()
+                pnl_importance_df = pnl_permutation_importance(
+                    model=model,
+                    X_test=X_test,
+                    df=df_reg,
+                    df_1m=df_1m,
+                    base_pnl=pnl,
+                    model_type="regressor",
+                    k=0.5,
+                    n_repeats=3
+                )
+                pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
+                pnl_importance_wide.insert(0, "pnl", pnl)
+                table_name_reg = f"{reg_name}_reg_{timestamp}"
+                important_features_df_reg = extract_important_features(
+                                        pnl_importance_wide,
+                                        table_name_reg
+                                        )  
+                save_df_to_db(
+                    df=important_features_df_reg,
+                    table_name="best_features",
+                    schema= "ml_features",
+                    time_column= None,
+                    is_timeseries=False
+                )
+                stats_df = compute_trade_statistics(ledger)
+                stats_df.insert(0, "pnl", pnl)
+                stats_df.insert(0,"model_name",table_name_reg)
+                save_df_to_db(
+                    df=stats_df,
+                    table_name="models_stats",
+                    schema= "ml_results",
+                    time_column= None,
+                    is_timeseries=False
+                )
+                save_model(
+                    model,
+                    X_test.columns.tolist(),
+                    symbol,
+                    f"{reg_name}_regressor_{timestamp}"
+                )
+            except Exception as e:
+                logger.error(f"Regressor {reg_name} failed for {symbol}: {e}")
 
-        # logger.info(f"Model training complete for {symbol}.")
+        logger.info(f"Model training complete for {symbol}.")
 
 
 # ============================================================
