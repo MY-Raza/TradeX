@@ -7,6 +7,7 @@ from TradeX.utils.common.logs import get_logger
 from dotenv import load_dotenv
 from types import SimpleNamespace
 import json
+import numpy as np
 
 # ---------------------------
 # Initialize logger
@@ -460,6 +461,72 @@ def get_profitable_strategies(
     )
 
     return strategies
+
+def get_best_model(
+    schema: str = "model_stats",
+    table_name: str = "ml_results"
+) -> str | None:
+    """
+    Returns the best model_name based on:
+        score = pnl * sharpe_ratio / abs(max_drawdown)
+
+    Reads data from DB and calculates score dynamically.
+    """
+
+    # ----------------------------------------
+    # Load data from DB
+    # ----------------------------------------
+    df = read_df_from_db(table_name=table_name, schema=schema)
+
+    if df.empty:
+        logger.warning("No model stats found in database.")
+        return None
+
+    required_cols = ["model_name", "pnl", "sharpe_ratio", "max_drawdown"]
+
+    for col in required_cols:
+        if col not in df.columns:
+            raise ValueError(f"Missing required column: {col}")
+
+    # ----------------------------------------
+    # Clean data
+    # ----------------------------------------
+    df = df.copy()
+
+    # Avoid division by zero
+    df = df[df["max_drawdown"] != 0]
+
+    if df.empty:
+        logger.warning("All models have zero max_drawdown. Cannot compute score.")
+        return None
+
+    # ----------------------------------------
+    # Compute Score
+    # ----------------------------------------
+    df["score"] = (
+        df["pnl"]
+        * df["sharpe_ratio"]
+        / df["max_drawdown"].abs()
+    )
+
+    # Remove infinite / NaN scores
+    df = df.replace([np.inf, -np.inf], np.nan).dropna(subset=["score"])
+
+    if df.empty:
+        logger.warning("No valid models after score computation.")
+        return None
+
+    # ----------------------------------------
+    # Get Best Model
+    # ----------------------------------------
+    best_row = df.sort_values("score", ascending=False).iloc[0]
+
+    best_model_name = best_row["model_name"]
+
+    logger.info(f"Best model selected: {best_model_name}")
+    logger.info(f"Score: {best_row['score']}")
+
+    return best_model_name
 
 
 

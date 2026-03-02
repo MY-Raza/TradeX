@@ -44,7 +44,7 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
         "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
         "LINEARREG", "LINEARREG_SLOPE", "LINEARREG_ANGLE",
         "LINEARREG_INTERCEPT", "STDDEV", "VAR", "TSF",
-        "MA","BOP", "CMO"
+        "MA","CMO"
     }
 
     hlc_series = {
@@ -100,6 +100,14 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             elif ind == "MIDPRICE":
                 midprice = call_indicator("MIDPRICE", high, low, timeperiod=14)[0]
                 df["MIDPRICE_14"] = midprice
+            elif ind == "BOP":
+                df["BOP"] = call_indicator(
+                                    "BOP",
+                                    open=open_,
+                                    high=high,
+                                    low=low,
+                                    close=close
+                                )[0]
 
             # =========================
             # High / Low / Close indicators
@@ -322,8 +330,8 @@ def main():
                 stats_df.insert(0,"model_name",table_name_clf)
                 save_df_to_db(
                     df=stats_df,
-                    table_name="models_stats",
-                    schema= "ml_results",
+                    table_name="ml_results",
+                    schema= "model_stats",
                     time_column= None,
                     is_timeseries=False
                 )
@@ -398,8 +406,8 @@ def main():
                 stats_df.insert(0,"model_name",table_name_reg)
                 save_df_to_db(
                     df=stats_df,
-                    table_name="models_stats",
-                    schema= "ml_results",
+                    table_name="ml_results",
+                    schema= "model_stats",
                     time_column= None,
                     is_timeseries=False
                 )
