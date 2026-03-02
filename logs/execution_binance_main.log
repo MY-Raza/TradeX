@@ -11372,3 +11372,110 @@ Traceback (most recent call last):
 binance.exceptions.BinanceAPIException: APIError(code=-2013): Order does not exist.
 2026-02-27 12:56:59,986 | INFO | execution_binance_main | Waiting 181 seconds until next valid 5m time...
 2026-02-27 13:00:00,998 | INFO | execution_binance_main | Current time 08:00:00 is valid for 5m execution.
+2026-02-27 13:00:37,560 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-02-27 13:00:39,269 | INFO | execution_binance_main | Current time 08:00:39 is valid for 5m execution.
+2026-02-27 13:02:20,004 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:02:20,159 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:02:20,159 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:02:28,475 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:02:28,510 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:02:28,527 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:00:00+00:00
+2026-02-27 13:02:31,695 | INFO | execution_binance_main | Waiting 149 seconds until next valid 5m time...
+2026-02-27 13:05:00,709 | INFO | execution_binance_main | Current time 08:05:00 is valid for 5m execution.
+2026-02-27 13:06:36,947 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:06:36,963 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:06:36,963 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:06:54,376 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:06:54,448 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:06:54,502 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:05:00+00:00
+2026-02-27 13:06:57,007 | INFO | execution_binance_main | Waiting 183 seconds until next valid 5m time...
+2026-02-27 13:10:01,655 | INFO | execution_binance_main | Current time 08:10:01 is valid for 5m execution.
+2026-02-27 13:34:00,585 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:34:00,593 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:34:00,593 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:34:09,874 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:34:09,908 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:34:09,933 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:10:00+00:00
+2026-02-27 13:34:11,829 | INFO | execution_binance_main | Waiting 49 seconds until next valid 5m time...
+2026-02-27 13:35:00,830 | INFO | execution_binance_main | Current time 08:35:00 is valid for 5m execution.
+2026-02-27 13:36:41,216 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:36:41,222 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:36:41,222 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:36:50,843 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:36:50,872 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:36:50,879 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:35:00+00:00
+2026-02-27 13:36:52,692 | INFO | execution_binance_main | Waiting 188 seconds until next valid 5m time...
+2026-02-27 13:40:00,703 | INFO | execution_binance_main | Current time 08:40:00 is valid for 5m execution.
+2026-02-27 13:41:37,499 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:41:37,499 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:41:37,499 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:41:45,957 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:41:45,972 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:41:46,027 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:40:00+00:00
+2026-02-27 13:41:48,041 | INFO | execution_binance_main | Waiting 192 seconds until next valid 5m time...
+2026-02-27 13:45:00,042 | INFO | execution_binance_main | Current time 08:45:00 is valid for 5m execution.
+2026-02-27 13:46:37,224 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:46:37,234 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:46:37,234 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:46:45,423 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:46:45,438 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:46:45,455 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:45:00+00:00
+2026-02-27 13:46:47,519 | INFO | execution_binance_main | Waiting 193 seconds until next valid 5m time...
+2026-02-27 13:50:00,537 | INFO | execution_binance_main | Current time 08:50:00 is valid for 5m execution.
+2026-02-27 13:51:36,980 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:51:36,985 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:51:36,985 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:51:47,147 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:51:47,162 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:51:47,185 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:50:00+00:00
+2026-02-27 13:51:49,249 | INFO | execution_binance_main | Waiting 191 seconds until next valid 5m time...
+2026-02-27 13:55:00,253 | INFO | execution_binance_main | Current time 08:55:00 is valid for 5m execution.
+2026-02-27 13:56:39,198 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 13:56:39,214 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 13:56:39,216 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 13:56:47,819 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 13:56:47,837 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 13:56:47,846 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 08:55:00+00:00
+2026-02-27 13:56:49,677 | INFO | execution_binance_main | Waiting 191 seconds until next valid 5m time...
+2026-02-27 14:00:00,677 | INFO | execution_binance_main | Current time 09:00:00 is valid for 5m execution.
+2026-02-27 14:01:36,742 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 14:01:36,748 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 14:01:36,748 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 14:01:45,177 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 14:01:45,192 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 14:01:45,205 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 09:00:00+00:00
+2026-02-27 14:01:46,973 | INFO | execution_binance_main | Waiting 194 seconds until next valid 5m time...
+2026-02-27 14:05:00,976 | INFO | execution_binance_main | Current time 09:05:00 is valid for 5m execution.
+2026-02-27 14:06:37,023 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 14:06:37,030 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 14:06:37,030 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 14:06:45,524 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 14:06:45,538 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 14:06:45,544 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → -1 at 2026-02-27 09:05:00+00:00
+2026-02-27 14:06:51,528 | INFO | execution_binance_main | Waiting 189 seconds until next valid 5m time...
+2026-02-27 14:10:00,542 | INFO | execution_binance_main | Current time 09:10:00 is valid for 5m execution.
+2026-02-27 14:11:39,579 | INFO | execution_binance_main | Processing symbol: btc
+2026-02-27 14:11:39,588 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-02-27 14:11:39,588 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-02-27 14:11:59,346 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-02-27 14:11:59,375 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-02-27 14:11:59,391 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-02-27 09:10:00+00:00
+2026-02-27 14:12:05,038 | INFO | execution_binance_main | Waiting 175 seconds until next valid 5m time...
+2026-03-02 09:14:38,155 | ERROR | execution_binance_main | Usage: python main.py <timeframe> (e.g., 1h, 15m, 5m)
+2026-03-02 09:15:13,752 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-03-02 09:15:17,215 | INFO | execution_binance_main | Current time 04:15:17 is valid for 5m execution.
+2026-03-02 09:21:48,089 | INFO | execution_binance_main | Processing symbol: btc
+2026-03-02 09:21:48,913 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-03-02 09:21:48,913 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-03-02 09:22:07,640 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-03-02 09:22:07,759 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-03-02 09:22:07,823 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → -1 at 2026-03-02 04:15:00+00:00
+2026-03-02 09:22:12,582 | INFO | execution_binance_main | Waiting 168 seconds until next valid 5m time...
+2026-03-02 09:25:00,590 | INFO | execution_binance_main | Current time 04:25:00 is valid for 5m execution.
+2026-03-02 09:26:42,163 | INFO | execution_binance_main | Processing symbol: btc
+2026-03-02 09:26:42,226 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-03-02 09:26:42,235 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-03-02 09:27:20,069 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-03-02 09:27:20,126 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-03-02 09:27:20,170 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-03-02 04:25:00+00:00
+2026-03-02 09:27:29,368 | INFO | execution_binance_main | Waiting 151 seconds until next valid 5m time...
