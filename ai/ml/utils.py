@@ -6,21 +6,21 @@ from TradeX.backtest.backtest import BackTest
 def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
 
     df = ledger.copy()
-
     stats = {}
 
     # ------------------------
-    # Basic counts
+    # Basic Counts
     # ------------------------
     stats["total_trades"] = len(df)
     stats["long_trades"] = (df["predicted_direction"] == "long").sum()
     stats["short_trades"] = (df["predicted_direction"] == "short").sum()
 
     # ------------------------
-    # Wins / Losses
+    # Win / Loss
     # ------------------------
     stats["win_trades"] = (df["pnl"] > 0).sum()
     stats["loss_trades"] = (df["pnl"] < 0).sum()
+    stats["breakeven_trades"] = (df["pnl"] == 0).sum()
 
     stats["win_rate"] = stats["win_trades"] / stats["total_trades"] if stats["total_trades"] else 0
     stats["loss_rate"] = stats["loss_trades"] / stats["total_trades"] if stats["total_trades"] else 0
@@ -36,12 +36,7 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
     stats["net_profit"] = df["pnl"].sum()
 
     # ------------------------
-    # Fees
-    # ------------------------
-    stats["total_fees"] = df["fee"].sum()
-
-    # ------------------------
-    # Average trades
+    # Averages
     # ------------------------
     stats["avg_trade_pnl"] = df["pnl"].mean()
 
@@ -52,9 +47,9 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
     stats["avg_loss"] = avg_loss
 
     # ------------------------
-    # Risk metrics
+    # Risk Ratios
     # ------------------------
-    stats["risk_reward_ratio"] = abs(avg_win / avg_loss) if avg_loss != 0 else np.nan
+    stats["risk_reward_ratio"] = abs(avg_win / avg_loss) if avg_loss and not np.isnan(avg_loss) else np.nan
     stats["profit_factor"] = gross_profit / abs(gross_loss) if gross_loss != 0 else np.nan
 
     # ------------------------
@@ -73,7 +68,7 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
     # ------------------------
     returns = df["pnl"]
 
-    if returns.std() != 0:
+    if returns.std() and not np.isnan(returns.std()):
         stats["sharpe_ratio"] = returns.mean() / returns.std()
     else:
         stats["sharpe_ratio"] = 0
@@ -83,13 +78,13 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
     # ------------------------
     downside = returns[returns < 0]
 
-    if downside.std() != 0:
+    if downside.std() and not np.isnan(downside.std()):
         stats["sortino_ratio"] = returns.mean() / downside.std()
     else:
         stats["sortino_ratio"] = 0
 
     # ------------------------
-    # Consecutive wins / losses
+    # Consecutive Wins / Losses
     # ------------------------
     wins = df["pnl"] > 0
     losses = df["pnl"] < 0
@@ -101,7 +96,7 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
     stats["max_consecutive_losses"] = loss_streak.max()
 
     # ------------------------
-    # Convert to DataFrame
+    # Return DataFrame
     # ------------------------
     stats_df = pd.DataFrame([stats])
 

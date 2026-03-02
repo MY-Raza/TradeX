@@ -31358,3 +31358,548 @@ Last 5 rows from data_binance.btc_1m:
 2026-03-02 10:21:39,986 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
 2026-03-02 10:21:40,009 | INFO | utils | Inserted 5 rows into data_binance.link_1m
 2026-03-02 10:21:40,184 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:21:53,975 | INFO | utils | Table Found
+2026-03-02 10:21:55,782 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:21:55,805 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:21:55,810 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:21:55,818 | INFO | utils | No new rows to insert
+2026-03-02 10:22:26,803 | INFO | utils | Schema 'ml_features' ready
+2026-03-02 10:22:26,803 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-02 10:22:27,017 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-03-02 10:25:03,817 | INFO | utils | Database engine initialized
+2026-03-02 10:25:13,714 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:25:13,743 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:25:13,747 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:25:13,781 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:25:23,254 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:25:23,273 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:25:23,277 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:25:23,303 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:25:32,749 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:25:32,766 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:25:32,769 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:25:32,800 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:25:42,324 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:25:42,347 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:25:42,350 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:25:42,377 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:25:51,922 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:25:51,937 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:25:51,939 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:25:51,965 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:26:01,486 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:26:01,507 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:26:01,510 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:26:01,549 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:26:13,248 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:26:13,263 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:26:13,266 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:26:13,353 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 10:26:22,933 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:26:22,950 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:26:22,952 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:26:22,972 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:26:32,320 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:26:32,337 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:26:32,343 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:26:32,356 | INFO | utils | No new rows to insert
+2026-03-02 10:26:41,919 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:26:41,933 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:26:41,936 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:26:41,963 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:26:42,159 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:26:56,816 | INFO | utils | Table Found
+2026-03-02 10:26:58,234 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:26:58,257 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:26:58,261 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:26:58,271 | INFO | utils | No new rows to insert
+2026-03-02 10:29:23,126 | INFO | utils | Schema 'ml_features' ready
+2026-03-02 10:29:23,126 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-02 10:29:23,161 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-03-02 10:30:02,051 | INFO | utils | Database engine initialized
+2026-03-02 10:30:11,775 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:30:11,793 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:30:11,797 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:30:11,823 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:30:21,144 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:30:21,158 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:30:21,160 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:30:21,176 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:30:30,501 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:30:30,515 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:30:30,517 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:30:30,539 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:30:39,843 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:30:39,857 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:30:39,859 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:30:39,882 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:30:49,233 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:30:49,247 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:30:49,251 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:30:49,275 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:30:58,514 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:30:58,530 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:30:58,532 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:30:58,611 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:31:07,946 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:31:07,963 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:31:07,965 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:31:07,994 | INFO | utils | Inserted 4 rows into data_binance.sol_1m
+2026-03-02 10:31:17,423 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:31:17,437 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:31:17,440 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:31:17,464 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:31:26,595 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:31:26,620 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:31:26,630 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:31:26,647 | INFO | utils | No new rows to insert
+2026-03-02 10:31:36,254 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:31:36,279 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:31:36,281 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:31:36,322 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:31:36,782 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:31:53,547 | INFO | utils | Table Found
+2026-03-02 10:31:54,617 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:31:54,647 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:31:54,654 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:31:54,658 | INFO | utils | No new rows to insert
+2026-03-02 10:32:21,624 | INFO | utils | Database engine initialized
+2026-03-02 10:32:32,251 | INFO | utils | Table Found
+2026-03-02 10:35:03,566 | INFO | utils | Database engine initialized
+2026-03-02 10:35:13,388 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:35:13,419 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:35:13,423 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:35:13,474 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:35:23,110 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:35:23,129 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:35:23,131 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:35:23,161 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:35:32,861 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:35:32,881 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:35:32,884 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:35:32,917 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:35:42,594 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:35:42,614 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:35:42,618 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:35:42,646 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:35:52,309 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:35:52,323 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:35:52,325 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:35:52,354 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:36:01,976 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:36:01,998 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:36:02,002 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:36:02,031 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:36:11,722 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:36:11,758 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:36:11,758 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:36:11,944 | INFO | utils | Inserted 6 rows into data_binance.sol_1m
+2026-03-02 10:36:21,941 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:36:21,984 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:36:21,986 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:36:22,179 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:36:32,463 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:36:32,479 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:36:32,482 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:36:32,497 | INFO | utils | No new rows to insert
+2026-03-02 10:36:42,847 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:36:42,863 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:36:42,866 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:36:42,892 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:36:43,173 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:36:57,992 | INFO | utils | Table Found
+2026-03-02 10:36:58,317 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:36:58,333 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:36:58,336 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:36:58,345 | INFO | utils | No new rows to insert
+2026-03-02 10:40:03,796 | INFO | utils | Database engine initialized
+2026-03-02 10:40:13,796 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:40:13,827 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:40:13,833 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:40:13,871 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:40:23,420 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:40:23,438 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:40:23,440 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:40:23,465 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:40:32,987 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:40:32,999 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:40:33,002 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:40:33,024 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:40:42,567 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:40:42,586 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:40:42,589 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:40:42,646 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:40:52,149 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:40:52,164 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:40:52,167 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:40:52,190 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:40:52,760 | INFO | utils | Schema 'ml_features' ready
+2026-03-02 10:40:52,765 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-02 10:40:52,837 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-03-02 10:41:01,732 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:41:01,749 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:41:01,750 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:41:01,770 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:41:11,199 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:41:11,211 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:41:11,213 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:41:11,235 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 10:41:20,746 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:41:20,764 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:41:20,767 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:41:20,788 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:41:30,163 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:41:30,175 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:41:30,178 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:41:30,188 | INFO | utils | No new rows to insert
+2026-03-02 10:41:39,605 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:41:39,617 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:41:39,620 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:41:39,650 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:41:39,885 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:41:50,130 | INFO | utils | Table Found
+2026-03-02 10:41:57,791 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:41:57,811 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:41:57,813 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:41:57,829 | INFO | utils | Inserted 2 rows into execution.btc_trades
+2026-03-02 10:45:03,333 | INFO | utils | Database engine initialized
+2026-03-02 10:45:13,241 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:45:13,285 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:45:13,288 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:45:13,369 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:45:22,932 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:45:22,948 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:45:22,951 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:45:22,988 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:45:32,647 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:45:32,661 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:45:32,664 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:45:32,721 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:45:42,303 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:45:42,318 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:45:42,322 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:45:42,360 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:45:52,051 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:45:52,063 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:45:52,063 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:45:52,111 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:46:01,663 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:46:01,696 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:46:01,699 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:46:01,739 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:46:13,527 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:46:13,581 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:46:13,585 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:46:13,879 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 10:46:29,433 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:46:29,451 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:46:29,453 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:46:29,506 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:46:38,894 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:46:38,902 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:46:38,907 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:46:38,909 | INFO | utils | No new rows to insert
+2026-03-02 10:46:48,373 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:46:48,386 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:46:48,389 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:46:48,431 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:46:48,630 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:46:56,131 | INFO | utils | Table Found
+2026-03-02 10:46:57,175 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:46:57,185 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:46:57,188 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:46:57,194 | INFO | utils | No new rows to insert
+2026-03-02 10:50:05,360 | INFO | utils | Database engine initialized
+2026-03-02 10:50:16,230 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:50:16,263 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:50:16,268 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:50:16,294 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:50:25,753 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:50:25,777 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:50:25,781 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:50:25,802 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:50:35,302 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:50:35,324 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:50:35,325 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:50:35,358 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:50:45,138 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:50:45,154 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:50:45,157 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:50:45,176 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:50:54,733 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:50:54,751 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:50:54,754 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:50:54,780 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:51:04,259 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:51:04,276 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:51:04,279 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:51:04,303 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:51:13,792 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:51:13,804 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:51:13,807 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:51:13,829 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 10:51:23,272 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:51:23,291 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:51:23,293 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:51:23,319 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:51:32,625 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:51:32,636 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:51:32,639 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:51:32,648 | INFO | utils | No new rows to insert
+2026-03-02 10:51:42,096 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:51:42,107 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:51:42,110 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:51:42,130 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:51:42,337 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:51:55,091 | INFO | utils | Table Found
+2026-03-02 10:51:56,018 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:51:56,033 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:51:56,036 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:51:56,044 | INFO | utils | No new rows to insert
+2026-03-02 10:55:02,892 | INFO | utils | Database engine initialized
+2026-03-02 10:55:12,810 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:55:12,854 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 10:55:12,859 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 10:55:12,907 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 10:55:22,443 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:55:22,470 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 10:55:22,474 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 10:55:22,498 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 10:55:29,155 | INFO | utils | Schema 'ml_features' ready
+2026-03-02 10:55:29,155 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-02 10:55:29,186 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-03-02 10:55:32,048 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:55:32,060 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 10:55:32,061 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 10:55:32,079 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 10:55:41,394 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:55:41,421 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 10:55:41,426 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 10:55:41,461 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 10:55:51,348 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:55:51,361 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 10:55:51,361 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 10:55:51,384 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 10:56:00,706 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:56:00,723 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 10:56:00,726 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 10:56:00,747 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 10:56:12,260 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:56:12,271 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 10:56:12,273 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 10:56:12,294 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 10:56:21,683 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:56:21,701 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 10:56:21,704 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 10:56:21,723 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 10:56:30,952 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:56:30,964 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 10:56:30,966 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 10:56:30,974 | INFO | utils | No new rows to insert
+2026-03-02 10:56:40,312 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 10:56:40,329 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 10:56:40,332 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 10:56:40,353 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 10:56:40,531 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 10:56:47,945 | INFO | utils | Table Found
+2026-03-02 10:56:48,861 | INFO | utils | Schema 'execution' ready
+2026-03-02 10:56:48,875 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 10:56:48,889 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 10:56:48,894 | INFO | utils | No new rows to insert
+2026-03-02 10:58:14,677 | INFO | utils | Database engine initialized
+2026-03-02 10:58:22,646 | INFO | utils | Table Found
+2026-03-02 11:00:05,047 | INFO | utils | Database engine initialized
+2026-03-02 11:00:15,382 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:00:15,418 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 11:00:15,430 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 11:00:15,515 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 11:00:28,553 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:00:28,570 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 11:00:28,574 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 11:00:28,587 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 11:00:37,966 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:00:37,975 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 11:00:37,979 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 11:00:38,014 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 11:00:45,302 | INFO | utils | Database engine initialized
+2026-03-02 11:00:47,337 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:00:47,387 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 11:00:47,389 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 11:00:47,503 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 11:00:54,774 | INFO | utils | Table Found
+2026-03-02 11:00:56,963 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:00:56,984 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 11:00:57,000 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 11:00:57,035 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 11:01:10,860 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:01:10,892 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 11:01:10,900 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 11:01:10,936 | INFO | utils | Inserted 6 rows into data_binance.doge_1m
+2026-03-02 11:01:26,552 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:01:26,575 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 11:01:26,593 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 11:01:26,654 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 11:01:41,363 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:01:41,397 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 11:01:41,407 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 11:01:41,440 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 11:01:51,636 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:01:51,647 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 11:01:51,649 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 11:01:51,658 | INFO | utils | No new rows to insert
+2026-03-02 11:02:01,497 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:02:01,510 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 11:02:01,512 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 11:02:01,536 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 11:02:01,721 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 11:02:24,111 | INFO | utils | Table Found
+2026-03-02 11:02:25,395 | INFO | utils | Schema 'execution' ready
+2026-03-02 11:02:25,423 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 11:02:25,435 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 11:02:25,443 | INFO | utils | No new rows to insert
+2026-03-02 11:05:02,455 | INFO | utils | Database engine initialized
+2026-03-02 11:05:12,218 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:05:12,245 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 11:05:12,252 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 11:05:12,381 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 11:05:22,398 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:05:22,423 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 11:05:22,426 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 11:05:22,454 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 11:05:32,004 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:05:32,017 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 11:05:32,019 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 11:05:32,042 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 11:05:41,457 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:05:41,474 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 11:05:41,476 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 11:05:41,499 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 11:05:50,913 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:05:50,927 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 11:05:50,929 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 11:05:50,965 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 11:06:00,349 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:06:00,369 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 11:06:00,372 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 11:06:00,406 | INFO | utils | Inserted 4 rows into data_binance.doge_1m
+2026-03-02 11:06:09,832 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:06:09,849 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 11:06:09,851 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 11:06:09,953 | INFO | utils | Inserted 5 rows into data_binance.sol_1m
+2026-03-02 11:06:19,498 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:06:19,514 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 11:06:19,518 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 11:06:19,955 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 11:06:29,235 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:06:29,247 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 11:06:29,251 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 11:06:29,262 | INFO | utils | No new rows to insert
+2026-03-02 11:06:38,771 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:06:38,783 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 11:06:38,786 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 11:06:38,846 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 11:06:39,035 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 11:06:50,547 | INFO | utils | Table Found
+2026-03-02 11:06:55,204 | INFO | utils | Schema 'execution' ready
+2026-03-02 11:06:55,220 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 11:06:55,223 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 11:06:55,244 | INFO | utils | Inserted 2 rows into execution.btc_trades
+2026-03-02 11:09:34,624 | INFO | utils | Schema 'ml_features' ready
+2026-03-02 11:09:34,624 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-02 11:09:34,668 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-03-02 11:10:02,279 | INFO | utils | Database engine initialized
+2026-03-02 11:10:12,120 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:10:12,152 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 11:10:12,152 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 11:10:12,208 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 11:10:21,538 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:10:21,552 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 11:10:21,554 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 11:10:21,589 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 11:10:30,921 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:10:30,934 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 11:10:30,937 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 11:10:30,970 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 11:10:40,323 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:10:40,337 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 11:10:40,340 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 11:10:40,369 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 11:10:49,738 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:10:49,746 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 11:10:49,752 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 11:10:49,794 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 11:10:59,143 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:10:59,159 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 11:10:59,162 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 11:10:59,181 | INFO | utils | Inserted 5 rows into data_binance.doge_1m
+2026-03-02 11:11:08,467 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:11:08,480 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 11:11:08,482 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 11:11:08,498 | INFO | utils | Inserted 4 rows into data_binance.sol_1m
+2026-03-02 11:11:17,864 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:11:17,919 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 11:11:17,924 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 11:11:17,944 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 11:11:27,196 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:11:27,228 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 11:11:27,228 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 11:11:27,243 | INFO | utils | No new rows to insert
+2026-03-02 11:11:36,594 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:11:36,618 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 11:11:36,620 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 11:11:36,639 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 11:11:36,800 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 11:11:45,393 | INFO | utils | Table Found
+2026-03-02 11:11:46,328 | INFO | utils | Schema 'execution' ready
+2026-03-02 11:11:46,340 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 11:11:46,344 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 11:11:46,350 | INFO | utils | No new rows to insert
+2026-03-02 11:13:01,035 | INFO | utils | Database engine initialized
+2026-03-02 11:13:09,523 | INFO | utils | Table Found
+2026-03-02 11:15:05,078 | INFO | utils | Database engine initialized
+2026-03-02 11:15:15,494 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:15:15,525 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-02 11:15:15,531 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-02 11:15:15,568 | INFO | utils | Inserted 5 rows into data_binance.btc_1m
+2026-03-02 11:15:27,518 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:15:27,560 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-02 11:15:27,574 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-02 11:15:27,619 | INFO | utils | Inserted 5 rows into data_binance.eth_1m
+2026-03-02 11:15:39,935 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:15:39,959 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-02 11:15:39,971 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-02 11:15:40,009 | INFO | utils | Inserted 5 rows into data_binance.bnb_1m
+2026-03-02 11:15:52,056 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:15:52,082 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-02 11:15:52,085 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-02 11:15:52,169 | INFO | utils | Inserted 5 rows into data_binance.ada_1m
+2026-03-02 11:16:01,778 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:16:01,791 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-02 11:16:01,793 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-02 11:16:01,815 | INFO | utils | Inserted 5 rows into data_binance.xrp_1m
+2026-03-02 11:16:11,320 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:16:11,347 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-02 11:16:11,350 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-02 11:16:11,384 | INFO | utils | Inserted 6 rows into data_binance.doge_1m
+2026-03-02 11:16:21,129 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:16:21,155 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-02 11:16:21,164 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-02 11:16:21,212 | INFO | utils | Inserted 6 rows into data_binance.sol_1m
+2026-03-02 11:16:31,293 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:16:31,319 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-02 11:16:31,323 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-02 11:16:31,368 | INFO | utils | Inserted 5 rows into data_binance.dot_1m
+2026-03-02 11:16:41,125 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:16:41,147 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-02 11:16:41,162 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-02 11:16:41,193 | INFO | utils | No new rows to insert
+2026-03-02 11:16:51,326 | INFO | utils | Schema 'data_binance' ready
+2026-03-02 11:16:51,349 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-02 11:16:51,363 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-02 11:16:51,397 | INFO | utils | Inserted 5 rows into data_binance.link_1m
+2026-03-02 11:16:51,787 | INFO | utils | Total profitable strategies returned for timeframe 5m: 1
+2026-03-02 11:17:06,883 | INFO | utils | Table Found
+2026-03-02 11:17:08,219 | INFO | utils | Schema 'execution' ready
+2026-03-02 11:17:08,239 | INFO | utils | Indexes ensured: btc_trades_datetime_uidx, btc_trades_datetime_desc_idx
+2026-03-02 11:17:08,243 | INFO | utils | Hypertable created/verified for "execution"."btc_trades"
+2026-03-02 11:17:08,251 | INFO | utils | No new rows to insert
