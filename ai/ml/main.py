@@ -17,6 +17,11 @@ from datetime import datetime
 # ----------------------------
 # FEATURE ENGINEERING
 # ----------------------------
+def _arr(x) -> np.ndarray:
+    """Ensure x is a 1D float64 numpy array."""
+    return np.asarray(x, dtype=np.float64).ravel()
+
+
 def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
     """
     Generate technical indicator features for a DataFrame.
@@ -29,12 +34,12 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Original DataFrame with new indicator columns added
     """
-    df = df.copy()
-    close = df["close"].values
-    high = df["high"].values
-    low = df["low"].values
-    open_ = df["open"].values
-    volume = df["volume"].values
+
+    close  = df["close"].values.astype(np.float64)
+    high   = df["high"].values.astype(np.float64)
+    low    = df["low"].values.astype(np.float64)
+    open_  = df["open"].values.astype(np.float64)
+    volume = df["volume"].values.astype(np.float64)
 
     # =========================
     # Indicator categories
@@ -44,23 +49,26 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
         "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
         "LINEARREG", "LINEARREG_SLOPE", "LINEARREG_ANGLE",
         "LINEARREG_INTERCEPT", "STDDEV", "VAR", "TSF",
-        "MA","CMO"
+        "MA", "CMO"
     }
 
     hlc_series = {
-        "ATR", "NATR", "TRANGE", "ADX", "ADXR", "DX", "CCI",
+        "ATR", "NATR", "ADX", "ADXR", "DX", "CCI",
         "PLUS_DI", "MINUS_DI", "PLUS_DM", "MINUS_DM", "WILLR"
     }
 
-    macd_series = {"MACD", "MACDEXT", "PPO", "APO", "TRIX"}
-    bband_series = {"BBANDS"}
+    macd_series      = {"MACD", "MACDEXT", "PPO", "APO", "TRIX"}
+    bband_series     = {"BBANDS"}
     stochastic_series = {"STOCH", "STOCHF", "STOCHRSI"}
-    volume_series = {"OBV", "AD", "ADOSC", "MFI"}
-    aroon_series = {"AROON", "AROONOSC"}
-    sar_series = {"SAR", "SAREXT"}
+    volume_series    = {"OBV", "AD", "ADOSC", "MFI"}
+    aroon_series     = {"AROON", "AROONOSC"}
+    sar_series       = {"SAR", "SAREXT"}
     price_transforms = {"AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE"}
-    cycle_series = {ind for ind in indicators if ind.startswith("HT_")}
-    candle_patterns = {ind for ind in indicators if ind.startswith("CDL")}
+    cycle_series     = {ind for ind in indicators if ind.startswith("HT_")}
+    candle_patterns  = {ind for ind in indicators if ind.startswith("CDL")}
+
+    # Accumulate all new columns; assign once at the end via pd.concat
+    new_cols = {}
 
     for ind in indicators:
         try:
@@ -69,128 +77,139 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
             # =========================
             if ind in single_series:
                 values, window = call_indicator(ind, close, timeperiod=14)
-                df[f"{ind}_{window}"] = values
+                new_cols[f"{ind}_{window}"] = _arr(values)
 
             # =========================
             # MAMA special case
             # =========================
             elif ind == "MAMA":
-                close_arr = np.asarray(close, dtype=np.float64)
-                out = call_indicator("MAMA", close, fastlimit=0.5, slowlimit=0.05)
-                mama = np.ravel(out[0])  # flatten to 1D
-                fama = np.ravel(out[1])  # flatten to 1D
-
-                # Pad with NaN if needed
+                (mama_raw, fama_raw), _ = call_indicator("MAMA", close, fastlimit=0.5, slowlimit=0.05)
+                mama = _arr(mama_raw)
+                fama = _arr(fama_raw)
                 if len(mama) != len(df):
-                    if len(mama) > len(df):
-                        mama =  mama[-len(df):]
-                    else:
-                        pad_len = len(df) - len(mama)
-                        mama = np.concatenate([np.full(pad_len, np.nan), mama])
-                        fama = np.concatenate([np.full(pad_len, np.nan), fama])
-
-                df["MAMA"] = mama
-                df["FAMA"] = fama
+                    pad = len(df) - len(mama)
+                    mama = np.concatenate([np.full(pad, np.nan), mama]) if pad > 0 else mama[-len(df):]
+                    fama = np.concatenate([np.full(pad, np.nan), fama]) if pad > 0 else fama[-len(df):]
+                new_cols["MAMA"] = mama
+                new_cols["FAMA"] = fama
 
             # =========================
-            # MIDPOINT / MIDPRICE
+            # MIDPOINT / MIDPRICE / BOP / TRANGE
             # =========================
             elif ind == "MIDPOINT":
-                df["MIDPOINT_14"] = call_indicator("MIDPOINT", close, timeperiod=14)[0]
+                new_cols["MIDPOINT_14"] = _arr(call_indicator("MIDPOINT", close, timeperiod=14)[0])
+
             elif ind == "MIDPRICE":
-                midprice = call_indicator("MIDPRICE", high, low, timeperiod=14)[0]
-                df["MIDPRICE_14"] = midprice
+                new_cols["MIDPRICE_14"] = _arr(call_indicator("MIDPRICE", high, low, timeperiod=14)[0])
+
             elif ind == "BOP":
-                df["BOP"] = call_indicator(
-                                    "BOP",
-                                    open=open_,
-                                    high=high,
-                                    low=low,
-                                    close=close
-                                )[0]
+                new_cols["BOP"] = _arr(call_indicator("BOP", open=open_, high=high, low=low, close=close)[0])
+
+            elif ind == "TRANGE":
+                new_cols["TRANGE"] = _arr(call_indicator("TRANGE", high=high, low=low, close=close)[0])
 
             # =========================
             # High / Low / Close indicators
             # =========================
             elif ind in hlc_series:
-                if ind == "MINUS_DM":
-                    df[ind] = call_indicator("MINUS_DM", high=high, low=low, timeperiod=14)[0]
-                elif ind == "PLUS_DM":
-                    df[ind] = call_indicator("PLUS_DM", high=high, low=low, timeperiod=14)[0]
+                if ind in {"MINUS_DM", "PLUS_DM"}:
+                    new_cols[ind] = _arr(call_indicator(ind, high=high, low=low, timeperiod=14)[0])
                 else:
                     values, window = call_indicator(ind, high=high, low=low, close=close, timeperiod=14)
-                    df[f"{ind}_{window}"] = values
+                    new_cols[f"{ind}_{window}"] = _arr(values)
 
             # =========================
             # MACD family
+            # MACD/MACDEXT -> tuple of arrays (macd, signal, hist)
+            # APO/PPO/TRIX  -> single 1D array
             # =========================
             elif ind in macd_series:
-                out = call_indicator(ind, close)
-                for i, arr in enumerate(out[0]):
-                    df[f"{ind}_{i}"] = arr
+                result, _ = call_indicator(ind, close)
+                if isinstance(result, (tuple, list)):
+                    for i, arr in enumerate(result):
+                        new_cols[f"{ind}_{i}"] = _arr(arr)
+                else:
+                    new_cols[f"{ind}_0"] = _arr(result)
 
             # =========================
             # Bollinger Bands
             # =========================
             elif ind in bband_series:
-                upper, mid, lower = call_indicator("BBANDS", close, timeperiod=20)[0]
-                df["BB_UPPER"], df["BB_MIDDLE"], df["BB_LOWER"] = upper, mid, lower
+                (upper, mid, lower), _ = call_indicator("BBANDS", close, timeperiod=20)
+                new_cols["BB_UPPER"]  = _arr(upper)
+                new_cols["BB_MIDDLE"] = _arr(mid)
+                new_cols["BB_LOWER"]  = _arr(lower)
 
             # =========================
             # Stochastic family
             # =========================
             elif ind in stochastic_series:
                 if ind == "STOCHRSI":
-                    slowk, slowd = call_indicator(ind, close)[0]
+                    (slowk, slowd), _ = call_indicator(ind, close)
                 else:
-                    slowk, slowd = call_indicator(ind, high=high, low=low, close=close)[0]
-
-                df[f"{ind}_K"], df[f"{ind}_D"] = slowk, slowd
+                    (slowk, slowd), _ = call_indicator(ind, high=high, low=low, close=close)
+                new_cols[f"{ind}_K"] = _arr(slowk)
+                new_cols[f"{ind}_D"] = _arr(slowd)
 
             # =========================
             # Volume indicators
             # =========================
             elif ind in volume_series:
-                if ind in {"OBV", "AD"}:
-                    df[ind] = call_indicator(ind, close, volume)[0]
+                if ind == "OBV":
+                    new_cols[ind] = _arr(call_indicator(ind, close, volume)[0])
+                elif ind == "AD":
+                    new_cols[ind] = _arr(call_indicator(ind, high=high, low=low, close=close, volume=volume)[0])
                 elif ind == "ADOSC":
-                    df[ind] = call_indicator("ADOSC", high=high, low=low, close=close, volume=volume)[0]
+                    new_cols[ind] = _arr(call_indicator("ADOSC", high=high, low=low, close=close, volume=volume)[0])
                 elif ind == "MFI":
-                    df[f"{ind}_14"] = call_indicator("MFI", high=high, low=low, close=close, volume=volume, timeperiod=14)[0]
+                    new_cols[f"{ind}_14"] = _arr(call_indicator("MFI", high=high, low=low, close=close, volume=volume, timeperiod=14)[0])
 
             # =========================
             # Aroon
             # =========================
             elif ind in aroon_series:
-                out = call_indicator(ind, high=high, low=low, timeperiod=14)[0]
                 if ind == "AROON":
-                    df["AROON_UP"], df["AROON_DOWN"] = out
+                    (aroon_up, aroon_down), _ = call_indicator(ind, high=high, low=low, timeperiod=14)
+                    new_cols["AROON_UP"]   = _arr(aroon_up)
+                    new_cols["AROON_DOWN"] = _arr(aroon_down)
                 else:
-                    df["AROONOSC"] = out
+                    new_cols["AROONOSC"] = _arr(call_indicator(ind, high=high, low=low, timeperiod=14)[0])
 
             # =========================
             # SAR
             # =========================
             elif ind in sar_series:
-                df[ind] = call_indicator(ind, high=high, low=low)[0]
+                new_cols[ind] = _arr(call_indicator(ind, high=high, low=low)[0])
 
             # =========================
             # Price transforms
             # =========================
-            elif ind in price_transforms:
-                df[ind] = call_indicator(ind, open=open_, high=high, low=low, close=close)[0]
+            elif ind == "AVGPRICE":
+                new_cols[ind] = _arr(call_indicator(ind, open=open_, high=high, low=low, close=close)[0])
+            elif ind == "MEDPRICE":
+                new_cols[ind] = _arr(call_indicator(ind, high=high, low=low)[0])
+            elif ind in {"TYPPRICE", "WCLPRICE"}:
+                new_cols[ind] = _arr(call_indicator(ind, high=high, low=low, close=close)[0])
 
             # =========================
             # Hilbert Transform (Cycle)
+            # HT_PHASOR → (inphase, quadrature)
+            # HT_SINE   → (sine, leadsine)
+            # others    → single array
             # =========================
             elif ind in cycle_series:
-                df[ind] = call_indicator(ind, close)[0]
+                result, _ = call_indicator(ind, close)
+                if isinstance(result, (tuple, list)):
+                    for i, arr in enumerate(result):
+                        new_cols[f"{ind}_{i}"] = _arr(arr)
+                else:
+                    new_cols[ind] = _arr(result)
 
             # =========================
             # Candlestick patterns
             # =========================
             elif ind in candle_patterns:
-                df[ind] = call_indicator(ind, open=open_, high=high, low=low, close=close)[0]
+                new_cols[ind] = _arr(call_indicator(ind, open=open_, high=high, low=low, close=close)[0])
 
             else:
                 logger.warning(f"Unsupported indicator: {ind}")
@@ -198,13 +217,26 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
         except Exception as e:
             logger.error(f"Indicator {ind} failed: {e}")
 
+    # Single concat — avoids repeated DataFrame copy overhead
+    if new_cols:
+        n = len(df)
+        safe = {}
+        for k, v in new_cols.items():
+            arr = np.asarray(v, dtype=np.float64).ravel()
+            if arr.shape == (n,):
+                safe[k] = arr
+            else:
+                logger.warning(f"Skipping column {k}: expected length {n}, got {arr.shape}")
+        new_df = pd.DataFrame(safe, index=df.index)
+        df = pd.concat([df, new_df], axis=1)
+
     return df
 
 # ----------------------------
 # TARGET CREATION
 # ----------------------------
 def create_classification_target(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
+    
     df["future_close"] = df["close"].shift(-1)
     df["target"] = (df["future_close"] > df["close"]).astype(int)
     df.dropna(inplace=True)
@@ -212,7 +244,7 @@ def create_classification_target(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_regression_target(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
+    
     df["future_close"] = df["close"].shift(-1)
     df["target"] = ((df["future_close"] - df["close"]) / df["close"]) * 1000
     df.dropna(inplace=True)
