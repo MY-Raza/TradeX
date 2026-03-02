@@ -3,6 +3,111 @@ import numpy as np
 from TradeX.backtest.backtest import BackTest
 
 
+def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
+
+    df = ledger.copy()
+
+    stats = {}
+
+    # ------------------------
+    # Basic counts
+    # ------------------------
+    stats["total_trades"] = len(df)
+    stats["long_trades"] = (df["predicted_direction"] == "long").sum()
+    stats["short_trades"] = (df["predicted_direction"] == "short").sum()
+
+    # ------------------------
+    # Wins / Losses
+    # ------------------------
+    stats["win_trades"] = (df["pnl"] > 0).sum()
+    stats["loss_trades"] = (df["pnl"] < 0).sum()
+
+    stats["win_rate"] = stats["win_trades"] / stats["total_trades"] if stats["total_trades"] else 0
+    stats["loss_rate"] = stats["loss_trades"] / stats["total_trades"] if stats["total_trades"] else 0
+
+    # ------------------------
+    # Profit / Loss
+    # ------------------------
+    gross_profit = df.loc[df["pnl"] > 0, "pnl"].sum()
+    gross_loss = df.loc[df["pnl"] < 0, "pnl"].sum()
+
+    stats["gross_profit"] = gross_profit
+    stats["gross_loss"] = gross_loss
+    stats["net_profit"] = df["pnl"].sum()
+
+    # ------------------------
+    # Fees
+    # ------------------------
+    stats["total_fees"] = df["fee"].sum()
+
+    # ------------------------
+    # Average trades
+    # ------------------------
+    stats["avg_trade_pnl"] = df["pnl"].mean()
+
+    avg_win = df.loc[df["pnl"] > 0, "pnl"].mean()
+    avg_loss = df.loc[df["pnl"] < 0, "pnl"].mean()
+
+    stats["avg_win"] = avg_win
+    stats["avg_loss"] = avg_loss
+
+    # ------------------------
+    # Risk metrics
+    # ------------------------
+    stats["risk_reward_ratio"] = abs(avg_win / avg_loss) if avg_loss != 0 else np.nan
+    stats["profit_factor"] = gross_profit / abs(gross_loss) if gross_loss != 0 else np.nan
+
+    # ------------------------
+    # Drawdown
+    # ------------------------
+    equity = df["balance"]
+
+    rolling_max = equity.cummax()
+    drawdown = equity - rolling_max
+
+    stats["max_drawdown"] = drawdown.min()
+    stats["max_drawdown_pct"] = (drawdown / rolling_max).min()
+
+    # ------------------------
+    # Sharpe Ratio
+    # ------------------------
+    returns = df["pnl"]
+
+    if returns.std() != 0:
+        stats["sharpe_ratio"] = returns.mean() / returns.std()
+    else:
+        stats["sharpe_ratio"] = 0
+
+    # ------------------------
+    # Sortino Ratio
+    # ------------------------
+    downside = returns[returns < 0]
+
+    if downside.std() != 0:
+        stats["sortino_ratio"] = returns.mean() / downside.std()
+    else:
+        stats["sortino_ratio"] = 0
+
+    # ------------------------
+    # Consecutive wins / losses
+    # ------------------------
+    wins = df["pnl"] > 0
+    losses = df["pnl"] < 0
+
+    win_streak = wins.astype(int).groupby((wins != wins.shift()).cumsum()).cumsum()
+    loss_streak = losses.astype(int).groupby((losses != losses.shift()).cumsum()).cumsum()
+
+    stats["max_consecutive_wins"] = win_streak.max()
+    stats["max_consecutive_losses"] = loss_streak.max()
+
+    # ------------------------
+    # Convert to DataFrame
+    # ------------------------
+    stats_df = pd.DataFrame([stats])
+
+    return stats_df
+
+
 def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5):
     """
     Prepare a predictions DataFrame for backtesting.

@@ -1630,3 +1630,23 @@ Feature names seen at fit time, yet now missing:
 2026-02-27 12:43:28,548 | INFO | model_main | Final Balance: 497.46
 2026-02-27 12:43:28,548 | INFO | model_main | Cummulative PnL: -68.07
 2026-02-27 12:43:28,617 | INFO | model_main | Model training complete for btc.
+2026-03-02 09:13:21,942 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-02 09:13:21,948 | INFO | model_main | Fetching data for btc from database...
+2026-03-02 09:13:47,139 | INFO | model_main | Generating indicators for btc...
+2026-03-02 09:13:47,224 | INFO | model_main | Training classifier: random_forest for btc
+2026-03-02 09:20:48,119 | INFO | model_main | Final Balance: 498.51
+2026-03-02 09:20:48,119 | INFO | model_main | Cummulative PnL: -67.05
+2026-03-02 09:20:48,256 | INFO | model_main | Training classifier: xgboost for btc
+2026-03-02 09:26:38,546 | INFO | model_main | Final Balance: 494.08
+2026-03-02 09:26:38,546 | INFO | model_main | Cummulative PnL: -69.01
+2026-03-02 09:26:38,594 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-02 09:35:07,204 | INFO | model_main | Final Balance: 593.78
+2026-03-02 09:35:07,205 | INFO | model_main | Cummulative PnL: -47.95
+2026-03-02 09:35:07,242 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-02 09:41:26,175 | INFO | model_main | Final Balance: 499.9
+2026-03-02 09:41:26,175 | INFO | model_main | Cummulative PnL: -67.73
+2026-03-02 09:41:26,272 | INFO | model_main | Model training complete for btc.
+2026-03-02 09:48:32,875 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-02 09:48:32,875 | INFO | model_main | Fetching data for btc from database...
+2026-03-02 09:48:42,797 | INFO | model_main | Generating indicators for btc...
+2026-03-02 09:48:42,825 | INFO | model_main | Training classifier: random_forest for btc
