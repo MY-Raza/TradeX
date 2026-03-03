@@ -134,7 +134,7 @@ for clf_name, is_active in classifiers_config.items():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=5,
+                    n_trails=10,
                     df_1m=df_1m
                 )
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -171,7 +171,7 @@ for reg_name, is_active in regressors_config.items():
                     df=df_reg,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=5,
+                    n_trails=10,
                     df_1m=df_1m
                 )
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
