@@ -110,3 +110,28 @@
 2026-03-03 12:10:29,650 | INFO | model_fetcher | Generating features for base indicators: {'MACD', 'MFI', 'CDLHIGHWAVE', 'STOCHRSI', 'STOCH', 'CDLMARUBOZU', 'AVGPRICE', 'MIDPOINT', 'ROCP', 'TRANGE', 'TSF', 'CDLHANGINGMAN', 'WCLPRICE', 'ADX', 'AROONOSC', 'CCI', 'NATR', 'CDLGRAVESTONEDOJI', 'KAMA', 'VAR', 'ADOSC', 'PPO', 'DX', 'BBANDS', 'HT_TRENDLINE', 'ROC', 'WMA', 'CDLADVANCEBLOCK', 'MA'}
 2026-03-03 12:10:29,722 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
 2026-03-03 12:10:29,763 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-03 12:18:08,862 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 12:18:08,871 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 12:18:26,015 | INFO | model_fetcher | Generating features for base indicators: {'STOCH', 'ROCP', 'CCI', 'ADOSC', 'ROC', 'ADX', 'CDLGRAVESTONEDOJI', 'KAMA', 'HT_TRENDLINE', 'PPO', 'WCLPRICE', 'CDLMARUBOZU', 'TRANGE', 'MA', 'DX', 'BBANDS', 'MIDPOINT', 'NATR', 'AROONOSC', 'CDLHANGINGMAN', 'VAR', 'STOCHRSI', 'CDLHIGHWAVE', 'MACD', 'TSF', 'AVGPRICE', 'WMA', 'CDLADVANCEBLOCK', 'MFI'}
+2026-03-03 12:18:26,082 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-03 12:19:54,481 | INFO | model_fetcher | Final Ledger:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-06-28 08:00:00+00:00                long                      buy  ...   999.50 -0.05    -0.05
+1 2025-06-28 15:00:00+00:00                long  sell - direction_change  ...   996.37 -0.31    -0.36
+2 2025-06-28 15:00:00+00:00               short                      buy  ...   995.88 -0.05    -0.41
+3 2025-06-28 16:00:00+00:00               short  sell - direction_change  ...   992.99 -0.29    -0.70
+4 2025-06-28 16:00:00+00:00                long                      buy  ...   992.50 -0.05    -0.75
+
+[5 rows x 8 columns]
+2026-03-03 12:19:54,483 | INFO | model_fetcher | Final Balance: 498.51
+2026-03-03 12:19:54,483 | INFO | model_fetcher | Final PnL: -66.33
+2026-03-03 12:19:54,483 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-03 12:20:41,680 | INFO | model_fetcher | Final Ledger:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-06-28 08:00:00+00:00                long                      buy  ...   999.50 -0.05    -0.05
+1 2025-06-28 09:00:00+00:00                long  sell - direction_change  ...   998.04 -0.15    -0.20
+2 2025-06-28 09:00:00+00:00               short                      buy  ...   997.54 -0.05    -0.25
+3 2025-06-28 12:00:00+00:00               short  sell - direction_change  ...   997.13 -0.04    -0.29
+4 2025-06-28 12:00:00+00:00                long                      buy  ...   996.63 -0.05    -0.34
+
+[5 rows x 8 columns]
+2026-03-03 12:20:41,680 | INFO | model_fetcher | Final Balance: 498.51
+2026-03-03 12:20:41,681 | INFO | model_fetcher | Final PnL: -67.43

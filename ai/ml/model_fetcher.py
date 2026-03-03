@@ -55,8 +55,6 @@ def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.Dat
             if m:
                 base_indicators.add(m.group(1))
 
-    logger.info(f"Generating features for base indicators: {base_indicators}")
-
     # ----------------------------------------
     # Step 2: Generate all base indicators
     # ----------------------------------------
@@ -90,16 +88,9 @@ else:
     best_model = None
 
 important_features = None
-model = None
 
 if best_model:
     important_features = get_important_features(best_model)
-
-    if important_features and isinstance(important_features, str):
-        logger.info(f"The best features by {best_model} are: {important_features}")
-    else:
-        logger.info("No valid features found")
-
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 ml_config_path = os.path.join(current_dir, "config.yml")
