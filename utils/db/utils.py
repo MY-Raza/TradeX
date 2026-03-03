@@ -528,6 +528,49 @@ def get_best_model(
 
     return best_model_name
 
+def get_important_features(
+    model_name: str,
+    schema: str = "ml_features",
+    table_name: str = "best_features",
+):
+    """
+    Fetch important_features for a given model_name
+    from ml_features.best_features table.
+    """
+
+    if not model_name:
+        logger.warning("No model_name provided.")
+        return None
+
+    # ----------------------------------------
+    # Load table
+    # ----------------------------------------
+    df = read_df_from_db(table_name=table_name, schema=schema)
+
+    if df.empty:
+        logger.warning("best_features table is empty.")
+        return None
+
+    required_cols = ["model_name", "important_features"]
+    for col in required_cols:
+        if col not in df.columns:
+            raise ValueError(f"Missing required column: {col}")
+
+    # ----------------------------------------
+    # Filter for model
+    # ----------------------------------------
+    row = df[df["model_name"] == model_name]
+
+    if row.empty:
+        logger.warning(f"No features found for model: {model_name}")
+        return None
+
+    important_features = row.iloc[0]["important_features"]
+
+    logger.info(f"Fetched important features for model: {model_name}")
+
+    return important_features
+
 
 
 
