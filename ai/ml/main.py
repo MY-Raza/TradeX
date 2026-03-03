@@ -269,10 +269,6 @@ def main():
     classifiers_config = config.get("classifiers", {})
     regressors_config = config.get("regressors", {})
 
-    # Optional hyperparameters for XGBoost models
-    xgb_params_clf = config.get("xgboost_classifier_params", {})
-    xgb_params_reg = config.get("xgboost_regressor_params", {})
-
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 
     logger.info(f"Config loaded | symbols={symbols} | timehorizon={timehorizon}")
@@ -309,9 +305,6 @@ def main():
             logger.info(f"Training classifier: {clf_name} for {symbol}")
             try:
                 df_clf = create_classification_target(df_gf)
-
-                # Pass XGBoost params dynamically
-                kwargs = xgb_params_clf if clf_name.lower() == "xgboost" else {}
 
                 model, preds, test_index, X_test = train_model(
                     model_type="classifier",
@@ -367,12 +360,6 @@ def main():
                     time_column= None,
                     is_timeseries=False
                 )
-                save_model(
-                    model,
-                    X_test.columns.tolist(),
-                    symbol,
-                    f"{clf_name}_classifier_{timestamp}"
-                )
             except Exception as e:
                 logger.error(f"Classifier {clf_name} failed for {symbol}: {e}")
 
@@ -386,9 +373,6 @@ def main():
             logger.info(f"Training regressor: {reg_name} for {symbol}")
             try:
                 df_reg = create_regression_target(df_gf)
-
-                # Pass XGBoost params dynamically
-                kwargs = xgb_params_reg if reg_name.lower() == "xgboost" else {}
 
                 model, preds, test_index, X_test = train_model(
                     model_type="regressor",
@@ -442,12 +426,6 @@ def main():
                     schema= "model_stats",
                     time_column= None,
                     is_timeseries=False
-                )
-                save_model(
-                    model,
-                    X_test.columns.tolist(),
-                    symbol,
-                    f"{reg_name}_regressor_{timestamp}"
                 )
             except Exception as e:
                 logger.error(f"Regressor {reg_name} failed for {symbol}: {e}")

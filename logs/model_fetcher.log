@@ -25,3 +25,88 @@
 2026-03-03 10:25:38,367 | INFO | model_fetcher | The best features for random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
 2026-03-03 10:25:42,128 | INFO | model_fetcher | Loaded model file: btc_random_forest_classifier_20260302_153911.pkl
 2026-03-03 10:25:42,128 | INFO | model_fetcher | Model object ready for inference 🚀
+2026-03-03 10:48:38,739 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 10:48:38,750 | INFO | model_fetcher | The best features for random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:24:05,145 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:24:05,150 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:24:19,267 | INFO | model_fetcher | Generating features for base indicators: {'ADOSC', 'ROC', 'DX', 'NATR', 'MFI', 'WCLPRICE', 'PPO', 'HT', 'WMA', 'MACD', 'KAMA', 'TSF', 'MA', 'CDLHANGINGMAN', 'ROCP', 'AROONOSC', 'ADX', 'VAR', 'STOCHRSI', 'TRANGE', 'CDLMARUBOZU', 'CDLADVANCEBLOCK', 'BB', 'CDLGRAVESTONEDOJI', 'CDLHIGHWAVE', 'CCI', 'AVGPRICE', 'STOCH', 'MIDPOINT'}
+2026-03-03 11:24:19,309 | WARNING | model_fetcher | Some best_features were not generated: {'HT_TRENDLINE', 'BB_UPPER'}
+2026-03-03 11:24:19,316 | INFO | model_fetcher | Index(['datetime', 'open', 'high', 'low', 'close', 'volume', 'STOCH_K',
+       'DX_14', 'MACD_2', 'ADOSC', 'ROC_14', 'STOCHRSI_D', 'low', 'NATR_14',
+       'AROONOSC', 'close', 'ADX_14', 'MIDPOINT_14', 'STOCH_D', 'volume',
+       'STOCHRSI_K', 'TRANGE', 'ROCP_14', 'CDLADVANCEBLOCK', 'CDLHANGINGMAN',
+       'CDLGRAVESTONEDOJI', 'WCLPRICE', 'CDLMARUBOZU', 'WMA_14', 'AVGPRICE',
+       'KAMA_14', 'TSF_14', 'MFI_14', 'CCI_14', 'CDLHIGHWAVE', 'VAR_14',
+       'PPO_0', 'MA_14'],
+      dtype='object')
+2026-03-03 11:31:05,804 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:31:05,811 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:31:18,784 | INFO | model_fetcher | Generating features for base indicators: {'KAMA', 'MA', 'CDLADVANCEBLOCK', 'STOCH', 'CCI', 'MFI', 'AVGPRICE', 'WMA', 'PPO', 'MACD', 'ROCP', 'ADOSC', 'TRANGE', 'MIDPOINT', 'CDLHANGINGMAN', 'AROONOSC', 'DX', 'CDLMARUBOZU', 'ADX', 'CDLHIGHWAVE', 'BBANDS', 'NATR', 'STOCHRSI', 'CDLGRAVESTONEDOJI', 'HT_TRENDLINE', 'WCLPRICE', 'VAR', 'TSF', 'ROC'}
+2026-03-03 11:31:18,843 | INFO | model_fetcher | Index(['datetime', 'open', 'high', 'low', 'close', 'volume', 'STOCH_K',
+       'DX_14', 'MACD_2', 'ADOSC', 'ROC_14', 'STOCHRSI_D', 'low', 'NATR_14',
+       'AROONOSC', 'close', 'ADX_14', 'MIDPOINT_14', 'STOCH_D', 'volume',
+       'STOCHRSI_K', 'TRANGE', 'ROCP_14', 'CDLADVANCEBLOCK', 'CDLHANGINGMAN',
+       'CDLGRAVESTONEDOJI', 'WCLPRICE', 'CDLMARUBOZU', 'WMA_14', 'AVGPRICE',
+       'KAMA_14', 'TSF_14', 'MFI_14', 'CCI_14', 'BB_UPPER', 'CDLHIGHWAVE',
+       'VAR_14', 'PPO_0', 'MA_14', 'HT_TRENDLINE'],
+      dtype='object')
+2026-03-03 11:38:53,924 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:38:53,928 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:40:00,217 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:40:00,221 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:40:12,175 | INFO | model_fetcher | Generating features for base indicators: {'WMA', 'CCI', 'STOCH', 'CDLMARUBOZU', 'MA', 'BBANDS', 'STOCHRSI', 'ADOSC', 'WCLPRICE', 'MFI', 'HT_TRENDLINE', 'ADX', 'NATR', 'ROCP', 'AROONOSC', 'CDLHANGINGMAN', 'CDLADVANCEBLOCK', 'DX', 'TRANGE', 'MACD', 'CDLHIGHWAVE', 'MIDPOINT', 'CDLGRAVESTONEDOJI', 'ROC', 'PPO', 'TSF', 'VAR', 'AVGPRICE', 'KAMA'}
+2026-03-03 11:40:12,231 | INFO | model_fetcher | Index(['datetime', 'open', 'high', 'low', 'close', 'volume', 'STOCH_K',
+       'DX_14', 'MACD_2', 'ADOSC', 'ROC_14', 'STOCHRSI_D', 'low', 'NATR_14',
+       'AROONOSC', 'close', 'ADX_14', 'MIDPOINT_14', 'STOCH_D', 'volume',
+       'STOCHRSI_K', 'TRANGE', 'ROCP_14', 'CDLADVANCEBLOCK', 'CDLHANGINGMAN',
+       'CDLGRAVESTONEDOJI', 'WCLPRICE', 'CDLMARUBOZU', 'WMA_14', 'AVGPRICE',
+       'KAMA_14', 'TSF_14', 'MFI_14', 'CCI_14', 'BB_UPPER', 'CDLHIGHWAVE',
+       'VAR_14', 'PPO_0', 'MA_14', 'HT_TRENDLINE'],
+      dtype='object')
+2026-03-03 11:44:19,915 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:44:19,925 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:44:33,996 | INFO | model_fetcher | Generating features for base indicators: {'MACD', 'VAR', 'STOCH', 'ADX', 'STOCHRSI', 'KAMA', 'CDLHIGHWAVE', 'CCI', 'CDLHANGINGMAN', 'BBANDS', 'HT_TRENDLINE', 'DX', 'ROCP', 'CDLMARUBOZU', 'WCLPRICE', 'MFI', 'TSF', 'AROONOSC', 'CDLGRAVESTONEDOJI', 'CDLADVANCEBLOCK', 'ROC', 'AVGPRICE', 'TRANGE', 'PPO', 'WMA', 'NATR', 'ADOSC', 'MA', 'MIDPOINT'}
+2026-03-03 11:44:34,123 | INFO | model_fetcher | Index(['datetime', 'open', 'high', 'low', 'close', 'volume', 'STOCH_K',
+       'DX_14', 'MACD_2', 'ADOSC', 'ROC_14', 'STOCHRSI_D', 'low', 'NATR_14',
+       'AROONOSC', 'close', 'ADX_14', 'MIDPOINT_14', 'STOCH_D', 'volume',
+       'STOCHRSI_K', 'TRANGE', 'ROCP_14', 'CDLADVANCEBLOCK', 'CDLHANGINGMAN',
+       'CDLGRAVESTONEDOJI', 'WCLPRICE', 'CDLMARUBOZU', 'WMA_14', 'AVGPRICE',
+       'KAMA_14', 'TSF_14', 'MFI_14', 'CCI_14', 'BB_UPPER', 'CDLHIGHWAVE',
+       'VAR_14', 'PPO_0', 'MA_14', 'HT_TRENDLINE'],
+      dtype='object')
+2026-03-03 11:45:10,155 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:45:10,168 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:45:21,885 | INFO | model_fetcher | Generating features for base indicators: {'ADX', 'DX', 'STOCH', 'NATR', 'ROCP', 'CCI', 'MFI', 'AVGPRICE', 'ROC', 'MIDPOINT', 'HT_TRENDLINE', 'CDLGRAVESTONEDOJI', 'WCLPRICE', 'ADOSC', 'BBANDS', 'STOCHRSI', 'CDLHIGHWAVE', 'WMA', 'CDLADVANCEBLOCK', 'CDLHANGINGMAN', 'KAMA', 'TSF', 'VAR', 'TRANGE', 'MACD', 'CDLMARUBOZU', 'PPO', 'AROONOSC', 'MA'}
+2026-03-03 11:45:21,937 | INFO | model_fetcher | Index(['datetime', 'open', 'high', 'low', 'close', 'volume', 'STOCH_K',
+       'DX_14', 'MACD_2', 'ADOSC', 'ROC_14', 'STOCHRSI_D', 'low', 'NATR_14',
+       'AROONOSC', 'close', 'ADX_14', 'MIDPOINT_14', 'STOCH_D', 'volume',
+       'STOCHRSI_K', 'TRANGE', 'ROCP_14', 'CDLADVANCEBLOCK', 'CDLHANGINGMAN',
+       'CDLGRAVESTONEDOJI', 'WCLPRICE', 'CDLMARUBOZU', 'WMA_14', 'AVGPRICE',
+       'KAMA_14', 'TSF_14', 'MFI_14', 'CCI_14', 'BB_UPPER', 'CDLHIGHWAVE',
+       'VAR_14', 'PPO_0', 'MA_14', 'HT_TRENDLINE'],
+      dtype='object')
+2026-03-03 11:53:09,672 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:53:09,677 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:53:21,219 | INFO | model_fetcher | Generating features for base indicators: {'CDLGRAVESTONEDOJI', 'MIDPOINT', 'TRANGE', 'ADX', 'WCLPRICE', 'MACD', 'CCI', 'CDLMARUBOZU', 'VAR', 'STOCH', 'WMA', 'CDLHIGHWAVE', 'PPO', 'ROCP', 'DX', 'HT_TRENDLINE', 'TSF', 'ROC', 'MFI', 'STOCHRSI', 'MA', 'CDLADVANCEBLOCK', 'KAMA', 'NATR', 'AROONOSC', 'CDLHANGINGMAN', 'AVGPRICE', 'ADOSC', 'BBANDS'}
+2026-03-03 11:54:12,220 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:54:12,238 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:54:23,499 | INFO | model_fetcher | Generating features for base indicators: {'ADOSC', 'AVGPRICE', 'PPO', 'CDLHIGHWAVE', 'DX', 'MACD', 'AROONOSC', 'CDLMARUBOZU', 'ROC', 'TRANGE', 'ROCP', 'STOCH', 'NATR', 'STOCHRSI', 'TSF', 'CCI', 'CDLGRAVESTONEDOJI', 'KAMA', 'HT_TRENDLINE', 'CDLHANGINGMAN', 'ADX', 'MFI', 'VAR', 'WCLPRICE', 'MIDPOINT', 'WMA', 'BBANDS', 'CDLADVANCEBLOCK', 'MA'}
+2026-03-03 11:55:12,066 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:55:12,071 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 11:55:22,757 | INFO | model_fetcher | Generating features for base indicators: {'TSF', 'CDLGRAVESTONEDOJI', 'CCI', 'AVGPRICE', 'ADOSC', 'MIDPOINT', 'CDLHIGHWAVE', 'TRANGE', 'ROCP', 'CDLHANGINGMAN', 'CDLADVANCEBLOCK', 'DX', 'HT_TRENDLINE', 'STOCH', 'MACD', 'ADX', 'STOCHRSI', 'BBANDS', 'CDLMARUBOZU', 'WMA', 'VAR', 'MFI', 'AROONOSC', 'PPO', 'MA', 'KAMA', 'NATR', 'ROC', 'WCLPRICE'}
+2026-03-03 11:59:54,964 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 11:59:54,970 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 12:00:07,439 | INFO | model_fetcher | Generating features for base indicators: {'ROC', 'AVGPRICE', 'HT_TRENDLINE', 'ADOSC', 'CDLMARUBOZU', 'ADX', 'PPO', 'WMA', 'DX', 'KAMA', 'CCI', 'TSF', 'AROONOSC', 'CDLHIGHWAVE', 'STOCHRSI', 'BBANDS', 'MA', 'MACD', 'MFI', 'MIDPOINT', 'ROCP', 'CDLGRAVESTONEDOJI', 'NATR', 'STOCH', 'CDLADVANCEBLOCK', 'TRANGE', 'VAR', 'WCLPRICE', 'CDLHANGINGMAN'}
+2026-03-03 12:01:51,717 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 12:01:51,730 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 12:02:03,469 | INFO | model_fetcher | Generating features for base indicators: {'STOCH', 'MIDPOINT', 'AROONOSC', 'HT_TRENDLINE', 'MFI', 'KAMA', 'STOCHRSI', 'AVGPRICE', 'NATR', 'ADOSC', 'TSF', 'MACD', 'CDLGRAVESTONEDOJI', 'TRANGE', 'MA', 'ROC', 'WMA', 'ROCP', 'CDLADVANCEBLOCK', 'PPO', 'DX', 'CCI', 'CDLHANGINGMAN', 'CDLMARUBOZU', 'WCLPRICE', 'BBANDS', 'ADX', 'CDLHIGHWAVE', 'VAR'}
+2026-03-03 12:03:54,410 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 12:03:54,416 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 12:04:06,776 | INFO | model_fetcher | Generating features for base indicators: {'HT_TRENDLINE', 'CCI', 'NATR', 'WCLPRICE', 'ROCP', 'MACD', 'ROC', 'ADOSC', 'TRANGE', 'STOCHRSI', 'TSF', 'WMA', 'CDLHANGINGMAN', 'PPO', 'CDLGRAVESTONEDOJI', 'AVGPRICE', 'ADX', 'KAMA', 'VAR', 'DX', 'MIDPOINT', 'CDLMARUBOZU', 'MFI', 'STOCH', 'BBANDS', 'CDLADVANCEBLOCK', 'CDLHIGHWAVE', 'MA', 'AROONOSC'}
+2026-03-03 12:04:06,819 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-03 12:04:06,833 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-03 12:10:15,264 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
+2026-03-03 12:10:15,272 | INFO | model_fetcher | The best features by random_forest_clf_20260302_153911 are: ["STOCH_K", "DX_14", "MACD_2", "ADOSC", "ROC_14", "STOCHRSI_D", "low", "NATR_14", "AROONOSC", "close", "ADX_14", "MIDPOINT_14", "STOCH_D", "volume", "STOCHRSI_K", "TRANGE", "ROCP_14", "CDLADVANCEBLOCK", "CDLHANGINGMAN", "CDLGRAVESTONEDOJI", "WCLPRICE", "CDLMARUBOZU", "WMA_14", "AVGPRICE", "KAMA_14", "TSF_14", "MFI_14", "CCI_14", "BB_UPPER", "CDLHIGHWAVE", "VAR_14", "PPO_0", "MA_14", "HT_TRENDLINE"]
+2026-03-03 12:10:29,650 | INFO | model_fetcher | Generating features for base indicators: {'MACD', 'MFI', 'CDLHIGHWAVE', 'STOCHRSI', 'STOCH', 'CDLMARUBOZU', 'AVGPRICE', 'MIDPOINT', 'ROCP', 'TRANGE', 'TSF', 'CDLHANGINGMAN', 'WCLPRICE', 'ADX', 'AROONOSC', 'CCI', 'NATR', 'CDLGRAVESTONEDOJI', 'KAMA', 'VAR', 'ADOSC', 'PPO', 'DX', 'BBANDS', 'HT_TRENDLINE', 'ROC', 'WMA', 'CDLADVANCEBLOCK', 'MA'}
+2026-03-03 12:10:29,722 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-03 12:10:29,763 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
