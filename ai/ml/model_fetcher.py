@@ -145,11 +145,42 @@ for clf_name, is_active in classifiers_config.items():
                     stop_loss=1
                 )
         ledger, final_balance, pnl = bt.run()
-        logger.info(f"Final Ledger: {ledger.head()}")
-        logger.info(f"Final Balance: {final_balance}")
-        logger.info(f"Final PnL: {pnl}")
+        logger.info(f"Final Ledger for Classifier: {ledger.head()}")
+        logger.info(f"Final Balance for Classifier: {final_balance}")
+        logger.info(f"Final PnL for Classifier: {pnl}")
     except Exception as e:
                 logger.error(f"Classifier {clf_name} failed for {symbols}: {e}")
-        
+
+for reg_name, is_active in regressors_config.items():
+     if not is_active:
+          continue
+     logger.info(f"Training Regressor: {reg_name} for {symbols}")
+     try:
+        df_reg = create_regression_target(df_gf)
+        df_reg = df_reg.drop(columns=["open", "high", "low"], errors="ignore")
+        model, preds, test_index, X_test = train_model(
+                    model_type="regressor",
+                    model_name=reg_name,
+                    df=df_reg,
+                    target_col="target",
+                    split_date=split_date,
+                    n_trails=2,
+                    df_1m=df_1m
+                )
+        df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
+        df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+        bt = BackTest(
+                    df_1m,
+                    df_predictions,
+                    take_profit=3,
+                    stop_loss=1
+                )
+        ledger, final_balance, pnl = bt.run()
+        logger.info(f"Final Ledger for Regressor: {ledger.head()}")
+        logger.info(f"Final Balance for Regressor: {final_balance}")
+        logger.info(f"Final PnL for Regressor: {pnl}")
+
+     except Exception as e:
+                logger.error(f"Regressor {reg_name} failed for {symbols}: {e}")   
 
 
