@@ -11,6 +11,7 @@ import re
 from TradeX.ai.ml.models.model_trainer import train_model,save_model
 from TradeX.ai.ml.utils import prepare_predictions
 from TradeX.backtest.backtest import BackTest
+from datetime import datetime
 
 logger = get_logger("model_fetcher")
 
@@ -21,7 +22,7 @@ FEATURE_MAP = {
     "BB_LOWER": "BBANDS",
     # Add more mappings if needed
 }
-
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.DataFrame:
     """
     Generate only the technical indicators needed for best_features (with suffixes).
@@ -133,7 +134,7 @@ for clf_name, is_active in classifiers_config.items():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=2,
+                    n_trails=5,
                     df_1m=df_1m
                 )
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -148,6 +149,12 @@ for clf_name, is_active in classifiers_config.items():
         logger.info(f"Final Ledger for Classifier: {ledger.head()}")
         logger.info(f"Final Balance for Classifier: {final_balance}")
         logger.info(f"Final PnL for Classifier: {pnl}")
+        save_model(
+             model,
+             X_test.columns.tolist(),
+             symbols,
+             f"{clf_name}_classifier_{timestamp}"
+        )
     except Exception as e:
                 logger.error(f"Classifier {clf_name} failed for {symbols}: {e}")
 
@@ -164,7 +171,7 @@ for reg_name, is_active in regressors_config.items():
                     df=df_reg,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=2,
+                    n_trails=5,
                     df_1m=df_1m
                 )
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -179,6 +186,12 @@ for reg_name, is_active in regressors_config.items():
         logger.info(f"Final Ledger for Regressor: {ledger.head()}")
         logger.info(f"Final Balance for Regressor: {final_balance}")
         logger.info(f"Final PnL for Regressor: {pnl}")
+        save_model(
+             model,
+             X_test.columns.tolist(),
+             symbols,
+             f"{reg_name}_regressor_{timestamp}"
+        )
 
      except Exception as e:
                 logger.error(f"Regressor {reg_name} failed for {symbols}: {e}")   
