@@ -123,17 +123,16 @@ def run_active_signals_with_voting(
                 filtered_window = {k: v for k, v in window_params.items() if v not in (None, 0)}
                 if filtered_window:
                     windows_dict[name] = filtered_window
-        if model_signals is not None:
+    if model_signals is not None:
             try:
                 model_signals["datetime"] = pd.to_datetime(model_signals["datetime"])
                 model_signals = model_signals.set_index("datetime")
-
                 aligned_model = model_signals.reindex(
                     pd.to_datetime(timestamps)
                 )["signal"].to_numpy(dtype = np.float32)
                 signals_dict["ML_MODEL"] = aligned_model
             except Exception as e:
-                logger.warning(f"Error integrating ML model signals: {e}")
+                logger.warning(f"Error integrating ML model signals: {e}")   
             
     # ---------------------------------------------------------
     # Create DataFrame of all signals

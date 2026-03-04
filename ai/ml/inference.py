@@ -160,7 +160,6 @@ def run_inference(
         "datetime": df_features.loc[X.index, "datetime"],
         "signal": signals,
     })
-
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
     logger.info(f"Generated {len(df_predictions)} predictions.")

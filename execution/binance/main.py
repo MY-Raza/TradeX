@@ -31,10 +31,11 @@ symbols = ["btc"]
 # Parse command-line argument
 # -----------------------------
 if len(sys.argv) < 2:
+    timeframe = "5m"
     logger.error("Usage: python main.py <timeframe> (e.g., 1h, 15m, 5m)")
-    exit()
-
-timeframe = sys.argv[1].lower()
+    # exit()
+else:
+    timeframe = sys.argv[1].lower()
 logger.info(f"Running continuous strategy execution for timeframe: {timeframe}")
 
 timeframe_minutes = {
