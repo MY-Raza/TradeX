@@ -1,4 +1,4 @@
-import os
+import time
 from datetime import datetime, timezone
 from time import sleep
 from binance.client import Client
@@ -13,6 +13,8 @@ class FuturesTrader:
 
     def __init__(self, api_key, api_secret, symbol):
         self.client = Client(api_key, api_secret, testnet=True)
+        server_time = self.client.get_server_time()
+        self.client.timestamp_offset = server_time['serverTime'] - int(time.time() * 1000)
         self.symbol = symbol
         self.active_trade = None
         self.pnl_sum = 0.0

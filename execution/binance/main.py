@@ -101,7 +101,7 @@ while True:
             logger.info(f"Processing symbol: {symbol}")
 
             USE_ML_MODEL = True
-            MODEL_NAME = "xgboost_classifier_20260304_101010"
+            MODEL_NAME = "random_forest_regressor_20260304_095453"
             model_predictions = None
 
             strategies = get_profitable_strategies(

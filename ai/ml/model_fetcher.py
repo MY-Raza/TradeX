@@ -189,7 +189,7 @@ for reg_name, is_active in regressors_config.items():
         save_model(
              model,
              X_test.columns.tolist(),
-             symbols,
+             symbols[0],
              f"{reg_name}_regressor_{timestamp}"
         )
 

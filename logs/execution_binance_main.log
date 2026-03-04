@@ -11881,3 +11881,42 @@ sqlalchemy.exc.DatabaseError: (psycopg2.DatabaseError) out of memory for query r
 2026-03-02 13:12:05,582 | INFO | execution_binance_main | btc | Latest Signal: sig_5m_btc_73 → 1 at 2026-03-02 08:10:00+00:00
 2026-03-02 13:12:07,391 | INFO | execution_binance_main | Waiting 173 seconds until next valid 5m time...
 2026-03-02 13:13:20,850 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-03-04 11:26:29,705 | ERROR | execution_binance_main | Usage: python main.py <timeframe> (e.g., 1h, 15m, 5m)
+2026-03-04 11:26:46,857 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-03-04 11:30:20,194 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-03-04 11:32:27,608 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-03-04 11:32:29,222 | INFO | execution_binance_main | Waiting 151 seconds until next valid 5m time...
+2026-03-04 11:35:00,231 | INFO | execution_binance_main | Current time 06:35:00 is valid for 5m execution.
+2026-03-04 11:36:41,542 | INFO | execution_binance_main | Processing symbol: btc
+2026-03-04 11:36:41,747 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-03-04 11:36:41,749 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-03-04 11:36:54,301 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-03-04 11:36:54,373 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-03-04 11:36:54,375 | ERROR | execution_binance_main | Error in continuous execution loop: Model not found: D:\trading\TradeX\saved_models\['btc']_random_forest_regressor_20260304_095453.pkl
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 158, in <module>
+    model_predictions = run_inference(model_name= MODEL_NAME, df_tf=df_resampled)
+  File "D:\trading\TradeX\ai\ml\inference.py", line 120, in run_inference
+    model, feature_list, symbols = load_model(model_name)
+  File "D:\trading\TradeX\ai\ml\inference.py", line 50, in load_model
+    raise FileNotFoundError(f"Model not found: {model_path}")
+FileNotFoundError: Model not found: D:\trading\TradeX\saved_models\['btc']_random_forest_regressor_20260304_095453.pkl
+2026-03-04 11:36:59,387 | INFO | execution_binance_main | Waiting 181 seconds until next valid 5m time...
+2026-03-04 11:44:30,968 | INFO | execution_binance_main | Running continuous strategy execution for timeframe: 5m
+2026-03-04 11:44:32,743 | INFO | execution_binance_main | Waiting 28 seconds until next valid 5m time...
+2026-03-04 11:45:00,746 | INFO | execution_binance_main | Current time 06:45:00 is valid for 5m execution.
+2026-03-04 11:46:42,050 | INFO | execution_binance_main | Processing symbol: btc
+2026-03-04 11:46:42,432 | INFO | execution_binance_main | btc | sig_5m_btc_73 → Highest window: 30
+2026-03-04 11:46:42,432 | INFO | execution_binance_main | btc | Required 1m candles: 450
+2026-03-04 11:47:01,262 | INFO | execution_binance_main | btc | Fetched 450 rows of 1m data.
+2026-03-04 11:47:01,343 | INFO | execution_binance_main | btc | Resampled to 90 rows.
+2026-03-04 11:47:01,344 | ERROR | execution_binance_main | Error in continuous execution loop: Model not found: D:\trading\TradeX\saved_models\random_forest_regressor_20260304_095453.pkl
+Traceback (most recent call last):
+  File "D:\trading\TradeX\execution\binance\main.py", line 158, in <module>
+    model_predictions = run_inference(model_name= MODEL_NAME, df_tf=df_resampled)
+  File "D:\trading\TradeX\ai\ml\inference.py", line 120, in run_inference
+    model, feature_list, symbols = load_model(model_name)
+  File "D:\trading\TradeX\ai\ml\inference.py", line 50, in load_model
+    raise FileNotFoundError(f"Model not found: {model_path}")
+FileNotFoundError: Model not found: D:\trading\TradeX\saved_models\random_forest_regressor_20260304_095453.pkl
+2026-03-04 11:47:06,366 | INFO | execution_binance_main | Waiting 174 seconds until next valid 5m time...

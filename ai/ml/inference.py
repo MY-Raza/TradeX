@@ -25,7 +25,7 @@ FEATURE_MAP = {
 # LOAD MODEL
 # ==========================================================
 
-def load_model(model_name: str, model_dir: str = "saved_models"):
+def load_model(model_name: str):
     """
     Load model .pkl file.
 
@@ -34,6 +34,16 @@ def load_model(model_name: str, model_dir: str = "saved_models"):
         feature_list
         symbols
     """
+
+    # Get current file directory (ai/ml)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Go up two levels → TradeX/
+    tradex_root = os.path.abspath(os.path.join(current_dir, "..", "..",".."))
+
+    # Build saved_models path
+    model_dir = os.path.join(tradex_root, "saved_models")
+
     model_path = os.path.join(model_dir, f"{model_name}.pkl")
 
     if not os.path.exists(model_path):
@@ -47,6 +57,7 @@ def load_model(model_name: str, model_dir: str = "saved_models"):
 
     logger.info(f"Loaded model: {model_name}")
     logger.info(f"Features used: {len(feature_list)}")
+    logger.info(f"Model path: {model_path}")
 
     return model, feature_list, symbols
 
