@@ -174,7 +174,7 @@ for reg_name, is_active in regressors_config.items():
                     n_trails=10,
                     df_1m=df_1m
                 )
-        df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
+        df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
         bt = BackTest(
                     df_1m,

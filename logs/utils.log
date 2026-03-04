@@ -33331,3 +33331,72 @@ Last 5 rows from data_binance.btc_1m:
 2026-03-03 14:38:08,946 | INFO | utils | Table Found
 2026-03-03 14:38:08,952 | INFO | utils | Fetched important features for model: random_forest_clf_20260302_153911
 2026-03-03 14:38:25,980 | INFO | utils | Table Found
+2026-03-03 15:26:20,163 | INFO | utils | Database engine initialized
+2026-03-03 15:26:20,468 | INFO | utils | Table Found
+2026-03-03 15:26:20,486 | INFO | utils | Best model selected: random_forest_clf_20260302_153911
+2026-03-03 15:26:20,486 | INFO | utils | Score: 0.015446320362120843
+2026-03-03 15:26:20,494 | INFO | utils | Table Found
+2026-03-03 15:26:20,498 | INFO | utils | Fetched important features for model: random_forest_clf_20260302_153911
+2026-03-03 15:26:42,286 | INFO | utils | Table Found
+2026-03-03 15:34:36,779 | INFO | utils | Database engine initialized
+2026-03-03 15:34:36,953 | INFO | utils | Table Found
+2026-03-03 15:34:36,962 | INFO | utils | Best model selected: random_forest_clf_20260302_153911
+2026-03-03 15:34:36,962 | INFO | utils | Score: 0.015446320362120843
+2026-03-03 15:34:36,971 | INFO | utils | Table Found
+2026-03-03 15:34:36,973 | INFO | utils | Fetched important features for model: random_forest_clf_20260302_153911
+2026-03-03 15:34:46,131 | INFO | utils | Table Found
+2026-03-03 15:43:23,047 | INFO | utils | Database engine initialized
+2026-03-03 15:43:23,315 | INFO | utils | Table Found
+2026-03-03 15:43:23,339 | INFO | utils | Best model selected: random_forest_clf_20260302_153911
+2026-03-03 15:43:23,339 | INFO | utils | Score: 0.015446320362120843
+2026-03-03 15:43:23,350 | INFO | utils | Table Found
+2026-03-03 15:43:23,356 | INFO | utils | Fetched important features for model: random_forest_clf_20260302_153911
+2026-03-03 15:43:47,565 | INFO | utils | Table Found
+2026-03-04 09:54:25,097 | INFO | utils | Database engine initialized
+2026-03-04 09:54:53,482 | INFO | utils | Database engine initialized
+2026-03-04 09:54:53,577 | INFO | utils | Table Found
+2026-03-04 09:54:53,611 | INFO | utils | Best model selected: random_forest_clf_20260302_153911
+2026-03-04 09:54:53,611 | INFO | utils | Score: 0.015446320362120843
+2026-03-04 09:54:53,615 | INFO | utils | Table Found
+2026-03-04 09:54:53,619 | INFO | utils | Fetched important features for model: random_forest_clf_20260302_153911
+2026-03-04 09:55:06,732 | INFO | utils | Table Found
+2026-03-04 09:55:30,835 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 09:55:30,932 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-04 09:55:30,948 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-04 09:55:32,538 | INFO | utils | Inserted 2563 rows into data_binance.btc_1m
+2026-03-04 09:56:42,350 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 09:56:42,395 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-04 09:56:42,398 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-04 09:56:43,629 | INFO | utils | Inserted 2564 rows into data_binance.eth_1m
+2026-03-04 09:57:50,025 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 09:57:50,260 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-04 09:57:50,293 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-04 09:57:52,283 | INFO | utils | Inserted 2565 rows into data_binance.bnb_1m
+2026-03-04 09:58:59,269 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 09:58:59,327 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-03-04 09:58:59,330 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-03-04 09:59:00,336 | INFO | utils | Inserted 2566 rows into data_binance.ada_1m
+2026-03-04 10:00:06,970 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 10:00:07,054 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-03-04 10:00:07,060 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-03-04 10:00:08,650 | INFO | utils | Inserted 2567 rows into data_binance.xrp_1m
+2026-03-04 10:01:14,683 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 10:01:14,744 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-03-04 10:01:14,750 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-03-04 10:01:16,178 | INFO | utils | Inserted 2568 rows into data_binance.doge_1m
+2026-03-04 10:02:24,469 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 10:02:24,562 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-03-04 10:02:24,568 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-03-04 10:02:26,322 | INFO | utils | Inserted 2613 rows into data_binance.sol_1m
+2026-03-04 10:03:34,282 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 10:03:34,360 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-03-04 10:03:34,364 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-03-04 10:03:36,209 | INFO | utils | Inserted 2614 rows into data_binance.dot_1m
+2026-03-04 10:03:45,994 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 10:03:46,014 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-03-04 10:03:46,018 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-03-04 10:03:46,032 | INFO | utils | No new rows to insert
+2026-03-04 10:04:56,012 | INFO | utils | Schema 'data_binance' ready
+2026-03-04 10:05:02,642 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-03-04 10:05:02,691 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-03-04 10:05:06,408 | INFO | utils | Inserted 2614 rows into data_binance.link_1m
