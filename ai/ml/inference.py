@@ -1,13 +1,8 @@
 import os
 import numpy as np
 import pandas as pd
-from datetime import datetime
-
-from TradeX.utils.db.utils import fetch_ohlcv_df
-from TradeX.utils.data.data_cleaner import resample_ohlcv
 from TradeX.utils.common.logs import get_logger
 from TradeX.ai.ml.main import generate_features
-from TradeX.backtest.backtest import BackTest
 
 import joblib
 import re
@@ -99,16 +94,9 @@ def generate_required_features(df: pd.DataFrame, feature_list: list[str]) -> pd.
 
 def run_inference(
     model_name: str,
-    start_date: str,
-    end_date: str,
-    table_name: str = "btc_1m",
-    schema: str = "data_binance",
-    timehorizon: str = "1h",
+    df_tf:None,
     classifier_threshold_high: float = 0.55,
     classifier_threshold_low: float = 0.45,
-    run_backtest: bool = False,
-    take_profit: float = 3,
-    stop_loss: float = 1,
     k=0.5
 ):
     """
@@ -122,20 +110,6 @@ def run_inference(
 
     # Detect model type from name
     model_type = "classifier" if "classifier" in model_name else "regressor"
-
-    # ------------------------------------------------------
-    # 2️⃣ Fetch new data
-    # ------------------------------------------------------
-    df_1m = fetch_ohlcv_df(
-        table_name=table_name,
-        schema=schema,
-        time_column="datetime",
-        start_date=start_date,
-        end_date=end_date,
-    )
-
-    df_tf = resample_ohlcv(df_1m, timehorizon)
-
     # ------------------------------------------------------
     # 3️⃣ Generate required features
     # ------------------------------------------------------

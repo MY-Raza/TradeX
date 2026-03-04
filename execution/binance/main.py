@@ -19,6 +19,7 @@ from TradeX.utils.common.config_loader import read_config
 from TradeX.execution.binance.executor import FuturesTrader
 from dotenv import load_dotenv
 from TradeX.utils.db.utils import save_df_to_db
+from TradeX.ai.ml.inference import run_inference
 
 logger = get_logger("execution_binance_main")
 SCHEMA = EXCHANGE_SCHEMA_MAP["binance"]
@@ -99,6 +100,10 @@ while True:
         for symbol in symbols:
             logger.info(f"Processing symbol: {symbol}")
 
+            USE_ML_MODEL = True
+            MODEL_NAME = "xgboost_classifier_20260304_101010"
+            model_predictions = None
+
             strategies = get_profitable_strategies(
                 symbol="btc",
                 timehorizon=timeframe,
@@ -149,8 +154,9 @@ while True:
                 logger.warning(f"{symbol} | Resampled {timeframe} dataframe is empty.")
                 continue
             logger.info(f"{symbol} | Resampled to {len(df_resampled)} rows.")
-
-            results = execute_strategies_on_dataframe(df=df_resampled, strategies=strategies)
+            if USE_ML_MODEL:
+                model_predictions = run_inference(model_name= MODEL_NAME, df_tf=df_resampled)
+            results = execute_strategies_on_dataframe(df=df_resampled, strategies=strategies,use_model=USE_ML_MODEL,model_signals=model_predictions)
             if not results:
                 logger.warning(f"{symbol} | No signals generated.")
                 continue

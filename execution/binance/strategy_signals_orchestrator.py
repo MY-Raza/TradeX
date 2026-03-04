@@ -51,7 +51,9 @@ def extract_indicator_flags(strategy) -> Dict[str, bool]:
 # -------------------------------------------------------------
 def execute_strategies_on_dataframe(
     df: pd.DataFrame,
-    strategies: List
+    strategies: List,
+    model_signals: None,
+    use_model: False
 ) -> Dict[str, Dict]:
     """
     Executes all strategies on provided OHLCV dataframe.
@@ -103,7 +105,8 @@ def execute_strategies_on_dataframe(
             low=low,
             close_=close_,
             volume=volume,
-            timestamps=timestamps
+            timestamps=timestamps,
+            model_signals=model_signals if use_model else None
         )
 
         if not final_df.empty:
