@@ -104,11 +104,12 @@ def run_inference(
     table_name: str = "btc_1m",
     schema: str = "data_binance",
     timehorizon: str = "1h",
-    classifier_threshold_high: float = 0.6,
-    classifier_threshold_low: float = 0.4,
+    classifier_threshold_high: float = 0.55,
+    classifier_threshold_low: float = 0.45,
     run_backtest: bool = False,
     take_profit: float = 3,
     stop_loss: float = 1,
+    k=0.5
 ):
     """
     Full inference pipeline.
@@ -163,12 +164,9 @@ def run_inference(
 
     else:  # regressor
         preds = model.predict(X)
-
-        signals = np.where(
-            preds > 0,
-            1,
-            np.where(preds < 0, -1, 0),
-        )
+        threshold = k * np.std(preds)
+        signals = np.where(preds > threshold, 1,
+                  np.where(preds < -threshold, -1, 0))
 
     # ------------------------------------------------------
     # Create prediction dataframe
@@ -181,23 +179,5 @@ def run_inference(
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
     logger.info(f"Generated {len(df_predictions)} predictions.")
-
-    # ------------------------------------------------------
-    # 6️⃣ Optional Backtest
-    # ------------------------------------------------------
-    if run_backtest:
-        bt = BackTest(
-            df_1m,
-            df_predictions,
-            take_profit=take_profit,
-            stop_loss=stop_loss,
-        )
-
-        ledger, final_balance, pnl = bt.run()
-
-        logger.info(f"Final Balance: {final_balance}")
-        logger.info(f"Final PnL: {pnl}")
-
-        return df_predictions, ledger, final_balance, pnl
 
     return df_predictions
