@@ -382,3 +382,14 @@
 2026-03-03 15:43:49,263 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
 2026-03-04 09:54:53,611 | INFO | model_fetcher | The best model: random_forest_clf_20260302_153911
 2026-03-04 09:55:07,994 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-04 10:14:50,079 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-06-28 08:00:00+00:00                long                      buy  ...   999.50 -0.05    -0.05
+1 2025-06-28 09:00:00+00:00                long  sell - direction_change  ...   998.04 -0.15    -0.20
+2 2025-06-28 09:00:00+00:00               short                      buy  ...   997.54 -0.05    -0.25
+3 2025-06-28 12:00:00+00:00               short  sell - direction_change  ...   997.13 -0.04    -0.29
+4 2025-06-28 12:00:00+00:00                long                      buy  ...   996.63 -0.05    -0.34
+
+[5 rows x 8 columns]
+2026-03-04 10:14:50,087 | INFO | model_fetcher | Final Balance for Classifier: 493.49
+2026-03-04 10:14:50,087 | INFO | model_fetcher | Final PnL for Classifier: -67.44
+2026-03-04 10:14:53,680 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
