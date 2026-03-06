@@ -235,20 +235,37 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
 # ----------------------------
 # TARGET CREATION
 # ----------------------------
-def create_classification_target(df: pd.DataFrame) -> pd.DataFrame:
+def create_classification_target(
+    df: pd.DataFrame,
+    window: int = 15,
+    threshold: float = 0.002
+) -> pd.DataFrame:
     
-    df["future_close"] = df["close"].shift(-1)
-    df["target"] = (df["future_close"] > df["close"]).astype(int)
+    future_max = df["close"].rolling(window=window).max().shift(-window + 1)
+
+    future_return = (future_max - df["close"]) / df["close"]
+
+    df["target"] = (future_return > threshold).astype(int)
+
     df.dropna(inplace=True)
+
     return df
 
 
-def create_regression_target(df: pd.DataFrame) -> pd.DataFrame:
-    
-    df["future_close"] = df["close"].shift(-1)
-    df["target"] = ((df["future_close"] - df["close"]) / df["close"]) * 1000
+def create_regression_target(
+    df: pd.DataFrame,
+    window: int = 15
+) -> pd.DataFrame:
+
+    future_max = df["close"].rolling(window=window).max().shift(-window + 1)
+
+    df["target"] = np.log(future_max / df["close"])
+
     df.dropna(inplace=True)
+
     return df
+    
+
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 # ----------------------------
@@ -312,7 +329,7 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=2,
+                    n_trails=10,
                     df_1m=df_1m
                 )
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -381,7 +398,7 @@ def main():
                     df_1m=df_1m,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=2
+                    n_trails=10
                 )
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)

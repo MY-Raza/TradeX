@@ -34912,3 +34912,11 @@ Last 5 rows from data_binance.btc_1m:
 2026-03-06 10:03:39,827 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
 2026-03-06 10:03:39,862 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
 2026-03-06 10:03:41,193 | INFO | utils | Inserted 2135 rows into data_binance.link_1m
+2026-03-06 12:45:03,885 | INFO | utils | Database engine initialized
+2026-03-06 12:45:17,772 | INFO | utils | Table Found
+2026-03-06 13:07:37,765 | INFO | utils | Schema 'ml_features' ready
+2026-03-06 13:07:37,765 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-06 13:07:38,077 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-03-06 13:07:38,131 | INFO | utils | Schema 'model_stats' ready
+2026-03-06 13:07:38,131 | INFO | utils | No time_column provided and 'datetime' missing
+2026-03-06 13:07:38,172 | INFO | utils | Inserted 1 rows into model_stats.ml_results
