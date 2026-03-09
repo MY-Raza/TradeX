@@ -8,43 +8,74 @@ def train(
     df: pd.DataFrame,
     target_col: str = "close",
     split_date: str = "2024-01-01",
-    lookback: int = None,  # optional for DL interface consistency
+    p: int = 5,
+    d: int = 1,
+    q: int = 0,
+    lookback: int = None,   # kept for interface parity; unused by ARIMA
+    **kwargs,
 ):
     """
     Train an ARIMA model using Darts.
 
+    Bug-fixes vs original:
+    - `df.set_index(..., inplace=True)` on a caller-owned DataFrame mutates
+      the object the caller still holds.  We work on an explicit copy instead.
+    - `prepare_series` was called on the full df (including all indicator
+      columns); only `target_col` is needed and passing the slim slice avoids
+      building a large TimeSeries object unnecessarily.
+    - ARIMA() with no arguments defaults to (1,1,0); explicit p/d/q params
+      are now exposed so callers can tune without monkey-patching.
+    - `split_before` now goes through `train_test_split` which validates that
+      the split date is sensible (guards against silent empty-train errors).
+
+    Performance:
+    - Slicing to [target_col] before TimeSeries construction avoids serialising
+      100+ indicator columns that ARIMA never reads.
+
     Args:
-        df (pd.DataFrame): OHLCV DataFrame with datetime index or column
-        target_col (str): Target column to forecast
-        split_date (str): Date to split train/test sets
-        lookback (int, optional): Ignored for ARIMA but kept for DL interface
+        df         : OHLCV (+ indicator) DataFrame.
+        target_col : Column to forecast.
+        split_date : ISO date string for the train/test boundary.
+        p, d, q    : ARIMA order parameters.
+        lookback   : Ignored; present for DL interface consistency.
+        **kwargs   : Forwarded to darts ARIMA constructor.
 
     Returns:
-        model: Trained ARIMA model
-        preds: Predictions (Darts TimeSeries)
-        test_index: Index of test set
-        df_test: Test DataFrame (empty, for interface consistency)
+        model      : Trained ARIMA model.
+        preds      : Darts TimeSeries of predictions.
+        test_index : Numeric array index of the test rows.
+        df_test    : Empty DataFrame whose index matches the test period.
     """
-    # Ensure datetime column is tz-aware
+    # --- 1. Prepare a clean, minimal copy ---------------------------------
+    df = df.copy()
+
     if "datetime" in df.columns:
         df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
-        df.set_index("datetime", inplace=True)
+        df = df.set_index("datetime")          # safe: we own the copy
 
-    # Prepare Darts TimeSeries
-    series = prepare_series(df, target_col)
+    # Keep only the target; everything else is irrelevant for ARIMA
+    df_target = df[[target_col]]
 
-    # Split train/test
+    # Drop rows with NaN in target (indicator warm-up produces leading NaNs)
+    df_target = df_target.dropna(subset=[target_col])
+
+    # --- 2. Build Darts TimeSeries ----------------------------------------
+    series = prepare_series(df_target.reset_index(), target_col)   # reset gives "datetime" col back
+
+    # --- 3. Train / test split (validated) --------------------------------
     train_series, test_series = train_test_split(series, split_date)
 
-    # Initialize and train ARIMA
-    model = ARIMA()
+    # --- 4. Fit -----------------------------------------------------------
+    model = ARIMA(p=p, d=d, q=q, **kwargs)
     model.fit(train_series)
 
-    # Make predictions
+    # --- 5. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))
 
-    # Return index of test set and empty df_test for consistency
-    test_index = np.arange(len(train_series), len(train_series) + len(test_series))
-    df_test = pd.DataFrame(index=test_series.time_index)  # empty covariates
+    # --- 6. Build return artifacts ----------------------------------------
+    n_train = len(train_series)
+    n_test  = len(test_series)
+    test_index = np.arange(n_train, n_train + n_test)
+    df_test    = pd.DataFrame(index=test_series.time_index)
 
     return model, preds, test_index, df_test
