@@ -103,7 +103,10 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
     return stats_df
 
 
-def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5):
+import numpy as np
+import pandas as pd
+
+def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5, lookback=None, last_train_value=None):
     """
     Prepare a predictions DataFrame for backtesting.
     
@@ -113,49 +116,73 @@ def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5
         Original price DataFrame with 'datetime' column.
         
     preds : np.ndarray
-        Model predictions (classifier or regressor outputs)
+        Model predictions (classifier, regressor, or DL outputs)
         
     test_index : array-like
         Indices of the test set in df
         
     model_type : str
-        'classifier' or 'regressor'
+        'classifier', 'regressor', or 'dl'
         
     threshold : float or None
-        If None and model_type='regressor', automatically computed as k*std(preds)
+        Threshold for generating signals (used for regressor or DL)
         
     k : float
-        Multiplier for standard deviation when auto thresholding (default 0.5)
+        Multiplier for std-based threshold if threshold is None
+        
+    lookback : int
+        For DL models (like LSTM), the number of timesteps used in sequences
+        
+    last_train_value : float
+        Last training value used for inverse log-diff reconstruction (DL only)
         
     Returns
     -------
     pd.DataFrame
-        DataFrame with columns ['datetime', 'signals'] with -1, 0, 1 signals
+        DataFrame with columns ['datetime', 'signals'] (-1, 0, 1)
     """
     
     # Ensure datetime is UTC-aware
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
-
+    
     if model_type == "classifier":
-        # Convert probability into 3 trading zones
+        # Probabilities → trading signals
         upper = 0.55
         lower = 0.45
-
-        signals = np.where(preds > upper, 1,
-              np.where(preds < lower, -1, 0))
+        signals = np.where(preds > upper, 1, np.where(preds < lower, -1, 0))
 
     elif model_type == "regressor":
-        # Auto-compute threshold if not provided
+        # Continuous predictions → signals
         if threshold is None:
             threshold = k * np.std(preds)
-        # Convert continuous predictions into discrete signals
-        signals = np.where(preds > threshold, 1,
-                  np.where(preds < -threshold, -1, 0))
+        signals = np.where(preds > threshold, 1, np.where(preds < -threshold, -1, 0))
+
+    elif model_type == "dl":
+        # DL predictions → continuous series
+        if lookback is None:
+            raise ValueError("lookback must be provided for DL models")
         
+        # Align predictions with test_index
+        test_index_aligned = test_index[lookback:]
+        preds_aligned = preds[:len(test_index_aligned)]
+
+        # Compute error vs actual if df has close prices
+        if "close" in df.columns:
+            actual = df.loc[test_index_aligned, "close"].values
+            errors = preds_aligned - actual
+            if threshold is None:
+                threshold = k * np.std(errors)
+        else:
+            threshold = k * np.std(preds_aligned)
+
+        # Convert continuous predictions → discrete signals
+        signals = np.where(preds_aligned > threshold, 1,
+                           np.where(preds_aligned < -threshold, -1, 0))
+        test_index = test_index_aligned  # use aligned index for DL
 
     else:
-        raise ValueError("model_type must be 'classifier' or 'regressor'")
-
+        raise ValueError("model_type must be 'classifier', 'regressor', or 'dl'")
+    
     # Build prediction DataFrame
     df_predictions = pd.DataFrame({
         "datetime": df.loc[test_index, "datetime"].values,

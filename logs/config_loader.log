@@ -874,3 +874,11 @@ FileNotFoundError: Config file not found at: D:\trading\TradeX\strategy_generato
 2026-03-06 12:45:03,708 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
 2026-03-06 13:34:17,703 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\ml\config.yml
 2026-03-09 09:35:27,390 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=now | timehorizon=1h | path=D:\trading\TradeX\data\binance\config.yml
+2026-03-09 14:22:50,800 | ERROR | config_loader | Failed to load config.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\utils\common\config_loader.py", line 21, in read_config
+    raise FileNotFoundError(f"Config file not found at: {config_path}")
+FileNotFoundError: Config file not found at: D:\trading\TradeX\ai\dl\config_dl.yml
+2026-03-09 14:23:53,928 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\dl\config.yml
+2026-03-09 14:25:16,213 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\dl\config.yml
+2026-03-09 14:29:41,901 | INFO | config_loader | Configuration loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | start_date=2023-01-01 | end_date=2026-02-17 | timehorizon=1h | path=D:\trading\TradeX\ai\dl\config.yml

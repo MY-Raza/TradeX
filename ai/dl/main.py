@@ -240,16 +240,16 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
 # ----------------------------
 def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    dl_config_path = os.path.join(current_dir, "config_dl.yml")
+    dl_config_path = os.path.join(current_dir, "config.yml")
     config = read_config(dl_config_path)
 
     start_date = config.get("start_date")
     end_date = config.get("end_date")
     split_date = config.get("split_date")
-    symbols = config.get("symbols", ["btc"])
+    symbols = ["btc"]
     timehorizon = config.get("timehorizon", "1h")
     indicators_config = config.get("indicators", {})
-    dl_models_config = config.get("dl_models", {})
+    dl_models_config = config.get("forecasting_models", {})
 
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 

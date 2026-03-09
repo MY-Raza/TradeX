@@ -1,0 +1,23 @@
+2026-03-09 14:23:53,928 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-09 14:23:53,928 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 14:24:10,105 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 14:24:10,322 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-09 14:24:10,322 | INFO | dl_model_main | Fetching data for eth from database...
+2026-03-09 14:25:16,213 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-09 14:25:16,213 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 14:25:27,674 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 14:25:27,867 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-09 14:29:41,901 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-09 14:29:41,901 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 14:29:57,249 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 14:29:57,408 | INFO | dl_model_main | Training DL model: LSTM for btc
+2026-03-09 14:29:57,410 | ERROR | dl_model_main | DL model LSTM failed for btc: Unknown DL model: LSTM
+2026-03-09 14:29:57,410 | INFO | dl_model_main | Training DL model: ARIMA for btc
+2026-03-09 14:29:57,410 | ERROR | dl_model_main | DL model ARIMA failed for btc: Unknown DL model: ARIMA
+2026-03-09 14:29:57,412 | INFO | dl_model_main | Training DL model: VARIMA for btc
+2026-03-09 14:29:57,412 | ERROR | dl_model_main | DL model VARIMA failed for btc: Unknown DL model: VARIMA
+2026-03-09 14:29:57,412 | INFO | dl_model_main | Training DL model: NBEATS for btc
+2026-03-09 14:29:57,412 | ERROR | dl_model_main | DL model NBEATS failed for btc: Unknown DL model: NBEATS
+2026-03-09 14:29:57,412 | INFO | dl_model_main | Training DL model: TRANSFORMER for btc
+2026-03-09 14:29:57,414 | ERROR | dl_model_main | DL model TRANSFORMER failed for btc: Unknown DL model: TRANSFORMER
+2026-03-09 14:29:57,414 | INFO | dl_model_main | DL model training complete for btc.

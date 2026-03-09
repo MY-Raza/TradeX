@@ -10,7 +10,6 @@ from TradeX.ai.dl.models.arima import train as train_arima
 from TradeX.ai.dl.models.varima import train as train_varima
 from TradeX.ai.dl.models.nbeats import train as train_nbeats
 from TradeX.ai.dl.models.transformer import train as train_transformer
-
 logger = get_logger("dl_model_trainer")
 
 # ----------------------------
