@@ -39,3 +39,21 @@
 2026-03-09 14:42:14,333 | INFO | dl_model_main | Training DL model: arima for btc
 2026-03-09 14:42:17,972 | ERROR | dl_model_main | DL model arima failed for btc: lookback must be provided for DL models
 2026-03-09 14:42:17,972 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-09 14:57:19,340 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-09 14:57:19,340 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 14:57:34,370 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 14:57:34,585 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-09 14:57:34,585 | ERROR | dl_model_main | DL model arima failed for btc: train() got an unexpected keyword argument 'epochs'
+2026-03-09 14:57:34,585 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-09 14:57:35,051 | ERROR | dl_model_main | DL model varima failed for btc: VARIMA.__init__() got an unexpected keyword argument 'epochs'
+2026-03-09 14:57:35,051 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-09 14:57:35,063 | ERROR | dl_model_main | DL model nbeats failed for btc: 'datetime'
+2026-03-09 14:57:35,063 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-09 14:57:35,065 | ERROR | dl_model_main | DL model transformer failed for btc: 'datetime'
+2026-03-09 14:57:35,066 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-09 15:00:43,984 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-09 15:00:43,984 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 15:00:57,275 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 15:00:57,464 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-09 15:00:57,478 | ERROR | dl_model_main | DL model arima failed for btc: 'datetime'
+2026-03-09 15:00:57,478 | INFO | dl_model_main | Training DL model: varima for btc

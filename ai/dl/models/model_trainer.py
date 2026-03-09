@@ -61,8 +61,9 @@ def train_model(model_type: str, model_name: str, df: pd.DataFrame, df_1m: pd.Da
     # Only pass lookback to models that need it
     if model_name not in ["arima", "varima"] and lookback is not None:
         trainer_kwargs["lookback"] = lookback
-    trainer_kwargs["epochs"] = epochs
-    trainer_kwargs["batch_size"] = batch_size
+        trainer_kwargs["epochs"] = epochs
+        trainer_kwargs["batch_size"] = batch_size
+    
 
     try:
         model, preds, test_index, df_test = trainer(
