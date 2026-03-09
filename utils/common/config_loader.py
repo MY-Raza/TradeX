@@ -41,6 +41,25 @@ def read_config(config_path: str) -> dict:
         xgboost_classifier_params = config.get("xgboost_classifier_params", {})
         xgboost_regressor_params = config.get("xgboost_regressor_params", {})
 
+        # =========================
+        # Forecasting Models
+        # =========================
+
+        forecasting_models = config.get("forecasting_models", {})
+
+        # Model parameters
+        arima_params = config.get("arima_params", {})
+        varima_params = config.get("varima_params", {})
+        nbeats_params = config.get("nbeats_params", {})
+        transformer_params = config.get("transformer_params", {})
+
+        # =========================
+        # Training Settings
+        # =========================
+
+        training = config.get("training", {})
+        covariates = config.get("covariates", {})
+
         if not symbols:
             raise ValueError("Config must include 'symbols'")
 
@@ -60,7 +79,20 @@ def read_config(config_path: str) -> dict:
             "indicators": indicators,
             "xgboost_classifier_params": xgboost_classifier_params,
             "xgboost_regressor_params": xgboost_regressor_params,
-            "split_date":split_date
+            "split_date":split_date,
+            # models
+            "forecasting_models": forecasting_models,
+
+            # model params
+            "arima_params": arima_params,
+            "varima_params": varima_params,
+            "nbeats_params": nbeats_params,
+            "transformer_params": transformer_params,
+
+            # training
+            "training": training,
+            "covariates": covariates,
+
         }
 
     except Exception:
