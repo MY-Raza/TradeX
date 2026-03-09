@@ -21,3 +21,21 @@
 2026-03-09 14:29:57,412 | INFO | dl_model_main | Training DL model: TRANSFORMER for btc
 2026-03-09 14:29:57,414 | ERROR | dl_model_main | DL model TRANSFORMER failed for btc: Unknown DL model: TRANSFORMER
 2026-03-09 14:29:57,414 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-09 14:39:12,234 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-09 14:39:12,234 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 14:39:27,656 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 14:39:27,875 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-09 14:39:27,875 | ERROR | dl_model_main | DL model arima failed for btc: train() got an unexpected keyword argument 'lookback'
+2026-03-09 14:39:27,875 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-09 14:39:27,875 | ERROR | dl_model_main | DL model varima failed for btc: train() got an unexpected keyword argument 'lookback'
+2026-03-09 14:39:27,875 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-09 14:39:27,875 | ERROR | dl_model_main | DL model nbeats failed for btc: train() got an unexpected keyword argument 'lookback'
+2026-03-09 14:39:27,875 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-09 14:39:27,875 | ERROR | dl_model_main | DL model transformer failed for btc: train() got an unexpected keyword argument 'lookback'
+2026-03-09 14:39:27,875 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-09 14:42:01,026 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-09 14:42:01,026 | INFO | dl_model_main | Fetching data for btc from database...
+2026-03-09 14:42:14,088 | INFO | dl_model_main | Generating indicators for btc...
+2026-03-09 14:42:14,333 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-09 14:42:17,972 | ERROR | dl_model_main | DL model arima failed for btc: lookback must be provided for DL models
+2026-03-09 14:42:17,972 | INFO | dl_model_main | Training DL model: varima for btc
