@@ -1,0 +1,252 @@
+forecasting_models:
+
+  ARIMA: true
+  VARIMA: true
+  NBEATS: true
+  TRANSFORMER: true
+
+
+# =================================
+# Model Parameters
+# =================================
+
+arima_params:
+  p: 5
+  d: 1
+  q: 1
+
+
+varima_params:
+  p: 2
+  d: 1
+  q: 1
+
+
+nbeats_params:
+  input_chunk_length: 48
+  output_chunk_length: 1
+  n_epochs: 100
+  batch_size: 32
+  num_blocks: 4
+  num_layers: 4
+  layer_widths: 256
+  random_state: 42
+
+
+transformer_params:
+  input_chunk_length: 48
+  output_chunk_length: 1
+  d_model: 64
+  nhead: 4
+  num_encoder_layers: 3
+  num_decoder_layers: 3
+  dim_feedforward: 128
+  dropout: 0.1
+  batch_size: 32
+  n_epochs: 100
+  random_state: 42
+
+
+# =================================
+# Training Settings
+# =================================
+
+training:
+
+  use_gpu: true
+  num_workers: 4
+
+  early_stopping: true
+  patience: 10
+
+  validation_split: 0.2
+
+
+# =================================
+# Covariates
+# =================================
+
+covariates:
+
+  use_past_covariates: true
+  use_future_covariates: false
+
+indicators:
+
+  # =========================
+  # Overlap Studies
+  # =========================
+  BBANDS: true
+  DEMA: true
+  EMA: true
+  HT_TRENDLINE: true
+  KAMA: true
+  MA: true
+  MIDPOINT: true
+  MIDPRICE: true
+  SAR: true
+  SAREXT: true
+  SMA: true
+  T3: true
+  TEMA: true
+  TRIMA: true
+  WMA: true
+
+  # =========================
+  # Momentum Indicators
+  # =========================
+  ADX: true
+  ADXR: true
+  APO: true
+  AROON: true
+  AROONOSC: true
+  BOP: true
+  CCI: true
+  CMO: true
+  DX: true
+  MACD: true
+  MACDEXT: true
+  MFI: true
+  MINUS_DI: true
+  MINUS_DM: true
+  MOM: true
+  PLUS_DI: true
+  PLUS_DM: true
+  PPO: true
+  ROC: true
+  ROCP: true
+  ROCR: true
+  ROCR100: true
+  RSI: true
+  STOCH: true
+  STOCHF: true
+  STOCHRSI: true
+  TRIX: true
+  WILLR: true
+
+  # =========================
+  # Volume Indicators
+  # =========================
+  AD: true
+  ADOSC: true
+  OBV: true
+
+  # =========================
+  # Volatility Indicators
+  # =========================
+  ATR: true
+  NATR: true
+  TRANGE: true
+
+  # =========================
+  # Price Transform
+  # =========================
+  AVGPRICE: true
+  MEDPRICE: true
+  TYPPRICE: true
+  WCLPRICE: true
+
+  # =========================
+  # Cycle Indicators
+  # =========================
+  HT_DCPERIOD: true
+  HT_DCPHASE: true
+  HT_PHASOR: true
+  HT_SINE: true
+  HT_TRENDMODE: true
+
+  # =========================
+  # Statistic Indicators
+  # =========================
+  LINEARREG: true
+  LINEARREG_ANGLE: true
+  LINEARREG_INTERCEPT: true
+  LINEARREG_SLOPE: true
+  STDDEV: true
+  TSF: true
+  VAR: true
+
+  # =========================
+  # Candlestick Patterns
+  # =========================
+  CDLENGULFING: true
+  CDLHAMMER: true
+  CDLSHOOTINGSTAR: true
+  CDLDOJI: true
+  CDLMORNINGSTAR: true
+  CDLEVENINGSTAR: true
+
+  # Most patterns disabled by default
+  CDL2CROWS: true
+  CDL3BLACKCROWS: true
+  CDL3INSIDE: true
+  CDL3LINESTRIKE: true
+  CDL3OUTSIDE: true
+  CDL3STARSINSOUTH: true
+  CDL3WHITESOLDIERS: true
+  CDLABANDONEDBABY: true
+  CDLADVANCEBLOCK: true
+  CDLBELTHOLD: true
+  CDLBREAKAWAY: true
+  CDLCLOSINGMARUBOZU: true
+  CDLCONCEALBABYSWALL: true
+  CDLCOUNTERATTACK: true
+  CDLDARKCLOUDCOVER: true
+  CDLDOJISTAR: true
+  CDLDRAGONFLYDOJI: true
+  CDLEVENINGDOJISTAR: true
+  CDLGAPSIDESIDEWHITE: true
+  CDLGRAVESTONEDOJI: true
+  CDLHANGINGMAN: true
+  CDLHARAMI: true
+  CDLHARAMICROSS: true
+  CDLHIGHWAVE: true
+  CDLHIKKAKE: true
+  CDLHIKKAKEMOD: true
+  CDLHOMINGPIGEON: true
+  CDLIDENTICAL3CROWS: true
+  CDLINNECK: true
+  CDLINVERTEDHAMMER: true
+  CDLKICKING: true
+  CDLKICKINGBYLENGTH: true
+  CDLLADDERBOTTOM: true
+  CDLLONGLEGGEDDOJI: true
+  CDLLONGLINE: true
+  CDLMARUBOZU: true
+  CDLMATCHINGLOW: true
+  CDLMATHOLD: true
+  CDLMORNINGDOJISTAR: true
+  CDLONNECK: true
+  CDLPIERCING: true
+  CDLRICKSHAWMAN: true
+  CDLRISEFALL3METHODS: true
+  CDLSEPARATINGLINES: true
+  CDLSHORTLINE: true
+  CDLSPINNINGTOP: true
+  CDLSTALLEDPATTERN: true
+  CDLSTICKSANDWICH: true
+  CDLTAKURI: true
+  CDLTASUKIGAP: true
+  CDLTHRUSTING: true
+  CDLTRISTAR: true
+  CDLUNIQUE3RIVER: true
+  CDLUPSIDEGAP2CROWS: true
+  CDLXSIDEGAP3METHODS: true
+
+symbols:
+  - btc
+  - eth
+  - bnb
+  - ada
+  - xrp
+  - doge
+  - sol
+  - dot
+  - matic
+  - link
+
+start_date: '2023-01-01' 
+end_date: '2026-02-17'
+split_date: '2025-07-01'
+
+timehorizon: "1h"
