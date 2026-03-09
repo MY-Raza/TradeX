@@ -34922,3 +34922,16 @@ Last 5 rows from data_binance.btc_1m:
 2026-03-06 13:07:38,172 | INFO | utils | Inserted 1 rows into model_stats.ml_results
 2026-03-06 13:34:17,832 | INFO | utils | Database engine initialized
 2026-03-06 13:34:30,990 | INFO | utils | Table Found
+2026-03-09 09:35:27,585 | INFO | utils | Database engine initialized
+2026-03-09 09:37:13,349 | INFO | utils | Schema 'data_binance' ready
+2026-03-09 09:37:13,415 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-03-09 09:37:13,420 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-03-09 09:37:14,807 | INFO | utils | Inserted 4301 rows into data_binance.btc_1m
+2026-03-09 09:39:00,226 | INFO | utils | Schema 'data_binance' ready
+2026-03-09 09:39:00,265 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-03-09 09:39:00,265 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-03-09 09:39:01,615 | INFO | utils | Inserted 4302 rows into data_binance.eth_1m
+2026-03-09 09:58:52,352 | INFO | utils | Schema 'data_binance' ready
+2026-03-09 09:58:59,687 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-03-09 09:58:59,788 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-03-09 09:59:27,818 | INFO | utils | Inserted 4303 rows into data_binance.bnb_1m
