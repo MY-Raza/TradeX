@@ -59,7 +59,10 @@ def train(
     df = df.copy()
 
     if "datetime" in df.columns:
-        df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
+        df["datetime"] = (
+            pd.to_datetime(df["datetime"], utc=True)
+            .dt.tz_localize(None)   # strip tz → tz-naive UTC (Darts requirement)
+        )
         df = df.set_index("datetime")
 
     # Validate requested columns exist
@@ -77,7 +80,6 @@ def train(
 
     # --- 3. Train / test split (validated) --------------------------------
     train_series, test_series = train_test_split(series, split_date)
-
     # --- 4. Fit -----------------------------------------------------------
     model = VARIMA(p=p, d=d, q=q, **kwargs)
     model.fit(train_series)

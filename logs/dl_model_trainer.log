@@ -3,3 +3,7 @@
 2026-03-09 14:57:35,051 | ERROR | dl_model_trainer | Training failed for DL model nbeats: 'datetime'
 2026-03-09 14:57:35,065 | ERROR | dl_model_trainer | Training failed for DL model transformer: 'datetime'
 2026-03-09 15:00:57,477 | ERROR | dl_model_trainer | Training failed for DL model arima: 'datetime'
+2026-03-09 15:32:00,515 | ERROR | dl_model_trainer | Training failed for DL model 'arima': Cannot compare tz-naive and tz-aware timestamps
+2026-03-09 15:32:00,573 | ERROR | dl_model_trainer | Training failed for DL model 'varima': Cannot compare tz-naive and tz-aware timestamps
+2026-03-09 15:32:00,648 | ERROR | dl_model_trainer | Training failed for DL model 'nbeats': Cannot compare tz-naive and tz-aware timestamps
+2026-03-09 15:32:00,711 | ERROR | dl_model_trainer | Training failed for DL model 'transformer': Cannot compare tz-naive and tz-aware timestamps

@@ -50,8 +50,11 @@ def train(
     df = df.copy()
 
     if "datetime" in df.columns:
-        df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
-        df = df.set_index("datetime")          # safe: we own the copy
+        df["datetime"] = (
+            pd.to_datetime(df["datetime"], utc=True)
+            .dt.tz_localize(None)   # strip tz → tz-naive UTC (Darts requirement)
+        )
+        df = df.set_index("datetime")
 
     # Keep only the target; everything else is irrelevant for ARIMA
     df_target = df[[target_col]]
@@ -60,7 +63,8 @@ def train(
     df_target = df_target.dropna(subset=[target_col])
 
     # --- 2. Build Darts TimeSeries ----------------------------------------
-    series = prepare_series(df_target.reset_index(), target_col)   # reset gives "datetime" col back
+    # reset_index() restores "datetime" as a plain tz-naive column; prepare_series handles it
+    series = prepare_series(df_target.reset_index(), target_col)
 
     # --- 3. Train / test split (validated) --------------------------------
     train_series, test_series = train_test_split(series, split_date)

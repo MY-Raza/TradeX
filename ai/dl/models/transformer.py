@@ -86,7 +86,10 @@ def train(
     df = df.copy()
 
     if "datetime" in df.columns:
-        df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
+        df["datetime"] = (
+            pd.to_datetime(df["datetime"], utc=True)
+            .dt.tz_localize(None)   # strip tz → tz-naive UTC (Darts requirement)
+        )
         df = df.set_index("datetime")
 
     if target_col not in df.columns:
