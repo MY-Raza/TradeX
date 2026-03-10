@@ -1,7 +1,33 @@
-from darts.models import ARIMA
-from TradeX.ai.dl.utils import prepare_series, train_test_split
-import pandas as pd
+"""
+arima.py — Univariate ARIMA trainer (Darts)
+=============================================
+Bug-fixes over original:
+
+1. `pd.to_datetime(..., utc=True).dt.tz_localize(None)` raises TypeError when
+   the Series is already tz-aware (tz_localize cannot re-localize).  Fixed by
+   using tz_convert → tz_localize(None) pattern (same as utils.py).
+
+2. `dropna(subset=[target_col])` only works when target_col is a column, not
+   when it's the index.  Since we set the index *before* calling dropna, the
+   target is in df_target as a column (because we slice df[[target_col]]),
+   so the original was fine — but we add an explicit `.dropna()` call on the
+   single-column frame for clarity.
+
+3. No minimum-length guard: if the series has fewer rows than the ARIMA
+   order, Darts raises an opaque statsmodels error.  Added an early check.
+
+Performance:
+- Raw arrays are never constructed; ARIMA only needs the Darts TimeSeries.
+- df_target is sliced to a single column before index construction.
+"""
+
+from __future__ import annotations
+
 import numpy as np
+import pandas as pd
+from darts.models import ARIMA
+
+from TradeX.ai.dl.utils import prepare_series, train_test_split
 
 
 def train(
@@ -11,74 +37,78 @@ def train(
     p: int = 5,
     d: int = 1,
     q: int = 0,
-    lookback: int = None,   # kept for interface parity; unused by ARIMA
+    lookback: int = None,   # interface-parity only; unused by ARIMA
     **kwargs,
-):
+) -> tuple:
     """
-    Train an ARIMA model using Darts.
-
-    Bug-fixes vs original:
-    - `df.set_index(..., inplace=True)` on a caller-owned DataFrame mutates
-      the object the caller still holds.  We work on an explicit copy instead.
-    - `prepare_series` was called on the full df (including all indicator
-      columns); only `target_col` is needed and passing the slim slice avoids
-      building a large TimeSeries object unnecessarily.
-    - ARIMA() with no arguments defaults to (1,1,0); explicit p/d/q params
-      are now exposed so callers can tune without monkey-patching.
-    - `split_before` now goes through `train_test_split` which validates that
-      the split date is sensible (guards against silent empty-train errors).
-
-    Performance:
-    - Slicing to [target_col] before TimeSeries construction avoids serialising
-      100+ indicator columns that ARIMA never reads.
+    Train an ARIMA model and return (model, preds, test_index, df_test).
 
     Args:
         df         : OHLCV (+ indicator) DataFrame.
-        target_col : Column to forecast.
-        split_date : ISO date string for the train/test boundary.
+        target_col : Column to forecast (default 'close').
+        split_date : ISO date string for train/test boundary.
         p, d, q    : ARIMA order parameters.
-        lookback   : Ignored; present for DL interface consistency.
+        lookback   : Ignored; kept for DL interface parity.
         **kwargs   : Forwarded to darts ARIMA constructor.
 
     Returns:
         model      : Trained ARIMA model.
-        preds      : Darts TimeSeries of predictions.
-        test_index : Numeric array index of the test rows.
-        df_test    : Empty DataFrame whose index matches the test period.
+        preds      : Darts TimeSeries of in-sample predictions.
+        test_index : 1-D integer array indexing the test rows.
+        df_test    : Empty DataFrame indexed by the test period timestamps.
     """
-    # --- 1. Prepare a clean, minimal copy ---------------------------------
+    # --- 1. Validate inputs -----------------------------------------------
+    if target_col not in df.columns and "datetime" not in df.columns:
+        # Maybe target_col is the index — handled below; warn if genuinely missing
+        if target_col not in df.columns:
+            raise ValueError(
+                f"target_col '{target_col}' not found in DataFrame columns: "
+                f"{list(df.columns)}"
+            )
+
+    # --- 2. Prepare a clean, minimal copy ---------------------------------
     df = df.copy()
 
     if "datetime" in df.columns:
-        df["datetime"] = (
-            pd.to_datetime(df["datetime"], utc=True)
-            .dt.tz_localize(None)   # strip tz → tz-naive UTC (Darts requirement)
-        )
+        dt = pd.to_datetime(df["datetime"])
+        if dt.dt.tz is None:
+            dt = dt.dt.tz_localize("UTC")
+        df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
         df = df.set_index("datetime")
 
-    # Keep only the target; everything else is irrelevant for ARIMA
-    df_target = df[[target_col]]
+    if target_col not in df.columns:
+        raise ValueError(
+            f"target_col '{target_col}' not found after index reset. "
+            f"Available: {list(df.columns)}"
+        )
 
-    # Drop rows with NaN in target (indicator warm-up produces leading NaNs)
-    df_target = df_target.dropna(subset=[target_col])
+    # Keep only the target column; drop NaN warm-up rows
+    df_target = df[[target_col]].dropna()
 
-    # --- 2. Build Darts TimeSeries ----------------------------------------
-    # reset_index() restores "datetime" as a plain tz-naive column; prepare_series handles it
+    # --- 3. Minimum-length guard ------------------------------------------
+    min_rows = p + d + 1
+    if len(df_target) < min_rows:
+        raise ValueError(
+            f"ARIMA({p},{d},{q}): need at least {min_rows} rows, "
+            f"got {len(df_target)}."
+        )
+
+    # --- 4. Build Darts TimeSeries ----------------------------------------
     series = prepare_series(df_target.reset_index(), target_col)
 
-    # --- 3. Train / test split (validated) --------------------------------
+    # --- 5. Train / test split --------------------------------------------
     train_series, test_series = train_test_split(series, split_date)
 
-    # --- 4. Fit -----------------------------------------------------------
+    # --- 6. Fit -----------------------------------------------------------
     model = ARIMA(p=p, d=d, q=q, **kwargs)
     model.fit(train_series)
 
-    # --- 5. Predict -------------------------------------------------------
+    # --- 7. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))
 
-    # --- 6. Build return artifacts ----------------------------------------
-    n_train = len(train_series)
-    n_test  = len(test_series)
+    # --- 8. Return artifacts ----------------------------------------------
+    n_train    = len(train_series)
+    n_test     = len(test_series)
     test_index = np.arange(n_train, n_train + n_test)
     df_test    = pd.DataFrame(index=test_series.time_index)
 

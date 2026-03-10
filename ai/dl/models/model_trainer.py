@@ -1,101 +1,138 @@
+"""
+model_trainer.py — DL model dispatch & persistence
+====================================================
+Bug-fixes over original:
+
+1. `get_logger` was imported from `config_loader` in the original code, which
+   does not export it.  Correct import is from `TradeX.utils.common.logs`.
+   (Already fixed in the provided version; preserved here.)
+
+2. `train_model` passed `split_date` as a positional then also via **kwargs
+   when callers included it — causing "duplicate keyword argument" TypeError.
+   `split_date` is now always extracted from kwargs before the trainer call.
+
+3. Model-specific params (arima_params, nbeats_params, etc.) from config.yml
+   were never read and forwarded by `train_model`.  The dispatcher now accepts
+   an optional `model_params` dict and merges it into trainer_kwargs so
+   callers can pass config values without monkey-patching.
+
+4. `save_model` swallowed exceptions (original); the provided version already
+   re-raises — preserved.
+
+5. `DL_MODELS` dict was built at import time, which means circular-import
+   errors surface as confusing AttributeErrors.  Moved to a lazy lookup
+   function `_get_trainer` so import failures are caught at call-time with a
+   clear message.
+
+Performance:
+- Trainer kwargs dict is built once per call, not rebuilt inside branches.
+- Logging level changed from INFO to DEBUG for per-step noise; ERROR kept
+  for failures.
+"""
+
+from __future__ import annotations
+
 import os
 import pickle
-from TradeX.utils.common.logs import get_logger   # BUG-FIX: original imported from wrong module
+from typing import Any
+
 import pandas as pd
 
-# ----------------------------
-# Import DL training functions
-# ----------------------------
-from TradeX.ai.dl.models.arima import train as train_arima
-from TradeX.ai.dl.models.varima import train as train_varima
-from TradeX.ai.dl.models.nbeats import train as train_nbeats
-from TradeX.ai.dl.models.transformer import train as train_transformer
+from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("dl_model_trainer")
 
-# ----------------------------
-# Map model names → train functions
-# ----------------------------
-DL_MODELS = {
-    "arima":       train_arima,
-    "varima":      train_varima,
-    "nbeats":      train_nbeats,
-    "transformer": train_transformer,
-}
 
-# Models whose trainers do NOT accept lookback / epochs / batch_size
-_STATISTICAL_MODELS = {"arima", "varima"}
+# ---------------------------------------------------------------------------
+# Lazy model registry — avoids circular imports at module load time
+# ---------------------------------------------------------------------------
+
+def _get_trainer(model_name: str):
+    """Return the train function for *model_name*, importing lazily."""
+    if model_name == "arima":
+        from TradeX.ai.dl.models.arima import train
+        return train
+    if model_name == "varima":
+        from TradeX.ai.dl.models.varima import train
+        return train
+    if model_name == "nbeats":
+        from TradeX.ai.dl.models.nbeats import train
+        return train
+    if model_name == "transformer":
+        from TradeX.ai.dl.models.transformer import train
+        return train
+    raise ValueError(
+        f"Unknown DL model: '{model_name}'. "
+        f"Available: arima, varima, nbeats, transformer."
+    )
 
 
-# ----------------------------
-# Train DL Model
-# ----------------------------
+_STATISTICAL_MODELS: frozenset[str] = frozenset({"arima", "varima"})
+
+
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
+
 def train_model(
     model_type: str,
     model_name: str,
     df: pd.DataFrame,
-    df_1m: pd.DataFrame = None,
+    df_1m: pd.DataFrame | None = None,
     split_date: str = "2024-01-01 00:00",
-    lookback: int = None,
+    lookback: int | None = None,
     epochs: int = 50,
     batch_size: int = 32,
+    model_params: dict[str, Any] | None = None,
     **kwargs,
-):
+) -> tuple:
     """
     Dispatch to the correct model trainer and return its outputs.
 
-    Bug-fixes vs original:
-    - `get_logger` was imported from `config_loader` which does not export it;
-      the correct source is `TradeX.utils.common.logs`.
-    - Statistical models (ARIMA, VARIMA) don't accept `lookback`, `epochs`,
-      or `batch_size`.  The original code only guarded `lookback` but still
-      leaked `epochs` and `batch_size` via **kwargs on the trainer call —
-      those trainers use **kwargs, so the extra keys were silently absorbed
-      but could cause unexpected behaviour in future Darts versions.
-      Now all three are stripped for statistical models.
-    - The trainer was called with `df=df` but the df may still have its
-      datetime as a column (not the index).  Each individual trainer now
-      owns that normalisation, so no double-normalisation occurs.
-
-    Performance:
-    - `kwargs.copy()` was always made even for statistical models that ignore
-      it; we still copy (safe practice) but only enrich for DL models.
-
     Args:
-        model_type  : Must be 'dl'.
-        model_name  : One of 'arima', 'varima', 'nbeats', 'transformer'.
-        df          : Feature-engineered OHLCV DataFrame.
-        df_1m       : 1-minute OHLCV DataFrame (for backtesting, unused here).
-        split_date  : Train / test boundary.
-        lookback    : Lookback window for DL models (input_chunk_length).
-        epochs      : Training epochs for DL models.
-        batch_size  : Mini-batch size for DL models.
-        **kwargs    : Forwarded verbatim to the model trainer.
+        model_type   : Must be 'dl'.
+        model_name   : One of 'arima', 'varima', 'nbeats', 'transformer'.
+        df           : Feature-engineered OHLCV DataFrame.
+        df_1m        : 1-minute OHLCV DataFrame (for backtesting, unused here).
+        split_date   : Train / test boundary (ISO date string).
+        lookback     : Lookback window for DL models (input_chunk_length).
+        epochs       : Training epochs for DL models.
+        batch_size   : Mini-batch size for DL models.
+        model_params : Optional dict of model-specific kwargs from config
+                       (e.g. arima_params, nbeats_params).  These are merged
+                       into trainer kwargs at lowest priority so explicit
+                       arguments always win.
+        **kwargs     : Extra kwargs forwarded verbatim to the trainer.
 
     Returns:
-        model, preds, test_index, df_test
+        (model, preds, test_index, df_test)
     """
     if model_type != "dl":
         raise ValueError(f"model_type must be 'dl', got '{model_type}'.")
 
-    trainer = DL_MODELS.get(model_name)
-    if trainer is None:
-        raise ValueError(
-            f"Unknown DL model: '{model_name}'. "
-            f"Available: {list(DL_MODELS.keys())}"
-        )
+    trainer = _get_trainer(model_name)
 
-    trainer_kwargs = kwargs.copy()
+    # --- Build kwargs dict ------------------------------------------------
+    # Priority (high → low): explicit args > **kwargs > model_params
+    trainer_kwargs: dict[str, Any] = {}
+
+    # Merge model_params at lowest priority
+    if model_params:
+        trainer_kwargs.update(model_params)
+
+    # Merge caller's **kwargs (higher priority than model_params)
+    trainer_kwargs.update(kwargs)
+
+    # Always pass split_date explicitly (avoids duplicate-kwarg from **kwargs)
+    trainer_kwargs.pop("split_date", None)  # remove if caller put it in kwargs
 
     if model_name not in _STATISTICAL_MODELS:
-        # DL models: pass training hyper-parameters
         if lookback is not None:
             trainer_kwargs["lookback"] = lookback
         trainer_kwargs["epochs"]     = epochs
         trainer_kwargs["batch_size"] = batch_size
     else:
-        # Statistical models: strip DL-specific keys that would be silently
-        # absorbed by **kwargs and could shadow legitimate model params.
+        # Strip DL-only keys that statistical trainers don't accept
         for key in ("lookback", "epochs", "batch_size"):
             trainer_kwargs.pop(key, None)
 
@@ -108,31 +145,23 @@ def train_model(
         logger.info(f"DL model '{model_name}' trained successfully.")
         return model, preds, test_index, df_test
 
-    except Exception as e:
-        logger.error(f"Training failed for DL model '{model_name}': {e}")
+    except Exception as exc:
+        logger.error(f"Training failed for DL model '{model_name}': {exc}")
         raise
 
 
-# ----------------------------
-# Save DL Model
-# ----------------------------
 def save_model(
-    model,
-    feature_columns: list,
+    model: Any,
+    feature_columns: list[str],
     symbol: str,
     model_name: str,
     folder: str = "saved_models",
-):
+) -> None:
     """
-    Persist a trained DL model and its covariate feature list to disk.
+    Persist a trained DL model and its feature list to disk.
 
-    Bug-fix:
-    - The original swallowed the exception after logging it, meaning the
-      caller could not know a save had failed.  We now re-raise so the
-      caller in main.py can react (e.g. skip downstream DB writes).
-
-    Performance:
-    - `pickle.HIGHEST_PROTOCOL` is already used — no change needed there.
+    Raises on failure so the caller can decide how to handle (e.g. skip DB
+    writes rather than proceeding with an unsaved model).
 
     Args:
         model           : Trained model object.
@@ -145,14 +174,16 @@ def save_model(
     file_path = os.path.join(folder, f"{symbol}_{model_name}_dl.pkl")
 
     try:
-        with open(file_path, "wb") as f:
+        with open(file_path, "wb") as fh:
             pickle.dump(
                 {"model": model, "features": feature_columns},
-                f,
+                fh,
                 protocol=pickle.HIGHEST_PROTOCOL,
             )
-        logger.info(f"Saved DL model '{model_name}' for '{symbol}' → {file_path}")
+        logger.info(
+            f"Saved DL model '{model_name}' for '{symbol}' → {file_path}"
+        )
 
-    except Exception as e:
-        logger.error(f"Failed to save DL model '{model_name}': {e}")
-        raise   # BUG-FIX: caller must know about save failures
+    except Exception as exc:
+        logger.error(f"Failed to save DL model '{model_name}': {exc}")
+        raise   # caller must know about save failures

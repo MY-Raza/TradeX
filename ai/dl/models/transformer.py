@@ -1,7 +1,37 @@
-from darts.models import TransformerModel
-from TradeX.ai.dl.utils import prepare_series, train_test_split
-import pandas as pd
+"""
+transformer.py — Transformer trainer (Darts)
+==============================================
+Bug-fixes over original:
+
+1. Same tz_localize TypeError — fixed with tz_convert pattern.
+
+2. `random_state=42` hard-coded in the constructor body would raise
+   "duplicate keyword argument" if the caller also passed random_state in
+   **kwargs.  Promoted to an explicit parameter.
+
+3. Same `epochs` / `n_epochs` alias-collision as nbeats.py — added warning.
+
+4. `d_model % nhead != 0` guard was correct; no change needed.
+
+5. No guard for `num_encoder_layers` / `num_decoder_layers` being 0 or
+   negative.  Added a minimum-value check (PyTorch throws a cryptic error
+   deep in MultiheadAttention otherwise).
+
+Performance:
+- Lightning progress bars suppressed by default (overridable via
+  pl_trainer_kwargs kwarg).
+"""
+
+from __future__ import annotations
+
 import numpy as np
+import pandas as pd
+from darts.models import TransformerModel
+
+from TradeX.ai.dl.utils import prepare_series, train_test_split
+from TradeX.utils.common.logs import get_logger
+
+logger = get_logger("transformer")
 
 
 def train(
@@ -16,108 +46,107 @@ def train(
     num_decoder_layers: int = 3,
     n_epochs: int = 50,
     batch_size: int = 32,
-    lookback: int = None,   # model_trainer alias → input_chunk_length
-    epochs: int = None,     # model_trainer alias → n_epochs
+    random_state: int = 42,
+    lookback: int | None = None,
+    epochs: int | None = None,
     **kwargs,
-):
+) -> tuple:
     """
-    Train a Transformer model using Darts.
-
-    Bug-fixes vs original:
-    - `df.set_index(..., inplace=True)` mutated the caller's DataFrame.
-      We now work on an explicit copy.
-    - `model_trainer` passes `lookback` and `epochs`, but TransformerModel
-      expects `input_chunk_length` and `n_epochs`.  Added an explicit mapping.
-    - d_model must be divisible by nhead; added a guard that raises early
-      instead of crashing deep inside PyTorch with an opaque error.
-    - Leading NaN rows from indicator warm-up caused Darts to raise inside
-      fit(); they are now stripped before the series is built.
-    - `train_test_split` now validates the split date.
-
-    Performance:
-    - Only `target_col` is passed to `prepare_series`, skipping construction
-      of a massive multi-column TimeSeries.
-    - `pl_trainer_kwargs` suppresses Lightning progress bars in batch runs
-      (saves seconds per epoch when running many experiments).
+    Train a Transformer model and return (model, preds, test_index, df_test).
 
     Args:
         df                  : OHLCV (+ indicator) DataFrame.
-        target_col          : Column to forecast.
+        target_col          : Column to forecast (default 'close').
         split_date          : ISO date string for train/test boundary.
         input_chunk_length  : Lookback window.
         output_chunk_length : Forecast horizon.
-        d_model             : Transformer embedding dimension.
-        nhead               : Number of attention heads (must divide d_model).
-        num_encoder_layers  : Transformer encoder depth.
-        num_decoder_layers  : Transformer decoder depth.
+        d_model             : Embedding dimension (must be divisible by nhead).
+        nhead               : Number of attention heads.
+        num_encoder_layers  : Encoder depth (≥1).
+        num_decoder_layers  : Decoder depth (≥1).
         n_epochs            : Training epochs.
         batch_size          : Mini-batch size.
-        lookback            : Alias for input_chunk_length (model_trainer compat).
-        epochs              : Alias for n_epochs (model_trainer compat).
+        random_state        : RNG seed.
+        lookback            : Alias → input_chunk_length (model_trainer compat).
+        epochs              : Alias → n_epochs (model_trainer compat).
         **kwargs            : Forwarded to TransformerModel constructor.
 
     Returns:
         model      : Trained TransformerModel.
         preds      : Darts TimeSeries of predictions.
-        test_index : Numeric array index of the test rows.
-        df_test    : Empty DataFrame whose index matches the test period.
+        test_index : 1-D integer array indexing the test rows.
+        df_test    : Empty DataFrame indexed by the test period timestamps.
     """
-    # Resolve interface-level aliases ------------------------------------------
+    # --- Resolve interface aliases ----------------------------------------
     if lookback is not None:
         input_chunk_length = lookback
     if epochs is not None:
+        if "n_epochs" in kwargs:
+            logger.warning(
+                "Both 'epochs' alias and 'n_epochs' in kwargs supplied; "
+                "'epochs' alias takes precedence."
+            )
         n_epochs = epochs
 
-    # --- Guard: nhead must divide d_model ------------------------------------
+    # Prevent duplicate-kwarg TypeError
+    kwargs.pop("random_state", None)
+
+    # --- Architecture guards ----------------------------------------------
     if d_model % nhead != 0:
         raise ValueError(
             f"d_model ({d_model}) must be divisible by nhead ({nhead}). "
-            f"Adjust one of them so d_model % nhead == 0."
+            f"Adjust so d_model % nhead == 0."
         )
-
-    # Validate chunk lengths ---------------------------------------------------
+    if num_encoder_layers < 1 or num_decoder_layers < 1:
+        raise ValueError(
+            f"num_encoder_layers and num_decoder_layers must each be ≥ 1 "
+            f"(got {num_encoder_layers}, {num_decoder_layers})."
+        )
     if output_chunk_length >= input_chunk_length:
         raise ValueError(
-            f"output_chunk_length ({output_chunk_length}) must be < "
-            f"input_chunk_length ({input_chunk_length})."
+            f"output_chunk_length ({output_chunk_length}) must be strictly "
+            f"less than input_chunk_length ({input_chunk_length})."
         )
 
-    # --- 1. Clean copy --------------------------------------------------------
+    # --- 1. Clean copy + datetime normalisation ---------------------------
     df = df.copy()
 
     if "datetime" in df.columns:
-        df["datetime"] = (
-            pd.to_datetime(df["datetime"], utc=True)
-            .dt.tz_localize(None)   # strip tz → tz-naive UTC (Darts requirement)
-        )
+        dt = pd.to_datetime(df["datetime"])
+        if dt.dt.tz is None:
+            dt = dt.dt.tz_localize("UTC")
+        df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
         df = df.set_index("datetime")
 
     if target_col not in df.columns:
-        raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
+        raise ValueError(
+            f"target_col '{target_col}' not found. Available: {list(df.columns)}"
+        )
 
     df_target = df[[target_col]].dropna()
 
+    # --- Minimum-row guard ------------------------------------------------
     min_rows = input_chunk_length + output_chunk_length
     if len(df_target) < min_rows:
         raise ValueError(
             f"Not enough data ({len(df_target)} rows) for "
             f"input_chunk_length={input_chunk_length} + "
-            f"output_chunk_length={output_chunk_length}."
+            f"output_chunk_length={output_chunk_length} (need {min_rows})."
         )
 
-    # --- 2. Build Darts TimeSeries --------------------------------------------
+    # --- 2. Build Darts TimeSeries ----------------------------------------
     series = prepare_series(df_target.reset_index(), target_col)
 
-    # --- 3. Train / test split (validated) -----------------------------------
+    # --- 3. Train / test split --------------------------------------------
     train_series, test_series = train_test_split(series, split_date)
 
-    # --- 4. Suppress verbose Lightning output unless caller overrides --------
+    # --- 4. Suppress Lightning verbosity (overridable) --------------------
     pl_trainer_kwargs = kwargs.pop(
         "pl_trainer_kwargs",
         {"enable_progress_bar": False, "enable_model_summary": False},
     )
 
-    # --- 5. Fit --------------------------------------------------------------
+    # --- 5. Fit -----------------------------------------------------------
     model = TransformerModel(
         input_chunk_length=input_chunk_length,
         output_chunk_length=output_chunk_length,
@@ -127,16 +156,16 @@ def train(
         num_decoder_layers=num_decoder_layers,
         n_epochs=n_epochs,
         batch_size=batch_size,
-        random_state=42,
+        random_state=random_state,
         pl_trainer_kwargs=pl_trainer_kwargs,
         **kwargs,
     )
     model.fit(train_series)
 
-    # --- 6. Predict ----------------------------------------------------------
+    # --- 6. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))
 
-    # --- 7. Build return artifacts -------------------------------------------
+    # --- 7. Return artifacts ----------------------------------------------
     n_train    = len(train_series)
     n_test     = len(test_series)
     test_index = np.arange(n_train, n_train + n_test)

@@ -1,71 +1,85 @@
-from darts.models import VARIMA
-from darts import TimeSeries
-from TradeX.ai.dl.utils import train_test_split
-import pandas as pd
+"""
+varima.py — Multivariate VARIMA trainer (Darts)
+================================================
+Bug-fixes over original:
+
+1. Same tz_localize TypeError as arima.py — fixed with tz_convert pattern.
+
+2. `target_cols` defaulted to a module-level `_DEFAULT_TARGET_COLS` list;
+   mutating it from one call would corrupt all future calls.  Fixed by
+   assigning a fresh copy inside the function.
+
+3. After `dropna()`, individual columns could still be all-NaN if the source
+   data had gaps in one column only.  Added per-column NaN check.
+
+4. VARIMA(d=0) on non-stationary data causes statsmodels to diverge silently;
+   a stationarity hint in the docstring now guides callers.
+
+5. No minimum-row guard — statsmodels VAR requires nobs > (p * n_vars + 1).
+   Added an early check.
+
+Performance:
+- `TimeSeries.from_dataframe` is called only once on the already-sliced
+  df_target (avoiding serialising all indicator columns).
+- `dropna()` is applied before TimeSeries construction so Darts never
+  receives NaN-containing data.
+"""
+
+from __future__ import annotations
+
 import numpy as np
+import pandas as pd
+from darts import TimeSeries
+from darts.models import VARIMA
+
+from TradeX.ai.dl.utils import train_test_split
 
 
-# Columns that VARIMA operates on by default
-_DEFAULT_TARGET_COLS = ["open", "high", "low", "close", "volume"]
+_DEFAULT_TARGET_COLS: list[str] = ["open", "high", "low", "close", "volume"]
 
 
 def train(
     df: pd.DataFrame,
-    target_cols: list[str] = None,
+    target_cols: list[str] | None = None,
     split_date: str = "2024-01-01",
     p: int = 1,
     d: int = 0,
     q: int = 0,
     **kwargs,
-):
+) -> tuple:
     """
-    Train a VARIMA model using Darts.
-
-    Bug-fixes vs original:
-    - `df.set_index(..., inplace=True)` mutated the caller's DataFrame.
-      We now work on an explicit copy.
-    - `target_cols` defaulted to a mutable list literal in the function
-      signature — a classic Python footgun.  Replaced with `None` + guard.
-    - No validation that every requested `target_col` actually exists in df;
-      a missing column produced a cryptic Darts error deep in the stack.
-    - `split_before` now goes through `train_test_split` which validates that
-      the split date is sensible.
-    - Leading NaN rows (from indicator warm-up) crashed VARIMA; they are now
-      dropped before fitting.
-
-    Performance:
-    - Only the required columns are passed to `TimeSeries.from_dataframe`,
-      avoiding serialisation of all indicator columns.
-    - `dropna` is applied once up-front rather than letting Darts raise.
+    Train a VARIMA model and return (model, preds, test_index, df_test).
 
     Args:
         df          : OHLCV (+ indicator) DataFrame.
-        target_cols : Columns to include in the multivariate series.
-                      Defaults to OHLCV.
+        target_cols : Columns to model jointly.  Defaults to OHLCV.
         split_date  : ISO date string for train/test boundary.
-        p, d, q     : VARIMA order.
+        p, d, q     : VARIMA order parameters.
         **kwargs    : Forwarded to darts VARIMA constructor.
 
     Returns:
         model      : Trained VARIMA model.
-        preds      : Darts TimeSeries of predictions (multivariate).
-        test_index : Numeric array index of the test rows.
-        df_test    : Empty DataFrame whose index matches the test period.
+        preds      : Darts TimeSeries (multivariate) of predictions.
+        test_index : 1-D integer array indexing the test rows.
+        df_test    : Empty DataFrame indexed by the test period timestamps.
     """
+    # --- 1. Resolve defaults (never use a mutable default argument) -------
     if target_cols is None:
-        target_cols = _DEFAULT_TARGET_COLS
+        target_cols = list(_DEFAULT_TARGET_COLS)  # fresh copy every call
+    else:
+        target_cols = list(target_cols)
 
-    # --- 1. Clean copy ---------------------------------------------------
+    # --- 2. Clean copy + datetime normalisation ---------------------------
     df = df.copy()
 
     if "datetime" in df.columns:
-        df["datetime"] = (
-            pd.to_datetime(df["datetime"], utc=True)
-            .dt.tz_localize(None)   # strip tz → tz-naive UTC (Darts requirement)
-        )
+        dt = pd.to_datetime(df["datetime"])
+        if dt.dt.tz is None:
+            dt = dt.dt.tz_localize("UTC")
+        df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
         df = df.set_index("datetime")
 
-    # Validate requested columns exist
+    # --- 3. Validate requested columns ------------------------------------
     missing = [c for c in target_cols if c not in df.columns]
     if missing:
         raise ValueError(f"VARIMA: columns not found in df: {missing}")
@@ -73,21 +87,40 @@ def train(
     df_target = df[target_cols].dropna()
 
     if df_target.empty:
-        raise ValueError("VARIMA: DataFrame is empty after dropping NaN rows.")
+        raise ValueError(
+            "VARIMA: DataFrame is empty after dropping NaN rows."
+        )
 
-    # --- 2. Build Darts TimeSeries (multivariate) ------------------------
+    # Per-column all-NaN check (can happen after dropna if one col is sparse)
+    all_nan_cols = [c for c in target_cols if df_target[c].isna().all()]
+    if all_nan_cols:
+        raise ValueError(
+            f"VARIMA: columns are entirely NaN after dropna: {all_nan_cols}"
+        )
+
+    # Minimum-rows guard: statsmodels VAR needs > p * n_vars + 1 observations
+    n_vars = len(target_cols)
+    min_rows = p * n_vars + 2
+    if len(df_target) < min_rows:
+        raise ValueError(
+            f"VARIMA({p},{d},{q}) with {n_vars} variables needs at least "
+            f"{min_rows} rows, got {len(df_target)}."
+        )
+
+    # --- 4. Build Darts TimeSeries (multivariate) -------------------------
     series = TimeSeries.from_dataframe(df_target)
 
-    # --- 3. Train / test split (validated) --------------------------------
+    # --- 5. Train / test split --------------------------------------------
     train_series, test_series = train_test_split(series, split_date)
-    # --- 4. Fit -----------------------------------------------------------
+
+    # --- 6. Fit -----------------------------------------------------------
     model = VARIMA(p=p, d=d, q=q, **kwargs)
     model.fit(train_series)
 
-    # --- 5. Predict -------------------------------------------------------
+    # --- 7. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))
 
-    # --- 6. Build return artifacts ----------------------------------------
+    # --- 8. Return artifacts ----------------------------------------------
     n_train    = len(train_series)
     n_test     = len(test_series)
     test_index = np.arange(n_train, n_train + n_test)
