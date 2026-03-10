@@ -322,56 +322,13 @@ def main() -> None:
                 # on a permuted DataFrame, but Darts models don't accept a
                 # DataFrame -- they need a Darts TimeSeries. Skip permutation
                 # importance for Darts models and store a pnl-only placeholder.
-                _DARTS_MODELS = {"arima", "varima", "nbeats", "transformer"}
-                if model_name in _DARTS_MODELS:
-                    logger.info(
-                        f"Skipping pnl_permutation_importance for Darts model "
-                        f"'{model_name}' -- use covariate ablation instead."
-                    )
-                    pnl_importance_wide = pd.DataFrame(
-                        {"pnl": [pnl]}, index=["pnl_drop"]
-                    )
-                else:
-                    pnl_importance_df = pnl_permutation_importance(
-                        model=model,
-                        X_test=test_feature_df,
-                        df=df_gf,
-                        df_1m=df_1m,
-                        base_pnl=pnl,
-                        model_type="dl_darts",
-                        k=0.5,
-                        n_repeats=3,
-                    )
-                    if pnl_importance_df.empty:
-                        logger.warning(
-                            f"Empty importance results for {model_name}/{symbol}."
-                        )
-                        pnl_importance_wide = pd.DataFrame(
-                            {"pnl": [pnl]}, index=["pnl_drop"]
-                        )
-                    else:
-                        # set_index("feature").T gives 1 row ("pnl_drop"), N feature columns
-                        pnl_importance_wide = pnl_importance_df.set_index("feature").T
-                        pnl_importance_wide.insert(0, "pnl", pnl)
-
                 table_name_dl = f"{model_name}_dl_{timestamp}"
-                important_features_df = extract_important_features(
-                    pnl_importance_wide, table_name_dl
-                )
-                save_df_to_db(
-                    df=important_features_df,
-                    table_name="best_features",
-                    schema="ml_features",
-                    time_column=None,
-                    is_timeseries=False,
-                )
-
                 stats_df = compute_trade_statistics(ledger)
                 stats_df.insert(0, "pnl",        pnl)
                 stats_df.insert(0, "model_name", table_name_dl)
                 save_df_to_db(
                     df=stats_df,
-                    table_name="ml_results",
+                    table_name="dl_results",
                     schema="model_stats",
                     time_column=None,
                     is_timeseries=False,

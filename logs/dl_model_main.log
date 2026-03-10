@@ -96,3 +96,27 @@
 2026-03-10 10:51:58,486 | INFO | dl_model_main | Training DL model: arima for btc
 2026-03-10 10:53:13,908 | ERROR | dl_model_main | DL model arima failed for btc: lookback must be provided for DL models
 2026-03-10 10:53:13,911 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-10 11:08:08,857 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-10 11:08:08,857 | INFO | dl_model_main | Fetching data for btc …
+2026-03-10 11:08:22,432 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-10 11:08:22,674 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-10 11:08:48,145 | ERROR | dl_model_main | DL model arima failed for btc: 'pnl_drop'
+2026-03-10 11:08:48,145 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-10 11:23:25,918 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-10 11:23:25,918 | INFO | dl_model_main | Fetching data for btc …
+2026-03-10 11:23:35,170 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-10 11:23:35,287 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-10 11:23:55,858 | INFO | dl_model_main | Skipping pnl_permutation_importance for Darts model 'arima' -- use covariate ablation instead.
+2026-03-10 11:24:00,230 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-10 11:24:57,112 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-10 11:24:57,112 | INFO | dl_model_main | Fetching data for btc …
+2026-03-10 11:25:08,106 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-10 11:25:08,284 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-10 11:25:29,738 | INFO | dl_model_main | Skipping pnl_permutation_importance for Darts model 'arima' -- use covariate ablation instead.
+2026-03-10 11:25:31,090 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-10 11:26:10,087 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-10 11:26:10,087 | INFO | dl_model_main | Fetching data for btc …
+2026-03-10 11:26:21,365 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-10 11:26:21,494 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-10 11:26:38,566 | INFO | dl_model_main | Skipping pnl_permutation_importance for Darts model 'arima' -- use covariate ablation instead.
+2026-03-10 11:26:38,987 | INFO | dl_model_main | Training DL model: varima for btc
