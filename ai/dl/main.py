@@ -225,7 +225,7 @@ def main() -> None:
     start_date        = config.get("start_date")
     end_date          = config.get("end_date")
     split_date        = config.get("split_date")
-    symbols           = config.get("symbols", ["btc"])
+    symbols           = ["btc"]
     timehorizon       = config.get("timehorizon", "1h")
     indicators_config = config.get("indicators", {})
     dl_models_config  = config.get("forecasting_models", {})

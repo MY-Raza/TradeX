@@ -1,0 +1,3 @@
+2026-03-10 15:48:14,745 | INFO | transformer | Transformer CPU: 4 intraop threads | MKL=True
+2026-03-10 15:48:15,023 | INFO | transformer | Transformer rolling window: last 4320 rows (dropped 17567).
+2026-03-10 15:48:15,172 | INFO | transformer | TransformerModel | d_model=64 nhead=4 enc=3 dec=3 ffn=128 icl=24 epochs=50 batch=32 cores=4 | quant=True compile=True bf16=True

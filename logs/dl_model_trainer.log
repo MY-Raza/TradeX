@@ -35,3 +35,12 @@
 2026-03-10 12:55:31,029 | INFO | dl_model_trainer | Saved DL model 'varima' for 'btc' → saved_models\btc_varima_dl.pkl
 2026-03-10 13:30:27,183 | INFO | dl_model_trainer | DL model 'nbeats' trained successfully.
 2026-03-10 13:30:34,242 | INFO | dl_model_trainer | Saved DL model 'nbeats' for 'btc' → saved_models\btc_nbeats_dl.pkl
+2026-03-10 14:57:37,057 | INFO | dl_model_trainer | DL model 'arima' trained successfully.
+2026-03-10 14:57:43,897 | INFO | dl_model_trainer | Saved DL model 'arima' for 'btc' → saved_models\btc_arima_dl.pkl
+2026-03-10 14:59:07,998 | INFO | dl_model_trainer | DL model 'varima' trained successfully.
+2026-03-10 14:59:11,466 | INFO | dl_model_trainer | Saved DL model 'varima' for 'btc' → saved_models\btc_varima_dl.pkl
+2026-03-10 15:48:01,359 | INFO | dl_model_trainer | DL model 'nbeats' trained successfully.
+2026-03-10 15:48:14,159 | INFO | dl_model_trainer | Saved DL model 'nbeats' for 'btc' → saved_models\btc_nbeats_dl.pkl
+2026-03-10 15:48:15,622 | ERROR | dl_model_trainer | Training failed for DL model 'transformer': expected m1 and m2 to have the same dtype, but got: double != float
+2026-03-10 15:48:45,451 | INFO | dl_model_trainer | DL model 'arima' trained successfully.
+2026-03-10 15:48:53,272 | INFO | dl_model_trainer | Saved DL model 'arima' for 'eth' → saved_models\eth_arima_dl.pkl

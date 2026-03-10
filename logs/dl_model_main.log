@@ -149,3 +149,16 @@
 2026-03-10 12:53:59,009 | INFO | dl_model_main | Training DL model: varima for btc
 2026-03-10 12:55:31,029 | INFO | dl_model_main | Training DL model: nbeats for btc
 2026-03-10 13:30:34,242 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-10 14:56:40,579 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-10 14:56:40,579 | INFO | dl_model_main | Fetching data for btc …
+2026-03-10 14:57:02,151 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-10 14:57:02,293 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-10 14:57:43,899 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-10 14:59:11,466 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-10 15:48:14,167 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-10 15:48:15,622 | ERROR | dl_model_main | DL model transformer failed for btc: expected m1 and m2 to have the same dtype, but got: double != float
+2026-03-10 15:48:15,622 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-10 15:48:15,622 | INFO | dl_model_main | Fetching data for eth …
+2026-03-10 15:48:41,283 | INFO | dl_model_main | Generating indicators for eth …
+2026-03-10 15:48:41,770 | INFO | dl_model_main | Training DL model: arima for eth
+2026-03-10 15:48:53,272 | INFO | dl_model_main | Training DL model: varima for eth
