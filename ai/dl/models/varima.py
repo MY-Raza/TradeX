@@ -1,35 +1,3 @@
-"""
-varima.py — Multivariate VARIMA trainer (Darts)
-================================================
-Performance improvements over previous version:
-
-1. COPY SCOPE: `df.copy()` was copying the entire feature-engineered DataFrame
-   (100+ columns, years of hourly rows) before slicing to target_cols.
-   Now we slice FIRST, then copy only the 5-column target frame — ~20x less
-   memory allocated and copied.
-
-2. FREQ INFERENCE: `TimeSeries.from_dataframe()` without `freq` scans the
-   entire DatetimeIndex to infer frequency. We detect it once from the sliced
-   df_target and pass it explicitly, skipping the scan.
-
-3. DROPNA SCOPE: sort + dropna applied once on the small frame.
-
-4. VARIMA COLUMN COUNT: Each additional target column multiplies the number of
-   parameters to fit (p * n_vars^2 in the VAR component). fast=True drops
-   'volume' (typically non-stationary, adds noise) reducing 5->4 columns and
-   cutting parameter count by 36%.
-
-5. STATSMODELS TREND: Default trend='c' fits an intercept per variable. For
-   differenced (d>=1) series this is redundant. We default trend='n' when
-   d >= 1 and fast=True.
-
-Bug-fixes preserved:
-- tz_convert pattern (no tz_localize TypeError)
-- mutable default argument guard
-- per-column all-NaN check
-- minimum-row guard
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -154,6 +122,20 @@ def train(
     # --- 8. Fit -----------------------------------------------------------
     if fast and d >= 1 and "trend" not in kwargs:
         kwargs["trend"] = "n"   # no intercept needed after differencing
+
+    # Guard: VARMA(q>0) is non-identifiable in statsmodels — triggers the
+    # EstimationWarning and causes extremely slow / non-convergent fitting.
+    # VAR(p) with d differencing (q=0) is robust and fast; enforce it.
+    if q != 0:
+        import warnings
+        warnings.warn(
+            f"VARIMA: q={q} requested but VARMA(q>0) is non-identifiable "
+            f"(statsmodels EstimationWarning). Forcing q=0. "
+            f"Set q=0 in config.yml to suppress this warning.",
+            UserWarning,
+            stacklevel=2,
+        )
+        q = 0
 
     model = VARIMA(p=p, d=d, q=q, **kwargs)
     model.fit(train_series)
