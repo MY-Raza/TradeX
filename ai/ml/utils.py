@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pandas as pd
 import numpy as np
 from TradeX.backtest.backtest import BackTest
@@ -102,91 +103,148 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
 
     return stats_df
 
-
-import numpy as np
-import pandas as pd
-
-def prepare_predictions(df, preds, test_index, model_type, threshold=None, k=0.5, lookback=None, last_train_value=None):
+def prepare_predictions(
+    df,
+    preds,
+    test_index,
+    model_type: str,
+    threshold=None,
+    k: float = 0.5,
+    lookback: int | None = None,
+    last_train_value=None,
+) -> pd.DataFrame:
     """
     Prepare a predictions DataFrame for backtesting.
-    
+
     Parameters
     ----------
     df : pd.DataFrame
-        Original price DataFrame with 'datetime' column.
-        
-    preds : np.ndarray
-        Model predictions (classifier, regressor, or DL outputs)
-        
+        Original price DataFrame with a 'datetime' column or DatetimeIndex.
+    preds : np.ndarray | darts.TimeSeries
+        Model predictions.
     test_index : array-like
-        Indices of the test set in df
-        
+        Integer positions of the test rows in df.
     model_type : str
-        'classifier', 'regressor', or 'dl'
-        
+        ``'classifier'``, ``'regressor'``, ``'dl'`` (LSTM-style, requires
+        lookback), or ``'dl_darts'`` (Darts models — no lookback needed).
     threshold : float or None
-        Threshold for generating signals (used for regressor or DL)
-        
+        Signal threshold.  If None, derived as ``k * std(...)``.
     k : float
-        Multiplier for std-based threshold if threshold is None
-        
-    lookback : int
-        For DL models (like LSTM), the number of timesteps used in sequences
-        
-    last_train_value : float
-        Last training value used for inverse log-diff reconstruction (DL only)
-        
+        Std multiplier when threshold is None.
+    lookback : int or None
+        LSTM warm-up steps (only used for ``model_type='dl'``).
+    last_train_value : float or None
+        Last training value for inverse log-diff (reserved, unused here).
+
     Returns
     -------
     pd.DataFrame
-        DataFrame with columns ['datetime', 'signals'] (-1, 0, 1)
+        Columns: ['datetime', 'signals']  where signals ∈ {-1, 0, 1}.
     """
-    
-    # Ensure datetime is UTC-aware
-    df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
-    
+
+    # ------------------------------------------------------------------
+    # Normalise datetime column to UTC-aware (guard against re-localising)
+    # ------------------------------------------------------------------
+    df = df.copy()  # never mutate caller's frame
+    if "datetime" in df.columns:
+        dt_col = pd.to_datetime(df["datetime"])
+        if dt_col.dt.tz is None:
+            dt_col = dt_col.dt.tz_localize("UTC")
+        df["datetime"] = dt_col
+    elif isinstance(df.index, pd.DatetimeIndex):
+        if df.index.tz is None:
+            df.index = df.index.tz_localize("UTC")
+        df = df.reset_index()          # bring DatetimeIndex → "datetime" column
+        df = df.rename(columns={df.columns[0]: "datetime"})
+
+    # ------------------------------------------------------------------
+    # Branch: classifier
+    # ------------------------------------------------------------------
     if model_type == "classifier":
-        # Probabilities → trading signals
-        upper = 0.55
-        lower = 0.45
+        upper   = 0.55
+        lower   = 0.45
         signals = np.where(preds > upper, 1, np.where(preds < lower, -1, 0))
 
+    # ------------------------------------------------------------------
+    # Branch: regressor
+    # ------------------------------------------------------------------
     elif model_type == "regressor":
-        # Continuous predictions → signals
         if threshold is None:
             threshold = k * np.std(preds)
-        signals = np.where(preds > threshold, 1, np.where(preds < -threshold, -1, 0))
+        signals = np.where(preds > threshold, 1,
+                           np.where(preds < -threshold, -1, 0))
 
-    elif model_type == "dl":
-        # DL predictions → continuous series
-        if lookback is None:
-            raise ValueError("lookback must be provided for DL models")
-        
-        # Align predictions with test_index
-        test_index_aligned = test_index[lookback:]
-        preds_aligned = preds[:len(test_index_aligned)]
+    # ------------------------------------------------------------------
+    # Branch: dl_darts  (ARIMA / VARIMA / NBEATS / Transformer via Darts)
+    # Darts predicts the full test window — no lookback warm-up gap.
+    # ------------------------------------------------------------------
+    elif model_type == "dl_darts":
+        # Extract numpy array from Darts TimeSeries if needed
+        if hasattr(preds, "values"):
+            preds_np = preds.values().ravel().astype(np.float64)
+        else:
+            preds_np = np.asarray(preds, dtype=np.float64).ravel()
 
-        # Compute error vs actual if df has close prices
+        # test_index and preds must be the same length
+        test_index = np.asarray(test_index)
+        min_len    = min(len(preds_np), len(test_index))
+        preds_np   = preds_np[:min_len]
+        test_index = test_index[:min_len]
+
         if "close" in df.columns:
-            actual = df.loc[test_index_aligned, "close"].values
+            actual = df.iloc[test_index]["close"].values.astype(np.float64)
+            errors = preds_np - actual
+            if threshold is None:
+                threshold = k * np.std(errors)
+            signals = np.where(errors > threshold, 1,
+                               np.where(errors < -threshold, -1, 0))
+        else:
+            if threshold is None:
+                threshold = k * np.std(preds_np)
+            signals = np.where(preds_np > threshold, 1,
+                               np.where(preds_np < -threshold, -1, 0))
+
+    # ------------------------------------------------------------------
+    # Branch: dl  (legacy LSTM / sequence models — lookback required)
+    # ------------------------------------------------------------------
+    elif model_type == "dl":
+        if lookback is None:
+            raise ValueError(
+                "lookback must be provided for model_type='dl' (LSTM-style). "
+                "For Darts models use model_type='dl_darts'."
+            )
+
+        test_index_aligned = np.asarray(test_index)[lookback:]
+        preds_aligned      = np.asarray(preds, dtype=np.float64).ravel()
+        preds_aligned      = preds_aligned[:len(test_index_aligned)]
+
+        if "close" in df.columns:
+            actual = df.iloc[test_index_aligned]["close"].values.astype(np.float64)
             errors = preds_aligned - actual
             if threshold is None:
                 threshold = k * np.std(errors)
         else:
-            threshold = k * np.std(preds_aligned)
+            errors    = preds_aligned
+            threshold = threshold or k * np.std(preds_aligned)
 
-        # Convert continuous predictions → discrete signals
-        signals = np.where(preds_aligned > threshold, 1,
-                           np.where(preds_aligned < -threshold, -1, 0))
-        test_index = test_index_aligned  # use aligned index for DL
+        signals    = np.where(errors > threshold, 1,
+                              np.where(errors < -threshold, -1, 0))
+        test_index = test_index_aligned
 
     else:
-        raise ValueError("model_type must be 'classifier', 'regressor', or 'dl'")
-    
-    # Build prediction DataFrame
+        raise ValueError(
+            f"model_type must be one of: 'classifier', 'regressor', "
+            f"'dl', 'dl_darts'.  Got: '{model_type}'"
+        )
+
+    # ------------------------------------------------------------------
+    # Build output DataFrame using iloc (safe for any index type)
+    # ------------------------------------------------------------------
+    datetimes = df.iloc[np.asarray(test_index)]["datetime"].values
+
     df_predictions = pd.DataFrame({
-        "datetime": df.loc[test_index, "datetime"].values,
-        "signals": signals
+        "datetime": datetimes,
+        "signals":  signals,
     })
 
     return df_predictions

@@ -1,39 +1,3 @@
-"""
-main.py — DL model training pipeline
-======================================
-Bug-fixes over original:
-
-1. `train_model` was called with `lookback`, `epochs`, `batch_size` sourced
-   from the top-level config (keys that don't exist there); they were all
-   falling back to hardcoded defaults.  Now they are read from
-   `training` section of config.yml, and model-specific params (arima_params,
-   nbeats_params, etc.) are extracted and forwarded via `model_params`.
-
-2. `pnl_importance_df.set_index("feature").T.drop(columns=["feature"], ...)`
-   after `set_index` the "feature" column no longer exists as a column —
-   `.drop(columns=["feature"], errors="ignore")` was silently a no-op but
-   would hide real bugs.  Removed the redundant drop.
-
-3. `BackTest` was instantiated inside the per-model loop but `df_1m` could
-   be empty (the `df_1m.empty` guard is only for the outer symbol loop).
-   Added an early continue if `df_1m` is None or empty before the backtest.
-
-4. `df_predictions["datetime"]` conversion to UTC was done after
-   `prepare_predictions`; if prepare_predictions already emits UTC-aware
-   timestamps, double-converting is a no-op but wasteful.  The conversion
-   is now guarded with a tz-check.
-
-5. `timestamp` was a module-level variable; if the process runs past
-   midnight the timestamp would be stale.  It is now computed per-run
-   inside `main()`.
-
-Performance:
-- `active_indicators` list comprehension is unchanged (already efficient).
-- Model-params dicts are extracted once per symbol loop, not per model.
-- The entire per-model block is wrapped in a single try/except so a
-  crashed model does not abort the symbol.
-"""
-
 from __future__ import annotations
 
 import os
@@ -324,7 +288,12 @@ def main() -> None:
                     model_params=model_params_map.get(model_name, {}),
                 )
 
-                df_predictions = prepare_predictions(df_gf, preds, test_index, model_type="dl")
+                # All models here are Darts-based (ARIMA, VARIMA, NBEATS, Transformer).
+                # Darts predicts the full test window in one shot — no LSTM-style
+                # lookback warm-up gap — so we always use "dl_darts".
+                df_predictions = prepare_predictions(
+                    df_gf, preds, test_index, model_type="dl_darts"
+                )
 
                 # Normalise datetime column to UTC-aware (guard against double-convert)
                 if "datetime" in df_predictions.columns:
@@ -344,20 +313,46 @@ def main() -> None:
                     continue
 
                 # Feature importance
-                pnl_importance_df = pnl_permutation_importance(
-                    model=model,
-                    X_test=df_test,
-                    df=df_gf,
-                    df_1m=df_1m,
-                    base_pnl=pnl,
-                    model_type="dl",
-                    k=0.5,
-                    n_repeats=3,
-                )
-                # BUG-FIX: after set_index("feature"), "feature" is the index,
-                # not a column — drop(columns=["feature"]) was a silent no-op.
-                pnl_importance_wide = pnl_importance_df.set_index("feature").T
-                pnl_importance_wide.insert(0, "pnl", pnl)
+                # BUG-FIX 1: df_test is an empty DataFrame (only a DatetimeIndex)
+                # returned by all Darts trainers -- it has no feature columns to
+                # permute. Pass the actual test-period feature rows from df_gf.
+                test_feature_df = df_gf.iloc[test_index].copy()
+
+                # BUG-FIX 2: pnl_permutation_importance calls model.predict()
+                # on a permuted DataFrame, but Darts models don't accept a
+                # DataFrame -- they need a Darts TimeSeries. Skip permutation
+                # importance for Darts models and store a pnl-only placeholder.
+                _DARTS_MODELS = {"arima", "varima", "nbeats", "transformer"}
+                if model_name in _DARTS_MODELS:
+                    logger.info(
+                        f"Skipping pnl_permutation_importance for Darts model "
+                        f"'{model_name}' -- use covariate ablation instead."
+                    )
+                    pnl_importance_wide = pd.DataFrame(
+                        {"pnl": [pnl]}, index=["pnl_drop"]
+                    )
+                else:
+                    pnl_importance_df = pnl_permutation_importance(
+                        model=model,
+                        X_test=test_feature_df,
+                        df=df_gf,
+                        df_1m=df_1m,
+                        base_pnl=pnl,
+                        model_type="dl_darts",
+                        k=0.5,
+                        n_repeats=3,
+                    )
+                    if pnl_importance_df.empty:
+                        logger.warning(
+                            f"Empty importance results for {model_name}/{symbol}."
+                        )
+                        pnl_importance_wide = pd.DataFrame(
+                            {"pnl": [pnl]}, index=["pnl_drop"]
+                        )
+                    else:
+                        # set_index("feature").T gives 1 row ("pnl_drop"), N feature columns
+                        pnl_importance_wide = pnl_importance_df.set_index("feature").T
+                        pnl_importance_wide.insert(0, "pnl", pnl)
 
                 table_name_dl = f"{model_name}_dl_{timestamp}"
                 important_features_df = extract_important_features(
