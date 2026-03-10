@@ -12,24 +12,6 @@ logger = get_logger("transformer")
 
 _DEFAULT_ROLLING_ROWS = 4_320   # ~6 months at 1h
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SPEED KNOBS — edit these to trade accuracy vs wall-clock time
-# ─────────────────────────────────────────────────────────────────────────────
-# Tier 1 – safe, almost no accuracy loss
-#   input_chunk_length : 24   (was 48)  → attention is O(n²): 4× fewer ops
-#   d_model            : 32   (was 64)  → halves every matmul
-#   nhead              : 2   (was 4)   → must divide d_model
-#   num_encoder_layers : 1   (was 3)   → 3× fewer attention passes
-#   num_decoder_layers : 1   (was 3)
-#   batch_size         : 128  (was 32)  → 4× fewer gradient steps/epoch
-#   n_epochs           : 15   (was 100) → early-stopping fires ~8-12
-#
-# Tier 2 – enabled by default here; disable if you see accuracy regressions
-#   quantization       : dynamic INT8 on the trained model (inference only)
-#   torch.compile      : graph-level fusion (PyTorch ≥ 2.0, skipped silently)
-#   autocast bfloat16  : halves arithmetic on AVX-512 machines (skipped silently)
-# ─────────────────────────────────────────────────────────────────────────────
-
 
 def _configure_cpu(n_cores: int = 4) -> None:
     """
@@ -125,51 +107,7 @@ def train(
     epochs: int | None = None,
     **kwargs,
 ) -> tuple:
-    """
-    Train a Transformer model optimised for a 4-core CPU laptop.
-
-    Speed improvements over the baseline version
-    ─────────────────────────────────────────────
-    1. Smaller architecture (d_model=32, 1 enc/dec layer, icl=24, batch=128)
-       – already present in baseline; preserved here.
-    2. Thread pinning with os.environ *overwrite* (not setdefault) so re-runs
-       inside the same process actually pick up the new value.
-    3. Dynamic INT8 quantization on the final model's Linear layers.
-       → 1.5-2× faster inference, zero accuracy loss in expectation.
-    4. torch.compile(backend="inductor") – graph fusion, ~15-30% faster forward.
-    5. bfloat16 autocast during fit() on AVX-512 CPUs (falls back silently).
-    6. EarlyStopping patience reduced to 2 (was 3) – saves ~1-2 extra epochs.
-    7. gradient_clip_val added (default 1.0) – stabler loss curve, converges
-       faster, especially with large batch sizes.
-    8. num_workers forced to 0 (Windows-safe); pin_memory=False.
-
-    Args:
-        df                  : OHLCV (+ indicator) DataFrame.
-        target_col          : Column to forecast.
-        split_date          : ISO date string for train/test boundary.
-        input_chunk_length  : Lookback window.
-        output_chunk_length : Forecast horizon.
-        d_model             : Embedding dimension.
-        nhead               : Attention heads (must divide d_model).
-        num_encoder_layers  : Encoder depth ≥ 1.
-        num_decoder_layers  : Decoder depth ≥ 1.
-        dim_feedforward     : FFN hidden size (None → 4 × d_model).
-        dropout             : Dropout rate.
-        n_epochs            : Max training epochs.
-        batch_size          : Mini-batch size.
-        random_state        : RNG seed.
-        rolling_rows        : Cap training rows.
-        n_cores             : Physical CPU cores.
-        use_quantization    : Apply INT8 dynamic quantization after training.
-        use_compile         : Apply torch.compile after training (PT ≥ 2.0).
-        use_bf16_fit        : Use bfloat16 autocast during training.
-        lookback            : Alias for input_chunk_length.
-        epochs              : Alias for n_epochs.
-        **kwargs            : Forwarded to TransformerModel constructor.
-
-    Returns:
-        model, preds, test_index, df_test
-    """
+   
     # ── Configure threads BEFORE any torch/lightning import ────────────────
     _configure_cpu(n_cores)
 
