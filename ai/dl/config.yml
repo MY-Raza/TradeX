@@ -16,20 +16,22 @@ arima_params:
 
 
 varima_params:
-  p: 2
+  p: 1    # p=1 sufficient with rolling window; p=2 doubles parameter count
   d: 1
-  q: 0
+  q: 0    # MUST be 0 — VARMA(q>0) is non-identifiable, causes hanging
+  rolling_rows: 4320  # ~6 months at 1h; caps OLS matrix size for speed
 
 
 nbeats_params:
-  input_chunk_length: 48
+  input_chunk_length: 24   # 48->24: halves per-batch cost on CPU
   output_chunk_length: 1
-  n_epochs: 100
-  batch_size: 32
-  num_blocks: 4
-  num_layers: 4
-  layer_widths: 256
+  n_epochs: 20             # 100->20: converges here; beyond = overfitting on CPU
+  batch_size: 64           # 32->64: fewer gradient steps per epoch
+  num_blocks: 2            # 4->2: smaller model, 2x faster forward pass
+  num_layers: 2            # 4->2: fewer FC layers per block
+  layer_widths: 128        # 256->128: halves matrix multiply cost
   random_state: 42
+  rolling_rows: 4320       # ~6 months at 1h; avoids training on 22k rows
 
 
 transformer_params:
