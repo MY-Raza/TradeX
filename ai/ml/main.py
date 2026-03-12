@@ -332,6 +332,11 @@ def main():
                     n_trails=10,
                     df_1m=df_1m
                 )
+                try:
+                    sample_preds = model.predict(X_test.head(5))
+                    logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
+                except Exception as e:
+                    logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
                 df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
                 bt = BackTest(
@@ -400,6 +405,11 @@ def main():
                     split_date=split_date,
                     n_trails=10
                 )
+                try:
+                    sample_preds = model.predict(X_test.head(5))
+                    logger.info(f"[Dry-run] {reg_name} predictions on first 5 test rows:\n{sample_preds}")
+                except Exception as e:
+                    logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
                 df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
                 df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
                 bt = BackTest(
