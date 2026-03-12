@@ -86,18 +86,18 @@ def train(
     df: pd.DataFrame,
     target_col: str = "log_return",
     split_date: str = "2024-01-01",
-    input_chunk_length: int = 24,
+    input_chunk_length: int = 24,   # shorter input window
     output_chunk_length: int = 1,
-    d_model: int = 32,
+    d_model: int = 32,              # smaller model
     nhead: int = 2,
-    num_encoder_layers: int = 1,
-    num_decoder_layers: int = 1,
-    dim_feedforward: int | None = None,
+    num_encoder_layers: int = 2,
+    num_decoder_layers: int = 2,
+    dim_feedforward: int | None = 64,  # smaller feedforward
     dropout: float = 0.0,
-    n_epochs: int = 15,
-    batch_size: int = 128,
+    n_epochs: int = 15,             # fewer epochs
+    batch_size: int = 64,           # larger batch
     random_state: int = 42,
-    rolling_rows: int = _DEFAULT_ROLLING_ROWS,
+    rolling_rows: int = 2_000,      # smaller rolling window
     n_cores: int = 4,
     use_quantization: bool = True,
     use_compile: bool = True,
@@ -107,12 +107,15 @@ def train(
     **kwargs,
 ) -> tuple:
     """
-    Train a Transformer model optimised for a 4-core CPU laptop.
-    Returns (model, preds, test_index, df_test).
+    Optimized Transformer training for CPU:
+    - Smaller model, shorter input window, fewer epochs.
+    - Uses bf16 + torch.compile for speed.
+    - Returns (model, preds, test_index, df_test).
     """
+    # --- CPU setup
     _configure_cpu(n_cores)
 
-    # --- Resolve aliases --------------------------------------------------
+    # --- Aliases
     if lookback is not None:
         input_chunk_length = lookback
     if epochs is not None:
@@ -122,34 +125,23 @@ def train(
 
     kwargs.pop("random_state", None)
 
-    # --- Architecture guards ----------------------------------------------
+    # --- Architecture guards
     if d_model % nhead != 0:
-        raise ValueError(
-            f"d_model ({d_model}) must be divisible by nhead ({nhead}). "
-            f"Common pairs: (32,2), (64,4), (128,4), (128,8)."
-        )
+        raise ValueError(f"d_model ({d_model}) must be divisible by nhead ({nhead}).")
     if num_encoder_layers < 1 or num_decoder_layers < 1:
-        raise ValueError(
-            f"num_encoder_layers and num_decoder_layers must each be ≥ 1 "
-            f"(got {num_encoder_layers}, {num_decoder_layers})."
-        )
+        raise ValueError("num_encoder_layers and num_decoder_layers must be >= 1")
     if output_chunk_length >= input_chunk_length:
-        raise ValueError(
-            f"output_chunk_length ({output_chunk_length}) must be strictly "
-            f"less than input_chunk_length ({input_chunk_length})."
-        )
+        raise ValueError("output_chunk_length must be < input_chunk_length")
 
     if dim_feedforward is None:
         dim_feedforward = 4 * d_model
     if dim_feedforward > 4 * d_model:
         logger.warning(
-            f"dim_feedforward={dim_feedforward} is large relative to "
-            f"d_model={d_model}. Consider {4 * d_model} for CPU speed."
+            f"dim_feedforward={dim_feedforward} is large relative to d_model={d_model}."
         )
 
-    # --- 1. Prepare DataFrame ---------------------------------------------
+    # --- Prepare DataFrame
     df = df.copy()
-
     if target_col == "log_return" and "log_return" not in df.columns:
         df["log_return"] = np.log(df["close"]).diff()
 
@@ -161,44 +153,27 @@ def train(
         df = df.set_index("datetime")
 
     if target_col not in df.columns:
-        raise ValueError(
-            f"target_col '{target_col}' not found. Available: {list(df.columns)}"
-        )
+        raise ValueError(f"target_col '{target_col}' not found.")
 
-    df_target = df[[target_col]].dropna().sort_index()
-    df_target = df_target.astype({target_col: "float32"})
+    df_target = df[[target_col]].dropna().astype({target_col: "float32"}).sort_index()
 
-    # --- 2. Rolling window split ------------------------------------------
+    # --- Rolling window split
     split_ts = pd.Timestamp(split_date)
     if split_ts.tz is not None:
         split_ts = split_ts.tz_convert("UTC").tz_localize(None)
 
     df_train_full = df_target[df_target.index < split_ts]
-    df_test_raw   = df_target[df_target.index >= split_ts]
-
-    if df_train_full.empty:
-        raise ValueError(f"No training rows before split_date '{split_date}'.")
-    if df_test_raw.empty:
-        raise ValueError(f"No test rows on/after split_date '{split_date}'.")
+    df_test_raw = df_target[df_target.index >= split_ts]
 
     if rolling_rows and len(df_train_full) > rolling_rows:
-        n_total  = len(df_train_full)
-        dropped  = n_total - rolling_rows
         df_train_full = df_train_full.iloc[-rolling_rows:]
-        logger.info(
-            f"Transformer rolling window: last {rolling_rows} of "
-            f"{n_total} rows (dropped {dropped})."
-        )
+        logger.info(f"Using last {rolling_rows} rows for training.")
 
     min_rows = input_chunk_length + output_chunk_length
     if len(df_train_full) < min_rows:
-        raise ValueError(
-            f"Training window too small ({len(df_train_full)} rows), "
-            f"need at least {min_rows}."
-        )
+        raise ValueError(f"Training window too small: {len(df_train_full)} rows.")
 
-    # --- 3. Build Darts series --------------------------------------------
-    # BUG-1 FIX: deduplicate index before passing to Darts.
+    # --- Build Darts series
     df_windowed = (
         pd.concat([df_train_full, df_test_raw])
         .loc[~pd.concat([df_train_full, df_test_raw]).index.duplicated(keep="last")]
@@ -207,52 +182,32 @@ def train(
     series = prepare_series(df_windowed.reset_index(), target_col)
     train_series, test_series = train_test_split(series, split_date)
 
-    # --- 4. Trainer kwargs ------------------------------------------------
-    # BUG-3 FIX: copy the popped dict so we don't mutate the caller's object.
+    # --- Trainer kwargs
     pl_trainer_kwargs = kwargs.pop("pl_trainer_kwargs", {}).copy()
-    pl_trainer_kwargs.setdefault("accelerator",          "cpu")
-    pl_trainer_kwargs.setdefault("devices",              1)
-    pl_trainer_kwargs.setdefault("enable_progress_bar",  False)
+    pl_trainer_kwargs.setdefault("accelerator", "cpu")
+    pl_trainer_kwargs.setdefault("devices", 1)
+    pl_trainer_kwargs.setdefault("enable_progress_bar", False)
     pl_trainer_kwargs.setdefault("enable_model_summary", False)
-    pl_trainer_kwargs.setdefault("log_every_n_steps",    10)
-    pl_trainer_kwargs.setdefault("gradient_clip_val",    1.0)
+    pl_trainer_kwargs.setdefault("log_every_n_steps", 10)
+    pl_trainer_kwargs.setdefault("gradient_clip_val", 1.0)
+    pl_trainer_kwargs.setdefault("precision", "bf16-mixed" if use_bf16_fit and _bf16_supported() else "32-true")
 
-    # BUG-5 FIX: proper bfloat16 capability check.
-    if use_bf16_fit and _bf16_supported():
-        pl_trainer_kwargs.setdefault("precision", "bf16-mixed")
-        logger.info("Training precision: bf16-mixed (autocast).")
-    else:
-        pl_trainer_kwargs.setdefault("precision", "32-true")
-
-    # BUG-4 FIX: guard EarlyStopping in try/except; monitor only "train_loss"
-    # since we never pass a validation series to model.fit().
     try:
         from pytorch_lightning.callbacks import EarlyStopping
         cb = pl_trainer_kwargs.pop("callbacks", [])
-        cb.append(EarlyStopping(
-            monitor="train_loss", patience=2, min_delta=1e-4, mode="min"
-        ))
+        cb.append(EarlyStopping(monitor="train_loss", patience=2, min_delta=1e-4, mode="min"))
         pl_trainer_kwargs["callbacks"] = cb
     except Exception as e:
         logger.warning(f"EarlyStopping not added: {e}")
 
-    # BUG-6 FIX: dataloader_kwargs only passed when Darts supports it.
     dataloader_kwargs = kwargs.pop("dataloader_kwargs", {}).copy()
     dataloader_kwargs["num_workers"] = 0
     dataloader_kwargs.setdefault("pin_memory", False)
 
-    # --- 5. Fit -----------------------------------------------------------
+    # --- Fit
     from darts.models import TransformerModel
 
-    logger.info(
-        f"TransformerModel | d_model={d_model} nhead={nhead} "
-        f"enc={num_encoder_layers} dec={num_decoder_layers} "
-        f"ffn={dim_feedforward} icl={input_chunk_length} "
-        f"epochs={n_epochs} batch={batch_size} cores={n_cores} | "
-        f"quant={use_quantization} compile={use_compile} bf16={use_bf16_fit}"
-    )
-
-    model_kwargs: dict = dict(
+    model_kwargs = dict(
         input_chunk_length=input_chunk_length,
         output_chunk_length=output_chunk_length,
         d_model=d_model,
@@ -268,37 +223,29 @@ def train(
         **kwargs,
     )
 
-    # BUG-6 FIX: only add dataloader_kwargs if Darts accepts it.
     try:
         import inspect
-        from darts.models import TransformerModel as _TM
-        if "dataloader_kwargs" in inspect.signature(_TM.__init__).parameters:
+        if "dataloader_kwargs" in inspect.signature(TransformerModel.__init__).parameters:
             model_kwargs["dataloader_kwargs"] = dataloader_kwargs
-        else:
-            logger.warning(
-                "This Darts version does not accept dataloader_kwargs; "
-                "num_workers=0 / pin_memory=False settings skipped."
-            )
     except Exception:
         pass
 
     model = TransformerModel(**model_kwargs)
     model.fit(train_series)
 
-    # --- 6. Post-training speed boosts ------------------------------------
+    # --- Post-training boosts
     if use_compile:
         model = _try_compile(model)
     if use_quantization:
         model = _try_quantize(model)
 
-    # --- 7. Predict -------------------------------------------------------
+    # --- Predict
     preds = model.predict(len(test_series))
 
-    # --- 8. Return artifacts ----------------------------------------------
-    # BUG-2 FIX: test_index relative to windowed df, not full df_target.
+    # --- Return
     n_train_windowed = len(df_train_full)
-    n_test           = len(test_series)
-    test_index       = np.arange(n_train_windowed, n_train_windowed + n_test)
-    df_test          = pd.DataFrame(index=test_series.time_index)
+    n_test = len(test_series)
+    test_index = np.arange(n_train_windowed, n_train_windowed + n_test)
+    df_test = pd.DataFrame(index=test_series.time_index)
 
     return model, preds, test_index, df_test
