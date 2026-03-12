@@ -56,3 +56,25 @@
 2026-03-12 10:06:01,049 | INFO | dl_model_trainer | Saved DL model 'varima' for 'btc' → saved_models\btc_varima_dl.pkl
 2026-03-12 10:09:41,075 | INFO | dl_model_trainer | DL model 'nbeats' trained successfully.
 2026-03-12 10:09:44,644 | INFO | dl_model_trainer | Saved DL model 'nbeats' for 'btc' → saved_models\btc_nbeats_dl.pkl
+2026-03-12 10:28:41,754 | INFO | dl_model_trainer | DL model 'arima' trained successfully.
+2026-03-12 10:28:47,426 | INFO | dl_model_trainer | Saved DL model 'arima' for 'btc' → saved_models\btc_arima_dl.pkl
+2026-03-12 10:30:09,985 | INFO | dl_model_trainer | DL model 'varima' trained successfully.
+2026-03-12 10:30:13,110 | INFO | dl_model_trainer | Saved DL model 'varima' for 'btc' → saved_models\btc_varima_dl.pkl
+2026-03-12 10:34:03,810 | INFO | dl_model_trainer | DL model 'nbeats' trained successfully.
+2026-03-12 10:34:08,287 | INFO | dl_model_trainer | Saved DL model 'nbeats' for 'btc' → saved_models\btc_nbeats_dl.pkl
+2026-03-12 10:42:39,897 | ERROR | dl_model_trainer | Training failed for DL model 'transformer': CalledProcessError: Command '['x86_64-w64-mingw32-g++.exe', '/help']' returned non-zero exit status 1.
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+2026-03-12 10:42:54,151 | INFO | dl_model_trainer | DL model 'arima' trained successfully.
+2026-03-12 10:42:58,249 | INFO | dl_model_trainer | Saved DL model 'arima' for 'eth' → saved_models\eth_arima_dl.pkl
+2026-03-12 10:45:19,342 | INFO | dl_model_trainer | DL model 'arima' trained successfully.
+2026-03-12 10:45:26,935 | INFO | dl_model_trainer | Saved DL model 'arima' for 'btc' → saved_models\btc_arima_dl.pkl
+2026-03-12 10:48:30,788 | INFO | dl_model_trainer | DL model 'varima' trained successfully.
+2026-03-12 10:49:10,371 | INFO | dl_model_trainer | Saved DL model 'varima' for 'btc' → saved_models\btc_varima_dl.pkl
+2026-03-12 10:54:55,769 | INFO | dl_model_trainer | DL model 'nbeats' trained successfully.
+2026-03-12 10:55:14,067 | INFO | dl_model_trainer | Saved DL model 'nbeats' for 'btc' → saved_models\btc_nbeats_dl.pkl
+2026-03-12 11:05:41,788 | INFO | dl_model_trainer | DL model 'transformer' trained successfully.
+2026-03-12 11:05:46,503 | INFO | dl_model_trainer | Saved DL model 'transformer' for 'btc' → saved_models\btc_transformer_dl.pkl
+2026-03-12 11:06:12,368 | INFO | dl_model_trainer | DL model 'arima' trained successfully.
+2026-03-12 11:06:16,385 | INFO | dl_model_trainer | Saved DL model 'arima' for 'eth' → saved_models\eth_arima_dl.pkl

@@ -100,7 +100,7 @@ def train(
     rolling_rows: int = 2_000,      # smaller rolling window
     n_cores: int = 4,
     use_quantization: bool = True,
-    use_compile: bool = True,
+    use_compile: bool = False,
     use_bf16_fit: bool = True,
     lookback: int | None = None,
     epochs: int | None = None,

@@ -6,3 +6,10 @@
 2026-03-12 10:09:44,870 | INFO | transformer | Training precision: bf16-mixed (autocast).
 2026-03-12 10:09:44,870 | INFO | transformer | TransformerModel | d_model=64 nhead=4 enc=3 dec=3 ffn=128 icl=48 epochs=100 batch=32 cores=4 | quant=True compile=True bf16=True
 2026-03-12 10:09:44,875 | WARNING | transformer | This Darts version does not accept dataloader_kwargs; num_workers=0 / pin_memory=False settings skipped.
+2026-03-12 10:34:08,296 | INFO | transformer | Transformer CPU: 4 intraop threads | MKL=True
+2026-03-12 10:34:08,393 | INFO | transformer | Using last 2000 rows for training.
+2026-03-12 10:42:34,374 | INFO | transformer | torch.compile() (inductor, reduce-overhead) applied.
+2026-03-12 10:42:34,534 | INFO | transformer | Dynamic INT8 quantization applied to inference model.
+2026-03-12 10:55:14,161 | INFO | transformer | Transformer CPU: 4 intraop threads | MKL=True
+2026-03-12 10:55:14,271 | INFO | transformer | Using last 2000 rows for training.
+2026-03-12 11:04:04,021 | INFO | transformer | Dynamic INT8 quantization applied to inference model.

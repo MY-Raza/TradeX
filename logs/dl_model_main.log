@@ -180,3 +180,31 @@
 2026-03-12 10:04:29,481 | INFO | dl_model_main | Training DL model: varima for btc
 2026-03-12 10:06:01,049 | INFO | dl_model_main | Training DL model: nbeats for btc
 2026-03-12 10:09:44,644 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-12 10:28:17,447 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-12 10:28:17,447 | INFO | dl_model_main | Fetching data for btc …
+2026-03-12 10:28:27,388 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-12 10:28:27,520 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-12 10:28:47,426 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-12 10:30:13,110 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-12 10:34:08,287 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-12 10:42:39,897 | ERROR | dl_model_main | DL model transformer failed for btc: CalledProcessError: Command '['x86_64-w64-mingw32-g++.exe', '/help']' returned non-zero exit status 1.
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+2026-03-12 10:42:39,897 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-12 10:42:39,897 | INFO | dl_model_main | Fetching data for eth …
+2026-03-12 10:42:52,704 | INFO | dl_model_main | Generating indicators for eth …
+2026-03-12 10:42:52,876 | INFO | dl_model_main | Training DL model: arima for eth
+2026-03-12 10:42:58,249 | INFO | dl_model_main | Training DL model: varima for eth
+2026-03-12 10:44:32,679 | INFO | dl_model_main | Config loaded | symbols=['btc', 'eth', 'bnb', 'ada', 'xrp', 'doge', 'sol', 'dot', 'matic', 'link'] | timehorizon=1h
+2026-03-12 10:44:32,680 | INFO | dl_model_main | Fetching data for btc …
+2026-03-12 10:44:57,436 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-12 10:44:57,825 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-12 10:45:26,935 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-12 10:49:10,376 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-12 10:55:14,094 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-12 11:05:46,503 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-12 11:05:46,504 | INFO | dl_model_main | Fetching data for eth …
+2026-03-12 11:06:09,501 | INFO | dl_model_main | Generating indicators for eth …
+2026-03-12 11:06:09,776 | INFO | dl_model_main | Training DL model: arima for eth
+2026-03-12 11:06:16,386 | INFO | dl_model_main | Training DL model: varima for eth
