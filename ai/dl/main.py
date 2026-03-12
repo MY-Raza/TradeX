@@ -310,6 +310,7 @@ def main() -> None:
                 if df_1m is not None and not df_1m.empty:
                     bt = BackTest(df_1m, df_predictions, take_profit=3, stop_loss=1)
                     ledger, final_balance, pnl = bt.run()
+                    print(ledger.head())
                 else:
                     logger.warning(
                         f"df_1m unavailable for {symbol}; skipping backtest."
