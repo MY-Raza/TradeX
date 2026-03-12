@@ -331,20 +331,6 @@ def main() -> None:
                     time_column=None,
                     is_timeseries=False,
                 )
-
-                try:
-                    save_model(
-                        model,
-                        # BUG-FIX: pass only indicator columns, not all of df_gf.
-                        feature_columns=feature_columns,
-                        symbol=symbol,
-                        model_name=model_name,
-                    )
-                except Exception as save_err:
-                    logger.error(
-                        f"Model save failed for {model_name}/{symbol}: {save_err}"
-                    )
-
             except Exception as exc:
                 logger.error(f"DL model {model_name} failed for {symbol}: {exc}")
 
