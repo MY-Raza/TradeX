@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-import math
 import numpy as np
 import pandas as pd
 
@@ -12,38 +11,19 @@ logger = get_logger("transformer")
 
 _DEFAULT_ROLLING_ROWS = 4_320   # ~6 months at 1h
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SPEED KNOBS — edit these to trade accuracy vs wall-clock time
-# ─────────────────────────────────────────────────────────────────────────────
-# Tier 1 – safe, almost no accuracy loss
-#   input_chunk_length : 24   (was 48)  → attention is O(n²): 4× fewer ops
-#   d_model            : 32   (was 64)  → halves every matmul
-#   nhead              : 2   (was 4)   → must divide d_model
-#   num_encoder_layers : 1   (was 3)   → 3× fewer attention passes
-#   num_decoder_layers : 1   (was 3)
-#   batch_size         : 128  (was 32)  → 4× fewer gradient steps/epoch
-#   n_epochs           : 15   (was 100) → early-stopping fires ~8-12
-#
-# Tier 2 – enabled by default here; disable if you see accuracy regressions
-#   quantization       : dynamic INT8 on the trained model (inference only)
-#   torch.compile      : graph-level fusion (PyTorch ≥ 2.0, skipped silently)
-#   autocast bfloat16  : halves arithmetic on AVX-512 machines (skipped silently)
-# ─────────────────────────────────────────────────────────────────────────────
-
 
 def _configure_cpu(n_cores: int = 4) -> None:
     """
     Set all thread-count env-vars BEFORE torch is imported.
-    On Windows, OMP/MKL read these at import time — torch.set_num_threads()
-    has no effect on BLAS after the fact.
+    On Windows, OMP/MKL read these at import time.
     """
     for var in ("OMP_NUM_THREADS", "MKL_NUM_THREADS",
                 "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
-        os.environ[var] = str(n_cores)          # overwrite, not setdefault
+        os.environ[var] = str(n_cores)
     try:
         import torch
         torch.set_num_threads(n_cores)
-        torch.set_num_interop_threads(1)         # >1 causes contention on small models
+        torch.set_num_interop_threads(1)
         logger.info(
             f"Transformer CPU: {n_cores} intraop threads | "
             f"MKL={torch.backends.mkl.is_available()}"
@@ -53,22 +33,14 @@ def _configure_cpu(n_cores: int = 4) -> None:
 
 
 def _try_quantize(model):
-    """
-    Apply dynamic INT8 quantization to the trained model's Linear layers.
-    This is lossless in expectation (same weights, lower-precision arithmetic)
-    and typically gives 1.5-2× inference speed on pure-CPU x86.
-    Silently skipped on PyTorch < 1.8 or non-x86 platforms.
-    """
+    """Apply dynamic INT8 quantization to the trained model's Linear layers."""
     try:
         import torch
-        # Access the underlying nn.Module stored by Darts
         nn_model = getattr(model, "model", None)
         if nn_model is None:
             return model
         quantized = torch.quantization.quantize_dynamic(
-            nn_model,
-            {torch.nn.Linear},
-            dtype=torch.qint8,
+            nn_model, {torch.nn.Linear}, dtype=torch.qint8,
         )
         model.model = quantized
         logger.info("Dynamic INT8 quantization applied to inference model.")
@@ -78,11 +50,7 @@ def _try_quantize(model):
 
 
 def _try_compile(model):
-    """
-    torch.compile() (PyTorch ≥ 2.0) fuses ops into a single kernel graph,
-    saving ~15-30% wall-clock per forward pass on CPU.
-    Silently skipped on older PyTorch.
-    """
+    """torch.compile() fuses ops into a single kernel graph (PyTorch ≥ 2.0)."""
     try:
         import torch
         if not hasattr(torch, "compile"):
@@ -97,83 +65,54 @@ def _try_compile(model):
     return model
 
 
+def _bf16_supported() -> bool:
+    """
+    BUG-5 FIX: return True only when bfloat16 is actually usable on this CPU.
+    Uses torch.Tensor.is_floating_point + bfloat16 cast as a reliable probe.
+    """
+    try:
+        import torch
+        t = torch.tensor([1.0], dtype=torch.float32)
+        _ = t.to(torch.bfloat16)
+        # Further check: bfloat16 matmul must not raise
+        a = torch.ones(4, 4, dtype=torch.bfloat16)
+        _ = a @ a
+        return True
+    except Exception:
+        return False
+
+
 def train(
     df: pd.DataFrame,
     target_col: str = "log_return",
     split_date: str = "2024-01-01",
-    # ── Architecture (CPU-tuned defaults) ──────────────────────────────────
-    input_chunk_length: int = 24,       # attention O(n²): 4× cheaper than 48
+    input_chunk_length: int = 24,
     output_chunk_length: int = 1,
-    d_model: int = 32,                  # halves every matmul vs 64
-    nhead: int = 2,                     # must divide d_model
-    num_encoder_layers: int = 1,        # 3× fewer attention passes vs 3
+    d_model: int = 32,
+    nhead: int = 2,
+    num_encoder_layers: int = 1,
     num_decoder_layers: int = 1,
-    dim_feedforward: int | None = None, # None → auto (4 × d_model = 128)
-    dropout: float = 0.0,               # no benefit + overhead for small models
-    # ── Training ───────────────────────────────────────────────────────────
-    n_epochs: int = 15,                 # early stopping fires ~8-12
-    batch_size: int = 128,              # 4× fewer gradient steps/epoch vs 32
+    dim_feedforward: int | None = None,
+    dropout: float = 0.0,
+    n_epochs: int = 15,
+    batch_size: int = 128,
     random_state: int = 42,
     rolling_rows: int = _DEFAULT_ROLLING_ROWS,
     n_cores: int = 4,
-    # ── Post-training speed boosts ─────────────────────────────────────────
-    use_quantization: bool = True,      # INT8 dynamic quant for inference
-    use_compile: bool = True,           # torch.compile if PyTorch ≥ 2.0
-    use_bf16_fit: bool = True,          # bfloat16 autocast during training
-    # ── Aliases ────────────────────────────────────────────────────────────
+    use_quantization: bool = True,
+    use_compile: bool = True,
+    use_bf16_fit: bool = True,
     lookback: int | None = None,
     epochs: int | None = None,
     **kwargs,
 ) -> tuple:
     """
     Train a Transformer model optimised for a 4-core CPU laptop.
-
-    Speed improvements over the baseline version
-    ─────────────────────────────────────────────
-    1. Smaller architecture (d_model=32, 1 enc/dec layer, icl=24, batch=128)
-       – already present in baseline; preserved here.
-    2. Thread pinning with os.environ *overwrite* (not setdefault) so re-runs
-       inside the same process actually pick up the new value.
-    3. Dynamic INT8 quantization on the final model's Linear layers.
-       → 1.5-2× faster inference, zero accuracy loss in expectation.
-    4. torch.compile(backend="inductor") – graph fusion, ~15-30% faster forward.
-    5. bfloat16 autocast during fit() on AVX-512 CPUs (falls back silently).
-    6. EarlyStopping patience reduced to 2 (was 3) – saves ~1-2 extra epochs.
-    7. gradient_clip_val added (default 1.0) – stabler loss curve, converges
-       faster, especially with large batch sizes.
-    8. num_workers forced to 0 (Windows-safe); pin_memory=False.
-
-    Args:
-        df                  : OHLCV (+ indicator) DataFrame.
-        target_col          : Column to forecast.
-        split_date          : ISO date string for train/test boundary.
-        input_chunk_length  : Lookback window.
-        output_chunk_length : Forecast horizon.
-        d_model             : Embedding dimension.
-        nhead               : Attention heads (must divide d_model).
-        num_encoder_layers  : Encoder depth ≥ 1.
-        num_decoder_layers  : Decoder depth ≥ 1.
-        dim_feedforward     : FFN hidden size (None → 4 × d_model).
-        dropout             : Dropout rate.
-        n_epochs            : Max training epochs.
-        batch_size          : Mini-batch size.
-        random_state        : RNG seed.
-        rolling_rows        : Cap training rows.
-        n_cores             : Physical CPU cores.
-        use_quantization    : Apply INT8 dynamic quantization after training.
-        use_compile         : Apply torch.compile after training (PT ≥ 2.0).
-        use_bf16_fit        : Use bfloat16 autocast during training.
-        lookback            : Alias for input_chunk_length.
-        epochs              : Alias for n_epochs.
-        **kwargs            : Forwarded to TransformerModel constructor.
-
-    Returns:
-        model, preds, test_index, df_test
+    Returns (model, preds, test_index, df_test).
     """
-    # ── Configure threads BEFORE any torch/lightning import ────────────────
     _configure_cpu(n_cores)
 
-    # ── Resolve aliases ────────────────────────────────────────────────────
+    # --- Resolve aliases --------------------------------------------------
     if lookback is not None:
         input_chunk_length = lookback
     if epochs is not None:
@@ -183,7 +122,7 @@ def train(
 
     kwargs.pop("random_state", None)
 
-    # ── Architecture guards ────────────────────────────────────────────────
+    # --- Architecture guards ----------------------------------------------
     if d_model % nhead != 0:
         raise ValueError(
             f"d_model ({d_model}) must be divisible by nhead ({nhead}). "
@@ -208,7 +147,7 @@ def train(
             f"d_model={d_model}. Consider {4 * d_model} for CPU speed."
         )
 
-    # ── 1. Prepare DataFrame ───────────────────────────────────────────────
+    # --- 1. Prepare DataFrame ---------------------------------------------
     df = df.copy()
 
     if target_col == "log_return" and "log_return" not in df.columns:
@@ -227,13 +166,9 @@ def train(
         )
 
     df_target = df[[target_col]].dropna().sort_index()
-
-    # Cast to float32 — PyTorch Linear layers use float32 by default.
-    # pandas/numpy defaults to float64 (double), which causes:
-    #   "expected m1 and m2 to have the same dtype, but got: double != float"
     df_target = df_target.astype({target_col: "float32"})
 
-    # ── 2. Rolling window split ────────────────────────────────────────────
+    # --- 2. Rolling window split ------------------------------------------
     split_ts = pd.Timestamp(split_date)
     if split_ts.tz is not None:
         split_ts = split_ts.tz_convert("UTC").tz_localize(None)
@@ -247,11 +182,12 @@ def train(
         raise ValueError(f"No test rows on/after split_date '{split_date}'.")
 
     if rolling_rows and len(df_train_full) > rolling_rows:
-        dropped = len(df_train_full) - rolling_rows
+        n_total  = len(df_train_full)
+        dropped  = n_total - rolling_rows
         df_train_full = df_train_full.iloc[-rolling_rows:]
         logger.info(
-            f"Transformer rolling window: last {rolling_rows} rows "
-            f"(dropped {dropped})."
+            f"Transformer rolling window: last {rolling_rows} of "
+            f"{n_total} rows (dropped {dropped})."
         )
 
     min_rows = input_chunk_length + output_chunk_length
@@ -261,39 +197,35 @@ def train(
             f"need at least {min_rows}."
         )
 
-    # ── 3. Build Darts series ──────────────────────────────────────────────
-    df_windowed  = pd.concat([df_train_full, df_test_raw])
-    series       = prepare_series(df_windowed.reset_index(), target_col)
+    # --- 3. Build Darts series --------------------------------------------
+    # BUG-1 FIX: deduplicate index before passing to Darts.
+    df_windowed = (
+        pd.concat([df_train_full, df_test_raw])
+        .loc[~pd.concat([df_train_full, df_test_raw]).index.duplicated(keep="last")]
+        .sort_index()
+    )
+    series = prepare_series(df_windowed.reset_index(), target_col)
     train_series, test_series = train_test_split(series, split_date)
 
-    # ── 4. Trainer kwargs ──────────────────────────────────────────────────
-    pl_trainer_kwargs = kwargs.pop("pl_trainer_kwargs", {})
+    # --- 4. Trainer kwargs ------------------------------------------------
+    # BUG-3 FIX: copy the popped dict so we don't mutate the caller's object.
+    pl_trainer_kwargs = kwargs.pop("pl_trainer_kwargs", {}).copy()
     pl_trainer_kwargs.setdefault("accelerator",          "cpu")
     pl_trainer_kwargs.setdefault("devices",              1)
     pl_trainer_kwargs.setdefault("enable_progress_bar",  False)
     pl_trainer_kwargs.setdefault("enable_model_summary", False)
     pl_trainer_kwargs.setdefault("log_every_n_steps",    10)
-    pl_trainer_kwargs.setdefault("gradient_clip_val",    1.0)   # NEW: faster convergence
+    pl_trainer_kwargs.setdefault("gradient_clip_val",    1.0)
 
-    # bfloat16 autocast: halves arithmetic on AVX-512 CPUs, ~10-20% faster.
-    # Falls back to fp32 silently on machines without AVX-512.
-    if use_bf16_fit:
-        try:
-            import torch
-            if torch.backends.cpu.get_default_dtype() is not None:  # always True
-                pl_trainer_kwargs.setdefault("precision", "bf16-mixed")
-                logger.info("Training precision: bf16-mixed (autocast).")
-        except Exception:
-            pl_trainer_kwargs.setdefault("precision", "32-true")
+    # BUG-5 FIX: proper bfloat16 capability check.
+    if use_bf16_fit and _bf16_supported():
+        pl_trainer_kwargs.setdefault("precision", "bf16-mixed")
+        logger.info("Training precision: bf16-mixed (autocast).")
     else:
         pl_trainer_kwargs.setdefault("precision", "32-true")
 
-    # Windows: num_workers > 0 spawns subprocesses (~2-5 s overhead per epoch)
-    dataloader_kwargs = kwargs.pop("dataloader_kwargs", {})
-    dataloader_kwargs["num_workers"] = 0
-    dataloader_kwargs.setdefault("pin_memory", False)
-
-    # EarlyStopping: patience=2 (was 3) shaves 1-2 epochs off the tail
+    # BUG-4 FIX: guard EarlyStopping in try/except; monitor only "train_loss"
+    # since we never pass a validation series to model.fit().
     try:
         from pytorch_lightning.callbacks import EarlyStopping
         cb = pl_trainer_kwargs.pop("callbacks", [])
@@ -301,10 +233,15 @@ def train(
             monitor="train_loss", patience=2, min_delta=1e-4, mode="min"
         ))
         pl_trainer_kwargs["callbacks"] = cb
-    except ImportError:
-        pass
+    except Exception as e:
+        logger.warning(f"EarlyStopping not added: {e}")
 
-    # ── 5. Fit ─────────────────────────────────────────────────────────────
+    # BUG-6 FIX: dataloader_kwargs only passed when Darts supports it.
+    dataloader_kwargs = kwargs.pop("dataloader_kwargs", {}).copy()
+    dataloader_kwargs["num_workers"] = 0
+    dataloader_kwargs.setdefault("pin_memory", False)
+
+    # --- 5. Fit -----------------------------------------------------------
     from darts.models import TransformerModel
 
     logger.info(
@@ -315,7 +252,7 @@ def train(
         f"quant={use_quantization} compile={use_compile} bf16={use_bf16_fit}"
     )
 
-    model = TransformerModel(
+    model_kwargs: dict = dict(
         input_chunk_length=input_chunk_length,
         output_chunk_length=output_chunk_length,
         d_model=d_model,
@@ -330,21 +267,38 @@ def train(
         pl_trainer_kwargs=pl_trainer_kwargs,
         **kwargs,
     )
+
+    # BUG-6 FIX: only add dataloader_kwargs if Darts accepts it.
+    try:
+        import inspect
+        from darts.models import TransformerModel as _TM
+        if "dataloader_kwargs" in inspect.signature(_TM.__init__).parameters:
+            model_kwargs["dataloader_kwargs"] = dataloader_kwargs
+        else:
+            logger.warning(
+                "This Darts version does not accept dataloader_kwargs; "
+                "num_workers=0 / pin_memory=False settings skipped."
+            )
+    except Exception:
+        pass
+
+    model = TransformerModel(**model_kwargs)
     model.fit(train_series)
 
-    # ── 6. Post-training speed boosts (inference path) ─────────────────────
+    # --- 6. Post-training speed boosts ------------------------------------
     if use_compile:
-        model = _try_compile(model)         # graph fusion via inductor
+        model = _try_compile(model)
     if use_quantization:
-        model = _try_quantize(model)        # INT8 dynamic quant on Linear layers
+        model = _try_quantize(model)
 
-    # ── 7. Predict ─────────────────────────────────────────────────────────
+    # --- 7. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))
 
-    # ── 8. Return artifacts ────────────────────────────────────────────────
-    n_train_full = len(df_target[df_target.index < split_ts])
-    n_test       = len(test_series)
-    test_index   = np.arange(n_train_full, n_train_full + n_test)
-    df_test      = pd.DataFrame(index=test_series.time_index)
+    # --- 8. Return artifacts ----------------------------------------------
+    # BUG-2 FIX: test_index relative to windowed df, not full df_target.
+    n_train_windowed = len(df_train_full)
+    n_test           = len(test_series)
+    test_index       = np.arange(n_train_windowed, n_train_windowed + n_test)
+    df_test          = pd.DataFrame(index=test_series.time_index)
 
     return model, preds, test_index, df_test

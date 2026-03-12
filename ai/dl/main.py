@@ -25,6 +25,12 @@ from TradeX.utils.db.utils import fetch_ohlcv_df, save_df_to_db
 
 logger = get_logger("dl_model_main")
 
+# Raw OHLCV + target columns that should NOT be passed as "features" to save_model.
+_NON_FEATURE_COLS = frozenset({
+    "open", "high", "low", "close", "volume",
+    "datetime", "log_return", "timestamp",
+})
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Helpers
@@ -39,7 +45,6 @@ def _arr(x) -> np.ndarray:
 # Feature Engineering
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Category sets built once at module level (not rebuilt per call)
 _SINGLE_SERIES = frozenset({
     "RSI", "EMA", "SMA", "WMA", "DEMA", "TEMA", "TRIMA",
     "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
@@ -67,7 +72,6 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
     """
     n = len(df)
 
-    # Extract raw arrays once
     close  = df["close"].to_numpy(dtype=np.float64)
     high   = df["high"].to_numpy(dtype=np.float64)
     low    = df["low"].to_numpy(dtype=np.float64)
@@ -194,7 +198,6 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
         except Exception as exc:
             logger.error(f"Indicator '{ind}' failed: {exc}")
 
-    # Single concat — avoids repeated DataFrame copy overhead
     if new_cols:
         safe = {
             k: v for k, v in (
@@ -216,7 +219,7 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    timestamp  = datetime.now().strftime("%Y%m%d_%H%M%S")  # computed per run
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     current_dir    = os.path.dirname(os.path.abspath(__file__))
     dl_config_path = os.path.join(current_dir, "config.yml")
@@ -225,18 +228,21 @@ def main() -> None:
     start_date        = config.get("start_date")
     end_date          = config.get("end_date")
     split_date        = config.get("split_date")
-    symbols           = ["btc"]
+    symbols           = config.get("symbols", ["btc"])  # BUG-FIX: was hardcoded to ["btc"]
     timehorizon       = config.get("timehorizon", "1h")
     indicators_config = config.get("indicators", {})
     dl_models_config  = config.get("forecasting_models", {})
     training_cfg      = config.get("training", {})
 
-    # Training hyper-params from config (with sensible fallbacks)
-    lookback   = training_cfg.get("lookback",    24)
-    epochs     = training_cfg.get("epochs",      50)
-    batch_size = training_cfg.get("batch_size",  32)
+    # BUG-FIX (main): training_cfg has no "lookback"/"epochs"/"batch_size" keys
+    # in config.yml — those live inside model-specific param dicts. Using
+    # training_cfg.get() with wrong keys always returned the fallback values
+    # (24/50/32), silently overriding whatever was in nbeats_params etc.
+    # Fix: pass None so model_trainer uses the model-specific config params.
+    lookback   = training_cfg.get("lookback",    None)
+    epochs     = training_cfg.get("epochs",      None)
+    batch_size = training_cfg.get("batch_size",  None)
 
-    # Model-specific param dicts
     model_params_map: dict[str, dict] = {
         "arima":       config.get("arima_params",       {}),
         "varima":      config.get("varima_params",      {}),
@@ -262,14 +268,16 @@ def main() -> None:
             logger.warning(f"No data found for {symbol}. Skipping.")
             continue
 
-        # Resample to desired timeframe
         df_tf = resample_ohlcv(df_1m, timehorizon)
-
-        # Feature Engineering
         logger.info(f"Generating indicators for {symbol} …")
         df_gf = generate_features(df_tf, active_indicators)
 
-        # ── Train DL Models ───────────────────────────────────────────────
+        # BUG-FIX (main): derive feature columns once, outside the model loop,
+        # so save_model receives indicator columns only (not raw OHLCV/target).
+        feature_columns = [
+            c for c in df_gf.columns if c not in _NON_FEATURE_COLS
+        ]
+
         for model_name, is_active in dl_models_config.items():
             if not is_active:
                 continue
@@ -288,21 +296,17 @@ def main() -> None:
                     model_params=model_params_map.get(model_name, {}),
                 )
 
-                # All models here are Darts-based (ARIMA, VARIMA, NBEATS, Transformer).
-                # Darts predicts the full test window in one shot — no LSTM-style
-                # lookback warm-up gap — so we always use "dl_darts".
                 df_predictions = prepare_predictions(
                     df_gf, preds, test_index, model_type="dl_darts"
                 )
 
-                # Normalise datetime column to UTC-aware (guard against double-convert)
+                # Normalise datetime column to UTC-aware
                 if "datetime" in df_predictions.columns:
                     dt_col = pd.to_datetime(df_predictions["datetime"])
                     if dt_col.dt.tz is None:
                         dt_col = dt_col.dt.tz_localize("UTC")
                     df_predictions["datetime"] = dt_col
 
-                # Backtest — skip if 1m data is unavailable
                 if df_1m is not None and not df_1m.empty:
                     bt = BackTest(df_1m, df_predictions, take_profit=3, stop_loss=1)
                     ledger, final_balance, pnl = bt.run()
@@ -312,16 +316,9 @@ def main() -> None:
                     )
                     continue
 
-                # Feature importance
-                # BUG-FIX 1: df_test is an empty DataFrame (only a DatetimeIndex)
-                # returned by all Darts trainers -- it has no feature columns to
-                # permute. Pass the actual test-period feature rows from df_gf.
-                test_feature_df = df_gf.iloc[test_index].copy()
+                # test_feature_df kept for future permutation-importance support.
+                test_feature_df = df_gf.iloc[test_index].copy()  # noqa: F841
 
-                # BUG-FIX 2: pnl_permutation_importance calls model.predict()
-                # on a permuted DataFrame, but Darts models don't accept a
-                # DataFrame -- they need a Darts TimeSeries. Skip permutation
-                # importance for Darts models and store a pnl-only placeholder.
                 table_name_dl = f"{model_name}_dl_{timestamp}"
                 stats_df = compute_trade_statistics(ledger)
                 stats_df.insert(0, "pnl",        pnl)
@@ -334,12 +331,11 @@ def main() -> None:
                     is_timeseries=False,
                 )
 
-                # save_model re-raises on failure; wrap so one bad save
-                # doesn't abort the remaining models for this symbol.
                 try:
                     save_model(
                         model,
-                        feature_columns=df_gf.columns.tolist(),
+                        # BUG-FIX: pass only indicator columns, not all of df_gf.
+                        feature_columns=feature_columns,
                         symbol=symbol,
                         model_name=model_name,
                     )

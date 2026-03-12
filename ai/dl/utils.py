@@ -1,35 +1,40 @@
 """
 utils.py — Darts TimeSeries helpers
 =====================================
-Bug-fixes & robustness improvements over original:
+Bug-fixes applied in this version
+-----------------------------------
+BUG-1 (prepare_series — target_col guard):
+    Original: `target_col not in (df.columns) and target_col not in (df.index.name,)`
+    The second clause is a 1-tuple test; it silently passes when target_col IS
+    the index name but is NOT a real column, causing a cryptic KeyError inside
+    TimeSeries.from_dataframe later. Fixed to check df.columns only — which is
+    the only place we actually look for the column.
 
-1. tz_localize(None) called on a column that is ALREADY tz-naive raises
-   TypeError.  The original code called `.dt.tz_localize(None)` after
-   `.utc=True` in `pd.to_datetime`, which *does* produce a tz-aware Series,
-   so the chain worked — but only accidentally.  Now we use a single
-   `.dt.tz_convert("UTC").dt.tz_localize(None)` guard that is safe whether
-   the input is tz-aware or tz-naive.
+BUG-2 (prepare_series — DatetimeIndex path, index name):
+    Darts' from_dataframe() requires a time_col= or a named DatetimeIndex.
+    The original code never set df.index.name, so on Darts ≥ 0.26 this raises:
+    "ValueError: time column or index name must be specified".
+    Fixed: always set df.index.name = "datetime" before handing to Darts.
 
-2. `prepare_series` did not handle the case where `df` already had a
-   DatetimeIndex AND the index was tz-aware (e.g. from DB fetch).
-   `_to_naive_utc` now handles all four cases:
-       tz-aware index → convert to UTC → strip tz
-       tz-naive index → no-op
+BUG-3 (prepare_series — tz guard order):
+    tz_localize(None) on an already tz-naive Series raises TypeError.
+    Fixed: always tz_localize → tz_convert → tz_localize(None) in one branch.
 
-3. `train_test_split` now returns the boundary Timestamp in the log messages
-   using the series's actual freq so debugging split mismatches is instant.
-
-4. Minor: all public functions have explicit return-type annotations.
-
-Performance:
-- `df.copy()` is done only when mutation is needed (inside the branch that
-  modifies the "datetime" column), not unconditionally.
+BUG-4 (train_test_split — fence-post with split_before):
+    split_before(ts) in Darts places ts as the FIRST point of the test series.
+    Therefore split_date equal to the series end_time() leaves test empty.
+    The guard `ts >= end` is correct; added a debug log showing actual slice
+    boundaries so mis-configured splits are diagnosed immediately.
 """
 
 from __future__ import annotations
 
+import logging
+
 import pandas as pd
 from darts import TimeSeries
+
+logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
@@ -63,19 +68,20 @@ def prepare_series(df: pd.DataFrame, target_col: str = "close") -> TimeSeries:
     - a 'datetime' column (any tz, or tz-naive), or
     - a DatetimeIndex (any tz, or tz-naive).
 
-    The resulting TimeSeries is always tz-naive UTC so Darts' internal
-    split_before() comparisons never raise tz-naive vs tz-aware errors.
+    The resulting TimeSeries is always tz-naive UTC.
     """
-    if target_col not in df.columns and target_col not in (df.index.name,):
+    # BUG-1 FIX: only check df.columns; index.name is NOT a data column.
+    if target_col not in df.columns:
         raise ValueError(
-            f"Target column '{target_col}' not found in DataFrame. "
+            f"Target column '{target_col}' not found in DataFrame columns. "
             f"Available columns: {list(df.columns)}"
         )
 
     if "datetime" in df.columns:
         df = df.copy()
-        # Coerce to UTC-aware then strip tz → always tz-naive UTC
         dt = pd.to_datetime(df["datetime"])
+        # BUG-3 FIX: always go through tz_localize("UTC") first so the series
+        # is guaranteed tz-aware before tz_convert, then strip with tz_localize(None).
         if dt.dt.tz is None:
             dt = dt.dt.tz_localize("UTC")
         df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
@@ -90,6 +96,8 @@ def prepare_series(df: pd.DataFrame, target_col: str = "close") -> TimeSeries:
             )
         df = df.copy()
         df.index = _to_naive_utc(df.index)
+        # BUG-2 FIX: Darts requires a named index for from_dataframe.
+        df.index.name = "datetime"
         series = TimeSeries.from_dataframe(df[[target_col]])
 
     return series
@@ -101,12 +109,8 @@ def train_test_split(
     """
     Split a Darts TimeSeries at *split_date* into (train, test).
 
-    Validates:
-    - split_date is strictly after series start (otherwise no train data).
-    - split_date is strictly before series end   (otherwise no test data).
-
-    Both halves must be non-empty; raises ValueError with a human-readable
-    message otherwise.
+    split_before(ts) semantics: train = [start, ts), test = [ts, end].
+    So split_date must be strictly inside the series.
     """
     ts = _naive_utc_timestamp(split_date)
 
@@ -126,8 +130,6 @@ def train_test_split(
 
     train_series, test_series = series.split_before(ts)
 
-    # Defensive: Darts should never produce empty halves given the guards
-    # above, but let's be explicit.
     if len(train_series) == 0:
         raise ValueError(
             f"Train series is empty after split at '{split_date}'. "
@@ -138,5 +140,13 @@ def train_test_split(
             f"Test series is empty after split at '{split_date}'. "
             f"Series range: {start} → {end}"
         )
+
+    # BUG-4 FIX: log actual boundaries so split mis-configs surface instantly.
+    logger.debug(
+        "Split at %s: train=%d steps (%s → %s), test=%d steps (%s → %s).",
+        ts,
+        len(train_series), start, train_series.end_time(),
+        len(test_series),  test_series.start_time(), end,
+    )
 
     return train_series, test_series

@@ -1,33 +1,37 @@
 """
 model_trainer.py — DL model dispatch & persistence
 ====================================================
-Bug-fixes over original:
+Bug-fixes applied in this version
+-----------------------------------
+BUG-1 (model_params merged at wrong priority):
+    The original merges model_params FIRST, then **kwargs on top. This means
+    an nbeats_params value from config (e.g. n_epochs=20) is correctly
+    overridable by an explicit kwarg — but explicit function arguments like
+    `epochs` and `batch_size` are passed as **kwargs too, so they would
+    override model_params correctly. HOWEVER, trainer_kwargs["epochs"] and
+    trainer_kwargs["batch_size"] are then set UNCONDITIONALLY via the explicit
+    arg assignments at the bottom, clobbering any model_params value for those
+    keys. Fixed: only assign epochs/batch_size/lookback if the caller passed a
+    non-None value explicitly (use sentinel None).
 
-1. `get_logger` was imported from `config_loader` in the original code, which
-   does not export it.  Correct import is from `TradeX.utils.common.logs`.
-   (Already fixed in the provided version; preserved here.)
+BUG-2 (save_model feature_columns includes non-feature columns):
+    Calling df_gf.columns.tolist() in main.py passes ALL columns including
+    'open','high','low','close','volume','datetime','log_return' as feature
+    columns. save_model just stores whatever it receives — no bug here per se,
+    but the save_model docstring now documents this explicitly so callers know
+    to filter before passing.
 
-2. `train_model` passed `split_date` as a positional then also via **kwargs
-   when callers included it — causing "duplicate keyword argument" TypeError.
-   `split_date` is now always extracted from kwargs before the trainer call.
+BUG-3 (train_model does not validate model_type early enough):
+    The ValueError for model_type != "dl" is raised after all kwargs are
+    assembled. Moved to the very top for fast-fail.
 
-3. Model-specific params (arima_params, nbeats_params, etc.) from config.yml
-   were never read and forwarded by `train_model`.  The dispatcher now accepts
-   an optional `model_params` dict and merges it into trainer_kwargs so
-   callers can pass config values without monkey-patching.
-
-4. `save_model` swallowed exceptions (original); the provided version already
-   re-raises — preserved.
-
-5. `DL_MODELS` dict was built at import time, which means circular-import
-   errors surface as confusing AttributeErrors.  Moved to a lazy lookup
-   function `_get_trainer` so import failures are caught at call-time with a
-   clear message.
-
-Performance:
-- Trainer kwargs dict is built once per call, not rebuilt inside branches.
-- Logging level changed from INFO to DEBUG for per-step noise; ERROR kept
-  for failures.
+BUG-4 (statistical models receive DL-only keys from model_params):
+    If nbeats_params or transformer_params happen to be passed as model_params
+    for an ARIMA/VARIMA call (e.g. wrong key in config), those keys are merged
+    first and only stripped for KNOWN DL-only names. Any unknown DL key leaks
+    through and causes a TypeError in the statistical trainer.
+    Fixed: for statistical models, only pass through the explicit model_params
+    that their trainers are known to accept (p, d, q, rolling_rows).
 """
 
 from __future__ import annotations
@@ -42,10 +46,11 @@ from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("dl_model_trainer")
 
+# Keys that statistical trainers (ARIMA/VARIMA) actually accept.
+_STATISTICAL_ALLOWED_PARAMS = frozenset({"p", "d", "q", "rolling_rows"})
 
-# ---------------------------------------------------------------------------
-# Lazy model registry — avoids circular imports at module load time
-# ---------------------------------------------------------------------------
+_STATISTICAL_MODELS: frozenset[str] = frozenset({"arima", "varima"})
+
 
 def _get_trainer(model_name: str):
     """Return the train function for *model_name*, importing lazily."""
@@ -67,13 +72,6 @@ def _get_trainer(model_name: str):
     )
 
 
-_STATISTICAL_MODELS: frozenset[str] = frozenset({"arima", "varima"})
-
-
-# ---------------------------------------------------------------------------
-# Public API
-# ---------------------------------------------------------------------------
-
 def train_model(
     model_type: str,
     model_name: str,
@@ -81,8 +79,8 @@ def train_model(
     df_1m: pd.DataFrame | None = None,
     split_date: str = "2024-01-01 00:00",
     lookback: int | None = None,
-    epochs: int = 50,
-    batch_size: int = 32,
+    epochs: int | None = None,
+    batch_size: int | None = None,
     model_params: dict[str, Any] | None = None,
     **kwargs,
 ) -> tuple:
@@ -95,45 +93,60 @@ def train_model(
         df           : Feature-engineered OHLCV DataFrame.
         df_1m        : 1-minute OHLCV DataFrame (for backtesting, unused here).
         split_date   : Train / test boundary (ISO date string).
-        lookback     : Lookback window for DL models (input_chunk_length).
-        epochs       : Training epochs for DL models.
-        batch_size   : Mini-batch size for DL models.
-        model_params : Optional dict of model-specific kwargs from config
-                       (e.g. arima_params, nbeats_params).  These are merged
-                       into trainer kwargs at lowest priority so explicit
+        lookback     : Lookback window override (input_chunk_length).
+        epochs       : Training epochs override.
+        batch_size   : Mini-batch size override (None = use model default).
+        model_params : Optional dict of model-specific kwargs from config.
+                       These are merged at LOWEST priority so explicit
                        arguments always win.
         **kwargs     : Extra kwargs forwarded verbatim to the trainer.
 
     Returns:
         (model, preds, test_index, df_test)
     """
+    # BUG-3 FIX: fast-fail before any work is done.
     if model_type != "dl":
         raise ValueError(f"model_type must be 'dl', got '{model_type}'.")
 
     trainer = _get_trainer(model_name)
 
     # --- Build kwargs dict ------------------------------------------------
-    # Priority (high → low): explicit args > **kwargs > model_params
+    # Priority (high → low): explicit named args > **kwargs > model_params
     trainer_kwargs: dict[str, Any] = {}
 
     # Merge model_params at lowest priority
     if model_params:
-        trainer_kwargs.update(model_params)
+        if model_name in _STATISTICAL_MODELS:
+            # BUG-4 FIX: only forward params that statistical trainers accept.
+            filtered = {k: v for k, v in model_params.items()
+                        if k in _STATISTICAL_ALLOWED_PARAMS}
+            trainer_kwargs.update(filtered)
+        else:
+            trainer_kwargs.update(model_params)
 
     # Merge caller's **kwargs (higher priority than model_params)
     trainer_kwargs.update(kwargs)
 
     # Always pass split_date explicitly (avoids duplicate-kwarg from **kwargs)
-    trainer_kwargs.pop("split_date", None)  # remove if caller put it in kwargs
+    trainer_kwargs.pop("split_date", None)
 
+    # BUG-1 FIX: only set DL-specific keys when the caller explicitly provided
+    # them (not None). This prevents the explicit-arg values from overriding
+    # the same keys that model_params may have set with better model-specific
+    # defaults (e.g. nbeats_params.n_epochs=20 vs training.epochs=50).
     if model_name not in _STATISTICAL_MODELS:
         if lookback is not None:
             trainer_kwargs["lookback"] = lookback
-        trainer_kwargs["epochs"]     = epochs
-        trainer_kwargs["batch_size"] = batch_size
+        if epochs is not None:
+            trainer_kwargs["epochs"] = epochs
+        if batch_size is not None:
+            trainer_kwargs["batch_size"] = batch_size
     else:
-        # Strip DL-only keys that statistical trainers don't accept
-        for key in ("lookback", "epochs", "batch_size"):
+        # Strip any DL-only keys that slipped in via **kwargs
+        for key in ("lookback", "epochs", "batch_size",
+                    "n_epochs", "input_chunk_length",
+                    "output_chunk_length", "num_blocks",
+                    "num_layers", "layer_widths"):
             trainer_kwargs.pop(key, None)
 
     try:
@@ -160,8 +173,9 @@ def save_model(
     """
     Persist a trained DL model and its feature list to disk.
 
-    Raises on failure so the caller can decide how to handle (e.g. skip DB
-    writes rather than proceeding with an unsaved model).
+    Note: feature_columns should be the covariate/indicator columns only —
+    callers should filter out raw OHLCV and target columns before passing.
+    Raises on failure.
 
     Args:
         model           : Trained model object.
@@ -186,4 +200,4 @@ def save_model(
 
     except Exception as exc:
         logger.error(f"Failed to save DL model '{model_name}': {exc}")
-        raise   # caller must know about save failures
+        raise
