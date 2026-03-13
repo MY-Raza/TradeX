@@ -534,3 +534,20 @@
 2026-03-13 11:16:56,430 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
 2026-03-13 11:17:08,916 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
 2026-03-13 11:17:08,953 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-13 11:39:35,845 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-13 11:39:48,388 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-13 11:39:48,423 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-13 12:13:20,210 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[1 1 1 1 1]
+2026-03-13 12:13:25,393 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 12:13:25,399 | INFO | model_fetcher | Final Balance for Classifier: 495.6
+2026-03-13 12:13:25,399 | INFO | model_fetcher | Final PnL for Classifier: -69.32
+2026-03-13 12:13:25,727 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-13 12:14:20,822 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-13 12:14:34,526 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-13 12:14:34,567 | INFO | model_fetcher | Training classifier: random_forest for ['btc']

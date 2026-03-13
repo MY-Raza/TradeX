@@ -5,151 +5,185 @@ import optuna
 from TradeX.backtest.backtest import BackTest
 from TradeX.ai.ml.utils import prepare_predictions
 
+# Suppress Optuna's verbose per-trial logging
+optuna.logging.set_verbosity(optuna.logging.WARNING)
+
 
 def train(
-    df,
-    df_1m,
-    target_col="target",
-    split_date="2024-01-01 00:00",
-    n_trials=50,
-    k=0.5
-):
+    df: pd.DataFrame,
+    df_1m: pd.DataFrame,
+    target_col: str = "target",
+    split_date: str = "2024-01-01 00:00",
+    n_trials: int = 50,
+    k: float = 0.5,
+    transform_features: bool = True,
+) -> tuple:
     """
-    Train RandomForestRegressor using time-based split with PnL-based Optuna optimization and pruning.
+    Train a RandomForestRegressor on OHLCV data using Optuna for hyperparameter
+    optimization and a PnL-based backtest objective with MedianPruner.
+
+    Features (open/high/low/close/volume) are optionally log-diff transformed for
+    numeric stability. The target column is intentionally left untransformed so that
+    model predictions are in absolute price units (e.g. 33 358.6) rather than
+    log-return scale.
 
     Args:
-        df (pd.DataFrame): Input dataframe with features and target
-        df_1m (pd.DataFrame): 1-minute OHLCV dataframe for backtesting
-        target_col (str): Name of the target column
-        split_date (str): Date string to split train/test
-        n_trials (int): Number of Optuna trials
-        k (float): Threshold multiplier for converting regressor output to signals
+        df               (pd.DataFrame): Feature dataframe; must contain a 'datetime' column.
+        df_1m            (pd.DataFrame): 1-minute OHLCV dataframe used by the backtester.
+        target_col       (str):          Name of the target column (absolute price).
+        split_date       (str):          ISO date string that separates train from test.
+        n_trials         (int):          Number of Optuna optimisation trials.
+        k                (float):        Threshold multiplier for converting regressor
+                                         output to long/short/flat signals.
+        transform_features (bool):       When True, apply log-diff to OHLCV feature
+                                         columns for numeric stability.
 
     Returns:
-        model: Trained RandomForestRegressor
-        preds: Predictions on test set
-        test_index: Indices of the test set
-        X_test: Features of the test set
+        final_model  (RandomForestRegressor): Best model re-trained on the full train set.
+        final_preds  (np.ndarray):            Predictions on the test set in absolute price units.
+        test_index   (pd.Index):              Row indices of the test set.
+        X_test       (pd.DataFrame):         Feature matrix of the test set.
+
+    Raises:
+        ValueError: If 'datetime' column is missing, or the split yields an empty partition.
     """
 
-    # ----------------------------
-    # Ensure datetime column & sort
-    # ----------------------------
+    # ------------------------------------------------------------------ #
+    # 1.  Validate & pre-process                                           #
+    # ------------------------------------------------------------------ #
     if "datetime" not in df.columns:
-        raise ValueError("DataFrame must have a 'datetime' column.")
-    
+        raise ValueError("DataFrame must contain a 'datetime' column.")
+    if target_col not in df.columns:
+        raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
+
     df = df.copy()
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime").reset_index(drop=True)
 
-    # ----------------------------
-    # LOG-DIFF TRANSFORMATION
-    # ----------------------------
-    price_cols = ["open", "high", "low", "close"]
-    for col in price_cols:
-        if col in df.columns:
+    print(f"[train] DataFrame shape before transform: {df.shape}")
+
+    # ------------------------------------------------------------------ #
+    # 2.  Feature transformation (target is excluded)                      #
+    # ------------------------------------------------------------------ #
+    if transform_features:
+        price_feature_cols = [c for c in ("open", "high", "low", "close") if c in df.columns]
+        for col in price_feature_cols:
             df[col] = np.log(df[col]).diff()
 
-    if "volume" in df.columns:
-        df["volume"] = np.log1p(df["volume"]).diff()
+        if "volume" in df.columns:
+            df["volume"] = np.log1p(df["volume"]).diff()
 
-    df = df.dropna().reset_index(drop=True)
+        # Drop rows introduced by differencing (first row per series becomes NaN)
+        df = df.dropna(subset=price_feature_cols).reset_index(drop=True)
+        print(f"[train] DataFrame shape after log-diff transform & dropna: {df.shape}", flush=True)
 
-    # ----------------------------
-    # Train/Test Split
-    # ----------------------------
-    split_date = pd.to_datetime(split_date, utc=True)
-    train_df = df[df["datetime"] < split_date]
-    test_df  = df[df["datetime"] >= split_date]
+    # ------------------------------------------------------------------ #
+    # 3.  Time-based train / test split                                    #
+    # ------------------------------------------------------------------ #
+    split_dt  = pd.to_datetime(split_date, utc=True)
+    train_df  = df[df["datetime"] < split_dt].copy()
+    test_df   = df[df["datetime"] >= split_dt].copy()
 
-    if train_df.empty or test_df.empty:
-        raise ValueError("Train/Test split resulted in empty dataset.")
+    if train_df.empty:
+        raise ValueError(f"Train set is empty for split_date='{split_date}'. Adjust the split date.")
+    if test_df.empty:
+        raise ValueError(f"Test set is empty for split_date='{split_date}'. Adjust the split date.")
 
-    drop_cols = [target_col, "datetime", "future_close"]
+    drop_cols = [c for c in (target_col, "datetime", "future_close") if c in df.columns]
 
-    X_train = train_df.drop(columns=[c for c in drop_cols if c in train_df.columns])
-    y_train = train_df[target_col]
+    X_train = train_df.drop(columns=drop_cols)
+    y_train = train_df[target_col]          # absolute price units
 
-    X_test = test_df.drop(columns=[c for c in drop_cols if c in test_df.columns])
-    y_test = test_df[target_col]
+    X_test  = test_df.drop(columns=drop_cols)
+    y_test  = test_df[target_col]           # kept for reference / evaluation
 
-    # ----------------------------
-    # OPTUNA OBJECTIVE (PnL Optimization with Pruning)
-    # ----------------------------
-    def objective(trial):
-        # Suggest hyperparameters
+    print(f"[train] Train rows: {len(X_train)} | Test rows: {len(X_test)} | Features: {X_train.shape[1]}", flush=True)
+    print(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}", flush=True)
+    print(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}", flush=True)
+    print(f"[train] Starting Optuna study ({n_trials} trials)...", flush=True)
+
+    # ------------------------------------------------------------------ #
+    # 4.  Optuna objective — maximise PnL with chunked pruning             #
+    # ------------------------------------------------------------------ #
+    def objective(trial: optuna.Trial) -> float:
         params = {
-            "n_estimators": trial.suggest_int("n_estimators", 100, 800),
-            "max_depth": trial.suggest_int("max_depth", 3, 40),
+            # Cap n_estimators to 300 — beyond this, gains are marginal but
+            # fit time grows linearly, causing silent hangs with n_jobs=-1
+            "n_estimators":      trial.suggest_int("n_estimators", 100, 800),
+            "max_depth":         trial.suggest_int("max_depth", 3, 12),
             "min_samples_split": trial.suggest_int("min_samples_split", 2, 20),
-            "min_samples_leaf": trial.suggest_int("min_samples_leaf", 1, 20),
-            "max_features": trial.suggest_categorical("max_features", ["sqrt", "log2", None]),
-            "bootstrap": trial.suggest_categorical("bootstrap", [True, False]),
+            "min_samples_leaf":  trial.suggest_int("min_samples_leaf", 1, 20),
+            "max_features":      trial.suggest_categorical("max_features", ["sqrt", "log2"]),
+            "bootstrap":         trial.suggest_categorical("bootstrap", [True, False]),
         }
 
-        model = RandomForestRegressor(
-            random_state=42,
-            n_jobs=-1,
-            **params
-        )
+        print(f"[trial {trial.number}] Params: {params}", flush=True)
 
+        # Use n_jobs=1 inside Optuna trials — Optuna already parallelises
+        # trials at the study level; nested joblib pools can deadlock
+        model = RandomForestRegressor(random_state=42, n_jobs=1, **params)
+
+        print(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...", flush=True)
         model.fit(X_train, y_train)
-        preds = model.predict(X_test)
+        preds = model.predict(X_test)   # absolute price predictions
 
-        # Convert regressor predictions → signals
+        # Guard against constant predictions (degenerate model)
+        print(f"[trial {trial.number}] Fit done. Running backtest chunks...", flush=True)
+
+        if np.std(preds) < 1e-8:
+            print(f"[trial {trial.number}] Skipping: constant predictions detected.", flush=True)
+            raise optuna.TrialPruned()
+
         df_preds = prepare_predictions(
             df,
             preds,
             X_test.index,
             model_type="regressor",
             threshold=None,
-            k=k
+            k=k,
         )
-        df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
+        df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
-        # ----------------------------
-        # Backtest in chunks for pruning
-        # ----------------------------
+        # Chunked backtest for intermediate Optuna reporting / pruning
+        n_chunks   = 5
         total_rows = len(df_preds)
-        n_chunks = 5  # split test set into 5 chunks for intermediate reporting
+        pnl_so_far = 0.0
 
-        pnl_so_far = 0
-        for i in range(n_chunks):
-            end_idx = (i + 1) * total_rows // n_chunks
-            df_chunk = df_preds.iloc[:end_idx]  # cumulative backtest
+        for chunk_idx in range(n_chunks):
+            end_idx    = (chunk_idx + 1) * total_rows // n_chunks
+            df_chunk   = df_preds.iloc[:end_idx]
 
             bt = BackTest(df_1m, df_chunk, take_profit=3, stop_loss=1)
-            _, _, pnl_chunk = bt.run()
-            pnl_so_far = pnl_chunk
+            _, _, pnl_so_far = bt.run()
 
-            # Report intermediate PnL to Optuna
-            trial.report(pnl_so_far, step=i)
-
-            # Prune unpromising trials
+            trial.report(pnl_so_far, step=chunk_idx)
+            print(f"[trial {trial.number}] Chunk {chunk_idx+1}/{n_chunks} PnL: {pnl_so_far:.4f}", flush=True)
             if trial.should_prune():
                 raise optuna.TrialPruned()
 
-        return pnl_so_far  # maximize profit
+        return pnl_so_far
 
-    # ----------------------------
-    # Run Optuna with MedianPruner
-    # ----------------------------
+    # ------------------------------------------------------------------ #
+    # 5.  Run Optuna study                                                 #
+    # ------------------------------------------------------------------ #
     pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=1)
-    study = optuna.create_study(direction="maximize", pruner=pruner)
+    study  = optuna.create_study(direction="maximize", pruner=pruner)
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    print(f"Best Optuna Parameters: {best_params}")
+    print(f"[train] Best Optuna parameters: {best_params}", flush=True)
+    print(f"[train] Best trial PnL: {study.best_value:.4f}", flush=True)
 
-    # ----------------------------
-    # Final Model Training
-    # ----------------------------
-    final_model = RandomForestRegressor(
-        random_state=42,
-        n_jobs=-1,
-        **best_params
-    )
+    # ------------------------------------------------------------------ #
+    # 6.  Final model — re-train on full train set with best params        #
+    # ------------------------------------------------------------------ #
+    # n_jobs=-1 is safe here since we're outside Optuna's parallel context
+    final_model = RandomForestRegressor(random_state=42, n_jobs=-1, **best_params)
+    print("[train] Fitting final model...", flush=True)
     final_model.fit(X_train, y_train)
-    final_preds = final_model.predict(X_test)
+    final_preds = final_model.predict(X_test)   # absolute price units
+
+    print(f"[train] Final predictions — min: {final_preds.min():.4f}, "
+          f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}", flush=True)
 
     return final_model, final_preds, X_test.index, X_test

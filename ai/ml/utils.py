@@ -170,9 +170,18 @@ def prepare_predictions(
     # ------------------------------------------------------------------
     elif model_type == "regressor":
         if threshold is None:
-            threshold = k * np.std(preds)
-        signals = np.where(preds > threshold, 1,
-                           np.where(preds < -threshold, -1, 0))
+            preds_series = pd.Series(preds)
+    
+            rolling_mean = preds_series.rolling(window=20, min_periods=1).mean()
+            rolling_std = preds_series.rolling(window=20, min_periods=1).std().fillna(0)
+    
+            # Avoid division by zero
+            rolling_std = rolling_std.replace(0, 1e-8)
+    
+            threshold = k * rolling_std
+    
+            signals = np.where(preds_series > rolling_mean + threshold, 1,
+                       np.where(preds_series < rolling_mean - threshold, -1, 0))
 
     # ------------------------------------------------------------------
     # Branch: dl_darts  (ARIMA / VARIMA / NBEATS / Transformer via Darts)
