@@ -66,6 +66,9 @@ def train(
     y_test  = test_df[target_col]
 
     logger.info(f"Train rows: {len(X_train)} | Test rows: {len(X_test)} | Features: {X_train.shape[1]}")
+    logger.info(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}", )
+    logger.info(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}", )
+    logger.info(f"[train] Starting Optuna study ({n_trials} trials)...", )
 
     # ------------------ #
     # 4. Optuna Objective #
@@ -82,10 +85,13 @@ def train(
         }
 
         model = RandomForestClassifier(random_state=42, n_jobs=1, **params)
+        logger.info(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...")
         model.fit(X_train, y_train)
 
         # Use predict_proba[:,1] for signal generation
         probs = model.predict_proba(X_test)[:, 1]
+
+        logger.info(f"[trial {trial.number}] Fit done. Running backtest chunks...")
 
         # Generate signals using prepare_predictions
         df_preds = prepare_predictions(
@@ -112,6 +118,7 @@ def train(
 
             trial.report(pnl_so_far, step=i)
             if trial.should_prune():
+                logger.info(f"[trial {trial.number}] Chunk {i+1}/{n_chunks} PnL: {pnl_so_far:.4f}")
                 raise optuna.TrialPruned()
 
         return pnl_so_far
@@ -124,14 +131,18 @@ def train(
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    logger.info(f"Best Optuna params: {best_params} | Best PnL: {study.best_value:.4f}")
+    logger.info(f"[train] Best Optuna parameters: {best_params}")
+    logger.info(f"[train] Best trial PnL: {study.best_value:.4f}")
 
     # ------------------ #
     # 6. Final model training #
     # ------------------ #
     final_model = RandomForestClassifier(random_state=42, n_jobs=-1, **best_params)
+    logger.info("[train] Fitting final model...", )
     final_model.fit(X_train, y_train)
 
     final_probs = final_model.predict_proba(X_test)[:, 1]
+    logger.info(f"[train] Final predictions — min: {final_probs.min():.4f}, "
+          f"max: {final_probs.max():.4f}, mean: {final_probs.mean():.4f}")
 
     return final_model, final_probs, X_test.index, X_test
