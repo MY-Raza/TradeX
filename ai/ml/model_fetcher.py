@@ -148,7 +148,7 @@ for clf_name, is_active in classifiers_config.items():
             preds_df = pd.DataFrame({
                  "prediction": sample_preds
               })
-            preds_df.to_csv(f"debug_outputs/{clf_name}_sample_preds.csv", index=False)
+            preds_df.to_csv(f"{clf_name}_classifier_sample_preds.csv", index=False)
         except Exception as e:
             logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -194,7 +194,7 @@ for reg_name, is_active in regressors_config.items():
             preds_df = pd.DataFrame({
                  "prediction": sample_preds
               })
-            preds_df.to_csv(f"{reg_name}_sample_preds.csv", index=False)
+            preds_df.to_csv(f"{reg_name}_regressor_sample_preds.csv", index=False)
         except Exception as e:
             logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
         df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")

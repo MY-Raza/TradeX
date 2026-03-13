@@ -531,3 +531,6 @@
 4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
 2026-03-13 10:39:20,553 | INFO | model_fetcher | Final Balance for Regressor: 496.42
 2026-03-13 10:39:20,553 | INFO | model_fetcher | Final PnL for Regressor: -66.2
+2026-03-13 11:16:56,430 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-13 11:17:08,916 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-13 11:17:08,953 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
