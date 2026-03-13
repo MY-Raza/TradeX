@@ -20,6 +20,9 @@ FEATURE_MAP = {
     "BB_UPPER": "BBANDS",
     "BB_MIDDLE": "BBANDS",
     "BB_LOWER": "BBANDS",
+    "HT_PHASOR_0": "HT_PHASOR",
+    "HT_PHASOR_1": "HT_PHASOR",
+    "LINEARREG_SLOPE_14": "LINEARREG_SLOPE"
     # Add more mappings if needed
 }
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -50,6 +53,8 @@ def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.Dat
         # Keep HT_* cycle indicators intact
         elif f.startswith("HT_"):
             base_indicators.add(f)
+        elif f.startswith("CDL"):
+             base_indicators.add(f)
         else:
             # Strip suffix (_K, _D, _14, _0, etc.) to get base name
             m = re.match(r"([A-Z]+)", f)
@@ -137,6 +142,11 @@ for clf_name, is_active in classifiers_config.items():
                     n_trails=10,
                     df_1m=df_1m
                 )
+        try:
+            sample_preds = model.predict(X_test.head(5))
+            logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
+        except Exception as e:
+            logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
         bt = BackTest(
@@ -174,6 +184,11 @@ for reg_name, is_active in regressors_config.items():
                     n_trails=10,
                     df_1m=df_1m
                 )
+        try:
+            sample_preds = model.predict(X_test.head(5))
+            logger.info(f"[Dry-run] {reg_name} predictions on first 5 test rows:\n{sample_preds}")
+        except Exception as e:
+            logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
         df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")
         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
         bt = BackTest(

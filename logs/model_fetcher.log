@@ -427,3 +427,15 @@
 2026-03-04 10:49:06,015 | INFO | model_fetcher | Final PnL for Regressor: -67.25
 2026-03-12 11:59:11,592 | INFO | model_fetcher | Config loaded | symbols=['btc'] | timehorizon=1h
 2026-03-12 11:59:12,514 | INFO | model_fetcher | The best model: transformer_dl_20260312_110939
+2026-03-12 15:50:40,681 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-12 15:50:53,697 | WARNING | model_fetcher | Some best_features were not generated: {'CDLRISEFALL3METHODS', 'MINUS_DI_14', 'CDLXSIDEGAP3METHODS', 'LINEARREG_SLOPE_14', 'CDL2CROWS', 'CDL3LINESTRIKE', 'CDL3BLACKCROWS', 'CDL3OUTSIDE', 'HT_PHASOR_0', 'CDLIDENTICAL3CROWS', 'CDLUPSIDEGAP2CROWS', 'CDL3STARSINSOUTH', 'CDLUNIQUE3RIVER', 'HT_PHASOR_1', 'CDL3INSIDE', 'CDL3WHITESOLDIERS'}
+2026-03-12 15:50:53,734 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-12 15:54:22,652 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-12 15:54:31,076 | WARNING | model_fetcher | Some best_features were not generated: {'HT_PHASOR_0', 'LINEARREG_SLOPE_14', 'HT_PHASOR_1', 'MINUS_DI_14'}
+2026-03-12 15:54:31,105 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-12 15:58:14,961 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-12 15:58:23,131 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14', 'LINEARREG_SLOPE_14'}
+2026-03-12 15:58:23,160 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-12 16:00:53,861 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-12 16:01:02,065 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-12 16:01:02,098 | INFO | model_fetcher | Training classifier: random_forest for ['btc']

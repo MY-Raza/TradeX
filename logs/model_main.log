@@ -1767,3 +1767,23 @@ Feature names seen at fit time, yet now missing:
 2026-03-12 13:38:38,097 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
 [1 1 1 1 1]
 2026-03-12 14:17:29,159 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-12 14:50:28,761 | INFO | model_main | [Dry-run] random_forest predictions on first 5 test rows:
+[0.0055919  0.00567481 0.00575479 0.00569371 0.00601313]
+2026-03-12 15:18:02,550 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-12 15:22:51,536 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
+[0.01084206 0.01084206 0.01084206 0.01084206 0.01084206]
+2026-03-12 15:48:02,594 | INFO | model_main | Model training complete for btc.
+2026-03-12 15:50:53,623 | ERROR | model_main | Indicator CDLUNIQUE failed: Indicator 'CDLUNIQUE' not found in TA-Lib
+2026-03-12 15:50:53,623 | ERROR | model_main | Indicator HT_PHASOR_0 failed: Indicator 'HT_PHASOR_0' not found in TA-Lib
+2026-03-12 15:50:53,629 | ERROR | model_main | Indicator CDL failed: Indicator 'CDL' not found in TA-Lib
+2026-03-12 15:50:53,631 | WARNING | model_main | Unsupported indicator: MINUS
+2026-03-12 15:50:53,648 | ERROR | model_main | Indicator CDLXSIDEGAP failed: Indicator 'CDLXSIDEGAP' not found in TA-Lib
+2026-03-12 15:50:53,650 | ERROR | model_main | Indicator HT_PHASOR_1 failed: Indicator 'HT_PHASOR_1' not found in TA-Lib
+2026-03-12 15:50:53,657 | ERROR | model_main | Indicator CDLUPSIDEGAP failed: Indicator 'CDLUPSIDEGAP' not found in TA-Lib
+2026-03-12 15:50:53,660 | ERROR | model_main | Indicator CDLIDENTICAL failed: Indicator 'CDLIDENTICAL' not found in TA-Lib
+2026-03-12 15:50:53,664 | ERROR | model_main | Indicator CDLRISEFALL failed: Indicator 'CDLRISEFALL' not found in TA-Lib
+2026-03-12 15:54:31,026 | ERROR | model_main | Indicator HT_PHASOR_0 failed: Indicator 'HT_PHASOR_0' not found in TA-Lib
+2026-03-12 15:54:31,033 | WARNING | model_main | Unsupported indicator: MINUS
+2026-03-12 15:54:31,038 | ERROR | model_main | Indicator HT_PHASOR_1 failed: Indicator 'HT_PHASOR_1' not found in TA-Lib
+2026-03-12 15:58:23,103 | WARNING | model_main | Unsupported indicator: MINUS
+2026-03-12 16:01:02,015 | WARNING | model_main | Unsupported indicator: MINUS
