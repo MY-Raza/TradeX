@@ -161,8 +161,8 @@ def prepare_predictions(
     # Branch: classifier
     # ------------------------------------------------------------------
     if model_type == "classifier":
-        upper   = 0.55
-        lower   = 0.45
+        upper = preds.mean() + 0.25 * preds.std()
+        lower = preds.mean() - 0.25 * preds.std()
         signals = np.where(preds > upper, 1, np.where(preds < lower, -1, 0))
 
     # ------------------------------------------------------------------

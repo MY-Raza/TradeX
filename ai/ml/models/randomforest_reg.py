@@ -4,6 +4,9 @@ import numpy as np
 import optuna
 from TradeX.backtest.backtest import BackTest
 from TradeX.ai.ml.utils import prepare_predictions
+from TradeX.utils.common.config_loader import get_logger
+
+logger = get_logger("randomforest_regressor")
 
 # Suppress Optuna's verbose per-trial logging
 optuna.logging.set_verbosity(optuna.logging.WARNING)
@@ -75,7 +78,7 @@ def train(
 
         # Drop rows introduced by differencing (first row per series becomes NaN)
         df = df.dropna(subset=price_feature_cols).reset_index(drop=True)
-        print(f"[train] DataFrame shape after log-diff transform & dropna: {df.shape}", flush=True)
+        logger.info(f"[train] DataFrame shape after log-diff transform & dropna: {df.shape}")
 
     # ------------------------------------------------------------------ #
     # 3.  Time-based train / test split                                    #
@@ -97,10 +100,10 @@ def train(
     X_test  = test_df.drop(columns=drop_cols)
     y_test  = test_df[target_col]           # kept for reference / evaluation
 
-    print(f"[train] Train rows: {len(X_train)} | Test rows: {len(X_test)} | Features: {X_train.shape[1]}", flush=True)
-    print(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}", flush=True)
-    print(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}", flush=True)
-    print(f"[train] Starting Optuna study ({n_trials} trials)...", flush=True)
+    logger.info(f"[train] Train rows: {len(X_train)} | Test rows: {len(X_test)} | Features: {X_train.shape[1]}", )
+    logger.info(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}", )
+    logger.info(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}", )
+    logger.info(f"[train] Starting Optuna study ({n_trials} trials)...", )
 
     # ------------------------------------------------------------------ #
     # 4.  Optuna objective — maximise PnL with chunked pruning             #
@@ -117,21 +120,21 @@ def train(
             "bootstrap":         trial.suggest_categorical("bootstrap", [True, False]),
         }
 
-        print(f"[trial {trial.number}] Params: {params}", flush=True)
+        logger.info(f"[trial {trial.number}] Params: {params}", )
 
         # Use n_jobs=1 inside Optuna trials — Optuna already parallelises
         # trials at the study level; nested joblib pools can deadlock
         model = RandomForestRegressor(random_state=42, n_jobs=1, **params)
 
-        print(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...", flush=True)
+        logger.info(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...")
         model.fit(X_train, y_train)
         preds = model.predict(X_test)   # absolute price predictions
 
         # Guard against constant predictions (degenerate model)
-        print(f"[trial {trial.number}] Fit done. Running backtest chunks...", flush=True)
+        logger.info(f"[trial {trial.number}] Fit done. Running backtest chunks...")
 
         if np.std(preds) < 1e-8:
-            print(f"[trial {trial.number}] Skipping: constant predictions detected.", flush=True)
+            logger.info(f"[trial {trial.number}] Skipping: constant predictions detected.")
             raise optuna.TrialPruned()
 
         df_preds = prepare_predictions(
@@ -157,7 +160,7 @@ def train(
             _, _, pnl_so_far = bt.run()
 
             trial.report(pnl_so_far, step=chunk_idx)
-            print(f"[trial {trial.number}] Chunk {chunk_idx+1}/{n_chunks} PnL: {pnl_so_far:.4f}", flush=True)
+            logger.info(f"[trial {trial.number}] Chunk {chunk_idx+1}/{n_chunks} PnL: {pnl_so_far:.4f}")
             if trial.should_prune():
                 raise optuna.TrialPruned()
 
@@ -171,19 +174,19 @@ def train(
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    print(f"[train] Best Optuna parameters: {best_params}", flush=True)
-    print(f"[train] Best trial PnL: {study.best_value:.4f}", flush=True)
+    logger.info(f"[train] Best Optuna parameters: {best_params}")
+    logger.info(f"[train] Best trial PnL: {study.best_value:.4f}")
 
     # ------------------------------------------------------------------ #
     # 6.  Final model — re-train on full train set with best params        #
     # ------------------------------------------------------------------ #
     # n_jobs=-1 is safe here since we're outside Optuna's parallel context
     final_model = RandomForestRegressor(random_state=42, n_jobs=-1, **best_params)
-    print("[train] Fitting final model...", flush=True)
+    logger.info("[train] Fitting final model...", )
     final_model.fit(X_train, y_train)
     final_preds = final_model.predict(X_test)   # absolute price units
 
-    print(f"[train] Final predictions — min: {final_preds.min():.4f}, "
-          f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}", flush=True)
+    logger.info(f"[train] Final predictions — min: {final_preds.min():.4f}, "
+          f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}")
 
     return final_model, final_preds, X_test.index, X_test

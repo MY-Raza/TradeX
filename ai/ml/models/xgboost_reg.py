@@ -5,78 +5,86 @@ import optuna
 
 from TradeX.backtest.backtest import BackTest
 from TradeX.ai.ml.utils import prepare_predictions
+from TradeX.utils.common.config_loader import get_logger 
+
+logger = get_logger("randomforest_regressor")
+
+# Suppress Optuna verbose logging
+optuna.logging.set_verbosity(optuna.logging.WARNING)
 
 
 def train(
-    df,
-    df_1m,
-    target_col="target",
-    split_date="2024-01-01 00:00",
-    n_trials=50,
-    k=0.5
-):
+    df: pd.DataFrame,
+    df_1m: pd.DataFrame,
+    target_col: str = "target",
+    split_date: str = "2024-01-01 00:00",
+    n_trials: int = 50,
+    k: float = 0.5,
+    transform_features: bool = True,
+) -> tuple:
     """
-    Train XGBRegressor using PnL-based Optuna optimization with pruning.
+    Train an XGBRegressor on OHLCV data using Optuna for hyperparameter
+    optimization and a PnL-based backtest objective with MedianPruner.
 
-    Args:
-        df (pd.DataFrame): Feature dataframe
-        df_1m (pd.DataFrame): 1-minute OHLCV dataframe for backtesting
-        target_col (str): Target column name
-        split_date (str): Date string to split train/test
-        n_trials (int): Number of Optuna trials
-        k (float): Threshold for converting predictions to trading signals
+    Features (open/high/low/close/volume) are optionally log-diff transformed
+    for numeric stability. The target column remains in absolute price units.
 
     Returns:
-        model: trained XGBRegressor
-        preds: predictions on test set
-        test_index: indices of test set
-        X_test: features of test set
+        final_model  (XGBRegressor): Best model re-trained on the full train set.
+        final_preds  (np.ndarray):   Predictions on the test set in absolute price units.
+        test_index   (pd.Index):     Row indices of the test set.
+        X_test       (pd.DataFrame): Feature matrix of the test set.
     """
 
     # ----------------------------
-    # Ensure datetime column & sort
+    # 1. Validate & pre-process
     # ----------------------------
     if "datetime" not in df.columns:
-        raise ValueError("DataFrame must have a 'datetime' column.")
+        raise ValueError("DataFrame must contain a 'datetime' column.")
+    if target_col not in df.columns:
+        raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
 
     df = df.copy()
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime").reset_index(drop=True)
+    logger.info(f"[train] DataFrame shape before transform: {df.shape}")
 
     # ----------------------------
-    # LOG-DIFF TRANSFORMATION
+    # 2. Feature transformation (target excluded)
     # ----------------------------
-    price_cols = ["open", "high", "low", "close"]
-    for col in price_cols:
-        if col in df.columns:
+    if transform_features:
+        price_cols = [c for c in ("open", "high", "low", "close") if c in df.columns]
+        for col in price_cols:
             df[col] = np.log(df[col]).diff()
-
-    if "volume" in df.columns:
-        df["volume"] = np.log1p(df["volume"]).diff()
-
-    df = df.dropna().reset_index(drop=True)
+        if "volume" in df.columns:
+            df["volume"] = np.log1p(df["volume"]).diff()
+        df = df.dropna(subset=price_cols).reset_index(drop=True)
+        logger.info(f"[train] DataFrame shape after transform & dropna: {df.shape}")
 
     # ----------------------------
-    # Train/Test Split
+    # 3. Train/Test Split
     # ----------------------------
-    split_date = pd.to_datetime(split_date, utc=True)
-    train_df = df[df["datetime"] < split_date]
-    test_df = df[df["datetime"] >= split_date]
+    split_dt = pd.to_datetime(split_date, utc=True)
+    train_df = df[df["datetime"] < split_dt].copy()
+    test_df  = df[df["datetime"] >= split_dt].copy()
 
-    if train_df.empty or test_df.empty:
-        raise ValueError("Train/Test split resulted in empty dataset.")
+    if train_df.empty:
+        raise ValueError(f"Train set is empty for split_date='{split_date}'")
+    if test_df.empty:
+        raise ValueError(f"Test set is empty for split_date='{split_date}'")
 
-    drop_cols = [target_col, "datetime", "future_close"]
-    X_train = train_df.drop(columns=[c for c in drop_cols if c in train_df.columns])
+    drop_cols = [c for c in (target_col, "datetime", "future_close") if c in df.columns]
+    X_train = train_df.drop(columns=drop_cols)
     y_train = train_df[target_col]
+    X_test  = test_df.drop(columns=drop_cols)
+    y_test  = test_df[target_col]
 
-    X_test = test_df.drop(columns=[c for c in drop_cols if c in test_df.columns])
-    y_test = test_df[target_col]
+    logger.info(f"[train] Train rows: {len(X_train)}, Test rows: {len(X_test)}, Features: {X_train.shape[1]}")
 
     # ----------------------------
-    # OPTUNA OBJECTIVE (PnL Optimization with pruning)
+    # 4. Optuna objective (PnL + pruning)
     # ----------------------------
-    def objective(trial):
+    def objective(trial: optuna.Trial) -> float:
         params = {
             "n_estimators": trial.suggest_int("n_estimators", 100, 800),
             "max_depth": trial.suggest_int("max_depth", 3, 12),
@@ -88,15 +96,20 @@ def train(
             "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 5.0),
             "objective": "reg:squarederror",
             "tree_method": "hist",
-            "n_jobs": -1,
+            "n_jobs": 1,  # safer inside Optuna trials
             "random_state": 42,
         }
+
+        logger.info(f"[trial {trial.number}] Params: {params}", )
 
         model = XGBRegressor(**params)
         model.fit(X_train, y_train)
         preds = model.predict(X_test)
 
-        # Convert predictions → trading signals
+        if np.std(preds) < 1e-8:
+            logger.info(f"[trial {trial.number}] Skipping trial: constant predictions detected.")
+            raise optuna.TrialPruned()
+
         df_preds = prepare_predictions(
             df,
             preds,
@@ -105,44 +118,45 @@ def train(
             threshold=None,
             k=k
         )
-        df_preds['datetime'] = pd.to_datetime(df_preds['datetime'], utc=True)
+        df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
-        # ----------------------------
-        # Backtest in chunks for pruning
-        # ----------------------------
+        # Chunked backtest
+        n_chunks   = 5
         total_rows = len(df_preds)
-        n_chunks = 5  # split test set into 5 cumulative chunks
-        pnl_so_far = 0
+        pnl_so_far = 0.0
 
-        for i in range(n_chunks):
-            end_idx = (i + 1) * total_rows // n_chunks
+        for chunk_idx in range(n_chunks):
+            end_idx = (chunk_idx + 1) * total_rows // n_chunks
             df_chunk = df_preds.iloc[:end_idx]
 
             bt = BackTest(df_1m, df_chunk, take_profit=3, stop_loss=1)
-            _, _, pnl_chunk = bt.run()
-            pnl_so_far = pnl_chunk
+            _, _, pnl_so_far = bt.run()
 
-            trial.report(pnl_so_far, step=i)  # report intermediate PnL
+            trial.report(pnl_so_far, step=chunk_idx)
+            logger.info(f"[trial {trial.number}] Chunk {chunk_idx+1}/{n_chunks} PnL: {pnl_so_far:.4f}", )
             if trial.should_prune():
                 raise optuna.TrialPruned()
 
         return pnl_so_far
 
     # ----------------------------
-    # Run Optuna with MedianPruner
+    # 5. Run Optuna study
     # ----------------------------
     pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=1)
-    study = optuna.create_study(direction="maximize", pruner=pruner)
+    study  = optuna.create_study(direction="maximize", pruner=pruner)
     study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
-    print(f"Best Optuna Parameters: {best_params}")
+    logger.info(f"[train] Best Optuna parameters: {best_params}")
+    logger.info(f"[train] Best trial PnL: {study.best_value:.4f}")
 
     # ----------------------------
-    # Final Model Training
+    # 6. Final model (full train)
     # ----------------------------
-    final_model = XGBRegressor(**best_params)
+    final_model = XGBRegressor(**best_params, n_jobs=-1)
     final_model.fit(X_train, y_train)
-    final_preds = final_model.predict(X_test)
+    final_preds = final_model.predict(X_test)  # absolute price predictions
+
+    logger.info(f"[train] Final predictions — min: {final_preds.min():.4f}, max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}")
 
     return final_model, final_preds, X_test.index, X_test

@@ -1801,3 +1801,21 @@ Feature names seen at fit time, yet now missing:
 2026-03-13 12:44:06,552 | INFO | model_main | Fetching data for btc from database...
 2026-03-13 12:44:16,037 | INFO | model_main | Generating indicators for btc...
 2026-03-13 12:44:16,186 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-13 13:00:41,618 | INFO | model_main | [Dry-run] random_forest predictions on first 5 test rows:
+[108021.92636183 108003.17534983 107965.18980924 107960.97082514
+ 107934.95053106]
+2026-03-13 13:24:42,628 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-13 13:29:25,080 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
+[107812.18  107775.99  107731.766 107738.54  107648.93 ]
+2026-03-13 13:36:38,515 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-13 13:36:38,515 | INFO | model_main | Fetching data for btc from database...
+2026-03-13 13:36:50,326 | INFO | model_main | Generating indicators for btc...
+2026-03-13 13:36:50,464 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-13 13:45:49,093 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-13 13:45:49,093 | INFO | model_main | Fetching data for btc from database...
+2026-03-13 13:45:57,950 | INFO | model_main | Generating indicators for btc...
+2026-03-13 13:45:58,077 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-13 13:45:58,402 | ERROR | model_main | Regressor random_forest failed for btc: Logger._log() got an unexpected keyword argument 'flush'
+2026-03-13 13:45:58,408 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-13 13:45:58,729 | ERROR | model_main | Regressor xgboost failed for btc: Logger._log() got an unexpected keyword argument 'flush'
+2026-03-13 13:45:58,731 | INFO | model_main | Model training complete for btc.
