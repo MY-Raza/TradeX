@@ -156,6 +156,8 @@ while True:
             logger.info(f"{symbol} | Resampled to {len(df_resampled)} rows.")
             if USE_ML_MODEL:
                 model_predictions = run_inference(model_name= MODEL_NAME, df_tf=df_resampled)
+                print(model_predictions.tail(1))
+                model_predictions.to_csv(f"final_preds.csv")
             results = execute_strategies_on_dataframe(df=df_resampled, strategies=strategies,use_model=USE_ML_MODEL,model_signals=model_predictions)
             if not results:
                 logger.warning(f"{symbol} | No signals generated.")
