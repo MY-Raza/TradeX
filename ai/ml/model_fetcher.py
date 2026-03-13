@@ -145,6 +145,10 @@ for clf_name, is_active in classifiers_config.items():
         try:
             sample_preds = model.predict(X_test.head(5))
             logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
+            preds_df = pd.DataFrame({
+                 "prediction": sample_preds
+              })
+            preds_df.to_csv(f"debug_outputs/{clf_name}_sample_preds.csv", index=False)
         except Exception as e:
             logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
@@ -162,7 +166,7 @@ for clf_name, is_active in classifiers_config.items():
         save_model(
              model,
              X_test.columns.tolist(),
-             symbols,
+             symbols[0],
              f"{clf_name}_classifier_{timestamp}"
         )
     except Exception as e:
@@ -187,6 +191,10 @@ for reg_name, is_active in regressors_config.items():
         try:
             sample_preds = model.predict(X_test.head(5))
             logger.info(f"[Dry-run] {reg_name} predictions on first 5 test rows:\n{sample_preds}")
+            preds_df = pd.DataFrame({
+                 "prediction": sample_preds
+              })
+            preds_df.to_csv(f"{reg_name}_sample_preds.csv", index=False)
         except Exception as e:
             logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
         df_predictions = prepare_predictions(df_reg,preds,test_index,model_type="regressor")

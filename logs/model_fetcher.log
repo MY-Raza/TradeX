@@ -439,3 +439,95 @@
 2026-03-12 16:00:53,861 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
 2026-03-12 16:01:02,065 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
 2026-03-12 16:01:02,098 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-13 09:38:35,073 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-13 09:38:47,086 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-13 09:38:47,131 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-13 09:52:58,612 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[1 1 1 1 1]
+2026-03-13 09:52:58,631 | ERROR | model_fetcher | [Dry-run] Failed for random_forest: Cannot save file into a non-existent directory: 'debug_outputs'
+2026-03-13 09:53:01,891 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 09:53:01,891 | INFO | model_fetcher | Final Balance for Classifier: 496.42
+2026-03-13 09:53:01,891 | INFO | model_fetcher | Final PnL for Classifier: -66.2
+2026-03-13 09:53:01,958 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-13 09:55:41,982 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[1 1 1 1 1]
+2026-03-13 09:55:41,986 | ERROR | model_fetcher | [Dry-run] Failed for xgboost: Cannot save file into a non-existent directory: 'debug_outputs'
+2026-03-13 09:55:45,721 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                      buy  ...   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long         sell - stop_loss  ...   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                      buy  ...   988.51 -0.05    -1.15
+3 2025-07-02 16:00:00+00:00                long  sell - direction_change  ...  1014.47  2.63     1.48
+4 2025-07-02 16:00:00+00:00               short                      buy  ...  1013.96 -0.05     1.43
+
+[5 rows x 8 columns]
+2026-03-13 09:55:45,721 | INFO | model_fetcher | Final Balance for Classifier: 498.58
+2026-03-13 09:55:45,721 | INFO | model_fetcher | Final PnL for Classifier: -68.86
+2026-03-13 09:55:45,737 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']
+2026-03-13 09:58:57,151 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-13 09:59:07,052 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-13 09:59:07,097 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-13 10:04:43,996 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[1 1 1 1 1]
+2026-03-13 10:04:44,008 | ERROR | model_fetcher | [Dry-run] Failed for random_forest: Cannot save file into a non-existent directory: 'debug_outputs'
+2026-03-13 10:04:46,520 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 10:04:46,520 | INFO | model_fetcher | Final Balance for Classifier: 496.42
+2026-03-13 10:04:46,520 | INFO | model_fetcher | Final PnL for Classifier: -66.2
+2026-03-13 10:04:46,572 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-13 10:05:50,479 | INFO | model_fetcher | The best model: random_forest_clf_20260312_123808
+2026-03-13 10:05:59,733 | WARNING | model_fetcher | Some best_features were not generated: {'MINUS_DI_14'}
+2026-03-13 10:05:59,779 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-13 10:17:16,896 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[1 1 1 1 1]
+2026-03-13 10:17:16,931 | ERROR | model_fetcher | [Dry-run] Failed for random_forest: Cannot save file into a non-existent directory: 'debug_outputs'
+2026-03-13 10:17:21,378 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 10:17:21,379 | INFO | model_fetcher | Final Balance for Classifier: 496.42
+2026-03-13 10:17:21,379 | INFO | model_fetcher | Final PnL for Classifier: -66.2
+2026-03-13 10:17:21,409 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-13 10:21:09,290 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[1 1 1 1 1]
+2026-03-13 10:21:09,299 | ERROR | model_fetcher | [Dry-run] Failed for xgboost: Cannot save file into a non-existent directory: 'debug_outputs'
+2026-03-13 10:21:14,794 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 10:21:14,794 | INFO | model_fetcher | Final Balance for Classifier: 703.98
+2026-03-13 10:21:14,794 | INFO | model_fetcher | Final PnL for Classifier: -27.84
+2026-03-13 10:21:14,838 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']
+2026-03-13 10:35:48,343 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[0.00690781 0.00685677 0.00708572 0.00690066 0.00775361]
+2026-03-13 10:35:53,396 | INFO | model_fetcher | Final Ledger for Regressor:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 10:35:53,397 | INFO | model_fetcher | Final Balance for Regressor: 496.42
+2026-03-13 10:35:53,397 | INFO | model_fetcher | Final PnL for Regressor: -66.2
+2026-03-13 10:35:53,521 | INFO | model_fetcher | Training Regressor: xgboost for ['btc']
+2026-03-13 10:39:16,525 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[0.01086307 0.01086307 0.01086307 0.01086307 0.01086307]
+2026-03-13 10:39:20,552 | INFO | model_fetcher | Final Ledger for Regressor:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-13 10:39:20,553 | INFO | model_fetcher | Final Balance for Regressor: 496.42
+2026-03-13 10:39:20,553 | INFO | model_fetcher | Final PnL for Regressor: -66.2
