@@ -76,7 +76,7 @@ def train(
     def objective(trial: optuna.Trial):
         params = {
             "n_estimators": trial.suggest_int("n_estimators", 100, 800),
-            "max_depth": trial.suggest_int("max_depth", 3, 40),
+            "max_depth": trial.suggest_int("max_depth", 3, 12),
             "min_samples_split": trial.suggest_int("min_samples_split", 2, 20),
             "min_samples_leaf": trial.suggest_int("min_samples_leaf", 1, 20),
             "max_features": trial.suggest_categorical("max_features", ["sqrt", "log2", None]),

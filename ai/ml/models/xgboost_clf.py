@@ -89,11 +89,10 @@ def train(
             "reg_alpha": trial.suggest_float("reg_alpha", 0.0, 5.0),
             "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 5.0),
             "objective": "binary:logistic",
+            "tree_method": "hist",
+            "n_jobs": 1,  # safer inside Optuna trials
             "eval_metric": "logloss",
             "use_label_encoder": False,
-            "tree_method": "hist",
-            "n_jobs": 1,  # safe inside Optuna trials
-            "random_state": 42,
         }
 
         model = XGBClassifier(**params)

@@ -118,6 +118,7 @@ def train(
             "min_samples_leaf":  trial.suggest_int("min_samples_leaf", 1, 20),
             "max_features":      trial.suggest_categorical("max_features", ["sqrt", "log2"]),
             "bootstrap":         trial.suggest_categorical("bootstrap", [True, False]),
+            "criterion": trial.suggest_categorical("criterion", ["gini", "entropy", "log_loss"]),
         }
 
         logger.info(f"[trial {trial.number}] Params: {params}", )
