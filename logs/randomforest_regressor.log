@@ -1,1 +1,143 @@
 2026-03-13 13:45:58,679 | INFO | randomforest_regressor | [train] DataFrame shape before transform: (27317, 145)
+2026-03-13 13:48:57,162 | INFO | randomforest_regressor | [train] DataFrame shape after log-diff transform & dropna: (27330, 145)
+2026-03-13 13:48:57,195 | INFO | randomforest_regressor | [train] Train rows: 21799 | Test rows: 5531 | Features: 143
+2026-03-13 13:48:57,197 | INFO | randomforest_regressor | [train] NaNs in X_train: 0 | X_test: 0
+2026-03-13 13:48:57,197 | INFO | randomforest_regressor | [train] NaNs in y_train: 0 | y_test: 0
+2026-03-13 13:48:57,197 | INFO | randomforest_regressor | [train] Starting Optuna study (10 trials)...
+2026-03-13 13:48:57,212 | INFO | randomforest_regressor | [trial 0] Params: {'n_estimators': 176, 'max_depth': 11, 'min_samples_split': 19, 'min_samples_leaf': 16, 'max_features': 'sqrt', 'bootstrap': True}
+2026-03-13 13:48:57,215 | INFO | randomforest_regressor | [trial 0] Fitting model on 21799 rows...
+2026-03-13 13:49:14,142 | INFO | randomforest_regressor | [trial 0] Fit done. Running backtest chunks...
+2026-03-13 13:49:16,602 | INFO | randomforest_regressor | [trial 0] Chunk 1/5 PnL: 78.5100
+2026-03-13 13:49:19,260 | INFO | randomforest_regressor | [trial 0] Chunk 2/5 PnL: 23.5300
+2026-03-13 13:49:21,810 | INFO | randomforest_regressor | [trial 0] Chunk 3/5 PnL: 153.2700
+2026-03-13 13:49:24,392 | INFO | randomforest_regressor | [trial 0] Chunk 4/5 PnL: 174.1700
+2026-03-13 13:49:26,810 | INFO | randomforest_regressor | [trial 0] Chunk 5/5 PnL: 210.0200
+2026-03-13 13:49:26,963 | INFO | randomforest_regressor | [trial 1] Params: {'n_estimators': 375, 'max_depth': 9, 'min_samples_split': 11, 'min_samples_leaf': 6, 'max_features': 'sqrt', 'bootstrap': False}
+2026-03-13 13:49:26,963 | INFO | randomforest_regressor | [trial 1] Fitting model on 21799 rows...
+2026-03-13 13:50:21,273 | INFO | randomforest_regressor | [trial 1] Fit done. Running backtest chunks...
+2026-03-13 13:50:23,559 | INFO | randomforest_regressor | [trial 1] Chunk 1/5 PnL: 82.2600
+2026-03-13 13:50:25,712 | INFO | randomforest_regressor | [trial 1] Chunk 2/5 PnL: 21.2400
+2026-03-13 13:50:28,174 | INFO | randomforest_regressor | [trial 1] Chunk 3/5 PnL: 144.2600
+2026-03-13 13:50:30,771 | INFO | randomforest_regressor | [trial 1] Chunk 4/5 PnL: 167.8400
+2026-03-13 13:50:34,149 | INFO | randomforest_regressor | [trial 1] Chunk 5/5 PnL: 194.7600
+2026-03-13 13:50:34,343 | INFO | randomforest_regressor | [trial 2] Params: {'n_estimators': 705, 'max_depth': 11, 'min_samples_split': 15, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'bootstrap': True}
+2026-03-13 13:50:34,345 | INFO | randomforest_regressor | [trial 2] Fitting model on 21799 rows...
+2026-03-13 13:51:53,471 | INFO | randomforest_regressor | [trial 2] Fit done. Running backtest chunks...
+2026-03-13 13:51:55,529 | INFO | randomforest_regressor | [trial 2] Chunk 1/5 PnL: 78.3400
+2026-03-13 13:51:57,992 | INFO | randomforest_regressor | [trial 2] Chunk 2/5 PnL: 20.6600
+2026-03-13 13:52:00,690 | INFO | randomforest_regressor | [trial 2] Chunk 3/5 PnL: 139.3400
+2026-03-13 13:52:03,066 | INFO | randomforest_regressor | [trial 2] Chunk 4/5 PnL: 170.8500
+2026-03-13 13:52:05,669 | INFO | randomforest_regressor | [trial 2] Chunk 5/5 PnL: 201.8000
+2026-03-13 13:52:05,849 | INFO | randomforest_regressor | [trial 3] Params: {'n_estimators': 110, 'max_depth': 9, 'min_samples_split': 15, 'min_samples_leaf': 11, 'max_features': 'log2', 'bootstrap': False}
+2026-03-13 13:52:05,849 | INFO | randomforest_regressor | [trial 3] Fitting model on 21799 rows...
+2026-03-13 13:52:16,255 | INFO | randomforest_regressor | [trial 3] Fit done. Running backtest chunks...
+2026-03-13 13:52:18,536 | INFO | randomforest_regressor | [trial 3] Chunk 1/5 PnL: 74.4600
+2026-03-13 13:52:22,232 | INFO | randomforest_regressor | [trial 3] Chunk 2/5 PnL: 18.8800
+2026-03-13 13:52:25,693 | INFO | randomforest_regressor | [trial 3] Chunk 3/5 PnL: 139.4000
+2026-03-13 13:52:28,880 | INFO | randomforest_regressor | [trial 3] Chunk 4/5 PnL: 168.2900
+2026-03-13 13:52:32,312 | INFO | randomforest_regressor | [trial 3] Chunk 5/5 PnL: 202.3800
+2026-03-13 13:52:32,526 | INFO | randomforest_regressor | [trial 4] Params: {'n_estimators': 281, 'max_depth': 11, 'min_samples_split': 18, 'min_samples_leaf': 2, 'max_features': 'log2', 'bootstrap': False}
+2026-03-13 13:52:32,526 | INFO | randomforest_regressor | [trial 4] Fitting model on 21799 rows...
+2026-03-13 13:53:10,659 | INFO | randomforest_regressor | [trial 4] Fit done. Running backtest chunks...
+2026-03-13 13:53:13,096 | INFO | randomforest_regressor | [trial 4] Chunk 1/5 PnL: 75.7700
+2026-03-13 13:53:16,192 | INFO | randomforest_regressor | [trial 4] Chunk 2/5 PnL: 14.1700
+2026-03-13 13:53:19,112 | INFO | randomforest_regressor | [trial 4] Chunk 3/5 PnL: 124.5700
+2026-03-13 13:53:21,768 | INFO | randomforest_regressor | [trial 4] Chunk 4/5 PnL: 148.8800
+2026-03-13 13:53:25,249 | INFO | randomforest_regressor | [trial 4] Chunk 5/5 PnL: 172.5000
+2026-03-13 13:53:25,438 | INFO | randomforest_regressor | [trial 5] Params: {'n_estimators': 702, 'max_depth': 4, 'min_samples_split': 7, 'min_samples_leaf': 18, 'max_features': 'log2', 'bootstrap': False}
+2026-03-13 13:53:25,448 | INFO | randomforest_regressor | [trial 5] Fitting model on 21799 rows...
+2026-03-13 13:54:07,126 | INFO | randomforest_regressor | [trial 5] Fit done. Running backtest chunks...
+2026-03-13 13:54:10,342 | INFO | randomforest_regressor | [trial 5] Chunk 1/5 PnL: -10.2300
+2026-03-13 13:54:13,599 | INFO | randomforest_regressor | [trial 5] Chunk 2/5 PnL: 8.3600
+2026-03-13 13:54:13,606 | INFO | randomforest_regressor | [trial 6] Params: {'n_estimators': 495, 'max_depth': 11, 'min_samples_split': 15, 'min_samples_leaf': 13, 'max_features': 'log2', 'bootstrap': False}
+2026-03-13 13:54:13,606 | INFO | randomforest_regressor | [trial 6] Fitting model on 21799 rows...
+2026-03-13 13:55:17,665 | INFO | randomforest_regressor | [trial 6] Fit done. Running backtest chunks...
+2026-03-13 13:55:20,346 | INFO | randomforest_regressor | [trial 6] Chunk 1/5 PnL: 74.6900
+2026-03-13 13:55:23,629 | INFO | randomforest_regressor | [trial 6] Chunk 2/5 PnL: 12.0500
+2026-03-13 13:55:26,933 | INFO | randomforest_regressor | [trial 6] Chunk 3/5 PnL: 139.5500
+2026-03-13 13:55:30,058 | INFO | randomforest_regressor | [trial 6] Chunk 4/5 PnL: 172.0500
+2026-03-13 13:55:33,566 | INFO | randomforest_regressor | [trial 6] Chunk 5/5 PnL: 207.8200
+2026-03-13 13:55:33,761 | INFO | randomforest_regressor | [trial 7] Params: {'n_estimators': 114, 'max_depth': 9, 'min_samples_split': 17, 'min_samples_leaf': 7, 'max_features': 'log2', 'bootstrap': True}
+2026-03-13 13:55:33,761 | INFO | randomforest_regressor | [trial 7] Fitting model on 21799 rows...
+2026-03-13 13:55:43,495 | INFO | randomforest_regressor | [trial 7] Fit done. Running backtest chunks...
+2026-03-13 13:55:46,802 | INFO | randomforest_regressor | [trial 7] Chunk 1/5 PnL: 5.6700
+2026-03-13 13:55:50,005 | INFO | randomforest_regressor | [trial 7] Chunk 2/5 PnL: 36.2700
+2026-03-13 13:55:53,225 | INFO | randomforest_regressor | [trial 7] Chunk 3/5 PnL: 164.1500
+2026-03-13 13:55:56,549 | INFO | randomforest_regressor | [trial 7] Chunk 4/5 PnL: 196.8600
+2026-03-13 13:55:59,107 | INFO | randomforest_regressor | [trial 7] Chunk 5/5 PnL: 232.8100
+2026-03-13 13:55:59,275 | INFO | randomforest_regressor | [trial 8] Params: {'n_estimators': 729, 'max_depth': 7, 'min_samples_split': 19, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'bootstrap': False}
+2026-03-13 13:55:59,684 | INFO | randomforest_regressor | [trial 8] Fitting model on 21799 rows...
+2026-03-13 13:57:37,789 | INFO | randomforest_regressor | [trial 8] Fit done. Running backtest chunks...
+2026-03-13 13:57:41,271 | INFO | randomforest_regressor | [trial 8] Chunk 1/5 PnL: 5.7000
+2026-03-13 13:57:44,220 | INFO | randomforest_regressor | [trial 8] Chunk 2/5 PnL: 27.5700
+2026-03-13 13:57:46,798 | INFO | randomforest_regressor | [trial 8] Chunk 3/5 PnL: 153.6400
+2026-03-13 13:57:50,432 | INFO | randomforest_regressor | [trial 8] Chunk 4/5 PnL: 169.3300
+2026-03-13 13:57:50,438 | INFO | randomforest_regressor | [trial 9] Params: {'n_estimators': 769, 'max_depth': 6, 'min_samples_split': 7, 'min_samples_leaf': 17, 'max_features': 'log2', 'bootstrap': True}
+2026-03-13 13:57:50,438 | INFO | randomforest_regressor | [trial 9] Fitting model on 21799 rows...
+2026-03-13 13:58:33,282 | INFO | randomforest_regressor | [trial 9] Fit done. Running backtest chunks...
+2026-03-13 13:58:35,632 | INFO | randomforest_regressor | [trial 9] Chunk 1/5 PnL: 4.8600
+2026-03-13 13:58:39,025 | INFO | randomforest_regressor | [trial 9] Chunk 2/5 PnL: 26.4600
+2026-03-13 13:58:42,332 | INFO | randomforest_regressor | [trial 9] Chunk 3/5 PnL: 163.0700
+2026-03-13 13:58:46,044 | INFO | randomforest_regressor | [trial 9] Chunk 4/5 PnL: 184.4700
+2026-03-13 13:58:49,180 | INFO | randomforest_regressor | [trial 9] Chunk 5/5 PnL: 212.7200
+2026-03-13 13:58:49,351 | INFO | randomforest_regressor | [train] Best Optuna parameters: {'n_estimators': 114, 'max_depth': 9, 'min_samples_split': 17, 'min_samples_leaf': 7, 'max_features': 'log2', 'bootstrap': True}
+2026-03-13 13:58:49,351 | INFO | randomforest_regressor | [train] Best trial PnL: 232.8100
+2026-03-13 13:58:49,351 | INFO | randomforest_regressor | [train] Fitting final model...
+2026-03-13 13:58:52,357 | INFO | randomforest_regressor | [train] Final predictions — min: 66088.7722, max: 110713.3354, mean: 100465.2236
+2026-03-13 14:21:23,581 | INFO | randomforest_regressor | [train] DataFrame shape before transform: (27317, 145)
+2026-03-13 14:21:23,657 | INFO | randomforest_regressor | [train] DataFrame shape after transform & dropna: (27316, 145)
+2026-03-13 14:21:23,751 | INFO | randomforest_regressor | [train] Train rows: 21799, Test rows: 5517, Features: 143
+2026-03-13 14:21:23,768 | INFO | randomforest_regressor | [trial 0] Params: {'n_estimators': 800, 'max_depth': 4, 'learning_rate': 0.05500831431908479, 'subsample': 0.5415653563674756, 'colsample_bytree': 0.67167236087266, 'gamma': 0.27537990762539766, 'reg_alpha': 0.837475789831722, 'reg_lambda': 0.48056831817122725, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:21:39,324 | INFO | randomforest_regressor | [trial 0] Chunk 1/5 PnL: 79.9400
+2026-03-13 14:21:43,112 | INFO | randomforest_regressor | [trial 0] Chunk 2/5 PnL: 75.2300
+2026-03-13 14:21:46,048 | INFO | randomforest_regressor | [trial 0] Chunk 3/5 PnL: 161.6800
+2026-03-13 14:21:49,152 | INFO | randomforest_regressor | [trial 0] Chunk 4/5 PnL: 208.2700
+2026-03-13 14:21:52,806 | INFO | randomforest_regressor | [trial 0] Chunk 5/5 PnL: 244.2000
+2026-03-13 14:21:52,971 | INFO | randomforest_regressor | [trial 1] Params: {'n_estimators': 459, 'max_depth': 10, 'learning_rate': 0.052629420751249316, 'subsample': 0.5452610850349318, 'colsample_bytree': 0.646027176820221, 'gamma': 0.3503371688960799, 'reg_alpha': 0.634842734616593, 'reg_lambda': 2.611515748186422, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:22:50,759 | INFO | randomforest_regressor | [trial 1] Chunk 1/5 PnL: -13.6900
+2026-03-13 14:22:53,077 | INFO | randomforest_regressor | [trial 1] Chunk 2/5 PnL: 84.1100
+2026-03-13 14:22:55,616 | INFO | randomforest_regressor | [trial 1] Chunk 3/5 PnL: 104.9800
+2026-03-13 14:22:58,394 | INFO | randomforest_regressor | [trial 1] Chunk 4/5 PnL: 126.3800
+2026-03-13 14:23:00,955 | INFO | randomforest_regressor | [trial 1] Chunk 5/5 PnL: 160.6400
+2026-03-13 14:23:01,096 | INFO | randomforest_regressor | [trial 2] Params: {'n_estimators': 737, 'max_depth': 12, 'learning_rate': 0.26219478624085923, 'subsample': 0.8207982951112851, 'colsample_bytree': 0.5953755161770236, 'gamma': 2.6103276128612665, 'reg_alpha': 4.103567091723632, 'reg_lambda': 2.9272450904185074, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:23:58,116 | INFO | randomforest_regressor | [trial 2] Chunk 1/5 PnL: -43.8500
+2026-03-13 14:24:00,890 | INFO | randomforest_regressor | [trial 2] Chunk 2/5 PnL: 15.8900
+2026-03-13 14:24:04,120 | INFO | randomforest_regressor | [trial 2] Chunk 3/5 PnL: 89.9900
+2026-03-13 14:24:07,431 | INFO | randomforest_regressor | [trial 2] Chunk 4/5 PnL: 47.1600
+2026-03-13 14:24:11,181 | INFO | randomforest_regressor | [trial 2] Chunk 5/5 PnL: 85.7600
+2026-03-13 14:24:11,349 | INFO | randomforest_regressor | [trial 3] Params: {'n_estimators': 650, 'max_depth': 8, 'learning_rate': 0.18125309810034437, 'subsample': 0.7669091495134024, 'colsample_bytree': 0.5958772189662864, 'gamma': 4.513492327358319, 'reg_alpha': 0.48080765381338597, 'reg_lambda': 2.3743509277560984, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:24:57,939 | INFO | randomforest_regressor | [trial 3] Chunk 1/5 PnL: -16.0000
+2026-03-13 14:25:00,983 | INFO | randomforest_regressor | [trial 3] Chunk 2/5 PnL: 21.7700
+2026-03-13 14:25:04,175 | INFO | randomforest_regressor | [trial 3] Chunk 3/5 PnL: 76.3000
+2026-03-13 14:25:07,141 | INFO | randomforest_regressor | [trial 3] Chunk 4/5 PnL: 157.2700
+2026-03-13 14:25:10,094 | INFO | randomforest_regressor | [trial 3] Chunk 5/5 PnL: 190.7400
+2026-03-13 14:25:10,216 | INFO | randomforest_regressor | [trial 4] Params: {'n_estimators': 257, 'max_depth': 9, 'learning_rate': 0.2828368456868953, 'subsample': 0.8199402619341911, 'colsample_bytree': 0.7988306875482378, 'gamma': 2.5298271039350197, 'reg_alpha': 0.6375491226525654, 'reg_lambda': 4.533329500522211, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:25:41,533 | INFO | randomforest_regressor | [trial 4] Chunk 1/5 PnL: -27.4000
+2026-03-13 14:25:44,447 | INFO | randomforest_regressor | [trial 4] Chunk 2/5 PnL: 45.8000
+2026-03-13 14:25:48,391 | INFO | randomforest_regressor | [trial 4] Chunk 3/5 PnL: 8.2600
+2026-03-13 14:25:51,153 | INFO | randomforest_regressor | [trial 4] Chunk 4/5 PnL: 82.6000
+2026-03-13 14:25:54,409 | INFO | randomforest_regressor | [trial 4] Chunk 5/5 PnL: 115.8200
+2026-03-13 14:25:54,542 | INFO | randomforest_regressor | [trial 5] Params: {'n_estimators': 330, 'max_depth': 7, 'learning_rate': 0.14378370585922018, 'subsample': 0.9994182802786077, 'colsample_bytree': 0.9885452100908294, 'gamma': 0.012065351787778344, 'reg_alpha': 3.951564344900392, 'reg_lambda': 2.6630332541568844, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:26:13,419 | INFO | randomforest_regressor | [trial 5] Chunk 1/5 PnL: -34.7700
+2026-03-13 14:26:15,785 | INFO | randomforest_regressor | [trial 5] Chunk 2/5 PnL: 56.1400
+2026-03-13 14:26:19,096 | INFO | randomforest_regressor | [trial 5] Chunk 3/5 PnL: 12.6600
+2026-03-13 14:26:19,100 | INFO | randomforest_regressor | [trial 6] Params: {'n_estimators': 534, 'max_depth': 3, 'learning_rate': 0.22408567047239702, 'subsample': 0.6611374649136487, 'colsample_bytree': 0.8371385355282036, 'gamma': 3.93639701085233, 'reg_alpha': 4.071635240629796, 'reg_lambda': 0.2941240721996563, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:26:28,707 | INFO | randomforest_regressor | [trial 6] Chunk 1/5 PnL: -5.6600
+2026-03-13 14:26:31,608 | INFO | randomforest_regressor | [trial 6] Chunk 2/5 PnL: 105.6000
+2026-03-13 14:26:34,750 | INFO | randomforest_regressor | [trial 6] Chunk 3/5 PnL: 111.5800
+2026-03-13 14:26:37,615 | INFO | randomforest_regressor | [trial 6] Chunk 4/5 PnL: 153.9400
+2026-03-13 14:26:41,475 | INFO | randomforest_regressor | [trial 6] Chunk 5/5 PnL: 182.8900
+2026-03-13 14:26:41,648 | INFO | randomforest_regressor | [trial 7] Params: {'n_estimators': 161, 'max_depth': 5, 'learning_rate': 0.1734962800235916, 'subsample': 0.8660182344222627, 'colsample_bytree': 0.8029372527238673, 'gamma': 3.593321159903997, 'reg_alpha': 0.11597953045177023, 'reg_lambda': 4.867826594780397, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:26:48,317 | INFO | randomforest_regressor | [trial 7] Chunk 1/5 PnL: -27.9700
+2026-03-13 14:26:51,622 | INFO | randomforest_regressor | [trial 7] Chunk 2/5 PnL: 70.9200
+2026-03-13 14:26:54,553 | INFO | randomforest_regressor | [trial 7] Chunk 3/5 PnL: 81.6900
+2026-03-13 14:26:54,558 | INFO | randomforest_regressor | [trial 8] Params: {'n_estimators': 220, 'max_depth': 8, 'learning_rate': 0.24926836797355226, 'subsample': 0.7010963852287018, 'colsample_bytree': 0.9582656761207793, 'gamma': 4.205404173181181, 'reg_alpha': 2.207589961482693, 'reg_lambda': 4.477815985774972, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:27:15,398 | INFO | randomforest_regressor | [trial 8] Chunk 1/5 PnL: -21.6200
+2026-03-13 14:27:18,310 | INFO | randomforest_regressor | [trial 8] Chunk 2/5 PnL: 6.4500
+2026-03-13 14:27:18,313 | INFO | randomforest_regressor | [trial 9] Params: {'n_estimators': 674, 'max_depth': 10, 'learning_rate': 0.1527734098380135, 'subsample': 0.7774321813644045, 'colsample_bytree': 0.8706579142517761, 'gamma': 0.03328761646775147, 'reg_alpha': 4.693042851996135, 'reg_lambda': 3.165530371540761, 'objective': 'reg:squarederror', 'tree_method': 'hist', 'n_jobs': 1, 'random_state': 42}
+2026-03-13 14:29:33,360 | INFO | randomforest_regressor | [trial 9] Chunk 1/5 PnL: -9.1500
+2026-03-13 14:29:36,795 | INFO | randomforest_regressor | [trial 9] Chunk 2/5 PnL: 72.4600
+2026-03-13 14:29:39,613 | INFO | randomforest_regressor | [trial 9] Chunk 3/5 PnL: 28.0600
+2026-03-13 14:29:39,626 | INFO | randomforest_regressor | [train] Best Optuna parameters: {'n_estimators': 800, 'max_depth': 4, 'learning_rate': 0.05500831431908479, 'subsample': 0.5415653563674756, 'colsample_bytree': 0.67167236087266, 'gamma': 0.27537990762539766, 'reg_alpha': 0.837475789831722, 'reg_lambda': 0.48056831817122725}
+2026-03-13 14:29:39,628 | INFO | randomforest_regressor | [train] Best trial PnL: 244.2000
+2026-03-13 14:30:39,332 | INFO | randomforest_regressor | [train] Final predictions — min: 67391.9453, max: 115244.3047, mean: 102547.5547

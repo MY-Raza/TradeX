@@ -7,7 +7,7 @@ from TradeX.backtest.backtest import BackTest
 from TradeX.ai.ml.utils import prepare_predictions
 from TradeX.utils.common.config_loader import get_logger 
 
-logger = get_logger("randomforest_regressor")
+logger = get_logger("xgboost_regressor")
 
 # Suppress Optuna verbose logging
 optuna.logging.set_verbosity(optuna.logging.WARNING)
