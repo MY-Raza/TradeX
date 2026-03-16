@@ -172,7 +172,7 @@ def train(
     # ------------------------------------------------------------------ #
     pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=1)
     study  = optuna.create_study(direction="maximize", pruner=pruner)
-    study.optimize(objective, n_trials=n_trials)
+    study.optimize(objective, n_trials=n_trials, n_jobs=4)
 
     best_params = study.best_params
     logger.info(f"[train] Best Optuna parameters: {best_params}")
