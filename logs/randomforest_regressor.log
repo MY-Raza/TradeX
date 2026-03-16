@@ -186,3 +186,54 @@
 2026-03-16 13:37:26,091 | INFO | randomforest_regressor | [trial 2] Chunk 5/5 PnL: 67.8900
 2026-03-16 13:37:26,327 | INFO | randomforest_regressor | [trial 7] Params: {'n_estimators': 164, 'max_depth': 9, 'min_samples_split': 13, 'min_samples_leaf': 4, 'max_features': 'log2', 'bootstrap': False, 'criterion': 'absolute_error'}
 2026-03-16 13:37:26,327 | INFO | randomforest_regressor | [trial 7] Fitting model on 21799 rows...
+2026-03-16 15:20:59,371 | INFO | randomforest_regressor | [train] DataFrame shape after log-diff transform & dropna: (27330, 145)
+2026-03-16 15:20:59,527 | INFO | randomforest_regressor | [train] Train rows: 21799 | Test rows: 5531 | Features: 143
+2026-03-16 15:20:59,539 | INFO | randomforest_regressor | [train] NaNs in X_train: 0 | X_test: 0
+2026-03-16 15:20:59,539 | INFO | randomforest_regressor | [train] NaNs in y_train: 0 | y_test: 0
+2026-03-16 15:20:59,540 | INFO | randomforest_regressor | [train] Starting Optuna study (10 trials)...
+2026-03-16 15:20:59,543 | INFO | randomforest_regressor | [trial 0] Params: {'n_estimators': 406, 'max_depth': 4, 'min_samples_split': 11, 'min_samples_leaf': 8, 'max_features': 'sqrt', 'bootstrap': False, 'criterion': 'friedman_mse'}
+2026-03-16 15:20:59,545 | INFO | randomforest_regressor | [trial 0] Fitting model on 21799 rows...
+2026-03-16 15:20:59,558 | INFO | randomforest_regressor | [trial 1] Params: {'n_estimators': 162, 'max_depth': 10, 'min_samples_split': 6, 'min_samples_leaf': 1, 'max_features': 'log2', 'bootstrap': True, 'criterion': 'squared_error'}
+2026-03-16 15:20:59,560 | INFO | randomforest_regressor | [trial 1] Fitting model on 21799 rows...
+2026-03-16 15:20:59,560 | INFO | randomforest_regressor | [trial 2] Params: {'n_estimators': 562, 'max_depth': 7, 'min_samples_split': 19, 'min_samples_leaf': 4, 'max_features': 'log2', 'bootstrap': True, 'criterion': 'friedman_mse'}
+2026-03-16 15:20:59,567 | INFO | randomforest_regressor | [trial 3] Params: {'n_estimators': 773, 'max_depth': 8, 'min_samples_split': 16, 'min_samples_leaf': 18, 'max_features': 'log2', 'bootstrap': False, 'criterion': 'friedman_mse'}
+2026-03-16 15:20:59,567 | INFO | randomforest_regressor | [trial 2] Fitting model on 21799 rows...
+2026-03-16 15:20:59,570 | INFO | randomforest_regressor | [trial 3] Fitting model on 21799 rows...
+2026-03-16 15:21:21,481 | INFO | randomforest_regressor | [trial 1] Fit done. Running backtest chunks...
+2026-03-16 15:21:23,664 | INFO | randomforest_regressor | [trial 1] Chunk 1/5 PnL: 77.3900
+2026-03-16 15:21:28,437 | INFO | randomforest_regressor | [trial 1] Chunk 2/5 PnL: 21.7800
+2026-03-16 15:21:30,914 | INFO | randomforest_regressor | [trial 1] Chunk 3/5 PnL: 156.1200
+2026-03-16 15:21:33,447 | INFO | randomforest_regressor | [trial 1] Chunk 4/5 PnL: 181.9500
+2026-03-16 15:21:36,425 | INFO | randomforest_regressor | [trial 1] Chunk 5/5 PnL: 211.7800
+2026-03-16 15:21:36,624 | INFO | randomforest_regressor | [trial 4] Params: {'n_estimators': 741, 'max_depth': 11, 'min_samples_split': 4, 'min_samples_leaf': 11, 'max_features': 'log2', 'bootstrap': False, 'criterion': 'squared_error'}
+2026-03-16 15:21:36,624 | INFO | randomforest_regressor | [trial 4] Fitting model on 21799 rows...
+2026-03-16 15:22:09,269 | INFO | randomforest_regressor | [trial 0] Fit done. Running backtest chunks...
+2026-03-16 15:22:14,348 | INFO | randomforest_regressor | [trial 0] Chunk 1/5 PnL: -3.5400
+2026-03-16 15:22:20,230 | INFO | randomforest_regressor | [trial 0] Chunk 2/5 PnL: 25.1400
+2026-03-16 15:22:26,157 | INFO | randomforest_regressor | [trial 0] Chunk 3/5 PnL: 104.5400
+2026-03-16 15:22:31,314 | INFO | randomforest_regressor | [trial 0] Chunk 4/5 PnL: 188.0700
+2026-03-16 15:22:37,457 | INFO | randomforest_regressor | [trial 0] Chunk 5/5 PnL: 209.8900
+2026-03-16 15:22:37,843 | INFO | randomforest_regressor | [trial 5] Params: {'n_estimators': 749, 'max_depth': 4, 'min_samples_split': 14, 'min_samples_leaf': 17, 'max_features': None, 'bootstrap': True, 'criterion': 'friedman_mse'}
+2026-03-16 15:22:37,844 | INFO | randomforest_regressor | [trial 5] Fitting model on 21799 rows...
+2026-03-16 15:22:39,209 | INFO | randomforest_regressor | [trial 2] Fit done. Running backtest chunks...
+2026-03-16 15:22:41,333 | INFO | randomforest_regressor | [trial 2] Chunk 1/5 PnL: 82.8300
+2026-03-16 15:22:43,844 | INFO | randomforest_regressor | [trial 2] Chunk 2/5 PnL: 27.0300
+2026-03-16 15:22:46,582 | INFO | randomforest_regressor | [trial 2] Chunk 3/5 PnL: 157.1400
+2026-03-16 15:22:48,972 | INFO | randomforest_regressor | [trial 2] Chunk 4/5 PnL: 176.7700
+2026-03-16 15:22:52,156 | INFO | randomforest_regressor | [trial 2] Chunk 5/5 PnL: 213.8600
+2026-03-16 15:22:52,330 | INFO | randomforest_regressor | [trial 6] Params: {'n_estimators': 774, 'max_depth': 8, 'min_samples_split': 6, 'min_samples_leaf': 18, 'max_features': None, 'bootstrap': True, 'criterion': 'friedman_mse'}
+2026-03-16 15:22:52,330 | INFO | randomforest_regressor | [trial 6] Fitting model on 21799 rows...
+2026-03-16 15:23:58,358 | INFO | randomforest_regressor | [trial 3] Fit done. Running backtest chunks...
+2026-03-16 15:24:00,589 | INFO | randomforest_regressor | [trial 3] Chunk 1/5 PnL: 86.0200
+2026-03-16 15:24:03,724 | INFO | randomforest_regressor | [trial 3] Chunk 2/5 PnL: 24.3700
+2026-03-16 15:24:06,517 | INFO | randomforest_regressor | [trial 3] Chunk 3/5 PnL: 148.2700
+2026-03-16 15:24:09,544 | INFO | randomforest_regressor | [trial 3] Chunk 4/5 PnL: 171.1600
+2026-03-16 15:24:12,188 | INFO | randomforest_regressor | [trial 3] Chunk 5/5 PnL: 210.9000
+2026-03-16 15:24:12,428 | INFO | randomforest_regressor | [trial 7] Params: {'n_estimators': 688, 'max_depth': 6, 'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt', 'bootstrap': False, 'criterion': 'absolute_error'}
+2026-03-16 15:24:12,428 | INFO | randomforest_regressor | [trial 7] Fitting model on 21799 rows...
+2026-03-16 15:24:59,908 | INFO | randomforest_regressor | [trial 4] Fit done. Running backtest chunks...
+2026-03-16 15:25:04,090 | INFO | randomforest_regressor | [trial 4] Chunk 1/5 PnL: 78.9600
+2026-03-16 15:25:09,063 | INFO | randomforest_regressor | [trial 4] Chunk 2/5 PnL: 20.3000
+2026-03-16 15:25:12,826 | INFO | randomforest_regressor | [trial 4] Chunk 3/5 PnL: 142.1800
+2026-03-16 15:25:15,929 | INFO | randomforest_regressor | [trial 4] Chunk 4/5 PnL: 172.6600
+2026-03-16 15:25:19,780 | INFO | randomforest_regressor | [trial 4] Chunk 5/5 PnL: 208.1500
