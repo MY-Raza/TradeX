@@ -117,6 +117,7 @@ def train(
             model_type="classifier",
             k=k
         )
+        df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
         # ------------------ #
         # Chunked backtest for pruning

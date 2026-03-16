@@ -313,6 +313,7 @@ def main():
             continue
 
         # Resample to desired timeframe
+        df_1m["datetime"] = pd.to_datetime(df_1m["datetime"], utc=True)
         df_1h = resample_ohlcv(df_1m, timehorizon)
 
         # Feature Engineering

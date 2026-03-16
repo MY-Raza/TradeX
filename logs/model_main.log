@@ -1890,3 +1890,6 @@ Feature names seen at fit time, yet now missing:
 2026-03-16 14:33:08,089 | INFO | model_main | Training classifier: random_forest for btc
 2026-03-16 15:00:36,633 | INFO | model_main | [Dry-run] random_forest predictions on first 5 test rows:
 [-1 -1 -1 -1 -1]
+2026-03-16 15:20:20,789 | INFO | model_main | Training classifier: xgboost for btc
+2026-03-16 15:20:58,659 | ERROR | model_main | Classifier xgboost failed for btc: Cannot compare tz-naive and tz-aware timestamps
+2026-03-16 15:20:58,661 | INFO | model_main | Training regressor: random_forest for btc
