@@ -12,7 +12,6 @@ from TradeX.utils.data.data_cleaner import resample_ohlcv
 import os
 from TradeX.backtest.backtest import BackTest
 logger = get_logger("model_main")
-import os
 from datetime import datetime
 # ----------------------------
 # FEATURE ENGINEERING
@@ -247,11 +246,11 @@ def create_classification_target(df: pd.DataFrame, window: int = 15, threshold: 
     future_return = (future_close - df["close"]) / df["close"]
 
     df["target"] = np.where(
-    future_return > threshold, 1,
-    np.where(future_return < -threshold, -1, 0)
-)
+        future_return > threshold, 1,
+        np.where(future_return < -threshold, -1, 0)
+    )
 
-    df.dropna(inplace=True)
+    df = df.dropna().reset_index(drop=True)
     return df
 
 
@@ -271,19 +270,16 @@ def create_regression_target(
     # Target is just the future max price
     df["target"] = future_max
 
-    # Drop rows with NaN at the end
-    df.dropna(inplace=True)
-
-    print(df.head())
+    df = df.dropna().reset_index(drop=True)
     return df
     
 
 
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 # ----------------------------
 # MAIN PIPELINE
 # ----------------------------
 def main():
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     current_dir = os.path.dirname(os.path.abspath(__file__))
     ml_config_path = os.path.join(current_dir, "config.yml")
     config = read_config(ml_config_path)
@@ -376,7 +372,6 @@ def main():
                                         pnl_importance_wide,
                                         table_name_clf
                                         )
-                table_name_clf = f"{clf_name}_clf_{timestamp}"
                 save_df_to_db(
                     df=important_features_df_clf,
                     table_name="best_features",

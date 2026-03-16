@@ -62,7 +62,3 @@ def save_model(model, feature_columns, symbol, model_name, folder="saved_models"
         }, f)
 
     logger.info(f"Saved model {model_name} for {symbol} at {file_path}")
-
-
-
-

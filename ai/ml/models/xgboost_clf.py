@@ -90,12 +90,10 @@ def train(
             "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 5.0),
             "objective": "binary:logistic",
             "tree_method": "hist",
-            "n_jobs": 1,  # safer inside Optuna trials
             "eval_metric": "logloss",
-            "use_label_encoder": False,
         }
 
-        model = XGBClassifier(**params)
+        model = XGBClassifier(**params, n_jobs=1)
         logger.info(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...")
         model.fit(X_train, y_train)
 
@@ -146,7 +144,7 @@ def train(
     # ------------------ #
     # 6. Final model training #
     # ------------------ #
-    final_model = XGBClassifier(**best_params)
+    final_model = XGBClassifier(**best_params, n_jobs=-1)
     logger.info("[train] Fitting final model...", )
     final_model.fit(X_train, y_train)
     final_probs = final_model.predict_proba(X_test)[:, 1]

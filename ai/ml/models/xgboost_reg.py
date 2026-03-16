@@ -96,13 +96,12 @@ def train(
             "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 5.0),
             "objective": "reg:squarederror",
             "tree_method": "hist",
-            "n_jobs": 1,  # safer inside Optuna trials
             "random_state": 42,
         }
 
         logger.info(f"[trial {trial.number}] Params: {params}", )
 
-        model = XGBRegressor(**params)
+        model = XGBRegressor(**params, n_jobs=1)
         model.fit(X_train, y_train)
         preds = model.predict(X_test)
 
