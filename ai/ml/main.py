@@ -235,27 +235,21 @@ def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
 # ----------------------------
 # TARGET CREATION
 # ----------------------------
-def create_classification_target(df: pd.DataFrame, window: int = 15, threshold: float = 0.002) -> pd.DataFrame:
+def create_classification_target(df: pd.DataFrame, window: int = 15, threshold: float = 0.001) -> pd.DataFrame:
     """
     Create classification targets for trading:
     1 = significant upward move
     0 = neutral
     -1 = significant downward move
     """
-    future_max = df["close"].rolling(window=window).max().shift(-window + 1)
-    future_min = df["close"].rolling(window=window).min().shift(-window + 1)
+    future_close = df["close"].shift(-window)
 
-    future_return_up = (future_max - df["close"]) / df["close"]
-    future_return_down = (future_min - df["close"]) / df["close"]
+    future_return = (future_close - df["close"]) / df["close"]
 
-    # Initialize target as neutral
-    df["target"] = 0
-
-    # Assign 1 for upward moves
-    df.loc[future_return_up > threshold, "target"] = 1
-
-    # Assign -1 for downward moves
-    df.loc[future_return_down < -threshold, "target"] = -1
+    df["target"] = np.where(
+    future_return > threshold, 1,
+    np.where(future_return < -threshold, -1, 0)
+)
 
     df.dropna(inplace=True)
     return df
