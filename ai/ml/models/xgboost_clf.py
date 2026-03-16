@@ -1,4 +1,5 @@
 from xgboost import XGBClassifier
+from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 import numpy as np
 import optuna
@@ -24,7 +25,7 @@ def train(
     Signals are generated via `prepare_predictions` for consistency with other models.
 
     Returns:
-        final_model, final_preds, test_index, X_test
+        final_model, final_probs, test_index, X_test
     """
 
     # ------------------ #
@@ -70,10 +71,17 @@ def train(
     y_test  = test_df[target_col]
 
     logger.info(f"Train rows: {len(X_train)} | Test rows: {len(X_test)} | Features: {X_train.shape[1]}")
-    logger.info(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}", )
-    logger.info(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}", )
-    logger.info(f"[train] Starting Optuna study ({n_trials} trials)...", )
+    logger.info(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}")
+    logger.info(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}")
 
+    # XGBoost requires classes [0, 1, 2] — encode [-1, 0, 1] -> [0, 1, 2]
+    le = LabelEncoder()
+    y_train_enc = le.fit_transform(y_train)
+    y_test_enc  = le.transform(y_test)
+    # Index of the positive class (original label = 1) in encoded space
+    pos_class_idx = list(le.classes_).index(1)
+
+    logger.info(f"[train] Starting Optuna study ({n_trials} trials)...")
 
     # ------------------ #
     # 4. Optuna Objective #
@@ -88,19 +96,20 @@ def train(
             "gamma": trial.suggest_float("gamma", 0.0, 5.0),
             "reg_alpha": trial.suggest_float("reg_alpha", 0.0, 5.0),
             "reg_lambda": trial.suggest_float("reg_lambda", 0.0, 5.0),
-            "objective": "binary:logistic",
+            "objective": "multi:softprob",
+            "num_class": len(le.classes_),
             "tree_method": "hist",
-            "eval_metric": "logloss",
+            "eval_metric": "mlogloss",
         }
 
         model = XGBClassifier(**params, n_jobs=1)
         logger.info(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...")
-        model.fit(X_train, y_train)
+        model.fit(X_train, y_train_enc)
 
-        # Use predict_proba[:,1] for signal generation
-        probs = model.predict_proba(X_test)[:, 1]
+        # Extract probability of the positive class (original label = 1)
+        probs = model.predict_proba(X_test)[:, pos_class_idx]
         logger.info(f"[trial {trial.number}] Fit done. Running backtest chunks...")
-        # Generate signals using prepare_predictions
+
         df_preds = prepare_predictions(
             df,
             probs,
@@ -121,8 +130,7 @@ def train(
             df_chunk = df_preds.iloc[:end_idx]
 
             bt = BackTest(df_1m, df_chunk, take_profit=3, stop_loss=1)
-            _, _, pnl_chunk = bt.run()
-            pnl_so_far = pnl_chunk
+            _, _, pnl_so_far = bt.run()
 
             trial.report(pnl_so_far, step=i)
             if trial.should_prune():
@@ -144,11 +152,17 @@ def train(
     # ------------------ #
     # 6. Final model training #
     # ------------------ #
-    final_model = XGBClassifier(**best_params, n_jobs=-1)
-    logger.info("[train] Fitting final model...", )
-    final_model.fit(X_train, y_train)
-    final_probs = final_model.predict_proba(X_test)[:, 1]
+    final_params = {
+        **best_params,
+        "objective": "multi:softprob",
+        "num_class": len(le.classes_),
+        "eval_metric": "mlogloss",
+    }
+    final_model = XGBClassifier(**final_params, n_jobs=-1)
+    logger.info("[train] Fitting final model...")
+    final_model.fit(X_train, y_train_enc)
+    final_probs = final_model.predict_proba(X_test)[:, pos_class_idx]
     logger.info(f"[train] Final predictions — min: {final_probs.min():.4f}, "
-          f"max: {final_probs.max():.4f}, mean: {final_probs.mean():.4f}")
+                f"max: {final_probs.max():.4f}, mean: {final_probs.mean():.4f}")
 
     return final_model, final_probs, X_test.index, X_test
