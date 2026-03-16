@@ -1,102 +1,108 @@
 from __future__ import annotations
 import pandas as pd
 import numpy as np
-from concurrent.futures import ProcessPoolExecutor, as_completed
 from TradeX.backtest.backtest import BackTest
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# compute_trade_statistics
-# FIX BN6: collapsed all passes (win/loss streaks, drawdown, ratios) into a
-#           single vectorised scan.  Removed the unnecessary ledger.copy().
-# ─────────────────────────────────────────────────────────────────────────────
 def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
-    pnl     = ledger["pnl"].to_numpy()
-    balance = ledger["balance"].to_numpy()
-    dirs    = ledger["predicted_direction"]
 
-    # --- counts ---
-    total  = len(pnl)
-    n_long = (dirs == "long").sum()
-    n_short= (dirs == "short").sum()
-    n_win  = (pnl > 0).sum()
-    n_loss = (pnl < 0).sum()
-    n_be   = (pnl == 0).sum()
+    df = ledger.copy()
+    stats = {}
 
-    # --- profit / loss ---
-    wins_mask  = pnl > 0
-    loss_mask  = pnl < 0
-    gross_profit = pnl[wins_mask].sum()
-    gross_loss   = pnl[loss_mask].sum()
-    net_profit   = pnl.sum()
-    avg_win  = pnl[wins_mask].mean() if wins_mask.any() else np.nan
-    avg_loss = pnl[loss_mask].mean() if loss_mask.any() else np.nan
+    # ------------------------
+    # Basic Counts
+    # ------------------------
+    stats["total_trades"] = len(df)
+    stats["long_trades"] = (df["predicted_direction"] == "long").sum()
+    stats["short_trades"] = (df["predicted_direction"] == "short").sum()
 
-    # --- ratios ---
-    rrr = abs(avg_win / avg_loss) if avg_loss and not np.isnan(avg_loss) else np.nan
-    pf  = gross_profit / abs(gross_loss) if gross_loss != 0 else np.nan
+    # ------------------------
+    # Win / Loss
+    # ------------------------
+    stats["win_trades"] = (df["pnl"] > 0).sum()
+    stats["loss_trades"] = (df["pnl"] < 0).sum()
+    stats["breakeven_trades"] = (df["pnl"] == 0).sum()
 
-    # --- drawdown (single pass via numpy) ---
-    running_max = np.maximum.accumulate(balance)
-    dd          = balance - running_max
-    max_dd      = dd.min()
-    max_dd_pct  = (dd / running_max).min()
+    stats["win_rate"] = stats["win_trades"] / stats["total_trades"] if stats["total_trades"] else 0
+    stats["loss_rate"] = stats["loss_trades"] / stats["total_trades"] if stats["total_trades"] else 0
 
-    # --- Sharpe / Sortino ---
-    std_pnl = pnl.std()
-    sharpe  = pnl.mean() / std_pnl if std_pnl and not np.isnan(std_pnl) else 0.0
-    down    = pnl[loss_mask]
-    std_dn  = down.std()
-    sortino = pnl.mean() / std_dn if len(down) > 0 and std_dn and not np.isnan(std_dn) else 0.0
+    # ------------------------
+    # Profit / Loss
+    # ------------------------
+    gross_profit = df.loc[df["pnl"] > 0, "pnl"].sum()
+    gross_loss = df.loc[df["pnl"] < 0, "pnl"].sum()
 
-    # --- streaks (single pass, O(n)) ---
-    # FIX BN6: replaced two separate groupby/cumsum chains with one loop
-    max_w = max_l = cur_w = cur_l = 0
-    for p in pnl:
-        if p > 0:
-            cur_w += 1; cur_l = 0
-            max_w = max(max_w, cur_w)
-        elif p < 0:
-            cur_l += 1; cur_w = 0
-            max_l = max(max_l, cur_l)
-        else:
-            cur_w = cur_l = 0
+    stats["gross_profit"] = gross_profit
+    stats["gross_loss"] = gross_loss
+    stats["net_profit"] = df["pnl"].sum()
 
-    stats = {
-        "total_trades":           total,
-        "long_trades":            int(n_long),
-        "short_trades":           int(n_short),
-        "win_trades":             int(n_win),
-        "loss_trades":            int(n_loss),
-        "breakeven_trades":       int(n_be),
-        "win_rate":               n_win / total if total else 0,
-        "loss_rate":              n_loss / total if total else 0,
-        "gross_profit":           gross_profit,
-        "gross_loss":             gross_loss,
-        "net_profit":             net_profit,
-        "avg_trade_pnl":          pnl.mean(),
-        "avg_win":                avg_win,
-        "avg_loss":               avg_loss,
-        "risk_reward_ratio":      rrr,
-        "profit_factor":          pf,
-        "max_drawdown":           max_dd,
-        "max_drawdown_pct":       max_dd_pct,
-        "sharpe_ratio":           sharpe,
-        "sortino_ratio":          sortino,
-        "max_consecutive_wins":   max_w,
-        "max_consecutive_losses": max_l,
-    }
+    # ------------------------
+    # Averages
+    # ------------------------
+    stats["avg_trade_pnl"] = df["pnl"].mean()
 
-    return pd.DataFrame([stats])
+    avg_win = df.loc[df["pnl"] > 0, "pnl"].mean()
+    avg_loss = df.loc[df["pnl"] < 0, "pnl"].mean()
 
+    stats["avg_win"] = avg_win
+    stats["avg_loss"] = avg_loss
 
-# ─────────────────────────────────────────────────────────────────────────────
-# prepare_predictions
-# FIX BN1: guard against double-copy; df.copy() is skipped if the caller has
-#           already ensured a copy (i.e., the frame is not read-only).
-# FIX BN4: regressor branch replaced rolling() with pure numpy — ~10× faster
-#           for moderate-length arrays and avoids pandas Series construction.
-# ─────────────────────────────────────────────────────────────────────────────
+    # ------------------------
+    # Risk Ratios
+    # ------------------------
+    stats["risk_reward_ratio"] = abs(avg_win / avg_loss) if avg_loss and not np.isnan(avg_loss) else np.nan
+    stats["profit_factor"] = gross_profit / abs(gross_loss) if gross_loss != 0 else np.nan
+
+    # ------------------------
+    # Drawdown
+    # ------------------------
+    equity = df["balance"]
+
+    rolling_max = equity.cummax()
+    drawdown = equity - rolling_max
+
+    stats["max_drawdown"] = drawdown.min()
+    stats["max_drawdown_pct"] = (drawdown / rolling_max).min()
+
+    # ------------------------
+    # Sharpe Ratio
+    # ------------------------
+    returns = df["pnl"]
+
+    if returns.std() and not np.isnan(returns.std()):
+        stats["sharpe_ratio"] = returns.mean() / returns.std()
+    else:
+        stats["sharpe_ratio"] = 0
+
+    # ------------------------
+    # Sortino Ratio
+    # ------------------------
+    downside = returns[returns < 0]
+
+    if downside.std() and not np.isnan(downside.std()):
+        stats["sortino_ratio"] = returns.mean() / downside.std()
+    else:
+        stats["sortino_ratio"] = 0
+
+    # ------------------------
+    # Consecutive Wins / Losses
+    # ------------------------
+    wins = df["pnl"] > 0
+    losses = df["pnl"] < 0
+
+    win_streak = wins.astype(int).groupby((wins != wins.shift()).cumsum()).cumsum()
+    loss_streak = losses.astype(int).groupby((losses != losses.shift()).cumsum()).cumsum()
+
+    stats["max_consecutive_wins"] = win_streak.max()
+    stats["max_consecutive_losses"] = loss_streak.max()
+
+    # ------------------------
+    # Return DataFrame
+    # ------------------------
+    stats_df = pd.DataFrame([stats])
+
+    return stats_df
+
 def prepare_predictions(
     df,
     preds,
@@ -107,9 +113,39 @@ def prepare_predictions(
     lookback: int | None = None,
     last_train_value=None,
 ) -> pd.DataFrame:
+    """
+    Prepare a predictions DataFrame for backtesting.
 
-    # Normalise datetime column
-    df = df.copy()  # keep one copy; callers in Optuna already work on their own frame
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Original price DataFrame with a 'datetime' column or DatetimeIndex.
+    preds : np.ndarray | darts.TimeSeries
+        Model predictions.
+    test_index : array-like
+        Integer positions of the test rows in df.
+    model_type : str
+        ``'classifier'``, ``'regressor'``, ``'dl'`` (LSTM-style, requires
+        lookback), or ``'dl_darts'`` (Darts models — no lookback needed).
+    threshold : float or None
+        Signal threshold.  If None, derived as ``k * std(...)``.
+    k : float
+        Std multiplier when threshold is None.
+    lookback : int or None
+        LSTM warm-up steps (only used for ``model_type='dl'``).
+    last_train_value : float or None
+        Last training value for inverse log-diff (reserved, unused here).
+
+    Returns
+    -------
+    pd.DataFrame
+        Columns: ['datetime', 'signals']  where signals ∈ {-1, 0, 1}.
+    """
+
+    # ------------------------------------------------------------------
+    # Normalise datetime column to UTC-aware (guard against re-localising)
+    # ------------------------------------------------------------------
+    df = df.copy()  # never mutate caller's frame
     if "datetime" in df.columns:
         dt_col = pd.to_datetime(df["datetime"])
         if dt_col.dt.tz is None:
@@ -118,90 +154,89 @@ def prepare_predictions(
     elif isinstance(df.index, pd.DatetimeIndex):
         if df.index.tz is None:
             df.index = df.index.tz_localize("UTC")
-        df = df.reset_index()
+        df = df.reset_index()          # bring DatetimeIndex → "datetime" column
         df = df.rename(columns={df.columns[0]: "datetime"})
 
-    # ── classifier ──────────────────────────────────────────────────────
+    # ------------------------------------------------------------------
+    # Branch: classifier
+    # ------------------------------------------------------------------
     if model_type == "classifier":
         upper = preds.mean() + 0.25 * preds.std()
         lower = preds.mean() - 0.25 * preds.std()
         signals = np.where(preds > upper, 1, np.where(preds < lower, -1, 0))
 
-    # ── regressor ───────────────────────────────────────────────────────
-    # FIX BN4: replaced pandas rolling(20) with a pure-numpy sliding window.
-    # For an n-element array this is ~10× faster because it avoids Series
-    # allocation, the rolling object, and two min_periods checks per row.
+    # ------------------------------------------------------------------
+    # Branch: regressor
+    # ------------------------------------------------------------------
     elif model_type == "regressor":
-        preds_np = np.asarray(preds, dtype=np.float64)
-        n = len(preds_np)
-        w = 20
-
-        # Build a (n, w) view using stride tricks for vectorised mean/std
-        if n >= w:
-            shape   = (n - w + 1, w)
-            strides = (preds_np.strides[0], preds_np.strides[0])
-            windows = np.lib.stride_tricks.as_strided(preds_np, shape=shape, strides=strides)
-            rm = np.empty(n);  rs = np.empty(n)
-            rm[:w-1] = preds_np[:w-1].mean(); rs[:w-1] = 0.0
-            rm[w-1:] = windows.mean(axis=1)
-            rs[w-1:] = windows.std(axis=1)
-        else:
-            rm = np.full(n, preds_np.mean())
-            rs = np.full(n, preds_np.std())
-
-        rs = np.where(rs < 1e-8, 1e-8, rs)
-
         if threshold is None:
-            thr = k * rs
-        else:
-            thr = np.full(n, threshold)
+            preds_series = pd.Series(preds)
+    
+            rolling_mean = preds_series.rolling(window=20, min_periods=1).mean()
+            rolling_std = preds_series.rolling(window=20, min_periods=1).std().fillna(0)
+    
+            # Avoid division by zero
+            rolling_std = rolling_std.replace(0, 1e-8)
+    
+            threshold = k * rolling_std
+    
+            signals = np.where(preds_series > rolling_mean + threshold, 1,
+                       np.where(preds_series < rolling_mean - threshold, -1, 0))
 
-        signals = np.where(preds_np > rm + thr, 1,
-                           np.where(preds_np < rm - thr, -1, 0))
-
-    # ── dl_darts ────────────────────────────────────────────────────────
+    # ------------------------------------------------------------------
+    # Branch: dl_darts  (ARIMA / VARIMA / NBEATS / Transformer via Darts)
+    # Darts predicts the full test window — no lookback warm-up gap.
+    # ------------------------------------------------------------------
     elif model_type == "dl_darts":
+        # Extract numpy array from Darts TimeSeries if needed
         if hasattr(preds, "values"):
             preds_np = preds.values().ravel().astype(np.float64)
         else:
             preds_np = np.asarray(preds, dtype=np.float64).ravel()
 
+        # test_index and preds must be the same length
         test_index = np.asarray(test_index)
         min_len    = min(len(preds_np), len(test_index))
         preds_np   = preds_np[:min_len]
         test_index = test_index[:min_len]
 
         if "close" in df.columns:
-            actual    = df.iloc[test_index]["close"].values.astype(np.float64)
-            errors    = preds_np - actual
-            threshold = threshold if threshold is not None else k * np.std(errors)
-            signals   = np.where(errors >  threshold,  1,
-                                 np.where(errors < -threshold, -1, 0))
+            actual = df.iloc[test_index]["close"].values.astype(np.float64)
+            errors = preds_np - actual
+            if threshold is None:
+                threshold = k * np.std(errors)
+            signals = np.where(errors > threshold, 1,
+                               np.where(errors < -threshold, -1, 0))
         else:
-            threshold = threshold if threshold is not None else k * np.std(preds_np)
-            signals   = np.where(preds_np >  threshold,  1,
-                                 np.where(preds_np < -threshold, -1, 0))
+            if threshold is None:
+                threshold = k * np.std(preds_np)
+            signals = np.where(preds_np > threshold, 1,
+                               np.where(preds_np < -threshold, -1, 0))
 
-    # ── dl (legacy LSTM) ────────────────────────────────────────────────
+    # ------------------------------------------------------------------
+    # Branch: dl  (legacy LSTM / sequence models — lookback required)
+    # ------------------------------------------------------------------
     elif model_type == "dl":
         if lookback is None:
             raise ValueError(
-                "lookback must be provided for model_type='dl'. "
+                "lookback must be provided for model_type='dl' (LSTM-style). "
                 "For Darts models use model_type='dl_darts'."
             )
+
         test_index_aligned = np.asarray(test_index)[lookback:]
         preds_aligned      = np.asarray(preds, dtype=np.float64).ravel()
         preds_aligned      = preds_aligned[:len(test_index_aligned)]
 
         if "close" in df.columns:
-            actual    = df.iloc[test_index_aligned]["close"].values.astype(np.float64)
-            errors    = preds_aligned - actual
-            threshold = threshold if threshold is not None else k * np.std(errors)
+            actual = df.iloc[test_index_aligned]["close"].values.astype(np.float64)
+            errors = preds_aligned - actual
+            if threshold is None:
+                threshold = k * np.std(errors)
         else:
             errors    = preds_aligned
-            threshold = threshold if threshold is not None else k * np.std(preds_aligned)
+            threshold = threshold or k * np.std(preds_aligned)
 
-        signals    = np.where(errors >  threshold,  1,
+        signals    = np.where(errors > threshold, 1,
                               np.where(errors < -threshold, -1, 0))
         test_index = test_index_aligned
 
@@ -211,102 +246,94 @@ def prepare_predictions(
             f"'dl', 'dl_darts'.  Got: '{model_type}'"
         )
 
+    # ------------------------------------------------------------------
+    # Build output DataFrame using iloc (safe for any index type)
+    # ------------------------------------------------------------------
     datetimes = df.iloc[np.asarray(test_index)]["datetime"].values
-    return pd.DataFrame({"datetime": datetimes, "signals": signals})
 
+    df_predictions = pd.DataFrame({
+        "datetime": datetimes,
+        "signals":  signals,
+    })
 
-# ─────────────────────────────────────────────────────────────────────────────
-# _permute_one_feature  (module-level so ProcessPoolExecutor can pickle it)
-# ─────────────────────────────────────────────────────────────────────────────
-def _permute_one_feature(args):
-    """Evaluate PnL drop for a single feature column (runs in a worker process)."""
-    col, X_test_np, X_test_cols, model, df, df_1m, base_pnl, model_type, k, threshold, n_repeats = args
+    return df_predictions
 
-    col_idx = X_test_cols.index(col)
-    pnl_scores = []
-
-    for _ in range(n_repeats):
-        X_perm_np = X_test_np.copy()
-        X_perm_np[:, col_idx] = np.random.permutation(X_perm_np[:, col_idx])
-        X_perm = pd.DataFrame(X_perm_np, columns=X_test_cols)
-
-        if model_type == "classifier":
-            preds = (
-                model.predict_proba(X_perm)[:, 1]
-                if hasattr(model, "predict_proba")
-                else model.predict(X_perm)
-            )
-        else:
-            preds = model.predict(X_perm)
-
-        df_preds = prepare_predictions(
-            df, preds, X_perm.index,
-            model_type=model_type, threshold=threshold, k=k,
-        )
-        df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
-
-        bt = BackTest(df_1m, df_preds, take_profit=3, stop_loss=1)
-        _, _, pnl = bt.run()
-        pnl_scores.append(pnl)
-
-    return col, base_pnl - np.mean(pnl_scores)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# pnl_permutation_importance
-# FIX BN5: each feature permutation is now evaluated in a separate worker
-#           process via ProcessPoolExecutor.  For 50 features × 3 repeats
-#           this gives a near-linear speed-up with core count.
-# ─────────────────────────────────────────────────────────────────────────────
 def pnl_permutation_importance(
     model,
-    X_test: pd.DataFrame,
+    X_test,
     df,
     df_1m,
-    base_pnl: float,
-    model_type: str = "classifier",
-    k: float = 0.5,
+    base_pnl,
+    model_type="classifier",
+    k=0.5,
     threshold=None,
-    n_repeats: int = 3,
-    max_workers: int | None = None,
-) -> pd.DataFrame:
-    """
-    Parallel permutation importance evaluated on PnL.
+    n_repeats=3
+):
 
-    Parameters
-    ----------
-    max_workers : int or None
-        Number of worker processes.  None = os.cpu_count().
-    """
-    cols        = X_test.columns.tolist()
-    X_test_np   = X_test.to_numpy()
+    results = []
 
-    args_list = [
-        (col, X_test_np, cols, model, df, df_1m,
-         base_pnl, model_type, k, threshold, n_repeats)
-        for col in cols
-    ]
 
-    results = {}
-    with ProcessPoolExecutor(max_workers=max_workers) as pool:
-        futures = {pool.submit(_permute_one_feature, a): a[0] for a in args_list}
-        for fut in as_completed(futures):
-            col, drop = fut.result()
-            results[col] = drop
+    for col in X_test.columns:
+        pnl_scores = []
 
-    return (
-        pd.DataFrame(
-            [{"feature": col, "pnl_drop": drop} for col, drop in results.items()]
-        )
-        .sort_values("pnl_drop", ascending=False)
-        .reset_index(drop=True)
-    )
+        for _ in range(n_repeats):
+            X_perm = X_test.copy()
+            X_perm[col] = np.random.permutation(X_perm[col].values)
 
+            # ----------------------------
+            # Generate predictions
+            # ----------------------------
+            if model_type == "classifier":
+                if hasattr(model, "predict_proba"):
+                    preds = model.predict_proba(X_perm)[:, 1]
+                else:
+                    preds = model.predict(X_perm)
+            else:
+                preds = model.predict(X_perm)
+
+            # ----------------------------
+            # Convert → trades
+            # ----------------------------
+            df_preds = prepare_predictions(
+                df,
+                preds,
+                X_perm.index,
+                model_type=model_type,
+                threshold=threshold,
+                k=k
+            )
+
+            df_preds["datetime"] = pd.to_datetime(
+                df_preds["datetime"], utc=True
+            )
+
+            bt = BackTest(
+                df_1m,
+                df_preds,
+                take_profit=3,
+                stop_loss=1
+            )
+            _, _, pnl = bt.run()
+
+            pnl_scores.append(pnl)
+
+        pnl_drop = base_pnl - np.mean(pnl_scores)
+
+        results.append({
+            "feature": col,
+            "pnl_drop": pnl_drop
+        })
+
+    return pd.DataFrame(results).sort_values("pnl_drop", ascending=False)
 
 def extract_important_features(pnl_importance_wide: pd.DataFrame, model_name: str):
-    feature_row      = pnl_importance_wide.drop(columns=["pnl"], errors="ignore").iloc[0]
+    # Drop pnl column
+    feature_row = pnl_importance_wide.drop(columns=["pnl"], errors="ignore").iloc[0]
+
+    # Keep only features with value > 0
     important_features = feature_row[feature_row > 0].index.tolist()
+
     return pd.DataFrame({
-        "model_name":        [model_name],
-        "important_features": [important_features],
+        "model_name": [model_name],
+        "important_features": [important_features]
     })

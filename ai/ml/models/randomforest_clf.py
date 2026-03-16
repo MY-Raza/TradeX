@@ -21,10 +21,8 @@ def train(
     transform_features: bool = True,
 ) -> tuple:
     """
-    Train RandomForestClassifier using PnL-based Optuna optimisation.
-
-    FIX BN2: study.optimize now called with n_jobs=-1 (parallel trials).
-    FIX BN1: single df.copy() at the top; downstream helpers receive views.
+    Train RandomForestClassifier using PnL-based Optuna optimization with pruning.
+    Signals are generated via `prepare_predictions` for consistency with other models.
     """
 
     # ------------------ #
@@ -35,7 +33,7 @@ def train(
     if target_col not in df.columns:
         raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
 
-    df = df.copy()  # single copy
+    df = df.copy()
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime").reset_index(drop=True)
 
@@ -54,83 +52,97 @@ def train(
     # ------------------ #
     # 3. Train/Test split #
     # ------------------ #
-    split_dt  = pd.to_datetime(split_date, utc=True)
-    train_mask = df["datetime"] < split_dt
+    split_dt = pd.to_datetime(split_date, utc=True)
+    train_df = df[df["datetime"] < split_dt].copy()
+    test_df  = df[df["datetime"] >= split_dt].copy()
 
-    if train_mask.sum() == 0 or (~train_mask).sum() == 0:
+    if train_df.empty or test_df.empty:
         raise ValueError("Train/Test split resulted in empty dataset.")
 
     drop_cols = [c for c in (target_col, "datetime", "future_close") if c in df.columns]
-    X_train = df.loc[train_mask].drop(columns=drop_cols)
-    y_train = df.loc[train_mask, target_col]
-    X_test  = df.loc[~train_mask].drop(columns=drop_cols)
-    y_test  = df.loc[~train_mask, target_col]  # noqa: F841
+    X_train = train_df.drop(columns=drop_cols)
+    y_train = train_df[target_col]
+    X_test  = test_df.drop(columns=drop_cols)
+    y_test  = test_df[target_col]
 
-    logger.info(
-        f"Train rows: {len(X_train)} | Test rows: {len(X_test)} "
-        f"| Features: {X_train.shape[1]}"
-    )
+    logger.info(f"Train rows: {len(X_train)} | Test rows: {len(X_test)} | Features: {X_train.shape[1]}")
+    logger.info(f"[train] NaNs in X_train: {X_train.isna().sum().sum()} | X_test: {X_test.isna().sum().sum()}", )
+    logger.info(f"[train] NaNs in y_train: {y_train.isna().sum()} | y_test: {y_test.isna().sum()}", )
+    logger.info(f"[train] Starting Optuna study ({n_trials} trials)...", )
 
     # ------------------ #
     # 4. Optuna Objective #
     # ------------------ #
     def objective(trial: optuna.Trial):
         params = {
-            "n_estimators":      trial.suggest_int("n_estimators", 100, 800),
-            "max_depth":         trial.suggest_int("max_depth", 3, 12),
+            "n_estimators": trial.suggest_int("n_estimators", 100, 800),
+            "max_depth": trial.suggest_int("max_depth", 3, 12),
             "min_samples_split": trial.suggest_int("min_samples_split", 2, 20),
-            "min_samples_leaf":  trial.suggest_int("min_samples_leaf", 1, 20),
-            "max_features":      trial.suggest_categorical("max_features", ["sqrt", "log2", None]),
-            "bootstrap":         trial.suggest_categorical("bootstrap", [True, False]),
-            "criterion":         trial.suggest_categorical(
-                "criterion", ["gini", "entropy", "log_loss"]
-            ),
+            "min_samples_leaf": trial.suggest_int("min_samples_leaf", 1, 20),
+            "max_features": trial.suggest_categorical("max_features", ["sqrt", "log2", None]),
+            "bootstrap": trial.suggest_categorical("bootstrap", [True, False]),
+            "criterion": trial.suggest_categorical("criterion", ["gini", "entropy", "log_loss"]),
         }
 
         model = RandomForestClassifier(random_state=42, n_jobs=1, **params)
+        logger.info(f"[trial {trial.number}] Fitting model on {len(X_train)} rows...")
         model.fit(X_train, y_train)
+
+        # Use predict_proba[:,1] for signal generation
         probs = model.predict_proba(X_test)[:, 1]
 
+        logger.info(f"[trial {trial.number}] Fit done. Running backtest chunks...")
+
+        # Generate signals using prepare_predictions
         df_preds = prepare_predictions(
-            df, probs, X_test.index, model_type="classifier", k=k
+            df,
+            probs,
+            X_test.index,
+            model_type="classifier",
+            k=k
         )
         df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
+        # Chunked backtest for pruning
         total_rows = len(df_preds)
-        n_chunks   = 5
+        n_chunks = 5
         pnl_so_far = 0.0
 
         for i in range(n_chunks):
             end_idx = (i + 1) * total_rows // n_chunks
-            bt = BackTest(df_1m, df_preds.iloc[:end_idx], take_profit=3, stop_loss=1)
-            _, _, pnl_so_far = bt.run()
+            df_chunk = df_preds.iloc[:end_idx]
+
+            bt = BackTest(df_1m, df_chunk, take_profit=3, stop_loss=1)
+            _, _, pnl_chunk = bt.run()
+            pnl_so_far = pnl_chunk
+
             trial.report(pnl_so_far, step=i)
             if trial.should_prune():
+                logger.info(f"[trial {trial.number}] Chunk {i+1}/{n_chunks} PnL: {pnl_so_far:.4f}")
                 raise optuna.TrialPruned()
 
         return pnl_so_far
 
-    # ------------------------------------------------ #
-    # 5. Run study — FIX BN2: parallel trials          #
-    # ------------------------------------------------ #
+    # ------------------ #
+    # 5. Run Optuna study #
+    # ------------------ #
     pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=1)
-    study  = optuna.create_study(direction="maximize", pruner=pruner)
-    study.optimize(objective, n_trials=n_trials, n_jobs=-1)
+    study = optuna.create_study(direction="maximize", pruner=pruner)
+    study.optimize(objective, n_trials=n_trials)
 
     best_params = study.best_params
     logger.info(f"[train] Best Optuna parameters: {best_params}")
     logger.info(f"[train] Best trial PnL: {study.best_value:.4f}")
 
     # ------------------ #
-    # 6. Final model     #
+    # 6. Final model training #
     # ------------------ #
     final_model = RandomForestClassifier(random_state=42, n_jobs=-1, **best_params)
+    logger.info("[train] Fitting final model...", )
     final_model.fit(X_train, y_train)
-    final_probs = final_model.predict_proba(X_test)[:, 1]
 
-    logger.info(
-        f"[train] Final predictions — min: {final_probs.min():.4f}, "
-        f"max: {final_probs.max():.4f}, mean: {final_probs.mean():.4f}"
-    )
+    final_probs = final_model.predict_proba(X_test)[:, 1]
+    logger.info(f"[train] Final predictions — min: {final_probs.min():.4f}, "
+          f"max: {final_probs.max():.4f}, mean: {final_probs.mean():.4f}")
 
     return final_model, final_probs, X_test.index, X_test
