@@ -313,7 +313,6 @@ def main():
             continue
 
         # Resample to desired timeframe
-        df_1m["datetime"] = pd.to_datetime(df_1m["datetime"], utc=True)
         df_1h = resample_ohlcv(df_1m, timehorizon)
 
         # Feature Engineering
@@ -338,7 +337,7 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10,
+                    n_trails=5,
                     df_1m=df_1m
                 )
                 try:
@@ -411,7 +410,7 @@ def main():
                     df_1m=df_1m,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=10
+                    n_trails=5
                 )
                 try:
                     sample_preds = model.predict(X_test.head(5))
