@@ -115,107 +115,104 @@ def prepare_predictions(
 ) -> pd.DataFrame:
     """
     Prepare a predictions DataFrame for backtesting.
- 
+
     Parameters
     ----------
     df : pd.DataFrame
         Original price DataFrame with a 'datetime' column or DatetimeIndex.
-        Pass in a frame whose datetime column is already UTC-aware to avoid
-        the redundant tz_localize call on every invocation.
     preds : np.ndarray | darts.TimeSeries
         Model predictions.
     test_index : array-like
         Integer positions of the test rows in df.
     model_type : str
-        'classifier', 'regressor', 'dl' (LSTM-style), or 'dl_darts'.
+        ``'classifier'``, ``'regressor'``, ``'dl'`` (LSTM-style, requires
+        lookback), or ``'dl_darts'`` (Darts models — no lookback needed).
     threshold : float or None
-        Signal threshold. If None, derived as k * std(...).
+        Signal threshold.  If None, derived as ``k * std(...)``.
     k : float
         Std multiplier when threshold is None.
     lookback : int or None
-        LSTM warm-up steps (only used for model_type='dl').
+        LSTM warm-up steps (only used for ``model_type='dl'``).
     last_train_value : float or None
-        Reserved, unused.
- 
+        Last training value for inverse log-diff (reserved, unused here).
+
     Returns
     -------
     pd.DataFrame
         Columns: ['datetime', 'signals']  where signals ∈ {-1, 0, 1}.
     """
- 
+
     # ------------------------------------------------------------------
-    # Normalise datetime column to UTC-aware.
-    # IMPORTANT: only extract the datetime column — do NOT copy the full
-    # feature DataFrame. The caller may pass a 150-column frame and this
-    # function is called once per Optuna trial; copying the full frame
-    # each time adds significant overhead for regressors.
+    # Normalise datetime column to UTC-aware (guard against re-localising)
     # ------------------------------------------------------------------
+    df = df.copy()  # never mutate caller's frame
     if "datetime" in df.columns:
-        dt_series = pd.to_datetime(df["datetime"])
-        if dt_series.dt.tz is None:
-            dt_series = dt_series.dt.tz_localize("UTC")
-        # Work with a lightweight 2-column frame: index + datetime only
-        df = pd.DataFrame({"datetime": dt_series}, index=df.index)
+        dt_col = pd.to_datetime(df["datetime"])
+        if dt_col.dt.tz is None:
+            dt_col = dt_col.dt.tz_localize("UTC")
+        df["datetime"] = dt_col
     elif isinstance(df.index, pd.DatetimeIndex):
-        idx = df.index
-        if idx.tz is None:
-            idx = idx.tz_localize("UTC")
-        df = pd.DataFrame({"datetime": idx}, index=df.index)
- 
+        if df.index.tz is None:
+            df.index = df.index.tz_localize("UTC")
+        df = df.reset_index()          # bring DatetimeIndex → "datetime" column
+        df = df.rename(columns={df.columns[0]: "datetime"})
+
     # ------------------------------------------------------------------
     # Branch: classifier
     # ------------------------------------------------------------------
     if model_type == "classifier":
-        upper   = preds.mean() + 0.25 * preds.std()
-        lower   = preds.mean() - 0.25 * preds.std()
+        upper = preds.mean() + 0.25 * preds.std()
+        lower = preds.mean() - 0.25 * preds.std()
         signals = np.where(preds > upper, 1, np.where(preds < lower, -1, 0))
- 
+
     # ------------------------------------------------------------------
     # Branch: regressor
     # ------------------------------------------------------------------
     elif model_type == "regressor":
-        preds_series = pd.Series(preds)
-        rolling_mean = preds_series.rolling(window=20, min_periods=1).mean()
-        # Use a local variable `band` — never overwrite the `threshold` parameter.
-        # Overwriting `threshold` with a Series caused it to be truthy on subsequent
-        # calls within the same trial, silently skipping the rolling window block and
-        # reusing a stale Series from the previous invocation.
         if threshold is None:
+            preds_series = pd.Series(preds)
+    
+            rolling_mean = preds_series.rolling(window=20, min_periods=1).mean()
             rolling_std = preds_series.rolling(window=20, min_periods=1).std().fillna(0)
+    
+            # Avoid division by zero
             rolling_std = rolling_std.replace(0, 1e-8)
-            band        = k * rolling_std
-        else:
-            band = threshold
-        signals = np.where(
-            preds_series > rolling_mean + band, 1,
-            np.where(preds_series < rolling_mean - band, -1, 0)
-        )
- 
+    
+            threshold = k * rolling_std
+    
+            signals = np.where(preds_series > rolling_mean + threshold, 1,
+                       np.where(preds_series < rolling_mean - threshold, -1, 0))
+
     # ------------------------------------------------------------------
-    # Branch: dl_darts  (Darts models — no lookback warm-up gap)
+    # Branch: dl_darts  (ARIMA / VARIMA / NBEATS / Transformer via Darts)
+    # Darts predicts the full test window — no lookback warm-up gap.
     # ------------------------------------------------------------------
     elif model_type == "dl_darts":
+        # Extract numpy array from Darts TimeSeries if needed
         if hasattr(preds, "values"):
             preds_np = preds.values().ravel().astype(np.float64)
         else:
             preds_np = np.asarray(preds, dtype=np.float64).ravel()
- 
+
+        # test_index and preds must be the same length
         test_index = np.asarray(test_index)
         min_len    = min(len(preds_np), len(test_index))
         preds_np   = preds_np[:min_len]
         test_index = test_index[:min_len]
- 
+
         if "close" in df.columns:
-            actual    = df.iloc[test_index]["close"].values.astype(np.float64)
-            errors    = preds_np - actual
+            actual = df.iloc[test_index]["close"].values.astype(np.float64)
+            errors = preds_np - actual
             if threshold is None:
                 threshold = k * np.std(errors)
-            signals   = np.where(errors > threshold, 1, np.where(errors < -threshold, -1, 0))
+            signals = np.where(errors > threshold, 1,
+                               np.where(errors < -threshold, -1, 0))
         else:
             if threshold is None:
                 threshold = k * np.std(preds_np)
-            signals   = np.where(preds_np > threshold, 1, np.where(preds_np < -threshold, -1, 0))
- 
+            signals = np.where(preds_np > threshold, 1,
+                               np.where(preds_np < -threshold, -1, 0))
+
     # ------------------------------------------------------------------
     # Branch: dl  (legacy LSTM / sequence models — lookback required)
     # ------------------------------------------------------------------
@@ -225,35 +222,41 @@ def prepare_predictions(
                 "lookback must be provided for model_type='dl' (LSTM-style). "
                 "For Darts models use model_type='dl_darts'."
             )
- 
+
         test_index_aligned = np.asarray(test_index)[lookback:]
         preds_aligned      = np.asarray(preds, dtype=np.float64).ravel()
         preds_aligned      = preds_aligned[:len(test_index_aligned)]
- 
+
         if "close" in df.columns:
-            actual    = df.iloc[test_index_aligned]["close"].values.astype(np.float64)
-            errors    = preds_aligned - actual
+            actual = df.iloc[test_index_aligned]["close"].values.astype(np.float64)
+            errors = preds_aligned - actual
             if threshold is None:
                 threshold = k * np.std(errors)
         else:
             errors    = preds_aligned
             threshold = threshold or k * np.std(preds_aligned)
- 
-        signals    = np.where(errors > threshold, 1, np.where(errors < -threshold, -1, 0))
+
+        signals    = np.where(errors > threshold, 1,
+                              np.where(errors < -threshold, -1, 0))
         test_index = test_index_aligned
- 
+
     else:
         raise ValueError(
             f"model_type must be one of: 'classifier', 'regressor', "
-            f"'dl', 'dl_darts'. Got: '{model_type}'"
+            f"'dl', 'dl_darts'.  Got: '{model_type}'"
         )
- 
+
     # ------------------------------------------------------------------
-    # Build output DataFrame
+    # Build output DataFrame using iloc (safe for any index type)
     # ------------------------------------------------------------------
     datetimes = df.iloc[np.asarray(test_index)]["datetime"].values
- 
-    return pd.DataFrame({"datetime": datetimes, "signals": signals})
+
+    df_predictions = pd.DataFrame({
+        "datetime": datetimes,
+        "signals":  signals,
+    })
+
+    return df_predictions
 
 def pnl_permutation_importance(
     model,
