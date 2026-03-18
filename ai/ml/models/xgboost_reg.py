@@ -60,17 +60,6 @@ def train(
         df = df.dropna(subset=price_cols).reset_index(drop=True)
         logger.info(f"[train] DataFrame shape after transform & dropna: {df.shape}")
 
-    # Normalise regression target to the same scale as log-diff features.
-    # create_regression_target returns absolute future price (~45 000).
-    # Features are log-diff (~0.001). The scale mismatch forces XGBoost
-    # to use deeper trees / more rounds to compensate — every trial slower.
-    # Rolling z-score brings the target into [-3, 3] range, matching features.
-    if transform_features and target_col in df.columns:
-        target_mean = df[target_col].rolling(window=20, min_periods=1).mean()
-        target_std  = df[target_col].rolling(window=20, min_periods=1).std().fillna(1).replace(0, 1)
-        df[target_col] = (df[target_col] - target_mean) / target_std
-        logger.info(f"[train] Target normalised — mean: {df[target_col].mean():.4f}, std: {df[target_col].std():.4f}")
-
     # ----------------------------
     # 3. Train/Test Split
     # Build X_train / X_test ONCE — reused by every trial via closure.

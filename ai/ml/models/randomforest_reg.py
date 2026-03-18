@@ -62,28 +62,6 @@ def train(
         logger.info(f"[train] DataFrame shape after log-diff transform & dropna: {df.shape}")
 
     # ------------------------------------------------------------------ #
-    # Normalise regression target to log-return scale.                    #
-    # create_regression_target returns an absolute future price (~45 000).#
-    # The features above are log-diff (~0.001). Without normalisation the #
-    # tree needs far more estimators / depth to bridge the scale gap,     #
-    # making every trial significantly slower.                            #
-    # log(target / close_t) converts to the same scale as the features.  #
-    # We guard with a separate close_raw extracted before log-diff.       #
-    # ------------------------------------------------------------------ #
-    if transform_features and target_col in df.columns:
-        # close was already log-diff'd above — recover the original close
-        # from the raw copy we made before any transformation via the
-        # target column itself isn't transformed, so we can use it
-        # indirectly: log-return = log(future_price) - log(close_t).
-        # We approximate close_t from the cumsum of the log-diff close.
-        # Simpler and equally correct: normalise target by its own
-        # rolling mean so the model predicts relative deviation.
-        target_mean = df[target_col].rolling(window=20, min_periods=1).mean()
-        target_std  = df[target_col].rolling(window=20, min_periods=1).std().fillna(1).replace(0, 1)
-        df[target_col] = (df[target_col] - target_mean) / target_std
-        logger.info(f"[train] Target normalised — mean: {df[target_col].mean():.4f}, std: {df[target_col].std():.4f}")
-
-    # ------------------------------------------------------------------ #
     # 3. Train/Test split                                                  #
     # Build X_train / X_test ONCE — reused by every trial via closure.    #
     # ------------------------------------------------------------------ #
