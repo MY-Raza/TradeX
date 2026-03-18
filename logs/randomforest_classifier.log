@@ -254,3 +254,19 @@
 2026-03-18 10:26:38,776 | INFO | randomforest_classifier | [train] Best trial PnL: 128.7800
 2026-03-18 10:26:38,776 | INFO | randomforest_classifier | [train] Fitting final model...
 2026-03-18 10:26:42,812 | INFO | randomforest_classifier | [train] Final predictions — min: 0.0250, max: 0.1003, mean: 0.0671
+2026-03-18 10:46:40,149 | INFO | randomforest_classifier | DF shape after log-diff transform: (27344, 145)
+2026-03-18 10:46:40,179 | INFO | randomforest_classifier | Train rows: 21799 | Test rows: 5545 | Features: 143
+2026-03-18 10:46:40,196 | INFO | randomforest_classifier | [train] NaNs — X_train: 0 | X_test: 0
+2026-03-18 10:46:40,198 | INFO | randomforest_classifier | [train] NaNs — y_train: 0 | y_test: 0
+2026-03-18 10:46:40,198 | INFO | randomforest_classifier | [train] Starting Optuna study (10 trials)...
+2026-03-18 10:50:09,265 | INFO | randomforest_classifier | [trial 3] Pruned at chunk 1/2 — PnL: -30.2100
+2026-03-18 10:50:38,569 | INFO | randomforest_classifier | [trial 4] Pruned at chunk 1/2 — PnL: 10.0200
+2026-03-18 10:51:20,003 | INFO | randomforest_classifier | [trial 5] Pruned at chunk 1/2 — PnL: -5.8100
+2026-03-18 10:56:01,099 | INFO | randomforest_classifier | [trial 6] Pruned at chunk 1/2 — PnL: -36.4500
+2026-03-18 10:56:40,829 | INFO | randomforest_classifier | [trial 7] Pruned at chunk 2/2 — PnL: 85.5800
+2026-03-18 11:05:37,888 | INFO | randomforest_classifier | [trial 8] Pruned at chunk 2/2 — PnL: 22.7600
+2026-03-18 11:07:00,130 | INFO | randomforest_classifier | [trial 9] Pruned at chunk 1/2 — PnL: -36.8300
+2026-03-18 11:07:00,130 | INFO | randomforest_classifier | [train] Best Optuna parameters: {'n_estimators': 140, 'max_depth': 8, 'min_samples_split': 13, 'min_samples_leaf': 19, 'max_features': 'sqrt', 'bootstrap': True, 'criterion': 'log_loss'}
+2026-03-18 11:07:00,131 | INFO | randomforest_classifier | [train] Best trial PnL: 125.7800
+2026-03-18 11:07:00,131 | INFO | randomforest_classifier | [train] Fitting final model...
+2026-03-18 11:07:05,764 | INFO | randomforest_classifier | [train] Final predictions — min: 0.0119, max: 0.1143, mean: 0.0663

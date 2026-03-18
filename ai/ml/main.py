@@ -323,74 +323,74 @@ def main():
         # ----------------------------
         # Train Classifiers
         # ----------------------------
-        for clf_name, is_active in classifiers_config.items():
-            if not is_active:
-                continue
+        # for clf_name, is_active in classifiers_config.items():
+        #     if not is_active:
+        #         continue
 
-            logger.info(f"Training classifier: {clf_name} for {symbol}")
-            try:
-                df_clf = create_classification_target(df_gf)
+        #     logger.info(f"Training classifier: {clf_name} for {symbol}")
+        #     try:
+        #         df_clf = create_classification_target(df_gf)
 
-                model, preds, test_index, X_test = train_model(
-                    model_type="classifier",
-                    model_name=clf_name,
-                    df=df_clf,
-                    target_col="target",
-                    split_date=split_date,
-                    n_trails=10,
-                    df_1m=df_1m
-                )
-                try:
-                    sample_preds = model.predict(X_test.head(5))
-                    logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
-                except Exception as e:
-                    logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
-                df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
-                df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-                bt = BackTest(
-                    df_1m,
-                    df_predictions,
-                    take_profit=3,
-                    stop_loss=1
-                )
+        #         model, preds, test_index, X_test = train_model(
+        #             model_type="classifier",
+        #             model_name=clf_name,
+        #             df=df_clf,
+        #             target_col="target",
+        #             split_date=split_date,
+        #             n_trails=10,
+        #             df_1m=df_1m
+        #         )
+        #         try:
+        #             sample_preds = model.predict(X_test.head(5))
+        #             logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
+        #         except Exception as e:
+        #             logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
+        #         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
+        #         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+        #         bt = BackTest(
+        #             df_1m,
+        #             df_predictions,
+        #             take_profit=3,
+        #             stop_loss=1
+        #         )
                 
-                ledger, final_balance, pnl = bt.run()
-                pnl_importance_df = pnl_permutation_importance(
-                    model=model,
-                    X_test=X_test,
-                    df=df_clf,
-                    df_1m=df_1m,
-                    base_pnl=pnl,
-                    model_type="classifier",
-                    k=0.5,
-                    n_repeats=3
-                )
-                pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
-                pnl_importance_wide.insert(0, "pnl", pnl)
-                table_name_clf = f"{clf_name}_clf_{timestamp}"
-                important_features_df_clf = extract_important_features(
-                                        pnl_importance_wide,
-                                        table_name_clf
-                                        )
-                save_df_to_db(
-                    df=important_features_df_clf,
-                    table_name="best_features",
-                    schema= "ml_features",
-                    time_column= None,
-                    is_timeseries=False
-                )
-                stats_df = compute_trade_statistics(ledger)
-                stats_df.insert(0, "pnl", pnl)
-                stats_df.insert(0,"model_name",table_name_clf)
-                save_df_to_db(
-                    df=stats_df,
-                    table_name="ml_results",
-                    schema= "model_stats",
-                    time_column= None,
-                    is_timeseries=False
-                )
-            except Exception as e:
-                logger.error(f"Classifier {clf_name} failed for {symbol}: {e}")
+        #         ledger, final_balance, pnl = bt.run()
+        #         pnl_importance_df = pnl_permutation_importance(
+        #             model=model,
+        #             X_test=X_test,
+        #             df=df_clf,
+        #             df_1m=df_1m,
+        #             base_pnl=pnl,
+        #             model_type="classifier",
+        #             k=0.5,
+        #             n_repeats=3
+        #         )
+        #         pnl_importance_wide = pnl_importance_df.set_index('feature').T.drop(columns=['feature'], errors='ignore')
+        #         pnl_importance_wide.insert(0, "pnl", pnl)
+        #         table_name_clf = f"{clf_name}_clf_{timestamp}"
+        #         important_features_df_clf = extract_important_features(
+        #                                 pnl_importance_wide,
+        #                                 table_name_clf
+        #                                 )
+        #         save_df_to_db(
+        #             df=important_features_df_clf,
+        #             table_name="best_features",
+        #             schema= "ml_features",
+        #             time_column= None,
+        #             is_timeseries=False
+        #         )
+        #         stats_df = compute_trade_statistics(ledger)
+        #         stats_df.insert(0, "pnl", pnl)
+        #         stats_df.insert(0,"model_name",table_name_clf)
+        #         save_df_to_db(
+        #             df=stats_df,
+        #             table_name="ml_results",
+        #             schema= "model_stats",
+        #             time_column= None,
+        #             is_timeseries=False
+        #         )
+        #     except Exception as e:
+        #         logger.error(f"Classifier {clf_name} failed for {symbol}: {e}")
 
         # ----------------------------
         # Train Regressors
