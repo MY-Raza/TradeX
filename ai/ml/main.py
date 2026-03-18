@@ -337,7 +337,7 @@ def main():
                     df=df_clf,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=5,
+                    n_trails=10,
                     df_1m=df_1m
                 )
                 try:
@@ -410,7 +410,7 @@ def main():
                     df_1m=df_1m,
                     target_col="target",
                     split_date=split_date,
-                    n_trails=5
+                    n_trails=10
                 )
                 try:
                     sample_preds = model.predict(X_test.head(5))
