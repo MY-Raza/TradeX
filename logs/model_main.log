@@ -1923,3 +1923,7 @@ Feature names seen at fit time, yet now missing:
 2026-03-18 11:31:40,934 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
 [0 0 0 0 0]
 2026-03-18 11:52:36,738 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-18 12:04:37,070 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-18 12:04:37,070 | INFO | model_main | Fetching data for btc from database...
+2026-03-18 12:04:47,369 | INFO | model_main | Generating indicators for btc...
+2026-03-18 12:04:47,507 | INFO | model_main | Training regressor: random_forest for btc
