@@ -302,3 +302,9 @@
 2026-03-24 12:05:34,741 | INFO | randomforest_regressor | [train] Starting Optuna study (10 trials)...
 2026-03-24 12:06:28,911 | INFO | randomforest_regressor | [trial 0] Chunk 1/2 PnL: -16.5000
 2026-03-24 12:06:35,868 | INFO | randomforest_regressor | [trial 0] Chunk 2/2 PnL: 88.4800
+2026-03-24 13:10:22,609 | INFO | randomforest_regressor | [train] DataFrame shape before transform: (27331, 72)
+2026-03-24 13:10:22,640 | INFO | randomforest_regressor | [train] DataFrame shape after log-diff transform & dropna: (27330, 72)
+2026-03-24 13:10:22,659 | INFO | randomforest_regressor | [train] Train rows: 21799 | Test rows: 5531 | Features: 70
+2026-03-24 13:10:22,670 | INFO | randomforest_regressor | [train] NaNs — X_train: 0 | X_test: 0
+2026-03-24 13:10:22,671 | INFO | randomforest_regressor | [train] NaNs — y_train: 0 | y_test: 0
+2026-03-24 13:10:22,671 | INFO | randomforest_regressor | [train] Starting Optuna study (10 trials)...
