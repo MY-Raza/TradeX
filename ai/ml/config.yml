@@ -190,9 +190,23 @@ symbols:
   - matic
   - link
 
-start_date: '2023-01-01' 
+start_date: '2023-01-01'
 end_date: '2026-02-17'
-split_date: '2025-07-01'
+# --- Train / test split ---------------------------------------------------
+# Two modes (only one is used at a time):
+#
+#   train_ratio: float between 0.0 and 1.0
+#       Split is computed from the data itself: the first (train_ratio*100)%
+#       of rows become training, the rest become test.
+#       The resulting split_date is logged at startup so results are
+#       fully reproducible. Set to null to fall back to split_date.
+#
+#   split_date: 'YYYY-MM-DD'
+#       Hard calendar boundary. Used only when train_ratio is null.
+#
+# train_ratio takes precedence when both are set.
+train_ratio: 0.8          # 80% train, 20% test  (set to null to use split_date)
+split_date: '2025-07-01'  # fallback — used only when train_ratio is null
 
 xgboost_classifier_params:
     n_estimators: 500

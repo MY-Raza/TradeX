@@ -30,6 +30,7 @@ def read_config(config_path: str) -> dict:
         start_date = config.get("start_date")
         end_date = config.get("end_date", "now")
         split_date = config.get("split_date")
+        train_ratio =  config.get("train_ratio")
 
         # Optional fields
         timehorizon = config.get("timehorizon", "1h")
@@ -80,6 +81,7 @@ def read_config(config_path: str) -> dict:
             "xgboost_classifier_params": xgboost_classifier_params,
             "xgboost_regressor_params": xgboost_regressor_params,
             "split_date":split_date,
+            "train_ratio":train_ratio,
             # models
             "forecasting_models": forecasting_models,
 
