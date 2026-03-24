@@ -1946,3 +1946,14 @@ Feature names seen at fit time, yet now missing:
 2026-03-18 14:41:29,729 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
 [107714.56  107810.81  107752.125 107803.984 107528.04 ]
 2026-03-18 14:59:45,538 | INFO | model_main | Model training complete for btc.
+2026-03-24 10:11:39,250 | ERROR | model_main | Indicator HT_SINE_0 failed: Indicator 'HT_SINE_0' not found in TA-Lib
+2026-03-24 10:11:39,267 | WARNING | model_main | Unsupported indicator: PLUS
+2026-03-24 10:11:39,273 | ERROR | model_main | Indicator HT_SINE_1 failed: Indicator 'HT_SINE_1' not found in TA-Lib
+2026-03-24 10:11:39,280 | WARNING | model_main | Unsupported indicator: T
+2026-03-24 10:11:39,282 | WARNING | model_main | Unsupported indicator: MINUS
+2026-03-24 10:18:03,731 | WARNING | model_main | Unsupported indicator: AROON_DOWN
+2026-03-24 10:18:03,761 | WARNING | model_main | Unsupported indicator: STOCHF_K
+2026-03-24 10:18:03,774 | WARNING | model_main | Unsupported indicator: STOCHRSI_K
+2026-03-24 10:18:03,777 | WARNING | model_main | Unsupported indicator: AROON_UP
+2026-03-24 10:18:03,777 | WARNING | model_main | Unsupported indicator: STOCHF_D
+2026-03-24 10:18:03,873 | WARNING | model_main | Unsupported indicator: STOCH_K

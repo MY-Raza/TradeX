@@ -270,3 +270,13 @@
 2026-03-18 11:07:00,131 | INFO | randomforest_classifier | [train] Best trial PnL: 125.7800
 2026-03-18 11:07:00,131 | INFO | randomforest_classifier | [train] Fitting final model...
 2026-03-18 11:07:05,764 | INFO | randomforest_classifier | [train] Final predictions — min: 0.0119, max: 0.1143, mean: 0.0663
+2026-03-24 10:11:39,486 | INFO | randomforest_classifier | DF shape after log-diff transform: (27344, 63)
+2026-03-24 10:11:39,507 | INFO | randomforest_classifier | Train rows: 21799 | Test rows: 5545 | Features: 61
+2026-03-24 10:11:39,512 | INFO | randomforest_classifier | [train] NaNs — X_train: 0 | X_test: 0
+2026-03-24 10:11:39,512 | INFO | randomforest_classifier | [train] NaNs — y_train: 0 | y_test: 0
+2026-03-24 10:11:39,512 | INFO | randomforest_classifier | [train] Starting Optuna study (10 trials)...
+2026-03-24 10:18:04,147 | INFO | randomforest_classifier | DF shape after log-diff transform: (27344, 66)
+2026-03-24 10:18:04,189 | INFO | randomforest_classifier | Train rows: 21799 | Test rows: 5545 | Features: 64
+2026-03-24 10:18:04,207 | INFO | randomforest_classifier | [train] NaNs — X_train: 0 | X_test: 0
+2026-03-24 10:18:04,223 | INFO | randomforest_classifier | [train] NaNs — y_train: 0 | y_test: 0
+2026-03-24 10:18:04,223 | INFO | randomforest_classifier | [train] Starting Optuna study (10 trials)...

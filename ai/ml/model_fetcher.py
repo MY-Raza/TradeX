@@ -17,13 +17,28 @@ logger = get_logger("model_fetcher")
 
 
 FEATURE_MAP = {
+    # Bollinger Bands
     "BB_UPPER": "BBANDS",
     "BB_MIDDLE": "BBANDS",
     "BB_LOWER": "BBANDS",
+    # Hilbert Transform — Phasor (inphase=_0, quadrature=_1)
     "HT_PHASOR_0": "HT_PHASOR",
     "HT_PHASOR_1": "HT_PHASOR",
-    "LINEARREG_SLOPE_14": "LINEARREG_SLOPE"
-    # Add more mappings if needed
+    # Hilbert Transform — Sine (sine=_0, leadsine=_1)
+    "HT_SINE_0": "HT_SINE",
+    "HT_SINE_1": "HT_SINE",
+    # Linear Regression variants (suffixed with window, e.g. _14)
+    "LINEARREG_SLOPE_14": "LINEARREG_SLOPE",
+    "LINEARREG_ANGLE_14": "LINEARREG_ANGLE",
+    "LINEARREG_INTERCEPT_14": "LINEARREG_INTERCEPT",
+    # T3 (suffixed with window, e.g. _14)
+    "T3_14": "T3",
+    # Directional Movement — with period suffix
+    "PLUS_DI_14": "PLUS_DI",
+    "MINUS_DI_14": "MINUS_DI",
+    # Directional Movement — no period suffix (stored as PLUS_DM / MINUS_DM)
+    "PLUS_DM": "PLUS_DM",
+    "MINUS_DM": "MINUS_DM",
 }
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.DataFrame:
@@ -47,17 +62,25 @@ def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.Dat
     # ----------------------------------------
     base_indicators = set()
     for f in best_features:
-        # Check mapping first
+        # Check explicit mapping first (handles suffixed variants like HT_SINE_0,
+        # LINEARREG_ANGLE_14, PLUS_DI_14, MINUS_DM, T3_14, etc.)
         if f in FEATURE_MAP:
             base_indicators.add(FEATURE_MAP[f])
-        # Keep HT_* cycle indicators intact
-        elif f.startswith("HT_"):
-            base_indicators.add(f)
+        # Candlestick patterns — keep as-is
         elif f.startswith("CDL"):
-             base_indicators.add(f)
+            base_indicators.add(f)
+        # Hilbert Transform cycle indicators — strip trailing _0 / _1 index suffix
+        # so "HT_SINE_0" -> "HT_SINE", "HT_PHASOR_1" -> "HT_PHASOR"
+        elif f.startswith("HT_"):
+            base = re.sub(r"_\d+$", "", f)
+            base_indicators.add(base)
         else:
-            # Strip suffix (_K, _D, _14, _0, etc.) to get base name
-            m = re.match(r"([A-Z]+)", f)
+            # General case: strip trailing numeric period suffix (_14, _20, etc.)
+            # then extract uppercase word(s) joined by underscores.
+            # STOCH_K -> STOCH, MACD_2 -> MACD, DX_14 -> DX
+            # PLUS_DI_14 -> PLUS_DI (via FEATURE_MAP above, but fallback works too)
+            stripped = re.sub(r"_\d+$", "", f)
+            m = re.match(r"([A-Z]+(?:_[A-Z]+)*)", stripped)
             if m:
                 base_indicators.add(m.group(1))
 
@@ -217,6 +240,4 @@ for reg_name, is_active in regressors_config.items():
         )
 
      except Exception as e:
-                logger.error(f"Regressor {reg_name} failed for {symbols}: {e}")   
-
-
+                logger.error(f"Regressor {reg_name} failed for {symbols}: {e}")
