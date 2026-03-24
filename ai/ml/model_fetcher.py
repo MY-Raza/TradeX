@@ -39,6 +39,16 @@ FEATURE_MAP = {
     # Directional Movement — no period suffix (stored as PLUS_DM / MINUS_DM)
     "PLUS_DM": "PLUS_DM",
     "MINUS_DM": "MINUS_DM",
+    # Stochastic — _K / _D output suffixes
+    "STOCH_K": "STOCH",
+    "STOCH_D": "STOCH",
+    "STOCHF_K": "STOCHF",
+    "STOCHF_D": "STOCHF",
+    "STOCHRSI_K": "STOCHRSI",
+    "STOCHRSI_D": "STOCHRSI",
+    # Aroon — _UP / _DOWN output suffixes
+    "AROON_UP": "AROON",
+    "AROON_DOWN": "AROON",
 }
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.DataFrame:
@@ -75,11 +85,24 @@ def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.Dat
             base = re.sub(r"_\d+$", "", f)
             base_indicators.add(base)
         else:
-            # General case: strip trailing numeric period suffix (_14, _20, etc.)
-            # then extract uppercase word(s) joined by underscores.
-            # STOCH_K -> STOCH, MACD_2 -> MACD, DX_14 -> DX
-            # PLUS_DI_14 -> PLUS_DI (via FEATURE_MAP above, but fallback works too)
-            stripped = re.sub(r"_\d+$", "", f)
+            # General case:
+            # 1. Strip trailing numeric window suffix (_14, _20, etc.)
+            # 2. Strip trailing known single-word output suffixes (_K, _D, _UP, _DOWN, _0, _1)
+            # Then extract the uppercase base name (may contain underscores, e.g. PLUS_DI).
+            # Examples:
+            #   STOCH_K     -> STOCH       AROON_UP    -> AROON
+            #   DX_14       -> DX          MACD_2      -> MACD
+            #   PLUS_DI_14  -> PLUS_DI     (also in FEATURE_MAP as safety net)
+            _OUTPUT_SUFFIXES = re.compile(
+                r"_(?:K|D|UP|DOWN|\d+)$", re.IGNORECASE
+            )
+            stripped = f
+            # Keep stripping known suffixes until none remain
+            while True:
+                new = _OUTPUT_SUFFIXES.sub("", stripped)
+                if new == stripped:
+                    break
+                stripped = new
             m = re.match(r"([A-Z]+(?:_[A-Z]+)*)", stripped)
             if m:
                 base_indicators.add(m.group(1))
