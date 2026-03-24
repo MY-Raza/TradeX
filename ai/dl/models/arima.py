@@ -67,7 +67,6 @@ def train(
             )
 
     # --- 2. Prepare a clean, minimal copy ---------------------------------
-    df = df.copy()
 
     if "datetime" in df.columns:
         dt = pd.to_datetime(df["datetime"])

@@ -69,7 +69,6 @@ def train(
         )
 
     # --- 1. Datetime normalisation ----------------------------------------
-    df = df.copy()
 
     if target_col == "log_return" and "log_return" not in df.columns:
         df["log_return"] = np.log(df["close"]).diff()
