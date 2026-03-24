@@ -559,3 +559,27 @@
 2026-03-24 10:18:03,941 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
 2026-03-24 10:22:22,445 | INFO | model_fetcher | The best model: xgboost_reg_20260318_124806
 2026-03-24 10:22:37,559 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-24 10:45:49,662 | INFO | model_fetcher | The best model: xgboost_reg_20260318_124806
+2026-03-24 10:46:14,771 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-24 11:59:45,317 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[-1 -1 -1 -1 -1]
+2026-03-24 11:59:51,435 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction              action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00                long                 buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 14:42:00+00:00                long    sell - stop_loss   107051.1  105980.589   989.01 -1.05    -1.10
+2 2025-07-01 15:00:00+00:00                long                 buy   105862.5       0.000   988.51 -0.05    -1.15
+3 2025-07-02 16:05:00+00:00                long  sell - take_profit   105862.5  109038.375  1017.67  2.95     1.80
+4 2025-07-02 17:00:00+00:00                long                 buy   109367.0       0.000  1017.16 -0.05     1.75
+2026-03-24 11:59:51,435 | INFO | model_fetcher | Final Balance for Classifier: 3417.2
+2026-03-24 11:59:51,435 | INFO | model_fetcher | Final PnL for Classifier: 128.21
+2026-03-24 11:59:51,509 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-24 12:05:29,951 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[0 0 0 0 0]
+2026-03-24 12:05:34,524 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-06-30 23:00:00+00:00               short                      buy   107051.1       0.000   999.50 -0.05    -0.05
+1 2025-07-01 02:00:00+00:00               short  sell - direction_change   107051.1  107171.700   997.87 -0.16    -0.21
+2 2025-07-01 02:00:00+00:00                long                      buy   107171.7       0.000   997.38 -0.05    -0.26
+3 2025-07-01 14:40:00+00:00                long         sell - stop_loss   107171.7  106099.983   986.90 -1.05    -1.31
+4 2025-07-01 15:00:00+00:00                long                      buy   105862.5       0.000   986.41 -0.05    -1.36
+2026-03-24 12:05:34,524 | INFO | model_fetcher | Final Balance for Classifier: 497.34
+2026-03-24 12:05:34,524 | INFO | model_fetcher | Final PnL for Classifier: -67.66
+2026-03-24 12:05:34,553 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']

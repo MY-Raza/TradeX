@@ -294,3 +294,11 @@
 2026-03-18 14:16:54,857 | INFO | randomforest_regressor | [train] Best trial PnL: 215.1000
 2026-03-18 14:16:54,865 | INFO | randomforest_regressor | [train] Fitting final model...
 2026-03-18 14:17:04,978 | INFO | randomforest_regressor | [train] Final predictions — min: 65938.7973, max: 111023.8413, mean: 100877.2138
+2026-03-24 12:05:34,665 | INFO | randomforest_regressor | [train] DataFrame shape before transform: (27331, 72)
+2026-03-24 12:05:34,705 | INFO | randomforest_regressor | [train] DataFrame shape after log-diff transform & dropna: (27330, 72)
+2026-03-24 12:05:34,738 | INFO | randomforest_regressor | [train] Train rows: 21799 | Test rows: 5531 | Features: 70
+2026-03-24 12:05:34,741 | INFO | randomforest_regressor | [train] NaNs — X_train: 0 | X_test: 0
+2026-03-24 12:05:34,741 | INFO | randomforest_regressor | [train] NaNs — y_train: 0 | y_test: 0
+2026-03-24 12:05:34,741 | INFO | randomforest_regressor | [train] Starting Optuna study (10 trials)...
+2026-03-24 12:06:28,911 | INFO | randomforest_regressor | [trial 0] Chunk 1/2 PnL: -16.5000
+2026-03-24 12:06:35,868 | INFO | randomforest_regressor | [trial 0] Chunk 2/2 PnL: 88.4800

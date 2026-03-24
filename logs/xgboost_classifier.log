@@ -35,3 +35,15 @@
 2026-03-18 11:31:17,152 | INFO | xgboost_classifier | [train] Best trial PnL: -67.2000
 2026-03-18 11:31:17,152 | INFO | xgboost_classifier | [train] Fitting final model...
 2026-03-18 11:31:40,911 | INFO | xgboost_classifier | [train] Final predictions — min: 0.2267, max: 0.7378, mean: 0.3953
+2026-03-24 11:59:52,108 | INFO | xgboost_classifier | DF shape after log-diff transform: (27344, 72)
+2026-03-24 11:59:52,199 | INFO | xgboost_classifier | Train rows: 21799 | Test rows: 5545 | Features: 70
+2026-03-24 11:59:52,212 | INFO | xgboost_classifier | [train] NaNs — X_train: 0 | X_test: 0
+2026-03-24 11:59:52,216 | INFO | xgboost_classifier | [train] NaNs — y_train: 0 | y_test: 0
+2026-03-24 11:59:52,219 | INFO | xgboost_classifier | [train] Starting Optuna study (10 trials)...
+2026-03-24 12:04:10,552 | INFO | xgboost_classifier | [trial 6] Pruned at chunk 1/2 — PnL: -26.1600
+2026-03-24 12:04:46,645 | INFO | xgboost_classifier | [trial 7] Pruned at chunk 1/2 — PnL: -68.2800
+2026-03-24 12:04:58,402 | INFO | xgboost_classifier | [trial 8] Pruned at chunk 1/2 — PnL: -25.0300
+2026-03-24 12:05:13,091 | INFO | xgboost_classifier | [train] Best Optuna parameters: {'n_estimators': 154, 'max_depth': 3, 'learning_rate': 0.13469519908919725, 'subsample': 0.9907685065636447, 'colsample_bytree': 0.5404323286017809, 'gamma': 2.8870665737328176, 'reg_alpha': 0.8921822404564622, 'reg_lambda': 0.06344972776138935}
+2026-03-24 12:05:13,091 | INFO | xgboost_classifier | [train] Best trial PnL: -67.4600
+2026-03-24 12:05:13,091 | INFO | xgboost_classifier | [train] Fitting final model...
+2026-03-24 12:05:29,927 | INFO | xgboost_classifier | [train] Final predictions — min: 0.0271, max: 0.9799, mean: 0.3404
