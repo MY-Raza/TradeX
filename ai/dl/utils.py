@@ -78,7 +78,7 @@ def prepare_series(df: pd.DataFrame, target_col: str = "close") -> TimeSeries:
         )
 
     if "datetime" in df.columns:
-        df = df.copy()
+         
         dt = pd.to_datetime(df["datetime"])
         # BUG-3 FIX: always go through tz_localize("UTC") first so the series
         # is guaranteed tz-aware before tz_convert, then strip with tz_localize(None).
@@ -94,7 +94,7 @@ def prepare_series(df: pd.DataFrame, target_col: str = "close") -> TimeSeries:
             raise ValueError(
                 "DataFrame must have a DatetimeIndex or a 'datetime' column."
             )
-        df = df.copy()
+         
         df.index = _to_naive_utc(df.index)
         # BUG-2 FIX: Darts requires a named index for from_dataframe.
         df.index.name = "datetime"

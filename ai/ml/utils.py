@@ -145,7 +145,7 @@ def prepare_predictions(
     # ------------------------------------------------------------------
     # Normalise datetime column to UTC-aware (guard against re-localising)
     # ------------------------------------------------------------------
-    df = df.copy()  # never mutate caller's frame
+       # never mutate caller's frame
     if "datetime" in df.columns:
         dt_col = pd.to_datetime(df["datetime"])
         if dt_col.dt.tz is None:

@@ -41,7 +41,7 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
         raise ValueError(f"Unsupported interval: {interval}")
 
     interval_ms = INTERVAL_MS_MAP[interval]
-    df = df.copy()
+     
 
     required_cols = ["timestamp", "open", "high", "low", "close", "volume"]
     df = df[required_cols]
@@ -86,7 +86,7 @@ def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     if df.empty:
         return df.copy()
 
-    df = df.copy()
+     
 
     # Ensure timestamp column exists
     if "datetime" not in df.columns:

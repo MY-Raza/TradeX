@@ -42,7 +42,7 @@ def train(
     if target_col not in df.columns:
         raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
 
-    df = df.copy()
+     
     # Pre-process datetime ONCE here — not inside objective or prepare_predictions
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime").reset_index(drop=True)

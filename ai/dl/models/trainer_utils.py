@@ -43,7 +43,7 @@ def normalise_datetime(df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
                      can be found.
     """
     if copy:
-        df = df.copy()
+         
 
     if "datetime" in df.columns:
         dt = pd.to_datetime(df["datetime"])

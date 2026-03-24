@@ -62,6 +62,72 @@ _AROON_SERIES     = frozenset({"AROON", "AROONOSC"})
 _SAR_SERIES       = frozenset({"SAR", "SAREXT"})
 _PRICE_TRANSFORMS = frozenset({"AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE"})
 
+# ----------------------------
+# SPLIT DATE RESOLVER
+# ----------------------------
+def resolve_split_date(df: pd.DataFrame, config: dict) -> str:
+    """
+    Determine the train/test split date from config.
+
+    Priority:
+      1. train_ratio (float 0-1) — computes the split from the data itself
+         so the boundary always falls at exactly that percentage of rows.
+         The resolved date is logged for reproducibility.
+      2. split_date (str 'YYYY-MM-DD') — hard calendar boundary, used
+         only when train_ratio is null / absent.
+
+    Args:
+        df     : The feature DataFrame that will be split (must have a
+                 'datetime' column or a DatetimeIndex).
+        config : Loaded config dict.
+
+    Returns:
+        ISO date string 'YYYY-MM-DD HH:MM:SS' ready to pass to train_model.
+
+    Raises:
+        ValueError : If neither key is present in config.
+        ValueError : If train_ratio is not in (0, 1).
+    """
+    train_ratio = config.get("train_ratio")
+
+    if train_ratio is not None:
+        train_ratio = float(train_ratio)
+        if not (0.0 < train_ratio < 1.0):
+            raise ValueError(
+                f"train_ratio must be between 0 and 1 (exclusive), got {train_ratio}"
+            )
+
+        # Resolve the datetime series regardless of whether it is a column
+        # or the index so the helper works with both layouts.
+        if "datetime" in df.columns:
+            dt_series = pd.to_datetime(df["datetime"], utc=True).sort_values()
+        elif isinstance(df.index, pd.DatetimeIndex):
+            dt_series = df.index.sort_values().to_series()
+        else:
+            raise ValueError(
+                "resolve_split_date: DataFrame must have a 'datetime' column "
+                "or a DatetimeIndex to use train_ratio."
+            )
+
+        n_train    = int(len(dt_series) * train_ratio)
+        split_ts   = dt_series.iloc[n_train]
+        split_date = split_ts.strftime("%Y-%m-%d %H:%M:%S")
+
+        logger.info(
+            f"train_ratio={train_ratio} → split at row {n_train}/{len(dt_series)} "
+            f"→ split_date='{split_date}' "
+            f"({train_ratio*100:.0f}% train / {(1-train_ratio)*100:.0f}% test)"
+        )
+        return split_date
+
+    # Fallback: hard calendar split_date from config
+    split_date = config.get("split_date")
+    if split_date is None:
+        raise ValueError(
+            "Config must contain either 'train_ratio' or 'split_date'."
+        )
+    logger.info(f"Using fixed split_date='{split_date}' from config.")
+    return str(split_date)
 
 def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
     """
@@ -227,7 +293,6 @@ def main() -> None:
 
     start_date        = config.get("start_date")
     end_date          = config.get("end_date")
-    split_date        = config.get("split_date")
     symbols           = ["btc"]  # BUG-FIX: was hardcoded to ["btc"]
     timehorizon       = config.get("timehorizon", "1h")
     indicators_config = config.get("indicators", {})
@@ -271,6 +336,7 @@ def main() -> None:
         df_tf = resample_ohlcv(df_1m, timehorizon)
         logger.info(f"Generating indicators for {symbol} …")
         df_gf = generate_features(df_tf, active_indicators)
+        split_date = resolve_split_date(df_gf, config)
 
         # BUG-FIX (main): derive feature columns once, outside the model loop,
         # so save_model receives indicator columns only (not raw OHLCV/target).

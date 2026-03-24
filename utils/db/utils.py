@@ -491,7 +491,7 @@ def get_best_model(
     # ----------------------------------------
     # Clean data
     # ----------------------------------------
-    df = df.copy()
+     
 
     # Avoid division by zero
     df = df[df["max_drawdown"] != 0]
