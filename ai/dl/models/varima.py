@@ -87,7 +87,7 @@ def train(
     # --- 3. Datetime normalisation on target columns only -----------------
     # Slice first to avoid copying 100+ indicator columns unnecessarily.
     if "datetime" in df.columns:
-        df_target = df[target_cols].copy()
+        df_target = df[target_cols]  
         dt = pd.to_datetime(df["datetime"])
         if dt.dt.tz is None:
             dt = dt.dt.tz_localize("UTC")
@@ -95,7 +95,7 @@ def train(
             dt.dt.tz_convert("UTC").dt.tz_localize(None).values, name="datetime"
         )
     else:
-        df_slim = df[target_cols].copy()
+        df_slim = df[target_cols]  
         df_target = normalise_datetime(df_slim, copy=False)
 
     # --- 4. Sort + dropna -------------------------------------------------

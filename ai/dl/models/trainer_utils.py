@@ -245,7 +245,7 @@ def build_pl_trainer_kwargs(
     Returns:
         A new dict ready to pass as pl_trainer_kwargs=... to the Darts model.
     """
-    kwargs = (base_kwargs or {}).copy()
+    kwargs = (base_kwargs or {})  
 
     kwargs.setdefault("accelerator",          "cpu")
     kwargs.setdefault("enable_progress_bar",  False)

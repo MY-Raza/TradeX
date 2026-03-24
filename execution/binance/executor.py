@@ -405,4 +405,4 @@ class FuturesTrader:
         )
 
     def get_trade_log_df(self):
-        return self.trade_log.copy()
+        return self.trade_log  

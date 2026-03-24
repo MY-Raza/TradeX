@@ -84,7 +84,7 @@ def clean_df(df: pd.DataFrame, interval: str = "1m") -> pd.DataFrame:
 
 def resample_ohlcv(df: pd.DataFrame, interval: str) -> pd.DataFrame:
     if df.empty:
-        return df.copy()
+        return df  
 
      
 

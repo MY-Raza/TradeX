@@ -6,7 +6,7 @@ from TradeX.backtest.backtest import BackTest
 
 def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
 
-    df = ledger.copy()
+    df = ledger  
     stats = {}
 
     # ------------------------
@@ -277,7 +277,7 @@ def pnl_permutation_importance(
         pnl_scores = []
 
         for _ in range(n_repeats):
-            X_perm = X_test.copy()
+            X_perm = X_test  
             X_perm[col] = np.random.permutation(X_perm[col].values)
 
             # ----------------------------

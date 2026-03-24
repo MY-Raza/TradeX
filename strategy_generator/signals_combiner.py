@@ -168,7 +168,7 @@ def run_active_signals_with_voting(
         all_signals_df["signals"] = final_signal
 
         # Keep only datetime and final signals
-        final_df = all_signals_df[["datetime", "signals"]].copy()
+        final_df = all_signals_df[["datetime", "signals"]]  
         final_df["signals"] = final_df["signals"].astype(np.int8)
     else:
         final_df = pd.DataFrame(columns=["datetime", "signals"])

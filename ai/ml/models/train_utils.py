@@ -34,7 +34,7 @@ def validate_and_sort(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
     if target_col not in df.columns:
         raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
 
-    df = df.copy()
+      
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime").reset_index(drop=True)
     return df
@@ -62,7 +62,7 @@ def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         Transformed DataFrame with NaN rows removed and index reset.
     """
-    df = df.copy()
+      
     price_cols = [c for c in ("open", "high", "low", "close") if c in df.columns]
 
     for col in price_cols:
@@ -107,8 +107,8 @@ def split_features_labels(
         ValueError: If either split yields an empty set.
     """
     split_dt = pd.to_datetime(split_date, utc=True)
-    train_df = df[df["datetime"] < split_dt].copy()
-    test_df  = df[df["datetime"] >= split_dt].copy()
+    train_df = df[df["datetime"] < split_dt]  
+    test_df  = df[df["datetime"] >= split_dt]  
 
     if train_df.empty:
         raise ValueError(f"Train set is empty for split_date='{split_date}'. Adjust the split date.")

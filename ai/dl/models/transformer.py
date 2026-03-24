@@ -184,7 +184,7 @@ def train(
         "bf16-mixed" if use_bf16_fit and _bf16_supported() else "32-true",
     )
 
-    dataloader_kwargs = kwargs.pop("dataloader_kwargs", {}).copy()
+    dataloader_kwargs = kwargs.pop("dataloader_kwargs", {})  
     dataloader_kwargs["num_workers"] = 0
     dataloader_kwargs.setdefault("pin_memory", False)
 

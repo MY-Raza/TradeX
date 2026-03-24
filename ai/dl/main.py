@@ -384,7 +384,7 @@ def main() -> None:
                     continue
 
                 # test_feature_df kept for future permutation-importance support.
-                test_feature_df = df_gf.iloc[test_index].copy()  # noqa: F841
+                test_feature_df = df_gf.iloc[test_index]    # noqa: F841
 
                 table_name_dl = f"{model_name}_dl_{timestamp}"
                 stats_df = compute_trade_statistics(ledger)
