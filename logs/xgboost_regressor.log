@@ -1,0 +1,21 @@
+2026-03-18 14:36:50,695 | INFO | xgboost_regressor | [train] DataFrame shape before transform: (27331, 145)
+2026-03-18 14:36:50,730 | INFO | xgboost_regressor | [train] DataFrame shape after transform & dropna: (27330, 145)
+2026-03-18 14:36:50,774 | INFO | xgboost_regressor | [train] Train rows: 21799, Test rows: 5531, Features: 143
+2026-03-18 14:37:04,975 | INFO | xgboost_regressor | [trial 0] Chunk 1/2 PnL: 30.3900
+2026-03-18 14:37:07,691 | INFO | xgboost_regressor | [trial 0] Chunk 2/2 PnL: 110.8500
+2026-03-18 14:37:47,239 | INFO | xgboost_regressor | [trial 1] Chunk 1/2 PnL: 74.6100
+2026-03-18 14:37:49,975 | INFO | xgboost_regressor | [trial 1] Chunk 2/2 PnL: 95.1000
+2026-03-18 14:38:33,980 | INFO | xgboost_regressor | [trial 2] Chunk 1/2 PnL: 54.0100
+2026-03-18 14:38:36,506 | INFO | xgboost_regressor | [trial 2] Chunk 2/2 PnL: 98.6000
+2026-03-18 14:39:27,769 | INFO | xgboost_regressor | [trial 3] Chunk 1/2 PnL: 5.0700
+2026-03-18 14:39:34,329 | INFO | xgboost_regressor | [trial 4] Chunk 1/2 PnL: 45.0400
+2026-03-18 14:39:46,556 | INFO | xgboost_regressor | [trial 5] Chunk 1/2 PnL: 111.8500
+2026-03-18 14:39:49,116 | INFO | xgboost_regressor | [trial 5] Chunk 2/2 PnL: 145.9400
+2026-03-18 14:40:26,267 | INFO | xgboost_regressor | [trial 6] Chunk 1/2 PnL: 51.9500
+2026-03-18 14:40:33,131 | INFO | xgboost_regressor | [trial 7] Chunk 1/2 PnL: 8.5200
+2026-03-18 14:41:04,182 | INFO | xgboost_regressor | [trial 8] Chunk 1/2 PnL: -2.7600
+2026-03-18 14:41:10,546 | INFO | xgboost_regressor | [trial 9] Chunk 1/2 PnL: 102.6300
+2026-03-18 14:41:13,103 | INFO | xgboost_regressor | [trial 9] Chunk 2/2 PnL: 183.2600
+2026-03-18 14:41:13,270 | INFO | xgboost_regressor | [train] Best Optuna parameters: {'n_estimators': 195, 'max_depth': 5, 'learning_rate': 0.10136731489162774, 'subsample': 0.5220936975739041, 'colsample_bytree': 0.9267853370800127, 'gamma': 2.686395040266359, 'reg_alpha': 3.8489892688221756, 'reg_lambda': 1.0309470277910253}
+2026-03-18 14:41:13,270 | INFO | xgboost_regressor | [train] Best trial PnL: 183.2600
+2026-03-18 14:41:29,689 | INFO | xgboost_regressor | [train] Final predictions — min: 66358.6562, max: 113402.2344, mean: 101635.9375

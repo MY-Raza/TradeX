@@ -1935,3 +1935,14 @@ Feature names seen at fit time, yet now missing:
 2026-03-18 12:41:00,392 | INFO | model_main | Fetching data for btc from database...
 2026-03-18 12:41:09,384 | INFO | model_main | Generating indicators for btc...
 2026-03-18 12:41:09,526 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-18 12:48:06,651 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-18 12:48:06,651 | INFO | model_main | Fetching data for btc from database...
+2026-03-18 12:48:15,044 | INFO | model_main | Generating indicators for btc...
+2026-03-18 12:48:15,147 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-18 14:17:05,119 | INFO | model_main | [Dry-run] random_forest predictions on first 5 test rows:
+[108034.68999261 108048.36019    108024.15442936 108019.22843242
+ 108003.98973116]
+2026-03-18 14:36:50,540 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-18 14:41:29,729 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
+[107714.56  107810.81  107752.125 107803.984 107528.04 ]
+2026-03-18 14:59:45,538 | INFO | model_main | Model training complete for btc.
