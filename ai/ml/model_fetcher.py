@@ -14,6 +14,72 @@ from TradeX.backtest.backtest import BackTest
 from datetime import datetime
 
 logger = get_logger("model_fetcher")
+# ----------------------------
+# SPLIT DATE RESOLVER
+# ----------------------------
+def resolve_split_date(df: pd.DataFrame, config: dict) -> str:
+    """
+    Determine the train/test split date from config.
+
+    Priority:
+      1. train_ratio (float 0-1) — computes the split from the data itself
+         so the boundary always falls at exactly that percentage of rows.
+         The resolved date is logged for reproducibility.
+      2. split_date (str 'YYYY-MM-DD') — hard calendar boundary, used
+         only when train_ratio is null / absent.
+
+    Args:
+        df     : The feature DataFrame that will be split (must have a
+                 'datetime' column or a DatetimeIndex).
+        config : Loaded config dict.
+
+    Returns:
+        ISO date string 'YYYY-MM-DD HH:MM:SS' ready to pass to train_model.
+
+    Raises:
+        ValueError : If neither key is present in config.
+        ValueError : If train_ratio is not in (0, 1).
+    """
+    train_ratio = config.get("train_ratio")
+
+    if train_ratio is not None:
+        train_ratio = float(train_ratio)
+        if not (0.0 < train_ratio < 1.0):
+            raise ValueError(
+                f"train_ratio must be between 0 and 1 (exclusive), got {train_ratio}"
+            )
+
+        # Resolve the datetime series regardless of whether it is a column
+        # or the index so the helper works with both layouts.
+        if "datetime" in df.columns:
+            dt_series = pd.to_datetime(df["datetime"], utc=True).sort_values()
+        elif isinstance(df.index, pd.DatetimeIndex):
+            dt_series = df.index.sort_values().to_series()
+        else:
+            raise ValueError(
+                "resolve_split_date: DataFrame must have a 'datetime' column "
+                "or a DatetimeIndex to use train_ratio."
+            )
+
+        n_train    = int(len(dt_series) * train_ratio)
+        split_ts   = dt_series.iloc[n_train]
+        split_date = split_ts.strftime("%Y-%m-%d %H:%M:%S")
+
+        logger.info(
+            f"train_ratio={train_ratio} → split at row {n_train}/{len(dt_series)} "
+            f"→ split_date='{split_date}' "
+            f"({train_ratio*100:.0f}% train / {(1-train_ratio)*100:.0f}% test)"
+        )
+        return split_date
+
+    # Fallback: hard calendar split_date from config
+    split_date = config.get("split_date")
+    if split_date is None:
+        raise ValueError(
+            "Config must contain either 'train_ratio' or 'split_date'."
+        )
+    logger.info(f"Using fixed split_date='{split_date}' from config.")
+    return str(split_date)
 
 
 FEATURE_MAP = {
@@ -149,7 +215,6 @@ ml_config_path = os.path.join(current_dir, "config.yml")
 config = read_config(ml_config_path)
 start_date = config.get("start_date")
 end_date = config.get("end_date")
-split_date = config.get("split_date")
 
 symbols = ["btc"]
 timehorizon = config.get("timehorizon", "1h")
@@ -170,53 +235,54 @@ df_1h = resample_ohlcv(
 )
 
 df_gf = generate_best_features(df_1h,important_features)
+split_date = resolve_split_date(df_gf, config)
 
-# for clf_name, is_active in classifiers_config.items():
-#     if not is_active:
-#         continue
+for clf_name, is_active in classifiers_config.items():
+    if not is_active:
+        continue
 
-#     logger.info(f"Training classifier: {clf_name} for {symbols}")
-#     try:
-#         df_clf = create_classification_target(df_gf)
-#         df_clf = df_clf.drop(columns=["open", "high", "low"], errors="ignore")
-#         model, preds, test_index, X_test = train_model(
-#                     model_type="classifier",
-#                     model_name=clf_name,
-#                     df=df_clf,
-#                     target_col="target",
-#                     split_date=split_date,
-#                     n_trails=10,
-#                     df_1m=df_1m
-#                 )
-#         try:
-#             sample_preds = model.predict(X_test.head(5))
-#             logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
-#             preds_df = pd.DataFrame({
-#                  "prediction": sample_preds
-#               })
-#             preds_df.to_csv(f"{clf_name}_classifier_sample_preds.csv", index=False)
-#         except Exception as e:
-#             logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
-#         df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
-#         df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
-#         bt = BackTest(
-#                     df_1m,
-#                     df_predictions,
-#                     take_profit=3,
-#                     stop_loss=1
-#                 )
-#         ledger, final_balance, pnl = bt.run()
-#         logger.info(f"Final Ledger for Classifier: {ledger.head()}")
-#         logger.info(f"Final Balance for Classifier: {final_balance}")
-#         logger.info(f"Final PnL for Classifier: {pnl}")
-#         save_model(
-#              model,
-#              X_test.columns.tolist(),
-#              symbols[0],
-#              f"{clf_name}_classifier_{timestamp}"
-#         )
-#     except Exception as e:
-#                 logger.error(f"Classifier {clf_name} failed for {symbols}: {e}")
+    logger.info(f"Training classifier: {clf_name} for {symbols}")
+    try:
+        df_clf = create_classification_target(df_gf)
+        df_clf = df_clf.drop(columns=["open", "high", "low"], errors="ignore")
+        model, preds, test_index, X_test = train_model(
+                    model_type="classifier",
+                    model_name=clf_name,
+                    df=df_clf,
+                    target_col="target",
+                    split_date=split_date,
+                    n_trails=10,
+                    df_1m=df_1m
+                )
+        try:
+            sample_preds = model.predict(X_test.head(5))
+            logger.info(f"[Dry-run] {clf_name} predictions on first 5 test rows:\n{sample_preds}")
+            preds_df = pd.DataFrame({
+                 "prediction": sample_preds
+              })
+            preds_df.to_csv(f"{clf_name}_classifier_sample_preds.csv", index=False)
+        except Exception as e:
+            logger.error(f"[Dry-run] Failed for {clf_name}: {e}")
+        df_predictions = prepare_predictions(df_clf,preds,test_index,model_type="classifier")
+        df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'], utc=True)
+        bt = BackTest(
+                    df_1m,
+                    df_predictions,
+                    take_profit=3,
+                    stop_loss=1
+                )
+        ledger, final_balance, pnl = bt.run()
+        logger.info(f"Final Ledger for Classifier: {ledger.head()}")
+        logger.info(f"Final Balance for Classifier: {final_balance}")
+        logger.info(f"Final PnL for Classifier: {pnl}")
+        save_model(
+             model,
+             X_test.columns.tolist(),
+             symbols[0],
+             f"{clf_name}_classifier_{timestamp}"
+        )
+    except Exception as e:
+                logger.error(f"Classifier {clf_name} failed for {symbols}: {e}")
 
 for reg_name, is_active in regressors_config.items():
      if not is_active:
