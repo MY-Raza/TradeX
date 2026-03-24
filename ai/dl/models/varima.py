@@ -1,19 +1,5 @@
 """
 varima.py — Multivariate VARIMA trainer (Darts)
-================================================
-Key fix in this version:
-- ROLLING WINDOW: statsmodels VAR complexity is O(n * p^2 * k^2).
-  Fitting 22,000 hourly rows (2023-2025) with p=2, k=4 requires solving a
-  700,000-element OLS system — this is why the model appears "stuck".
-  A rolling window of the most recent N rows is now applied before fitting.
-  VAR does not benefit from data older than a few months for crypto (regime
-  changes make old data harmful, not helpful). Default: 6 months = 4,320 rows.
-
-- q=0 GUARD: VARMA(q>0) is non-identifiable in statsmodels — triggers slow/
-  non-convergent fitting. Any q>0 is forced to 0 with a warning.
-
-- All previous optimisations preserved:
-  slice-first copy, explicit freq, fast=True (OHLC only), trend='n' for d>=1.
 """
 
 from __future__ import annotations
@@ -24,14 +10,10 @@ import pandas as pd
 from darts import TimeSeries
 from darts.models import VARIMA
 
-from TradeX.ai.dl.utils import train_test_split
-
-
+from TradeX.ai.dl.models.trainer_utils import normalise_datetime,rolling_train_test_split,check_min_rows,make_test_artifacts
 _DEFAULT_TARGET_COLS: list[str] = ["open", "high", "low", "close", "volume"]
 _FAST_TARGET_COLS:    list[str] = ["open", "high", "low", "close"]
 
-# At 1h bars: 6 months ~ 4,320 rows. Enough for VAR to capture regime,
-# small enough to solve in seconds instead of minutes.
 _DEFAULT_ROLLING_ROWS = 4_320   # ~6 months of 1h data
 
 
@@ -97,31 +79,26 @@ def train(
     else:
         target_cols = list(target_cols)
 
-    # --- 2. Validate columns exist before copying -------------------------
+    # --- 2. Validate columns exist before normalisation -------------------
     missing = [c for c in target_cols if c not in df.columns]
     if missing:
         raise ValueError(f"VARIMA: columns not found in df: {missing}")
 
-    # --- 3. Slice to target cols FIRST (avoid copying 100+ indicator cols) -
+    # --- 3. Datetime normalisation on target columns only -----------------
+    # Slice first to avoid copying 100+ indicator columns unnecessarily.
     if "datetime" in df.columns:
+        df_target = df[target_cols].copy()
         dt = pd.to_datetime(df["datetime"])
         if dt.dt.tz is None:
             dt = dt.dt.tz_localize("UTC")
-        dt_naive = dt.dt.tz_convert("UTC").dt.tz_localize(None)
-        df_target = df[target_cols].copy()
-        df_target.index = pd.DatetimeIndex(dt_naive.values, name="datetime")
+        df_target.index = pd.DatetimeIndex(
+            dt.dt.tz_convert("UTC").dt.tz_localize(None).values, name="datetime"
+        )
     else:
-        if not isinstance(df.index, pd.DatetimeIndex):
-            raise ValueError(
-                "VARIMA: DataFrame must have a DatetimeIndex or 'datetime' column."
-            )
-        idx = df.index
-        if idx.tz is not None:
-            idx = idx.tz_convert("UTC").tz_localize(None)
-        df_target = df[target_cols].copy()
-        df_target.index = idx
+        df_slim = df[target_cols].copy()
+        df_target = normalise_datetime(df_slim, copy=False)
 
-    # --- 4. Sort + dropna on small frame ----------------------------------
+    # --- 4. Sort + dropna -------------------------------------------------
     df_target = df_target.sort_index().dropna()
 
     if df_target.empty:
@@ -131,64 +108,44 @@ def train(
     if all_nan_cols:
         raise ValueError(f"VARIMA: columns entirely NaN after dropna: {all_nan_cols}")
 
-    # --- 5. Split into train / test at split_date -------------------------
-    split_ts = pd.Timestamp(split_date)
-    if split_ts.tz is not None:
-        split_ts = split_ts.tz_convert("UTC").tz_localize(None)
+    # --- 5. Rolling train / test split ------------------------------------
+    df_train, df_test_raw = rolling_train_test_split(
+        df_target,
+        split_date=split_date,
+        rolling_rows=rolling_rows,
+        label="VARIMA",
+    )
 
-    df_train_full = df_target[df_target.index < split_ts]
-    df_test_raw   = df_target[df_target.index >= split_ts]
+    # --- 6. Minimum-row guard ---------------------------------------------
+    n_vars = len(target_cols)
+    check_min_rows(
+        df_train,
+        min_rows=p * n_vars + 2,
+        context=f"VARIMA({p},{d},{q}) with {n_vars} variables",
+    )
 
-    if df_train_full.empty:
-        raise ValueError(f"VARIMA: no training rows before split_date '{split_date}'.")
-    if df_test_raw.empty:
-        raise ValueError(f"VARIMA: no test rows on/after split_date '{split_date}'.")
-
-    # --- 6. Apply rolling window to training set --------------------------
-    # KEY PERFORMANCE FIX: cap training rows so statsmodels OLS stays fast.
-    if rolling_rows and len(df_train_full) > rolling_rows:
-        n_dropped = len(df_train_full) - rolling_rows
-        df_train = df_train_full.iloc[-rolling_rows:]
-        import logging
-        logging.getLogger("varima").info(
-            f"VARIMA rolling window: using last {rolling_rows} of "
-            f"{len(df_train_full)} training rows (dropped {n_dropped} old rows)."
-        )
-    else:
-        df_train = df_train_full
-
-    # --- 7. Minimum-row guard ---------------------------------------------
-    n_vars   = len(target_cols)
-    min_rows = p * n_vars + 2
-    if len(df_train) < min_rows:
-        raise ValueError(
-            f"VARIMA({p},{d},{q}) with {n_vars} variables needs >= {min_rows} "
-            f"rows in training window, got {len(df_train)}."
-        )
-
-    # --- 8. Build TimeSeries objects (explicit freq skips Darts index scan) -
+    # --- 7. Build TimeSeries objects (explicit freq skips Darts index scan) -
     freq = _detect_freq(df_target.index)
     ts_kwargs = {"freq": freq} if freq is not None else {}
+
+    # Store the full training length BEFORE the window for correct test_index.
+    n_train_full = len(df_target[df_target.index < pd.Timestamp(split_date)])
 
     train_series = TimeSeries.from_dataframe(df_train, **ts_kwargs)
     test_series  = TimeSeries.from_dataframe(df_test_raw, **ts_kwargs)
 
-    # --- 9. Fit -----------------------------------------------------------
+    # --- 8. Fit -----------------------------------------------------------
     if fast and d >= 1 and "trend" not in kwargs:
-        kwargs["trend"] = "n"   # intercept is redundant after differencing
+        kwargs["trend"] = "n"
 
     model = VARIMA(p=p, d=d, q=q, **kwargs)
     model.fit(train_series)
 
-    # --- 10. Predict ------------------------------------------------------
+    # --- 9. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))
 
-    # --- 11. Return artifacts ---------------------------------------------
-    # test_index refers to positions in the ORIGINAL df (pre-window),
-    # needed so prepare_predictions can look up df_gf rows by integer position.
-    n_train_full = len(df_train_full)
-    n_test       = len(test_series)
-    test_index   = np.arange(n_train_full, n_train_full + n_test)
-    df_test      = pd.DataFrame(index=test_series.time_index)
-
+    # --- 10. Return artifacts ---------------------------------------------
+    # test_index refers to positions in the ORIGINAL df (pre-window) so that
+    # prepare_predictions can look up df_gf rows by integer position.
+    test_index, df_test = make_test_artifacts(n_train_full, test_series)
     return model, preds, test_index, df_test

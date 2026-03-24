@@ -1,11 +1,15 @@
+"""
+nbeats.py — N-BEATS trainer (Darts, CPU-optimised)
+"""
+
 from __future__ import annotations
 
-import warnings
 import numpy as np
 import pandas as pd
 from darts.models import NBEATSModel
 
 from TradeX.ai.dl.utils import prepare_series, train_test_split
+from TradeX.ai.dl.models.trainer_utils import normalise_datetime,ensure_log_return,rolling_train_test_split,check_min_rows,concat_dedup_sort,build_pl_trainer_kwargs,make_test_artifacts
 from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("nbeats")
@@ -58,7 +62,6 @@ def train(
             )
         n_epochs = epochs
 
-    # Prevent duplicate-kwarg TypeError
     kwargs.pop("random_state", None)
 
     # --- Chunk length guard -----------------------------------------------
@@ -68,17 +71,10 @@ def train(
             f"less than input_chunk_length ({input_chunk_length})."
         )
 
-    # --- 1. Datetime normalisation ----------------------------------------
-
-    if target_col == "log_return" and "log_return" not in df.columns:
-        df["log_return"] = np.log(df["close"]).diff()
-
-    if "datetime" in df.columns:
-        dt = pd.to_datetime(df["datetime"])
-        if dt.dt.tz is None:
-            dt = dt.dt.tz_localize("UTC")
-        df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
-        df = df.set_index("datetime")
+    # --- 1. Datetime normalisation + log_return ---------------------------
+    df = normalise_datetime(df)
+    if target_col == "log_return":
+        df = ensure_log_return(df)
 
     if target_col not in df.columns:
         raise ValueError(
@@ -87,69 +83,36 @@ def train(
 
     df_target = df[[target_col]].dropna().sort_index()
 
-    # --- 2. Rolling window ------------------------------------------------
-    split_ts = pd.Timestamp(split_date)
-    if split_ts.tz is not None:
-        split_ts = split_ts.tz_convert("UTC").tz_localize(None)
-
-    df_before_split = df_target[df_target.index < split_ts]
-    df_after_split  = df_target[df_target.index >= split_ts]
-
-    if df_before_split.empty:
-        raise ValueError(f"No training rows before split_date '{split_date}'.")
-    if df_after_split.empty:
-        raise ValueError(f"No test rows on/after split_date '{split_date}'.")
-
-    if rolling_rows and len(df_before_split) > rolling_rows:
-        # BUG-1 FIX: capture n_dropped BEFORE slicing.
-        n_total  = len(df_before_split)
-        n_dropped = n_total - rolling_rows
-        df_before_split = df_before_split.iloc[-rolling_rows:]
-        logger.info(
-            f"N-BEATS rolling window: using last {rolling_rows} of "
-            f"{n_total} training rows (dropped {n_dropped} older rows)."
-        )
+    # --- 2. Rolling train / test split ------------------------------------
+    df_train, df_test_raw = rolling_train_test_split(
+        df_target,
+        split_date=split_date,
+        rolling_rows=rolling_rows,
+        logger=logger,
+        label="N-BEATS",
+    )
 
     # --- 3. Minimum-row guard ---------------------------------------------
-    min_rows = input_chunk_length + output_chunk_length
-    if len(df_before_split) < min_rows:
-        raise ValueError(
-            f"Not enough training data ({len(df_before_split)} rows) for "
-            f"input_chunk_length={input_chunk_length} + "
-            f"output_chunk_length={output_chunk_length} (need {min_rows})."
-        )
-
-    # BUG-2 FIX: deduplicate and sort to prevent Darts index-duplicate error.
-    df_windowed = (
-        pd.concat([df_before_split, df_after_split])
-        .loc[~pd.concat([df_before_split, df_after_split]).index.duplicated(keep="last")]
-        .sort_index()
+    check_min_rows(
+        df_train,
+        min_rows=input_chunk_length + output_chunk_length,
+        context=f"N-BEATS input+output={input_chunk_length + output_chunk_length}",
     )
 
     # --- 4. Build Darts TimeSeries ----------------------------------------
+    df_windowed = concat_dedup_sort(df_train, df_test_raw)
     series = prepare_series(df_windowed.reset_index(), target_col)
 
-    # --- 5. Train / test split --------------------------------------------
+    # --- 5. Train / test split (Darts) ------------------------------------
     train_series, test_series = train_test_split(series, split_date)
 
-    # --- 6. CPU-optimised trainer kwargs ----------------------------------
-    # BUG-4 FIX: copy the popped dict to avoid mutating the caller's kwargs.
-    pl_trainer_kwargs = kwargs.pop("pl_trainer_kwargs", {}).copy()
-    pl_trainer_kwargs.setdefault("accelerator",          "cpu")
-    pl_trainer_kwargs.setdefault("enable_progress_bar",  False)
-    pl_trainer_kwargs.setdefault("enable_model_summary", False)
-    pl_trainer_kwargs.setdefault("log_every_n_steps",    10)
-
-    # BUG-5 FIX: add EarlyStopping so training halts when converged.
-    try:
-        from pytorch_lightning.callbacks import EarlyStopping
-        cb = pl_trainer_kwargs.pop("callbacks", [])
-        cb.append(EarlyStopping(
-            monitor="train_loss", patience=3, min_delta=1e-4, mode="min"
-        ))
-        pl_trainer_kwargs["callbacks"] = cb
-    except ImportError:
-        pass
+    # --- 6. Build pl_trainer_kwargs ---------------------------------------
+    pl_trainer_kwargs = build_pl_trainer_kwargs(
+        base_kwargs=kwargs.pop("pl_trainer_kwargs", {}),
+        use_early_stopping=True,
+        monitor="train_loss",
+        patience=3,
+    )
 
     # --- 7. Fit -----------------------------------------------------------
     model = NBEATSModel(
@@ -170,13 +133,5 @@ def train(
     preds = model.predict(len(test_series))
 
     # --- 9. Return artifacts ----------------------------------------------
-    # BUG-3 FIX: test_index is relative to df_windowed (what preds aligns to),
-    # NOT to the full df_target.  main.py uses test_index to slice df_gf, so
-    # using the full-df offset caused silent wrong-row selection when a rolling
-    # window was applied.
-    n_train_windowed = len(df_before_split)
-    n_test           = len(test_series)
-    test_index       = np.arange(n_train_windowed, n_train_windowed + n_test)
-    df_test          = pd.DataFrame(index=test_series.time_index)
-
+    test_index, df_test = make_test_artifacts(len(df_train), test_series)
     return model, preds, test_index, df_test
