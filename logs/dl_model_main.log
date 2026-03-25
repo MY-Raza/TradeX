@@ -275,3 +275,12 @@ Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especiall
 2026-03-25 16:19:34,776 | INFO | dl_model_main | Training DL model: arima for btc
 2026-03-25 16:20:01,061 | ERROR | dl_model_main | DL model arima failed for btc: The time index is missing the `freq` attribute, and the frequency could not be directly inferred. This probably comes from inconsistent date frequencies with missing dates. If you know the actual frequency, try setting `fill_missing_dates=True, freq=actual_frequency`. If not, try setting `fill_missing_dates=True, freq=None` to see if a frequency can be inferred.
 2026-03-25 16:20:01,061 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-25 16:49:56,317 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-25 16:49:56,317 | INFO | dl_model_main | Fetching data for btc …
+2026-03-25 16:50:12,465 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-25 16:50:12,615 | INFO | dl_model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
+2026-03-25 16:50:12,615 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-25 16:51:45,029 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-25 16:54:46,894 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-25 17:20:51,543 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-25 17:40:38,038 | INFO | dl_model_main | DL model training complete for btc.
