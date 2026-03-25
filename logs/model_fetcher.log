@@ -591,3 +591,58 @@
 2026-03-24 14:48:28,990 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']
 2026-03-24 14:50:21,979 | INFO | model_fetcher | The best model: xgboost_reg_20260318_124806
 2026-03-24 14:50:35,460 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']
+2026-03-24 17:27:36,073 | INFO | model_fetcher | The best model: xgboost_reg_20260318_124806
+2026-03-24 17:27:44,980 | INFO | model_fetcher | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
+2026-03-24 17:27:44,980 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-24 18:00:37,223 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[-1 -1 -1 -1 -1]
+2026-03-24 18:00:39,839 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-07-03 09:00:00+00:00                long                      buy  ...   999.50 -0.05    -0.05
+1 2025-07-04 07:00:00+00:00                long  sell - direction_change  ...   995.87 -0.36    -0.41
+2 2025-07-04 07:00:00+00:00               short                      buy  ...   995.37 -0.05    -0.46
+3 2025-07-05 07:00:00+00:00               short  sell - direction_change  ...  1001.76  0.64     0.18
+4 2025-07-05 07:00:00+00:00                long                      buy  ...  1001.26 -0.05     0.13
+
+[5 rows x 8 columns]
+2026-03-24 18:00:39,841 | INFO | model_fetcher | Final Balance for Classifier: 3248.64
+2026-03-24 18:00:39,843 | INFO | model_fetcher | Final PnL for Classifier: 123.01
+2026-03-24 18:00:39,890 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-24 18:03:16,499 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[0 0 2 0 0]
+2026-03-24 18:03:19,425 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-07-03 11:00:00+00:00                long                      buy  ...   999.50 -0.05    -0.05
+1 2025-07-03 16:00:00+00:00                long  sell - direction_change  ...   992.58 -0.69    -0.74
+2 2025-07-03 16:00:00+00:00               short                      buy  ...   992.09 -0.05    -0.79
+3 2025-07-04 19:00:00+00:00               short  sell - direction_change  ...  1006.50  1.45     0.66
+4 2025-07-04 19:00:00+00:00                long                      buy  ...  1006.00 -0.05     0.61
+
+[5 rows x 8 columns]
+2026-03-24 18:03:19,425 | INFO | model_fetcher | Final Balance for Classifier: 495.1
+2026-03-24 18:03:19,426 | INFO | model_fetcher | Final PnL for Classifier: -68.19
+2026-03-24 18:03:19,518 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']
+2026-03-25 11:25:12,192 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[110061.87012579 110040.15188679 110006.77861635 110054.12295597
+ 109996.37704403]
+2026-03-25 11:25:27,166 | INFO | model_fetcher | Final Ledger for Regressor:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-07-03 10:00:00+00:00               short                      buy  ...   999.50 -0.05    -0.05
+1 2025-07-03 12:00:00+00:00               short  sell - direction_change  ...  1002.12  0.26     0.21
+2 2025-07-03 12:00:00+00:00                long                      buy  ...  1001.62 -0.05     0.16
+3 2025-07-03 13:00:00+00:00                long  sell - direction_change  ...   997.18 -0.44    -0.28
+4 2025-07-03 13:00:00+00:00               short                      buy  ...   996.68 -0.05    -0.33
+
+[5 rows x 8 columns]
+2026-03-25 11:25:27,170 | INFO | model_fetcher | Final Balance for Regressor: 18675.39
+2026-03-25 11:25:27,170 | INFO | model_fetcher | Final PnL for Regressor: 298.7
+2026-03-25 11:25:27,293 | INFO | model_fetcher | Training Regressor: xgboost for ['btc']
+2026-03-25 11:29:55,387 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[110156.14  110083.9   110051.23  110340.83  110175.055]
+2026-03-25 11:30:07,034 | INFO | model_fetcher | Final Ledger for Regressor:                    datetime predicted_direction                   action  ...  balance   pnl  pnl_sum
+0 2025-07-03 10:00:00+00:00               short                      buy  ...   999.50 -0.05    -0.05
+1 2025-07-03 12:00:00+00:00               short  sell - direction_change  ...  1002.12  0.26     0.21
+2 2025-07-03 12:00:00+00:00                long                      buy  ...  1001.62 -0.05     0.16
+3 2025-07-03 14:00:00+00:00                long  sell - direction_change  ...  1007.24  0.56     0.72
+4 2025-07-03 14:00:00+00:00               short                      buy  ...  1006.74 -0.05     0.67
+
+[5 rows x 8 columns]
+2026-03-25 11:30:07,034 | INFO | model_fetcher | Final Balance for Regressor: 47815.6
+2026-03-25 11:30:07,034 | INFO | model_fetcher | Final PnL for Regressor: 393.11

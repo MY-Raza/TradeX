@@ -19,3 +19,6 @@
 2026-03-18 14:41:13,270 | INFO | xgboost_regressor | [train] Best Optuna parameters: {'n_estimators': 195, 'max_depth': 5, 'learning_rate': 0.10136731489162774, 'subsample': 0.5220936975739041, 'colsample_bytree': 0.9267853370800127, 'gamma': 2.686395040266359, 'reg_alpha': 3.8489892688221756, 'reg_lambda': 1.0309470277910253}
 2026-03-18 14:41:13,270 | INFO | xgboost_regressor | [train] Best trial PnL: 183.2600
 2026-03-18 14:41:29,689 | INFO | xgboost_regressor | [train] Final predictions — min: 66358.6562, max: 113402.2344, mean: 101635.9375
+2026-03-25 11:25:28,031 | INFO | xgboost_regressor | [train] Starting Optuna study (10 trials)...
+2026-03-25 11:29:37,551 | INFO | xgboost_regressor | [train] Best params: {'n_estimators': 246, 'max_depth': 4, 'learning_rate': 0.045585023472091576, 'subsample': 0.9438385294845837, 'colsample_bytree': 0.9089512625488945, 'gamma': 1.9519390051329255, 'reg_alpha': 3.6791389602255595, 'reg_lambda': 4.781638395528082} | Best PnL: 292.2000
+2026-03-25 11:29:55,336 | INFO | xgboost_regressor | [train] Final preds — min: 66866.1328, max: 113270.9844, mean: 101498.1328

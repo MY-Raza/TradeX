@@ -47,3 +47,6 @@
 2026-03-24 12:05:13,091 | INFO | xgboost_classifier | [train] Best trial PnL: -67.4600
 2026-03-24 12:05:13,091 | INFO | xgboost_classifier | [train] Fitting final model...
 2026-03-24 12:05:29,927 | INFO | xgboost_classifier | [train] Final predictions — min: 0.0271, max: 0.9799, mean: 0.3404
+2026-03-24 18:00:40,732 | INFO | xgboost_classifier | [train] Starting Optuna study (10 trials)...
+2026-03-24 18:02:33,313 | INFO | xgboost_classifier | [train] Best params: {'n_estimators': 300, 'max_depth': 3, 'learning_rate': 0.14424098129658827, 'subsample': 0.9436888677314486, 'colsample_bytree': 0.7681667807542256, 'gamma': 1.9920893239335107, 'reg_alpha': 2.536732568253148, 'reg_lambda': 3.4781914814008363} | Best PnL: -67.5600
+2026-03-24 18:03:16,474 | INFO | xgboost_classifier | [train] Final preds — min: 0.0121, max: 0.9750, mean: 0.3346
