@@ -1,7 +1,3 @@
-"""
-nbeats.py — N-BEATS trainer (Darts, CPU-optimised)
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -32,15 +28,16 @@ def train(
     df: pd.DataFrame,
     target_col: str = "log_return",
     split_date: str = "2024-01-01",
-    input_chunk_length: int = 24,
-    output_chunk_length: int = 1,
-    n_epochs: int = 20,
+    input_chunk_length: int = 72,      # SIGNAL-3: was 24; 3 days of 1h context
+    output_chunk_length: int = 4,      # SIGNAL-2: was 1; predict 4h forward
+    n_epochs: int = 50,                # SIGNAL-4: was 20; more training
     batch_size: int = 64,
-    num_blocks: int = 2,
+    num_blocks: int = 3,               # SIGNAL-5: was 2
     num_layers: int = 2,
-    layer_widths: int = 128,
+    layer_widths: int = 256,           # SIGNAL-5: was 128
     random_state: int = 42,
     rolling_rows: int = _DEFAULT_ROLLING_ROWS,
+    signal_threshold: float = 3e-4,   # SIGNAL-1: dead-band on log_return (~0.03%)
     lookback: int | None = None,
     epochs: int | None = None,
     **kwargs,
@@ -111,7 +108,7 @@ def train(
         base_kwargs=kwargs.pop("pl_trainer_kwargs", {}),
         use_early_stopping=True,
         monitor="train_loss",
-        patience=3,
+        patience=5,                    # SIGNAL-4: was 3; allow fuller convergence
     )
 
     # --- 7. Fit -----------------------------------------------------------
@@ -128,6 +125,10 @@ def train(
         **kwargs,
     )
     model.fit(train_series)
+
+    # SIGNAL-1: attach threshold so downstream prepare_predictions can apply it.
+    model.signal_threshold = signal_threshold
+    logger.info(f"N-BEATS signal_threshold set to {signal_threshold:.2e}")
 
     # --- 8. Predict -------------------------------------------------------
     preds = model.predict(len(test_series))

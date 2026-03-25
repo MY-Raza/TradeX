@@ -230,3 +230,12 @@ Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especiall
 2026-03-25 13:03:25,498 | INFO | dl_model_main | Training DL model: transformer for btc
 2026-03-25 13:03:25,523 | ERROR | dl_model_main | DL model transformer failed for btc: expected an indented block after 'if' statement on line 45 (trainer_utils.py, line 48)
 2026-03-25 13:03:25,523 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-25 13:04:42,837 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-25 13:04:42,837 | INFO | dl_model_main | Fetching data for btc …
+2026-03-25 13:04:55,570 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-25 13:04:55,846 | INFO | dl_model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
+2026-03-25 13:04:55,846 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-25 13:05:15,050 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-25 13:07:07,604 | INFO | dl_model_main | Training DL model: nbeats for btc
+2026-03-25 13:11:25,717 | INFO | dl_model_main | Training DL model: transformer for btc
+2026-03-25 13:21:22,290 | INFO | dl_model_main | DL model training complete for btc.

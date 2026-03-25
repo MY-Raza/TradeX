@@ -43,7 +43,7 @@ def normalise_datetime(df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
                      can be found.
     """
     if copy:
-         
+        df = df.copy()
 
         if "datetime" in df.columns:
             dt = pd.to_datetime(df["datetime"])
@@ -245,7 +245,10 @@ def build_pl_trainer_kwargs(
     Returns:
         A new dict ready to pass as pl_trainer_kwargs=... to the Darts model.
     """
-    kwargs = (base_kwargs or {})  
+    # BUG-FIX: base_kwargs must be copied — the original code mutated the
+    # caller's dict in-place, so a second call with the same base dict would
+    # see EarlyStopping appended twice (and lose setdefault idempotency).
+    kwargs = dict(base_kwargs) if base_kwargs else {}
 
     kwargs.setdefault("accelerator",          "cpu")
     kwargs.setdefault("enable_progress_bar",  False)

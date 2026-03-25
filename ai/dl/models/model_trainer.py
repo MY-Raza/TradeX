@@ -1,39 +1,3 @@
-"""
-model_trainer.py — DL model dispatch & persistence
-====================================================
-Bug-fixes applied in this version
------------------------------------
-BUG-1 (model_params merged at wrong priority):
-    The original merges model_params FIRST, then **kwargs on top. This means
-    an nbeats_params value from config (e.g. n_epochs=20) is correctly
-    overridable by an explicit kwarg — but explicit function arguments like
-    `epochs` and `batch_size` are passed as **kwargs too, so they would
-    override model_params correctly. HOWEVER, trainer_kwargs["epochs"] and
-    trainer_kwargs["batch_size"] are then set UNCONDITIONALLY via the explicit
-    arg assignments at the bottom, clobbering any model_params value for those
-    keys. Fixed: only assign epochs/batch_size/lookback if the caller passed a
-    non-None value explicitly (use sentinel None).
-
-BUG-2 (save_model feature_columns includes non-feature columns):
-    Calling df_gf.columns.tolist() in main.py passes ALL columns including
-    'open','high','low','close','volume','datetime','log_return' as feature
-    columns. save_model just stores whatever it receives — no bug here per se,
-    but the save_model docstring now documents this explicitly so callers know
-    to filter before passing.
-
-BUG-3 (train_model does not validate model_type early enough):
-    The ValueError for model_type != "dl" is raised after all kwargs are
-    assembled. Moved to the very top for fast-fail.
-
-BUG-4 (statistical models receive DL-only keys from model_params):
-    If nbeats_params or transformer_params happen to be passed as model_params
-    for an ARIMA/VARIMA call (e.g. wrong key in config), those keys are merged
-    first and only stripped for KNOWN DL-only names. Any unknown DL key leaks
-    through and causes a TypeError in the statistical trainer.
-    Fixed: for statistical models, only pass through the explicit model_params
-    that their trainers are known to accept (p, d, q, rolling_rows).
-"""
-
 from __future__ import annotations
 
 import os
@@ -47,7 +11,13 @@ from TradeX.utils.common.logs import get_logger
 logger = get_logger("dl_model_trainer")
 
 # Keys that statistical trainers (ARIMA/VARIMA) actually accept.
-_STATISTICAL_ALLOWED_PARAMS = frozenset({"p", "d", "q", "rolling_rows"})
+_STATISTICAL_ALLOWED_PARAMS = frozenset({
+    "p", "d", "q", "rolling_rows",
+    "signal_threshold",        # dead-band for trade signal generation
+    "seasonal_order",          # ARIMA seasonal component
+    "use_log_returns",         # VARIMA: model log-returns vs raw price
+    "fast",                    # VARIMA: drop volume column
+})
 
 _STATISTICAL_MODELS: frozenset[str] = frozenset({"arima", "varima"})
 

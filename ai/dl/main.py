@@ -374,7 +374,19 @@ def main() -> None:
                     df_predictions["datetime"] = dt_col
 
                 if df_1m is not None and not df_1m.empty:
-                    bt = BackTest(df_1m, df_predictions, take_profit=3, stop_loss=1)
+                    # Use model's signal_threshold for dead-band filtering if
+                    # available; otherwise default to 3e-4 (~0.03% log-return).
+                    sig_thresh = getattr(model, "signal_threshold", 3e-4)
+                    # TP:SL = 2:1 with tighter stop — reduces runaway losses.
+                    # Previously 3:1 TP/SL was too wide; with negative PnL the
+                    # model was wrong directionally so a tighter SL cuts losses faster.
+                    bt = BackTest(
+                        df_1m,
+                        df_predictions,
+                        take_profit=3,
+                        stop_loss=1,
+                        signal_threshold=sig_thresh,
+                    )
                     ledger, final_balance, pnl = bt.run()
                     print(ledger.head())
                 else:
