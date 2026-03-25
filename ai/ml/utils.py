@@ -103,6 +103,14 @@ def compute_trade_statistics(ledger: pd.DataFrame) -> pd.DataFrame:
 
     return stats_df
 
+def _is_log_return(preds_np: np.ndarray) -> bool:
+    """
+    Heuristic: if the median absolute prediction is < 0.05 the model is
+    predicting log-returns (order ~1e-4 to 1e-2), not price levels (~1e3+).
+    """
+    return float(np.median(np.abs(preds_np))) < 0.05
+ 
+ 
 def prepare_predictions(
     df,
     preds,
@@ -115,7 +123,7 @@ def prepare_predictions(
 ) -> pd.DataFrame:
     """
     Prepare a predictions DataFrame for backtesting.
-
+ 
     Parameters
     ----------
     df : pd.DataFrame
@@ -128,24 +136,26 @@ def prepare_predictions(
         ``'classifier'``, ``'regressor'``, ``'dl'`` (LSTM-style, requires
         lookback), or ``'dl_darts'`` (Darts models — no lookback needed).
     threshold : float or None
-        Signal threshold.  If None, derived as ``k * std(...)``.
+        Signal threshold.  For log_return models this is the dead-band
+        (|pred| must exceed threshold to generate a trade).
+        If None, derived as ``k * std(preds_np)``.
     k : float
         Std multiplier when threshold is None.
     lookback : int or None
         LSTM warm-up steps (only used for ``model_type='dl'``).
     last_train_value : float or None
         Last training value for inverse log-diff (reserved, unused here).
-
+ 
     Returns
     -------
     pd.DataFrame
         Columns: ['datetime', 'signals']  where signals ∈ {-1, 0, 1}.
     """
-
+ 
     # ------------------------------------------------------------------
     # Normalise datetime column to UTC-aware (guard against re-localising)
     # ------------------------------------------------------------------
-       # never mutate caller's frame
+    df = df.copy()  # never mutate caller's frame
     if "datetime" in df.columns:
         dt_col = pd.to_datetime(df["datetime"])
         if dt_col.dt.tz is None:
@@ -154,9 +164,9 @@ def prepare_predictions(
     elif isinstance(df.index, pd.DatetimeIndex):
         if df.index.tz is None:
             df.index = df.index.tz_localize("UTC")
-        df = df.reset_index()          # bring DatetimeIndex → "datetime" column
+        df = df.reset_index()
         df = df.rename(columns={df.columns[0]: "datetime"})
-
+ 
     # ------------------------------------------------------------------
     # Branch: classifier
     # ------------------------------------------------------------------
@@ -164,28 +174,22 @@ def prepare_predictions(
         upper = preds.mean() + 0.25 * preds.std()
         lower = preds.mean() - 0.25 * preds.std()
         signals = np.where(preds > upper, 1, np.where(preds < lower, -1, 0))
-
+ 
     # ------------------------------------------------------------------
     # Branch: regressor
     # ------------------------------------------------------------------
     elif model_type == "regressor":
         if threshold is None:
             preds_series = pd.Series(preds)
-    
             rolling_mean = preds_series.rolling(window=20, min_periods=1).mean()
-            rolling_std = preds_series.rolling(window=20, min_periods=1).std().fillna(0)
-    
-            # Avoid division by zero
-            rolling_std = rolling_std.replace(0, 1e-8)
-    
-            threshold = k * rolling_std
-    
-            signals = np.where(preds_series > rolling_mean + threshold, 1,
+            rolling_std  = preds_series.rolling(window=20, min_periods=1).std().fillna(0)
+            rolling_std  = rolling_std.replace(0, 1e-8)
+            threshold    = k * rolling_std
+            signals = np.where(preds_series > rolling_mean + threshold,  1,
                        np.where(preds_series < rolling_mean - threshold, -1, 0))
-
+ 
     # ------------------------------------------------------------------
     # Branch: dl_darts  (ARIMA / VARIMA / NBEATS / Transformer via Darts)
-    # Darts predicts the full test window — no lookback warm-up gap.
     # ------------------------------------------------------------------
     elif model_type == "dl_darts":
         # Extract numpy array from Darts TimeSeries if needed
@@ -193,26 +197,52 @@ def prepare_predictions(
             preds_np = preds.values().ravel().astype(np.float64)
         else:
             preds_np = np.asarray(preds, dtype=np.float64).ravel()
-
-        # test_index and preds must be the same length
+ 
+        # Align lengths
         test_index = np.asarray(test_index)
         min_len    = min(len(preds_np), len(test_index))
         preds_np   = preds_np[:min_len]
         test_index = test_index[:min_len]
-
-        if "close" in df.columns:
-            actual = df.iloc[test_index]["close"].values.astype(np.float64)
-            errors = preds_np - actual
-            if threshold is None:
-                threshold = k * np.std(errors)
-            signals = np.where(errors > threshold, 1,
-                               np.where(errors < -threshold, -1, 0))
-        else:
+ 
+        if _is_log_return(preds_np):
+            # -----------------------------------------------------------------
+            # LOG-RETURN PATH (ARIMA/VARIMA/NBEATS/Transformer after fix)
+            #
+            # preds_np values are log_returns, e.g. +0.0005 means +0.05% move.
+            # Signal direction comes directly from the sign of the prediction:
+            #   pred > +threshold  → 1  (BUY:  price expected to rise)
+            #   pred < -threshold  → -1 (SELL: price expected to fall)
+            #   |pred| <= threshold → 0  (NO TRADE: prediction is noise)
+            #
+            # This is the correct interpretation — do NOT subtract close price.
+            # -----------------------------------------------------------------
             if threshold is None:
                 threshold = k * np.std(preds_np)
-            signals = np.where(preds_np > threshold, 1,
-                               np.where(preds_np < -threshold, -1, 0))
-
+ 
+            signals = np.where(
+                preds_np >  threshold,  1,
+                np.where(
+                preds_np < -threshold, -1, 0)
+            )
+ 
+        else:
+            # -----------------------------------------------------------------
+            # PRICE LEVEL PATH (legacy: models predicting raw close values)
+            # Keep original error-vs-close logic so existing models are unaffected.
+            # -----------------------------------------------------------------
+            if "close" in df.columns:
+                actual = df.iloc[test_index]["close"].values.astype(np.float64)
+                errors = preds_np - actual
+                if threshold is None:
+                    threshold = k * np.std(errors)
+                signals = np.where(errors >  threshold,  1,
+                          np.where(errors < -threshold, -1, 0))
+            else:
+                if threshold is None:
+                    threshold = k * np.std(preds_np)
+                signals = np.where(preds_np >  threshold,  1,
+                          np.where(preds_np < -threshold, -1, 0))
+ 
     # ------------------------------------------------------------------
     # Branch: dl  (legacy LSTM / sequence models — lookback required)
     # ------------------------------------------------------------------
@@ -222,11 +252,11 @@ def prepare_predictions(
                 "lookback must be provided for model_type='dl' (LSTM-style). "
                 "For Darts models use model_type='dl_darts'."
             )
-
+ 
         test_index_aligned = np.asarray(test_index)[lookback:]
         preds_aligned      = np.asarray(preds, dtype=np.float64).ravel()
         preds_aligned      = preds_aligned[:len(test_index_aligned)]
-
+ 
         if "close" in df.columns:
             actual = df.iloc[test_index_aligned]["close"].values.astype(np.float64)
             errors = preds_aligned - actual
@@ -235,27 +265,27 @@ def prepare_predictions(
         else:
             errors    = preds_aligned
             threshold = threshold or k * np.std(preds_aligned)
-
-        signals    = np.where(errors > threshold, 1,
+ 
+        signals    = np.where(errors >  threshold,  1,
                               np.where(errors < -threshold, -1, 0))
         test_index = test_index_aligned
-
+ 
     else:
         raise ValueError(
             f"model_type must be one of: 'classifier', 'regressor', "
             f"'dl', 'dl_darts'.  Got: '{model_type}'"
         )
-
+ 
     # ------------------------------------------------------------------
-    # Build output DataFrame using iloc (safe for any index type)
+    # Build output DataFrame — columns always: ['datetime', 'signals']
     # ------------------------------------------------------------------
     datetimes = df.iloc[np.asarray(test_index)]["datetime"].values
-
+ 
     df_predictions = pd.DataFrame({
         "datetime": datetimes,
         "signals":  signals,
     })
-
+ 
     return df_predictions
 
 def pnl_permutation_importance(

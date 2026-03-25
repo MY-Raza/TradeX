@@ -362,8 +362,17 @@ def main() -> None:
                     model_params=model_params_map.get(model_name, {}),
                 )
 
+                # Pass model's signal_threshold as the `threshold` arg so
+                # prepare_predictions applies the dead-band correctly inside
+                # the dl_darts branch before signals are binarised to {-1,0,1}.
+                # BackTest receives a clean ['datetime','signals'] DataFrame
+                # with no extra columns and no API change needed.
+                sig_thresh = getattr(model, "signal_threshold", 3e-4)
+
                 df_predictions = prepare_predictions(
-                    df_gf, preds, test_index, model_type="dl_darts"
+                    df_gf, preds, test_index,
+                    model_type="dl_darts",
+                    threshold=sig_thresh,
                 )
 
                 # Normalise datetime column to UTC-aware
@@ -374,18 +383,11 @@ def main() -> None:
                     df_predictions["datetime"] = dt_col
 
                 if df_1m is not None and not df_1m.empty:
-                    # Use model's signal_threshold for dead-band filtering if
-                    # available; otherwise default to 3e-4 (~0.03% log-return).
-                    sig_thresh = getattr(model, "signal_threshold", 3e-4)
-                    # TP:SL = 2:1 with tighter stop — reduces runaway losses.
-                    # Previously 3:1 TP/SL was too wide; with negative PnL the
-                    # model was wrong directionally so a tighter SL cuts losses faster.
                     bt = BackTest(
                         df_1m,
                         df_predictions,
-                        take_profit=3,
+                        take_profit=2,
                         stop_loss=1,
-                        signal_threshold=sig_thresh,
                     )
                     ledger, final_balance, pnl = bt.run()
                     print(ledger.head())
