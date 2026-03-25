@@ -45,24 +45,24 @@ def normalise_datetime(df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
     if copy:
          
 
-    if "datetime" in df.columns:
-        dt = pd.to_datetime(df["datetime"])
-        if dt.dt.tz is None:
-            dt = dt.dt.tz_localize("UTC")
-        df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
-        df = df.set_index("datetime")
+        if "datetime" in df.columns:
+            dt = pd.to_datetime(df["datetime"])
+            if dt.dt.tz is None:
+                dt = dt.dt.tz_localize("UTC")
+            df["datetime"] = dt.dt.tz_convert("UTC").dt.tz_localize(None)
+            df = df.set_index("datetime")
 
-    elif isinstance(df.index, pd.DatetimeIndex):
-        idx = df.index
-        if idx.tz is not None:
-            idx = idx.tz_convert("UTC").tz_localize(None)
-        df.index = idx
+        elif isinstance(df.index, pd.DatetimeIndex):
+            idx = df.index
+            if idx.tz is not None:
+                idx = idx.tz_convert("UTC").tz_localize(None)
+            df.index = idx
 
-    else:
-        raise ValueError(
-            "normalise_datetime: DataFrame must have a 'datetime' column "
-            "or a DatetimeIndex."
-        )
+        else:
+            raise ValueError(
+                "normalise_datetime: DataFrame must have a 'datetime' column "
+                "or a DatetimeIndex."
+            )
 
     df.index.name = "datetime"
     return df
