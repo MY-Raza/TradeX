@@ -96,3 +96,6 @@ Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especiall
 2026-03-25 14:27:08,893 | INFO | dl_model_trainer | DL model 'varima' trained successfully.
 2026-03-25 14:48:43,782 | INFO | dl_model_trainer | DL model 'nbeats' trained successfully.
 2026-03-25 15:04:46,893 | INFO | dl_model_trainer | DL model 'transformer' trained successfully.
+2026-03-25 16:08:49,805 | ERROR | dl_model_trainer | Training failed for DL model 'arima': The time index is missing the `freq` attribute, and the frequency could not be directly inferred. This probably comes from inconsistent date frequencies with missing dates. If you know the actual frequency, try setting `fill_missing_dates=True, freq=actual_frequency`. If not, try setting `fill_missing_dates=True, freq=None` to see if a frequency can be inferred.
+2026-03-25 16:12:55,095 | INFO | dl_model_trainer | DL model 'varima' trained successfully.
+2026-03-25 16:20:01,061 | ERROR | dl_model_trainer | Training failed for DL model 'arima': The time index is missing the `freq` attribute, and the frequency could not be directly inferred. This probably comes from inconsistent date frequencies with missing dates. If you know the actual frequency, try setting `fill_missing_dates=True, freq=actual_frequency`. If not, try setting `fill_missing_dates=True, freq=None` to see if a frequency can be inferred.

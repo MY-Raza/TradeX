@@ -261,3 +261,17 @@ Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especiall
 2026-03-25 14:27:12,923 | INFO | dl_model_main | Training DL model: nbeats for btc
 2026-03-25 14:48:46,937 | INFO | dl_model_main | Training DL model: transformer for btc
 2026-03-25 15:05:10,460 | INFO | dl_model_main | DL model training complete for btc.
+2026-03-25 16:07:44,741 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-25 16:07:44,741 | INFO | dl_model_main | Fetching data for btc …
+2026-03-25 16:08:04,112 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-25 16:08:04,341 | INFO | dl_model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
+2026-03-25 16:08:04,341 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-25 16:08:49,805 | ERROR | dl_model_main | DL model arima failed for btc: The time index is missing the `freq` attribute, and the frequency could not be directly inferred. This probably comes from inconsistent date frequencies with missing dates. If you know the actual frequency, try setting `fill_missing_dates=True, freq=actual_frequency`. If not, try setting `fill_missing_dates=True, freq=None` to see if a frequency can be inferred.
+2026-03-25 16:08:49,811 | INFO | dl_model_main | Training DL model: varima for btc
+2026-03-25 16:19:12,889 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-25 16:19:12,889 | INFO | dl_model_main | Fetching data for btc …
+2026-03-25 16:19:34,534 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-25 16:19:34,776 | INFO | dl_model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
+2026-03-25 16:19:34,776 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-25 16:20:01,061 | ERROR | dl_model_main | DL model arima failed for btc: The time index is missing the `freq` attribute, and the frequency could not be directly inferred. This probably comes from inconsistent date frequencies with missing dates. If you know the actual frequency, try setting `fill_missing_dates=True, freq=actual_frequency`. If not, try setting `fill_missing_dates=True, freq=None` to see if a frequency can be inferred.
+2026-03-25 16:20:01,061 | INFO | dl_model_main | Training DL model: varima for btc
