@@ -15,6 +15,9 @@ __all__ = [
     "concat_dedup_sort",
     "build_pl_trainer_kwargs",
     "make_test_artifacts",
+    # helpers (exported for testing)
+    "_log_diff",
+    "_signed_log_diff",
 ]
 
 # ---------------------------------------------------------------------------
@@ -72,30 +75,130 @@ def normalise_datetime(df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
 # 2. Log-return column derivation
 # ---------------------------------------------------------------------------
 
-def ensure_log_return(df: pd.DataFrame) -> pd.DataFrame:
+def _signed_log_diff(series: pd.Series) -> pd.Series:
     """
-    Add a 'log_return' column to df if it is not already present.
+    Signed log-difference for series that may contain non-positive values.
 
-    Computes log_return = log(close).diff().  The first row will be NaN
-    and must be dropped by the caller (e.g. via .dropna()).
+    Formula: sign(x) * log(|x| + 1), then .diff()
+
+    This preserves the sign of the original values and is defined for all
+    real numbers (including zero and negatives), unlike plain log().
 
     Args:
-        df : DataFrame that must contain a 'close' column.
+        series : Numeric pandas Series.
 
     Returns:
-        The same DataFrame with 'log_return' added (in-place; no copy).
+        First-differenced signed-log series (first element is NaN).
+    """
+    return series.apply(lambda x: np.sign(x) * np.log(abs(x) + 1)).diff()
+
+
+def _log_diff(series: pd.Series) -> pd.Series:
+    """
+    Standard log-difference: log(x).diff().
+
+    Args:
+        series : Numeric pandas Series with strictly positive values.
+
+    Returns:
+        First-differenced log series (first element is NaN).
+    """
+    return np.log(series).diff()
+
+
+def ensure_log_return(
+    df: pd.DataFrame,
+    columns: list[str] | None = None,
+    suffix: str = "_lr",
+    inplace: bool = True,
+) -> pd.DataFrame:
+    """
+    Compute log-difference returns for every numeric column in *df* and
+    append them as ``<col><suffix>`` columns.
+
+    For columns that are **strictly positive** everywhere, the standard
+    log-difference is used::
+
+        lr = log(x[t]) - log(x[t-1])
+
+    For columns that contain **zero or negative values**, the signed
+    log-difference is used instead (defined for all real numbers)::
+
+        lr = sign(x[t]) * log(|x[t]| + 1)  -  sign(x[t-1]) * log(|x[t-1]| + 1)
+
+    Special back-compat behaviour
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    * If ``columns`` is not given (default), **all numeric columns** are
+      processed — *except* those whose name already ends with ``suffix``
+      (avoids double-differencing previously computed return columns).
+    * A column named ``'close'`` always produces a ``'log_return'`` alias in
+      addition to its normal ``'close_lr'`` entry so that downstream code that
+      reads ``df['log_return']`` keeps working without modification.
+    * If ``'log_return'`` is already present **and** ``columns`` is None, the
+      function returns immediately (full back-compat shortcut).
+
+    Args:
+        df      : Input DataFrame.  Modified in-place when *inplace* is True.
+        columns : Explicit list of source columns to process.  Defaults to all
+                  numeric columns that don't already end with *suffix*.
+        suffix  : Suffix appended to each source column name.  Default ``'_lr'``.
+        inplace : If True (default) add columns to *df* directly.  If False,
+                  return a copy.
+
+    Returns:
+        The (possibly modified) DataFrame with new ``<col><suffix>`` columns.
 
     Raises:
-        ValueError : If 'close' is not a column and 'log_return' is absent.
+        ValueError : If an explicitly requested column is missing from *df*.
     """
-    if "log_return" in df.columns:
+    # --- Back-compat shortcut -------------------------------------------
+    if columns is None and "log_return" in df.columns:
         return df
-    if "close" not in df.columns:
+
+    if not inplace:
+        df = df.copy()
+
+    # --- Resolve target columns -----------------------------------------
+    if columns is None:
+        numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+        # Skip columns that are already log-return / suffix columns,
+        # and exclude any column named 'datetime' (it's a time index, not a feature).
+        _DATETIME_NAMES = {"datetime", "date", "time", "timestamp"}
+        columns = [
+            c for c in numeric_cols
+            if not c.endswith(suffix) and c.lower() not in _DATETIME_NAMES
+        ]
+    else:
+        missing = [c for c in columns if c not in df.columns]
+        if missing:
+            raise ValueError(
+                f"ensure_log_return: columns not found in DataFrame: {missing}"
+            )
+
+    if not columns:
         raise ValueError(
-            "ensure_log_return: DataFrame has no 'close' column to derive "
-            "log_return from, and 'log_return' is not already present."
+            "ensure_log_return: no numeric source columns found to process."
         )
-    df["log_return"] = np.log(df["close"]).diff()
+
+    # --- Compute per-column log-differences -----------------------------
+    for col in columns:
+        out_col = f"{col}{suffix}"
+        if out_col in df.columns:
+            # Already computed — skip to avoid overwriting.
+            continue
+
+        series = df[col]
+
+        # Use signed-log-diff when any value is <= 0; plain log-diff otherwise.
+        if (series <= 0).any():
+            df[out_col] = _signed_log_diff(series)
+        else:
+            df[out_col] = _log_diff(series)
+
+    # --- Back-compat alias: 'close' → 'log_return' ----------------------
+    if "close" in columns and "log_return" not in df.columns:
+        df["log_return"] = df[f"close{suffix}"]
+
     return df
 
 

@@ -6,7 +6,8 @@ from darts import TimeSeries
 from darts.models import VARIMA
 
 from TradeX.ai.dl.models.trainer_utils import (
-    normalise_datetime, rolling_train_test_split, check_min_rows, make_test_artifacts,
+    normalise_datetime, ensure_log_return, rolling_train_test_split,
+    check_min_rows, make_test_artifacts,
 )
 _DEFAULT_TARGET_COLS: list[str] = ["open", "high", "low", "close", "volume"]
 _FAST_TARGET_COLS:    list[str] = ["open", "high", "low", "close"]
@@ -87,8 +88,9 @@ def train(
         for col in base_cols:
             if col not in df.columns:
                 raise ValueError(f"VARIMA: column '{col}' not found in df.")
-            lr_col = f"{col}_lr"
-            df[lr_col] = np.log(df[col]).diff()
+        # Delegate to ensure_log_return: handles positive-only (log-diff) and
+        # columns with zero/negative values (signed-log-diff) automatically.
+        df = ensure_log_return(df, columns=base_cols)
         target_cols = [f"{c}_lr" for c in base_cols]
     else:
         # Fall back to raw price columns
