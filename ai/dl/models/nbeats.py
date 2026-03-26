@@ -10,7 +10,7 @@ from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("nbeats")
 
-_DEFAULT_ROLLING_ROWS = 10_840   # ~6 months at 1h
+_DEFAULT_ROLLING_ROWS = 4_320   # ~6 months at 1h
 
 
 def _set_cpu_threads(n_threads: int) -> None:

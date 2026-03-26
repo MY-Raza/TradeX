@@ -17,7 +17,7 @@ _LOG_RETURN_COLS: list[str] = [
     "open_lr", "high_lr", "low_lr", "close_lr"
 ]
 
-_DEFAULT_ROLLING_ROWS = 10_840   # ~6 months of 1h data
+_DEFAULT_ROLLING_ROWS = 4_320   # ~6 months of 1h data
 
 
 def _detect_freq(index: pd.DatetimeIndex) -> str | None:

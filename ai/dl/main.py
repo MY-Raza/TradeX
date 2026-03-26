@@ -359,6 +359,7 @@ def main() -> None:
                     lookback=lookback,
                     epochs=epochs,
                     batch_size=batch_size,
+                    high_performance=True,
                     model_params=model_params_map.get(model_name, {}),
                 )
 
