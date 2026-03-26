@@ -27,3 +27,8 @@
 2026-03-25 17:20:57,573 | INFO | transformer | Transformer rolling window: using last 2000 of 21945 training rows (dropped 19945 older rows).
 2026-03-25 17:38:30,206 | INFO | transformer | Transformer signal_threshold set to 3.00e-04
 2026-03-25 17:38:30,638 | INFO | transformer | Dynamic INT8 quantization applied to inference model.
+2026-03-26 11:04:07,388 | INFO | transformer | Transformer: high_performance=True — using full 4-core resources.
+2026-03-26 11:04:07,390 | INFO | transformer | Transformer CPU: 4 intraop threads | MKL=True
+2026-03-26 11:04:16,452 | INFO | transformer | Transformer rolling window: using last 2000 of 21945 training rows (dropped 19945 older rows).
+2026-03-26 11:25:36,383 | INFO | transformer | Transformer signal_threshold set to 3.00e-04
+2026-03-26 11:25:37,282 | INFO | transformer | Dynamic INT8 quantization applied to inference model.
