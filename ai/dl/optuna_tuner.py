@@ -1,12 +1,52 @@
+"""
+optuna_tuner.py — Optuna hyperparameter optimisation for all DL/statistical models.
+=====================================================================================
+
+Usage
+-----
+    from TradeX.ai.dl.models.optuna_tuner import tune_model
+
+    best_params = tune_model(
+        model_name  = "nbeats",          # "arima" | "varima" | "nbeats" | "transformer"
+        df          = df_gf,             # feature-engineered OHLCV DataFrame
+        df_1m       = df_1m,             # 1-minute OHLCV for backtesting
+        split_date  = split_date,        # same split as training pipeline
+        n_trials    = 50,                # Optuna trials
+        timeout     = 3600,              # optional wall-clock limit (seconds)
+        high_performance = True,         # pass False on a busy 4-core machine
+    )
+    # best_params is a dict ready to pass as model_params= to train_model().
+
+How it works
+------------
+Each trial:
+  1. Samples a hyperparameter set from the model-specific search space.
+  2. Calls the trainer directly (same code path as production).
+  3. Runs a lightweight backtest on the resulting predictions.
+  4. Returns the final PnL as the objective (maximise).
+
+Pruning
+-------
+MedianPruner is used: trials that are clearly worse than the median are
+stopped early, saving CPU time on a 4-core machine.
+
+Thread safety
+-------------
+Optuna uses SQLite storage by default so studies survive process restarts
+and can be resumed.  Pass ``storage=None`` to use in-memory storage.
+"""
+
 from __future__ import annotations
+
+import logging
 import warnings
 from typing import Any
-from TradeX.utils.common.logs import get_logger
+
 import numpy as np
 import pandas as pd
 
 warnings.filterwarnings("ignore")
-logger = get_logger("optuna_tuner")
+logger = logging.getLogger("optuna_tuner")
 
 
 # ---------------------------------------------------------------------------
@@ -18,7 +58,8 @@ def _arima_space(trial) -> dict[str, Any]:
         "p":                trial.suggest_int("p", 1, 10),
         "d":                0,          # log_return is I(0) — never difference
         "q":                trial.suggest_int("q", 0, 3),
-        "signal_threshold": trial.suggest_float("signal_threshold", 1e-4, 1e-3, log=True),
+        # ARIMA pred std ~1e-5; search around that scale, not Transformer scale
+        "signal_threshold": trial.suggest_float("signal_threshold", 1e-6, 5e-5, log=True),
         # Seasonal component: try with / without 24h cycle
         "seasonal_order": (
             trial.suggest_int("P", 0, 2),
@@ -35,7 +76,8 @@ def _varima_space(trial) -> dict[str, Any]:
         "d":                0,          # log_return columns are already I(0)
         "q":                0,          # VARMA(q>0) is non-identifiable — locked
         "rolling_rows":     trial.suggest_int("rolling_rows", 1000, 6000, step=500),
-        "signal_threshold": trial.suggest_float("signal_threshold", 1e-4, 1e-3, log=True),
+        # VARIMA close_lr pred std ~1e-5; search around that scale
+        "signal_threshold": trial.suggest_float("signal_threshold", 1e-6, 5e-5, log=True),
     }
 
 
@@ -51,7 +93,8 @@ def _nbeats_space(trial) -> dict[str, Any]:
         "num_layers":          trial.suggest_int("num_layers", 1, 4),
         "layer_widths":        trial.suggest_categorical("layer_widths", [64, 128, 256]),
         "rolling_rows":        trial.suggest_int("rolling_rows", 1000, 6000, step=500),
-        "signal_threshold":    trial.suggest_float("signal_threshold", 1e-4, 1e-3, log=True),
+        # NBEATS pred std ~1e-4; search 1e-5 to 5e-4
+        "signal_threshold":    trial.suggest_float("signal_threshold", 1e-5, 5e-4, log=True),
     }
 
 
@@ -262,17 +305,17 @@ def tune_model(
         f"pnl={best.value:.2f}, params={best.params}"
     )
 
-    logger.info(f"\n{'='*60}")
-    logger.info(f"  Optuna results for: {model_name}")
-    logger.info(f"{'='*60}")
-    logger.info(f"  Best PnL      : {best.value:.4f}")
-    logger.info(f"  Best params   :")
+    print(f"\n{'='*60}")
+    print(f"  Optuna results for: {model_name}")
+    print(f"{'='*60}")
+    print(f"  Best PnL      : {best.value:.4f}")
+    print(f"  Best params   :")
     for k, v in best.params.items():
-        logger.info(f"    {k:30s}: {v}")
-        logger.info(f"  Trials total  : {len(study.trials)}")
-        completed = [t for t in study.trials if t.state.name == "COMPLETE"]
-        logger.info(f"  Trials ok     : {len(completed)}")
-        logger.info(f"{'='*60}\n")
+        print(f"    {k:30s}: {v}")
+    print(f"  Trials total  : {len(study.trials)}")
+    completed = [t for t in study.trials if t.state.name == "COMPLETE"]
+    print(f"  Trials ok     : {len(completed)}")
+    print(f"{'='*60}\n")
 
     # Rebuild the full params dict from the trial params
     # (some keys like d=0 are hard-coded in the space builder, not in trial.params)

@@ -11,8 +11,9 @@ forecasting_models:
 
 arima_params:
   p: 5
-  d: 0     # log_return is I(0) — do NOT difference again
-  q: 0     # MA terms add instability; pure AR(5) is more robust
+  d: 0               # log_return is I(0) — do NOT difference again
+  q: 0               # MA terms add instability; pure AR(5) is more robust
+  signal_threshold: 0.00001   # ARIMA pred std ~1e-5; 3e-4 silences all signals
 
 
 varima_params:
@@ -20,6 +21,7 @@ varima_params:
   d: 0    # log_return columns are already stationary — no differencing needed
   q: 0    # MUST be 0 — VARMA(q>0) is non-identifiable, causes hanging
   rolling_rows: 4320  # ~6 months at 1h; caps OLS matrix size for speed
+  signal_threshold: 0.00001   # VARIMA close_lr pred std ~1e-5; 3e-4 silences all signals
 
 
 nbeats_params:
@@ -32,6 +34,7 @@ nbeats_params:
   layer_widths: 128        # 256->128: halves matrix multiply cost
   random_state: 42
   rolling_rows: 4320       # ~6 months at 1h; avoids training on 22k rows
+  signal_threshold: 0.0001  # NBEATS pred std ~1e-4; adaptive fallback also handles this
 
 
 transformer_params:
@@ -46,6 +49,7 @@ transformer_params:
   batch_size: 32
   n_epochs: 100
   random_state: 42
+  signal_threshold: 0.0003   # Transformer pred std ~3e-4; original default is correct here
 
 
 # =================================

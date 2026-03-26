@@ -18,7 +18,7 @@ def train(
     d: int = 0,                        # SIGNAL-3: was 1; log_return is I(0)
     q: int = 0,
     seasonal_order: tuple = (1, 0, 0, 24),  # SIGNAL-4: daily 24h seasonal AR
-    signal_threshold: float = 3e-4,    # SIGNAL-2: dead-band on log_return
+    signal_threshold: float = 1e-5,    # ARIMA log_return preds have std ~1e-5; 3e-4 silences all signals
     high_performance: bool = True,     # accepted for interface parity; ARIMA has no heavy resources
     lookback: int = None,
     **kwargs,

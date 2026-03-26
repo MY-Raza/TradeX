@@ -46,7 +46,7 @@ def train(
     fast: bool = True,
     use_log_returns: bool = True,        # SIGNAL-1: model log-returns of OHLC
     rolling_rows: int = _DEFAULT_ROLLING_ROWS,
-    signal_threshold: float = 3e-4,     # SIGNAL-3: dead-band on close_lr pred
+    signal_threshold: float = 1e-5,     # VARIMA close_lr preds have std ~1e-5; 3e-4 silences all signals
     high_performance: bool = True,       # True = full resources; False = half
     **kwargs,
 ) -> tuple:

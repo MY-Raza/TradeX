@@ -392,7 +392,7 @@ def main() -> None:
                     high_performance=training_cfg.get("high_performance", True),
                     model_params=final_params,
                 )
-
+                print(preds.head())
                 # Pass model's signal_threshold as the `threshold` arg so
                 # prepare_predictions applies the dead-band correctly inside
                 # the dl_darts branch before signals are binarised to {-1,0,1}.
