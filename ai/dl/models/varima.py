@@ -179,6 +179,7 @@ def train(
         kwargs["trend"] = "n"
 
     model = VARIMA(p=p, d=d, q=q, **kwargs)
+    print(train_series)
     model.fit(train_series)
 
     # SIGNAL-3: attach threshold for downstream signal filtering.

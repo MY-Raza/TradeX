@@ -81,6 +81,7 @@ def train(
 
     # --- 8. Fit -----------------------------------------------------------
     model = ARIMA(p=p, d=d, q=q, **arima_kwargs)
+    print(train_series)
     model.fit(train_series)
 
     # SIGNAL-2: store threshold for downstream signal filtering.

@@ -153,6 +153,7 @@ def train(
         **kwargs,
     )
     model.fit(train_series)
+    print(train_series)
 
     # SIGNAL-1: attach threshold so downstream prepare_predictions can apply it.
     model.signal_threshold = signal_threshold

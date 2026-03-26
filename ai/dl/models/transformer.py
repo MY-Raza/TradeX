@@ -243,6 +243,7 @@ def train(
         pass
 
     model = TransformerModel(**model_kwargs)
+    print(train_series)
     model.fit(train_series)
 
     # SIGNAL-1: attach threshold so downstream prepare_predictions can apply it.
