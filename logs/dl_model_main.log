@@ -342,3 +342,9 @@ Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especiall
 2026-03-26 13:23:44,116 | INFO | dl_model_main | Generating indicators for btc …
 2026-03-26 13:23:44,271 | INFO | dl_model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
 2026-03-26 13:23:44,271 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-26 14:08:21,030 | INFO | dl_model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-26 14:08:21,046 | INFO | dl_model_main | Fetching data for btc …
+2026-03-26 14:08:36,699 | INFO | dl_model_main | Generating indicators for btc …
+2026-03-26 14:08:36,861 | INFO | dl_model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
+2026-03-26 14:08:36,861 | INFO | dl_model_main | Training DL model: arima for btc
+2026-03-26 14:47:52,516 | INFO | dl_model_main | Training DL model: varima for btc
