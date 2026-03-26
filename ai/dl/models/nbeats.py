@@ -10,16 +10,16 @@ from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("nbeats")
 
-_DEFAULT_ROLLING_ROWS = 4_320   # ~6 months at 1h
+_DEFAULT_ROLLING_ROWS = 10_840   # ~6 months at 1h
 
 
-def _set_cpu_threads() -> None:
-    """Use all physical cores for PyTorch CPU ops."""
+def _set_cpu_threads(n_threads: int) -> None:
+    """Pin PyTorch to *n_threads* CPU threads."""
     try:
         import torch, os
-        n = int(os.environ.get("OMP_NUM_THREADS", 0)) or os.cpu_count() or 1
-        torch.set_num_threads(n)
-        logger.info(f"N-BEATS: PyTorch using {n} CPU threads.")
+        torch.set_num_threads(n_threads)
+        os.environ["OMP_NUM_THREADS"] = str(n_threads)
+        logger.info(f"N-BEATS: PyTorch using {n_threads} CPU threads.")
     except Exception:
         pass
 
@@ -38,6 +38,7 @@ def train(
     random_state: int = 42,
     rolling_rows: int = _DEFAULT_ROLLING_ROWS,
     signal_threshold: float = 3e-4,   # SIGNAL-1: dead-band on log_return (~0.03%)
+    high_performance: bool = True,     # True = 4 cores / full resources; False = 2 cores / half
     lookback: int | None = None,
     epochs: int | None = None,
     **kwargs,
@@ -46,7 +47,26 @@ def train(
     Train an N-BEATS model (CPU-optimised) and return
     (model, preds, test_index, df_test).
     """
-    _set_cpu_threads()
+    # --- Resource scaling -------------------------------------------------
+    # high_performance=True  → 4 cores, full epochs/batch/capacity
+    # high_performance=False → 2 cores, halved epochs/batch/capacity
+    n_threads = 4 if high_performance else 2
+    _set_cpu_threads(n_threads)
+
+    if not high_performance:
+        n_epochs      = max(1, n_epochs      // 2)   # 50 → 25
+        batch_size    = max(1, batch_size    // 2)   # 64 → 32
+        rolling_rows  = max(1, rolling_rows  // 2)   # 4320 → 2160
+        num_blocks    = max(1, num_blocks    - 1)    # 3 → 2
+        layer_widths  = max(32, layer_widths // 2)   # 256 → 128
+        logger.info(
+            "N-BEATS: high_performance=False — using 2 threads, "
+            f"n_epochs={n_epochs}, batch_size={batch_size}, "
+            f"rolling_rows={rolling_rows}, num_blocks={num_blocks}, "
+            f"layer_widths={layer_widths}."
+        )
+    else:
+        logger.info("N-BEATS: high_performance=True — using full 4-core resources.")
 
     # --- Resolve aliases --------------------------------------------------
     if lookback is not None:
@@ -109,6 +129,7 @@ def train(
         use_early_stopping=True,
         monitor="train_loss",
         patience=5,                    # SIGNAL-4: was 3; allow fuller convergence
+        high_performance=high_performance,
     )
 
     # --- 7. Fit -----------------------------------------------------------

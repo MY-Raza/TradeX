@@ -10,7 +10,7 @@ from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("transformer")
 
-_DEFAULT_ROLLING_ROWS = 4_320   # ~6 months at 1h
+_DEFAULT_ROLLING_ROWS = 10_840   # ~6 months at 1h
 
 
 def _configure_cpu(n_cores: int = 4) -> None:
@@ -100,6 +100,7 @@ def train(
     use_compile: bool = False,
     use_bf16_fit: bool = True,
     signal_threshold: float = 3e-4,   # SIGNAL-1: dead-band on log_return
+    high_performance: bool = True,     # True = 4 cores / full resources; False = 2 cores / half
     lookback: int | None = None,
     epochs: int | None = None,
     **kwargs,
@@ -108,6 +109,30 @@ def train(
     Optimized Transformer training for CPU.
     Returns (model, preds, test_index, df_test).
     """
+    # --- Resource scaling -------------------------------------------------
+    # high_performance=True  → 4 cores, full epochs/batch/model capacity
+    # high_performance=False → 2 cores, halved epochs/batch/model capacity
+    if not high_performance:
+        n_cores       = 2
+        n_epochs      = max(1, n_epochs      // 2)   # 40 → 20
+        batch_size    = max(1, batch_size    // 2)   # 64 → 32
+        rolling_rows  = max(1, rolling_rows  // 2)   # 2000 → 1000
+        d_model       = max(16, d_model      // 2)   # 64 → 32
+        dim_feedforward = (
+            max(32, dim_feedforward // 2) if dim_feedforward is not None else None
+        )                                            # 256 → 128
+        # nhead must still divide d_model after halving
+        while nhead > 1 and d_model % nhead != 0:
+            nhead //= 2
+        logger.info(
+            "Transformer: high_performance=False — using 2 threads, "
+            f"n_epochs={n_epochs}, batch_size={batch_size}, "
+            f"rolling_rows={rolling_rows}, d_model={d_model}, "
+            f"dim_feedforward={dim_feedforward}, nhead={nhead}."
+        )
+    else:
+        logger.info("Transformer: high_performance=True — using full 4-core resources.")
+
     # --- CPU setup --------------------------------------------------------
     _configure_cpu(n_cores)
 
@@ -173,6 +198,7 @@ def train(
         use_early_stopping=True,
         monitor="train_loss",
         patience=5,                    # SIGNAL-4: was 2; allow fuller convergence
+        high_performance=high_performance,
     )
     pl_trainer_kwargs.setdefault("devices", 1)
     pl_trainer_kwargs.setdefault("gradient_clip_val", 1.0)

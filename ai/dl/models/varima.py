@@ -17,7 +17,7 @@ _LOG_RETURN_COLS: list[str] = [
     "open_lr", "high_lr", "low_lr", "close_lr"
 ]
 
-_DEFAULT_ROLLING_ROWS = 4_320   # ~6 months of 1h data
+_DEFAULT_ROLLING_ROWS = 10_840   # ~6 months of 1h data
 
 
 def _detect_freq(index: pd.DatetimeIndex) -> str | None:
@@ -47,6 +47,7 @@ def train(
     use_log_returns: bool = True,        # SIGNAL-1: model log-returns of OHLC
     rolling_rows: int = _DEFAULT_ROLLING_ROWS,
     signal_threshold: float = 3e-4,     # SIGNAL-3: dead-band on close_lr pred
+    high_performance: bool = True,       # True = full resources; False = half
     **kwargs,
 ) -> tuple:
     """
@@ -64,11 +65,24 @@ def train(
                            This makes the series stationary so d=0 is correct.
         rolling_rows     : Cap training set size. Default 4320 (~6 months 1h).
         signal_threshold : |close_lr prediction| must exceed this to trade.
+        high_performance : If True (default), use full rolling_rows and all
+                           available CPU. If False, halve rolling_rows to
+                           reduce memory and fitting time on a 4-core machine.
         **kwargs         : Forwarded to darts VARIMA constructor.
 
     Returns:
         model, preds, test_index, df_test
     """
+    # --- Resource scaling -------------------------------------------------
+    # high_performance=True  → full rolling_rows (~6 months)
+    # high_performance=False → halved rolling_rows (~3 months), less fitting cost
+    if not high_performance:
+        import logging as _logging
+        rolling_rows = max(1, rolling_rows // 2)   # 4320 → 2160
+        _logging.getLogger("varima").info(
+            f"VARIMA: high_performance=False — rolling_rows reduced to {rolling_rows}."
+        )
+
     # --- 0. q guard -------------------------------------------------------
     if q != 0:
         import warnings

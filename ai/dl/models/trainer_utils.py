@@ -329,6 +329,7 @@ def build_pl_trainer_kwargs(
     monitor: str = "train_loss",
     patience: int = 3,
     min_delta: float = 1e-4,
+    high_performance: bool = True,
 ) -> dict:
     """
     Build the pl_trainer_kwargs dict consumed by Darts DL models.
@@ -343,12 +344,20 @@ def build_pl_trainer_kwargs(
         use_early_stopping  : Whether to append an EarlyStopping callback.
         monitor             : Metric to monitor (default 'train_loss').
         patience            : EarlyStopping patience (default 3).
+                              When high_performance=False this is halved
+                              (minimum 1) unless explicitly overridden.
         min_delta           : Minimum improvement to reset patience counter.
+        high_performance    : If True, use full resources (4 cores, full
+                              patience). If False, halve patience to allow
+                              faster early exit on a constrained machine.
 
     Returns:
         A new dict ready to pass as pl_trainer_kwargs=... to the Darts model.
     """
-    kwargs = (base_kwargs or {})  
+    kwargs = (base_kwargs or {})
+
+    # Scale patience: half resources → stop sooner to save CPU cycles.
+    effective_patience = patience if high_performance else max(1, patience // 2)
 
     kwargs.setdefault("accelerator",          "cpu")
     kwargs.setdefault("enable_progress_bar",  False)
@@ -362,7 +371,7 @@ def build_pl_trainer_kwargs(
             callbacks.append(
                 EarlyStopping(
                     monitor=monitor,
-                    patience=patience,
+                    patience=effective_patience,
                     min_delta=min_delta,
                     mode="min",
                 )

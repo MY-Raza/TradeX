@@ -19,6 +19,7 @@ def train(
     q: int = 0,
     seasonal_order: tuple = (1, 0, 0, 24),  # SIGNAL-4: daily 24h seasonal AR
     signal_threshold: float = 3e-4,    # SIGNAL-2: dead-band on log_return
+    high_performance: bool = True,     # accepted for interface parity; ARIMA has no heavy resources
     lookback: int = None,
     **kwargs,
 ) -> tuple:

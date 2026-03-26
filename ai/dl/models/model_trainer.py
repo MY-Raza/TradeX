@@ -17,6 +17,7 @@ _STATISTICAL_ALLOWED_PARAMS = frozenset({
     "seasonal_order",          # ARIMA seasonal component
     "use_log_returns",         # VARIMA: model log-returns vs raw price
     "fast",                    # VARIMA: drop volume column
+    "high_performance",        # resource-scaling flag
 })
 
 _STATISTICAL_MODELS: frozenset[str] = frozenset({"arima", "varima"})
@@ -52,24 +53,30 @@ def train_model(
     epochs: int | None = None,
     batch_size: int | None = None,
     model_params: dict[str, Any] | None = None,
+    high_performance: bool = True,
     **kwargs,
 ) -> tuple:
     """
     Dispatch to the correct model trainer and return its outputs.
 
     Args:
-        model_type   : Must be 'dl'.
-        model_name   : One of 'arima', 'varima', 'nbeats', 'transformer'.
-        df           : Feature-engineered OHLCV DataFrame.
-        df_1m        : 1-minute OHLCV DataFrame (for backtesting, unused here).
-        split_date   : Train / test boundary (ISO date string).
-        lookback     : Lookback window override (input_chunk_length).
-        epochs       : Training epochs override.
-        batch_size   : Mini-batch size override (None = use model default).
-        model_params : Optional dict of model-specific kwargs from config.
-                       These are merged at LOWEST priority so explicit
-                       arguments always win.
-        **kwargs     : Extra kwargs forwarded verbatim to the trainer.
+        model_type       : Must be 'dl'.
+        model_name       : One of 'arima', 'varima', 'nbeats', 'transformer'.
+        df               : Feature-engineered OHLCV DataFrame.
+        df_1m            : 1-minute OHLCV DataFrame (for backtesting, unused here).
+        split_date       : Train / test boundary (ISO date string).
+        lookback         : Lookback window override (input_chunk_length).
+        epochs           : Training epochs override.
+        batch_size       : Mini-batch size override (None = use model default).
+        model_params     : Optional dict of model-specific kwargs from config.
+                           These are merged at LOWEST priority so explicit
+                           arguments always win.
+        high_performance : If True (default), models use full 4-core CPU
+                           resources (full epochs, batch size, rolling window,
+                           and model capacity). If False, all resource-heavy
+                           settings are halved — suitable when other processes
+                           are competing for CPU on a 4-core machine.
+        **kwargs         : Extra kwargs forwarded verbatim to the trainer.
 
     Returns:
         (model, preds, test_index, df_test)
@@ -99,6 +106,10 @@ def train_model(
 
     # Always pass split_date explicitly (avoids duplicate-kwarg from **kwargs)
     trainer_kwargs.pop("split_date", None)
+
+    # Forward high_performance to every trainer (ARIMA ignores it gracefully
+    # via **kwargs since it has no resource-heavy settings to scale).
+    trainer_kwargs["high_performance"] = high_performance
 
     # BUG-1 FIX: only set DL-specific keys when the caller explicitly provided
     # them (not None). This prevents the explicit-arg values from overriding
