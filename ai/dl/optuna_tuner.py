@@ -1,52 +1,12 @@
-"""
-optuna_tuner.py — Optuna hyperparameter optimisation for all DL/statistical models.
-=====================================================================================
-
-Usage
------
-    from TradeX.ai.dl.models.optuna_tuner import tune_model
-
-    best_params = tune_model(
-        model_name  = "nbeats",          # "arima" | "varima" | "nbeats" | "transformer"
-        df          = df_gf,             # feature-engineered OHLCV DataFrame
-        df_1m       = df_1m,             # 1-minute OHLCV for backtesting
-        split_date  = split_date,        # same split as training pipeline
-        n_trials    = 50,                # Optuna trials
-        timeout     = 3600,              # optional wall-clock limit (seconds)
-        high_performance = True,         # pass False on a busy 4-core machine
-    )
-    # best_params is a dict ready to pass as model_params= to train_model().
-
-How it works
-------------
-Each trial:
-  1. Samples a hyperparameter set from the model-specific search space.
-  2. Calls the trainer directly (same code path as production).
-  3. Runs a lightweight backtest on the resulting predictions.
-  4. Returns the final PnL as the objective (maximise).
-
-Pruning
--------
-MedianPruner is used: trials that are clearly worse than the median are
-stopped early, saving CPU time on a 4-core machine.
-
-Thread safety
--------------
-Optuna uses SQLite storage by default so studies survive process restarts
-and can be resumed.  Pass ``storage=None`` to use in-memory storage.
-"""
-
 from __future__ import annotations
-
-import logging
 import warnings
 from typing import Any
-
+from TradeX.utils.common.logs import get_logger
 import numpy as np
 import pandas as pd
 
 warnings.filterwarnings("ignore")
-logger = logging.getLogger("optuna_tuner")
+logger = get_logger("optuna_tuner")
 
 
 # ---------------------------------------------------------------------------
@@ -302,17 +262,17 @@ def tune_model(
         f"pnl={best.value:.2f}, params={best.params}"
     )
 
-    print(f"\n{'='*60}")
-    print(f"  Optuna results for: {model_name}")
-    print(f"{'='*60}")
-    print(f"  Best PnL      : {best.value:.4f}")
-    print(f"  Best params   :")
+    logger.info(f"\n{'='*60}")
+    logger.info(f"  Optuna results for: {model_name}")
+    logger.info(f"{'='*60}")
+    logger.info(f"  Best PnL      : {best.value:.4f}")
+    logger.info(f"  Best params   :")
     for k, v in best.params.items():
-        print(f"    {k:30s}: {v}")
-    print(f"  Trials total  : {len(study.trials)}")
-    completed = [t for t in study.trials if t.state.name == "COMPLETE"]
-    print(f"  Trials ok     : {len(completed)}")
-    print(f"{'='*60}\n")
+        logger.info(f"    {k:30s}: {v}")
+        logger.info(f"  Trials total  : {len(study.trials)}")
+        completed = [t for t in study.trials if t.state.name == "COMPLETE"]
+        logger.info(f"  Trials ok     : {len(completed)}")
+        logger.info(f"{'='*60}\n")
 
     # Rebuild the full params dict from the trial params
     # (some keys like d=0 are hard-coded in the space builder, not in trial.params)

@@ -10,6 +10,7 @@ import pandas as pd
 warnings.filterwarnings("ignore")
 
 from TradeX.ai.dl.models.model_trainer import train_model, save_model
+from TradeX.ai.dl.optuna_tuner import tune_all_models
 from TradeX.ai.ml.utils import (
     compute_trade_statistics,
     extract_important_features,
@@ -319,6 +320,15 @@ def main() -> None:
 
     logger.info(f"Config loaded | symbols={symbols} | timehorizon={timehorizon}")
 
+    # ── Optuna tuning (optional) ──────────────────────────────────────────────
+    # Set run_optuna=True to search for best hyperparameters before training.
+    # Results are saved to SQLite so the search can be resumed if interrupted.
+    run_optuna   = training_cfg.get("run_optuna", False)
+    optuna_trials = int(training_cfg.get("optuna_trials", 30))
+    optuna_timeout = training_cfg.get("optuna_timeout_per_model", None)
+    # Will hold {model_name: best_params} populated during the first symbol run.
+    _tuned_params: dict = {}
+
     for symbol in symbols:
         logger.info(f"Fetching data for {symbol} …")
         df_1m = fetch_ohlcv_df(
@@ -344,9 +354,29 @@ def main() -> None:
             c for c in df_gf.columns if c not in _NON_FEATURE_COLS
         ]
 
+        # ── Optuna: run search on first symbol only, reuse for subsequent ────
+        active_models = [m for m, active in dl_models_config.items() if active]
+        if run_optuna and not _tuned_params:
+            logger.info("Running Optuna hyperparameter search …")
+            _tuned_params = tune_all_models(
+                df          = df_gf,
+                df_1m       = df_1m,
+                split_date  = split_date,
+                models      = active_models,
+                n_trials    = optuna_trials,
+                timeout_per_model = optuna_timeout,
+                high_performance  = training_cfg.get("high_performance", True),
+            )
+            logger.info(f"Optuna tuning complete. Best params: {_tuned_params}")
+
         for model_name, is_active in dl_models_config.items():
             if not is_active:
                 continue
+
+            # Merge: config params < tuned params (tuned wins when run_optuna=True)
+            base_params  = model_params_map.get(model_name, {})
+            tuned        = _tuned_params.get(model_name, {})
+            final_params = {**base_params, **tuned}   # tuned overrides config
 
             logger.info(f"Training DL model: {model_name} for {symbol}")
             try:
@@ -359,8 +389,8 @@ def main() -> None:
                     lookback=lookback,
                     epochs=epochs,
                     batch_size=batch_size,
-                    high_performance=True,
-                    model_params=model_params_map.get(model_name, {}),
+                    high_performance=training_cfg.get("high_performance", True),
+                    model_params=final_params,
                 )
 
                 # Pass model's signal_threshold as the `threshold` arg so

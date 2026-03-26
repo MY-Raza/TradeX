@@ -92,5 +92,5 @@ def train(
     # --- 10. Return artifacts ---------------------------------------------
     from TradeX.ai.dl.models.trainer_utils import make_test_artifacts
     split_idx = len(df_target[df_target.index < train_series.end_time()])
-    test_index, df_test = make_test_artifacts(split_idx, test_series)
+    test_index, df_test = make_test_artifacts(split_idx, test_series, n_full=len(df_target))
     return model, preds, test_index, df_test

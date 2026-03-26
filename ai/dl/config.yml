@@ -11,13 +11,13 @@ forecasting_models:
 
 arima_params:
   p: 5
-  d: 1
-  q: 1
+  d: 0     # log_return is I(0) — do NOT difference again
+  q: 0     # MA terms add instability; pure AR(5) is more robust
 
 
 varima_params:
   p: 1    # p=1 sufficient with rolling window; p=2 doubles parameter count
-  d: 1
+  d: 0    # log_return columns are already stationary — no differencing needed
   q: 0    # MUST be 0 — VARMA(q>0) is non-identifiable, causes hanging
   rolling_rows: 4320  # ~6 months at 1h; caps OLS matrix size for speed
 
@@ -54,13 +54,22 @@ transformer_params:
 
 training:
 
-  use_gpu: true
-  num_workers: 4
+  use_gpu: false          # no GPU on this machine
+  num_workers: 0          # 4-core CPU — keep workers at 0 to avoid overhead
 
   early_stopping: true
   patience: 10
 
   validation_split: 0.2
+
+  high_performance: true  # set false to use 2 cores / half resources
+
+  # ── Optuna hyperparameter search ────────────────────────────────────────
+  # Set run_optuna: true to search for best hyperparameters before training.
+  # Results are stored in optuna_tradex.db and reused on the next run.
+  run_optuna: false
+  optuna_trials: 30              # trials per model (increase for better results)
+  optuna_timeout_per_model: null # wall-clock seconds per model (null = no limit)
 
 
 # =================================

@@ -395,20 +395,31 @@ def build_pl_trainer_kwargs(
 def make_test_artifacts(
     n_train: int,
     test_series,
+    n_full: int | None = None,
 ) -> tuple[np.ndarray, pd.DataFrame]:
     """
     Build the (test_index, df_test) tuple returned by every trainer.
 
+    test_index contains *absolute* integer positions into the original full
+    DataFrame (df_gf in main.py) so df_gf.iloc[test_index] always selects
+    the correct test-period rows regardless of any rolling-window cap.
+
     Args:
-        n_train     : Number of training rows in the windowed dataset.
-                      test_index starts immediately after this offset.
+        n_train     : Absolute position of the first test row in df_gf.
+                      Callers should pass
+                      len(df_full[df_full.index < split_ts])
+                      NOT len(df_train_windowed).
         test_series : Darts TimeSeries for the test period.
+        n_full      : Total rows in df_gf. When given, the index is clamped
+                      so it never exceeds DataFrame bounds.
 
     Returns:
-        test_index  : 1-D integer NumPy array of shape (n_test,).
+        test_index  : 1-D integer NumPy array — absolute positions into df_gf.
         df_test     : Empty pd.DataFrame indexed by test_series.time_index.
     """
     n_test     = len(test_series)
     test_index = np.arange(n_train, n_train + n_test)
-    df_test    = pd.DataFrame(index=test_series.time_index)
+    if n_full is not None and len(test_index) and test_index[-1] >= n_full:
+        test_index = test_index[test_index < n_full]
+    df_test = pd.DataFrame(index=test_series.time_index)
     return test_index, df_test

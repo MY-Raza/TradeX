@@ -169,5 +169,5 @@ def train(
     preds = model.predict(len(test_series))
 
     # --- 10. Return artifacts ---------------------------------------------
-    test_index, df_test = make_test_artifacts(n_train_full, test_series)
+    test_index, df_test = make_test_artifacts(n_train_full, test_series, n_full=len(df_target))
     return model, preds, test_index, df_test

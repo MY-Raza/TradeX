@@ -171,6 +171,12 @@ def train(
 
     df_target = df[[target_col]].dropna().astype({target_col: "float32"}).sort_index()
 
+    # Absolute position of first test row in the FULL df_target (before rolling cap).
+    _split_ts = pd.Timestamp(split_date)
+    if _split_ts.tz is not None:
+        _split_ts = _split_ts.tz_convert("UTC").tz_localize(None)
+    _n_train_abs = int((df_target.index < _split_ts).sum())
+
     # --- 2. Rolling train / test split ------------------------------------
     df_train, df_test_raw = rolling_train_test_split(
         df_target,
@@ -253,5 +259,5 @@ def train(
     preds = model.predict(len(test_series))
 
     # --- 9. Return artifacts ----------------------------------------------
-    test_index, df_test = make_test_artifacts(len(df_train), test_series)
+    test_index, df_test = make_test_artifacts(_n_train_abs, test_series, n_full=len(df_target))
     return model, preds, test_index, df_test
