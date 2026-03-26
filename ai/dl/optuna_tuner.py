@@ -7,13 +7,13 @@ Usage
     from TradeX.ai.dl.models.optuna_tuner import tune_model
 
     best_params = tune_model(
-        model_name  = "nbeats",          # "arima" | "varima" | "nbeats" | "transformer"
-        df          = df_gf,             # feature-engineered OHLCV DataFrame
-        df_1m       = df_1m,             # 1-minute OHLCV for backtesting
-        split_date  = split_date,        # same split as training pipeline
-        n_trials    = 50,                # Optuna trials
-        timeout     = 3600,              # optional wall-clock limit (seconds)
-        high_performance = True,         # pass False on a busy 4-core machine
+        model_name  = "nbeats",
+        df          = df_gf,
+        df_1m       = df_1m,
+        split_date  = split_date,
+        n_trials    = 50,
+        timeout     = 3600,
+        high_performance = True,
     )
     # best_params is a dict ready to pass as model_params= to train_model().
 
@@ -24,6 +24,15 @@ Each trial:
   2. Calls the trainer directly (same code path as production).
   3. Runs a lightweight backtest on the resulting predictions.
   4. Returns the final PnL as the objective (maximise).
+
+VARIMA search-space changes (vs. original)
+------------------------------------------
+* ``rolling_rows`` lower bound raised from 1 000 → 4 000 and upper bound
+  raised from 6 000 → 10 000 to match the new 8 640-row default.
+* ``signal_threshold`` search range lowered from [1e-6, 5e-5] → [5e-7, 1e-5]
+  so Optuna can explore the regime where VARIMA close_lr predictions
+  actually carry signal (std ≈ 3–8 × 10⁻⁶ on a 12-month BTC window).
+* ``p`` upper bound raised from 4 → 6 to let Optuna consider more AR lags.
 
 Pruning
 -------
@@ -58,7 +67,7 @@ def _arima_space(trial) -> dict[str, Any]:
         "p":                trial.suggest_int("p", 1, 10),
         "d":                0,          # log_return is I(0) — never difference
         "q":                trial.suggest_int("q", 0, 3),
-        # ARIMA pred std ~1e-5; search around that scale, not Transformer scale
+        # ARIMA pred std ~1e-5; search around that scale
         "signal_threshold": trial.suggest_float("signal_threshold", 1e-6, 5e-5, log=True),
         # Seasonal component: try with / without 24h cycle
         "seasonal_order": (
@@ -72,12 +81,17 @@ def _arima_space(trial) -> dict[str, Any]:
 
 def _varima_space(trial) -> dict[str, Any]:
     return {
-        "p":                trial.suggest_int("p", 1, 4),
-        "d":                0,          # log_return columns are already I(0)
-        "q":                0,          # VARMA(q>0) is non-identifiable — locked
-        "rolling_rows":     trial.suggest_int("rolling_rows", 1000, 6000, step=500),
-        # VARIMA close_lr pred std ~1e-5; search around that scale
-        "signal_threshold": trial.suggest_float("signal_threshold", 1e-6, 5e-5, log=True),
+        "p": trial.suggest_int("p", 1, 6),   # FIX: was 1–4; raised to 6
+        "d": 0,                               # log-returns are I(0)
+        "q": 0,                               # VARMA(q>0) is non-identifiable
+        # FIX: raised rolling_rows range to match new 8640-row default.
+        # Allowing very short windows (1000) produced near-zero close_lr std
+        # which meant the signal_threshold silenced almost everything.
+        "rolling_rows": trial.suggest_int("rolling_rows", 4_000, 10_000, step=500),
+        # FIX: lowered search range — VARIMA close_lr std on a 12-month BTC
+        # window is ~3–8e-6, so the previous lower bound of 1e-6 was too tight
+        # and the upper bound of 5e-5 was too loose (kills all signals).
+        "signal_threshold": trial.suggest_float("signal_threshold", 5e-7, 1e-5, log=True),
     }
 
 
@@ -101,7 +115,6 @@ def _nbeats_space(trial) -> dict[str, Any]:
 def _transformer_space(trial) -> dict[str, Any]:
     d_model_choices = [32, 64, 128]
     d_model = trial.suggest_categorical("d_model", d_model_choices)
-    # nhead must divide d_model — pick from valid divisors
     valid_nheads = [h for h in [1, 2, 4, 8] if d_model % h == 0]
     nhead = trial.suggest_categorical("nhead", valid_nheads)
     input_chunk = trial.suggest_int("input_chunk_length", 24, 96, step=24)
@@ -155,6 +168,8 @@ def _make_objective(
         params = space_builder(trial)
 
         try:
+            # Disable recursive inline Optuna inside each trial to avoid
+            # infinite nesting (trial → train_model → inline_optuna → trial…).
             model, preds, test_index, df_test = train_model(
                 model_type="dl",
                 model_name=model_name,
@@ -162,6 +177,7 @@ def _make_objective(
                 split_date=split_date,
                 high_performance=high_performance,
                 model_params=params,
+                run_inline_optuna=False,   # ← prevents recursion
             )
 
             sig_thresh = getattr(model, "signal_threshold", params.get("signal_threshold", 3e-4))
@@ -192,7 +208,6 @@ def _make_objective(
 
         except Exception as exc:
             logger.warning(f"[{model_name}] Trial {trial.number} failed: {exc}")
-            # Return a large negative value so Optuna deprioritises this region
             return -1e6
 
     return objective
@@ -228,14 +243,10 @@ def tune_model(
         timeout           : Wall-clock time limit in seconds (None = no limit).
         take_profit       : BackTest take-profit multiplier.
         stop_loss         : BackTest stop-loss multiplier.
-        high_performance  : If False, each trial uses half-resources to keep
-                            the machine responsive during the search.
-        storage           : Optuna storage URL, e.g.
-                            'sqlite:///optuna_tradex.db'.
-                            None = in-memory (results lost after process exit).
-        study_name        : Optuna study name. Defaults to
-                            'tradex_{model_name}'.
-        show_progress_bar : Show tqdm progress bar (requires tqdm).
+        high_performance  : If False, each trial uses half-resources.
+        storage           : Optuna storage URL.  None = in-memory.
+        study_name        : Optuna study name. Defaults to 'tradex_{model_name}'.
+        show_progress_bar : Show tqdm progress bar.
 
     Returns:
         dict of best hyperparameters, ready to pass as ``model_params=`` to
@@ -255,24 +266,23 @@ def tune_model(
             f"Available: {list(_SPACE_BUILDERS)}"
         )
 
-    # Suppress Optuna's verbose per-trial output; we log our own summary.
     optuna.logging.set_verbosity(optuna.logging.WARNING)
 
     _study_name = study_name or f"tradex_{model_name}"
 
     sampler = optuna.samplers.TPESampler(seed=42)
     pruner  = optuna.pruners.MedianPruner(
-        n_startup_trials=5,    # don't prune until 5 trials have finished
+        n_startup_trials=5,
         n_warmup_steps=0,
     )
 
     study = optuna.create_study(
         study_name=_study_name,
-        direction="maximize",        # maximise PnL
+        direction="maximize",
         sampler=sampler,
         pruner=pruner,
         storage=storage,
-        load_if_exists=True,         # resume a previous run if storage is set
+        load_if_exists=True,
     )
 
     objective = _make_objective(
@@ -296,7 +306,7 @@ def tune_model(
         n_trials=n_trials,
         timeout=timeout,
         show_progress_bar=show_progress_bar,
-        gc_after_trial=True,       # free memory between trials on a 4-core machine
+        gc_after_trial=True,
     )
 
     best = study.best_trial
@@ -317,8 +327,6 @@ def tune_model(
     print(f"  Trials ok     : {len(completed)}")
     print(f"{'='*60}\n")
 
-    # Rebuild the full params dict from the trial params
-    # (some keys like d=0 are hard-coded in the space builder, not in trial.params)
     full_params = _SPACE_BUILDERS[model_name](
         _ParamOverrideTrial(best.params)
     )
@@ -340,14 +348,6 @@ def tune_all_models(
     """
     Run ``tune_model`` for each model in *models* and return a dict of
     ``{model_name: best_params}``.
-
-    Args:
-        models : List of model names to tune. Defaults to all four.
-        storage: Optuna storage. Defaults to SQLite so each model's study
-                 can be resumed if interrupted.
-
-    Returns:
-        Dict mapping model_name → best hyperparameter dict.
     """
     if models is None:
         models = ["arima", "varima", "nbeats", "transformer"]

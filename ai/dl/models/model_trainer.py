@@ -22,6 +22,78 @@ _STATISTICAL_ALLOWED_PARAMS = frozenset({
 
 _STATISTICAL_MODELS: frozenset[str] = frozenset({"arima", "varima"})
 
+# ---------------------------------------------------------------------------
+# Inline Optuna helper
+# ---------------------------------------------------------------------------
+
+def _inline_optuna_tune(
+    model_name: str,
+    df: pd.DataFrame,
+    df_1m: pd.DataFrame | None,
+    split_date: str,
+    n_trials: int,
+    high_performance: bool,
+    take_profit: float = 2.0,
+    stop_loss: float = 1.0,
+) -> dict[str, Any]:
+    """
+    Run a quick Optuna search *inside* train_model (before the final fit)
+    and return the best hyperparameter dict.
+
+    This is intentionally lightweight (default 10 trials, in-memory storage,
+    no SQLite overhead) so it adds minimal wall-clock time relative to the
+    benefit of avoiding a badly-initialised model.
+
+    Returns {} (empty dict) if optuna is not installed, df_1m is None, or
+    any error occurs — the caller falls back to its original params.
+    """
+    if df_1m is None or df_1m.empty:
+        logger.warning(
+            f"[inline-optuna/{model_name}] df_1m not available — "
+            "skipping inline tuning and using config params."
+        )
+        return {}
+
+    try:
+        import optuna
+        optuna.logging.set_verbosity(optuna.logging.WARNING)
+    except ImportError:
+        logger.warning(
+            "[inline-optuna] optuna not installed — skipping inline tuning."
+        )
+        return {}
+
+    try:
+        from TradeX.ai.dl.optuna_tuner import tune_model  # noqa: PLC0415
+        best = tune_model(
+            model_name=model_name,
+            df=df,
+            df_1m=df_1m,
+            split_date=split_date,
+            n_trials=n_trials,
+            timeout=None,
+            take_profit=take_profit,
+            stop_loss=stop_loss,
+            high_performance=high_performance,
+            storage=None,          # in-memory: fast, no disk I/O
+            show_progress_bar=False,
+        )
+        logger.info(
+            f"[inline-optuna/{model_name}] best params after {n_trials} "
+            f"trials: {best}"
+        )
+        return best
+    except Exception as exc:
+        logger.warning(
+            f"[inline-optuna/{model_name}] tuning failed ({exc}); "
+            "falling back to config params."
+        )
+        return {}
+
+
+# ---------------------------------------------------------------------------
+# Trainer dispatch
+# ---------------------------------------------------------------------------
 
 def _get_trainer(model_name: str):
     """Return the train function for *model_name*, importing lazily."""
@@ -54,29 +126,47 @@ def train_model(
     batch_size: int | None = None,
     model_params: dict[str, Any] | None = None,
     high_performance: bool = True,
+    # ── inline Optuna knobs ──────────────────────────────────────────────────
+    run_inline_optuna: bool = True,
+    inline_optuna_trials: int = 10,
+    inline_optuna_take_profit: float = 2.0,
+    inline_optuna_stop_loss: float = 1.0,
     **kwargs,
 ) -> tuple:
     """
     Dispatch to the correct model trainer and return its outputs.
 
+    New behaviour (vs original):
+    ────────────────────────────
+    When *run_inline_optuna* is True (default) **and** df_1m is supplied,
+    an Optuna mini-search is executed *before* the final model fit.  The
+    best hyperparameters found in ``inline_optuna_trials`` trials are merged
+    on top of *model_params*, giving the final fit the benefit of that search
+    at the cost of ``inline_optuna_trials × train_time`` extra wall-clock
+    seconds.
+
+    Set ``run_inline_optuna=False`` (or omit df_1m) to skip it and behave
+    exactly like the original implementation.
+
     Args:
-        model_type       : Must be 'dl'.
-        model_name       : One of 'arima', 'varima', 'nbeats', 'transformer'.
-        df               : Feature-engineered OHLCV DataFrame.
-        df_1m            : 1-minute OHLCV DataFrame (for backtesting, unused here).
-        split_date       : Train / test boundary (ISO date string).
-        lookback         : Lookback window override (input_chunk_length).
-        epochs           : Training epochs override.
-        batch_size       : Mini-batch size override (None = use model default).
-        model_params     : Optional dict of model-specific kwargs from config.
-                           These are merged at LOWEST priority so explicit
-                           arguments always win.
-        high_performance : If True (default), models use full 4-core CPU
-                           resources (full epochs, batch size, rolling window,
-                           and model capacity). If False, all resource-heavy
-                           settings are halved — suitable when other processes
-                           are competing for CPU on a 4-core machine.
-        **kwargs         : Extra kwargs forwarded verbatim to the trainer.
+        model_type               : Must be 'dl'.
+        model_name               : One of 'arima', 'varima', 'nbeats', 'transformer'.
+        df                       : Feature-engineered OHLCV DataFrame.
+        df_1m                    : 1-minute OHLCV DataFrame (used for inline
+                                   Optuna backtests; optional but recommended).
+        split_date               : Train / test boundary (ISO date string).
+        lookback                 : Lookback window override (input_chunk_length).
+        epochs                   : Training epochs override.
+        batch_size               : Mini-batch size override (None = model default).
+        model_params             : Optional dict of model-specific kwargs from
+                                   config.  Merged at LOWEST priority.
+        high_performance         : Full 4-core resources when True; half when False.
+        run_inline_optuna        : Run a quick Optuna search before the final fit.
+                                   Default True.
+        inline_optuna_trials     : Number of Optuna trials.  Default 10.
+        inline_optuna_take_profit: BackTest take-profit used during tuning.
+        inline_optuna_stop_loss  : BackTest stop-loss used during tuning.
+        **kwargs                 : Extra kwargs forwarded verbatim to the trainer.
 
     Returns:
         (model, preds, test_index, df_test)
@@ -88,33 +178,53 @@ def train_model(
     trainer = _get_trainer(model_name)
 
     # --- Build kwargs dict ------------------------------------------------
-    # Priority (high → low): explicit named args > **kwargs > model_params
+    # Priority (high → low):
+    #   explicit named args > **kwargs > inline_optuna_best > model_params
     trainer_kwargs: dict[str, Any] = {}
 
-    # Merge model_params at lowest priority
+    # 1. Lowest priority: model_params from config
     if model_params:
         if model_name in _STATISTICAL_MODELS:
-            # BUG-4 FIX: only forward params that statistical trainers accept.
             filtered = {k: v for k, v in model_params.items()
                         if k in _STATISTICAL_ALLOWED_PARAMS}
             trainer_kwargs.update(filtered)
         else:
             trainer_kwargs.update(model_params)
 
-    # Merge caller's **kwargs (higher priority than model_params)
+    # 2. Inline Optuna: run 10-trial search and overlay best params
+    if run_inline_optuna:
+        optuna_best = _inline_optuna_tune(
+            model_name=model_name,
+            df=df,
+            df_1m=df_1m,
+            split_date=split_date,
+            n_trials=inline_optuna_trials,
+            high_performance=high_performance,
+            take_profit=inline_optuna_take_profit,
+            stop_loss=inline_optuna_stop_loss,
+        )
+        if optuna_best:
+            if model_name in _STATISTICAL_MODELS:
+                filtered_best = {k: v for k, v in optuna_best.items()
+                                 if k in _STATISTICAL_ALLOWED_PARAMS}
+                trainer_kwargs.update(filtered_best)
+            else:
+                trainer_kwargs.update(optuna_best)
+            logger.info(
+                f"[inline-optuna/{model_name}] applied {len(optuna_best)} "
+                "tuned params on top of config params."
+            )
+
+    # 3. Caller's **kwargs (higher priority than optuna + model_params)
     trainer_kwargs.update(kwargs)
 
-    # Always pass split_date explicitly (avoids duplicate-kwarg from **kwargs)
+    # Always pass split_date explicitly
     trainer_kwargs.pop("split_date", None)
 
-    # Forward high_performance to every trainer (ARIMA ignores it gracefully
-    # via **kwargs since it has no resource-heavy settings to scale).
+    # Forward high_performance to every trainer
     trainer_kwargs["high_performance"] = high_performance
 
-    # BUG-1 FIX: only set DL-specific keys when the caller explicitly provided
-    # them (not None). This prevents the explicit-arg values from overriding
-    # the same keys that model_params may have set with better model-specific
-    # defaults (e.g. nbeats_params.n_epochs=20 vs training.epochs=50).
+    # BUG-1 FIX: only set DL-specific keys when explicitly provided
     if model_name not in _STATISTICAL_MODELS:
         if lookback is not None:
             trainer_kwargs["lookback"] = lookback
@@ -123,7 +233,6 @@ def train_model(
         if batch_size is not None:
             trainer_kwargs["batch_size"] = batch_size
     else:
-        # Strip any DL-only keys that slipped in via **kwargs
         for key in ("lookback", "epochs", "batch_size",
                     "n_epochs", "input_chunk_length",
                     "output_chunk_length", "num_blocks",
