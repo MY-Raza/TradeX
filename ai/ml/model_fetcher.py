@@ -1,12 +1,17 @@
-import numpy as np
 import os
-from TradeX.utils.db.utils import get_best_model, get_important_features,fetch_ohlcv_df
+import pandas as pd
+from TradeX.utils.db.utils import get_best_model, get_important_features
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.common.config_loader import read_config
-import json
-from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.ai.ml.main import generate_features,create_classification_target,create_regression_target
-import pandas as pd
+from TradeX.ai.data.data_pipeline import (
+    fetch_raw_data,
+    resample_data,
+    prepare_features,
+    build_classification_df,
+    build_regression_df,
+    resolve_split_date,
+)
+
 import re
 from TradeX.ai.ml.models.model_trainer import train_model,save_model
 from TradeX.ai.ml.utils import prepare_predictions
@@ -14,74 +19,6 @@ from TradeX.backtest.backtest import BackTest
 from datetime import datetime
 
 logger = get_logger("model_fetcher")
-# ----------------------------
-# SPLIT DATE RESOLVER
-# ----------------------------
-def resolve_split_date(df: pd.DataFrame, config: dict) -> str:
-    """
-    Determine the train/test split date from config.
-
-    Priority:
-      1. train_ratio (float 0-1) — computes the split from the data itself
-         so the boundary always falls at exactly that percentage of rows.
-         The resolved date is logged for reproducibility.
-      2. split_date (str 'YYYY-MM-DD') — hard calendar boundary, used
-         only when train_ratio is null / absent.
-
-    Args:
-        df     : The feature DataFrame that will be split (must have a
-                 'datetime' column or a DatetimeIndex).
-        config : Loaded config dict.
-
-    Returns:
-        ISO date string 'YYYY-MM-DD HH:MM:SS' ready to pass to train_model.
-
-    Raises:
-        ValueError : If neither key is present in config.
-        ValueError : If train_ratio is not in (0, 1).
-    """
-    train_ratio = config.get("train_ratio")
-
-    if train_ratio is not None:
-        train_ratio = float(train_ratio)
-        if not (0.0 < train_ratio < 1.0):
-            raise ValueError(
-                f"train_ratio must be between 0 and 1 (exclusive), got {train_ratio}"
-            )
-
-        # Resolve the datetime series regardless of whether it is a column
-        # or the index so the helper works with both layouts.
-        if "datetime" in df.columns:
-            dt_series = pd.to_datetime(df["datetime"], utc=True).sort_values()
-        elif isinstance(df.index, pd.DatetimeIndex):
-            dt_series = df.index.sort_values().to_series()
-        else:
-            raise ValueError(
-                "resolve_split_date: DataFrame must have a 'datetime' column "
-                "or a DatetimeIndex to use train_ratio."
-            )
-
-        n_train    = int(len(dt_series) * train_ratio)
-        split_ts   = dt_series.iloc[n_train]
-        split_date = split_ts.strftime("%Y-%m-%d %H:%M:%S")
-
-        logger.info(
-            f"train_ratio={train_ratio} → split at row {n_train}/{len(dt_series)} "
-            f"→ split_date='{split_date}' "
-            f"({train_ratio*100:.0f}% train / {(1-train_ratio)*100:.0f}% test)"
-        )
-        return split_date
-
-    # Fallback: hard calendar split_date from config
-    split_date = config.get("split_date")
-    if split_date is None:
-        raise ValueError(
-            "Config must contain either 'train_ratio' or 'split_date'."
-        )
-    logger.info(f"Using fixed split_date='{split_date}' from config.")
-    return str(split_date)
-
-
 FEATURE_MAP = {
     # Bollinger Bands
     "BB_UPPER": "BBANDS",
@@ -176,7 +113,8 @@ def generate_best_features(df: pd.DataFrame, best_features: list[str]) -> pd.Dat
     # ----------------------------------------
     # Step 2: Generate all base indicators
     # ----------------------------------------
-    df_generated = generate_features(df, list(base_indicators))
+    # prepare_features returns (df, diff_counts) — unpack accordingly
+    df_generated, _ = prepare_features(df, list(base_indicators))
 
     # ----------------------------------------
     # Step 3: Keep only columns that exactly match best_features
@@ -221,18 +159,8 @@ timehorizon = config.get("timehorizon", "1h")
 classifiers_config = config.get("classifiers", {})
 regressors_config = config.get("regressors", {})
 
-df_1m = fetch_ohlcv_df(
-    table_name="btc_1m",
-    schema="data_binance",
-    time_column="datetime",
-    start_date=start_date,
-    end_date=end_date
-)
-
-df_1h = resample_ohlcv(
-    df_1m,
-    timehorizon
-)
+df_1m  = fetch_raw_data(symbol="btc",schema="data_binance",start_date=start_date,end_date=end_date)
+df_1h =  resample_data(df_1m,timehorizon)
 
 df_gf = generate_best_features(df_1h,important_features)
 split_date = resolve_split_date(df_gf, config)
@@ -243,7 +171,7 @@ for clf_name, is_active in classifiers_config.items():
 
     logger.info(f"Training classifier: {clf_name} for {symbols}")
     try:
-        df_clf = create_classification_target(df_gf)
+        df_clf = build_classification_df(df_gf)
         df_clf = df_clf.drop(columns=["open", "high", "low"], errors="ignore")
         model, preds, test_index, X_test = train_model(
                     model_type="classifier",
@@ -289,7 +217,7 @@ for reg_name, is_active in regressors_config.items():
           continue
      logger.info(f"Training Regressor: {reg_name} for {symbols}")
      try:
-        df_reg = create_regression_target(df_gf)
+        df_reg = build_regression_df(df_gf)
         df_reg = df_reg.drop(columns=["open", "high", "low"], errors="ignore")
         model, preds, test_index, X_test = train_model(
                     model_type="regressor",

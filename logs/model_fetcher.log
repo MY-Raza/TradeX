@@ -646,3 +646,29 @@
 [5 rows x 8 columns]
 2026-03-25 11:30:07,034 | INFO | model_fetcher | Final Balance for Regressor: 47815.6
 2026-03-25 11:30:07,034 | INFO | model_fetcher | Final PnL for Regressor: 393.11
+2026-03-27 12:58:39,613 | INFO | model_fetcher | The best model: random_forest_clf_20260327_101752
+2026-03-27 13:34:26,793 | INFO | model_fetcher | The best model: random_forest_clf_20260327_101752
+2026-03-27 13:39:11,478 | WARNING | model_fetcher | Some best_features were not generated: {'ROCR100_14'}
+2026-03-27 13:39:11,574 | INFO | model_fetcher | Training classifier: random_forest for ['btc']
+2026-03-27 14:06:05,238 | INFO | model_fetcher | [Dry-run] random_forest predictions on first 5 test rows:
+[ 1 -1 -1 -1 -1]
+2026-03-27 14:06:08,290 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-07-03 09:00:00+00:00               short                      buy   109325.1         0.0   999.50 -0.05    -0.05
+1 2025-07-03 13:00:00+00:00               short  sell - direction_change   109325.1    109120.0  1000.88  0.14     0.09
+2 2025-07-03 13:00:00+00:00                long                      buy   109120.0         0.0  1000.37 -0.05     0.04
+3 2025-07-03 15:00:00+00:00                long  sell - direction_change   109120.0    109669.9  1004.92  0.45     0.49
+4 2025-07-03 15:00:00+00:00               short                      buy   109669.9         0.0  1004.41 -0.05     0.44
+2026-03-27 14:06:08,290 | INFO | model_fetcher | Final Balance for Classifier: 607.53
+2026-03-27 14:06:08,290 | INFO | model_fetcher | Final PnL for Classifier: -45.19
+2026-03-27 14:06:08,327 | INFO | model_fetcher | Training classifier: xgboost for ['btc']
+2026-03-27 14:11:05,283 | INFO | model_fetcher | [Dry-run] xgboost predictions on first 5 test rows:
+[2 0 2 2 0]
+2026-03-27 14:11:08,875 | INFO | model_fetcher | Final Ledger for Classifier:                    datetime predicted_direction                   action  buy_price  sell_price  balance   pnl  pnl_sum
+0 2025-07-03 09:00:00+00:00                long                      buy   109325.1         0.0   999.50 -0.05    -0.05
+1 2025-07-03 10:00:00+00:00                long  sell - direction_change   109325.1    109894.6  1004.21  0.47     0.42
+2 2025-07-03 10:00:00+00:00               short                      buy   109894.6         0.0  1003.70 -0.05     0.37
+3 2025-07-04 02:00:00+00:00               short  sell - direction_change   109894.6    109455.0  1007.22  0.35     0.72
+4 2025-07-04 02:00:00+00:00                long                      buy   109455.0         0.0  1006.71 -0.05     0.67
+2026-03-27 14:11:08,875 | INFO | model_fetcher | Final Balance for Classifier: 604.78
+2026-03-27 14:11:08,875 | INFO | model_fetcher | Final PnL for Classifier: -45.41
+2026-03-27 14:11:08,918 | INFO | model_fetcher | Training Regressor: random_forest for ['btc']
