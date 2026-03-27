@@ -1962,3 +1962,16 @@ Feature names seen at fit time, yet now missing:
 2026-03-24 17:20:39,131 | INFO | model_main | Generating indicators for btc...
 2026-03-24 17:20:39,275 | INFO | model_main | train_ratio=0.8 → split at row 21946/27433 → split_date='2025-07-03 10:00:00' (80% train / 20% test)
 2026-03-24 17:20:39,275 | INFO | model_main | Training classifier: random_forest for btc
+2026-03-27 09:57:20,845 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-27 09:57:20,845 | INFO | model_main | === Processing symbol: btc ===
+2026-03-27 10:01:55,211 | INFO | model_main | Training classifier: random_forest for btc
+2026-03-27 10:01:55,413 | ERROR | model_main | Classifier random_forest failed for btc: Input X contains infinity or a value too large for dtype('float32').
+2026-03-27 10:01:55,413 | INFO | model_main | Training classifier: xgboost for btc
+2026-03-27 10:03:12,626 | ERROR | model_main | Classifier xgboost failed for btc: [10:03:12] C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-0fdc6d574b9c0d168-1\xgboost\xgboost-ci-windows\src\data\data.cc:1104: Check failed: valid: Input data contains `inf` or `nan`
+2026-03-27 10:03:12,626 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-27 10:03:12,985 | ERROR | model_main | Regressor random_forest failed for btc: Input X contains infinity or a value too large for dtype('float32').
+2026-03-27 10:03:12,986 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-27 10:05:44,595 | ERROR | model_main | Regressor xgboost failed for btc: [10:05:44] C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-0fdc6d574b9c0d168-1\xgboost\xgboost-ci-windows\src\data\data.cc:1104: Check failed: valid: Input data contains `inf` or `nan`
+2026-03-27 10:05:44,596 | INFO | model_main | Model training complete for btc.
+2026-03-27 10:12:44,084 | INFO | model_main | Config loaded | symbols=['btc'] | timehorizon=1h
+2026-03-27 10:12:44,084 | INFO | model_main | === Processing symbol: btc ===

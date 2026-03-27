@@ -34,7 +34,6 @@ def validate_and_sort(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
     if target_col not in df.columns:
         raise ValueError(f"Target column '{target_col}' not found in DataFrame.")
 
-      
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     df = df.sort_values("datetime").reset_index(drop=True)
     return df
@@ -52,17 +51,22 @@ def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
         - open, high, low, close  →  log(x).diff()
         - volume                  →  log1p(x).diff()
 
-    Rows with NaN introduced by .diff() are dropped.
+    After OHLCV transforms, ALL columns (including indicator features) are
+    sanitised: inf/-inf are replaced with NaN, then every row containing any
+    NaN is dropped.  This guarantees sklearn / XGBoost never see infinite or
+    missing values regardless of how the upstream feature engineering behaves.
 
     Shared by: randomforest_clf, randomforest_reg, xgboost_clf, xgboost_reg
 
     Args:
-        df: DataFrame containing any subset of OHLCV columns.
+        df: DataFrame containing any subset of OHLCV columns plus arbitrary
+            indicator / feature columns.
 
     Returns:
-        Transformed DataFrame with NaN rows removed and index reset.
+        Transformed DataFrame with NaN / inf rows removed and index reset.
     """
-      
+    df = df.copy()
+
     price_cols = [c for c in ("open", "high", "low", "close") if c in df.columns]
 
     for col in price_cols:
@@ -70,7 +74,19 @@ def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
     if "volume" in df.columns:
         df["volume"] = np.log1p(df["volume"]).diff()
 
-    df = df.dropna(subset=price_cols).reset_index(drop=True)
+    # ── NEW: global inf → NaN, then drop any row with NaN in any numeric col ──
+    numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+    df[numeric_cols] = df[numeric_cols].replace([np.inf, -np.inf], np.nan)
+    rows_before = len(df)
+    df = df.dropna(subset=numeric_cols).reset_index(drop=True)
+    rows_dropped = rows_before - len(df)
+
+    if rows_dropped:
+        logger.warning(
+            f"[apply_log_diff_transform] Dropped {rows_dropped} rows containing "
+            f"inf/NaN across all numeric columns."
+        )
+
     logger.info(f"[apply_log_diff_transform] Shape after transform & dropna: {df.shape}")
     return df
 
@@ -91,6 +107,11 @@ def split_features_labels(
     X_train / X_test are built ONCE here so every Optuna trial can reuse them
     via closure — avoiding redundant work inside the objective.
 
+    A final defensive pass replaces any remaining inf/-inf with NaN and drops
+    those rows, so the contract "no inf or NaN in X_train / X_test" holds even
+    if new feature columns are added upstream without going through
+    apply_log_diff_transform.
+
     Shared by: randomforest_clf, randomforest_reg, xgboost_clf, xgboost_reg
 
     Args:
@@ -107,8 +128,8 @@ def split_features_labels(
         ValueError: If either split yields an empty set.
     """
     split_dt = pd.to_datetime(split_date, utc=True)
-    train_df = df[df["datetime"] < split_dt]  
-    test_df  = df[df["datetime"] >= split_dt]  
+    train_df = df[df["datetime"] < split_dt]
+    test_df  = df[df["datetime"] >= split_dt]
 
     if train_df.empty:
         raise ValueError(f"Train set is empty for split_date='{split_date}'. Adjust the split date.")
@@ -120,6 +141,24 @@ def split_features_labels(
     y_train = train_df[target_col]
     X_test  = test_df.drop(columns=drop_cols)
     y_test  = test_df[target_col]
+
+    # ── NEW: defensive final sanitisation on feature matrices only ────────────
+    for name, X in (("X_train", X_train), ("X_test", X_test)):
+        num_cols = X.select_dtypes(include=[np.number]).columns.tolist()
+        inf_mask = np.isinf(X[num_cols]).any(axis=1)
+        nan_mask = X[num_cols].isna().any(axis=1)
+        bad_mask = inf_mask | nan_mask
+        if bad_mask.any():
+            logger.warning(
+                f"[split_features_labels] {name}: dropping {bad_mask.sum()} rows "
+                f"with inf/NaN ({inf_mask.sum()} inf, {nan_mask.sum()} NaN)."
+            )
+            X.drop(index=X.index[bad_mask], inplace=True)
+            # Keep y aligned with X
+            if name == "X_train":
+                y_train = y_train.loc[X_train.index]
+            else:
+                y_test = y_test.loc[X_test.index]
 
     logger.info(
         f"[split_features_labels] Train rows: {len(X_train)} | "
