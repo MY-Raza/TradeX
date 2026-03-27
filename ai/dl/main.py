@@ -20,12 +20,7 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.db.utils import save_df_to_db
 
 # ── All data operations come from data_pipeline ───────────────────────────────
-from TradeX.ai.data.data_pipeline import (
-    fetch_raw_data,
-    resample_data,
-    prepare_features,
-    resolve_split_date,
-)
+from TradeX.ai.data.data_pipeline import fetch_raw_data,resample_data,prepare_features,resolve_split_date
 
 logger = get_logger("dl_model_main")
 

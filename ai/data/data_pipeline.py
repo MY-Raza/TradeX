@@ -7,12 +7,7 @@ from statsmodels.tsa.stattools import adfuller
 from TradeX.utils.db.utils import fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.data.data_cleaner import resample_ohlcv
-from TradeX.ai.ml.main import (
-    generate_features,
-    create_classification_target,
-    create_regression_target,
-)
-
+from TradeX.indicators.talib.indicators import call_indicator
 logger = get_logger("data_pipeline")
 
 # ---------------------------------------------------------------------------
@@ -334,6 +329,45 @@ def prepare_features(
 # ===========================================================================
 # 6. TARGET CREATION
 # ===========================================================================
+def create_classification_target(df: pd.DataFrame, window: int = 15, threshold: float = 0.001) -> pd.DataFrame:
+    """
+    Create classification targets for trading:
+    1 = significant upward move
+    0 = neutral
+    -1 = significant downward move
+    """
+    future_close = df["close"].shift(-window)
+
+    future_return = (future_close - df["close"]) / df["close"]
+
+    df["target"] = np.where(
+        future_return > threshold, 1,
+        np.where(future_return < -threshold, -1, 0)
+    )
+
+    df = df.dropna().reset_index(drop=True)
+    return df
+
+
+def create_regression_target(
+    df: pd.DataFrame,
+    window: int = 15
+) -> pd.DataFrame:
+    """
+    Creates a regression target as the actual future max price over a rolling window.
+    
+    df: DataFrame with 'close' column
+    window: how many future periods to look ahead
+    """
+    # Compute future max over rolling window, shift to align with current row
+    future_max = df["close"].rolling(window=window).max().shift(-window + 1)
+
+    # Target is just the future max price
+    df["target"] = future_max
+
+    df = df.dropna().reset_index(drop=True)
+    return df
+    
 
 def build_classification_df(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -442,3 +476,178 @@ def resolve_split_date(df: pd.DataFrame, config: dict) -> str:
         )
     logger.info(f"Using fixed split_date='{split_date}' from config.")
     return str(split_date)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Feature Engineering
+# ─────────────────────────────────────────────────────────────────────────────
+
+_SINGLE_SERIES = frozenset({
+    "RSI", "EMA", "SMA", "WMA", "DEMA", "TEMA", "TRIMA",
+    "KAMA", "T3", "MOM", "ROC", "ROCP", "ROCR", "ROCR100",
+    "LINEARREG", "LINEARREG_SLOPE", "LINEARREG_ANGLE",
+    "LINEARREG_INTERCEPT", "STDDEV", "VAR", "TSF",
+    "MA", "CMO",
+})
+_HLC_SERIES       = frozenset({"ATR", "NATR", "ADX", "ADXR", "DX", "CCI",
+                                "PLUS_DI", "MINUS_DI", "PLUS_DM", "MINUS_DM", "WILLR"})
+_MACD_SERIES      = frozenset({"MACD", "MACDEXT", "PPO", "APO", "TRIX"})
+_BBAND_SERIES     = frozenset({"BBANDS"})
+_STOCH_SERIES     = frozenset({"STOCH", "STOCHF", "STOCHRSI"})
+_VOLUME_SERIES    = frozenset({"OBV", "AD", "ADOSC", "MFI"})
+_AROON_SERIES     = frozenset({"AROON", "AROONOSC"})
+_SAR_SERIES       = frozenset({"SAR", "SAREXT"})
+_PRICE_TRANSFORMS = frozenset({"AVGPRICE", "MEDPRICE", "TYPPRICE", "WCLPRICE"})
+
+def _arr(x) -> np.ndarray:
+    """Return *x* as a flat float64 numpy array."""
+    return np.asarray(x, dtype=np.float64).ravel()
+
+def generate_features(df: pd.DataFrame, indicators: list[str]) -> pd.DataFrame:
+    """
+    Compute technical indicators and append them as new columns.
+
+    All indicator arrays are collected into a single dict and concatenated
+    once at the end to avoid repeated DataFrame copies.
+    """
+    n = len(df)
+
+    close  = df["close"].to_numpy(dtype=np.float64)
+    high   = df["high"].to_numpy(dtype=np.float64)
+    low    = df["low"].to_numpy(dtype=np.float64)
+    open_  = df["open"].to_numpy(dtype=np.float64)
+    volume = df["volume"].to_numpy(dtype=np.float64)
+
+    indicator_set   = set(indicators)
+    cycle_series    = frozenset(i for i in indicator_set if i.startswith("HT_"))
+    candle_patterns = frozenset(i for i in indicator_set if i.startswith("CDL"))
+
+    new_cols: dict[str, np.ndarray] = {}
+
+    def _store(key: str, arr):
+        if key in new_cols:
+            logger.warning(f"Indicator key collision: '{key}' will be overwritten.")
+        new_cols[key] = _arr(arr)
+
+    for ind in indicators:
+        try:
+            if ind in _SINGLE_SERIES:
+                values, window = call_indicator(ind, close, timeperiod=14)
+                _store(f"{ind}_{window}", values)
+
+            elif ind == "MAMA":
+                (mama_raw, fama_raw), _ = call_indicator(
+                    "MAMA", close, fastlimit=0.5, slowlimit=0.05
+                )
+                mama = _arr(mama_raw)
+                fama = _arr(fama_raw)
+                if len(mama) != n:
+                    pad = n - len(mama)
+                    if pad > 0:
+                        mama = np.concatenate([np.full(pad, np.nan), mama])
+                        fama = np.concatenate([np.full(pad, np.nan), fama])
+                    else:
+                        mama = mama[-n:]
+                        fama = fama[-n:]
+                _store("MAMA", mama)
+                _store("FAMA", fama)
+
+            elif ind == "MIDPOINT":
+                _store("MIDPOINT_14", call_indicator("MIDPOINT", close, timeperiod=14)[0])
+
+            elif ind == "MIDPRICE":
+                _store("MIDPRICE_14", call_indicator("MIDPRICE", high, low, timeperiod=14)[0])
+
+            elif ind == "BOP":
+                _store("BOP", call_indicator("BOP", open=open_, high=high, low=low, close=close)[0])
+
+            elif ind == "TRANGE":
+                _store("TRANGE", call_indicator("TRANGE", high=high, low=low, close=close)[0])
+
+            elif ind in _HLC_SERIES:
+                if ind in {"MINUS_DM", "PLUS_DM"}:
+                    _store(ind, call_indicator(ind, high=high, low=low, timeperiod=14)[0])
+                else:
+                    values, window = call_indicator(ind, high=high, low=low, close=close, timeperiod=14)
+                    _store(f"{ind}_{window}", values)
+
+            elif ind in _MACD_SERIES:
+                result, _ = call_indicator(ind, close)
+                if isinstance(result, (tuple, list)):
+                    for i, arr in enumerate(result):
+                        _store(f"{ind}_{i}", arr)
+                else:
+                    _store(f"{ind}_0", result)
+
+            elif ind in _BBAND_SERIES:
+                (upper, mid, lower), _ = call_indicator("BBANDS", close, timeperiod=20)
+                _store("BB_UPPER",  upper)
+                _store("BB_MIDDLE", mid)
+                _store("BB_LOWER",  lower)
+
+            elif ind in _STOCH_SERIES:
+                if ind == "STOCHRSI":
+                    (slowk, slowd), _ = call_indicator(ind, close)
+                else:
+                    (slowk, slowd), _ = call_indicator(ind, high=high, low=low, close=close)
+                _store(f"{ind}_K", slowk)
+                _store(f"{ind}_D", slowd)
+
+            elif ind in _VOLUME_SERIES:
+                if ind == "OBV":
+                    _store(ind, call_indicator(ind, close, volume)[0])
+                elif ind == "AD":
+                    _store(ind, call_indicator(ind, high=high, low=low, close=close, volume=volume)[0])
+                elif ind == "ADOSC":
+                    _store(ind, call_indicator("ADOSC", high=high, low=low, close=close, volume=volume)[0])
+                elif ind == "MFI":
+                    _store(f"{ind}_14", call_indicator("MFI", high=high, low=low, close=close, volume=volume, timeperiod=14)[0])
+
+            elif ind in _AROON_SERIES:
+                if ind == "AROON":
+                    (aroon_up, aroon_down), _ = call_indicator(ind, high=high, low=low, timeperiod=14)
+                    _store("AROON_UP",   aroon_up)
+                    _store("AROON_DOWN", aroon_down)
+                else:
+                    _store("AROONOSC", call_indicator(ind, high=high, low=low, timeperiod=14)[0])
+
+            elif ind in _SAR_SERIES:
+                _store(ind, call_indicator(ind, high=high, low=low)[0])
+
+            elif ind == "AVGPRICE":
+                _store(ind, call_indicator(ind, open=open_, high=high, low=low, close=close)[0])
+            elif ind == "MEDPRICE":
+                _store(ind, call_indicator(ind, high=high, low=low)[0])
+            elif ind in {"TYPPRICE", "WCLPRICE"}:
+                _store(ind, call_indicator(ind, high=high, low=low, close=close)[0])
+
+            elif ind in cycle_series:
+                result, _ = call_indicator(ind, close)
+                if isinstance(result, (tuple, list)):
+                    for i, arr in enumerate(result):
+                        _store(f"{ind}_{i}", arr)
+                else:
+                    _store(ind, result)
+
+            elif ind in candle_patterns:
+                _store(ind, call_indicator(ind, open=open_, high=high, low=low, close=close)[0])
+
+            else:
+                logger.warning(f"Unsupported indicator: {ind}")
+
+        except Exception as exc:
+            logger.error(f"Indicator '{ind}' failed: {exc}")
+
+    if new_cols:
+        safe = {
+            k: v for k, v in (
+                (k, np.asarray(v, dtype=np.float64).ravel()) for k, v in new_cols.items()
+            )
+            if v.shape == (n,)
+        }
+        skipped = set(new_cols) - set(safe)
+        for k in skipped:
+            logger.warning(f"Skipping column '{k}': length mismatch.")
+        if safe:
+            df = pd.concat([df, pd.DataFrame(safe, index=df.index)], axis=1)
+
+    return df
