@@ -174,3 +174,76 @@
 2026-03-27 10:27:52,353 | INFO | train_utils | [trial 8] Pruned at chunk 1/2 — PnL: 25.8400
 2026-03-27 10:27:58,198 | INFO | train_utils | [trial 9] Chunk 1/2 PnL: 44.3900
 2026-03-27 10:28:00,910 | INFO | train_utils | [trial 9] Chunk 2/2 PnL: 20.7400
+2026-03-27 10:56:00,998 | WARNING | train_utils | [apply_log_diff_transform] Dropped 20682 rows containing inf/NaN across all numeric columns.
+2026-03-27 10:56:00,998 | INFO | train_utils | [apply_log_diff_transform] Shape after transform & dropna: (6663, 142)
+2026-03-27 10:56:01,102 | INFO | train_utils | [split_features_labels] Train rows: 5340 | Test rows: 1323 | Features: 140
+2026-03-27 10:56:01,105 | INFO | train_utils | [split_features_labels] NaNs — X_train: 0 | X_test: 0 | y_train: 0 | y_test: 0
+2026-03-27 10:56:08,021 | INFO | train_utils | [trial 0] Chunk 1/2 PnL: -69.6700
+2026-03-27 10:56:11,417 | INFO | train_utils | [trial 0] Chunk 2/2 PnL: -69.6700
+2026-03-27 10:56:18,183 | INFO | train_utils | [trial 1] Chunk 1/2 PnL: -110.8700
+2026-03-27 10:56:21,560 | INFO | train_utils | [trial 1] Chunk 2/2 PnL: -110.8700
+2026-03-27 10:56:27,180 | INFO | train_utils | [trial 2] Chunk 1/2 PnL: -69.2600
+2026-03-27 10:56:30,580 | INFO | train_utils | [trial 2] Chunk 2/2 PnL: -69.2600
+2026-03-27 10:56:36,851 | INFO | train_utils | [trial 3] Chunk 1/2 PnL: -69.6600
+2026-03-27 10:56:40,124 | INFO | train_utils | [trial 3] Chunk 2/2 PnL: -69.6600
+2026-03-27 10:56:46,236 | INFO | train_utils | [trial 4] Chunk 1/2 PnL: -69.8800
+2026-03-27 10:56:46,236 | INFO | train_utils | [trial 4] Pruned at chunk 1/2 — PnL: -69.8800
+2026-03-27 10:56:52,343 | INFO | train_utils | [trial 5] Chunk 1/2 PnL: -69.4300
+2026-03-27 10:56:55,752 | INFO | train_utils | [trial 5] Chunk 2/2 PnL: -69.4300
+2026-03-27 10:57:21,125 | INFO | train_utils | [trial 6] Chunk 1/2 PnL: -30.3900
+2026-03-27 10:57:24,704 | INFO | train_utils | [trial 6] Chunk 2/2 PnL: -30.3900
+2026-03-27 10:57:29,833 | INFO | train_utils | [trial 7] Chunk 1/2 PnL: -69.4900
+2026-03-27 10:57:33,293 | INFO | train_utils | [trial 7] Chunk 2/2 PnL: -69.4900
+2026-03-27 10:57:39,334 | INFO | train_utils | [trial 8] Chunk 1/2 PnL: -69.2700
+2026-03-27 10:57:42,941 | INFO | train_utils | [trial 8] Chunk 2/2 PnL: -69.2700
+2026-03-27 10:57:48,663 | INFO | train_utils | [trial 9] Chunk 1/2 PnL: -69.1700
+2026-03-27 10:57:52,071 | INFO | train_utils | [trial 9] Chunk 2/2 PnL: -69.1700
+2026-03-27 11:27:13,876 | WARNING | train_utils | [apply_log_diff_transform] Dropped 20672 rows containing inf/NaN across all numeric columns.
+2026-03-27 11:27:13,877 | INFO | train_utils | [apply_log_diff_transform] Shape after transform & dropna: (6659, 142)
+2026-03-27 11:27:13,983 | INFO | train_utils | [split_features_labels] Train rows: 5340 | Test rows: 1319 | Features: 140
+2026-03-27 11:27:13,989 | INFO | train_utils | [split_features_labels] NaNs — X_train: 0 | X_test: 0 | y_train: 0 | y_test: 0
+2026-03-27 11:27:18,776 | INFO | train_utils | [trial 0] Chunk 1/2 PnL: 24.4200
+2026-03-27 11:27:21,225 | INFO | train_utils | [trial 0] Chunk 2/2 PnL: 51.8300
+2026-03-27 11:27:29,966 | INFO | train_utils | [trial 1] Chunk 1/2 PnL: 26.2400
+2026-03-27 11:27:33,157 | INFO | train_utils | [trial 1] Chunk 2/2 PnL: 50.1500
+2026-03-27 11:28:35,566 | INFO | train_utils | [trial 2] Chunk 1/2 PnL: 13.0500
+2026-03-27 11:28:39,269 | INFO | train_utils | [trial 2] Chunk 2/2 PnL: 26.6500
+2026-03-27 11:38:40,718 | INFO | train_utils | [trial 3] Chunk 1/2 PnL: 29.6900
+2026-03-27 11:38:46,870 | INFO | train_utils | [trial 3] Chunk 2/2 PnL: 62.8100
+2026-03-27 11:39:31,325 | INFO | train_utils | [trial 4] Chunk 1/2 PnL: 13.0500
+2026-03-27 11:39:31,327 | INFO | train_utils | [trial 4] Pruned at chunk 1/2 — PnL: 13.0500
+2026-03-27 11:39:52,895 | INFO | train_utils | [trial 5] Chunk 1/2 PnL: 19.0200
+2026-03-27 11:39:52,895 | INFO | train_utils | [trial 5] Pruned at chunk 1/2 — PnL: 19.0200
+2026-03-27 11:40:54,186 | INFO | train_utils | [trial 6] Chunk 1/2 PnL: 26.8600
+2026-03-27 11:40:59,787 | INFO | train_utils | [trial 6] Chunk 2/2 PnL: 51.8300
+2026-03-27 11:41:16,842 | INFO | train_utils | [trial 7] Chunk 1/2 PnL: 20.1500
+2026-03-27 11:41:16,842 | INFO | train_utils | [trial 7] Pruned at chunk 1/2 — PnL: 20.1500
+2026-03-27 11:41:39,124 | INFO | train_utils | [trial 8] Chunk 1/2 PnL: 20.5800
+2026-03-27 11:41:39,124 | INFO | train_utils | [trial 8] Pruned at chunk 1/2 — PnL: 20.5800
+2026-03-27 11:41:47,599 | INFO | train_utils | [trial 9] Chunk 1/2 PnL: 22.8900
+2026-03-27 11:41:47,599 | INFO | train_utils | [trial 9] Pruned at chunk 1/2 — PnL: 22.8900
+2026-03-27 12:15:05,758 | WARNING | train_utils | [apply_log_diff_transform] Dropped 20672 rows containing inf/NaN across all numeric columns.
+2026-03-27 12:15:05,758 | INFO | train_utils | [apply_log_diff_transform] Shape after transform & dropna: (6659, 142)
+2026-03-27 12:15:05,857 | INFO | train_utils | [split_features_labels] Train rows: 5340 | Test rows: 1319 | Features: 140
+2026-03-27 12:15:05,857 | INFO | train_utils | [split_features_labels] NaNs — X_train: 0 | X_test: 0 | y_train: 0 | y_test: 0
+2026-03-27 12:15:28,691 | INFO | train_utils | [trial 0] Chunk 1/2 PnL: 23.3600
+2026-03-27 12:15:34,445 | INFO | train_utils | [trial 0] Chunk 2/2 PnL: 25.3900
+2026-03-27 12:15:50,187 | INFO | train_utils | [trial 1] Chunk 1/2 PnL: 23.0000
+2026-03-27 12:15:55,359 | INFO | train_utils | [trial 1] Chunk 2/2 PnL: 28.8600
+2026-03-27 12:16:21,842 | INFO | train_utils | [trial 2] Chunk 1/2 PnL: 17.5300
+2026-03-27 12:16:27,762 | INFO | train_utils | [trial 2] Chunk 2/2 PnL: 17.8200
+2026-03-27 12:16:55,453 | INFO | train_utils | [trial 3] Chunk 1/2 PnL: 18.7500
+2026-03-27 12:16:55,459 | INFO | train_utils | [trial 3] Pruned at chunk 1/2 — PnL: 18.7500
+2026-03-27 12:17:03,642 | INFO | train_utils | [trial 4] Chunk 1/2 PnL: 2.8900
+2026-03-27 12:17:03,642 | INFO | train_utils | [trial 4] Pruned at chunk 1/2 — PnL: 2.8900
+2026-03-27 12:17:11,074 | INFO | train_utils | [trial 5] Chunk 1/2 PnL: 2.3900
+2026-03-27 12:17:11,080 | INFO | train_utils | [trial 5] Pruned at chunk 1/2 — PnL: 2.3900
+2026-03-27 12:17:38,185 | INFO | train_utils | [trial 6] Chunk 1/2 PnL: 6.9400
+2026-03-27 12:17:38,189 | INFO | train_utils | [trial 6] Pruned at chunk 1/2 — PnL: 6.9400
+2026-03-27 12:17:46,164 | INFO | train_utils | [trial 7] Chunk 1/2 PnL: 14.6700
+2026-03-27 12:17:46,172 | INFO | train_utils | [trial 7] Pruned at chunk 1/2 — PnL: 14.6700
+2026-03-27 12:18:15,065 | INFO | train_utils | [trial 8] Chunk 1/2 PnL: 23.3700
+2026-03-27 12:18:25,866 | INFO | train_utils | [trial 8] Chunk 2/2 PnL: 10.3700
+2026-03-27 12:18:26,023 | INFO | train_utils | [trial 8] Pruned at chunk 2/2 — PnL: 10.3700
+2026-03-27 12:18:55,135 | INFO | train_utils | [trial 9] Chunk 1/2 PnL: 17.7800
+2026-03-27 12:18:55,143 | INFO | train_utils | [trial 9] Pruned at chunk 1/2 — PnL: 17.7800

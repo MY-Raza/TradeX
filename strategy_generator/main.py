@@ -16,11 +16,11 @@ from TradeX.utils.common.config_loader import read_config
 # Load Configuration
 # -------------------------------------------------
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Go one level up from strategy_generator to TradeX
-project_root = os.path.dirname(current_dir)
-ml_config_path = os.path.join(project_root, "data", "binance", "config.yml")
-config = read_config(ml_config_path)
-symbols = ["btc"]
+binance_config_path = os.path.join(current_dir, "config.yml")
+config = read_config(binance_config_path)
+symbols = config["symbols"]
+default_start_date = config["start_date"]
+end_date = config["end_date"]
 
 
 # ============================

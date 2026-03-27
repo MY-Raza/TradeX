@@ -1981,3 +1981,15 @@ Feature names seen at fit time, yet now missing:
 2026-03-27 10:28:02,498 | INFO | model_main | [Dry-run] random_forest predictions on first 5 test rows:
 [-1 -1 -1 -1 -1]
 2026-03-27 10:28:05,194 | INFO | model_main | [random_forest] Balance=2293.14  PnL=139.6500
+2026-03-27 10:56:00,354 | INFO | model_main | Training classifier: xgboost for btc
+2026-03-27 10:58:07,293 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
+[0 0 0 0 0]
+2026-03-27 10:58:11,139 | INFO | model_main | [xgboost] Balance=-245.59  PnL=-210.0500
+2026-03-27 11:27:12,839 | INFO | model_main | Training regressor: random_forest for btc
+2026-03-27 11:43:57,222 | INFO | model_main | [Dry-run] random_forest predictions on first 5 test rows:
+[445.69592275 463.41909871 476.24120172 522.7944206  633.36695279]
+2026-03-27 11:44:02,501 | INFO | model_main | [random_forest] Balance=-378.08  PnL=-169.9800
+2026-03-27 12:15:04,686 | INFO | model_main | Training regressor: xgboost for btc
+2026-03-27 12:19:00,202 | INFO | model_main | [Dry-run] xgboost predictions on first 5 test rows:
+[577.45807 499.3246  537.24756 615.986   676.9134 ]
+2026-03-27 12:19:06,550 | INFO | model_main | [xgboost] Balance=-383.16  PnL=-168.5700
