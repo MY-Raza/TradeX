@@ -198,3 +198,156 @@
 2026-03-30 15:31:41,776 | INFO | base_dl_model | [LSTMModel] Using device: cpu
 2026-03-30 15:31:41,994 | INFO | base_dl_model | [LSTMModel] Network params: 281,478
 2026-03-30 15:31:55,323 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.607979  val_loss=0.641079
+2026-03-30 15:54:36,111 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 15:54:36,291 | INFO | base_dl_model | [GRUModel] Network params: 361,587
+2026-03-30 15:55:00,072 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.625627  val_loss=0.716506
+2026-03-30 15:58:08,471 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.583774  val_loss=0.661427
+2026-03-30 15:59:49,752 | INFO | base_dl_model | [GRUModel] Early stop at epoch 15. Best val_loss=0.661427
+2026-03-30 15:59:49,754 | INFO | base_dl_model | [GRUModel] Training finished in 310.4s
+2026-03-30 15:59:51,265 | INFO | base_dl_model | [GRUModel] predict() → min=0.0001  max=0.0008  mean=0.0003
+2026-03-30 15:59:58,206 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 15:59:58,285 | INFO | base_dl_model | [GRUModel] Network params: 754,878
+2026-03-30 16:00:26,861 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.592094  val_loss=0.614360
+2026-03-30 16:03:44,178 | INFO | base_dl_model | [GRUModel] Early stop at epoch 8. Best val_loss=0.600631
+2026-03-30 16:03:44,178 | INFO | base_dl_model | [GRUModel] Training finished in 225.9s
+2026-03-30 16:03:45,918 | INFO | base_dl_model | [GRUModel] predict() → min=0.0004  max=0.0005  mean=0.0004
+2026-03-30 16:03:52,882 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:03:53,035 | INFO | base_dl_model | [GRUModel] Network params: 480,423
+2026-03-30 16:05:19,604 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.587783  val_loss=0.653224
+2026-03-30 16:13:21,693 | INFO | base_dl_model | [GRUModel] Early stop at epoch 8. Best val_loss=0.641022
+2026-03-30 16:13:21,693 | INFO | base_dl_model | [GRUModel] Training finished in 568.6s
+2026-03-30 16:13:25,390 | INFO | base_dl_model | [GRUModel] predict() → min=0.0014  max=0.0017  mean=0.0015
+2026-03-30 16:13:31,583 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:13:31,772 | INFO | base_dl_model | [GRUModel] Network params: 87,003
+2026-03-30 16:13:52,697 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.789139  val_loss=0.612030
+2026-03-30 16:17:03,019 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.570282  val_loss=0.592788
+2026-03-30 16:18:06,563 | INFO | base_dl_model | [GRUModel] Early stop at epoch 13. Best val_loss=0.592487
+2026-03-30 16:18:06,563 | INFO | base_dl_model | [GRUModel] Training finished in 274.8s
+2026-03-30 16:18:07,898 | INFO | base_dl_model | [GRUModel] predict() → min=0.0010  max=0.0010  mean=0.0010
+2026-03-30 16:18:14,315 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:18:14,383 | INFO | base_dl_model | [GRUModel] Network params: 915,351
+2026-03-30 16:18:39,030 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.644052  val_loss=0.617321
+2026-03-30 16:21:05,112 | INFO | base_dl_model | [GRUModel] Early stop at epoch 7. Best val_loss=0.616089
+2026-03-30 16:21:05,112 | INFO | base_dl_model | [GRUModel] Training finished in 170.7s
+2026-03-30 16:21:06,648 | INFO | base_dl_model | [GRUModel] predict() → min=0.0003  max=0.0007  mean=0.0005
+2026-03-30 16:21:13,229 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:21:13,303 | INFO | base_dl_model | [GRUModel] Network params: 286,347
+2026-03-30 16:21:27,169 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.597660  val_loss=0.617943
+2026-03-30 16:22:37,444 | INFO | base_dl_model | [GRUModel] Early stop at epoch 6. Best val_loss=0.617943
+2026-03-30 16:22:37,444 | INFO | base_dl_model | [GRUModel] Training finished in 84.1s
+2026-03-30 16:22:38,339 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-03-30 16:22:44,928 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:22:45,017 | INFO | base_dl_model | [GRUModel] Network params: 589,746
+2026-03-30 16:23:10,799 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.597936  val_loss=0.639288
+2026-03-30 16:27:43,812 | INFO | base_dl_model | [GRUModel] Early stop at epoch 8. Best val_loss=0.629882
+2026-03-30 16:27:43,822 | INFO | base_dl_model | [GRUModel] Training finished in 298.8s
+2026-03-30 16:27:46,398 | INFO | base_dl_model | [GRUModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-03-30 16:27:54,426 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:27:54,666 | INFO | base_dl_model | [GRUModel] Network params: 44,439
+2026-03-30 16:28:22,541 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.658347  val_loss=0.602439
+2026-03-30 16:32:01,328 | INFO | base_dl_model | [GRUModel] Early stop at epoch 8. Best val_loss=0.594904
+2026-03-30 16:32:01,328 | INFO | base_dl_model | [GRUModel] Training finished in 246.7s
+2026-03-30 16:32:03,136 | INFO | base_dl_model | [GRUModel] predict() → min=0.0009  max=0.0011  mean=0.0009
+2026-03-30 16:32:15,257 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:32:15,469 | INFO | base_dl_model | [GRUModel] Network params: 47,811
+2026-03-30 16:32:39,636 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.591656  val_loss=0.656593
+2026-03-30 16:34:29,965 | INFO | base_dl_model | [GRUModel] Early stop at epoch 6. Best val_loss=0.656593
+2026-03-30 16:34:29,974 | INFO | base_dl_model | [GRUModel] Training finished in 134.0s
+2026-03-30 16:34:30,997 | INFO | base_dl_model | [GRUModel] predict() → min=0.0003  max=0.0003  mean=0.0003
+2026-03-30 16:34:43,986 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:34:47,108 | INFO | base_dl_model | [GRUModel] Network params: 276,762
+2026-03-30 16:35:05,428 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.659170  val_loss=0.711599
+2026-03-30 16:36:35,890 | INFO | base_dl_model | [GRUModel] Early stop at epoch 7. Best val_loss=0.651182
+2026-03-30 16:36:35,891 | INFO | base_dl_model | [GRUModel] Training finished in 108.8s
+2026-03-30 16:36:36,939 | INFO | base_dl_model | [GRUModel] predict() → min=0.0026  max=0.0032  mean=0.0028
+2026-03-30 16:36:45,849 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 16:36:45,922 | INFO | base_dl_model | [GRUModel] Network params: 286,347
+2026-03-30 16:37:01,240 | INFO | base_dl_model | [GRUModel] Epoch 1/50 train_loss=0.588403  val_loss=0.632345
+2026-03-30 16:39:29,403 | INFO | base_dl_model | [GRUModel] Epoch 10/50 train_loss=0.569517  val_loss=0.632280
+2026-03-30 16:40:13,316 | INFO | base_dl_model | [GRUModel] Early stop at epoch 13. Best val_loss=0.620966
+2026-03-30 16:40:13,316 | INFO | base_dl_model | [GRUModel] Training finished in 207.4s
+2026-03-30 16:40:14,213 | INFO | base_dl_model | [GRUModel] predict() → min=0.0000  max=0.0042  mean=0.0002
+2026-03-30 16:40:14,254 | INFO | base_dl_model | [GRUModel] predict() → min=0.0001  max=0.0001  mean=0.0001
+2026-03-30 16:40:19,059 | INFO | base_dl_model | [GRUModel] predict() → min=0.0000  max=0.0042  mean=0.0002
+2026-03-30 16:40:19,808 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:40:19,912 | INFO | base_dl_model | [LSTMModel] Network params: 37,992
+2026-03-30 16:40:22,885 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.932695  val_loss=0.879816
+2026-03-30 16:40:39,692 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.631165  val_loss=0.646744
+2026-03-30 16:40:58,335 | INFO | base_dl_model | [LSTMModel] Epoch 20/30 train_loss=0.592294  val_loss=0.621422
+2026-03-30 16:41:17,291 | INFO | base_dl_model | [LSTMModel] Epoch 30/30 train_loss=0.580594  val_loss=0.616215
+2026-03-30 16:41:17,291 | INFO | base_dl_model | [LSTMModel] Training finished in 57.4s
+2026-03-30 16:41:17,550 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0082  max=0.0149  mean=0.0124
+2026-03-30 16:41:24,077 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:41:24,183 | INFO | base_dl_model | [LSTMModel] Network params: 49,783
+2026-03-30 16:41:27,589 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.817423  val_loss=0.697757
+2026-03-30 16:42:45,933 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.575050  val_loss=0.629493
+2026-03-30 16:42:55,979 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 13. Best val_loss=0.627967
+2026-03-30 16:42:55,979 | INFO | base_dl_model | [LSTMModel] Training finished in 91.8s
+2026-03-30 16:42:56,381 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0010  max=0.0257  mean=0.0038
+2026-03-30 16:43:04,330 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:43:04,483 | INFO | base_dl_model | [LSTMModel] Network params: 49,783
+2026-03-30 16:43:07,068 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.652249  val_loss=0.621063
+2026-03-30 16:43:20,888 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 9. Best val_loss=0.604658
+2026-03-30 16:43:20,890 | INFO | base_dl_model | [LSTMModel] Training finished in 16.4s
+2026-03-30 16:43:21,080 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0009  max=0.0057  mean=0.0017
+2026-03-30 16:43:27,240 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:43:27,315 | INFO | base_dl_model | [LSTMModel] Network params: 37,628
+2026-03-30 16:43:29,952 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.682328  val_loss=0.605453
+2026-03-30 16:43:41,661 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 6. Best val_loss=0.605453
+2026-03-30 16:43:41,661 | INFO | base_dl_model | [LSTMModel] Training finished in 14.3s
+2026-03-30 16:43:41,868 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0008  max=0.0009  mean=0.0008
+2026-03-30 16:43:47,903 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:43:48,083 | INFO | base_dl_model | [LSTMModel] Network params: 55,681
+2026-03-30 16:43:52,330 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.987788  val_loss=0.878009
+2026-03-30 16:44:27,707 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.606664  val_loss=0.611110
+2026-03-30 16:45:12,867 | INFO | base_dl_model | [LSTMModel] Epoch 20/30 train_loss=0.582133  val_loss=0.595571
+2026-03-30 16:45:57,539 | INFO | base_dl_model | [LSTMModel] Epoch 30/30 train_loss=0.574584  val_loss=0.592083
+2026-03-30 16:45:57,539 | INFO | base_dl_model | [LSTMModel] Training finished in 129.5s
+2026-03-30 16:45:58,004 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0039  max=0.0081  mean=0.0066
+2026-03-30 16:46:02,688 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:46:02,864 | INFO | base_dl_model | [LSTMModel] Network params: 120,288
+2026-03-30 16:46:09,771 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.738873  val_loss=0.619120
+2026-03-30 16:47:20,660 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.569295  val_loss=0.594828
+2026-03-30 16:47:46,624 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 13. Best val_loss=0.593612
+2026-03-30 16:47:46,624 | INFO | base_dl_model | [LSTMModel] Training finished in 103.8s
+2026-03-30 16:47:47,363 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0006  max=0.0041  mean=0.0014
+2026-03-30 16:47:58,061 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:47:58,230 | INFO | base_dl_model | [LSTMModel] Network params: 912,981
+2026-03-30 16:48:34,710 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.615549  val_loss=0.617115
+2026-03-30 16:51:39,059 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 6. Best val_loss=0.617115
+2026-03-30 16:51:39,061 | INFO | base_dl_model | [LSTMModel] Training finished in 220.8s
+2026-03-30 16:51:41,529 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0007  max=0.0007  mean=0.0007
+2026-03-30 16:51:46,793 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:51:46,884 | INFO | base_dl_model | [LSTMModel] Network params: 181,706
+2026-03-30 16:51:52,823 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.773484  val_loss=0.601522
+2026-03-30 16:52:30,575 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 8. Best val_loss=0.593937
+2026-03-30 16:52:30,575 | INFO | base_dl_model | [LSTMModel] Training finished in 43.7s
+2026-03-30 16:52:30,955 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0010  max=0.0013  mean=0.0011
+2026-03-30 16:52:36,459 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 16:52:36,588 | INFO | base_dl_model | [LSTMModel] Network params: 1,404,675
+2026-03-30 16:53:09,611 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.647689  val_loss=0.617785
+2026-03-30 16:57:43,009 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.576944  val_loss=0.618118
+2026-03-30 17:25:19,404 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-03-30 17:25:19,694 | INFO | base_dl_model | [GRUModel] Network params: 885,927
+2026-03-30 17:26:29,200 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.604002  val_loss=0.595508
+2026-03-30 17:32:59,897 | INFO | base_dl_model | [GRUModel] Early stop at epoch 6. Best val_loss=0.595508
+2026-03-30 17:32:59,900 | INFO | base_dl_model | [GRUModel] Training finished in 452.9s
+2026-03-30 17:33:04,454 | INFO | base_dl_model | [GRUModel] predict() → min=0.0001  max=0.0002  mean=0.0002
+2026-03-30 17:33:05,084 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-03-30 17:33:05,266 | INFO | base_dl_model | [LSTMModel] Network params: 117,218
+2026-03-30 17:33:14,111 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.619863  val_loss=0.594863
+2026-03-30 17:34:32,025 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.570545  val_loss=0.592669
+2026-03-30 17:35:52,011 | INFO | base_dl_model | [LSTMModel] Epoch 20/30 train_loss=0.568755  val_loss=0.597280
+2026-03-30 17:36:00,311 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 21. Best val_loss=0.592350
+2026-03-30 17:36:00,312 | INFO | base_dl_model | [LSTMModel] Training finished in 175.0s
+2026-03-30 17:36:00,966 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0004  max=0.0010  mean=0.0006
+2026-03-30 17:36:01,456 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-03-30 17:36:01,651 | INFO | base_dl_model | [TCNModel] Network params: 1,034,374
+2026-03-30 17:36:25,756 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=302688.443948  val_loss=46144.440874
+2026-03-30 17:40:19,116 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=0.569059  val_loss=2056.852272
+2026-03-30 17:40:19,118 | INFO | base_dl_model | [TCNModel] Early stop at epoch 10. Best val_loss=569.785463
+2026-03-30 17:40:19,118 | INFO | base_dl_model | [TCNModel] Training finished in 257.5s
+2026-03-30 17:40:20,555 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0007  mean=0.0005
+2026-03-30 17:40:20,909 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-03-30 17:40:21,095 | INFO | base_dl_model | [TFTModel] Network params: 185,303
+2026-03-30 17:40:59,305 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=0.616780  val_loss=0.750057
