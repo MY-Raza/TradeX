@@ -1,39 +1,3 @@
-"""
-main_dl.py
-==========
-Deep-learning equivalent of ``main.py``.
-
-Replaces the sklearn / XGBoost model trainers with the custom PyTorch models
-(GRU, LSTM, TCN, TFT) while reusing **every other component unchanged**:
-
-- ``data_pipeline``   — same data fetch, resample, feature engineering
-- ``BackTest``        — same backtest engine
-- ``prepare_predictions``, ``pnl_permutation_importance``,
-  ``extract_important_features``, ``compute_trade_statistics``
-  — same post-processing utilities
-
-The only change needed in ``config.yml`` is adding a ``deep_learning``
-section (see the inline example below). Classifiers and regressors are
-controlled by the same on/off flags.
-
-Config example
---------------
-.. code-block:: yaml
-
-    deep_learning:
-      classifiers:
-        gru:  true
-        lstm: true
-        tcn:  false
-        tft:  true
-      regressors:
-        gru:  false
-        lstm: true
-        tcn:  true
-        tft:  false
-      dl_n_trials: 10   # Optuna trial budget per model
-"""
-
 from __future__ import annotations
 
 import os

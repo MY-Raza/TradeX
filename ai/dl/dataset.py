@@ -1,12 +1,3 @@
-"""
-dataset.py
-==========
-PyTorch Dataset and sliding-window sequence builder for time-series data.
-
-These utilities are shared by all DL models (GRU, LSTM, TCN, TFT) and
-replace the Darts ``TimeSeries`` object with plain NumPy → PyTorch tensors.
-"""
-
 from __future__ import annotations
 
 import numpy as np
