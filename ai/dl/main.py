@@ -151,10 +151,9 @@ def main() -> None:
     max_diffs         = 2
 
     # Read DL-specific config; fall back to empty dicts so it's optional
-    dl_config        = config.get("deep_learning", {})
-    dl_classifiers   = dl_config.get("classifiers", {})
-    dl_regressors    = dl_config.get("regressors", {})
-    dl_n_trials      = int(dl_config.get("dl_n_trials", 10))
+    dl_classifiers   = config.get("classifiers", {})
+    dl_regressors    = config.get("regressors", {})
+    dl_n_trials      = int(config.get("dl_n_trials", 10))
 
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 
