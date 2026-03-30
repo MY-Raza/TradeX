@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 
 from TradeX.ai.dl.models.base_model import BaseDLModel
-from TradeX.ai.ml.models.train_utils import (
+from TradeX.ai.dl.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
     split_features_labels,
@@ -174,10 +174,13 @@ def train(
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
 
+    # Trim X_test to match the (seq_len warm-up shortened) preds length so
+    # every downstream caller (backtest, importance, dry-run) sees aligned arrays.
     aligned_index = X_test.index[-(len(final_preds)):]
+    X_test_aligned = X_test.loc[aligned_index]
 
     logger.info(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
-    return final_model, final_preds, aligned_index, X_test
+    return final_model, final_preds, aligned_index, X_test_aligned

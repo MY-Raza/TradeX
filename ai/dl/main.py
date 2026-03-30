@@ -44,9 +44,27 @@ def _run_backtest(
     df_target: pd.DataFrame,
     model_type: str,
 ) -> tuple:
-    """Prepare predictions and run a BackTest. Returns (ledger, balance, pnl)."""
+    """Prepare predictions and run a BackTest. Returns (ledger, balance, pnl).
+
+    DL models return ``preds`` that is shorter than ``X_test`` by
+    ``seq_len - 1`` rows (sliding-window warm-up).  ``test_index`` is
+    pre-aligned inside each model's ``train()``, but a final length guard
+    here ensures ``preds`` and the datetime array extracted by
+    ``prepare_predictions`` are always identical in length, preventing the
+    'All arrays must be of the same length' crash.
+    """
+    import numpy as np
+
+    preds_np = np.asarray(preds)
+    idx_arr  = np.asarray(test_index)
+
+    # Trim both to the shorter length — handles any residual off-by-one
+    min_len  = min(len(preds_np), len(idx_arr))
+    preds_np = preds_np[-min_len:]
+    idx_arr  = idx_arr[-min_len:]
+
     df_predictions = prepare_predictions(
-        df_target, preds, test_index, model_type=model_type
+        df_target, preds_np, idx_arr, model_type=model_type
     )
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
@@ -133,9 +151,10 @@ def main() -> None:
     max_diffs         = 2
 
     # Read DL-specific config; fall back to empty dicts so it's optional
-    dl_classifiers   = config.get("classifiers", {})
-    dl_regressors    = config.get("regressors", {})
-    dl_n_trials      = int(config.get("dl_n_trials", 10))
+    dl_config        = config.get("deep_learning", {})
+    dl_classifiers   = dl_config.get("classifiers", {})
+    dl_regressors    = dl_config.get("regressors", {})
+    dl_n_trials      = int(dl_config.get("dl_n_trials", 10))
 
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 

@@ -192,8 +192,18 @@ def run_chunked_backtest(
     """
     # DL predictions use the 'dl' branch in prepare_predictions which handles
     # the seq_len warm-up offset automatically via lookback=0 (already aligned)
+    preds_np   = np.asarray(preds)
+    idx_arr    = np.asarray(test_index)
+
+    # Guard: preds may be shorter than test_index by seq_len-1 (DL warm-up).
+    # Always trim both to the shorter length before calling prepare_predictions
+    # so the datetime and signal arrays are always the same size.
+    min_len    = min(len(preds_np), len(idx_arr))
+    preds_np   = preds_np[-min_len:]
+    idx_arr    = idx_arr[-min_len:]
+
     df_preds = prepare_predictions(
-        df, preds, test_index,
+        df, preds_np, idx_arr,
         model_type=model_type,
         k=k,
     )

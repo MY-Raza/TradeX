@@ -317,3 +317,11 @@
 2026-03-30 12:44:48,084 | INFO | train_utils | [split_features_labels] NaNs — X_train: 0 | X_test: 0 | y_train: 0 | y_test: 0
 2026-03-30 12:45:23,447 | INFO | train_utils | [trial 0] Chunk 1/2 PnL: 21.4300
 2026-03-30 12:45:27,076 | INFO | train_utils | [trial 0] Chunk 2/2 PnL: -67.4900
+2026-03-30 15:29:57,176 | WARNING | train_utils | [apply_log_diff_transform] Dropped 20682 rows containing inf/NaN across all numeric columns.
+2026-03-30 15:29:57,179 | INFO | train_utils | [apply_log_diff_transform] Shape after transform & dropna: (6663, 87)
+2026-03-30 15:29:57,257 | INFO | train_utils | [split_features_labels] Train rows: 5340 | Test rows: 1323 | Features: 85
+2026-03-30 15:29:57,262 | INFO | train_utils | [split_features_labels] NaNs — X_train: 0 | X_test: 0 | y_train: 0 | y_test: 0
+2026-03-30 15:30:51,978 | INFO | train_utils | [trial 0] Chunk 1/2 PnL: -48.5000
+2026-03-30 15:30:55,383 | INFO | train_utils | [trial 0] Chunk 2/2 PnL: -30.6600
+2026-03-30 15:31:33,874 | INFO | train_utils | [trial 1] Chunk 1/2 PnL: -18.4700
+2026-03-30 15:31:41,317 | INFO | train_utils | [trial 1] Chunk 2/2 PnL: -36.0100
