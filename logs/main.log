@@ -1,2 +1,12 @@
 2026-03-30 11:12:47,353 | INFO | main | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
 2026-03-30 11:12:47,353 | INFO | main | === Processing symbol: btc ===
+2026-03-30 11:14:23,116 | INFO | main | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-03-30 11:14:23,116 | INFO | main | === Processing symbol: btc ===
+2026-03-30 11:20:11,517 | INFO | main | Training DL classifier: gru for btc
+2026-03-30 11:42:29,709 | INFO | main | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-03-30 11:42:29,709 | INFO | main | === Processing symbol: btc ===
+2026-03-30 11:49:32,281 | INFO | main | Training DL classifier: gru for btc
+2026-03-30 12:44:43,945 | ERROR | main | [Dry-run] Failed for gru: seq_len=91 is larger than the number of available timesteps=20. Reduce seq_len or provide more data.
+2026-03-30 12:44:46,770 | INFO | main | [gru] Balance=2206.20  PnL=136.1000
+2026-03-30 12:44:47,477 | ERROR | main | DL Classifier gru failed for btc: All arrays must be of the same length
+2026-03-30 12:44:47,479 | INFO | main | Training DL classifier: lstm for btc

@@ -1,14 +1,3 @@
-"""
-train_loop.py
-=============
-Core training / evaluation loop primitives shared by all DL models.
-
-Exports
--------
-- ``run_epoch``      : One pass over a DataLoader (train or eval mode).
-- ``EarlyStopping``  : Callback that signals when to halt training.
-"""
-
 from __future__ import annotations
 
 from typing import Optional

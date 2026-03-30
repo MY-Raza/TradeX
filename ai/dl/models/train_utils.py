@@ -1,20 +1,3 @@
-"""
-train_utils.py  (DL module)
-============================
-Shared preprocessing and backtest helpers for all DL model trainers.
-
-This module is a **direct port** of the ML module's ``train_utils.py``:
-the function signatures and semantics are identical so the DL models
-slot into the same pipeline without any caller-side changes.
-
-Functions
----------
-- ``validate_and_sort``       — ensure datetime + target columns exist; sort.
-- ``apply_log_diff_transform`` — log-diff OHLCV, sanitise inf/NaN.
-- ``split_features_labels``   — temporal train/test split → X/y matrices.
-- ``run_chunked_backtest``    — Optuna objective helper with pruning support.
-"""
-
 from __future__ import annotations
 
 import numpy as np

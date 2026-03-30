@@ -29,7 +29,7 @@ from TradeX.ai.data.data_pipeline import (
     resolve_split_date,
 )
 
-logger = get_logger("main")
+logger = get_logger("main_dl")
 
 
 # ===========================================================================
@@ -198,8 +198,10 @@ def main() -> None:
                 )
 
                 # Dry-run sanity check
+                # Use seq_len + 5 rows so at least one sequence can be built.
                 try:
-                    sample_preds = model.predict(X_test.head(20))
+                    dry_run_rows = model.seq_len + 5
+                    sample_preds = model.predict(X_test.head(dry_run_rows))
                     logger.info(
                         f"[Dry-run] {clf_name} predictions on first samples:\n"
                         f"{sample_preds[:5]}"
@@ -253,8 +255,10 @@ def main() -> None:
                 )
 
                 # Dry-run sanity check
+                # Use seq_len + 5 rows so at least one sequence can be built.
                 try:
-                    sample_preds = model.predict(X_test.head(20))
+                    dry_run_rows = model.seq_len + 5
+                    sample_preds = model.predict(X_test.head(dry_run_rows))
                     logger.info(
                         f"[Dry-run] {reg_name} predictions on first samples:\n"
                         f"{sample_preds[:5]}"
