@@ -1,15 +1,3 @@
-"""
-base_model.py
-=============
-Abstract base class for all custom PyTorch deep-learning forecasting models.
-
-Every concrete model (GRU, LSTM, TCN, TFT) inherits from ``BaseDLModel`` and
-must implement ``_build_network``, ``_forward``, and ``_predict_raw``.
-The base class owns the full ``fit`` / ``predict`` / ``evaluate`` lifecycle so
-that callers can treat every model identically — mirroring the uniform
-``train()`` interface used by ``randomforest_clf``, ``xgboost_reg``, etc.
-"""
-
 from __future__ import annotations
 
 import abc
@@ -23,9 +11,9 @@ import torch.nn as nn
 from torch.optim import Adam
 from torch.utils.data import DataLoader
 
-from TradeX.ai.ml.dl.utils.dataset import TimeSeriesDataset, build_sequences
-from TradeX.ai.ml.dl.training.train_loop import run_epoch, EarlyStopping
-from TradeX.ai.ml.dl.training.train_utils import (
+from TradeX.ai.dl.dataset import TimeSeriesDataset, build_sequences
+from TradeX.ai.dl.models.train_loop import run_epoch, EarlyStopping
+from TradeX.ai.dl.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
     split_features_labels,

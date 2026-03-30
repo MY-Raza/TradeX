@@ -1,21 +1,3 @@
-"""
-gru.py
-======
-Multi-layer GRU forecasting model.
-
-Follows the same ``train()`` entry-point contract as
-``randomforest_clf.py`` / ``xgboost_reg.py`` so it plugs directly into
-``model_trainer.py`` via the ``CLASSIFIERS`` / ``REGRESSORS`` dispatch tables.
-
-Architecture
-------------
-Input  →  GRU (num_layers, hidden_size, dropout)
-       →  FC head  →  output_size
-
-For classifiers  : output_size = num_classes (logits fed to CrossEntropyLoss)
-For regressors   : output_size = 1
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -24,8 +6,8 @@ import optuna
 import torch
 import torch.nn as nn
 
-from TradeX.ai.ml.dl.models.base_model import BaseDLModel
-from TradeX.ai.ml.dl.training.train_utils import (
+from TradeX.ai.dl.models.base_model import BaseDLModel
+from TradeX.ai.dl.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
     split_features_labels,

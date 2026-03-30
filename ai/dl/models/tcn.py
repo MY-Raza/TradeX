@@ -1,28 +1,3 @@
-"""
-tcn.py
-======
-Temporal Convolutional Network (TCN) forecasting model.
-
-Architecture
-------------
-Input  →  N × TCNBlock(dilated causal conv, residual connection, dropout)
-       →  FC head  →  output_size
-
-Each ``TCNBlock`` uses:
-- Dilated causal convolution (dilation doubles each block: 1, 2, 4, 8, …)
-- Weight normalisation
-- ReLU activation + dropout
-- Residual (skip) connection with a 1×1 projection when channels mismatch
-
-Receptive field: ``num_layers × kernel_size × 2^(num_layers-1)`` timesteps.
-
-References
-----------
-Bai, S., Kolter, J. Z., & Koltun, V. (2018).
-    "An Empirical Evaluation of Generic Convolutional and Recurrent Networks
-    for Sequence Modelling." arXiv:1803.01271
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -32,8 +7,8 @@ import torch
 import torch.nn as nn
 from torch.nn.utils import weight_norm
 
-from TradeX.ai.ml.dl.models.base_model import BaseDLModel
-from TradeX.ai.ml.dl.training.train_utils import (
+from TradeX.ai.dl.models.base_model import BaseDLModel
+from TradeX.ai.dl.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
     split_features_labels,

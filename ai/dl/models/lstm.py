@@ -1,16 +1,3 @@
-"""
-lstm.py
-=======
-Multi-layer LSTM forecasting model.
-
-Architecture
-------------
-Input  →  LSTM (num_layers, hidden_size, dropout)
-       →  FC head  →  output_size
-
-Same public ``train()`` interface as ``gru.py``, ``randomforest_clf.py``, etc.
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -19,8 +6,8 @@ import optuna
 import torch
 import torch.nn as nn
 
-from TradeX.ai.ml.dl.models.base_model import BaseDLModel
-from TradeX.ai.ml.dl.training.train_utils import (
+from TradeX.ai.dl.models.base_model import BaseDLModel
+from TradeX.ai.ml.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
     split_features_labels,

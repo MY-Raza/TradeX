@@ -1,41 +1,3 @@
-"""
-tft.py
-======
-Simplified Temporal Fusion Transformer (TFT) forecasting model.
-
-Architecture
-------------
-Input  →  Variable Selection Network (VSN) — gates irrelevant features
-       →  LSTM Encoder  →  LSTM Decoder
-       →  Multi-head Self-Attention (temporal self-attention)
-       →  Gated Residual Network (GRN)
-       →  FC head  →  output_size
-
-Core TFT components preserved
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. **Variable Selection Network** — soft feature-wise gating via a GRN on
-   the flattened input, followed by a softmax weighting over features.
-2. **LSTM Encoder / Decoder** — encodes history; decoder seed is the last
-   encoder hidden state, producing context-enriched sequence.
-3. **Multi-Head Self-Attention** — captures long-range dependencies across
-   the full look-back window.
-4. **Gated Residual Network (GRN)** — ``Linear → ELU → Linear → GLU
-   → LayerNorm`` with an optional skip connection; applied after attention.
-5. **Output head** — linear projection to the desired output dimensionality.
-
-Simplifications vs the original paper
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Static covariates are omitted (all features treated as temporal).
-- Quantile regression replaced with MSE / CE for regression / classification.
-- Only one temporal attention layer (vs stacked in full TFT).
-
-References
-----------
-Lim, B., Arık, S. Ö., Loeff, N., & Pfister, T. (2021).
-    "Temporal Fusion Transformers for Interpretable Multi-horizon Time Series
-    Forecasting." International Journal of Forecasting, 37(4), 1748–1764.
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -45,8 +7,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from TradeX.ai.ml.dl.models.base_model import BaseDLModel
-from TradeX.ai.ml.dl.training.train_utils import (
+from TradeX.ai.dl.models.base_model import BaseDLModel
+from TradeX.ai.dl.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
     split_features_labels,
