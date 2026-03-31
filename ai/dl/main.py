@@ -43,6 +43,7 @@ def _run_backtest(
     test_index,
     df_target: pd.DataFrame,
     model_type: str,
+    k: float = 0.5,
 ) -> tuple:
     """Prepare predictions and run a BackTest. Returns (ledger, balance, pnl).
 
@@ -63,8 +64,21 @@ def _run_backtest(
     preds_np = preds_np[-min_len:]
     idx_arr  = idx_arr[-min_len:]
 
+    # Slice df_target to only the rows that correspond to idx_arr.
+    # Passing the full train+test DataFrame would give prepare_predictions
+    # len(df_target) rows to build datetimes from, while preds_np only covers
+    # the (aligned) test window — causing the "All arrays must be of the same
+    # length" crash inside pandas DataFrame construction.
+    df_test_slice = df_target.loc[df_target.index.isin(idx_arr)]
+    if len(df_test_slice) != min_len:
+        # Fallback: idx_arr contains raw positional integers (reset index);
+        # use iloc instead.
+        df_test_slice = df_target.iloc[
+            df_target.index.get_indexer(idx_arr, method="nearest")
+        ]
+
     df_predictions = prepare_predictions(
-        df_target, preds_np, idx_arr, model_type=model_type
+        df_test_slice, preds_np, idx_arr, model_type=model_type, k=k
     )
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
@@ -229,7 +243,7 @@ def main() -> None:
 
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
-                    df_1m, model, preds, test_index, df_clf, "classifier"
+                    df_1m, model, preds, test_index, df_clf, "classifier", k=0.5
                 )
                 logger.info(f"[{clf_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
@@ -286,7 +300,7 @@ def main() -> None:
 
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
-                    df_1m, model, preds, test_index, df_reg, "regressor"
+                    df_1m, model, preds, test_index, df_reg, "regressor", k=0.5
                 )
                 logger.info(f"[{reg_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
