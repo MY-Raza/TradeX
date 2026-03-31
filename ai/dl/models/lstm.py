@@ -185,10 +185,8 @@ def train(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
-    split_dt = pd.to_datetime(split_date, utc=True)
-    df_test_norm = df_normalised[df_normalised["datetime"] >= split_dt].reset_index(drop=True)
+    pred_datetimes = df_normalised.loc[aligned_index, "datetime"].values
+    df_for_backtest = pd.DataFrame({"datetime": pred_datetimes})
+    backtest_positions = np.arange(len(final_preds))
 
-    test_start_label  = X_test.index[0]
-    aligned_positions = aligned_index - test_start_label
-
-    return final_model, final_preds, aligned_positions, X_test_aligned, df_test_norm
+    return final_model, final_preds, backtest_positions, X_test_aligned, df_for_backtest

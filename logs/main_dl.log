@@ -55,3 +55,18 @@
 [0.00021214 0.00021105 0.00021287 0.00021211 0.00021146]
 2026-03-31 11:55:43,452 | ERROR | main_dl | DL Classifier gru failed for btc: positional indexers are out-of-bounds
 2026-03-31 11:55:43,452 | INFO | main_dl | Training DL classifier: lstm for btc
+2026-03-31 12:10:17,219 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-03-31 12:10:17,219 | INFO | main_dl | === Processing symbol: btc ===
+2026-03-31 12:16:12,548 | INFO | main_dl | Training DL classifier: gru for btc
+2026-03-31 12:42:56,814 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[0.00059157 0.00059152 0.00059146 0.00059142 0.00059137]
+2026-03-31 12:42:56,826 | ERROR | main_dl | DL Classifier gru failed for btc: positional indexers are out-of-bounds
+2026-03-31 12:42:56,826 | INFO | main_dl | Training DL classifier: lstm for btc
+2026-03-31 12:49:28,240 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-03-31 12:49:28,240 | INFO | main_dl | === Processing symbol: btc ===
+2026-03-31 12:55:25,972 | INFO | main_dl | Training DL classifier: gru for btc
+2026-03-31 13:34:50,354 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[0.00026192 0.00044701 0.00044701 0.00044701 0.00077147]
+2026-03-31 13:34:54,383 | INFO | main_dl | [gru] Balance=746.70  PnL=-25.5600
+2026-03-31 13:34:55,410 | ERROR | main_dl | DL Classifier gru failed for btc: All arrays must be of the same length
+2026-03-31 13:34:55,412 | INFO | main_dl | Training DL classifier: lstm for btc
