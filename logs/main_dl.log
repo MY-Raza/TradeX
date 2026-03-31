@@ -37,3 +37,6 @@
 2026-03-30 17:36:01,004 | INFO | main_dl | Training DL classifier: tcn for btc
 2026-03-30 17:40:20,589 | ERROR | main_dl | DL Classifier tcn failed for btc: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
 2026-03-30 17:40:20,589 | INFO | main_dl | Training DL classifier: tft for btc
+2026-03-30 17:52:10,516 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-03-30 17:52:10,516 | INFO | main_dl | === Processing symbol: btc ===
+2026-03-30 17:57:26,876 | INFO | main_dl | Training DL classifier: gru for btc

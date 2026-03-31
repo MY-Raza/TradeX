@@ -849,3 +849,71 @@
 {-1: 21268, 1: 7040, 0: 21}
 2026-03-30 17:40:20,632 | INFO | data_pipeline | Classification target created — shape: (28329, 87), class counts:
 {-1: 21268, 1: 7040, 0: 21}
+2026-03-30 17:52:10,532 | INFO | data_pipeline | Fetching data: schema=data_binance, table=btc_1m, start=2023-01-01, end=2026-03-30
+2026-03-30 17:52:22,396 | INFO | data_pipeline | Fetched 1,704,961 rows for btc.
+2026-03-30 17:52:22,396 | INFO | data_pipeline | Resampling to 1h…
+2026-03-30 17:52:23,606 | INFO | data_pipeline | Resampled shape: (28417, 6)
+2026-03-30 17:52:23,606 | INFO | data_pipeline | Generating 71 indicator(s)…
+2026-03-30 17:52:23,714 | INFO | data_pipeline | Feature shape after generation: (28417, 89)
+2026-03-30 17:52:23,715 | INFO | data_pipeline | Running ADF stationarity tests…
+2026-03-30 17:52:26,727 | INFO | data_pipeline | [ADF] 'open' — NON-STATIONARY  (p=0.4742, stat=-1.6171)
+2026-03-30 17:52:29,649 | INFO | data_pipeline | [ADF] 'high' — NON-STATIONARY  (p=0.4740, stat=-1.6175)
+2026-03-30 17:52:32,770 | INFO | data_pipeline | [ADF] 'low' — NON-STATIONARY  (p=0.4741, stat=-1.6173)
+2026-03-30 17:52:35,358 | INFO | data_pipeline | [ADF] 'close' — NON-STATIONARY  (p=0.4744, stat=-1.6168)
+2026-03-30 17:52:40,920 | INFO | data_pipeline | [ADF] 'BB_UPPER' — NON-STATIONARY  (p=0.4697, stat=-1.6258)
+2026-03-30 17:52:43,667 | INFO | data_pipeline | [ADF] 'BB_MIDDLE' — NON-STATIONARY  (p=0.4672, stat=-1.6305)
+2026-03-30 17:52:46,346 | INFO | data_pipeline | [ADF] 'BB_LOWER' — NON-STATIONARY  (p=0.4715, stat=-1.6224)
+2026-03-30 17:52:49,045 | INFO | data_pipeline | [ADF] 'DEMA_14' — NON-STATIONARY  (p=0.4715, stat=-1.6223)
+2026-03-30 17:52:51,706 | INFO | data_pipeline | [ADF] 'EMA_14' — NON-STATIONARY  (p=0.4729, stat=-1.6197)
+2026-03-30 17:52:54,448 | INFO | data_pipeline | [ADF] 'HT_TRENDLINE' — NON-STATIONARY  (p=0.4684, stat=-1.6283)
+2026-03-30 17:52:57,120 | INFO | data_pipeline | [ADF] 'KAMA_14' — NON-STATIONARY  (p=0.4759, stat=-1.6139)
+2026-03-30 17:52:59,872 | INFO | data_pipeline | [ADF] 'MA_14' — NON-STATIONARY  (p=0.4712, stat=-1.6230)
+2026-03-30 17:53:02,597 | INFO | data_pipeline | [ADF] 'MIDPOINT_14' — NON-STATIONARY  (p=0.4719, stat=-1.6216)
+2026-03-30 17:53:05,733 | INFO | data_pipeline | [ADF] 'MIDPRICE_14' — NON-STATIONARY  (p=0.4681, stat=-1.6288)
+2026-03-30 17:53:08,850 | INFO | data_pipeline | [ADF] 'SAR' — NON-STATIONARY  (p=0.4678, stat=-1.6295)
+2026-03-30 17:53:14,936 | INFO | data_pipeline | [ADF] 'SMA_14' — NON-STATIONARY  (p=0.4712, stat=-1.6230)
+2026-03-30 17:53:17,903 | INFO | data_pipeline | [ADF] 'T3_14' — NON-STATIONARY  (p=0.4653, stat=-1.6341)
+2026-03-30 17:53:20,845 | INFO | data_pipeline | [ADF] 'TEMA_14' — NON-STATIONARY  (p=0.4730, stat=-1.6196)
+2026-03-30 17:53:23,892 | INFO | data_pipeline | [ADF] 'TRIMA_14' — NON-STATIONARY  (p=0.4720, stat=-1.6213)
+2026-03-30 17:53:26,825 | INFO | data_pipeline | [ADF] 'WMA_14' — NON-STATIONARY  (p=0.4729, stat=-1.6197)
+2026-03-30 17:54:49,948 | INFO | data_pipeline | [ADF] 'AVGPRICE' — NON-STATIONARY  (p=0.4742, stat=-1.6172)
+2026-03-30 17:54:53,714 | INFO | data_pipeline | [ADF] 'MEDPRICE' — NON-STATIONARY  (p=0.4741, stat=-1.6174)
+2026-03-30 17:54:56,952 | INFO | data_pipeline | [ADF] 'TYPPRICE' — NON-STATIONARY  (p=0.4730, stat=-1.6194)
+2026-03-30 17:55:00,140 | INFO | data_pipeline | [ADF] 'WCLPRICE' — NON-STATIONARY  (p=0.4731, stat=-1.6193)
+2026-03-30 17:55:29,082 | INFO | data_pipeline | [ADF] 'LINEARREG_14' — NON-STATIONARY  (p=0.4718, stat=-1.6218)
+2026-03-30 17:55:36,465 | INFO | data_pipeline | [ADF] 'LINEARREG_INTERCEPT_14' — NON-STATIONARY  (p=0.4727, stat=-1.6200)
+2026-03-30 17:55:46,732 | INFO | data_pipeline | [ADF] 'TSF_14' — NON-STATIONARY  (p=0.4722, stat=-1.6210)
+2026-03-30 17:55:50,403 | INFO | data_pipeline | [ADF] Tested 65 column(s): 38 stationary, 27 non-stationary.
+2026-03-30 17:55:50,434 | INFO | data_pipeline | [make_stationary] Differencing 27 non-stationary column(s)…
+2026-03-30 17:55:54,244 | INFO | data_pipeline | [make_stationary] 'open' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:55:58,340 | INFO | data_pipeline | [make_stationary] 'high' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:03,143 | INFO | data_pipeline | [make_stationary] 'low' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:06,762 | INFO | data_pipeline | [make_stationary] 'close' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:10,358 | INFO | data_pipeline | [make_stationary] 'BB_UPPER' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:14,511 | INFO | data_pipeline | [make_stationary] 'BB_MIDDLE' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:18,113 | INFO | data_pipeline | [make_stationary] 'BB_LOWER' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:21,502 | INFO | data_pipeline | [make_stationary] 'DEMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:24,815 | INFO | data_pipeline | [make_stationary] 'EMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:28,383 | INFO | data_pipeline | [make_stationary] 'HT_TRENDLINE' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:31,712 | INFO | data_pipeline | [make_stationary] 'KAMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:35,137 | INFO | data_pipeline | [make_stationary] 'MA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:38,525 | INFO | data_pipeline | [make_stationary] 'MIDPOINT_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:41,876 | INFO | data_pipeline | [make_stationary] 'MIDPRICE_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:45,212 | INFO | data_pipeline | [make_stationary] 'SAR' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:48,647 | INFO | data_pipeline | [make_stationary] 'SMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:51,976 | INFO | data_pipeline | [make_stationary] 'T3_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:55,305 | INFO | data_pipeline | [make_stationary] 'TEMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:56:58,977 | INFO | data_pipeline | [make_stationary] 'TRIMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:02,962 | INFO | data_pipeline | [make_stationary] 'WMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:06,356 | INFO | data_pipeline | [make_stationary] 'AVGPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:09,764 | INFO | data_pipeline | [make_stationary] 'MEDPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:13,107 | INFO | data_pipeline | [make_stationary] 'TYPPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:16,477 | INFO | data_pipeline | [make_stationary] 'WCLPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:19,896 | INFO | data_pipeline | [make_stationary] 'LINEARREG_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:23,371 | INFO | data_pipeline | [make_stationary] 'LINEARREG_INTERCEPT_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:26,809 | INFO | data_pipeline | [make_stationary] 'TSF_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-03-30 17:57:26,860 | INFO | data_pipeline | [make_stationary] Shape after differencing & dropna: (28329, 89)
+2026-03-30 17:57:26,861 | INFO | data_pipeline | Differencing summary: open=1d, high=1d, low=1d, close=1d, BB_UPPER=1d, BB_MIDDLE=1d, BB_LOWER=1d, DEMA_14=1d, EMA_14=1d, HT_TRENDLINE=1d, KAMA_14=1d, MA_14=1d, MIDPOINT_14=1d, MIDPRICE_14=1d, SAR=1d, SMA_14=1d, T3_14=1d, TEMA_14=1d, TRIMA_14=1d, WMA_14=1d, AVGPRICE=1d, MEDPRICE=1d, TYPPRICE=1d, WCLPRICE=1d, LINEARREG_14=1d, LINEARREG_INTERCEPT_14=1d, TSF_14=1d
+2026-03-30 17:57:26,876 | INFO | data_pipeline | train_ratio=0.8 → split at row 22663/28329 → split_date='2025-08-05 23:00:00' (80% train / 20% test)
+2026-03-30 17:57:26,914 | INFO | data_pipeline | Classification target created — shape: (28329, 87), class counts:
+{-1: 21268, 1: 7040, 0: 21}
