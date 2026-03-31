@@ -213,8 +213,21 @@ def train(
     # df_normalised using aligned_index (valid .loc labels into df_normalised).
     # test_index is then simply np.arange(P) — iloc[0..P-1] on a P-row frame
     # is always valid and always returns exactly P rows.
-    pred_datetimes = df_normalised.loc[aligned_index, "datetime"].values
-    df_for_backtest = pd.DataFrame({"datetime": pred_datetimes})   # RangeIndex 0..P-1
-    backtest_positions = np.arange(len(final_preds))
+    # Use .iloc with a clipped range so pred_datetimes is *always* exactly
+    # len(final_preds) rows, regardless of index gaps introduced by
+    # log-diff dropping or split sanitisation.
+    n_preds = len(final_preds)
+    iloc_end   = min(len(df_normalised), len(df_normalised))   # full length
+    iloc_start = max(0, len(df_normalised) - n_preds)
+    pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
+
+    # Guarantee exact length match (defensive clamp)
+    pred_datetimes     = pred_datetimes[-n_preds:]
+    backtest_positions = np.arange(n_preds)
+    df_for_backtest    = pd.DataFrame({"datetime": pred_datetimes})  # RangeIndex 0..P-1
+
+    assert len(df_for_backtest) == n_preds, (
+        f"df_for_backtest length {len(df_for_backtest)} != preds length {n_preds}"
+    )
 
     return final_model, final_preds, backtest_positions, X_test_aligned, df_for_backtest
