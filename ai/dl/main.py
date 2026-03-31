@@ -51,16 +51,22 @@ def _run_backtest(
     by each model's ``train()`` function.  Its RangeIndex matches the integer
     labels in ``test_index``, so ``prepare_predictions`` can look up datetimes
     correctly without any index translation.
+
+    All three arrays — preds, test_index, and df_test_norm — are trimmed to
+    the shortest common length so ``prepare_predictions`` never receives
+    mismatched inputs.
     """
     import numpy as np
 
     preds_np = np.asarray(preds)
     idx_arr  = np.asarray(test_index)
 
-    # Trim both to the shorter length — handles seq_len warm-up off-by-one
-    min_len  = min(len(preds_np), len(idx_arr))
-    preds_np = preds_np[-min_len:]
-    idx_arr  = idx_arr[-min_len:]
+    # Triple-align: preds, index positions, and the datetime lookup frame
+    # must all have the same length before entering prepare_predictions.
+    min_len      = min(len(preds_np), len(idx_arr), len(df_test_norm))
+    preds_np     = preds_np[-min_len:]
+    idx_arr      = np.arange(min_len)          # always 0..min_len-1 for iloc safety
+    df_test_norm = df_test_norm.iloc[-min_len:].reset_index(drop=True)
 
     df_predictions = prepare_predictions(
         df_test_norm, preds_np, idx_arr, model_type=model_type, k=k

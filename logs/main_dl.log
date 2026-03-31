@@ -78,3 +78,11 @@
 2026-03-31 15:10:16,044 | INFO | main_dl | [gru] Balance=531.51  PnL=-61.0200
 2026-03-31 15:10:16,590 | ERROR | main_dl | DL Classifier gru failed for btc: All arrays must be of the same length
 2026-03-31 15:10:16,593 | INFO | main_dl | Training DL classifier: lstm for btc
+2026-03-31 15:40:50,563 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-03-31 15:40:50,563 | INFO | main_dl | === Processing symbol: btc ===
+2026-03-31 15:50:08,311 | INFO | main_dl | Training DL classifier: gru for btc
+2026-03-31 16:43:23,829 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[0.0008055  0.00080737 0.00080737 0.00080737 0.00080737]
+2026-03-31 16:43:26,954 | INFO | main_dl | [gru] Balance=571.92  PnL=-53.7400
+2026-03-31 16:43:28,012 | ERROR | main_dl | DL Classifier gru failed for btc: All arrays must be of the same length
+2026-03-31 16:43:28,012 | INFO | main_dl | Training DL classifier: lstm for btc

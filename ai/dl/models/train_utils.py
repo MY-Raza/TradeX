@@ -190,20 +190,22 @@ def run_chunked_backtest(
     Raises:
         optuna.TrialPruned : If Optuna decides to prune mid-evaluation.
     """
-    # DL predictions use the 'dl' branch in prepare_predictions which handles
-    # the seq_len warm-up offset automatically via lookback=0 (already aligned)
     preds_np   = np.asarray(preds)
     idx_arr    = np.asarray(test_index)
 
-    # Guard: preds may be shorter than test_index by seq_len-1 (DL warm-up).
-    # Always trim both to the shorter length before calling prepare_predictions
-    # so the datetime and signal arrays are always the same size.
+    # Triple-align: preds, positional index, and the datetime lookup frame
+    # must all share the same length before prepare_predictions is called.
+    # Re-derive df_slice as the tail of df (datetime-sorted) so iloc positions
+    # 0..min_len-1 on it always correspond to the test predictions.
     min_len    = min(len(preds_np), len(idx_arr))
     preds_np   = preds_np[-min_len:]
-    idx_arr    = idx_arr[-min_len:]
+    idx_arr    = np.arange(min_len)   # safe 0-based positions into df_slice
+
+    # Slice df to the last min_len rows so iloc[0..min_len-1] is valid
+    df_slice   = df.iloc[-min_len:].reset_index(drop=True)
 
     df_preds = prepare_predictions(
-        df, preds_np, idx_arr,
+        df_slice, preds_np, idx_arr,
         model_type=model_type,
         k=k,
     )
