@@ -41,44 +41,29 @@ def _run_backtest(
     model,
     preds,
     test_index,
-    df_target: pd.DataFrame,
+    df_test_norm: pd.DataFrame,
     model_type: str,
     k: float = 0.5,
 ) -> tuple:
     """Prepare predictions and run a BackTest. Returns (ledger, balance, pnl).
 
-    DL models return ``preds`` that is shorter than ``X_test`` by
-    ``seq_len - 1`` rows (sliding-window warm-up).  ``test_index`` is
-    pre-aligned inside each model's ``train()``, but a final length guard
-    here ensures ``preds`` and the datetime array extracted by
-    ``prepare_predictions`` are always identical in length, preventing the
-    'All arrays must be of the same length' crash.
+    ``df_test_norm`` must be the normalised (reset-index) test slice returned
+    by each model's ``train()`` function.  Its RangeIndex matches the integer
+    labels in ``test_index``, so ``prepare_predictions`` can look up datetimes
+    correctly without any index translation.
     """
     import numpy as np
 
     preds_np = np.asarray(preds)
     idx_arr  = np.asarray(test_index)
 
-    # Trim both to the shorter length — handles any residual off-by-one
+    # Trim both to the shorter length — handles seq_len warm-up off-by-one
     min_len  = min(len(preds_np), len(idx_arr))
     preds_np = preds_np[-min_len:]
     idx_arr  = idx_arr[-min_len:]
 
-    # Slice df_target to only the rows that correspond to idx_arr.
-    # Passing the full train+test DataFrame would give prepare_predictions
-    # len(df_target) rows to build datetimes from, while preds_np only covers
-    # the (aligned) test window — causing the "All arrays must be of the same
-    # length" crash inside pandas DataFrame construction.
-    df_test_slice = df_target.loc[df_target.index.isin(idx_arr)]
-    if len(df_test_slice) != min_len:
-        # Fallback: idx_arr contains raw positional integers (reset index);
-        # use iloc instead.
-        df_test_slice = df_target.iloc[
-            df_target.index.get_indexer(idx_arr, method="nearest")
-        ]
-
     df_predictions = prepare_predictions(
-        df_test_slice, preds_np, idx_arr, model_type=model_type, k=k
+        df_test_norm, preds_np, idx_arr, model_type=model_type, k=k
     )
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
@@ -219,7 +204,7 @@ def main() -> None:
             try:
                 df_clf = build_classification_df(df_gf)
 
-                model, preds, test_index, X_test = train_model(
+                model, preds, test_index, X_test, df_test_norm = train_model(
                     model_type="classifier",
                     model_name=clf_name,
                     df=df_clf,
@@ -243,7 +228,7 @@ def main() -> None:
 
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
-                    df_1m, model, preds, test_index, df_clf, "classifier", k=0.5
+                    df_1m, model, preds, test_index, df_test_norm, "classifier", k=0.5
                 )
                 logger.info(f"[{clf_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
@@ -276,7 +261,7 @@ def main() -> None:
             try:
                 df_reg = build_regression_df(df_gf)
 
-                model, preds, test_index, X_test = train_model(
+                model, preds, test_index, X_test, df_test_norm = train_model(
                     model_type="regressor",
                     model_name=reg_name,
                     df=df_reg,
@@ -300,7 +285,7 @@ def main() -> None:
 
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
-                    df_1m, model, preds, test_index, df_reg, "regressor", k=0.5
+                    df_1m, model, preds, test_index, df_test_norm, "regressor", k=0.5
                 )
                 logger.info(f"[{reg_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 

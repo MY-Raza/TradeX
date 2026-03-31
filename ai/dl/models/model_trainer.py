@@ -72,7 +72,7 @@ def train_model(
             f"Available: {list(CLASSIFIERS.keys())}"
         )
 
-    model, preds, test_index, X_test = trainer(
+    model, preds, test_index, X_test, df_test_norm = trainer(
         df,
         df_1m,
         target_col=target_col,
@@ -80,7 +80,7 @@ def train_model(
         n_trials=n_trails,
         model_type=model_type,
     )
-    return model, preds, test_index, X_test
+    return model, preds, test_index, X_test, df_test_norm
 
 
 def save_model(

@@ -219,6 +219,8 @@ def train(
     if transform_features:
         df = apply_log_diff_transform(df)
 
+    df_normalised = df.copy()
+
     X_train, y_train, X_test, y_test = split_features_labels(df, target_col, split_date)
 
     logger.info(f"[train] Starting TCN Optuna study ({n_trials} trials)…")
@@ -287,4 +289,7 @@ def train(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
-    return final_model, final_preds, aligned_index, X_test_aligned
+    split_dt = pd.to_datetime(split_date, utc=True)
+    df_test_norm = df_normalised[df_normalised["datetime"] >= split_dt].reset_index(drop=True)
+
+    return final_model, final_preds, aligned_index, X_test_aligned, df_test_norm
