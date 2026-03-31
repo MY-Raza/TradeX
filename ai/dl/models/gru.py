@@ -205,4 +205,12 @@ def train(
     split_dt = pd.to_datetime(split_date, utc=True)
     df_test_norm = df_normalised[df_normalised["datetime"] >= split_dt].reset_index(drop=True)
 
-    return final_model, final_preds, aligned_index, X_test_aligned, df_test_norm
+    # prepare_predictions uses df.iloc[test_index], so test_index must be
+    # *positional* offsets into df_test_norm (which starts at 0 after reset).
+    # aligned_index contains label-based integers from df_normalised
+    # (e.g. 7060..9999).  Subtracting the first test label converts them to
+    # positions within df_test_norm (e.g. 60..2939).
+    test_start_label  = X_test.index[0]
+    aligned_positions = aligned_index - test_start_label
+
+    return final_model, final_preds, aligned_positions, X_test_aligned, df_test_norm

@@ -188,4 +188,7 @@ def train(
     split_dt = pd.to_datetime(split_date, utc=True)
     df_test_norm = df_normalised[df_normalised["datetime"] >= split_dt].reset_index(drop=True)
 
-    return final_model, final_preds, aligned_index, X_test_aligned, df_test_norm
+    test_start_label  = X_test.index[0]
+    aligned_positions = aligned_index - test_start_label
+
+    return final_model, final_preds, aligned_positions, X_test_aligned, df_test_norm
