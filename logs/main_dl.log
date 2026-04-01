@@ -102,3 +102,21 @@
 2026-04-01 11:44:28,897 | INFO | main_dl | [gru] Balance=608.00  PnL=-46.7500
 2026-04-01 11:44:29,543 | ERROR | main_dl | DL Classifier gru failed for btc: positional indexers are out-of-bounds
 2026-04-01 11:44:29,545 | INFO | main_dl | Training DL classifier: lstm for btc
+2026-04-01 11:58:58,935 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-04-01 11:58:58,935 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-01 12:08:35,577 | INFO | main_dl | Training DL classifier: gru for btc
+2026-04-01 13:05:48,214 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[0.00057994 0.00057879 0.00057779 0.00057693 0.00057617]
+2026-04-01 13:05:55,584 | INFO | main_dl | [gru] Balance=815.58  PnL=-16.9100
+2026-04-01 13:24:22,407 | INFO | main_dl | Training DL classifier: lstm for btc
+2026-04-01 14:22:08,488 | INFO | main_dl | [Dry-run] lstm predictions on first samples:
+[0.0005112  0.00051117 0.00051116 0.00051115 0.00051115]
+2026-04-01 14:22:13,242 | INFO | main_dl | [lstm] Balance=903.54  PnL=-6.5800
+2026-04-01 14:40:14,808 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-01 17:28:41,058 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[0. 0. 0. 0. 0.]
+2026-04-01 17:28:45,371 | INFO | main_dl | [tcn] Balance=1000.00  PnL=0.0000
+2026-04-01 17:51:47,528 | ERROR | main_dl | DL Classifier tcn failed for btc: 'predicted_direction'
+2026-04-01 17:51:47,528 | INFO | main_dl | Training DL classifier: tft for btc
+2026-04-01 17:51:50,437 | ERROR | main_dl | DL Classifier tft failed for btc: mat1 and mat2 shapes cannot be multiplied (6144x85 and 4760x85)
+2026-04-01 17:51:50,437 | INFO | main_dl | Training DL regressor: gru for btc

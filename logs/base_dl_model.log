@@ -1149,3 +1149,996 @@
 2026-04-01 11:57:23,668 | INFO | base_dl_model | [LSTMModel] Using device: cpu
 2026-04-01 11:57:24,007 | INFO | base_dl_model | [LSTMModel] Network params: 287,160
 2026-04-01 11:57:47,170 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.597356  val_loss=0.611100
+2026-04-01 12:08:36,274 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:08:38,547 | INFO | base_dl_model | [GRUModel] Network params: 59,979
+2026-04-01 12:09:00,530 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.625934  val_loss=0.657821
+2026-04-01 12:10:06,616 | INFO | base_dl_model | [GRUModel] Early stop at epoch 6. Best val_loss=0.657821
+2026-04-01 12:10:06,616 | INFO | base_dl_model | [GRUModel] Training finished in 79.5s
+2026-04-01 12:10:07,639 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0009  mean=0.0007
+2026-04-01 12:10:21,239 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:10:21,420 | INFO | base_dl_model | [GRUModel] Network params: 1,037,847
+2026-04-01 12:11:45,444 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.607481  val_loss=0.617771
+2026-04-01 12:23:11,150 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.583331  val_loss=0.619912
+2026-04-01 12:24:20,769 | INFO | base_dl_model | [GRUModel] Early stop at epoch 11. Best val_loss=0.615288
+2026-04-01 12:24:20,769 | INFO | base_dl_model | [GRUModel] Training finished in 839.3s
+2026-04-01 12:24:25,178 | INFO | base_dl_model | [GRUModel] predict() → min=0.0001  max=0.0058  mean=0.0007
+2026-04-01 12:24:41,252 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:24:41,538 | INFO | base_dl_model | [GRUModel] Network params: 120,774
+2026-04-01 12:25:01,328 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.592572  val_loss=0.675060
+2026-04-01 12:27:42,391 | INFO | base_dl_model | [GRUModel] Early stop at epoch 9. Best val_loss=0.672583
+2026-04-01 12:27:42,391 | INFO | base_dl_model | [GRUModel] Training finished in 180.9s
+2026-04-01 12:27:43,691 | INFO | base_dl_model | [GRUModel] predict() → min=0.0005  max=0.0007  mean=0.0006
+2026-04-01 12:27:55,612 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:27:56,042 | INFO | base_dl_model | [GRUModel] Network params: 33,699
+2026-04-01 12:28:21,254 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.659021  val_loss=0.611614
+2026-04-01 12:31:04,584 | INFO | base_dl_model | [GRUModel] Early stop at epoch 7. Best val_loss=0.609190
+2026-04-01 12:31:04,584 | INFO | base_dl_model | [GRUModel] Training finished in 188.5s
+2026-04-01 12:31:05,981 | INFO | base_dl_model | [GRUModel] predict() → min=0.0010  max=0.0013  mean=0.0010
+2026-04-01 12:31:13,327 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:31:13,673 | INFO | base_dl_model | [GRUModel] Network params: 52,734
+2026-04-01 12:31:33,283 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.854314  val_loss=0.702973
+2026-04-01 12:33:47,555 | INFO | base_dl_model | [GRUModel] Early stop at epoch 7. Best val_loss=0.647470
+2026-04-01 12:33:47,555 | INFO | base_dl_model | [GRUModel] Training finished in 153.9s
+2026-04-01 12:33:49,163 | INFO | base_dl_model | [GRUModel] predict() → min=0.0025  max=0.0051  mean=0.0031
+2026-04-01 12:33:56,919 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:33:57,333 | INFO | base_dl_model | [GRUModel] Network params: 630,339
+2026-04-01 12:35:14,249 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.592532  val_loss=0.701151
+2026-04-01 12:45:52,847 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.572567  val_loss=0.730922
+2026-04-01 12:48:26,976 | INFO | base_dl_model | [GRUModel] Early stop at epoch 13. Best val_loss=0.665987
+2026-04-01 12:48:26,979 | INFO | base_dl_model | [GRUModel] Training finished in 869.6s
+2026-04-01 12:48:29,990 | INFO | base_dl_model | [GRUModel] predict() → min=0.0002  max=0.0025  mean=0.0003
+2026-04-01 12:48:37,668 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:48:38,004 | INFO | base_dl_model | [GRUModel] Network params: 14,367
+2026-04-01 12:48:44,739 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.952717  val_loss=0.802757
+2026-04-01 12:49:36,498 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.621773  val_loss=0.618804
+2026-04-01 12:50:30,083 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=0.589187  val_loss=0.601228
+2026-04-01 12:51:31,775 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=0.579766  val_loss=0.596483
+2026-04-01 12:51:31,777 | INFO | base_dl_model | [GRUModel] Training finished in 173.8s
+2026-04-01 12:51:32,480 | INFO | base_dl_model | [GRUModel] predict() → min=0.0053  max=0.0382  mean=0.0090
+2026-04-01 12:51:38,384 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:51:38,674 | INFO | base_dl_model | [GRUModel] Network params: 541,467
+2026-04-01 12:52:42,881 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.589067  val_loss=0.662707
+2026-04-01 12:58:12,503 | INFO | base_dl_model | [GRUModel] Early stop at epoch 7. Best val_loss=0.647761
+2026-04-01 12:58:12,504 | INFO | base_dl_model | [GRUModel] Training finished in 393.8s
+2026-04-01 12:58:15,420 | INFO | base_dl_model | [GRUModel] predict() → min=0.0005  max=0.0007  mean=0.0006
+2026-04-01 12:58:22,552 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 12:58:23,098 | INFO | base_dl_model | [GRUModel] Network params: 258,822
+2026-04-01 12:58:46,924 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.668981  val_loss=0.601402
+2026-04-01 13:01:49,742 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.569985  val_loss=0.601780
+2026-04-01 13:02:27,891 | INFO | base_dl_model | [GRUModel] Early stop at epoch 12. Best val_loss=0.595182
+2026-04-01 13:02:27,891 | INFO | base_dl_model | [GRUModel] Training finished in 244.8s
+2026-04-01 13:02:29,852 | INFO | base_dl_model | [GRUModel] predict() → min=0.0003  max=0.0060  mean=0.0008
+2026-04-01 13:02:34,599 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 13:02:34,667 | INFO | base_dl_model | [GRUModel] Network params: 180,198
+2026-04-01 13:02:39,479 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.615222  val_loss=0.603304
+2026-04-01 13:03:39,441 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.577047  val_loss=0.631885
+2026-04-01 13:03:39,444 | INFO | base_dl_model | [GRUModel] Early stop at epoch 10. Best val_loss=0.597274
+2026-04-01 13:03:39,444 | INFO | base_dl_model | [GRUModel] Training finished in 64.8s
+2026-04-01 13:03:40,094 | INFO | base_dl_model | [GRUModel] predict() → min=0.0001  max=0.0043  mean=0.0004
+2026-04-01 13:03:47,403 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 13:03:47,631 | INFO | base_dl_model | [GRUModel] Network params: 59,979
+2026-04-01 13:04:00,202 | INFO | base_dl_model | [GRUModel] Epoch 1/50 train_loss=0.654006  val_loss=0.646647
+2026-04-01 13:05:34,997 | INFO | base_dl_model | [GRUModel] Epoch 10/50 train_loss=0.569257  val_loss=0.667461
+2026-04-01 13:05:47,157 | INFO | base_dl_model | [GRUModel] Early stop at epoch 11. Best val_loss=0.646647
+2026-04-01 13:05:47,158 | INFO | base_dl_model | [GRUModel] Training finished in 119.5s
+2026-04-01 13:05:48,142 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:05:48,205 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0006  mean=0.0006
+2026-04-01 13:05:56,143 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:02,726 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:05,982 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:08,904 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:12,054 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:15,062 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:18,390 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:21,649 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:26,300 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:32,845 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:36,359 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:39,405 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:42,232 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:45,302 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:51,088 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:06:56,499 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:00,683 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:04,680 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:10,646 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:15,531 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:20,135 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:24,768 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:29,972 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:34,677 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:39,505 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:43,885 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:48,322 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:52,948 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:07:56,924 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:01,190 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:05,358 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:09,554 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:13,490 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:17,594 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:21,705 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:28,939 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:34,908 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:40,294 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:46,069 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:50,706 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:08:56,179 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:01,137 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:09,232 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:14,886 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:20,051 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:24,932 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:29,724 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:34,049 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:38,236 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:42,067 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:46,296 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:50,175 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:54,478 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:09:59,193 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:03,482 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:07,423 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:11,491 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:16,122 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:20,584 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:24,842 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:29,345 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:33,854 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:37,986 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:42,712 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:47,166 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:51,399 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:10:57,233 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:02,039 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:07,575 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:11,631 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:15,839 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:20,774 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:25,339 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:29,321 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:34,334 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:38,405 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:42,490 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:46,471 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:51,319 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:55,205 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:11:59,400 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:03,856 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:08,121 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:11,600 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:15,391 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:19,198 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:23,320 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:27,623 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:31,791 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:36,210 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:40,418 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:44,755 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:49,117 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:53,345 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:12:57,722 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:01,610 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:06,250 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:10,404 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:15,008 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:19,127 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:24,013 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:28,388 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:32,373 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:35,978 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:39,623 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:43,740 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:47,798 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:52,061 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:13:56,157 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:00,760 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:05,387 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:09,494 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:13,916 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:18,466 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:22,478 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:26,568 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:30,417 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:35,221 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:39,561 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:43,674 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:47,703 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:51,692 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:54,939 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:14:59,137 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:03,175 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:07,246 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:11,143 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:15,758 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:19,967 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:24,192 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:28,551 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:32,952 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:36,869 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:41,012 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:45,536 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:50,081 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:54,398 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:15:58,333 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:02,308 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:07,186 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:11,548 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:15,389 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:19,267 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:23,197 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:27,103 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:31,395 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:35,271 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:39,138 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:43,054 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:46,775 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:50,883 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:54,156 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:16:57,965 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:02,205 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:06,158 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:10,489 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:14,266 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:18,111 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:22,583 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:26,628 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:30,624 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:34,624 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:38,342 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:42,808 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:46,214 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:50,612 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:54,676 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:17:58,745 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:03,210 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:07,343 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:11,152 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:15,308 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0009  mean=0.0008
+2026-04-01 13:18:20,096 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0009  mean=0.0008
+2026-04-01 13:18:24,165 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0009  mean=0.0008
+2026-04-01 13:18:28,064 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:32,211 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:37,056 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:41,440 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:45,593 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:50,373 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:54,522 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:18:58,715 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:02,753 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:06,541 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:10,856 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:14,914 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:18,935 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:22,964 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:27,321 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:31,305 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:35,219 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:39,567 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:43,438 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:47,315 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:51,486 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:19:55,612 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:00,131 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:04,657 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:09,451 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:13,976 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:18,257 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:23,378 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:28,710 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:33,595 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:37,902 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:42,156 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:46,923 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:51,198 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:54,671 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:20:59,279 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:04,304 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:08,717 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:12,640 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:16,887 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:21,914 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:26,616 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:31,055 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:36,203 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:40,556 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:45,040 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:49,614 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:53,906 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:21:58,988 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:03,612 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:08,140 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:12,925 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:17,163 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:21,563 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:26,036 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:31,180 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:35,584 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:39,919 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:44,438 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:48,748 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:22:52,597 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0010  mean=0.0008
+2026-04-01 13:22:56,516 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0010  mean=0.0008
+2026-04-01 13:23:00,929 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0010  mean=0.0008
+2026-04-01 13:23:04,946 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:09,035 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:13,151 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:18,041 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:22,363 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:26,946 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:31,782 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:35,907 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:40,284 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:44,360 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:48,526 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:52,662 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:23:56,881 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:24:00,895 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:24:05,925 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:24:10,152 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:24:13,895 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:24:18,103 | INFO | base_dl_model | [GRUModel] predict() → min=0.0006  max=0.0011  mean=0.0008
+2026-04-01 13:24:23,283 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 13:24:23,358 | INFO | base_dl_model | [LSTMModel] Network params: 1,006,320
+2026-04-01 13:24:49,006 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.600145  val_loss=0.617670
+2026-04-01 13:27:33,225 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 6. Best val_loss=0.617670
+2026-04-01 13:27:33,225 | INFO | base_dl_model | [LSTMModel] Training finished in 189.9s
+2026-04-01 13:27:35,367 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0007  max=0.0007  mean=0.0007
+2026-04-01 13:27:47,944 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 13:27:48,178 | INFO | base_dl_model | [LSTMModel] Network params: 431,529
+2026-04-01 13:28:26,714 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.681361  val_loss=0.594023
+2026-04-01 13:30:58,182 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 7. Best val_loss=0.592651
+2026-04-01 13:30:58,182 | INFO | base_dl_model | [LSTMModel] Training finished in 190.0s
+2026-04-01 13:30:59,773 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0008  max=0.0009  mean=0.0008
+2026-04-01 13:31:06,101 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 13:31:06,257 | INFO | base_dl_model | [LSTMModel] Network params: 161,841
+2026-04-01 13:31:14,750 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.751307  val_loss=0.620527
+2026-04-01 13:32:28,233 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.567426  val_loss=0.596349
+2026-04-01 13:32:28,235 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 10. Best val_loss=0.595493
+2026-04-01 13:32:28,235 | INFO | base_dl_model | [LSTMModel] Training finished in 82.0s
+2026-04-01 13:32:28,951 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0009  max=0.0094  mean=0.0016
+2026-04-01 13:32:35,387 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 13:32:35,542 | INFO | base_dl_model | [LSTMModel] Network params: 216,742
+2026-04-01 13:32:48,867 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.660328  val_loss=0.606340
+2026-04-01 13:34:55,375 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.569380  val_loss=0.590517
+2026-04-01 13:34:55,376 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 10. Best val_loss=0.590010
+2026-04-01 13:34:55,376 | INFO | base_dl_model | [LSTMModel] Training finished in 139.8s
+2026-04-01 13:34:56,402 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0006  max=0.0039  mean=0.0016
+2026-04-01 13:34:59,582 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 13:34:59,695 | INFO | base_dl_model | [LSTMModel] Network params: 481,929
+2026-04-01 13:35:11,407 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.880837  val_loss=0.660940
+2026-04-01 13:36:24,083 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 8. Best val_loss=0.608849
+2026-04-01 13:36:24,085 | INFO | base_dl_model | [LSTMModel] Training finished in 84.4s
+2026-04-01 13:36:24,865 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0011  max=0.0017  mean=0.0013
+2026-04-01 13:36:28,131 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 13:36:28,331 | INFO | base_dl_model | [LSTMModel] Network params: 1,634,428
+2026-04-01 13:37:40,505 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.616804  val_loss=0.604675
+2026-04-01 14:06:58,763 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 9. Best val_loss=0.593034
+2026-04-01 14:06:58,763 | INFO | base_dl_model | [LSTMModel] Training finished in 1830.4s
+2026-04-01 14:07:02,565 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0006  max=0.0006  mean=0.0006
+2026-04-01 14:07:08,906 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 14:07:09,067 | INFO | base_dl_model | [LSTMModel] Network params: 402,594
+2026-04-01 14:07:19,553 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.596864  val_loss=0.604728
+2026-04-01 14:08:25,263 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 7. Best val_loss=0.597968
+2026-04-01 14:08:25,263 | INFO | base_dl_model | [LSTMModel] Training finished in 76.2s
+2026-04-01 14:08:26,296 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0006  max=0.0006  mean=0.0006
+2026-04-01 14:08:34,821 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 14:08:34,926 | INFO | base_dl_model | [LSTMModel] Network params: 175,698
+2026-04-01 14:08:43,579 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.681775  val_loss=0.606897
+2026-04-01 14:09:51,704 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 9. Best val_loss=0.606305
+2026-04-01 14:09:51,704 | INFO | base_dl_model | [LSTMModel] Training finished in 76.8s
+2026-04-01 14:09:52,238 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0006  max=0.0006  mean=0.0006
+2026-04-01 14:09:56,318 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 14:09:56,458 | INFO | base_dl_model | [LSTMModel] Network params: 676,728
+2026-04-01 14:10:27,674 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.604240  val_loss=0.635760
+2026-04-01 14:15:17,329 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.571969  val_loss=0.627779
+2026-04-01 14:17:32,456 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 14. Best val_loss=0.619514
+2026-04-01 14:17:32,456 | INFO | base_dl_model | [LSTMModel] Training finished in 456.0s
+2026-04-01 14:17:34,749 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0003  max=0.0012  mean=0.0003
+2026-04-01 14:17:44,753 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 14:17:45,038 | INFO | base_dl_model | [LSTMModel] Network params: 47,881
+2026-04-01 14:17:50,395 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.861596  val_loss=0.797491
+2026-04-01 14:18:30,586 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.577868  val_loss=0.598670
+2026-04-01 14:19:12,640 | INFO | base_dl_model | [LSTMModel] Epoch 20/30 train_loss=0.570507  val_loss=0.592642
+2026-04-01 14:19:57,726 | INFO | base_dl_model | [LSTMModel] Epoch 30/30 train_loss=0.568291  val_loss=0.592775
+2026-04-01 14:19:57,726 | INFO | base_dl_model | [LSTMModel] Training finished in 132.7s
+2026-04-01 14:19:58,277 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0007  max=0.0069  mean=0.0041
+2026-04-01 14:20:02,512 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-01 14:20:02,595 | INFO | base_dl_model | [LSTMModel] Network params: 402,594
+2026-04-01 14:20:14,749 | INFO | base_dl_model | [LSTMModel] Epoch 1/50 train_loss=0.592120  val_loss=0.598342
+2026-04-01 14:21:56,269 | INFO | base_dl_model | [LSTMModel] Epoch 10/50 train_loss=0.570189  val_loss=0.606112
+2026-04-01 14:22:07,727 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 11. Best val_loss=0.598342
+2026-04-01 14:22:07,727 | INFO | base_dl_model | [LSTMModel] Training finished in 125.1s
+2026-04-01 14:22:08,415 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:08,479 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0005  mean=0.0005
+2026-04-01 14:22:13,891 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:18,445 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:22,716 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:28,303 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:33,009 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:37,076 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:42,273 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:47,342 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:51,486 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:22:55,999 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:01,005 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:05,535 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:10,337 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:16,178 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:20,376 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:24,668 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:29,709 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:33,858 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:38,262 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:42,490 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:46,696 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:51,109 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:55,384 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:23:59,419 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:03,430 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:07,893 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:12,124 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:15,804 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:19,650 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:23,978 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:27,798 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:31,831 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:36,270 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:40,317 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:44,846 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:48,841 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:52,706 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:24:56,787 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:00,590 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:05,034 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:08,943 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:13,588 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:17,894 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:21,518 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:25,850 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:29,970 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:33,995 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:37,822 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:42,176 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:46,529 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:51,135 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:55,620 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:25:59,457 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:03,204 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:07,358 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:11,656 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:15,685 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:20,391 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:24,332 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:28,371 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:32,573 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:36,736 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:41,997 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:46,599 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:51,054 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:55,307 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:26:59,598 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:03,839 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:09,069 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:13,872 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:18,259 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:22,219 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:26,464 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:30,133 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:34,590 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:39,195 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:43,439 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:47,580 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:51,668 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:27:56,454 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:00,907 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:05,132 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:09,278 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:13,744 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:17,871 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:21,975 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:26,515 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:31,196 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:35,481 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:39,687 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:44,105 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:48,728 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:53,056 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:28:57,422 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:01,556 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:06,022 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:10,128 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:14,719 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:18,772 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:22,605 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:26,235 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:30,547 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:34,979 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:38,978 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:42,893 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:46,933 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:51,452 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:29:55,984 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:00,688 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:04,549 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:08,767 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:12,552 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:16,712 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:20,888 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:24,656 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:29,054 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:33,239 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:37,152 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:41,731 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:45,730 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:49,887 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:53,983 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:30:58,358 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:02,845 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:07,188 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:11,387 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:15,387 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:19,467 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:23,805 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:28,925 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:34,091 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:39,050 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:44,164 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:49,088 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:53,457 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:31:57,421 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:02,166 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:06,960 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:10,978 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:14,699 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:19,049 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:23,766 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:27,723 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:31,639 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:36,456 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:40,950 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:45,352 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:49,498 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:53,516 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:32:57,791 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:01,967 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:05,933 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:09,799 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:13,784 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:18,441 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:22,381 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:26,932 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:31,002 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:34,940 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:39,260 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:43,259 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:47,226 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:51,213 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:55,851 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:33:59,753 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:03,318 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:07,073 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:11,595 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:15,818 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:19,807 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:23,782 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:28,300 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0006
+2026-04-01 14:34:32,552 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0006
+2026-04-01 14:34:36,702 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0006
+2026-04-01 14:34:40,856 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:45,270 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:49,409 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:53,884 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:34:57,999 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:01,782 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:05,400 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:09,499 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:13,798 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:18,262 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:22,683 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:26,735 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:30,689 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:34,674 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:38,610 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:42,457 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:46,381 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:50,703 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:54,819 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:35:58,596 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:02,632 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:07,172 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:11,346 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:15,322 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:19,496 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:23,922 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:27,834 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:31,748 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:35,668 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:39,687 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:43,641 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:48,232 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:52,352 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:36:56,173 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:00,165 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:04,697 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:08,694 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:12,843 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:16,850 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:21,016 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:24,566 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:28,481 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:32,866 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:36,963 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:41,458 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:45,609 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:49,585 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:54,060 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:37:58,010 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:02,175 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:06,032 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:10,444 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:14,384 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:18,189 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:22,738 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:26,542 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:31,136 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:34,994 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:39,127 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:43,744 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:38:48,096 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0006
+2026-04-01 14:38:52,126 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0006
+2026-04-01 14:38:56,371 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0006
+2026-04-01 14:39:00,515 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:05,130 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:09,057 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:13,003 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:16,950 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:21,107 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:25,788 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:29,853 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:34,382 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:38,478 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:42,309 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:46,899 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:50,954 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:55,036 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:39:58,501 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:40:03,177 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:40:07,197 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:40:10,953 | INFO | base_dl_model | [LSTMModel] predict() → min=0.0005  max=0.0006  mean=0.0005
+2026-04-01 14:40:15,533 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 14:40:15,829 | INFO | base_dl_model | [TCNModel] Network params: 137,523
+2026-04-01 14:56:34,994 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=53019.288591  val_loss=4459.008569
+2026-04-01 14:58:15,364 | INFO | base_dl_model | [TCNModel] Early stop at epoch 6. Best val_loss=4459.008569
+2026-04-01 14:58:15,365 | INFO | base_dl_model | [TCNModel] Training finished in 1079.5s
+2026-04-01 14:58:16,359 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 14:58:22,623 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 14:58:22,965 | INFO | base_dl_model | [TCNModel] Network params: 793,626
+2026-04-01 14:59:15,643 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=58630.887355  val_loss=21350.127930
+2026-04-01 15:08:15,889 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=2018.786893  val_loss=2382.082050
+2026-04-01 15:21:26,144 | INFO | base_dl_model | [TCNModel] Epoch 20/30 train_loss=670.962052  val_loss=1667.887692
+2026-04-01 15:25:03,934 | INFO | base_dl_model | [TCNModel] Early stop at epoch 23. Best val_loss=1053.997028
+2026-04-01 15:25:03,934 | INFO | base_dl_model | [TCNModel] Training finished in 1600.9s
+2026-04-01 15:25:08,669 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 15:25:25,124 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 15:25:25,342 | INFO | base_dl_model | [TCNModel] Network params: 389,379
+2026-04-01 15:25:48,223 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=93110.056697  val_loss=29928.419922
+2026-04-01 15:28:52,207 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=1050.355773  val_loss=2623.002802
+2026-04-01 15:30:13,845 | INFO | base_dl_model | [TCNModel] Early stop at epoch 14. Best val_loss=1883.394008
+2026-04-01 15:30:13,845 | INFO | base_dl_model | [TCNModel] Training finished in 288.5s
+2026-04-01 15:30:15,120 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=1.0000  mean=0.1956
+2026-04-01 15:30:23,774 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 15:30:24,048 | INFO | base_dl_model | [TCNModel] Network params: 2,840,844
+2026-04-01 15:32:44,405 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=629062.314819  val_loss=30465.807664
+2026-04-01 15:50:00,295 | INFO | base_dl_model | [TCNModel] Early stop at epoch 9. Best val_loss=1718.418882
+2026-04-01 15:50:00,819 | INFO | base_dl_model | [TCNModel] Training finished in 1176.8s
+2026-04-01 15:50:12,547 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0005  mean=0.0004
+2026-04-01 15:50:23,857 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 15:50:24,343 | INFO | base_dl_model | [TCNModel] Network params: 2,018,166
+2026-04-01 15:52:21,614 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=71403.414418  val_loss=15595.816007
+2026-04-01 16:10:24,921 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=2192.888081  val_loss=4969.674128
+2026-04-01 16:16:53,280 | INFO | base_dl_model | [TCNModel] Early stop at epoch 14. Best val_loss=3543.614053
+2026-04-01 16:16:53,282 | INFO | base_dl_model | [TCNModel] Training finished in 1588.9s
+2026-04-01 16:17:01,633 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 16:17:14,091 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 16:17:14,470 | INFO | base_dl_model | [TCNModel] Network params: 538,806
+2026-04-01 16:18:09,881 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=221928.073674  val_loss=31791.835156
+2026-04-01 16:24:50,341 | INFO | base_dl_model | [TCNModel] Early stop at epoch 8. Best val_loss=15254.229834
+2026-04-01 16:24:50,852 | INFO | base_dl_model | [TCNModel] Training finished in 456.4s
+2026-04-01 16:24:53,482 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 16:25:03,784 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 16:25:04,157 | INFO | base_dl_model | [TCNModel] Network params: 1,206,659
+2026-04-01 16:26:29,279 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=55150.935369  val_loss=19138.459717
+2026-04-01 16:40:04,841 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=6813.950214  val_loss=7274.187280
+2026-04-01 16:40:04,842 | INFO | base_dl_model | [TCNModel] Early stop at epoch 10. Best val_loss=6489.729108
+2026-04-01 16:40:04,843 | INFO | base_dl_model | [TCNModel] Training finished in 900.7s
+2026-04-01 16:40:10,920 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 16:40:22,264 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 16:40:22,417 | INFO | base_dl_model | [TCNModel] Network params: 713,997
+2026-04-01 16:40:56,828 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=51164.308724  val_loss=10059.657965
+2026-04-01 16:46:10,039 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=3080.838426  val_loss=3659.673638
+2026-04-01 16:46:10,039 | INFO | base_dl_model | [TCNModel] Early stop at epoch 10. Best val_loss=2669.953744
+2026-04-01 16:46:10,039 | INFO | base_dl_model | [TCNModel] Training finished in 347.6s
+2026-04-01 16:46:11,863 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 16:46:18,239 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 16:46:18,393 | INFO | base_dl_model | [TCNModel] Network params: 483,171
+2026-04-01 16:46:52,151 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=83404.926690  val_loss=19861.832520
+2026-04-01 16:52:29,448 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=6581.571096  val_loss=26392.371387
+2026-04-01 16:56:14,736 | INFO | base_dl_model | [TCNModel] Early stop at epoch 16. Best val_loss=5799.832959
+2026-04-01 16:56:14,736 | INFO | base_dl_model | [TCNModel] Training finished in 596.3s
+2026-04-01 16:56:16,744 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 16:56:26,838 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 16:56:27,025 | INFO | base_dl_model | [TCNModel] Network params: 1,336,683
+2026-04-01 16:56:58,921 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=53465.603902  val_loss=6218.340620
+2026-04-01 16:59:39,364 | INFO | base_dl_model | [TCNModel] Early stop at epoch 6. Best val_loss=6218.340620
+2026-04-01 16:59:39,364 | INFO | base_dl_model | [TCNModel] Training finished in 192.3s
+2026-04-01 16:59:42,018 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 16:59:48,148 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-01 16:59:48,364 | INFO | base_dl_model | [TCNModel] Network params: 137,523
+2026-04-01 17:00:13,266 | INFO | base_dl_model | [TCNModel] Epoch 1/50 train_loss=58574.233318  val_loss=8475.824060
+2026-04-01 17:25:22,495 | INFO | base_dl_model | [TCNModel] Epoch 10/50 train_loss=4035.689216  val_loss=7745.628711
+2026-04-01 17:28:39,486 | INFO | base_dl_model | [TCNModel] Early stop at epoch 17. Best val_loss=2063.249316
+2026-04-01 17:28:39,488 | INFO | base_dl_model | [TCNModel] Training finished in 1731.1s
+2026-04-01 17:28:40,796 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:28:41,048 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:28:46,324 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:28:51,633 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:28:56,809 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:01,819 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:06,413 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:11,373 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:16,881 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:21,470 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:26,217 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:30,814 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:35,441 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:40,734 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:45,683 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:50,839 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:29:55,481 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:00,616 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:05,771 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:10,374 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:15,173 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:19,977 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:24,657 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:29,534 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:34,046 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:38,999 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:44,105 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:48,699 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:53,526 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:30:58,094 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:03,644 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:08,075 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:13,281 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:18,288 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:23,403 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:28,287 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:33,037 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:38,354 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:43,341 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:47,942 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:52,637 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:31:57,578 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:02,927 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:07,410 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:12,289 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:16,826 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:22,046 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:26,720 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:32,021 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:36,696 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:41,672 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:46,527 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:50,931 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:32:55,808 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:00,538 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:05,506 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:13,403 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:20,498 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:27,735 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:35,918 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:43,742 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:52,005 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:33:59,691 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:07,163 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:15,234 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:22,004 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:29,297 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:37,298 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:45,330 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:34:53,325 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:01,322 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:08,756 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:17,240 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:24,655 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:32,583 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:39,817 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:48,218 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:35:55,633 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:03,496 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:11,437 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:19,085 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:26,546 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:33,449 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:41,321 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:48,076 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:36:55,327 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:02,794 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:10,389 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:17,602 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:24,678 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:32,848 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:40,811 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:48,602 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:54,979 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:37:58,339 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:01,955 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:05,067 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:08,106 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:11,617 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:15,218 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:18,589 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:22,567 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:26,745 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:33,899 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:41,713 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:49,581 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:38:57,463 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:05,623 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:13,182 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:20,888 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:29,576 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:37,309 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:45,268 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:39:52,971 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:01,404 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:09,001 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:16,430 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:23,838 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:32,081 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:39,654 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:47,254 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:40:55,131 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:01,963 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:09,236 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:16,751 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:25,025 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:32,841 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:40,258 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:48,185 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:41:55,563 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:03,911 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:11,189 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:19,770 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:27,287 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:35,030 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:42,290 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:49,818 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:42:57,277 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:04,722 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:12,119 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:20,541 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:27,737 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:35,497 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:42,421 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:48,282 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:53,014 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:43:58,145 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:03,206 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:10,155 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:18,073 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:25,212 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:32,880 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:40,769 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:46,905 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:44:53,841 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:00,791 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:09,149 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:16,322 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:24,004 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:31,392 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:39,540 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:46,848 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:52,791 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:45:58,970 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:02,217 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:05,230 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:08,211 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:11,576 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:14,712 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:17,755 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:20,878 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:23,889 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:27,445 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:30,777 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:34,458 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:37,899 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:41,289 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:44,642 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:48,106 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:51,669 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:55,263 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:46:58,770 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:02,639 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:06,154 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:09,652 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:13,465 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:17,060 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:20,564 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:24,064 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:27,776 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:31,241 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:35,053 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:38,565 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:42,276 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:46,166 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:49,724 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:53,328 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:47:56,851 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:00,710 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:04,233 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:07,760 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:11,271 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:15,066 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:18,566 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:22,104 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:26,028 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:29,592 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:33,098 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:36,675 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:40,262 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:44,017 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:47,483 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:51,254 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:54,763 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:48:58,278 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:02,091 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:05,598 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:09,094 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:12,941 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:16,633 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:19,997 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:26,595 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:35,166 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:39,219 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:42,868 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:46,542 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:50,329 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:54,042 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:49:57,644 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:01,274 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:04,804 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:08,618 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:12,169 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:15,714 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:19,187 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:22,979 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:26,541 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:30,235 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:33,695 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:37,429 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:41,023 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:45,160 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:49,082 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:53,234 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:50:57,131 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:01,272 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:05,082 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:08,853 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:12,635 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:16,682 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:20,881 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:24,769 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:28,613 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:32,458 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:36,545 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:40,344 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:44,178 | INFO | base_dl_model | [TCNModel] predict() → min=0.0000  max=0.0000  mean=0.0000
+2026-04-01 17:51:48,466 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-01 17:51:48,645 | INFO | base_dl_model | [TFTModel] Network params: 907,406
+2026-04-01 17:51:50,734 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-01 17:51:50,859 | INFO | base_dl_model | [GRUModel] Network params: 52,990
+2026-04-01 17:52:03,553 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=523534.515988  val_loss=725466.305398
+2026-04-01 17:54:19,224 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=476717.029070  val_loss=665717.644531
