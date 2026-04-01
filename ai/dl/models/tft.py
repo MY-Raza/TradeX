@@ -92,37 +92,40 @@ class _VariableSelectionNetwork(nn.Module):
         super().__init__()
         self.n_features = n_features
         self.d_model    = d_model
-        # One linear projection per feature
+        # One linear projection per feature: scalar → d_model
         self.feature_projections = nn.ModuleList(
             [nn.Linear(1, d_model) for _ in range(n_features)]
         )
-        # GRN that processes the flattened input and outputs selection weights
-        self.grn         = _GatedResidualNetwork(n_features * d_model, n_features, dropout)
-        self.softmax     = nn.Softmax(dim=-1)
+        # GRN gate: takes raw flat features (B*T, n_features) and outputs
+        # selection weights (B*T, n_features).
+        # BUG-FIX: was initialised with input_dim = n_features * d_model (e.g.
+        # 85 * 56 = 4760) but forward() passed flat of shape (B*T, n_features)
+        # (e.g. B*T x 85) → shape mismatch crash on every trial.
+        # The gate only needs the raw n_features values to decide which
+        # features to up-weight; it does not need the expanded projections.
+        self.grn     = _GatedResidualNetwork(n_features, n_features, dropout)
+        self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, T, n_features)
         B, T, _ = x.shape
 
-        # Project each feature independently
+        # Project each feature independently: (B, T, 1) → (B, T, d_model)
         projections = []
         for i, proj in enumerate(self.feature_projections):
             feat = x[:, :, i : i + 1]              # (B, T, 1)
             projections.append(proj(feat))          # (B, T, d_model)
         stacked = torch.stack(projections, dim=-2)  # (B, T, n_features, d_model)
 
-        # Compute selection weights
-        flat       = x.reshape(B * T, self.n_features)            # (B*T, n_features)
-        flat_proj  = x.reshape(B * T, self.n_features * self.d_model) \
-                     if self.n_features * self.d_model == flat.shape[-1] \
-                     else flat.unsqueeze(-1).expand(-1, -1, self.d_model).reshape(B * T, -1)
-        # Use raw features for gate computation (simpler, still effective)
+        # Compute selection weights from raw flat features.
+        # flat : (B*T, n_features) — matches GRN input_dim exactly.
+        flat    = x.reshape(B * T, self.n_features)               # (B*T, n_features)
         weights = self.softmax(
             self.grn(flat).reshape(B, T, self.n_features)
         )  # (B, T, n_features)
 
-        # Weighted sum over features
-        out = (stacked * weights.unsqueeze(-1)).sum(dim=-2)  # (B, T, d_model)
+        # Weighted sum over features → (B, T, d_model)
+        out = (stacked * weights.unsqueeze(-1)).sum(dim=-2)
         return out
 
 
@@ -359,19 +362,13 @@ def train(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
-    # Build df_for_backtest: a length-aligned frame with both 'datetime' and
-    # all feature columns.  pnl_permutation_importance uses this as its `df`
-    # argument, so it must contain every feature column that X_test_aligned has
-    # (for shuffling) plus 'datetime' (for BackTest lookup).
     n_preds = len(final_preds)
     iloc_start = max(0, len(df_normalised) - n_preds)
     pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
 
     pred_datetimes     = pred_datetimes[-n_preds:]
     backtest_positions = np.arange(n_preds)
-
-    df_for_backtest = X_test_aligned.reset_index(drop=True).copy()
-    df_for_backtest.insert(0, "datetime", pred_datetimes)
+    df_for_backtest    = pd.DataFrame({"datetime": pred_datetimes})
 
     assert len(df_for_backtest) == n_preds, (
         f"df_for_backtest length {len(df_for_backtest)} != preds length {n_preds}"
