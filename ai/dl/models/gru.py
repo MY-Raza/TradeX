@@ -203,28 +203,21 @@ def train(
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
 
-    # Build a minimal DataFrame for prepare_predictions that is guaranteed to
-    # be length-aligned with final_preds regardless of index gaps or seq_len
-    # warm-up effects.
-    #
-    # prepare_predictions does:  df.iloc[test_index]['datetime']
-    # so we construct df_for_backtest with RangeIndex 0..P-1 containing only
-    # the datetimes that correspond to each prediction, extracted directly from
-    # df_normalised using aligned_index (valid .loc labels into df_normalised).
-    # test_index is then simply np.arange(P) — iloc[0..P-1] on a P-row frame
-    # is always valid and always returns exactly P rows.
-    # Use .iloc with a clipped range so pred_datetimes is *always* exactly
-    # len(final_preds) rows, regardless of index gaps introduced by
-    # log-diff dropping or split sanitisation.
+    # Build df_for_backtest: a length-aligned frame with both 'datetime' and
+    # all feature columns.  pnl_permutation_importance uses this as its `df`
+    # argument, so it must contain every feature column that X_test_aligned has
+    # (for shuffling) plus 'datetime' (for BackTest lookup).
+    # RangeIndex 0..P-1 keeps iloc positions consistent with backtest_positions.
     n_preds = len(final_preds)
-    iloc_end   = min(len(df_normalised), len(df_normalised))   # full length
     iloc_start = max(0, len(df_normalised) - n_preds)
     pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
 
     # Guarantee exact length match (defensive clamp)
     pred_datetimes     = pred_datetimes[-n_preds:]
     backtest_positions = np.arange(n_preds)
-    df_for_backtest    = pd.DataFrame({"datetime": pred_datetimes})  # RangeIndex 0..P-1
+
+    df_for_backtest = X_test_aligned.reset_index(drop=True).copy()
+    df_for_backtest.insert(0, "datetime", pred_datetimes)
 
     assert len(df_for_backtest) == n_preds, (
         f"df_for_backtest length {len(df_for_backtest)} != preds length {n_preds}"

@@ -80,17 +80,24 @@ def _run_backtest(
 def _compute_and_save_importance(
     model,
     X_test: pd.DataFrame,
-    df_target: pd.DataFrame,
+    df_test_norm: pd.DataFrame,
     df_1m: pd.DataFrame,
     pnl: float,
     model_type: str,
     table_name: str,
 ) -> None:
-    """Compute PnL-permutation importance and persist to DB."""
+    """Compute PnL-permutation importance and persist to DB.
+
+    ``df_test_norm`` must be the length-aligned DataFrame returned by
+    ``train_model`` (i.e. ``df_for_backtest`` with RangeIndex 0..P-1).
+    Using the full ``df_clf`` / ``df_reg`` here caused the
+    "All arrays must be of the same length" crash because its row count
+    did not match the (seq_len-shortened) prediction array.
+    """
     pnl_importance_df = pnl_permutation_importance(
         model=model,
         X_test=X_test,
-        df=df_target,
+        df=df_test_norm,
         df_1m=df_1m,
         base_pnl=pnl,
         model_type=model_type,
@@ -239,9 +246,12 @@ def main() -> None:
                 logger.info(f"[{clf_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
                 # Importance + stats
+                # Pass df_test_norm (length-aligned, RangeIndex 0..P-1) so
+                # pnl_permutation_importance receives a df whose row count
+                # matches the (seq_len-shortened) prediction array exactly.
                 table_name_clf = f"{clf_name}_dl_clf_{timestamp}"
                 _compute_and_save_importance(
-                    model, X_test, df_clf, df_1m, pnl, "classifier", table_name_clf
+                    model, X_test, df_test_norm, df_1m, pnl, "classifier", table_name_clf
                 )
                 _save_trade_stats(ledger, pnl, table_name_clf)
 
@@ -296,9 +306,12 @@ def main() -> None:
                 logger.info(f"[{reg_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
                 # Importance + stats
+                # Pass df_test_norm (length-aligned, RangeIndex 0..P-1) so
+                # pnl_permutation_importance receives a df whose row count
+                # matches the (seq_len-shortened) prediction array exactly.
                 table_name_reg = f"{reg_name}_dl_reg_{timestamp}"
                 _compute_and_save_importance(
-                    model, X_test, df_reg, df_1m, pnl, "regressor", table_name_reg
+                    model, X_test, df_test_norm, df_1m, pnl, "regressor", table_name_reg
                 )
                 _save_trade_stats(ledger, pnl, table_name_reg)
 

@@ -185,13 +185,19 @@ def train(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
+    # Build df_for_backtest: a length-aligned frame with both 'datetime' and
+    # all feature columns.  pnl_permutation_importance uses this as its `df`
+    # argument, so it must contain every feature column that X_test_aligned has
+    # (for shuffling) plus 'datetime' (for BackTest lookup).
     n_preds = len(final_preds)
     iloc_start = max(0, len(df_normalised) - n_preds)
     pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
 
     pred_datetimes     = pred_datetimes[-n_preds:]
     backtest_positions = np.arange(n_preds)
-    df_for_backtest    = pd.DataFrame({"datetime": pred_datetimes})
+
+    df_for_backtest = X_test_aligned.reset_index(drop=True).copy()
+    df_for_backtest.insert(0, "datetime", pred_datetimes)
 
     assert len(df_for_backtest) == n_preds, (
         f"df_for_backtest length {len(df_for_backtest)} != preds length {n_preds}"
