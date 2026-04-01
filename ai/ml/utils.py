@@ -371,12 +371,15 @@ def pnl_permutation_importance(
 
     results = []
 
-
     for col in X_test.columns:
         pnl_scores = []
 
         for _ in range(n_repeats):
-            X_perm = X_test  
+            # BUG-FIX 1: always copy so we never mutate X_test in-place.
+            # The original code did `X_perm = X_test` (no copy), meaning every
+            # permutation permanently corrupted X_test for all subsequent
+            # features and repeats.
+            X_perm = X_test.copy()
             X_perm[col] = np.random.permutation(X_perm[col].values)
 
             # ----------------------------
@@ -390,13 +393,26 @@ def pnl_permutation_importance(
             else:
                 preds = model.predict(X_perm)
 
+            # BUG-FIX 2: DL models consume seq_len-1 rows as warm-up, so
+            # len(preds) < len(X_perm).  Align df and test_index to exactly
+            # len(preds) rows using a safe RangeIndex so that
+            # prepare_predictions never receives out-of-bounds iloc positions.
+            #
+            # The original code passed `X_perm.index` (the original
+            # non-zero-based index from the train/test split, e.g. 5543..6898)
+            # as test_index into a df that has only 1,324 rows, causing
+            # "positional indexers are out-of-bounds".
+            n_preds   = len(preds)
+            df_aligned = df.iloc[-n_preds:].reset_index(drop=True)
+            pos_index  = np.arange(n_preds)
+
             # ----------------------------
             # Convert → trades
             # ----------------------------
             df_preds = prepare_predictions(
-                df,
+                df_aligned,
                 preds,
-                X_perm.index,
+                pos_index,
                 model_type=model_type,
                 threshold=threshold,
                 k=k
