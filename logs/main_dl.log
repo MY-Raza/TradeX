@@ -128,3 +128,8 @@
 2026-04-02 11:52:26,440 | INFO | main_dl | Training DL classifier: tcn for btc
 2026-04-02 11:54:21,156 | ERROR | main_dl | DL Classifier tcn failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
 2026-04-02 11:54:21,156 | INFO | main_dl | Training DL classifier: tft for btc
+2026-04-02 12:04:46,304 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-04-02 12:04:46,304 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-02 12:10:00,260 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-02 12:19:52,426 | ERROR | main_dl | DL Classifier tcn failed for btc: 'signals'
+2026-04-02 12:19:52,426 | INFO | main_dl | Training DL classifier: tft for btc

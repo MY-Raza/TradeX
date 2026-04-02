@@ -73,7 +73,7 @@ def _run_backtest(
     # std-threshold path which is for continuous regressor scores only.
     if model_type == "classifier":
         df_predictions = df_test_norm[["datetime"]].copy().reset_index(drop=True)
-        df_predictions["predicted_direction"] = preds_np.astype(int)
+        df_predictions["signals"] = preds_np.astype(int)
     else:
         df_predictions = prepare_predictions(
             df_test_norm, preds_np, idx_arr, model_type="dl", k=k

@@ -2229,3 +2229,28 @@
 2026-04-02 12:01:28,772 | INFO | base_dl_model | [TFTModel] Network params: 311,975
 2026-04-02 12:01:28,772 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.006
 2026-04-02 12:02:14,321 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=0.888833  val_loss=0.936823
+2026-04-02 12:10:00,902 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 12:10:01,140 | INFO | base_dl_model | [TCNModel] Network params: 1,315,469
+2026-04-02 12:10:01,183 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 12:11:11,670 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=51924.198374  val_loss=15626.406500
+2026-04-02 12:19:40,790 | INFO | base_dl_model | [TCNModel] Early stop at epoch 8. Best val_loss=6451.396167
+2026-04-02 12:19:40,828 | INFO | base_dl_model | [TCNModel] Training finished in 576.7s
+2026-04-02 12:19:45,689 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=0.5697
+2026-04-02 12:19:53,224 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-02 12:19:53,355 | INFO | base_dl_model | [TFTModel] Network params: 138,791
+2026-04-02 12:19:53,376 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 12:20:09,165 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=1.027347  val_loss=0.978787
+2026-04-02 12:21:27,924 | INFO | base_dl_model | [TFTModel] Early stop at epoch 6. Best val_loss=0.978787
+2026-04-02 12:21:27,925 | INFO | base_dl_model | [TFTModel] Training finished in 94.5s
+2026-04-02 12:21:29,148 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-02 12:21:29,155 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-02 12:21:29,559 | INFO | base_dl_model | [TFTModel] Network params: 253,271
+2026-04-02 12:21:29,560 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 12:22:37,507 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=1.052461  val_loss=0.902077
+2026-04-02 12:28:07,078 | INFO | base_dl_model | [TFTModel] Early stop at epoch 6. Best val_loss=0.902077
+2026-04-02 12:28:07,078 | INFO | base_dl_model | [TFTModel] Training finished in 397.5s
+2026-04-02 12:28:12,149 | INFO | base_dl_model | [TFTModel] predict() → min=1.0000  max=1.0000  mean=1.0000
+2026-04-02 12:28:12,203 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-02 12:28:12,738 | INFO | base_dl_model | [TFTModel] Network params: 609,623
+2026-04-02 12:28:12,762 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 12:30:03,289 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=0.808885  val_loss=0.830097

@@ -211,7 +211,7 @@ def run_chunked_backtest(
     # For DL regressors, use the 'dl' path which applies std-threshold correctly.
     if model_type == "classifier":
         df_preds = df_slice[["datetime"]].copy().reset_index(drop=True)
-        df_preds["predicted_direction"] = preds_np.astype(int)
+        df_preds["signals"] = preds_np.astype(int)
     else:
         df_preds = prepare_predictions(
             df_slice, preds_np, idx_arr,
