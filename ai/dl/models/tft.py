@@ -328,7 +328,7 @@ def train(
         aligned_index = X_test.index[-(len(preds)):]
         return run_chunked_backtest(
             trial, df, preds, aligned_index, df_1m,
-            model_type="dl", k=k,
+            model_type=model_type, k=k,
         )
 
     pruner = optuna.pruners.MedianPruner(n_startup_trials=3, n_warmup_steps=0)
@@ -369,7 +369,9 @@ def train(
 
     pred_datetimes     = pred_datetimes[-n_preds:]
     backtest_positions = np.arange(n_preds)
-    df_for_backtest    = pd.DataFrame({"datetime": pred_datetimes})
+
+    df_for_backtest = X_test_aligned.reset_index(drop=True).copy()
+    df_for_backtest.insert(0, "datetime", pred_datetimes)
 
     assert len(df_for_backtest) == n_preds, (
         f"df_for_backtest length {len(df_for_backtest)} != preds length {n_preds}"
