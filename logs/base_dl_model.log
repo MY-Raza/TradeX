@@ -2254,3 +2254,49 @@
 2026-04-02 12:28:12,738 | INFO | base_dl_model | [TFTModel] Network params: 609,623
 2026-04-02 12:28:12,762 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.007
 2026-04-02 12:30:03,289 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=0.808885  val_loss=0.830097
+2026-04-02 12:38:56,074 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 12:38:56,324 | INFO | base_dl_model | [TCNModel] Network params: 1,818,324
+2026-04-02 12:38:56,362 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 12:40:47,320 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=108790.905342  val_loss=69983.494673
+2026-04-02 12:53:35,049 | INFO | base_dl_model | [TCNModel] Early stop at epoch 8. Best val_loss=12342.872403
+2026-04-02 12:53:35,094 | INFO | base_dl_model | [TCNModel] Training finished in 875.6s
+2026-04-02 12:53:44,677 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.7174
+2026-04-02 12:54:07,039 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 12:54:07,609 | INFO | base_dl_model | [TCNModel] Network params: 1,553,903
+2026-04-02 12:54:07,712 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 12:55:12,989 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=486669.833876  val_loss=19279.164156
+2026-04-02 13:06:13,362 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 13:06:13,721 | INFO | base_dl_model | [TCNModel] Network params: 168,899
+2026-04-02 13:06:13,790 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 13:06:39,584 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=37448.886219  val_loss=20533.832544
+2026-04-02 13:09:48,405 | INFO | base_dl_model | [TCNModel] Early stop at epoch 9. Best val_loss=9737.002576
+2026-04-02 13:09:48,405 | INFO | base_dl_model | [TCNModel] Training finished in 211.3s
+2026-04-02 13:09:50,203 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.8924
+2026-04-02 13:10:00,623 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 13:10:01,047 | INFO | base_dl_model | [TCNModel] Network params: 494,796
+2026-04-02 13:10:01,111 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 13:11:02,720 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=131996.611237  val_loss=116187.654883
+2026-04-02 13:19:16,092 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=20319.579261  val_loss=13373.970068
+2026-04-02 13:21:01,785 | INFO | base_dl_model | [TCNModel] Early stop at epoch 12. Best val_loss=11635.905566
+2026-04-02 13:21:01,786 | INFO | base_dl_model | [TCNModel] Training finished in 660.7s
+2026-04-02 13:21:04,770 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=0.9906
+2026-04-02 13:21:15,775 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 13:21:15,990 | INFO | base_dl_model | [TCNModel] Network params: 136,361
+2026-04-02 13:21:16,010 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 13:21:32,343 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=67245.826149  val_loss=25218.755139
+2026-04-02 13:23:58,856 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=3996.838074  val_loss=9083.059497
+2026-04-02 13:25:40,470 | INFO | base_dl_model | [TCNModel] Early stop at epoch 16. Best val_loss=3993.351071
+2026-04-02 13:25:40,470 | INFO | base_dl_model | [TCNModel] Training finished in 264.5s
+2026-04-02 13:25:41,538 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=0.7258
+2026-04-02 13:25:50,586 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 13:25:50,814 | INFO | base_dl_model | [TCNModel] Network params: 540,573
+2026-04-02 13:25:50,815 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 13:26:59,523 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=56093.883579  val_loss=39290.241650
+2026-04-02 13:37:28,383 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=8480.740225  val_loss=12643.431763
+2026-04-02 13:38:31,146 | INFO | base_dl_model | [TCNModel] Early stop at epoch 11. Best val_loss=5132.261804
+2026-04-02 13:38:31,148 | INFO | base_dl_model | [TCNModel] Training finished in 760.3s
+2026-04-02 13:38:36,326 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=0.0000  mean=-0.9945
+2026-04-02 13:38:44,694 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 13:38:44,998 | INFO | base_dl_model | [TCNModel] Network params: 413,427
+2026-04-02 13:38:45,014 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 13:39:22,916 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=86029.676417  val_loss=42957.064453

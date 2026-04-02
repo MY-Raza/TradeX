@@ -14,7 +14,7 @@ regressors:
   tft:  true
 
   # Optuna trial budget per DL model
-dl_n_trials: 10
+dl_n_trials: 2
 
   # --- Default DL hyper-parameters (overridden by Optuna) ---
 seq_len:     60      # look-back window (timesteps)

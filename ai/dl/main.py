@@ -174,7 +174,7 @@ def main() -> None:
     # Read DL-specific config; fall back to empty dicts so it's optional
     dl_classifiers   = config.get("classifiers", {})
     dl_regressors    = config.get("regressors", {})
-    dl_n_trials      = int(config.get("dl_n_trials", 10))
+    dl_n_trials      = int(config.get("dl_n_trials",2))
 
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 
