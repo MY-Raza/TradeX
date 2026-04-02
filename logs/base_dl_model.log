@@ -2166,3 +2166,40 @@
 2026-04-02 09:55:42,922 | INFO | base_dl_model | [GRUModel] Network params: 524,598
 2026-04-02 09:56:21,691 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=516744.514535  val_loss=750167.123884
 2026-04-02 10:02:00,017 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=461185.771802  val_loss=667172.091146
+2026-04-02 10:07:20,937 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=398574.369368  val_loss=584869.525484
+2026-04-02 10:13:16,437 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=351256.284157  val_loss=511559.666202
+2026-04-02 10:13:16,439 | INFO | base_dl_model | [GRUModel] Training finished in 1053.5s
+2026-04-02 10:13:18,881 | INFO | base_dl_model | [GRUModel] predict() → min=207.1233  max=207.1236  mean=207.1234
+2026-04-02 10:13:36,040 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-02 10:13:36,322 | INFO | base_dl_model | [GRUModel] Network params: 125,742
+2026-04-02 10:14:27,359 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=524229.909996  val_loss=790844.241797
+2026-04-02 10:22:25,651 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=502731.025219  val_loss=762976.125000
+2026-04-02 10:31:36,619 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=482010.836440  val_loss=733592.916016
+2026-04-02 10:40:39,341 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=462295.252696  val_loss=705107.016797
+2026-04-02 10:40:39,344 | INFO | base_dl_model | [GRUModel] Training finished in 1623.0s
+2026-04-02 10:40:42,406 | INFO | base_dl_model | [GRUModel] predict() → min=66.7382  max=66.7382  mean=66.7382
+2026-04-02 10:40:42,568 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-02 10:40:42,952 | INFO | base_dl_model | [GRUModel] Network params: 133,921
+2026-04-02 10:41:03,015 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=524490.957849  val_loss=793887.609375
+2026-04-02 10:43:49,382 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=505162.103198  val_loss=768733.840625
+2026-04-02 10:46:48,293 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=487986.444041  val_loss=743929.781250
+2026-04-02 10:49:47,923 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=471512.569767  val_loss=719898.037500
+2026-04-02 10:49:47,923 | INFO | base_dl_model | [GRUModel] Training finished in 545.0s
+2026-04-02 10:49:49,220 | INFO | base_dl_model | [GRUModel] predict() → min=56.9134  max=56.9149  mean=56.9144
+2026-04-02 10:49:58,017 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-02 10:49:58,901 | INFO | base_dl_model | [GRUModel] Network params: 542,158
+2026-04-02 10:50:50,926 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=509797.624273  val_loss=715216.196875
+2026-04-02 10:58:42,001 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=326848.770712  val_loss=440416.546875
+2026-04-02 11:08:23,435 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=239706.599746  val_loss=276615.531250
+2026-04-02 11:20:47,749 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 11:20:48,024 | INFO | base_dl_model | [TCNModel] Network params: 128,103
+2026-04-02 11:21:05,315 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=63532.497911  val_loss=58233.126420
+2026-04-02 11:22:56,000 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=2897.568692  val_loss=7869.371316
+2026-04-02 11:24:58,584 | INFO | base_dl_model | [TCNModel] Epoch 20/30 train_loss=2224.773460  val_loss=10331.475675
+2026-04-02 11:24:58,584 | INFO | base_dl_model | [TCNModel] Early stop at epoch 20. Best val_loss=6440.732688
+2026-04-02 11:24:58,584 | INFO | base_dl_model | [TCNModel] Training finished in 247.2s
+2026-04-02 11:24:59,373 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-02 11:24:59,385 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 11:24:59,587 | INFO | base_dl_model | [TCNModel] Network params: 3,059,136
+2026-04-02 11:26:47,339 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=232285.909904  val_loss=27230.057803
+2026-04-02 11:43:49,756 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=1875.731555  val_loss=5678.138067

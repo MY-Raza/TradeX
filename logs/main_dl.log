@@ -120,3 +120,6 @@
 2026-04-01 17:51:47,528 | INFO | main_dl | Training DL classifier: tft for btc
 2026-04-01 17:51:50,437 | ERROR | main_dl | DL Classifier tft failed for btc: mat1 and mat2 shapes cannot be multiplied (6144x85 and 4760x85)
 2026-04-01 17:51:50,437 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-02 11:15:23,818 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=10
+2026-04-02 11:15:23,818 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-02 11:20:47,459 | INFO | main_dl | Training DL classifier: tcn for btc

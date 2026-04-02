@@ -204,17 +204,20 @@ def run_chunked_backtest(
     # Slice df to the last min_len rows so iloc[0..min_len-1] is valid
     df_slice   = df.iloc[-min_len:].reset_index(drop=True)
 
-    # prepare_predictions uses model_type='dl' for DL models so it applies
-    # the correct signal-generation path (std-threshold on the raw score,
-    # rather than the RF/XGB class-label path which looks for 'predicted_direction').
-    # Passing model_type='classifier' or 'regressor' here triggers a KeyError
-    # on 'predicted_direction' because those paths expect sklearn-style outputs.
-    # model_type="dl" is the correct string for prepare_predictions with DL models
-    df_preds = prepare_predictions(
-        df_slice, preds_np, idx_arr,
-        model_type="dl",
-        k=k,
-    )
+    # For DL classifiers, preds are already discrete {-1, 0, 1} signals from
+    # argmax. Build df_preds directly without going through prepare_predictions'
+    # std-threshold path (which is designed for continuous regressor scores and
+    # would distort discrete class predictions).
+    # For DL regressors, use the 'dl' path which applies std-threshold correctly.
+    if model_type == "classifier":
+        df_preds = df_slice[["datetime"]].copy().reset_index(drop=True)
+        df_preds["predicted_direction"] = preds_np.astype(int)
+    else:
+        df_preds = prepare_predictions(
+            df_slice, preds_np, idx_arr,
+            model_type="dl",
+            k=k,
+        )
     df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
     total_rows  = len(df_preds)

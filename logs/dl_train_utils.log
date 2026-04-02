@@ -457,3 +457,10 @@
 2026-04-02 09:51:29,570 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -67.4400
 2026-04-02 09:55:39,694 | INFO | dl_train_utils | [trial 2] Chunk 1/2 PnL: -28.6000
 2026-04-02 09:55:42,568 | INFO | dl_train_utils | [trial 2] Chunk 2/2 PnL: -40.5100
+2026-04-02 10:13:30,810 | INFO | dl_train_utils | [trial 3] Chunk 1/2 PnL: -27.9000
+2026-04-02 10:13:35,647 | INFO | dl_train_utils | [trial 3] Chunk 2/2 PnL: -39.0300
+2026-04-02 10:49:57,986 | INFO | dl_train_utils | [trial 5] Chunk 1/2 PnL: -50.8800
+2026-04-02 10:49:57,996 | INFO | dl_train_utils | [trial 5] Pruned at chunk 1/2 — PnL: -50.8800
+2026-04-02 11:20:47,693 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21430 rows with inf/NaN.
+2026-04-02 11:20:47,693 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6899, 87)
+2026-04-02 11:20:47,745 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1356 | Features: 85

@@ -68,9 +68,16 @@ def _run_backtest(
     idx_arr      = np.arange(min_len)          # always 0..min_len-1 for iloc safety
     df_test_norm = df_test_norm.iloc[-min_len:].reset_index(drop=True)
 
-    df_predictions = prepare_predictions(
-        df_test_norm, preds_np, idx_arr, model_type="dl", k=k
-    )
+    # For DL classifiers, preds are already discrete {-1, 0, 1} from argmax.
+    # Build the predictions frame directly — bypassing prepare_predictions'
+    # std-threshold path which is for continuous regressor scores only.
+    if model_type == "classifier":
+        df_predictions = df_test_norm[["datetime"]].copy().reset_index(drop=True)
+        df_predictions["predicted_direction"] = preds_np.astype(int)
+    else:
+        df_predictions = prepare_predictions(
+            df_test_norm, preds_np, idx_arr, model_type="dl", k=k
+        )
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
     bt = BackTest(df_1m, df_predictions, take_profit=3, stop_loss=1)
@@ -94,13 +101,15 @@ def _compute_and_save_importance(
     "All arrays must be of the same length" crash because its row count
     did not match the (seq_len-shortened) prediction array.
     """
+    # Pass the actual model_type so pnl_permutation_importance routes
+    # classifier preds (discrete {-1,0,1}) correctly inside its backtest calls.
     pnl_importance_df = pnl_permutation_importance(
         model=model,
         X_test=X_test,
         df=df_test_norm,
         df_1m=df_1m,
         base_pnl=pnl,
-        model_type="dl",
+        model_type=model_type,
         k=0.5,
         n_repeats=3,
     )

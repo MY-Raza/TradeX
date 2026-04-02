@@ -165,8 +165,20 @@ class BaseDLModel(abc.ABC):
 
         # ── Loss & optimiser ─────────────────────────────────────────
         if self.model_type == "classifier":
-            # Multi-class cross-entropy; labels must be long integers
-            criterion = nn.CrossEntropyLoss()
+            # Compute inverse-frequency class weights to counter label imbalance.
+            # y_seq_tr labels are still float {-1, 0, 1}; remap to {0, 1, 2}
+            # (same mapping as _remap_labels in train_loop.py) before counting.
+            remapped = (torch.from_numpy(y_seq_tr) + 1).long()  # {0, 1, 2}
+            counts   = torch.bincount(remapped, minlength=3).float()
+            # Replace any zero-count class with 1 to avoid division by zero
+            counts   = counts.clamp(min=1.0)
+            weights  = (1.0 / counts)
+            weights  = (weights / weights.sum() * 3).to(self.device)   # normalise to sum=3
+            logger.info(
+                f"[{self.__class__.__name__}] Class weights: "
+                f"short={weights[0]:.3f} neutral={weights[1]:.3f} long={weights[2]:.3f}"
+            )
+            criterion = nn.CrossEntropyLoss(weight=weights)
         else:
             criterion = nn.MSELoss()
 
@@ -243,20 +255,12 @@ class BaseDLModel(abc.ABC):
                 out     = self.network_(X_batch)  # (B, output_size)
 
                 if self.model_type == "classifier":
-                    # Labels are remapped: {-1→0 (short), 0→1 (neutral), 1→2 (long)}
-                    # Return (long_prob - short_prob) as a signed confidence score
-                    # so that prepare_predictions can threshold it correctly.
-                    # Using only probs[:, 1] (neutral) was the original bug —
-                    # it is always near zero, producing all-zero signals.
-                    probs = torch.softmax(out, dim=-1)
-                    if probs.shape[-1] == 3:
-                        # 3-class: short=0, neutral=1, long=2
-                        preds_np = (probs[:, 2] - probs[:, 0]).cpu().numpy()
-                    elif probs.shape[-1] == 2:
-                        # Binary fallback: negative=0, positive=1
-                        preds_np = probs[:, 1].cpu().numpy()
-                    else:
-                        preds_np = probs[:, 0].cpu().numpy()
+                    # argmax gives the winning class index {0=short, 1=neutral, 2=long}.
+                    # Subtract 1 to map back to the original label space {-1, 0, 1}
+                    # so the output is directly usable as a trading signal:
+                    #   -1 → short,  0 → hold,  1 → long
+                    pred_cls = torch.argmax(out, dim=-1)   # (B,)
+                    preds_np = (pred_cls - 1).cpu().numpy().astype(np.float32)
                 else:
                     preds_np = out.squeeze(-1).cpu().numpy()
 
@@ -292,13 +296,8 @@ class BaseDLModel(abc.ABC):
         y_aligned = y_test.to_numpy(dtype=np.float32)[-len(preds):]
 
         if self.model_type == "classifier":
-            # preds are (long_prob - short_prob) in [-1, 1]:
-            #   > 0  → predicted long  (original label +1)
-            #   < 0  → predicted short (original label -1)
-            #   ≈ 0  → neutral
-            # Map back to {-1, 0, 1} to compare with y_aligned.
-            pred_classes = np.where(preds > 0.05, 1, np.where(preds < -0.05, -1, 0))
-            accuracy = float(np.mean(pred_classes == y_aligned.astype(int)))
+            # predict() already returns {-1, 0, 1} via argmax-1, so compare directly.
+            accuracy = float(np.mean(preds == y_aligned.astype(np.float32)))
             logger.info(f"[{self.__class__.__name__}] Test accuracy: {accuracy:.4f}")
             return {"accuracy": accuracy}
         else:
