@@ -453,3 +453,7 @@
 2026-04-01 17:51:50,709 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
 2026-04-01 17:51:50,709 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
 2026-04-01 17:51:50,731 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1353 | Features: 85
+2026-04-02 09:51:26,467 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -27.2700
+2026-04-02 09:51:29,570 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -67.4400
+2026-04-02 09:55:39,694 | INFO | dl_train_utils | [trial 2] Chunk 1/2 PnL: -28.6000
+2026-04-02 09:55:42,568 | INFO | dl_train_utils | [trial 2] Chunk 2/2 PnL: -40.5100

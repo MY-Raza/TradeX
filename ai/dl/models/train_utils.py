@@ -204,9 +204,15 @@ def run_chunked_backtest(
     # Slice df to the last min_len rows so iloc[0..min_len-1] is valid
     df_slice   = df.iloc[-min_len:].reset_index(drop=True)
 
+    # prepare_predictions uses model_type='dl' for DL models so it applies
+    # the correct signal-generation path (std-threshold on the raw score,
+    # rather than the RF/XGB class-label path which looks for 'predicted_direction').
+    # Passing model_type='classifier' or 'regressor' here triggers a KeyError
+    # on 'predicted_direction' because those paths expect sklearn-style outputs.
+    # model_type="dl" is the correct string for prepare_predictions with DL models
     df_preds = prepare_predictions(
         df_slice, preds_np, idx_arr,
-        model_type=model_type,
+        model_type="dl",
         k=k,
     )
     df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)

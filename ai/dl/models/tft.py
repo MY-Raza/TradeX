@@ -321,13 +321,14 @@ def train(
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
 
-        if model_type == "regressor" and np.std(preds) < 1e-8:
+        # Prune trials where the model outputs a constant (dead network).
+        if np.std(preds) < 1e-8:
             raise optuna.TrialPruned()
 
         aligned_index = X_test.index[-(len(preds)):]
         return run_chunked_backtest(
             trial, df, preds, aligned_index, df_1m,
-            model_type=model_type, k=k,
+            model_type="dl", k=k,
         )
 
     pruner = optuna.pruners.MedianPruner(n_startup_trials=3, n_warmup_steps=0)

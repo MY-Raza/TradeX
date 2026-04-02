@@ -243,10 +243,17 @@ class BaseDLModel(abc.ABC):
                 out     = self.network_(X_batch)  # (B, output_size)
 
                 if self.model_type == "classifier":
-                    # Return softmax probability of the positive class (index 1)
+                    # Labels are remapped: {-1→0 (short), 0→1 (neutral), 1→2 (long)}
+                    # Return (long_prob - short_prob) as a signed confidence score
+                    # so that prepare_predictions can threshold it correctly.
+                    # Using only probs[:, 1] (neutral) was the original bug —
+                    # it is always near zero, producing all-zero signals.
                     probs = torch.softmax(out, dim=-1)
-                    # Handle both binary (2 classes) and multi-class
-                    if probs.shape[-1] >= 2:
+                    if probs.shape[-1] == 3:
+                        # 3-class: short=0, neutral=1, long=2
+                        preds_np = (probs[:, 2] - probs[:, 0]).cpu().numpy()
+                    elif probs.shape[-1] == 2:
+                        # Binary fallback: negative=0, positive=1
                         preds_np = probs[:, 1].cpu().numpy()
                     else:
                         preds_np = probs[:, 0].cpu().numpy()
@@ -285,7 +292,12 @@ class BaseDLModel(abc.ABC):
         y_aligned = y_test.to_numpy(dtype=np.float32)[-len(preds):]
 
         if self.model_type == "classifier":
-            pred_classes = (preds > 0.5).astype(int)
+            # preds are (long_prob - short_prob) in [-1, 1]:
+            #   > 0  → predicted long  (original label +1)
+            #   < 0  → predicted short (original label -1)
+            #   ≈ 0  → neutral
+            # Map back to {-1, 0, 1} to compare with y_aligned.
+            pred_classes = np.where(preds > 0.05, 1, np.where(preds < -0.05, -1, 0))
             accuracy = float(np.mean(pred_classes == y_aligned.astype(int)))
             logger.info(f"[{self.__class__.__name__}] Test accuracy: {accuracy:.4f}")
             return {"accuracy": accuracy}

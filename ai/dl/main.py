@@ -69,7 +69,7 @@ def _run_backtest(
     df_test_norm = df_test_norm.iloc[-min_len:].reset_index(drop=True)
 
     df_predictions = prepare_predictions(
-        df_test_norm, preds_np, idx_arr, model_type=model_type, k=k
+        df_test_norm, preds_np, idx_arr, model_type="dl", k=k
     )
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
@@ -100,7 +100,7 @@ def _compute_and_save_importance(
         df=df_test_norm,
         df_1m=df_1m,
         base_pnl=pnl,
-        model_type=model_type,
+        model_type="dl",
         k=0.5,
         n_repeats=3,
     )
