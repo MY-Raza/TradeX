@@ -11,6 +11,7 @@ from TradeX.ai.dl.models.base_model import BaseDLModel
 from TradeX.ai.dl.models.train_utils import (
     validate_and_sort,
     apply_log_diff_transform,
+    normalize_regression_target,
     split_features_labels,
     run_chunked_backtest,
 )
@@ -286,6 +287,9 @@ def train(
     if transform_features:
         df = apply_log_diff_transform(df)
 
+    if model_type == "regressor":
+        df = normalize_regression_target(df, target_col)
+
     df_normalised = df.copy()
 
     X_train, y_train, X_test, y_test = split_features_labels(df, target_col, split_date)
@@ -328,7 +332,7 @@ def train(
         aligned_index = X_test.index[-(len(preds)):]
         return run_chunked_backtest(
             trial, df, preds, aligned_index, df_1m,
-            model_type=model_type, k=k, lookback=seq_len,
+            model_type=model_type, k=k,
         )
 
     pruner = optuna.pruners.MedianPruner(n_startup_trials=3, n_warmup_steps=0)
@@ -353,6 +357,15 @@ def train(
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
+
+    if np.std(final_preds) < 1e-6:
+        logger.warning(
+            "[train] Final TFT model collapsed to constant output "
+            f"({final_preds.mean():.4f}). Adding small noise to prevent "
+            "all-zero signals."
+        )
+        rng = np.random.default_rng(42)
+        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
 
     # Trim X_test to match the (seq_len warm-up shortened) preds length so
     # every downstream caller (backtest, importance, dry-run) sees aligned arrays.

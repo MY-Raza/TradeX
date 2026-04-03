@@ -86,6 +86,63 @@ def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# 2b. Regression target normalisation
+# ──────────────────────────────────────────────────────────────────────────────
+
+def normalize_regression_target(
+    df: pd.DataFrame,
+    target_col: str,
+) -> pd.DataFrame:
+    """
+    Replace a raw-price regression target with its log-return equivalent.
+
+    If the target column has a large absolute mean (> 1.0) we assume it is a
+    raw price and convert it to a log-difference return:
+
+        target[t]  →  log(target[t]) - log(target[t-1])
+
+    This keeps the target on the same ~[-0.05, +0.05] scale as the
+    log-differenced OHLCV features, preventing MSE from exploding and the
+    network from collapsing to the mean.
+
+    If the target already looks normalised (|mean| ≤ 1.0) the DataFrame is
+    returned unchanged so classifiers and pre-normalised regressors are
+    unaffected.
+
+    Args:
+        df         : DataFrame containing ``target_col``.
+        target_col : Name of the regression target column.
+
+    Returns:
+        DataFrame with ``target_col`` replaced by log-returns (rows with NaN
+        dropped and index reset).
+    """
+    if target_col not in df.columns:
+        return df
+
+    abs_mean = df[target_col].abs().mean()
+    if abs_mean <= 1.0:
+        logger.info(
+            f"[normalize_regression_target] Target '{target_col}' looks already "
+            f"normalised (|mean|={abs_mean:.4f}). Skipping."
+        )
+        return df
+
+    logger.info(
+        f"[normalize_regression_target] Converting '{target_col}' from raw price "
+        f"(|mean|={abs_mean:.2f}) to log-return."
+    )
+    df = df.copy()
+    df[target_col] = np.log(df[target_col]).diff()
+    df = df.dropna(subset=[target_col]).reset_index(drop=True)
+    logger.info(
+        f"[normalize_regression_target] Target stats after transform — "
+        f"mean={df[target_col].mean():.6f}  std={df[target_col].std():.6f}"
+    )
+    return df
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # 3. Train / test split  (identical to ML train_utils)
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -161,7 +218,6 @@ def run_chunked_backtest(
     df_1m: pd.DataFrame,
     model_type: str,
     k: float,
-    lookback: int = 1,
     n_chunks: int = 2,
     take_profit: float = 3,
     stop_loss: float = 1,
@@ -181,9 +237,6 @@ def run_chunked_backtest(
         df_1m        : 1-minute OHLCV data for BackTest.
         model_type   : ``'classifier'`` or ``'regressor'``.
         k            : Top-k std threshold for signal selection.
-        lookback     : Sequence length (seq_len) used by the model; passed to
-                       ``prepare_predictions`` as the ``lookback`` argument
-                       required for ``model_type='dl'`` regressors.
         n_chunks     : Number of temporal evaluation chunks.
         take_profit  : BackTest take-profit multiplier.
         stop_loss    : BackTest stop-loss multiplier.
@@ -221,7 +274,6 @@ def run_chunked_backtest(
             df_slice, preds_np, idx_arr,
             model_type="dl",
             k=k,
-            lookback=lookback,
         )
     df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
