@@ -2300,3 +2300,587 @@
 2026-04-02 13:38:44,998 | INFO | base_dl_model | [TCNModel] Network params: 413,427
 2026-04-02 13:38:45,014 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
 2026-04-02 13:39:22,916 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=86029.676417  val_loss=42957.064453
+2026-04-02 14:14:10,807 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 14:14:11,072 | INFO | base_dl_model | [TCNModel] Network params: 2,496,903
+2026-04-02 14:14:11,130 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 14:15:54,567 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=142010.359218  val_loss=42020.211368
+2026-04-02 14:46:55,443 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=8912.158174  val_loss=26233.707822
+2026-04-02 15:07:23,733 | INFO | base_dl_model | [TCNModel] Epoch 20/30 train_loss=2471.890316  val_loss=7261.554568
+2026-04-02 15:27:55,190 | INFO | base_dl_model | [TCNModel] Epoch 30/30 train_loss=0.882128  val_loss=424.634898
+2026-04-02 15:27:55,246 | INFO | base_dl_model | [TCNModel] Training finished in 4420.9s
+2026-04-02 15:28:07,527 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.7123
+2026-04-02 15:28:46,314 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 15:28:46,565 | INFO | base_dl_model | [TCNModel] Network params: 112,128
+2026-04-02 15:28:46,585 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 15:28:52,955 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=74683.188836  val_loss=26152.202799
+2026-04-02 15:29:57,493 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=8881.467381  val_loss=18420.685184
+2026-04-02 15:30:04,782 | INFO | base_dl_model | [TCNModel] Early stop at epoch 11. Best val_loss=7421.882295
+2026-04-02 15:30:04,782 | INFO | base_dl_model | [TCNModel] Training finished in 78.2s
+2026-04-02 15:30:05,158 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-02 15:30:05,170 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-02 15:30:05,375 | INFO | base_dl_model | [TCNModel] Network params: 2,496,903
+2026-04-02 15:30:05,375 | INFO | base_dl_model | [TCNModel] Class weights: short=0.002 neutral=2.991 long=0.006
+2026-04-02 15:32:08,909 | INFO | base_dl_model | [TCNModel] Epoch 1/50 train_loss=221461.931750  val_loss=77964.452381
+2026-04-02 15:52:33,077 | INFO | base_dl_model | [TCNModel] Epoch 10/50 train_loss=11563.140544  val_loss=35713.011114
+2026-04-02 16:15:01,141 | INFO | base_dl_model | [TCNModel] Epoch 20/50 train_loss=4106.233748  val_loss=16008.416626
+2026-04-02 16:38:31,037 | INFO | base_dl_model | [TCNModel] Epoch 30/50 train_loss=197.780571  val_loss=221.317451
+2026-04-02 17:00:53,166 | INFO | base_dl_model | [TCNModel] Epoch 40/50 train_loss=0.839921  val_loss=171.100834
+2026-04-02 17:03:05,482 | INFO | base_dl_model | [TCNModel] Early stop at epoch 41. Best val_loss=102.000683
+2026-04-02 17:03:05,500 | INFO | base_dl_model | [TCNModel] Training finished in 5580.1s
+2026-04-02 17:03:16,750 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.7055
+2026-04-02 17:03:17,330 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-02 17:03:45,545 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:04:01,155 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:04:16,309 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:04:31,676 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:04:46,480 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:05:02,927 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:05:16,182 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:05:29,690 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:05:43,056 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:05:56,614 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:18:40,973 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:18:53,445 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:19:04,462 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:19:14,365 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:19:24,158 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:19:34,241 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:19:44,774 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:19:55,146 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:20:05,806 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:20:16,307 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:20:26,656 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:20:37,104 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:20:47,436 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:20:58,123 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:21:08,481 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:21:19,117 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:21:28,985 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:21:39,430 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:21:50,212 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:22:01,539 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:22:12,775 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6944
+2026-04-02 17:22:24,395 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:22:35,071 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:22:46,342 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:22:57,350 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:23:08,606 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:23:19,180 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6967
+2026-04-02 17:23:29,840 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6936
+2026-04-02 17:23:40,655 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:23:52,036 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6897
+2026-04-02 17:24:02,938 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6936
+2026-04-02 17:24:16,391 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6882
+2026-04-02 17:24:30,474 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:24:43,195 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:24:57,817 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:25:12,828 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:25:26,130 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:25:38,843 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:25:51,581 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6944
+2026-04-02 17:26:05,148 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:26:18,050 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:26:31,244 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:26:44,713 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:26:58,666 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:27:11,329 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:27:25,136 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:27:40,168 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:27:54,028 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:28:09,211 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:28:22,590 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:28:36,543 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:28:50,312 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:29:01,891 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:29:12,716 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6944
+2026-04-02 17:29:24,818 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:29:36,201 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:29:47,493 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:29:58,539 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:30:10,103 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:30:21,369 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:30:32,295 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:30:43,253 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:30:54,304 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:31:05,121 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:31:16,228 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:31:27,220 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:31:39,002 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:31:50,687 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:32:01,691 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:32:13,215 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:32:24,044 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:32:34,879 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:32:45,315 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:32:56,921 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:33:08,288 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:33:19,590 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:33:30,928 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:33:42,428 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6952
+2026-04-02 17:33:55,082 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:34:57,162 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:35:11,757 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:35:26,455 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:35:41,534 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:35:56,457 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:36:10,738 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:36:24,277 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:36:39,095 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:36:53,118 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:37:05,940 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:37:20,175 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:37:35,820 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:37:49,833 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:38:03,703 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:38:18,403 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:38:32,275 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:38:46,080 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:39:00,450 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:39:14,242 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:39:27,963 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:39:41,525 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:39:55,501 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:40:08,860 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:40:22,716 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:40:36,718 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:40:50,862 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:41:04,192 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6944
+2026-04-02 17:41:17,804 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:41:31,382 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:41:45,272 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:41:58,864 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:42:12,541 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:42:26,243 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:42:40,642 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:42:55,683 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:43:09,370 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:43:22,819 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:43:36,251 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:43:49,553 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:44:03,040 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:44:16,517 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:44:30,456 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:44:43,865 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:44:57,404 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:45:11,085 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:45:24,611 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:45:38,113 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:45:51,469 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:46:05,317 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:46:19,173 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:46:33,519 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:46:46,797 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:47:00,448 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:47:13,917 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:47:27,199 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:47:40,203 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:47:53,829 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:48:07,123 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:48:20,634 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:48:33,801 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:48:46,721 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:49:00,020 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:49:13,561 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:49:26,854 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:49:40,280 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:49:53,569 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:50:07,528 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:50:21,356 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:50:35,385 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:50:48,383 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:51:01,026 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:51:13,218 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:51:24,961 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:51:36,402 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:51:48,325 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:51:59,646 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:52:12,748 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6742
+2026-04-02 17:52:25,996 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6757
+2026-04-02 17:52:39,913 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6726
+2026-04-02 17:52:53,269 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6944
+2026-04-02 17:53:06,349 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6998
+2026-04-02 17:53:21,187 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:53:36,512 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.1843
+2026-04-02 17:53:50,965 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.2302
+2026-04-02 17:54:04,366 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.2271
+2026-04-02 17:54:17,966 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:54:31,177 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 17:54:45,396 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:54:59,098 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:55:12,288 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:55:25,148 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:55:38,628 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:55:51,724 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:56:05,844 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:56:19,688 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:56:32,730 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:56:47,882 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:57:01,676 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6952
+2026-04-02 17:57:16,983 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:57:31,031 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:57:44,133 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6936
+2026-04-02 17:57:58,663 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:58:13,010 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6983
+2026-04-02 17:58:26,137 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6983
+2026-04-02 17:58:40,067 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:58:53,808 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6936
+2026-04-02 17:59:05,144 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:59:16,104 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:59:27,072 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 17:59:38,478 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 17:59:49,925 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:00:01,952 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:00:13,495 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:00:24,615 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:00:35,715 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:00:46,970 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6998
+2026-04-02 18:00:58,288 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:01:09,386 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6913
+2026-04-02 18:01:20,264 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:01:31,267 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:01:42,424 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:01:53,473 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:02:04,644 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:02:15,628 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:02:26,034 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:02:36,949 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:02:47,868 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:02:59,674 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:03:10,923 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:03:22,346 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 18:03:33,237 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:03:43,989 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:03:56,655 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:04:09,025 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:04:20,289 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:04:32,495 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:04:45,471 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:04:58,079 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:05:10,627 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:05:23,649 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:05:36,162 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:05:49,221 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:06:02,159 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:06:14,647 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 18:06:27,658 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:06:40,531 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6726
+2026-04-02 18:06:53,288 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.7068
+2026-04-02 18:07:08,332 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6781
+2026-04-02 18:07:21,627 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:07:34,789 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:07:47,702 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:08:00,369 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:08:12,974 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:08:25,553 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:08:38,509 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:08:51,236 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6960
+2026-04-02 18:09:04,088 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:09:16,790 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:09:29,405 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6991
+2026-04-02 18:09:42,596 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:09:55,353 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:10:07,905 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:10:20,368 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:10:33,203 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:10:45,849 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:10:58,709 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.6975
+2026-04-02 18:11:03,544 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-02 18:11:03,775 | INFO | base_dl_model | [TFTModel] Network params: 262,231
+2026-04-02 18:11:04,374 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 18:11:48,220 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=0.981330  val_loss=0.999467
+2026-04-02 18:14:56,043 | INFO | base_dl_model | [TFTModel] Early stop at epoch 6. Best val_loss=0.999467
+2026-04-02 18:14:56,043 | INFO | base_dl_model | [TFTModel] Training finished in 231.7s
+2026-04-02 18:14:58,521 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=1.0000  mean=-0.9890
+2026-04-02 18:15:05,531 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-02 18:15:05,745 | INFO | base_dl_model | [TFTModel] Network params: 129,111
+2026-04-02 18:15:05,745 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-02 18:15:49,404 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=1.005203  val_loss=1.114195
+2026-04-03 09:41:25,079 | INFO | base_dl_model | [TFTModel] Early stop at epoch 6. Best val_loss=1.114195
+2026-04-03 09:41:25,579 | INFO | base_dl_model | [TFTModel] Training finished in 55579.8s
+2026-04-03 09:41:30,055 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:41:33,163 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-03 09:41:37,711 | INFO | base_dl_model | [TFTModel] Network params: 262,231
+2026-04-03 09:41:38,037 | INFO | base_dl_model | [TFTModel] Class weights: short=0.002 neutral=2.991 long=0.007
+2026-04-03 09:42:13,145 | INFO | base_dl_model | [TFTModel] Epoch 1/50 train_loss=0.889058  val_loss=0.996836
+2026-04-03 09:49:01,039 | INFO | base_dl_model | [TFTModel] Epoch 10/50 train_loss=0.955429  val_loss=1.112285
+2026-04-03 09:49:48,997 | INFO | base_dl_model | [TFTModel] Early stop at epoch 11. Best val_loss=0.996836
+2026-04-03 09:49:49,001 | INFO | base_dl_model | [TFTModel] Training finished in 490.7s
+2026-04-03 09:49:52,420 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:49:53,689 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:08,707 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:17,551 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:26,607 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:34,873 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:42,315 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:50,861 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:50:59,951 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:08,501 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:17,127 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:24,954 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:33,354 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:42,396 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:50,545 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:51:59,672 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:08,466 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:16,616 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:25,475 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:33,410 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:38,785 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:46,566 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:51,682 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:52:57,971 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:05,752 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:14,575 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:23,183 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:31,444 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:37,730 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:43,519 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:49,852 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:53:56,185 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:02,507 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:08,730 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:15,036 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:21,095 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:27,860 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:34,290 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:40,396 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:46,401 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:52,085 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:54:58,354 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:04,537 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:10,737 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:17,081 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:23,252 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:29,277 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:35,989 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:42,305 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:48,403 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:55:54,396 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:00,343 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:06,608 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:12,437 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:21,505 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:29,424 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:35,928 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:42,431 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:48,391 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:56:54,600 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:01,595 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:07,987 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:14,355 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:22,251 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:29,335 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:35,596 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:41,753 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:46,866 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:51,800 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:57:56,758 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:03,039 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:08,257 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:13,731 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:18,770 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:24,765 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:29,980 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:35,477 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:40,723 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:46,077 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:51,872 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:58:57,969 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:03,045 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:08,418 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:14,716 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:20,057 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:25,008 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:30,535 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:35,828 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:41,822 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:47,415 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:52,602 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 09:59:57,880 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:03,603 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:08,952 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:14,618 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:20,762 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:27,147 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:32,697 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:37,886 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:44,156 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:49,779 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:00:54,990 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:00,274 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:05,661 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:11,009 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:16,471 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:22,422 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:28,997 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:35,726 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:41,557 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:48,238 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:01:55,281 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:01,822 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:08,992 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:15,210 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:22,015 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:27,657 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:32,438 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:37,228 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:42,107 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:46,973 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:52,197 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:02:57,325 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:02,326 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:07,377 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:13,851 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:20,565 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:27,816 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:34,206 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:40,688 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:46,817 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:03:55,393 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:02,063 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:09,148 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:16,628 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:23,143 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:30,011 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:36,689 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:43,623 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:49,850 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:04:56,399 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:03,462 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:10,081 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:16,771 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:23,339 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:31,133 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:38,808 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:49,527 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:05:57,890 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:06:06,450 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:06:37,406 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:06:54,520 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:00,749 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:06,496 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:14,273 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:20,935 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:28,265 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:35,125 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:41,865 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:48,088 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:07:54,140 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:01,466 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:08,596 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:14,646 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:21,162 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:27,378 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:33,758 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:40,136 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:47,377 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:53,782 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:08:59,990 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:06,745 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:12,911 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:19,479 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:26,018 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:32,813 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:39,746 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:46,455 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:52,915 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:09:59,502 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:05,662 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:12,396 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:18,840 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:24,960 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:30,592 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:37,478 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:43,666 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:49,947 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:10:56,247 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:02,598 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:08,924 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:15,483 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:21,514 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:27,526 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:33,647 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:39,838 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:46,563 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:52,769 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:11:59,037 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:05,301 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:11,601 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:18,139 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:24,731 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:31,084 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:37,056 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:43,733 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:50,130 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:12:56,365 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:02,680 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:08,975 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:15,474 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:21,945 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:27,854 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:34,312 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:42,982 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:49,177 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:13:56,322 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:02,495 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:08,280 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:14,148 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:20,196 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:26,414 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:32,077 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:37,774 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:43,740 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:50,344 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:14:56,437 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:02,741 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:08,917 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:13,818 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:19,299 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:25,044 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:31,326 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:37,502 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:43,015 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:48,210 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:15:54,255 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:00,812 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:07,060 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:13,385 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:19,380 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:26,194 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:32,528 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:38,621 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:44,345 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:50,418 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:16:56,429 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:02,452 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:08,714 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:14,487 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:20,836 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:27,583 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:33,762 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:40,145 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:46,555 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:52,558 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:17:58,805 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-03 10:18:04,096 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 10:18:04,367 | INFO | base_dl_model | [GRUModel] Network params: 27,146
+2026-04-03 10:18:17,671 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=530180.511949  val_loss=770274.598157
+2026-04-03 10:20:22,475 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=521518.545680  val_loss=758013.645833
+2026-04-03 10:22:42,053 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=511591.934283  val_loss=744553.086138
+2026-04-03 10:25:02,677 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=501667.366176  val_loss=731260.411058
+2026-04-03 10:25:02,677 | INFO | base_dl_model | [GRUModel] Training finished in 418.3s
+2026-04-03 10:25:03,832 | INFO | base_dl_model | [GRUModel] predict() → min=21.9879  max=30.6017  mean=27.6263
+2026-04-03 10:25:04,415 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-03 10:25:04,547 | INFO | base_dl_model | [LSTMModel] Network params: 59,721
+2026-04-03 10:25:10,585 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=526399.162064  val_loss=739339.431818
+2026-04-03 10:25:59,108 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=516672.039244  val_loss=726884.872869
+2026-04-03 10:26:50,539 | INFO | base_dl_model | [LSTMModel] Epoch 20/30 train_loss=509486.129360  val_loss=717028.619318
+2026-04-03 10:27:42,896 | INFO | base_dl_model | [LSTMModel] Epoch 30/30 train_loss=502739.207122  val_loss=707394.551136
+2026-04-03 10:27:42,896 | INFO | base_dl_model | [LSTMModel] Training finished in 158.3s
+2026-04-03 10:27:43,283 | INFO | base_dl_model | [LSTMModel] predict() → min=24.2043  max=24.2043  mean=24.2043
+2026-04-03 10:27:44,014 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-03 10:27:44,384 | INFO | base_dl_model | [TCNModel] Network params: 435,006
+2026-04-03 10:28:26,785 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=30016049639.859650  val_loss=532510977.200000
+2026-04-03 10:35:12,003 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=717829891.029240  val_loss=669288435.200000
+2026-04-03 10:35:59,945 | INFO | base_dl_model | [TCNModel] Early stop at epoch 11. Best val_loss=145241947.200000
+2026-04-03 10:36:00,007 | INFO | base_dl_model | [TCNModel] Training finished in 495.6s

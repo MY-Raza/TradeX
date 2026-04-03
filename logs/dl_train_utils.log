@@ -492,3 +492,22 @@
 2026-04-02 13:25:50,267 | INFO | dl_train_utils | [trial 2] Chunk 2/2 PnL: -68.4600
 2026-04-02 13:38:41,285 | INFO | dl_train_utils | [trial 3] Chunk 1/2 PnL: -22.8400
 2026-04-02 13:38:44,393 | INFO | dl_train_utils | [trial 3] Chunk 2/2 PnL: -67.9000
+2026-04-02 14:14:10,766 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21430 rows with inf/NaN.
+2026-04-02 14:14:10,768 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6899, 87)
+2026-04-02 14:14:10,798 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1356 | Features: 85
+2026-04-02 15:28:42,201 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -24.5800
+2026-04-02 15:28:45,997 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -67.6000
+2026-04-02 18:11:03,322 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21430 rows with inf/NaN.
+2026-04-02 18:11:03,327 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6899, 87)
+2026-04-02 18:11:03,468 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1356 | Features: 85
+2026-04-02 18:15:01,810 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -53.9000
+2026-04-02 18:15:05,248 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -67.9000
+2026-04-03 10:18:03,913 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
+2026-04-03 10:18:03,929 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
+2026-04-03 10:18:04,055 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1353 | Features: 85
+2026-04-03 10:25:04,379 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
+2026-04-03 10:25:04,380 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
+2026-04-03 10:25:04,407 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1353 | Features: 85
+2026-04-03 10:27:43,970 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
+2026-04-03 10:27:43,971 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
+2026-04-03 10:27:43,994 | INFO | dl_train_utils | [split_features_labels] Train rows: 5543 | Test rows: 1353 | Features: 85
