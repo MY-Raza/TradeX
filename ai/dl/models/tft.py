@@ -332,7 +332,7 @@ def train(
         aligned_index = X_test.index[-(len(preds)):]
         return run_chunked_backtest(
             trial, df, preds, aligned_index, df_1m,
-            model_type=model_type, k=k,
+            model_type=model_type, k=k, lookback=seq_len,
         )
 
     pruner = optuna.pruners.MedianPruner(n_startup_trials=3, n_warmup_steps=0)
@@ -361,8 +361,7 @@ def train(
     if np.std(final_preds) < 1e-6:
         logger.warning(
             "[train] Final TFT model collapsed to constant output "
-            f"({final_preds.mean():.4f}). Adding small noise to prevent "
-            "all-zero signals."
+            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
         )
         rng = np.random.default_rng(42)
         final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)

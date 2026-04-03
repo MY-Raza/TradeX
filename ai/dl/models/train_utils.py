@@ -12,22 +12,12 @@ logger = get_logger("dl_train_utils")
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 1. Validate & sort  (identical to ML train_utils)
+# 1. Validate & sort
 # ──────────────────────────────────────────────────────────────────────────────
 
 def validate_and_sort(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
     """
     Validate required columns exist and sort the DataFrame by datetime (UTC).
-
-    Args:
-        df         : Raw feature DataFrame.
-        target_col : Name of the target column (e.g. ``'target'``).
-
-    Returns:
-        DataFrame with ``'datetime'`` cast to UTC-aware Timestamps, sorted.
-
-    Raises:
-        ValueError : If ``'datetime'`` or ``target_col`` are missing.
     """
     if "datetime" not in df.columns:
         raise ValueError("DataFrame must contain a 'datetime' column.")
@@ -41,7 +31,7 @@ def validate_and_sort(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 2. Feature transformation  (identical to ML train_utils)
+# 2. Feature transformation
 # ──────────────────────────────────────────────────────────────────────────────
 
 def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
@@ -49,17 +39,8 @@ def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
     Apply log-differencing to OHLCV columns and sanitise inf/NaN.
 
     Transformation:
-        - open, high, low, close  →  log(x).diff()
-        - volume                  →  log1p(x).diff()
-
-    After transformation all numeric columns are checked for inf / NaN and
-    offending rows are dropped so downstream models never receive bad values.
-
-    Args:
-        df : DataFrame containing any subset of OHLCV columns.
-
-    Returns:
-        Transformed DataFrame with NaN/inf rows removed and index reset.
+        - open, high, low, close  ->  log(x).diff()
+        - volume                  ->  log1p(x).diff()
     """
     df = df.copy()
 
@@ -96,26 +77,12 @@ def normalize_regression_target(
     """
     Replace a raw-price regression target with its log-return equivalent.
 
-    If the target column has a large absolute mean (> 1.0) we assume it is a
-    raw price and convert it to a log-difference return:
+    If |mean| of the target > 1.0 we assume it is a raw price and convert:
+        target[t]  ->  log(target[t]) - log(target[t-1])
 
-        target[t]  →  log(target[t]) - log(target[t-1])
-
-    This keeps the target on the same ~[-0.05, +0.05] scale as the
-    log-differenced OHLCV features, preventing MSE from exploding and the
-    network from collapsing to the mean.
-
-    If the target already looks normalised (|mean| ≤ 1.0) the DataFrame is
-    returned unchanged so classifiers and pre-normalised regressors are
-    unaffected.
-
-    Args:
-        df         : DataFrame containing ``target_col``.
-        target_col : Name of the regression target column.
-
-    Returns:
-        DataFrame with ``target_col`` replaced by log-returns (rows with NaN
-        dropped and index reset).
+    This keeps the target on the same small-float scale as log-differenced
+    OHLCV features, preventing MSE collapse to the mean.
+    Classifiers ({-1, 0, 1}) and already-normalised targets pass through unchanged.
     """
     if target_col not in df.columns:
         return df
@@ -123,7 +90,7 @@ def normalize_regression_target(
     abs_mean = df[target_col].abs().mean()
     if abs_mean <= 1.0:
         logger.info(
-            f"[normalize_regression_target] Target '{target_col}' looks already "
+            f"[normalize_regression_target] Target '{target_col}' already "
             f"normalised (|mean|={abs_mean:.4f}). Skipping."
         )
         return df
@@ -143,7 +110,7 @@ def normalize_regression_target(
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 3. Train / test split  (identical to ML train_utils)
+# 3. Train / test split
 # ──────────────────────────────────────────────────────────────────────────────
 
 def split_features_labels(
@@ -153,21 +120,6 @@ def split_features_labels(
 ) -> tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.Series]:
     """
     Temporal train/test split and X/y construction.
-
-    Drops ``'datetime'``, ``target_col``, and ``'future_close'`` from feature
-    matrices.  A final defensive pass replaces remaining inf/NaN and drops
-    those rows.
-
-    Args:
-        df          : Sorted, transformed DataFrame.
-        target_col  : Name of the label column.
-        split_date  : ISO date string marking the train/test boundary.
-
-    Returns:
-        ``(X_train, y_train, X_test, y_test)``
-
-    Raises:
-        ValueError : If either split yields an empty set.
     """
     split_dt = pd.to_datetime(split_date, utc=True)
     train_df = df[df["datetime"] < split_dt]
@@ -207,7 +159,7 @@ def split_features_labels(
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 4. Chunked backtest with Optuna pruning  (identical to ML train_utils)
+# 4. Chunked backtest with Optuna pruning
 # ──────────────────────────────────────────────────────────────────────────────
 
 def run_chunked_backtest(
@@ -218,6 +170,7 @@ def run_chunked_backtest(
     df_1m: pd.DataFrame,
     model_type: str,
     k: float,
+    lookback: int = 1,          # FIX: seq_len passed by each model's objective()
     n_chunks: int = 2,
     take_profit: float = 3,
     stop_loss: float = 1,
@@ -225,47 +178,29 @@ def run_chunked_backtest(
     """
     Evaluate predictions via chunked PnL backtesting with Optuna pruning.
 
-    Identical to the ML module's ``run_chunked_backtest`` — DL models are
-    evaluated the same way as RF / XGB models, using ``model_type='dl'`` so
-    ``prepare_predictions`` applies the correct signal-generation path.
-
     Args:
         trial        : Active Optuna trial.
-        df           : Full feature DataFrame (with ``'datetime'`` column).
+        df           : Full feature DataFrame (with 'datetime' column).
         preds        : Model predictions for the test set.
         test_index   : Index of test rows (after seq_len warm-up alignment).
         df_1m        : 1-minute OHLCV data for BackTest.
-        model_type   : ``'classifier'`` or ``'regressor'``.
+        model_type   : 'classifier' or 'regressor'.
         k            : Top-k std threshold for signal selection.
+        lookback     : seq_len used by the model — required by prepare_predictions
+                       when model_type='dl'.
         n_chunks     : Number of temporal evaluation chunks.
         take_profit  : BackTest take-profit multiplier.
         stop_loss    : BackTest stop-loss multiplier.
-
-    Returns:
-        Final cumulative PnL across all chunks.
-
-    Raises:
-        optuna.TrialPruned : If Optuna decides to prune mid-evaluation.
     """
     preds_np   = np.asarray(preds)
     idx_arr    = np.asarray(test_index)
 
-    # Triple-align: preds, positional index, and the datetime lookup frame
-    # must all share the same length before prepare_predictions is called.
-    # Re-derive df_slice as the tail of df (datetime-sorted) so iloc positions
-    # 0..min_len-1 on it always correspond to the test predictions.
     min_len    = min(len(preds_np), len(idx_arr))
     preds_np   = preds_np[-min_len:]
-    idx_arr    = np.arange(min_len)   # safe 0-based positions into df_slice
+    idx_arr    = np.arange(min_len)
 
-    # Slice df to the last min_len rows so iloc[0..min_len-1] is valid
     df_slice   = df.iloc[-min_len:].reset_index(drop=True)
 
-    # For DL classifiers, preds are already discrete {-1, 0, 1} signals from
-    # argmax. Build df_preds directly without going through prepare_predictions'
-    # std-threshold path (which is designed for continuous regressor scores and
-    # would distort discrete class predictions).
-    # For DL regressors, use the 'dl' path which applies std-threshold correctly.
     if model_type == "classifier":
         df_preds = df_slice[["datetime"]].copy().reset_index(drop=True)
         df_preds["signals"] = preds_np.astype(int)
@@ -274,6 +209,7 @@ def run_chunked_backtest(
             df_slice, preds_np, idx_arr,
             model_type="dl",
             k=k,
+            lookback=lookback,          # FIX: was missing, caused ValueError
         )
     df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
