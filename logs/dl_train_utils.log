@@ -548,3 +548,17 @@
 2026-04-03 14:42:20,061 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=573.90) to log-return.
 2026-04-03 14:42:20,096 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000245  std=0.420107
 2026-04-03 14:42:20,195 | INFO | dl_train_utils | [split_features_labels] Train rows: 5542 | Test rows: 1353 | Features: 85
+2026-04-03 14:59:30,621 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
+2026-04-03 14:59:30,621 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
+2026-04-03 14:59:30,634 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=573.90) to log-return.
+2026-04-03 14:59:30,638 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000245  std=0.420107
+2026-04-03 14:59:30,674 | INFO | dl_train_utils | [split_features_labels] Train rows: 5542 | Test rows: 1353 | Features: 85
+2026-04-03 15:09:02,828 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -68.4500
+2026-04-03 15:09:07,970 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.4500
+2026-04-03 15:15:23,856 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -69.0900
+2026-04-03 15:15:28,391 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -69.0900
+2026-04-03 15:57:18,973 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
+2026-04-03 15:57:18,973 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
+2026-04-03 15:57:18,973 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=573.90) to log-return.
+2026-04-03 15:57:18,992 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000245  std=0.420107
+2026-04-03 15:57:19,073 | INFO | dl_train_utils | [split_features_labels] Train rows: 5542 | Test rows: 1353 | Features: 85

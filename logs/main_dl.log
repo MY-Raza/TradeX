@@ -178,3 +178,10 @@
 2026-04-03 14:42:18,010 | INFO | main_dl | Training DL regressor: tft for btc
 2026-04-03 14:47:18,247 | ERROR | main_dl | DL Regressor tft failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
 2026-04-03 14:47:18,247 | INFO | main_dl | DL model training complete for btc.
+2026-04-03 14:53:51,341 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-03 14:53:51,341 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-03 14:59:30,393 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-03 15:31:39,429 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[0.04957916 0.05408993 0.06126998 0.06520829 0.06726991]
+2026-04-03 15:31:46,867 | INFO | main_dl | [gru] Balance=496.22  PnL=-69.1200
+2026-04-03 15:57:18,244 | INFO | main_dl | Training DL regressor: lstm for btc
