@@ -142,3 +142,15 @@
 2026-04-02 14:09:03,387 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
 2026-04-02 14:09:03,387 | INFO | main_dl | === Processing symbol: btc ===
 2026-04-02 14:14:10,557 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-02 17:03:17,392 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[-1. -1. -1. -1. -1.]
+2026-04-02 17:03:36,434 | INFO | main_dl | [tcn] Balance=499.41  PnL=-67.6000
+2026-04-02 18:11:02,765 | INFO | main_dl | Training DL classifier: tft for btc
+2026-04-03 09:49:53,787 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[-1. -1. -1. -1. -1.]
+2026-04-03 09:50:05,165 | INFO | main_dl | [tft] Balance=498.48  PnL=-67.9000
+2026-04-03 10:18:03,126 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-03 10:25:03,925 | ERROR | main_dl | DL Regressor gru failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 10:25:03,928 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-03 10:27:43,460 | ERROR | main_dl | DL Regressor lstm failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 10:27:43,460 | INFO | main_dl | Training DL regressor: tcn for btc

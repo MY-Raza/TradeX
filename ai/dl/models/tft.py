@@ -328,7 +328,7 @@ def train(
         aligned_index = X_test.index[-(len(preds)):]
         return run_chunked_backtest(
             trial, df, preds, aligned_index, df_1m,
-            model_type=model_type, k=k,
+            model_type=model_type, k=k, lookback=seq_len,
         )
 
     pruner = optuna.pruners.MedianPruner(n_startup_trials=3, n_warmup_steps=0)

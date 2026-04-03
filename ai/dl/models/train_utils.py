@@ -161,6 +161,7 @@ def run_chunked_backtest(
     df_1m: pd.DataFrame,
     model_type: str,
     k: float,
+    lookback: int = 1,
     n_chunks: int = 2,
     take_profit: float = 3,
     stop_loss: float = 1,
@@ -180,6 +181,9 @@ def run_chunked_backtest(
         df_1m        : 1-minute OHLCV data for BackTest.
         model_type   : ``'classifier'`` or ``'regressor'``.
         k            : Top-k std threshold for signal selection.
+        lookback     : Sequence length (seq_len) used by the model; passed to
+                       ``prepare_predictions`` as the ``lookback`` argument
+                       required for ``model_type='dl'`` regressors.
         n_chunks     : Number of temporal evaluation chunks.
         take_profit  : BackTest take-profit multiplier.
         stop_loss    : BackTest stop-loss multiplier.
@@ -217,6 +221,7 @@ def run_chunked_backtest(
             df_slice, preds_np, idx_arr,
             model_type="dl",
             k=k,
+            lookback=lookback,
         )
     df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
