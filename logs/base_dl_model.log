@@ -2923,3 +2923,235 @@
 2026-04-03 12:07:16,286 | INFO | base_dl_model | [LSTMModel] Network params: 79,384
 2026-04-03 12:07:28,571 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=523759.011628  val_loss=729126.088778
 2026-04-03 12:09:39,161 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=493912.898256  val_loss=691053.368608
+2026-04-03 12:17:51,950 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 12:17:55,126 | INFO | base_dl_model | [GRUModel] Network params: 233,625
+2026-04-03 12:19:07,093 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=510325.478860  val_loss=719693.028245
+2026-04-03 12:28:34,403 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=300372.826057  val_loss=407207.151192
+2026-04-03 12:38:17,240 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=216641.524655  val_loss=277483.531450
+2026-04-03 12:47:57,102 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=190666.850207  val_loss=239235.000901
+2026-04-03 12:47:57,119 | INFO | base_dl_model | [GRUModel] Training finished in 1793.8s
+2026-04-03 12:48:00,561 | INFO | base_dl_model | [GRUModel] predict() → min=615.8920  max=615.8936  mean=615.8931
+2026-04-03 12:48:27,119 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 12:48:27,793 | INFO | base_dl_model | [GRUModel] Network params: 42,862
+2026-04-03 12:48:48,707 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=523360.916424  val_loss=793740.443750
+2026-04-03 12:51:00,488 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=498648.539971  val_loss=757734.596875
+2026-04-03 12:53:32,183 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=473304.218023  val_loss=719782.059375
+2026-04-03 12:56:43,313 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=445439.802689  val_loss=683354.962500
+2026-04-03 12:56:43,317 | INFO | base_dl_model | [GRUModel] Training finished in 495.5s
+2026-04-03 12:56:44,320 | INFO | base_dl_model | [GRUModel] predict() → min=84.0009  max=84.0009  mean=84.0009
+2026-04-03 12:57:02,342 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 12:57:04,753 | INFO | base_dl_model | [GRUModel] Network params: 42,862
+2026-04-03 12:57:20,014 | INFO | base_dl_model | [GRUModel] Epoch 1/50 train_loss=523915.888808  val_loss=793817.625000
+2026-04-03 12:59:28,543 | INFO | base_dl_model | [GRUModel] Epoch 10/50 train_loss=497945.649709  val_loss=757817.112500
+2026-04-03 13:01:53,715 | INFO | base_dl_model | [GRUModel] Epoch 20/50 train_loss=471609.683866  val_loss=719855.681250
+2026-04-03 13:04:35,157 | INFO | base_dl_model | [GRUModel] Epoch 30/50 train_loss=445263.283430  val_loss=683423.234375
+2026-04-03 13:40:05,870 | INFO | base_dl_model | [GRUModel] Epoch 40/50 train_loss=422321.988372  val_loss=648472.034375
+2026-04-03 13:42:38,311 | INFO | base_dl_model | [GRUModel] Epoch 50/50 train_loss=401600.537791  val_loss=614988.084375
+2026-04-03 13:42:38,316 | INFO | base_dl_model | [GRUModel] Training finished in 2733.5s
+2026-04-03 13:42:39,379 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:42:39,602 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:42:51,982 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:42:57,423 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:02,264 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:06,979 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:11,965 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:16,213 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:20,485 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:25,122 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:29,067 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:32,502 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:36,147 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:39,512 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:42,729 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:45,957 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:49,459 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:52,752 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:56,100 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:43:59,299 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:02,474 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:05,912 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:09,127 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:12,672 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:16,027 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:19,226 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:22,375 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:25,855 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:29,037 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:32,181 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:35,753 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:39,010 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:42,210 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:45,370 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:48,491 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:51,916 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:55,159 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:44:58,560 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:01,779 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:04,940 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:08,139 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:11,709 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:15,124 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:18,589 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:22,180 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:25,585 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:28,967 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:32,366 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:35,701 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:39,328 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:42,710 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:46,431 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:49,871 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:53,282 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:45:56,621 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:00,310 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:03,783 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:07,268 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:11,009 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:14,605 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:18,171 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:21,722 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:25,314 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:28,810 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:32,515 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:35,789 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:39,131 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:42,776 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:46,225 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:49,622 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:53,240 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:46:57,033 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:00,516 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:03,985 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:07,450 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:10,869 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:14,450 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:18,073 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:21,483 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:24,906 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:28,317 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:31,720 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:35,118 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:38,810 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:43,015 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:46,518 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:49,894 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:53,279 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:47:57,363 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:00,918 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:04,331 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:07,733 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:11,390 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:14,817 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:18,274 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:21,984 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:25,409 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:28,849 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:32,473 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:35,994 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:40,606 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:44,322 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:48,266 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:48:51,940 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:58:45,601 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:58:49,420 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:58:52,406 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:58:55,411 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:58:59,052 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:02,647 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:07,052 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:11,089 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:14,670 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:18,126 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:21,765 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:25,354 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:29,153 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:32,499 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:36,492 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:41,398 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:45,625 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:50,381 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:54,807 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 13:59:59,398 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:04,491 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:08,981 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:13,539 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:18,827 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:23,761 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:28,440 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:33,271 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:38,507 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:42,852 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:47,374 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:51,560 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:00:56,376 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:00,788 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:05,411 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:10,308 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:15,301 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:20,320 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:24,963 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:30,175 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:35,110 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:40,148 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:45,430 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:50,484 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:01:55,337 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:00,433 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:05,435 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:09,777 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:14,653 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:19,117 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:23,083 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:27,408 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:31,216 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:35,120 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:39,214 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:43,703 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:48,575 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:52,733 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:02:56,741 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:00,969 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:05,021 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:09,934 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:14,446 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:19,422 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:23,362 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:27,746 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:31,825 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:36,261 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:40,588 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:44,682 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:51,386 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:55,657 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:03:59,924 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:04:05,512 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:04:09,893 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:04:15,071 | INFO | base_dl_model | [GRUModel] predict() → min=137.9125  max=137.9125  mean=137.9125
+2026-04-03 14:12:14,233 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 14:12:14,586 | INFO | base_dl_model | [GRUModel] Network params: 125,742
+2026-04-03 14:13:14,444 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=0.183794  val_loss=0.174362
+2026-04-03 14:20:09,242 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=0.180416  val_loss=0.178494
+2026-04-03 14:20:09,319 | INFO | base_dl_model | [GRUModel] Early stop at epoch 10. Best val_loss=0.168618
+2026-04-03 14:20:09,321 | INFO | base_dl_model | [GRUModel] Training finished in 467.3s
+2026-04-03 14:20:11,675 | INFO | base_dl_model | [GRUModel] predict() → min=-0.1049  max=-0.0960  mean=-0.0999
+2026-04-03 14:20:12,162 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-03 14:20:12,293 | INFO | base_dl_model | [LSTMModel] Network params: 1,475,592
+2026-04-03 14:20:52,179 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.177797  val_loss=0.162998
+2026-04-03 14:23:50,667 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 6. Best val_loss=0.162998
+2026-04-03 14:23:50,667 | INFO | base_dl_model | [LSTMModel] Training finished in 218.4s
+2026-04-03 14:23:52,840 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.0813  max=0.0855  mean=0.0034
+2026-04-03 14:23:53,191 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-03 14:23:53,376 | INFO | base_dl_model | [TCNModel] Network params: 905,452
+2026-04-03 14:24:30,292 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=6494311771.586206  val_loss=4091294829.714286
+2026-04-03 14:29:32,662 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=34433690.106322  val_loss=55749271.214286
+2026-04-03 14:36:05,655 | INFO | base_dl_model | [TCNModel] Epoch 20/30 train_loss=4530705.249282  val_loss=25445826.047619
+2026-04-03 14:42:14,752 | INFO | base_dl_model | [TCNModel] Epoch 30/30 train_loss=2916956.779454  val_loss=17323811.547619
+2026-04-03 14:42:14,752 | INFO | base_dl_model | [TCNModel] Training finished in 1101.4s
+2026-04-03 14:42:17,723 | INFO | base_dl_model | [TCNModel] predict() → min=-30610.4277  max=9107.6660  mean=-1729.1466
+2026-04-03 14:42:20,260 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-03 14:42:20,532 | INFO | base_dl_model | [TFTModel] Network params: 553,341
+2026-04-03 14:42:46,400 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=0.201215  val_loss=0.170714
+2026-04-03 14:46:26,071 | INFO | base_dl_model | [TFTModel] Epoch 10/30 train_loss=0.178680  val_loss=0.169584
+2026-04-03 14:47:16,731 | INFO | base_dl_model | [TFTModel] Early stop at epoch 12. Best val_loss=0.169256
+2026-04-03 14:47:16,732 | INFO | base_dl_model | [TFTModel] Training finished in 296.2s
+2026-04-03 14:47:18,220 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0276  max=-0.0276  mean=-0.0276

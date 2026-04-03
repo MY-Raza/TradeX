@@ -161,3 +161,20 @@
 [695.7018 695.7018 695.7018 695.7018 695.7018]
 2026-04-03 12:04:16,571 | ERROR | main_dl | DL Regressor gru failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
 2026-04-03 12:04:16,577 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-03 12:11:32,205 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-03 12:11:32,205 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-03 12:17:51,535 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-03 13:42:39,645 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[137.91246 137.91246 137.91246 137.91246 137.91246]
+2026-04-03 13:42:50,883 | INFO | main_dl | [gru] Balance=1390.01  PnL=36.5300
+2026-04-03 14:05:26,693 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-03 14:05:26,693 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-03 14:12:13,668 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-03 14:20:11,757 | ERROR | main_dl | DL Regressor gru failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 14:20:11,758 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-03 14:23:52,852 | ERROR | main_dl | DL Regressor lstm failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 14:23:52,853 | INFO | main_dl | Training DL regressor: tcn for btc
+2026-04-03 14:42:18,008 | ERROR | main_dl | DL Regressor tcn failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 14:42:18,010 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-03 14:47:18,247 | ERROR | main_dl | DL Regressor tft failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 14:47:18,247 | INFO | main_dl | DL model training complete for btc.
