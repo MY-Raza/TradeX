@@ -2884,3 +2884,42 @@
 2026-04-03 10:35:12,003 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=717829891.029240  val_loss=669288435.200000
 2026-04-03 10:35:59,945 | INFO | base_dl_model | [TCNModel] Early stop at epoch 11. Best val_loss=145241947.200000
 2026-04-03 10:36:00,007 | INFO | base_dl_model | [TCNModel] Training finished in 495.6s
+2026-04-03 10:43:25,417 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 10:43:25,791 | INFO | base_dl_model | [GRUModel] Network params: 117,502
+2026-04-03 10:43:56,467 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=513993.355741  val_loss=711178.627344
+2026-04-03 10:46:59,392 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=273465.908703  val_loss=361073.377344
+2026-04-03 10:50:39,904 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=204938.656159  val_loss=236983.489453
+2026-04-03 10:54:53,896 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=195029.194767  val_loss=225843.637891
+2026-04-03 10:54:53,900 | INFO | base_dl_model | [GRUModel] Training finished in 683.4s
+2026-04-03 10:54:55,419 | INFO | base_dl_model | [GRUModel] predict() → min=559.2838  max=717.7836  mean=658.9059
+2026-04-03 10:55:08,425 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 10:55:08,923 | INFO | base_dl_model | [GRUModel] Network params: 379,905
+2026-04-03 10:56:42,410 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=519319.270221  val_loss=725242.204297
+2026-04-03 11:09:42,686 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=401415.223897  val_loss=562445.594922
+2026-04-03 11:26:53,955 | INFO | base_dl_model | [GRUModel] Epoch 20/30 train_loss=310357.554779  val_loss=419156.090381
+2026-04-03 11:43:39,063 | INFO | base_dl_model | [GRUModel] Epoch 30/30 train_loss=257021.985110  val_loss=315217.167725
+2026-04-03 11:43:39,125 | INFO | base_dl_model | [GRUModel] Training finished in 2910.2s
+2026-04-03 11:43:45,162 | INFO | base_dl_model | [GRUModel] predict() → min=423.8548  max=423.8548  mean=423.8548
+2026-04-03 11:43:45,326 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-03 11:43:45,805 | INFO | base_dl_model | [GRUModel] Network params: 117,502
+2026-04-03 11:44:11,142 | INFO | base_dl_model | [GRUModel] Epoch 1/50 train_loss=506886.529978  val_loss=702493.412500
+2026-04-03 11:47:59,088 | INFO | base_dl_model | [GRUModel] Epoch 10/50 train_loss=252013.026344  val_loss=312823.067969
+2026-04-03 11:52:04,673 | INFO | base_dl_model | [GRUModel] Epoch 20/50 train_loss=196521.658158  val_loss=230087.240820
+2026-04-03 11:56:00,715 | INFO | base_dl_model | [GRUModel] Epoch 30/50 train_loss=190487.944858  val_loss=222075.808984
+2026-04-03 12:00:08,403 | INFO | base_dl_model | [GRUModel] Epoch 40/50 train_loss=185221.160293  val_loss=218860.908594
+2026-04-03 12:04:13,502 | INFO | base_dl_model | [GRUModel] Epoch 50/50 train_loss=184369.441633  val_loss=217114.986719
+2026-04-03 12:04:13,504 | INFO | base_dl_model | [GRUModel] Training finished in 1227.7s
+2026-04-03 12:04:15,491 | INFO | base_dl_model | [GRUModel] predict() → min=632.8493  max=790.9609  mean=706.7603
+2026-04-03 12:04:16,199 | INFO | base_dl_model | [GRUModel] predict() → min=695.7018  max=695.7018  mean=695.7017
+2026-04-03 12:04:18,609 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-03 12:04:19,121 | INFO | base_dl_model | [LSTMModel] Network params: 55,515
+2026-04-03 12:04:25,531 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=528348.007994  val_loss=756480.771875
+2026-04-03 12:05:01,933 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=493519.920058  val_loss=715958.559375
+2026-04-03 12:05:47,758 | INFO | base_dl_model | [LSTMModel] Epoch 20/30 train_loss=464107.355560  val_loss=673404.770312
+2026-04-03 12:06:48,695 | INFO | base_dl_model | [LSTMModel] Epoch 30/30 train_loss=435840.564862  val_loss=632609.487109
+2026-04-03 12:06:48,695 | INFO | base_dl_model | [LSTMModel] Training finished in 149.6s
+2026-04-03 12:06:49,374 | INFO | base_dl_model | [LSTMModel] predict() → min=67.5791  max=106.4262  mean=93.2922
+2026-04-03 12:07:15,956 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-03 12:07:16,286 | INFO | base_dl_model | [LSTMModel] Network params: 79,384
+2026-04-03 12:07:28,571 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=523759.011628  val_loss=729126.088778
+2026-04-03 12:09:39,161 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=493912.898256  val_loss=691053.368608

@@ -154,3 +154,10 @@
 2026-04-03 10:25:03,928 | INFO | main_dl | Training DL regressor: lstm for btc
 2026-04-03 10:27:43,460 | ERROR | main_dl | DL Regressor lstm failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
 2026-04-03 10:27:43,460 | INFO | main_dl | Training DL regressor: tcn for btc
+2026-04-03 10:36:45,794 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-03 10:36:45,794 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-03 10:43:25,031 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-03 12:04:16,282 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[695.7018 695.7018 695.7018 695.7018 695.7018]
+2026-04-03 12:04:16,571 | ERROR | main_dl | DL Regressor gru failed for btc: lookback must be provided for model_type='dl' (LSTM-style). For Darts models use model_type='dl_darts'.
+2026-04-03 12:04:16,577 | INFO | main_dl | Training DL regressor: lstm for btc

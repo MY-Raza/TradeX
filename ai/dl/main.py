@@ -44,6 +44,7 @@ def _run_backtest(
     df_test_norm: pd.DataFrame,
     model_type: str,
     k: float = 0.5,
+    lookback: int = 1,
 ) -> tuple:
     """Prepare predictions and run a BackTest. Returns (ledger, balance, pnl).
 
@@ -76,7 +77,7 @@ def _run_backtest(
         df_predictions["signals"] = preds_np.astype(int)
     else:
         df_predictions = prepare_predictions(
-            df_test_norm, preds_np, idx_arr, model_type="dl", k=k
+            df_test_norm, preds_np, idx_arr, model_type="dl", k=k, lookback=lookback
         )
     df_predictions["datetime"] = pd.to_datetime(df_predictions["datetime"], utc=True)
 
@@ -250,7 +251,8 @@ def main() -> None:
 
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
-                    df_1m, model, preds, test_index, df_test_norm, "classifier", k=0.5
+                    df_1m, model, preds, test_index, df_test_norm, "classifier",
+                    k=0.5, lookback=model.seq_len,
                 )
                 logger.info(f"[{clf_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
@@ -310,7 +312,8 @@ def main() -> None:
 
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
-                    df_1m, model, preds, test_index, df_test_norm, "regressor", k=0.5
+                    df_1m, model, preds, test_index, df_test_norm, "regressor",
+                    k=0.5, lookback=model.seq_len,
                 )
                 logger.info(f"[{reg_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
