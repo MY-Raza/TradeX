@@ -80,12 +80,27 @@ class _VariableSelectionNetwork(nn.Module):
     """
     Variable Selection Network (VSN).
 
-    Computes a soft attention weight over ``n_features`` input variables,
-    then returns a weighted sum of per-feature linear projections.
+    Computes a soft attention weight over ``n_features`` input variables and
+    returns a gated projection of the full feature vector into ``d_model`` space.
+
+    The original per-feature Linear(1, d_model) design had a fatal collapse
+    problem: at initialisation the softmax weights are uniform (~1/n_features),
+    so the VSN output is the average of 85 independent scalar projections.
+    Averaging 85 independent random vectors reduces their std by sqrt(85) ≈ 9×,
+    giving the downstream LSTM near-identical inputs across all samples in a
+    batch.  The encoder then can't differentiate samples, h_n is near-constant,
+    and the FC head learns a single constant equal to the target mean — which is
+    what the logs show (min=max=mean=0.0626).
+
+    Fix: replace the n_features individual Linear(1, d_model) projections with
+    a single joint Linear(n_features, d_model).  This gives the LSTM properly
+    varied inputs from the very first forward pass.  The GRN still computes
+    meaningful selection weights from the raw features, which are applied as a
+    scalar gate on the joint projection output.
 
     Args:
         n_features : Number of input features.
-        d_model    : Projection dimension for each feature and the gate GRN.
+        d_model    : Output projection dimension.
         dropout    : Dropout inside the GRN.
     """
 
@@ -93,41 +108,32 @@ class _VariableSelectionNetwork(nn.Module):
         super().__init__()
         self.n_features = n_features
         self.d_model    = d_model
-        # One linear projection per feature: scalar → d_model
-        self.feature_projections = nn.ModuleList(
-            [nn.Linear(1, d_model) for _ in range(n_features)]
-        )
-        # GRN gate: takes raw flat features (B*T, n_features) and outputs
-        # selection weights (B*T, n_features).
-        # BUG-FIX: was initialised with input_dim = n_features * d_model (e.g.
-        # 85 * 56 = 4760) but forward() passed flat of shape (B*T, n_features)
-        # (e.g. B*T x 85) → shape mismatch crash on every trial.
-        # The gate only needs the raw n_features values to decide which
-        # features to up-weight; it does not need the expanded projections.
-        self.grn     = _GatedResidualNetwork(n_features, n_features, dropout)
-        self.softmax = nn.Softmax(dim=-1)
+
+        # Single joint projection: all features seen together → d_model
+        # This preserves inter-feature covariance and avoids the averaging collapse.
+        self.input_projection = nn.Linear(n_features, d_model)
+
+        # GRN gate: maps raw features to a d_model-dim gate vector applied to
+        # the joint projection output (element-wise sigmoid scaling).
+        self.grn     = _GatedResidualNetwork(n_features, d_model, dropout)
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, T, n_features)
         B, T, _ = x.shape
 
-        # Project each feature independently: (B, T, 1) → (B, T, d_model)
-        projections = []
-        for i, proj in enumerate(self.feature_projections):
-            feat = x[:, :, i : i + 1]              # (B, T, 1)
-            projections.append(proj(feat))          # (B, T, d_model)
-        stacked = torch.stack(projections, dim=-2)  # (B, T, n_features, d_model)
+        # Joint projection: (B, T, n_features) → (B, T, d_model)
+        projected = self.input_projection(x)
 
-        # Compute selection weights from raw flat features.
-        # flat : (B*T, n_features) — matches GRN input_dim exactly.
-        flat    = x.reshape(B * T, self.n_features)               # (B*T, n_features)
-        weights = self.softmax(
-            self.grn(flat).reshape(B, T, self.n_features)
-        )  # (B, T, n_features)
+        # Compute per-dimension gate from raw features.
+        # Flatten time into batch for the GRN, then reshape back.
+        flat    = x.reshape(B * T, self.n_features)          # (B*T, n_features)
+        gate    = self.sigmoid(
+            self.grn(flat).reshape(B, T, self.d_model)
+        )                                                      # (B, T, d_model)
 
-        # Weighted sum over features → (B, T, d_model)
-        out = (stacked * weights.unsqueeze(-1)).sum(dim=-2)
-        return out
+        # Gated output: element-wise product keeps informative dimensions
+        return projected * gate                                # (B, T, d_model)
 
 
 class _TFTNetwork(nn.Module):

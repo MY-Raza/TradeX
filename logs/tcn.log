@@ -15,3 +15,6 @@
 2026-04-06 11:10:24,627 | INFO | tcn | [train] Starting TCN Optuna study (2 trials)…
 2026-04-06 11:34:38,206 | INFO | tcn | [train] Best params: {'seq_len': 99, 'num_channels': 102, 'num_layers': 3, 'kernel_size': 2, 'dropout': 0.26400762219413654, 'lr': 0.0002691980978872244, 'batch_size': 128} | Best PnL: 38.4500
 2026-04-06 11:47:10,558 | INFO | tcn | [train] Final preds — min: -22725.3301, max: -1044.5966, mean: -5921.2168
+2026-04-06 12:17:23,342 | INFO | tcn | [train] Starting TCN Optuna study (2 trials)…
+2026-04-06 12:35:46,976 | INFO | tcn | [train] Best params: {'seq_len': 31, 'num_channels': 193, 'num_layers': 5, 'kernel_size': 7, 'dropout': 0.349373227449576, 'lr': 0.0025983187786415615, 'batch_size': 32} | Best PnL: -67.6900
+2026-04-06 13:01:37,575 | INFO | tcn | [train] Final preds — min: -7059.9023, max: 29869.0195, mean: 23531.9902
