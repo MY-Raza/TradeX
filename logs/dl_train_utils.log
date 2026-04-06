@@ -609,3 +609,13 @@
 2026-04-06 14:39:54,117 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -69.3600
 2026-04-06 14:46:44,548 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -68.8100
 2026-04-06 14:46:48,587 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -68.8100
+2026-04-06 15:23:34,902 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 21419 rows with inf/NaN.
+2026-04-06 15:23:34,904 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (6896, 87)
+2026-04-06 15:23:34,906 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=573.90) to z-scored log-return.
+2026-04-06 15:23:34,923 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000245  std=0.420107
+2026-04-06 15:23:34,923 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=-0.000000  std=1.000000
+2026-04-06 15:23:34,961 | INFO | dl_train_utils | [split_features_labels] Train rows: 5542 | Test rows: 1353 | Features: 85
+2026-04-06 15:26:31,863 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -68.6400
+2026-04-06 15:26:35,001 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.6400
+2026-04-06 15:32:25,639 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -69.1600
+2026-04-06 15:32:32,560 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -69.1600

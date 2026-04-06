@@ -10,3 +10,6 @@
 2026-04-06 14:46:48,999 | INFO | tft | [train] Best params: {'seq_len': 64, 'hidden_size': 127, 'num_heads': 8, 'num_layers': 3, 'dropout': 0.17993751117399304, 'lr': 0.00513075545029312, 'batch_size': 32} | Best PnL: -68.8100
 2026-04-06 15:08:03,213 | WARNING | tft | [train] Final TFT model collapsed to constant output (-0.028500). Adding small noise to prevent all-zero signals.
 2026-04-06 15:08:03,373 | INFO | tft | [train] Final preds — min: -0.0289, max: -0.0282, mean: -0.0285
+2026-04-06 15:23:34,961 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
+2026-04-06 15:32:33,012 | INFO | tft | [train] Best params: {'seq_len': 62, 'hidden_size': 84, 'num_heads': 8, 'num_layers': 1, 'dropout': 0.009540498497157435, 'lr': 0.0002001135520529833, 'batch_size': 128} | Best PnL: -68.6400
+2026-04-06 15:42:05,834 | INFO | tft | [train] Final preds — min: -0.2477, max: 0.1128, mean: 0.0355

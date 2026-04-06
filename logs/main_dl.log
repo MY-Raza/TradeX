@@ -209,3 +209,10 @@
 2026-04-06 15:08:03,791 | INFO | main_dl | [Dry-run] tft predictions on first samples:
 [-0.02850012 -0.02850012 -0.02850012 -0.02850012 -0.02850012]
 2026-04-06 15:08:16,822 | INFO | main_dl | [tft] Balance=322.14  PnL=-104.2000
+2026-04-06 15:17:52,997 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-06 15:17:52,997 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-06 15:23:34,641 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-06 15:42:06,035 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[ 0.0793356   0.07934739  0.07942687  0.07977426 -0.05058906]
+2026-04-06 15:42:13,369 | INFO | main_dl | [tft] Balance=494.89  PnL=-69.5700
+2026-04-06 16:05:43,430 | INFO | main_dl | DL model training complete for btc.
