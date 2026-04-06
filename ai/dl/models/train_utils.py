@@ -75,14 +75,25 @@ def normalize_regression_target(
     target_col: str,
 ) -> pd.DataFrame:
     """
-    Replace a raw-price regression target with its log-return equivalent.
+    Replace a raw-price regression target with a z-scored log-return.
 
-    If |mean| of the target > 1.0 we assume it is a raw price and convert:
-        target[t]  ->  log(target[t]) - log(target[t-1])
+    Steps applied when ``|mean| > 1.0`` (raw price detected):
+        1. log-return: target[t] -> log(target[t]) - log(target[t-1])
+        2. z-score:    target[t] -> (target[t] - mean) / std
 
-    This keeps the target on the same small-float scale as log-differenced
-    OHLCV features, preventing MSE collapse to the mean.
-    Classifiers ({-1, 0, 1}) and already-normalised targets pass through unchanged.
+    Step 2 is critical: an uncentered log-return (e.g. mean ~ -0.0003 in a
+    bear market) causes MSE-trained models to collapse to predicting the mean,
+    which manifests as all predictions being a large negative constant.
+    Z-scoring forces the model to learn deviations from the trend level so
+    predictions are centred around 0 regardless of market direction.
+
+    The transform parameters (mean, std) are stored as
+    ``df.attrs['target_mean']`` and ``df.attrs['target_std']`` so callers
+    can inverse-transform if raw-scale predictions are needed:
+        raw_pred = pred * std + mean
+
+    Classifiers ({-1, 0, 1}) and already-normalised targets pass through
+    unchanged (|mean| <= 1.0 guard).
     """
     if target_col not in df.columns:
         return df
@@ -97,11 +108,32 @@ def normalize_regression_target(
 
     logger.info(
         f"[normalize_regression_target] Converting '{target_col}' from raw price "
-        f"(|mean|={abs_mean:.2f}) to log-return."
+        f"(|mean|={abs_mean:.2f}) to z-scored log-return."
     )
     df = df.copy()
+
+    # Step 1: log-return
     df[target_col] = np.log(df[target_col]).diff()
     df = df.dropna(subset=[target_col]).reset_index(drop=True)
+
+    # Step 2: z-score so model predictions are centred at 0
+    target_mean = df[target_col].mean()
+    target_std  = df[target_col].std()
+    if target_std < 1e-8:
+        logger.warning(
+            f"[normalize_regression_target] Target std~0 after log-return "
+            "transform — skipping z-score to avoid division by zero."
+        )
+    else:
+        df[target_col] = (df[target_col] - target_mean) / target_std
+        # Store scale params as DataFrame attrs for optional inverse-transform
+        df.attrs["target_mean"] = float(target_mean)
+        df.attrs["target_std"]  = float(target_std)
+        logger.info(
+            f"[normalize_regression_target] Z-score params stored — "
+            f"mean={target_mean:.6f}  std={target_std:.6f}"
+        )
+
     logger.info(
         f"[normalize_regression_target] Target stats after transform — "
         f"mean={df[target_col].mean():.6f}  std={df[target_col].std():.6f}"

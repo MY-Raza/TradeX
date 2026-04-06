@@ -109,7 +109,12 @@ class _TCNBlock(nn.Module):
         out = self.dropout(out)
 
         residual = x if self.downsample is None else self.downsample(x)
-        return self.relu(out + residual)
+        # BUG FIX: Do NOT apply ReLU after the residual addition.
+        # Applying ReLU here clamps all block outputs to >= 0, which forces the
+        # FC head's bias to absorb the (negative) target mean — causing every
+        # prediction to be negative. Standard TCN residual connections are
+        # activation-free at the block output level (Bai et al. 2018).
+        return out + residual
 
 
 class _TCNNetwork(nn.Module):
