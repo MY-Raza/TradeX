@@ -1034,3 +1034,22 @@ Traceback (most recent call last):
   File "D:\trading\TradeX\utils\common\config_loader.py", line 21, in read_config
     raise FileNotFoundError(f"Config file not found at: {config_path}")
 FileNotFoundError: Config file not found at: d:\trading\TradeX\ai\test\config.yml
+2026-04-07 09:18:58,653 | ERROR | config_loader | Failed to load config.
+Traceback (most recent call last):
+  File "D:\trading\TradeX\utils\common\config_loader.py", line 25, in read_config
+    config = yaml.safe_load(f)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\yaml\__init__.py", line 125, in safe_load
+    return load(stream, SafeLoader)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\yaml\__init__.py", line 79, in load
+    loader = Loader(stream)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\yaml\loader.py", line 34, in __init__
+    Reader.__init__(self, stream)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\yaml\reader.py", line 85, in __init__
+    self.determine_encoding()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\yaml\reader.py", line 124, in determine_encoding
+    self.update_raw()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\yaml\reader.py", line 178, in update_raw
+    data = self.stream.read(size)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x90 in position 622: character maps to <undefined>
