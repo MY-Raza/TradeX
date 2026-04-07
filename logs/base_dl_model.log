@@ -4900,3 +4900,26 @@
 2026-04-07 09:51:19,275 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.4119  max=0.6729  mean=0.0571
 2026-04-07 09:51:19,446 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.3766  max=0.5256  mean=-0.0237
 2026-04-07 09:51:19,866 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.4282  max=0.7348  mean=0.0510
+2026-04-07 09:59:18,969 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-07 09:59:19,486 | INFO | base_dl_model | [LSTMModel] Network params: 131,860
+2026-04-07 09:59:24,289 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.908132  val_loss=1.509301
+2026-04-07 09:59:37,382 | INFO | base_dl_model | [LSTMModel] Epoch 10/30 train_loss=0.872163  val_loss=1.488646
+2026-04-07 09:59:38,809 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 11. Best val_loss=1.464985
+2026-04-07 09:59:38,809 | INFO | base_dl_model | [LSTMModel] Training finished in 16.2s
+2026-04-07 09:59:39,101 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.3864  max=0.5727  mean=-0.0480
+2026-04-07 09:59:41,096 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-07 09:59:41,112 | INFO | base_dl_model | [LSTMModel] Network params: 183,576
+2026-04-07 09:59:42,144 | INFO | base_dl_model | [LSTMModel] Epoch 1/30 train_loss=0.910781  val_loss=1.364925
+2026-04-07 09:59:46,919 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 6. Best val_loss=1.364925
+2026-04-07 09:59:46,919 | INFO | base_dl_model | [LSTMModel] Training finished in 5.8s
+2026-04-07 09:59:47,092 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.5409  max=0.5905  mean=-0.0368
+2026-04-07 09:59:49,047 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-07 09:59:49,084 | INFO | base_dl_model | [LSTMModel] Network params: 131,860
+2026-04-07 09:59:50,608 | INFO | base_dl_model | [LSTMModel] Epoch 1/50 train_loss=0.934543  val_loss=1.494521
+2026-04-07 10:00:03,649 | INFO | base_dl_model | [LSTMModel] Epoch 10/50 train_loss=0.894499  val_loss=1.480702
+2026-04-07 10:00:18,323 | INFO | base_dl_model | [LSTMModel] Epoch 20/50 train_loss=0.848079  val_loss=1.526711
+2026-04-07 10:00:19,814 | INFO | base_dl_model | [LSTMModel] Early stop at epoch 21. Best val_loss=1.476011
+2026-04-07 10:00:19,814 | INFO | base_dl_model | [LSTMModel] Training finished in 30.7s
+2026-04-07 10:00:20,057 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.5091  max=0.7625  mean=-0.0270
+2026-04-07 10:00:20,229 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.3246  max=0.5879  mean=0.0447
+2026-04-07 10:00:20,823 | INFO | base_dl_model | [LSTMModel] predict() → min=-0.5140  max=0.8199  mean=0.0277

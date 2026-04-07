@@ -526,6 +526,20 @@ def train(
     # ── 1. Pre-processing ─────────────────────────────────────────────────────
     df = validate_and_sort(df, target_col)
 
+    # Snapshot the raw target BEFORE any transformation so we can write the
+    # original value (raw close price or raw log-return, depending on what
+    # build_regression_df produced) alongside the z-scored version in every
+    # predictions CSV.
+    #
+    # We index by datetime so we can look up the original value for any
+    # arbitrary aligned subset later without worrying about integer offsets.
+    df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
+    raw_target_series: pd.Series = (
+        df.set_index("datetime")[target_col]
+        .copy()
+        .rename("original_target")
+    )
+
     if transform_features:
         df = apply_log_diff_transform(df)
 
@@ -652,21 +666,19 @@ def train(
         filename: str,
     ) -> None:
         """
-        Build and save a predictions CSV with actual price (from df_1m),
-        actual target, predicted value (as actual price direction signal),
-        and the {-1, 0, +1} signal.
-
-        The ``predicted_price`` column contains the actual close price looked
-        up from ``df_1m`` resampled to ``timehorizon``.  This gives the user
-        a human-readable price alongside each prediction rather than the
-        z-scored LSTM output.
+        Build and save a predictions CSV.
 
         Columns
         -------
-        datetime         : Bar timestamp (UTC).
-        actual_price     : Raw close price from df_1m (untransformed).
-        actual_target    : Ground-truth label from the dataset.
-        predicted_signal : {-1, 0, +1} — LSTM trading signal.
+        datetime          : Bar timestamp (UTC).
+        actual_price      : Raw close price from df_1m (untransformed).
+        original_target   : Target value BEFORE any transform — i.e. the raw
+                            close price (or raw log-return) that the dataset
+                            was built from.  This is the human-readable label.
+        actual_target     : Target value AFTER z-score log-return transform —
+                            the value the model actually trained against.
+        predicted_signal  : {-1, 0, +1} — LSTM trading signal derived from
+                            the model output via adaptive 0.5-std threshold.
         """
         sig = _make_signal(preds_arr)
 
@@ -678,9 +690,18 @@ def train(
             price_col="close",
         )
 
+        # Look up original (pre-transform) target values via datetime index
+        dt_index = pd.to_datetime(datetimes, utc=True)
+        original_targets = (
+            raw_target_series
+            .reindex(dt_index)       # align by datetime; NaN for missing bars
+            .to_numpy(dtype=np.float64)
+        )
+
         row: dict = {
             "datetime":         datetimes,
             "actual_price":     actual_prices,
+            "original_target":  original_targets,
         }
         if actual_targets is not None:
             row["actual_target"] = actual_targets
@@ -689,7 +710,7 @@ def train(
         out_df = pd.DataFrame(row)
         save_csv(out_df, os.path.join(output_dir, filename))
         logger.info(
-            f"[train] Saved {len(preds_arr):,} predictions → {filename}  "
+            f"[train] Saved {len(preds_arr):,} {tag} predictions → {filename}  "
             f"(long={int((sig == 1).sum())}  "
             f"short={int((sig == -1).sum())}  "
             f"hold={int((sig == 0).sum())})"

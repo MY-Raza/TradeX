@@ -83,3 +83,30 @@
 2026-04-07 09:51:20,050 | INFO | lstm_pipeline | [save_csv] Saved 1 rows → outputs\btc\btc_log_returns_summary.csv
 2026-04-07 09:51:20,050 | INFO | lstm_pipeline | [train] Log-return evaluation saved to outputs\btc
 2026-04-07 09:51:20,064 | INFO | lstm_pipeline | [btc] LSTM pipeline complete. Model saved as 'lstm_regressor_20260407_094914'.
+2026-04-07 09:57:49,856 | INFO | lstm_pipeline | === LSTM pipeline | symbol=btc | timehorizon=1h ===
+2026-04-07 09:58:17,261 | INFO | lstm_pipeline | === LSTM pipeline | symbol=btc | timehorizon=1h ===
+2026-04-07 09:58:30,401 | INFO | lstm_pipeline | [save_csv] Saved 527,041 rows → outputs\btc\btc_raw_1m.csv
+2026-04-07 09:58:30,740 | INFO | lstm_pipeline | [save_csv] Saved 8,785 rows → outputs\btc\btc_resampled.csv
+2026-04-07 09:59:18,366 | INFO | lstm_pipeline | [save_csv] Saved 8,697 rows → outputs\btc\btc_features.csv
+2026-04-07 09:59:18,482 | INFO | lstm_pipeline | [split_70_30] Total rows: 2110 | Train 70%: 1477 | Test 30%: 633
+2026-04-07 09:59:18,669 | INFO | lstm_pipeline | [save_csv] Saved 1,477 rows → outputs\btc\btc_train_70pct.csv
+2026-04-07 09:59:18,750 | INFO | lstm_pipeline | [save_csv] Saved 633 rows → outputs\btc\btc_test_30pct.csv
+2026-04-07 09:59:18,752 | INFO | lstm_pipeline | [split_train_val_90_10] Train 90%: 1329 rows | Val 10%: 148 rows | Features: 85
+2026-04-07 09:59:18,912 | INFO | lstm_pipeline | [save_csv] Saved 1,329 rows → outputs\btc\btc_train_90pct.csv
+2026-04-07 09:59:18,942 | INFO | lstm_pipeline | [save_csv] Saved 148 rows → outputs\btc\btc_val_10pct.csv
+2026-04-07 09:59:18,944 | INFO | lstm_pipeline | [train] 70/30 split | X_train=(1329, 85) | X_val=(148, 85) | X_test=(633, 85)
+2026-04-07 09:59:18,945 | INFO | lstm_pipeline | [train] Starting LSTM Optuna study (2 trials)…
+2026-04-07 09:59:49,047 | INFO | lstm_pipeline | [train] Best params: {'seq_len': 87, 'hidden_size': 91, 'num_layers': 2, 'dropout': 0.321007141383217, 'lr': 0.0007988632380277402, 'batch_size': 128} | Best PnL: -67.6900
+2026-04-07 10:00:20,061 | INFO | lstm_pipeline | [train] Final preds — min: -0.5091, max: 0.7625, mean: -0.0270
+2026-04-07 10:00:20,195 | INFO | lstm_pipeline | [save_csv] Saved 547 rows → outputs\btc\btc_test_predictions.csv
+2026-04-07 10:00:20,195 | INFO | lstm_pipeline | [train] Saved 547 test predictions → btc_test_predictions.csv  (long=141  short=222  hold=184)
+2026-04-07 10:00:20,349 | INFO | lstm_pipeline | [save_csv] Saved 62 rows → outputs\btc\btc_val_predictions.csv
+2026-04-07 10:00:20,349 | INFO | lstm_pipeline | [train] Saved 62 val predictions → btc_val_predictions.csv  (long=20  short=19  hold=23)
+2026-04-07 10:00:20,961 | INFO | lstm_pipeline | [save_csv] Saved 1,243 rows → outputs\btc\btc_train_predictions.csv
+2026-04-07 10:00:20,963 | INFO | lstm_pipeline | [train] Saved 1,243 train predictions → btc_train_predictions.csv  (long=397  short=368  hold=478)
+2026-04-07 10:00:20,963 | INFO | lstm_pipeline | [log_returns_eval] Directional accuracy: 0.3144
+2026-04-07 10:00:20,965 | INFO | lstm_pipeline | [log_returns_eval] Strategy total log-return: -9.071061 | Buy-and-hold: -1.320935 | Signals — long: 141  short: 222  hold: 184
+2026-04-07 10:00:20,980 | INFO | lstm_pipeline | [save_csv] Saved 547 rows → outputs\btc\btc_log_returns_eval.csv
+2026-04-07 10:00:20,984 | INFO | lstm_pipeline | [save_csv] Saved 1 rows → outputs\btc\btc_log_returns_summary.csv
+2026-04-07 10:00:20,984 | INFO | lstm_pipeline | [train] Log-return evaluation saved to outputs\btc
+2026-04-07 10:00:20,995 | INFO | lstm_pipeline | [btc] LSTM pipeline complete. Model saved as 'lstm_regressor_20260407_095817'.
