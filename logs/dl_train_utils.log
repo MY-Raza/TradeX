@@ -660,3 +660,19 @@
 2026-04-07 09:59:41,037 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -67.6900
 2026-04-07 09:59:48,087 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: 12.6000
 2026-04-07 09:59:48,981 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -68.4800
+2026-04-07 10:51:04,593 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6572 rows with inf/NaN.
+2026-04-07 10:51:04,593 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2111, 87)
+2026-04-07 10:51:04,593 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=744.95) to z-scored log-return.
+2026-04-07 10:51:04,600 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=-0.000317  std=0.398386
+2026-04-07 10:51:04,602 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-07 10:51:20,214 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: 11.8000
+2026-04-07 10:51:21,189 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.4700
+2026-04-07 10:52:44,013 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6572 rows with inf/NaN.
+2026-04-07 10:52:44,014 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2111, 87)
+2026-04-07 10:52:44,015 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=744.95) to z-scored log-return.
+2026-04-07 10:52:44,021 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=-0.000317  std=0.398386
+2026-04-07 10:52:44,022 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-07 10:53:43,934 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: 8.8100
+2026-04-07 10:53:44,924 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.3800
+2026-04-07 10:54:12,599 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -26.1700
+2026-04-07 10:54:13,670 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -68.4600
