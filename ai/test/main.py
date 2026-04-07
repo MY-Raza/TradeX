@@ -1,3 +1,46 @@
+"""
+lstm_pipeline.py
+================
+Self-contained LSTM training pipeline that extends the existing DL framework
+(GRU / TCN / TFT) with three additions required by the project spec:
+
+  1. **70 / 30 temporal split** — 70 % train, 30 % held-out test.
+     Within the 70 % train block a further 90 / 10 sub-split gives the
+     model a validation set during Optuna search and final training.
+
+  2. **CSV persistence** — raw data and all intermediate artefacts are saved
+     to ``./outputs/<symbol>/`` so every stage can be inspected offline.
+
+  3. **Log-return evaluation** — the 30 % test block is used to compute
+     per-bar log returns (actual) and a corresponding strategy-return series
+     (model-predicted direction × log return), plus an evaluation summary.
+
+Everything else — DataLoader, dataset, base model, train loop, Optuna
+objective, chunked backtest, model serialisation — is unchanged from the
+existing pipeline.  Only the split logic and two new helper functions are
+novel.
+
+Usage
+-----
+Run directly::
+
+    python lstm_pipeline.py          # trains on BTC using config.yml defaults
+
+Or import and call ``run_lstm_pipeline(symbol, config)`` from main.py.
+
+File outputs (relative to ``./outputs/<symbol>/``)
+---------------------------------------------------
+  <symbol>_raw_1m.csv               raw 1-minute OHLCV
+  <symbol>_resampled.csv            resampled OHLCV (timehorizon)
+  <symbol>_features.csv             full feature-engineered DataFrame
+  <symbol>_train_70pct.csv          70 % train split (features + target)
+  <symbol>_test_30pct.csv           30 % test split  (features + target)
+  <symbol>_train_90pct.csv          90 % sub-split of train (actual model input)
+  <symbol>_val_10pct.csv            10 % validation sub-split
+  <symbol>_train_predictions.csv    model predictions on the 90 % train portion
+  <symbol>_log_returns_eval.csv     log-return evaluation on the 30 % test set
+  saved_models/<symbol>_lstm_*.pkl  pickled model (existing pipeline format)
+"""
 from __future__ import annotations
 
 import os
@@ -363,6 +406,72 @@ def summarise_log_returns(eval_df: pd.DataFrame) -> pd.DataFrame:
 
 
 # =============================================================================
+# 5b.  Actual-price lookup helper  (NEW)
+# =============================================================================
+
+def _lookup_actual_prices(
+    datetimes: np.ndarray,
+    df_1m: pd.DataFrame,
+    timehorizon: str = "1h",
+    price_col: str = "close",
+) -> np.ndarray:
+    """
+    Return the raw (untransformed) close price for each datetime in
+    ``datetimes`` by resampling ``df_1m`` to ``timehorizon`` and doing a
+    left-join on the timestamp.
+
+    This is the correct way to recover actual prices after log-diff
+    transformation has been applied to the feature DataFrame — the
+    transformed ``close`` column is no longer a price, it is a log-return.
+
+    Args:
+        datetimes   : Array of UTC-aware datetime64 values (one per prediction).
+        df_1m       : Raw 1-minute OHLCV DataFrame (never transformed).
+        timehorizon : Resampling rule matching the feature DataFrame, e.g.
+                      ``'1h'``, ``'4h'``.  Must match what was used in
+                      ``resample_data()``.
+        price_col   : Column to extract from the resampled frame (default
+                      ``'close'``).
+
+    Returns:
+        1-D float64 array of actual prices, aligned to ``datetimes``.
+        Bars with no match are filled with ``np.nan``.
+    """
+    # Resample 1m data to the model's timehorizon using the same aggregation
+    # rules as resample_ohlcv: open=first, high=max, low=min, close=last,
+    # volume=sum.  We replicate the essential close logic here directly so
+    # this helper has no dependency on resample_ohlcv's internals.
+    df_ref = df_1m.copy()
+    df_ref["datetime"] = pd.to_datetime(df_ref["datetime"], utc=True)
+    df_ref = df_ref.set_index("datetime")
+
+    resampled_close = (
+        df_ref[price_col]
+        .resample(timehorizon)
+        .last()
+        .rename("actual_price")
+        .reset_index()
+    )
+    resampled_close["datetime"] = pd.to_datetime(resampled_close["datetime"], utc=True)
+
+    # Build a lookup frame from the prediction datetimes
+    lookup = pd.DataFrame({"datetime": pd.to_datetime(datetimes, utc=True)})
+    merged = lookup.merge(resampled_close, on="datetime", how="left")
+
+    prices = merged["actual_price"].to_numpy(dtype=np.float64)
+
+    n_missing = int(np.isnan(prices).sum())
+    if n_missing > 0:
+        logger.warning(
+            f"[_lookup_actual_prices] {n_missing}/{len(prices)} bars had no "
+            "matching price in df_1m — filled with NaN. "
+            "Check that timehorizon matches the resampling used during feature engineering."
+        )
+
+    return prices
+
+
+# =============================================================================
 # 6.  Core train() function  (extends existing lstm.py train())
 # =============================================================================
 
@@ -377,6 +486,7 @@ def train(
     model_type: str = "regressor",
     output_dir: str | None = None,
     symbol: str = "btc",
+    timehorizon: str = "1h",
 ) -> tuple:
     """
     Train an LSTM model with the 70 / 30 split protocol.
@@ -525,15 +635,103 @@ def train(
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
 
-    # ── 8. Predictions on the 90 % training portion ───────────────────────────
-    # (requirement: save predictions on the data used to train the model)
-    train_preds = final_model.predict(X_train)
-    n_tp = len(train_preds)
-    df_train_pred_out = X_train.iloc[-n_tp:].reset_index(drop=True).copy()
-    df_train_pred_out.insert(0, "datetime", df_train_90["datetime"].values[-n_tp:])
-    df_train_pred_out["predicted"] = train_preds
-    save_csv(df_train_pred_out, os.path.join(output_dir, f"{symbol}_train_predictions.csv"))
-    logger.info(f"[train] Saved {n_tp:,} training-set predictions.")
+    # ── Shared helper: compute signal array from a predictions array ──────────
+    def _make_signal(preds_arr: np.ndarray) -> np.ndarray:
+        """Adaptive 0.5-std threshold → {-1, 0, +1} signal."""
+        thr = 0.5 * np.std(preds_arr)
+        return np.where(
+            preds_arr >  thr,  1,
+            np.where(preds_arr < -thr, -1, 0),
+        ).astype(np.int8)
+
+    def _save_predictions(
+        tag: str,
+        datetimes: np.ndarray,
+        preds_arr: np.ndarray,
+        actual_targets: np.ndarray | None,
+        filename: str,
+    ) -> None:
+        """
+        Build and save a predictions CSV with actual price (from df_1m),
+        actual target, predicted value (as actual price direction signal),
+        and the {-1, 0, +1} signal.
+
+        The ``predicted_price`` column contains the actual close price looked
+        up from ``df_1m`` resampled to ``timehorizon``.  This gives the user
+        a human-readable price alongside each prediction rather than the
+        z-scored LSTM output.
+
+        Columns
+        -------
+        datetime         : Bar timestamp (UTC).
+        actual_price     : Raw close price from df_1m (untransformed).
+        actual_target    : Ground-truth label from the dataset.
+        predicted_signal : {-1, 0, +1} — LSTM trading signal.
+        """
+        sig = _make_signal(preds_arr)
+
+        # Look up actual prices from df_1m (pre-transformation)
+        actual_prices = _lookup_actual_prices(
+            datetimes=datetimes,
+            df_1m=df_1m,
+            timehorizon=timehorizon,
+            price_col="close",
+        )
+
+        row: dict = {
+            "datetime":         datetimes,
+            "actual_price":     actual_prices,
+        }
+        if actual_targets is not None:
+            row["actual_target"] = actual_targets
+        row["predicted_signal"] = sig
+
+        out_df = pd.DataFrame(row)
+        save_csv(out_df, os.path.join(output_dir, filename))
+        logger.info(
+            f"[train] Saved {len(preds_arr):,} predictions → {filename}  "
+            f"(long={int((sig == 1).sum())}  "
+            f"short={int((sig == -1).sum())}  "
+            f"hold={int((sig == 0).sum())})"
+        )
+
+    # ── 8a. TEST predictions (30 % held-out set) ──────────────────────────────
+    n_test_preds    = len(final_preds)
+    df_test_aligned = df_test_30.iloc[-n_test_preds:].reset_index(drop=True)
+
+    _save_predictions(
+        tag          = "test",
+        datetimes    = df_test_aligned["datetime"].values if "datetime" in df_test_aligned.columns else np.arange(n_test_preds).astype("datetime64[ns]"),
+        preds_arr    = final_preds,
+        actual_targets = df_test_aligned[target_col].values if target_col in df_test_aligned.columns else None,
+        filename     = f"{symbol}_test_predictions.csv",
+    )
+
+    # ── 8b. VALIDATION predictions (10 % sub-split of the 70 % train block) ───
+    val_preds    = final_model.predict(X_val)
+    n_val_preds  = len(val_preds)
+    df_val_aligned = df_val_10.iloc[-n_val_preds:].reset_index(drop=True)
+
+    _save_predictions(
+        tag          = "val",
+        datetimes    = df_val_aligned["datetime"].values if "datetime" in df_val_aligned.columns else np.arange(n_val_preds).astype("datetime64[ns]"),
+        preds_arr    = val_preds,
+        actual_targets = df_val_aligned[target_col].values if target_col in df_val_aligned.columns else None,
+        filename     = f"{symbol}_val_predictions.csv",
+    )
+
+    # ── 8c. TRAIN predictions (90 % portion used to train the model) ──────────
+    train_preds  = final_model.predict(X_train)
+    n_tp         = len(train_preds)
+    df_train_aligned = df_train_90.iloc[-n_tp:].reset_index(drop=True)
+
+    _save_predictions(
+        tag          = "train",
+        datetimes    = df_train_aligned["datetime"].values if "datetime" in df_train_aligned.columns else np.arange(n_tp).astype("datetime64[ns]"),
+        preds_arr    = train_preds,
+        actual_targets = df_train_aligned[target_col].values if target_col in df_train_aligned.columns else None,
+        filename     = f"{symbol}_train_predictions.csv",
+    )
 
     # ── 9. Log-return evaluation on the 30 % test set ────────────────────────
     # We need original (non-log-diff) close prices for the log-return calc.
@@ -652,6 +850,7 @@ def run_lstm_pipeline(
             model_type="regressor",
             output_dir=output_dir,
             symbol=symbol,
+            timehorizon=timehorizon,
         )
     except Exception as exc:
         logger.error(f"LSTM training failed for {symbol}: {exc}", exc_info=True)
