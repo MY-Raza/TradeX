@@ -37,8 +37,14 @@ File outputs (relative to ``./outputs/<symbol>/``)
   <symbol>_test_30pct.csv           30 % test split  (features + target)
   <symbol>_train_90pct.csv          90 % sub-split of train (actual model input)
   <symbol>_val_10pct.csv            10 % validation sub-split
-  <symbol>_train_predictions.csv    model predictions on the 90 % train portion
-  <symbol>_log_returns_eval.csv     log-return evaluation on the 30 % test set
+  <symbol>_train_predictions.csv    predictions on 90 % train (actual_price, original_target, signal)
+  <symbol>_val_predictions.csv      predictions on 10 % val   (actual_price, original_target, signal)
+  <symbol>_test_predictions.csv     predictions on 30 % test  (actual_price, original_target, signal)
+  <symbol>_train_ledger.csv         BackTest trade ledger for the train set
+  <symbol>_val_ledger.csv           BackTest trade ledger for the val set
+  <symbol>_test_ledger.csv          BackTest trade ledger for the test set
+  <symbol>_log_returns_eval.csv     bar-by-bar log-return evaluation on the test set
+  <symbol>_log_returns_summary.csv  one-row performance summary (Sharpe, drawdown ...)
   saved_models/<symbol>_lstm_*.pkl  pickled model (existing pipeline format)
 """
 from __future__ import annotations
@@ -649,7 +655,8 @@ def train(
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
 
-    # ── Shared helper: compute signal array from a predictions array ──────────
+    # ── Shared helpers ────────────────────────────────────────────────────────
+
     def _make_signal(preds_arr: np.ndarray) -> np.ndarray:
         """Adaptive 0.5-std threshold → {-1, 0, +1} signal."""
         thr = 0.5 * np.std(preds_arr)
@@ -658,31 +665,75 @@ def train(
             np.where(preds_arr < -thr, -1, 0),
         ).astype(np.int8)
 
+    def _run_and_save_backtest(
+        tag: str,
+        datetimes: np.ndarray,
+        sig: np.ndarray,
+    ) -> tuple[pd.DataFrame, float, float]:
+        """
+        Build a df_predictions frame from ``datetimes`` + ``sig``, run
+        BackTest against ``df_1m``, save the ledger CSV, and return
+        ``(ledger, final_balance, pnl)``.
+
+        The df_predictions frame passed to BackTest has exactly two columns:
+            datetime  — UTC-aware timestamp for each bar.
+            signals   — {-1, 0, +1} trading signal.
+
+        Args:
+            tag       : One of ``'train'``, ``'val'``, ``'test'`` — used for
+                        the output filename and log messages.
+            datetimes : Array of UTC datetime64 values (one per prediction).
+            sig       : Integer signal array aligned to ``datetimes``.
+
+        Returns:
+            ``(ledger, final_balance, pnl)`` — same tuple as ``BackTest.run()``.
+        """
+        from TradeX.backtest.backtest import BackTest
+
+        df_signals = pd.DataFrame({
+            "datetime": pd.to_datetime(datetimes, utc=True),
+            "signals":  sig.astype(int),
+        })
+
+        bt             = BackTest(df_1m, df_signals, take_profit=3, stop_loss=1)
+        ledger, balance, pnl = bt.run()
+
+        ledger_path = os.path.join(output_dir, f"{symbol}_{tag}_ledger.csv")
+        save_csv(ledger, ledger_path)
+        logger.info(
+            f"[backtest:{tag}] balance={balance:.2f}  pnl={pnl:.4f}  "
+            f"trades={len(ledger)}  → {symbol}_{tag}_ledger.csv"
+        )
+        return ledger, balance, pnl
+
     def _save_predictions(
         tag: str,
         datetimes: np.ndarray,
         preds_arr: np.ndarray,
         actual_targets: np.ndarray | None,
         filename: str,
-    ) -> None:
+    ) -> np.ndarray:
         """
-        Build and save a predictions CSV.
+        Build and save a predictions CSV, run BackTest, save ledger.
 
-        Columns
-        -------
+        Columns written to ``filename``
+        --------------------------------
         datetime          : Bar timestamp (UTC).
         actual_price      : Raw close price from df_1m (untransformed).
-        original_target   : Target value BEFORE any transform — i.e. the raw
-                            close price (or raw log-return) that the dataset
-                            was built from.  This is the human-readable label.
+        original_target   : Target value BEFORE any transform — the raw
+                            close price that the dataset was built from.
         actual_target     : Target value AFTER z-score log-return transform —
-                            the value the model actually trained against.
-        predicted_signal  : {-1, 0, +1} — LSTM trading signal derived from
-                            the model output via adaptive 0.5-std threshold.
+                            what the model actually trained against.
+        predicted_signal  : {-1, 0, +1} LSTM trading signal.
+
+        Returns
+        -------
+        sig : np.ndarray
+            The computed signal array (passed on to the backtest).
         """
         sig = _make_signal(preds_arr)
 
-        # Look up actual prices from df_1m (pre-transformation)
+        # ── Actual price from df_1m (never transformed) ───────────────────────
         actual_prices = _lookup_actual_prices(
             datetimes=datetimes,
             df_1m=df_1m,
@@ -690,18 +741,19 @@ def train(
             price_col="close",
         )
 
-        # Look up original (pre-transform) target values via datetime index
+        # ── Original target (pre-transform) via datetime index ────────────────
         dt_index = pd.to_datetime(datetimes, utc=True)
         original_targets = (
             raw_target_series
-            .reindex(dt_index)       # align by datetime; NaN for missing bars
+            .reindex(dt_index)
             .to_numpy(dtype=np.float64)
         )
 
+        # ── Build and save predictions CSV ────────────────────────────────────
         row: dict = {
-            "datetime":         datetimes,
-            "actual_price":     actual_prices,
-            "original_target":  original_targets,
+            "datetime":        datetimes,
+            "actual_price":    actual_prices,
+            "original_target": original_targets,
         }
         if actual_targets is not None:
             row["actual_target"] = actual_targets
@@ -715,6 +767,11 @@ def train(
             f"short={int((sig == -1).sum())}  "
             f"hold={int((sig == 0).sum())})"
         )
+
+        # ── Run backtest and save ledger ──────────────────────────────────────
+        _run_and_save_backtest(tag=tag, datetimes=datetimes, sig=sig)
+
+        return sig
 
     # ── 8a. TEST predictions (30 % held-out set) ──────────────────────────────
     n_test_preds    = len(final_preds)
