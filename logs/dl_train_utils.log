@@ -744,3 +744,47 @@
 2026-04-08 14:21:00,700 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.5000
 2026-04-08 14:38:53,136 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -29.7400
 2026-04-08 14:38:54,098 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -68.5000
+2026-04-08 15:20:31,446 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-08 15:20:31,447 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-08 15:20:31,456 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-08 15:20:34,819 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-08 15:20:34,819 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-08 15:20:34,842 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-08 15:20:35,003 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-08 15:20:35,003 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-08 15:20:35,020 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-08 15:20:35,217 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-08 15:20:35,217 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-08 15:20:35,228 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-08 15:20:35,360 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6572 rows with inf/NaN.
+2026-04-08 15:20:35,361 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2111, 87)
+2026-04-08 15:20:35,362 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=746.30) to z-scored log-return.
+2026-04-08 15:20:35,368 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000011  std=0.398920
+2026-04-08 15:20:35,369 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-08 15:20:35,370 | INFO | dl_train_utils | [normalize_regression_target] Post-normalisation sign balance — 19.4% positive / 80.6% negative
+2026-04-08 15:20:35,371 | WARNING | dl_train_utils | [normalize_regression_target] Target sign is imbalanced after z-scoring (19.4% positive). Consider extending the training window to include more balanced market conditions, or increase magnitude_penalty in the loss function.
+2026-04-08 15:20:35,383 | INFO | dl_train_utils | [split_features_labels] Train rows: 1498 | Test rows: 612 | Features: 85
+2026-04-08 15:20:35,566 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6572 rows with inf/NaN.
+2026-04-08 15:20:35,566 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2111, 87)
+2026-04-08 15:20:35,566 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=746.30) to z-scored log-return.
+2026-04-08 15:20:35,574 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000011  std=0.398920
+2026-04-08 15:20:35,574 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-08 15:20:35,574 | INFO | dl_train_utils | [normalize_regression_target] Post-normalisation sign balance — 19.4% positive / 80.6% negative
+2026-04-08 15:20:35,577 | WARNING | dl_train_utils | [normalize_regression_target] Target sign is imbalanced after z-scoring (19.4% positive). Consider extending the training window to include more balanced market conditions, or increase magnitude_penalty in the loss function.
+2026-04-08 15:20:35,597 | INFO | dl_train_utils | [split_features_labels] Train rows: 1498 | Test rows: 612 | Features: 85
+2026-04-08 15:20:35,729 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6572 rows with inf/NaN.
+2026-04-08 15:20:35,730 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2111, 87)
+2026-04-08 15:20:35,731 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=746.30) to z-scored log-return.
+2026-04-08 15:20:35,735 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000011  std=0.398920
+2026-04-08 15:20:35,735 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-08 15:20:35,735 | INFO | dl_train_utils | [normalize_regression_target] Post-normalisation sign balance — 19.4% positive / 80.6% negative
+2026-04-08 15:20:35,740 | WARNING | dl_train_utils | [normalize_regression_target] Target sign is imbalanced after z-scoring (19.4% positive). Consider extending the training window to include more balanced market conditions, or increase magnitude_penalty in the loss function.
+2026-04-08 15:20:35,755 | INFO | dl_train_utils | [split_features_labels] Train rows: 1498 | Test rows: 612 | Features: 85
+2026-04-08 15:20:35,890 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6572 rows with inf/NaN.
+2026-04-08 15:20:35,890 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2111, 87)
+2026-04-08 15:20:35,890 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=746.30) to z-scored log-return.
+2026-04-08 15:20:35,897 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000011  std=0.398920
+2026-04-08 15:20:35,898 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-08 15:20:35,899 | INFO | dl_train_utils | [normalize_regression_target] Post-normalisation sign balance — 19.4% positive / 80.6% negative
+2026-04-08 15:20:35,899 | WARNING | dl_train_utils | [normalize_regression_target] Target sign is imbalanced after z-scoring (19.4% positive). Consider extending the training window to include more balanced market conditions, or increase magnitude_penalty in the loss function.
+2026-04-08 15:20:35,915 | INFO | dl_train_utils | [split_features_labels] Train rows: 1498 | Test rows: 612 | Features: 85

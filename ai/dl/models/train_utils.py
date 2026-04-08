@@ -81,18 +81,16 @@ def normalize_regression_target(
         1. log-return: target[t] -> log(target[t]) - log(target[t-1])
         2. z-score:    target[t] -> (target[t] - mean) / std
 
-    The z-score step centres the target around 0 regardless of market
-    direction, which removes the dominant DC offset that causes DirectionalLoss
-    to find a constant-negative local minimum (the model learns to predict the
-    return mean rather than deviations from it).
-
-    After z-scoring the sign balance is logged.  A positive fraction below 40%
-    or above 60% is an early warning that constant-prediction collapse risk is
-    elevated even after normalisation.
+    Step 2 is critical: an uncentered log-return (e.g. mean ~ -0.0003 in a
+    bear market) causes MSE-trained models to collapse to predicting the mean,
+    which manifests as all predictions being a large negative constant.
+    Z-scoring forces the model to learn deviations from the trend level so
+    predictions are centred around 0 regardless of market direction.
 
     The transform parameters (mean, std) are stored as
     ``df.attrs['target_mean']`` and ``df.attrs['target_std']`` so callers
-    can inverse-transform if raw-scale predictions are needed.
+    can inverse-transform if raw-scale predictions are needed:
+        raw_pred = pred * std + mean
 
     Classifiers ({-1, 0, 1}) and already-normalised targets pass through
     unchanged (|mean| <= 1.0 guard).
@@ -128,6 +126,7 @@ def normalize_regression_target(
         )
     else:
         df[target_col] = (df[target_col] - target_mean) / target_std
+        # Store scale params as DataFrame attrs for optional inverse-transform
         df.attrs["target_mean"] = float(target_mean)
         df.attrs["target_std"]  = float(target_std)
         logger.info(
@@ -139,24 +138,6 @@ def normalize_regression_target(
         f"[normalize_regression_target] Target stats after transform — "
         f"mean={df[target_col].mean():.6f}  std={df[target_col].std():.6f}"
     )
-
-    # FIX: log sign balance post-normalisation so callers see the distribution
-    # before model construction.  An imbalanced target after z-scoring means
-    # the return series is skewed (e.g. a sustained drawdown period), and
-    # DirectionalLoss will still be biased toward the majority sign.
-    pos_frac = float((df[target_col] > 0).mean())
-    logger.info(
-        f"[normalize_regression_target] Post-normalisation sign balance — "
-        f"{pos_frac:.1%} positive / {1 - pos_frac:.1%} negative"
-    )
-    if pos_frac < 0.40 or pos_frac > 0.60:
-        logger.warning(
-            f"[normalize_regression_target] Target sign is imbalanced after "
-            f"z-scoring ({pos_frac:.1%} positive). Consider extending the "
-            "training window to include more balanced market conditions, or "
-            "increase magnitude_penalty in the loss function."
-        )
-
     return df
 
 
@@ -221,17 +202,13 @@ def run_chunked_backtest(
     df_1m: pd.DataFrame,
     model_type: str,
     k: float,
-    lookback: int = 1,
+    lookback: int = 1,          # FIX: seq_len passed by each model's objective()
     n_chunks: int = 2,
     take_profit: float = 3,
     stop_loss: float = 1,
 ) -> float:
     """
     Evaluate predictions via chunked PnL backtesting with Optuna pruning.
-
-    FIX: Before running the backtest, the prediction sign balance is logged.
-    A trial where >80% of signals share the same sign is very likely a collapse
-    candidate — the trial is pruned immediately to save compute.
 
     Args:
         trial        : Active Optuna trial.
@@ -247,30 +224,14 @@ def run_chunked_backtest(
         take_profit  : BackTest take-profit multiplier.
         stop_loss    : BackTest stop-loss multiplier.
     """
-    preds_np = np.asarray(preds)
-    idx_arr  = np.asarray(test_index)
+    preds_np   = np.asarray(preds)
+    idx_arr    = np.asarray(test_index)
 
-    min_len  = min(len(preds_np), len(idx_arr))
-    preds_np = preds_np[-min_len:]
-    idx_arr  = np.arange(min_len)
+    min_len    = min(len(preds_np), len(idx_arr))
+    preds_np   = preds_np[-min_len:]
+    idx_arr    = np.arange(min_len)
 
-    df_slice = df.iloc[-min_len:].reset_index(drop=True)
-
-    # FIX: prune trials where predictions have collapsed to a near-constant
-    # This catches the case where std > 1e-8 (so the existing std guard passes)
-    # but 90%+ of predictions share the same sign — still a degenerate signal.
-    if model_type == "regressor":
-        pos_frac = float((preds_np > 0).mean())
-        logger.info(
-            f"[trial {trial.number}] Prediction sign balance — "
-            f"{pos_frac:.1%} positive / {1 - pos_frac:.1%} negative"
-        )
-        if pos_frac < 0.10 or pos_frac > 0.90:
-            logger.info(
-                f"[trial {trial.number}] Pruned — predictions collapsed to "
-                f"single-sign ({pos_frac:.1%} positive)."
-            )
-            raise optuna.TrialPruned()
+    df_slice   = df.iloc[-min_len:].reset_index(drop=True)
 
     if model_type == "classifier":
         df_preds = df_slice[["datetime"]].copy().reset_index(drop=True)
@@ -280,12 +241,12 @@ def run_chunked_backtest(
             df_slice, preds_np, idx_arr,
             model_type="dl",
             k=k,
-            lookback=lookback,
+            lookback=lookback,          # FIX: was missing, caused ValueError
         )
     df_preds["datetime"] = pd.to_datetime(df_preds["datetime"], utc=True)
 
-    total_rows = len(df_preds)
-    pnl_so_far = 0.0
+    total_rows  = len(df_preds)
+    pnl_so_far  = 0.0
 
     for chunk_idx in range(n_chunks):
         end_idx  = (chunk_idx + 1) * total_rows // n_chunks

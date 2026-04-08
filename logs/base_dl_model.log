@@ -7216,3 +7216,35 @@
 2026-04-08 14:49:10,774 | INFO | base_dl_model | [TFTModel] predict() → min=-1654.5746  max=-1654.5742  mean=-1654.5743
 2026-04-08 14:49:12,564 | INFO | base_dl_model | [TFTModel] predict() → min=-1654.5746  max=-1654.5742  mean=-1654.5743
 2026-04-08 14:49:14,501 | INFO | base_dl_model | [TFTModel] predict() → min=-1654.5746  max=-1654.5742  mean=-1654.5743
+2026-04-08 15:20:31,472 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-08 15:20:31,642 | INFO | base_dl_model | [GRUModel] Network params: 195,114
+2026-04-08 15:20:31,850 | INFO | base_dl_model | [GRUModel] Class weights: short=0.003 neutral=2.989 long=0.008
+2026-04-08 15:20:34,844 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-08 15:20:34,895 | INFO | base_dl_model | [LSTMModel] Network params: 352,154
+2026-04-08 15:20:34,895 | INFO | base_dl_model | [LSTMModel] Class weights: short=0.003 neutral=2.989 long=0.008
+2026-04-08 15:20:35,022 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-08 15:20:35,115 | INFO | base_dl_model | [TCNModel] Network params: 39,568
+2026-04-08 15:20:35,116 | INFO | base_dl_model | [TCNModel] Class weights: short=0.003 neutral=2.989 long=0.008
+2026-04-08 15:20:35,234 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-08 15:20:35,259 | INFO | base_dl_model | [TFTModel] Network params: 34,915
+2026-04-08 15:20:35,259 | INFO | base_dl_model | [TFTModel] Class weights: short=0.003 neutral=2.989 long=0.008
+2026-04-08 15:20:35,386 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-08 15:20:35,442 | INFO | base_dl_model | [GRUModel] Network params: 699,777
+2026-04-08 15:20:35,442 | INFO | base_dl_model | [GRUModel] Target sign balance — 19.6% positive / 80.4% negative
+2026-04-08 15:20:35,443 | WARNING | base_dl_model | [GRUModel] Target is imbalanced (19.6% positive). Constant-prediction collapse risk is elevated. magnitude_penalty=0.01 is active.
+2026-04-08 15:20:35,443 | INFO | base_dl_model | [GRUModel] Using DirectionalLoss (λ=0.01).
+2026-04-08 15:20:35,599 | INFO | base_dl_model | [LSTMModel] Using device: cpu
+2026-04-08 15:20:35,625 | INFO | base_dl_model | [LSTMModel] Network params: 32,890
+2026-04-08 15:20:35,625 | INFO | base_dl_model | [LSTMModel] Target sign balance — 19.4% positive / 80.6% negative
+2026-04-08 15:20:35,625 | WARNING | base_dl_model | [LSTMModel] Target is imbalanced (19.4% positive). Constant-prediction collapse risk is elevated. magnitude_penalty=0.01 is active.
+2026-04-08 15:20:35,625 | INFO | base_dl_model | [LSTMModel] Using DirectionalLoss (λ=0.01).
+2026-04-08 15:20:35,759 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-08 15:20:35,788 | INFO | base_dl_model | [TCNModel] Network params: 311,122
+2026-04-08 15:20:35,788 | INFO | base_dl_model | [TCNModel] Target sign balance — 19.4% positive / 80.6% negative
+2026-04-08 15:20:35,788 | WARNING | base_dl_model | [TCNModel] Target is imbalanced (19.4% positive). Constant-prediction collapse risk is elevated. magnitude_penalty=0.01 is active.
+2026-04-08 15:20:35,788 | INFO | base_dl_model | [TCNModel] Using DirectionalLoss (λ=0.01).
+2026-04-08 15:20:35,918 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-08 15:20:35,957 | INFO | base_dl_model | [TFTModel] Network params: 258,145
+2026-04-08 15:20:35,957 | INFO | base_dl_model | [TFTModel] Target sign balance — 19.7% positive / 80.3% negative
+2026-04-08 15:20:35,957 | WARNING | base_dl_model | [TFTModel] Target is imbalanced (19.7% positive). Constant-prediction collapse risk is elevated. magnitude_penalty=0.01 is active.
+2026-04-08 15:20:35,957 | INFO | base_dl_model | [TFTModel] Using DirectionalLoss (λ=0.01).

@@ -60,11 +60,11 @@ class _GatedResidualNetwork(nn.Module):
 
     def __init__(self, input_dim: int, d_model: int, dropout: float = 0.1) -> None:
         super().__init__()
-        self.fc1       = nn.Linear(input_dim, d_model)
-        self.fc2       = nn.Linear(d_model, d_model * 2)
-        self.glu       = _GatedLinearUnit()
-        self.dropout   = nn.Dropout(dropout)
-        self.norm      = nn.LayerNorm(d_model)
+        self.fc1      = nn.Linear(input_dim, d_model)
+        self.fc2      = nn.Linear(d_model, d_model * 2)   # doubled for GLU
+        self.glu      = _GatedLinearUnit()
+        self.dropout  = nn.Dropout(dropout)
+        self.norm     = nn.LayerNorm(d_model)
         self.skip_proj = (
             nn.Linear(input_dim, d_model, bias=False)
             if input_dim != d_model
@@ -73,8 +73,8 @@ class _GatedResidualNetwork(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         residual = self.skip_proj(x)
-        out = F.elu(self.fc1(x))
-        out = self.glu(self.fc2(out))
+        out = F.elu(self.fc1(x))           # ELU preserved — TFT architecture
+        out = self.glu(self.fc2(out))      # GLU gating preserved
         out = self.dropout(out)
         return self.norm(residual + out)
 
@@ -86,11 +86,19 @@ class _VariableSelectionNetwork(nn.Module):
     Computes a soft attention weight over ``n_features`` input variables and
     returns a gated projection of the full feature vector into ``d_model`` space.
 
-    Uses a single joint Linear(n_features, d_model) projection rather than
-    n_features individual Linear(1, d_model) projections.  The per-feature
-    design averaged 85 independent scalar projections, reducing their std by
-    sqrt(85) ≈ 9× and giving the downstream LSTM near-identical inputs across
-    all samples — causing it to learn a single constant equal to the target mean.
+    The original per-feature Linear(1, d_model) design had a fatal collapse
+    problem: at initialisation the softmax weights are uniform (~1/n_features),
+    so the VSN output is the average of 85 independent scalar projections.
+    Averaging 85 independent random vectors reduces their std by sqrt(85) ≈ 9×,
+    giving the downstream LSTM near-identical inputs across all samples in a
+    batch.  The encoder then can't differentiate samples, h_n is near-constant,
+    and the FC head learns a single constant equal to the target mean.
+
+    Fix: replace the n_features individual Linear(1, d_model) projections with
+    a single joint Linear(n_features, d_model).  This gives the LSTM properly
+    varied inputs from the very first forward pass.  The GRN still computes
+    meaningful selection weights from the raw features, which are applied as a
+    scalar gate on the joint projection output.
 
     Args:
         n_features : Number of input features.
@@ -100,20 +108,24 @@ class _VariableSelectionNetwork(nn.Module):
 
     def __init__(self, n_features: int, d_model: int, dropout: float = 0.1) -> None:
         super().__init__()
-        self.n_features       = n_features
-        self.d_model          = d_model
+        self.n_features = n_features
+        self.d_model    = d_model
+
         self.input_projection = nn.Linear(n_features, d_model)
-        self.grn              = _GatedResidualNetwork(n_features, d_model, dropout)
-        self.sigmoid          = nn.Sigmoid()
+        self.grn     = _GatedResidualNetwork(n_features, d_model, dropout)
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, T, n_features)
         B, T, _ = x.shape
+
         projected = self.input_projection(x)
-        flat      = x.reshape(B * T, self.n_features)
-        gate      = self.sigmoid(
+
+        flat    = x.reshape(B * T, self.n_features)
+        gate    = self.sigmoid(
             self.grn(flat).reshape(B, T, self.d_model)
         )
+
         return projected * gate
 
 
@@ -139,13 +151,15 @@ class _TFTNetwork(nn.Module):
         num_layers: int,
         dropout: float,
         output_size: int,
-        model_type: str = "regressor",
+        model_type: str = "regressor",   # ✅ UPDATED
     ) -> None:
         super().__init__()
-        self.model_type = model_type
+        self.model_type = model_type      # ✅ UPDATED
 
+        # Variable selection
         self.vsn = _VariableSelectionNetwork(input_size, d_model, dropout)
 
+        # LSTM encoder — internal sigmoid/tanh activations preserved unchanged
         self.encoder = nn.LSTM(
             input_size=d_model,
             hidden_size=d_model,
@@ -154,6 +168,7 @@ class _TFTNetwork(nn.Module):
             dropout=dropout if num_layers > 1 else 0.0,
         )
 
+        # LSTM decoder (single step; uses encoder's final hidden/cell)
         self.decoder = nn.LSTM(
             input_size=d_model,
             hidden_size=d_model,
@@ -162,25 +177,54 @@ class _TFTNetwork(nn.Module):
             dropout=dropout if num_layers > 1 else 0.0,
         )
 
-        self.attention = nn.MultiheadAttention(
+        # Multi-head self-attention
+        self.attention   = nn.MultiheadAttention(
             embed_dim=d_model, num_heads=num_heads,
             dropout=dropout, batch_first=True,
         )
-        self.attn_norm     = nn.LayerNorm(d_model)
+        self.attn_norm   = nn.LayerNorm(d_model)
+
+        # Post-attention GRN — ELU + GLU gating preserved
         self.post_attn_grn = _GatedResidualNetwork(d_model, d_model, dropout)
-        self.fc            = nn.Linear(d_model, output_size)
+
+        # Output projection
+        self.fc = nn.Linear(d_model, output_size)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, seq_len, input_size)
-        vsn_out             = self.vsn(x)
-        enc_out, (h_n, c_n) = self.encoder(vsn_out)
-        seed                = enc_out[:, -1:, :]
-        dec_out, _          = self.decoder(seed, (h_n, c_n))
-        attn_out, _         = self.attention(enc_out, enc_out, enc_out)
-        attn_out            = self.attn_norm(enc_out + attn_out)
-        combined            = dec_out[:, 0, :] + attn_out[:, -1, :]
-        grn_out             = self.post_attn_grn(combined.unsqueeze(1)).squeeze(1)
-        return self.fc(grn_out)
+
+        # 1. Variable selection
+        vsn_out = self.vsn(x)                           # (B, seq_len, d_model)
+
+        # 2. LSTM encoding
+        enc_out, (h_n, c_n) = self.encoder(vsn_out)    # enc_out: (B, T, d_model)
+
+        # 3. LSTM decoding — single step using last encoded hidden state
+        seed        = enc_out[:, -1:, :]                # (B, 1, d_model)
+        dec_out, _  = self.decoder(seed, (h_n, c_n))    # (B, 1, d_model)
+
+        # 4. Self-attention over encoder outputs
+        attn_input  = enc_out                            # (B, T, d_model)
+        attn_out, _ = self.attention(attn_input, attn_input, attn_input)
+        attn_out    = self.attn_norm(attn_input + attn_out)  # residual + norm
+
+        # 5. Combine decoder output with attended context (last timestep)
+        combined = dec_out[:, 0, :] + attn_out[:, -1, :]   # (B, d_model)
+
+        # 6. Post-attention GRN
+        grn_out = self.post_attn_grn(combined.unsqueeze(1)).squeeze(1)  # (B, d_model)
+
+        # 7. Linear head — raw logits / scalar
+        logits = self.fc(grn_out)                        # (B, output_size)
+
+        # ✅ UPDATED — output activation strategy:
+        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
+        #               internally (numerically stable). predict_proba() applies
+        #               softmax explicitly at inference time.
+        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
+        #               require unbounded outputs.
+        #   ELU + GLU gating structure preserved throughout (unchanged).
+        return logits
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -192,8 +236,8 @@ class TFTModel(BaseDLModel):
     Temporal Fusion Transformer forecasting model.
 
     Additional constructor parameters (beyond ``BaseDLModel``):
-        num_heads (int): Number of attention heads. Must evenly divide
-            ``hidden_size``. Defaults to 4.
+        num_heads (int): Number of attention heads in the self-attention layer.
+            Must evenly divide ``hidden_size``. Defaults to 4.
     """
 
     def __init__(self, num_heads: int = 4, **kwargs) -> None:
@@ -202,6 +246,7 @@ class TFTModel(BaseDLModel):
 
     def _build_network(self, input_size: int) -> nn.Module:
         output_size = 3 if self.model_type == "classifier" else 1
+        # Ensure hidden_size is divisible by num_heads
         d_model = self.hidden_size - (self.hidden_size % self.num_heads)
         if d_model != self.hidden_size:
             logger.warning(
@@ -215,7 +260,7 @@ class TFTModel(BaseDLModel):
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,
+            model_type=self.model_type,   # ✅ UPDATED
         )
 
 
@@ -232,9 +277,7 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",
-    magnitude_penalty: float = 0.01,   # FIX: exposed for caller override
-    max_grad_norm: float = 1.0,        # FIX: exposed for caller override
+    loss_fn: str = "directional",         # ✅ UPDATED
 ) -> tuple:
     """
     Train a TFT model using PnL-based Optuna optimisation.
@@ -248,13 +291,11 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ``'directional'`` or ``'confidence_weighted'``.
-        magnitude_penalty: L2 coefficient in DirectionalLoss to prevent
-                           constant-prediction collapse (default 0.01).
-        max_grad_norm    : Gradient clipping norm (default 1.0).
+        loss_fn          : ✅ UPDATED — ``'directional'`` or
+                           ``'confidence_weighted'`` (regressor only).
 
     Returns:
-        (model, preds, backtest_positions, X_test_aligned, df_for_backtest)
+        (model, preds, test_index, X_test)
     """
     df = validate_and_sort(df, target_col)
 
@@ -272,13 +313,11 @@ def train(
 
     def objective(trial: optuna.Trial) -> float:
         seq_len     = trial.suggest_int("seq_len",     20,  120)
-        # FIX: cap hidden_size at 128 — larger sizes collapse faster on CPU
         hidden_size = trial.suggest_int("hidden_size", 32,  128)
         num_heads   = trial.suggest_categorical("num_heads", [2, 4, 8])
         num_layers  = trial.suggest_int("num_layers",   1,    3)
         dropout     = trial.suggest_float("dropout",   0.0,  0.4)
-        # FIX: lower LR ceiling to 3e-3 (was 1e-2) — high LR accelerates collapse
-        lr          = trial.suggest_float("lr",        1e-5, 3e-3, log=True)
+        lr          = trial.suggest_float("lr",        1e-4, 1e-2, log=True)
         batch_size  = trial.suggest_categorical("batch_size", [32, 64, 128])
 
         d_model = hidden_size - (hidden_size % num_heads)
@@ -296,9 +335,7 @@ def train(
             epochs=30,
             patience=5,
             model_type=model_type,
-            loss_fn=loss_fn,
-            magnitude_penalty=magnitude_penalty,
-            max_grad_norm=max_grad_norm,
+            loss_fn=loss_fn,              # ✅ UPDATED
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
@@ -331,9 +368,7 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,
-        magnitude_penalty=magnitude_penalty,
-        max_grad_norm=max_grad_norm,
+        loss_fn=loss_fn,                  # ✅ UPDATED
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -341,11 +376,10 @@ def train(
     if np.std(final_preds) < 1e-6:
         logger.warning(
             "[train] Final TFT model collapsed to constant output "
-            f"({final_preds.mean():.6f}). Adding noise to prevent all-zero signals."
+            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
         )
         rng = np.random.default_rng(42)
-        # FIX: noise scale 1e-2 (was 1e-4) for better perturbation
-        final_preds = final_preds + rng.normal(0, 1e-2, size=final_preds.shape)
+        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
 
     aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]

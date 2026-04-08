@@ -44,10 +44,10 @@ class _GRUNetwork(nn.Module):
         num_layers: int,
         dropout: float,
         output_size: int,
-        model_type: str = "regressor",
+        model_type: str = "regressor",   # ✅ UPDATED
     ) -> None:
         super().__init__()
-        self.model_type = model_type
+        self.model_type = model_type      # ✅ UPDATED
         self.gru = nn.GRU(
             input_size=input_size,
             hidden_size=hidden_size,
@@ -59,9 +59,17 @@ class _GRUNetwork(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, seq_len, input_size)
-        out, _ = self.gru(x)     # (B, seq_len, hidden_size)
-        last   = out[:, -1, :]   # (B, hidden_size)
-        return self.fc(last)     # (B, output_size)
+        out, _ = self.gru(x)          # (B, seq_len, hidden_size)
+        last    = out[:, -1, :]       # (B, hidden_size)
+        logits  = self.fc(last)       # (B, output_size)
+
+        # ✅ UPDATED — output activation strategy:
+        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
+        #               internally (numerically stable). predict_proba() applies
+        #               softmax explicitly at inference time.
+        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
+        #               require unbounded outputs.
+        return logits
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -84,12 +92,12 @@ class GRUModel(BaseDLModel):
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,
+            model_type=self.model_type,   # ✅ UPDATED
         )
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Public train()
+# Public train() — identical signature to RF/XGB counterparts
 # ──────────────────────────────────────────────────────────────────────────────
 
 def train(
@@ -101,12 +109,18 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",
-    magnitude_penalty: float = 0.01,   # FIX: exposed for caller override
-    max_grad_norm: float = 1.0,        # FIX: exposed for caller override
+    loss_fn: str = "directional",         # ✅ UPDATED
 ) -> tuple:
     """
     Train a GRU model using PnL-based Optuna optimisation.
+
+    Mirrors the ``train()`` contract in ``randomforest_clf.py`` and
+    ``xgboost_reg.py``:
+        - Validates & sorts the input DataFrame.
+        - Optionally log-diff transforms OHLCV columns.
+        - Splits into train / test sets via a temporal boundary.
+        - Runs an Optuna study maximising backtested PnL.
+        - Retrains the best model on the full training set.
 
     Args:
         df               : Feature DataFrame (output of ``data_pipeline``).
@@ -117,13 +131,15 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ``'directional'`` or ``'confidence_weighted'``.
-        magnitude_penalty: L2 coefficient in DirectionalLoss to prevent
-                           constant-prediction collapse (default 0.01).
-        max_grad_norm    : Gradient clipping norm (default 1.0).
+        loss_fn          : ✅ UPDATED — ``'directional'`` or
+                           ``'confidence_weighted'`` (regressor only).
 
     Returns:
-        (model, preds, backtest_positions, X_test_aligned, df_for_backtest)
+        (model, preds, test_index, X_test)
+        - model      : Fitted ``GRUModel`` instance.
+        - preds      : 1-D np.ndarray of predictions on the test set.
+        - test_index : pd.Index of test-set rows in the original DataFrame.
+        - X_test     : Test feature matrix.
     """
     df = validate_and_sort(df, target_col)
 
@@ -157,9 +173,7 @@ def train(
             epochs=30,
             patience=5,
             model_type=model_type,
-            loss_fn=loss_fn,
-            magnitude_penalty=magnitude_penalty,
-            max_grad_norm=max_grad_norm,
+            loss_fn=loss_fn,              # ✅ UPDATED
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
@@ -168,6 +182,7 @@ def train(
             raise optuna.TrialPruned()
 
         aligned_index = X_test.index[-(len(preds)):]
+
         return run_chunked_backtest(
             trial, df, preds, aligned_index, df_1m,
             model_type=model_type, k=k, lookback=seq_len,
@@ -180,6 +195,7 @@ def train(
     best = study.best_params
     logger.info(f"[train] Best params: {best} | Best PnL: {study.best_value:.4f}")
 
+    # ── Retrain final model with best hyper-parameters ───────────────
     final_model = GRUModel(
         seq_len=best["seq_len"],
         hidden_size=best["hidden_size"],
@@ -190,9 +206,7 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,
-        magnitude_penalty=magnitude_penalty,
-        max_grad_norm=max_grad_norm,
+        loss_fn=loss_fn,                  # ✅ UPDATED
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -200,11 +214,10 @@ def train(
     if np.std(final_preds) < 1e-6:
         logger.warning(
             "[train] Final GRU model collapsed to constant output "
-            f"({final_preds.mean():.6f}). Adding noise to prevent all-zero signals."
+            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
         )
         rng = np.random.default_rng(42)
-        # FIX: noise scale 1e-2 (was 1e-4) for meaningful perturbation
-        final_preds = final_preds + rng.normal(0, 1e-2, size=final_preds.shape)
+        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
 
     aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]
