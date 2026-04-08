@@ -34,6 +34,7 @@ class _GRUNetwork(nn.Module):
         num_layers  : Number of stacked GRU layers.
         dropout     : Dropout applied between GRU layers (ignored if num_layers==1).
         output_size : Dimension of the final linear layer.
+        model_type  : ``'classifier'`` or ``'regressor'``.
     """
 
     def __init__(
@@ -43,8 +44,10 @@ class _GRUNetwork(nn.Module):
         num_layers: int,
         dropout: float,
         output_size: int,
+        model_type: str = "regressor",   # ✅ UPDATED
     ) -> None:
         super().__init__()
+        self.model_type = model_type      # ✅ UPDATED
         self.gru = nn.GRU(
             input_size=input_size,
             hidden_size=hidden_size,
@@ -58,7 +61,15 @@ class _GRUNetwork(nn.Module):
         # x : (B, seq_len, input_size)
         out, _ = self.gru(x)          # (B, seq_len, hidden_size)
         last    = out[:, -1, :]       # (B, hidden_size)
-        return self.fc(last)          # (B, output_size)
+        logits  = self.fc(last)       # (B, output_size)
+
+        # ✅ UPDATED — output activation strategy:
+        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
+        #               internally (numerically stable). predict_proba() applies
+        #               softmax explicitly at inference time.
+        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
+        #               require unbounded outputs.
+        return logits
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -81,6 +92,7 @@ class GRUModel(BaseDLModel):
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
+            model_type=self.model_type,   # ✅ UPDATED
         )
 
 
@@ -97,6 +109,7 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
+    loss_fn: str = "directional",         # ✅ UPDATED
 ) -> tuple:
     """
     Train a GRU model using PnL-based Optuna optimisation.
@@ -118,6 +131,8 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
+        loss_fn          : ✅ UPDATED — ``'directional'`` or
+                           ``'confidence_weighted'`` (regressor only).
 
     Returns:
         (model, preds, test_index, X_test)
@@ -134,8 +149,6 @@ def train(
     if model_type == "regressor":
         df = normalize_regression_target(df, target_col)
 
-    # Capture the normalised df NOW — its RangeIndex matches the idx_arr
-    # integers that aligned_index will contain after the train/test split.
     df_normalised = df.copy()
 
     X_train, y_train, X_test, y_test = split_features_labels(df, target_col, split_date)
@@ -160,6 +173,7 @@ def train(
             epochs=30,
             patience=5,
             model_type=model_type,
+            loss_fn=loss_fn,              # ✅ UPDATED
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
@@ -167,7 +181,6 @@ def train(
         if model_type == "regressor" and np.std(preds) < 1e-8:
             raise optuna.TrialPruned()
 
-        # Align test_index with the (potentially shorter) preds array
         aligned_index = X_test.index[-(len(preds)):]
 
         return run_chunked_backtest(
@@ -193,6 +206,7 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
+        loss_fn=loss_fn,                  # ✅ UPDATED
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -205,9 +219,7 @@ def train(
         rng = np.random.default_rng(42)
         final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
 
-    # Trim X_test to match the (seq_len warm-up shortened) preds length so
-    # every downstream caller (backtest, importance, dry-run) sees aligned arrays.
-    aligned_index = X_test.index[-(len(final_preds)):]
+    aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]
 
     logger.info(
@@ -215,16 +227,10 @@ def train(
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
 
-    # Build df_for_backtest: a length-aligned frame with both 'datetime' and
-    # all feature columns.  pnl_permutation_importance uses this as its `df`
-    # argument, so it must contain every feature column that X_test_aligned has
-    # (for shuffling) plus 'datetime' (for BackTest lookup).
-    # RangeIndex 0..P-1 keeps iloc positions consistent with backtest_positions.
-    n_preds = len(final_preds)
+    n_preds    = len(final_preds)
     iloc_start = max(0, len(df_normalised) - n_preds)
     pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
 
-    # Guarantee exact length match (defensive clamp)
     pred_datetimes     = pred_datetimes[-n_preds:]
     backtest_positions = np.arange(n_preds)
 

@@ -49,6 +49,9 @@ class _GatedResidualNetwork(nn.Module):
 
     If ``input_dim != d_model`` a 1×1 projection is applied to the skip path.
 
+    NOTE: ELU + GLU gating are preserved unchanged per the spec — these are
+    fundamental to the TFT architecture and must not be replaced with GELU.
+
     Args:
         input_dim : Dimensionality of the input vector.
         d_model   : Hidden / output dimension of this GRN.
@@ -70,8 +73,8 @@ class _GatedResidualNetwork(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         residual = self.skip_proj(x)
-        out = F.elu(self.fc1(x))
-        out = self.glu(self.fc2(out))   # (B, T, d_model)
+        out = F.elu(self.fc1(x))           # ELU preserved — TFT architecture
+        out = self.glu(self.fc2(out))      # GLU gating preserved
         out = self.dropout(out)
         return self.norm(residual + out)
 
@@ -89,8 +92,7 @@ class _VariableSelectionNetwork(nn.Module):
     Averaging 85 independent random vectors reduces their std by sqrt(85) ≈ 9×,
     giving the downstream LSTM near-identical inputs across all samples in a
     batch.  The encoder then can't differentiate samples, h_n is near-constant,
-    and the FC head learns a single constant equal to the target mean — which is
-    what the logs show (min=max=mean=0.0626).
+    and the FC head learns a single constant equal to the target mean.
 
     Fix: replace the n_features individual Linear(1, d_model) projections with
     a single joint Linear(n_features, d_model).  This gives the LSTM properly
@@ -109,12 +111,7 @@ class _VariableSelectionNetwork(nn.Module):
         self.n_features = n_features
         self.d_model    = d_model
 
-        # Single joint projection: all features seen together → d_model
-        # This preserves inter-feature covariance and avoids the averaging collapse.
         self.input_projection = nn.Linear(n_features, d_model)
-
-        # GRN gate: maps raw features to a d_model-dim gate vector applied to
-        # the joint projection output (element-wise sigmoid scaling).
         self.grn     = _GatedResidualNetwork(n_features, d_model, dropout)
         self.sigmoid = nn.Sigmoid()
 
@@ -122,18 +119,14 @@ class _VariableSelectionNetwork(nn.Module):
         # x : (B, T, n_features)
         B, T, _ = x.shape
 
-        # Joint projection: (B, T, n_features) → (B, T, d_model)
         projected = self.input_projection(x)
 
-        # Compute per-dimension gate from raw features.
-        # Flatten time into batch for the GRN, then reshape back.
-        flat    = x.reshape(B * T, self.n_features)          # (B*T, n_features)
+        flat    = x.reshape(B * T, self.n_features)
         gate    = self.sigmoid(
             self.grn(flat).reshape(B, T, self.d_model)
-        )                                                      # (B, T, d_model)
+        )
 
-        # Gated output: element-wise product keeps informative dimensions
-        return projected * gate                                # (B, T, d_model)
+        return projected * gate
 
 
 class _TFTNetwork(nn.Module):
@@ -147,6 +140,7 @@ class _TFTNetwork(nn.Module):
         num_layers   : Number of LSTM layers in encoder and decoder.
         dropout      : Dropout probability.
         output_size  : Output dimensionality of the head.
+        model_type   : ``'classifier'`` or ``'regressor'``.
     """
 
     def __init__(
@@ -157,12 +151,15 @@ class _TFTNetwork(nn.Module):
         num_layers: int,
         dropout: float,
         output_size: int,
+        model_type: str = "regressor",   # ✅ UPDATED
     ) -> None:
         super().__init__()
+        self.model_type = model_type      # ✅ UPDATED
+
         # Variable selection
         self.vsn = _VariableSelectionNetwork(input_size, d_model, dropout)
 
-        # LSTM encoder
+        # LSTM encoder — internal sigmoid/tanh activations preserved unchanged
         self.encoder = nn.LSTM(
             input_size=d_model,
             hidden_size=d_model,
@@ -187,7 +184,7 @@ class _TFTNetwork(nn.Module):
         )
         self.attn_norm   = nn.LayerNorm(d_model)
 
-        # Post-attention GRN
+        # Post-attention GRN — ELU + GLU gating preserved
         self.post_attn_grn = _GatedResidualNetwork(d_model, d_model, dropout)
 
         # Output projection
@@ -203,12 +200,11 @@ class _TFTNetwork(nn.Module):
         enc_out, (h_n, c_n) = self.encoder(vsn_out)    # enc_out: (B, T, d_model)
 
         # 3. LSTM decoding — single step using last encoded hidden state
-        # Seed with the last temporal context from the encoder output
         seed        = enc_out[:, -1:, :]                # (B, 1, d_model)
         dec_out, _  = self.decoder(seed, (h_n, c_n))    # (B, 1, d_model)
 
         # 4. Self-attention over encoder outputs
-        attn_input = enc_out                             # (B, T, d_model)
+        attn_input  = enc_out                            # (B, T, d_model)
         attn_out, _ = self.attention(attn_input, attn_input, attn_input)
         attn_out    = self.attn_norm(attn_input + attn_out)  # residual + norm
 
@@ -218,8 +214,17 @@ class _TFTNetwork(nn.Module):
         # 6. Post-attention GRN
         grn_out = self.post_attn_grn(combined.unsqueeze(1)).squeeze(1)  # (B, d_model)
 
-        # 7. Linear head
-        return self.fc(grn_out)                          # (B, output_size)
+        # 7. Linear head — raw logits / scalar
+        logits = self.fc(grn_out)                        # (B, output_size)
+
+        # ✅ UPDATED — output activation strategy:
+        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
+        #               internally (numerically stable). predict_proba() applies
+        #               softmax explicitly at inference time.
+        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
+        #               require unbounded outputs.
+        #   ELU + GLU gating structure preserved throughout (unchanged).
+        return logits
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -255,6 +260,7 @@ class TFTModel(BaseDLModel):
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
+            model_type=self.model_type,   # ✅ UPDATED
         )
 
 
@@ -271,6 +277,7 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
+    loss_fn: str = "directional",         # ✅ UPDATED
 ) -> tuple:
     """
     Train a TFT model using PnL-based Optuna optimisation.
@@ -284,6 +291,8 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
+        loss_fn          : ✅ UPDATED — ``'directional'`` or
+                           ``'confidence_weighted'`` (regressor only).
 
     Returns:
         (model, preds, test_index, X_test)
@@ -311,7 +320,6 @@ def train(
         lr          = trial.suggest_float("lr",        1e-4, 1e-2, log=True)
         batch_size  = trial.suggest_categorical("batch_size", [32, 64, 128])
 
-        # Ensure hidden_size is compatible with num_heads
         d_model = hidden_size - (hidden_size % num_heads)
         if d_model < num_heads:
             raise optuna.TrialPruned()
@@ -327,11 +335,11 @@ def train(
             epochs=30,
             patience=5,
             model_type=model_type,
+            loss_fn=loss_fn,              # ✅ UPDATED
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
 
-        # Prune trials where the model outputs a constant (dead network).
         if np.std(preds) < 1e-8:
             raise optuna.TrialPruned()
 
@@ -360,6 +368,7 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
+        loss_fn=loss_fn,                  # ✅ UPDATED
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -372,16 +381,15 @@ def train(
         rng = np.random.default_rng(42)
         final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
 
-    # Trim X_test to match the (seq_len warm-up shortened) preds length so
-    # every downstream caller (backtest, importance, dry-run) sees aligned arrays.
-    aligned_index = X_test.index[-(len(final_preds)):]
+    aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]
 
     logger.info(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
         f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
     )
-    n_preds = len(final_preds)
+
+    n_preds    = len(final_preds)
     iloc_start = max(0, len(df_normalised) - n_preds)
     pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
 
