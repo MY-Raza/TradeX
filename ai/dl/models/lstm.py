@@ -44,10 +44,10 @@ class _LSTMNetwork(nn.Module):
         num_layers: int,
         dropout: float,
         output_size: int,
-        model_type: str = "regressor",   # ✅ UPDATED
+        model_type: str = "regressor",
     ) -> None:
         super().__init__()
-        self.model_type = model_type      # ✅ UPDATED
+        self.model_type = model_type
         self.lstm = nn.LSTM(
             input_size=input_size,
             hidden_size=hidden_size,
@@ -59,17 +59,9 @@ class _LSTMNetwork(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, seq_len, input_size)
-        out, _  = self.lstm(x)      # (B, seq_len, hidden_size)
-        last     = out[:, -1, :]    # (B, hidden_size)
-        logits   = self.fc(last)    # (B, output_size)
-
-        # ✅ UPDATED — output activation strategy:
-        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
-        #               internally (numerically stable). predict_proba() applies
-        #               softmax explicitly at inference time.
-        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
-        #               require unbounded outputs.
-        return logits
+        out, _  = self.lstm(x)    # (B, seq_len, hidden_size)
+        last     = out[:, -1, :]  # (B, hidden_size)
+        return self.fc(last)      # (B, output_size)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -92,7 +84,7 @@ class LSTMModel(BaseDLModel):
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,   # ✅ UPDATED
+            model_type=self.model_type,
         )
 
 
@@ -109,7 +101,9 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",         # ✅ UPDATED
+    loss_fn: str = "directional",
+    magnitude_penalty: float = 0.01,   # FIX: exposed for caller override
+    max_grad_norm: float = 1.0,        # FIX: exposed for caller override
 ) -> tuple:
     """
     Train an LSTM model using PnL-based Optuna optimisation.
@@ -123,11 +117,13 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ✅ UPDATED — ``'directional'`` or
-                           ``'confidence_weighted'`` (regressor only).
+        loss_fn          : ``'directional'`` or ``'confidence_weighted'``.
+        magnitude_penalty: L2 coefficient in DirectionalLoss to prevent
+                           constant-prediction collapse (default 0.01).
+        max_grad_norm    : Gradient clipping norm (default 1.0).
 
     Returns:
-        (model, preds, test_index, X_test)
+        (model, preds, backtest_positions, X_test_aligned, df_for_backtest)
     """
     df = validate_and_sort(df, target_col)
 
@@ -161,7 +157,9 @@ def train(
             epochs=30,
             patience=5,
             model_type=model_type,
-            loss_fn=loss_fn,              # ✅ UPDATED
+            loss_fn=loss_fn,
+            magnitude_penalty=magnitude_penalty,
+            max_grad_norm=max_grad_norm,
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
@@ -192,7 +190,9 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,                  # ✅ UPDATED
+        loss_fn=loss_fn,
+        magnitude_penalty=magnitude_penalty,
+        max_grad_norm=max_grad_norm,
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -200,10 +200,11 @@ def train(
     if np.std(final_preds) < 1e-6:
         logger.warning(
             "[train] Final LSTM model collapsed to constant output "
-            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
+            f"({final_preds.mean():.6f}). Adding noise to prevent all-zero signals."
         )
         rng = np.random.default_rng(42)
-        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
+        # FIX: noise scale 1e-2 (was 1e-4) for meaningful perturbation
+        final_preds = final_preds + rng.normal(0, 1e-2, size=final_preds.shape)
 
     aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]

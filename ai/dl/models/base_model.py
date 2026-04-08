@@ -24,7 +24,10 @@ from TradeX.utils.common.logs import get_logger
 logger = get_logger("base_dl_model")
 
 
-# ✅ UPDATED — Trading-oriented loss functions
+# ──────────────────────────────────────────────────────────────────────────────
+# Loss functions
+# ──────────────────────────────────────────────────────────────────────────────
+
 class DirectionalLoss(nn.Module):
     """
     Directional loss for regression models.
@@ -32,18 +35,31 @@ class DirectionalLoss(nn.Module):
     Encourages predictions to have the correct sign (direction) relative to
     the target return, and rewards larger magnitude predictions when correct.
 
-    Loss = -mean(sign(targets) * preds)
+    Loss = -mean(sign(targets) * preds) + λ * mean(preds²)
 
-    A lower (more negative) value means the model is predicting in the right
-    direction with higher confidence. Minimising this loss maximises directional
-    PnL alignment.
+    The L2 magnitude penalty (λ, default 0.01) prevents the degenerate
+    constant-negative local minimum that pure directional loss falls into
+    when targets are imbalanced.  Without it, the optimiser discovers that
+    predicting a single large-magnitude constant in the majority-class
+    direction achieves a low loss and never escapes.  This was the root cause
+    of the constant-negative collapse observed in TFT, GRU, and LSTM, and the
+    magnitude explosion (float32 overflow) observed in TCN.
+
+    Args:
+        magnitude_penalty : L2 coefficient λ.  Set to 0.0 to recover the
+                            original pure directional loss (not recommended).
     """
 
+    def __init__(self, magnitude_penalty: float = 0.01) -> None:
+        super().__init__()
+        self.lam = magnitude_penalty
+
     def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
-        return -torch.mean(torch.sign(targets) * preds)
+        directional   = -torch.mean(torch.sign(targets) * preds)
+        magnitude_reg = self.lam * torch.mean(preds ** 2)
+        return directional + magnitude_reg
 
 
-# ✅ UPDATED — Confidence-weighted trading loss
 class ConfidenceWeightedLoss(nn.Module):
     """
     Confidence-weighted directional loss for regression models.
@@ -51,22 +67,24 @@ class ConfidenceWeightedLoss(nn.Module):
     Extends DirectionalLoss by scaling each term by the absolute prediction
     magnitude (confidence):
 
-        Loss = -mean(sign(targets) * preds * |preds|)
-             = -mean(sign(targets) * preds²  * sign(preds))
+        Loss = -mean(sign(targets) * preds * |preds|) + λ * mean(preds²)
 
-    Effect:
-        - Correct high-confidence predictions → large negative contribution (good).
-        - Wrong high-confidence predictions   → large positive contribution (bad).
-        - Low-confidence predictions           → near-zero contribution.
+    The same L2 penalty is applied to prevent constant-prediction collapse.
 
-    This is stronger than DirectionalLoss and can be enabled via the
-    ``loss_fn`` constructor argument on ``BaseDLModel``.
+    Args:
+        magnitude_penalty : L2 coefficient λ.
     """
 
+    def __init__(self, magnitude_penalty: float = 0.01) -> None:
+        super().__init__()
+        self.lam = magnitude_penalty
+
     def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
-        direction  = torch.sign(targets)
-        confidence = torch.abs(preds)
-        return -torch.mean(direction * preds * confidence)
+        direction     = torch.sign(targets)
+        confidence    = torch.abs(preds)
+        directional   = -torch.mean(direction * preds * confidence)
+        magnitude_reg = self.lam * torch.mean(preds ** 2)
+        return directional + magnitude_reg
 
 
 class BaseDLModel(abc.ABC):
@@ -74,8 +92,7 @@ class BaseDLModel(abc.ABC):
     Abstract base for all PyTorch time-series forecasting models.
 
     Subclasses must implement:
-        - ``_build_network(input_size, **kwargs) -> nn.Module``
-        - ``_predict_raw(X_tensor) -> np.ndarray``
+        - ``_build_network(input_size) -> nn.Module``
 
     Parameters
     ----------
@@ -102,9 +119,17 @@ class BaseDLModel(abc.ABC):
     model_type : str
         ``'classifier'`` or ``'regressor'``.
     loss_fn : str
-        ✅ UPDATED — Loss function selector for regressors.
+        Loss function selector for regressors.
         ``'directional'`` (default) or ``'confidence_weighted'``.
         Classifiers always use ``CrossEntropyLoss`` regardless of this setting.
+    magnitude_penalty : float
+        L2 coefficient λ applied inside DirectionalLoss / ConfidenceWeightedLoss
+        to prevent constant-prediction collapse.  Default 0.01.
+    max_grad_norm : float
+        Gradient clipping norm applied after every backward pass.
+        Prevents the float32 magnitude explosion observed in TCN with
+        weight_norm layers, and slows collapse speed in TFT/GRU/LSTM.
+        Default 1.0.  Set to 0.0 to disable (not recommended).
     """
 
     def __init__(
@@ -120,19 +145,23 @@ class BaseDLModel(abc.ABC):
         patience: int = 10,
         device: Optional[str] = None,
         model_type: str = "regressor",
-        loss_fn: str = "directional",   # ✅ UPDATED
+        loss_fn: str = "directional",
+        magnitude_penalty: float = 0.01,
+        max_grad_norm: float = 1.0,
     ) -> None:
-        self.seq_len     = seq_len
-        self.horizon     = horizon
-        self.hidden_size = hidden_size
-        self.num_layers  = num_layers
-        self.dropout     = dropout
-        self.batch_size  = batch_size
-        self.epochs      = epochs
-        self.lr          = lr
-        self.patience    = patience
-        self.model_type  = model_type
-        self.loss_fn     = loss_fn      # ✅ UPDATED
+        self.seq_len           = seq_len
+        self.horizon           = horizon
+        self.hidden_size       = hidden_size
+        self.num_layers        = num_layers
+        self.dropout           = dropout
+        self.batch_size        = batch_size
+        self.epochs            = epochs
+        self.lr                = lr
+        self.patience          = patience
+        self.model_type        = model_type
+        self.loss_fn           = loss_fn
+        self.magnitude_penalty = magnitude_penalty
+        self.max_grad_norm     = max_grad_norm
 
         if device is None:
             self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -142,9 +171,9 @@ class BaseDLModel(abc.ABC):
         logger.info(f"[{self.__class__.__name__}] Using device: {self.device}")
 
         # Set after fit()
-        self.network_: Optional[nn.Module]  = None
-        self.feature_names_: list[str]      = []
-        self.input_size_: int               = 0
+        self.network_: Optional[nn.Module] = None
+        self.feature_names_: list[str]     = []
+        self.input_size_: int              = 0
 
     # ------------------------------------------------------------------
     # Abstract interface
@@ -163,61 +192,67 @@ class BaseDLModel(abc.ABC):
         """
 
     # ------------------------------------------------------------------
-    # ✅ UPDATED — Loss factory
+    # Loss factory
     # ------------------------------------------------------------------
 
     def _build_criterion(self, y_seq_tr: np.ndarray) -> nn.Module:
         """
-        Construct the appropriate loss function for the current model type
-        and ``loss_fn`` setting.
+        Construct the appropriate loss function.
 
-        For classifiers: always ``CrossEntropyLoss`` with inverse-frequency
-        class weights to counter label imbalance.
+        Classifiers: ``CrossEntropyLoss`` with inverse-frequency class weights.
+        Regressors:  ``DirectionalLoss`` or ``ConfidenceWeightedLoss``, both
+                     with L2 magnitude penalty to prevent constant collapse.
 
-        For regressors: ``DirectionalLoss`` (default) or
-        ``ConfidenceWeightedLoss`` depending on ``self.loss_fn``.
+        Also logs the target sign balance to surface imbalance early — a
+        positive fraction below 40% or above 60% is a warning that constant-
+        prediction collapse risk is high even with the penalty active.
 
         Args:
-            y_seq_tr : Training label array (float32) used for class-weight
-                       computation in classifier mode.
+            y_seq_tr : Training label array used for class-weight computation
+                       and sign-balance logging.
 
         Returns:
             Configured ``nn.Module`` loss criterion.
         """
         if self.model_type == "classifier":
-            # Compute inverse-frequency class weights to counter label imbalance.
-            # y_seq_tr labels are still float {-1, 0, 1}; remap to {0, 1, 2}
-            # (same mapping as _remap_labels in train_loop.py) before counting.
-            remapped = (torch.from_numpy(y_seq_tr) + 1).long()  # {0, 1, 2}
-            counts   = torch.bincount(remapped, minlength=3).float()
-            counts   = counts.clamp(min=1.0)
+            remapped = (torch.from_numpy(y_seq_tr) + 1).long()
+            counts   = torch.bincount(remapped, minlength=3).float().clamp(min=1.0)
             weights  = (1.0 / counts)
             weights  = (weights / weights.sum() * 3).to(self.device)
             logger.info(
                 f"[{self.__class__.__name__}] Class weights: "
                 f"short={weights[0]:.3f} neutral={weights[1]:.3f} long={weights[2]:.3f}"
             )
-            # ✅ UPDATED — Classifiers use CrossEntropyLoss on raw logits.
-            # Networks output raw logits (no softmax in forward); CrossEntropyLoss
-            # applies log-softmax internally, which is numerically stable.
             return nn.CrossEntropyLoss(weight=weights)
 
-        else:
-            # ✅ UPDATED — Regressors use trading-aligned losses instead of MSE.
-            if self.loss_fn == "confidence_weighted":
-                logger.info(
-                    f"[{self.__class__.__name__}] Using ConfidenceWeightedLoss."
-                )
-                return ConfidenceWeightedLoss()
-            else:
-                # Default: directional loss
-                logger.info(
-                    f"[{self.__class__.__name__}] Using DirectionalLoss."
-                )
-                return DirectionalLoss()
+        # Log sign balance — surfaces imbalanced target distributions early
+        pos_frac = float((y_seq_tr > 0).mean())
+        logger.info(
+            f"[{self.__class__.__name__}] Target sign balance — "
+            f"{pos_frac:.1%} positive / {1 - pos_frac:.1%} negative"
+        )
+        if pos_frac < 0.40 or pos_frac > 0.60:
+            logger.warning(
+                f"[{self.__class__.__name__}] Target is imbalanced "
+                f"({pos_frac:.1%} positive). Constant-prediction collapse risk "
+                f"is elevated. magnitude_penalty={self.magnitude_penalty} is active."
+            )
+
+        if self.loss_fn == "confidence_weighted":
+            logger.info(
+                f"[{self.__class__.__name__}] Using ConfidenceWeightedLoss "
+                f"(λ={self.magnitude_penalty})."
+            )
+            return ConfidenceWeightedLoss(magnitude_penalty=self.magnitude_penalty)
+
+        logger.info(
+            f"[{self.__class__.__name__}] Using DirectionalLoss "
+            f"(λ={self.magnitude_penalty})."
+        )
+        return DirectionalLoss(magnitude_penalty=self.magnitude_penalty)
 
     # ------------------------------------------------------------------
-    # Public interface — mirrors train() in sklearn-style model files
+    # Public interface
     # ------------------------------------------------------------------
 
     def fit(
@@ -229,6 +264,10 @@ class BaseDLModel(abc.ABC):
     ) -> "BaseDLModel":
         """
         Build sequences, construct the network, and run the training loop.
+
+        Gradient clipping (``max_grad_norm``) is applied after every backward
+        pass to prevent the magnitude explosion seen in TCN and the rapid
+        collapse seen in TFT/GRU/LSTM.
 
         Args:
             X_train : Training feature matrix (rows = timesteps).
@@ -249,8 +288,10 @@ class BaseDLModel(abc.ABC):
         X_seq_tr, y_seq_tr = build_sequences(X_tr_np, y_tr_np, self.seq_len)
 
         train_ds = TimeSeriesDataset(X_seq_tr, y_seq_tr)
-        train_dl = DataLoader(train_ds, batch_size=self.batch_size, shuffle=True,
-                              num_workers=0, pin_memory=(self.device.type == "cuda"))
+        train_dl = DataLoader(
+            train_ds, batch_size=self.batch_size, shuffle=True,
+            num_workers=0, pin_memory=(self.device.type == "cuda"),
+        )
 
         val_dl = None
         if X_val is not None and y_val is not None:
@@ -269,9 +310,7 @@ class BaseDLModel(abc.ABC):
         )
 
         # ── Loss & optimiser ─────────────────────────────────────────
-        # ✅ UPDATED — delegate to _build_criterion()
         criterion = self._build_criterion(y_seq_tr)
-
         optimiser = Adam(self.network_.parameters(), lr=self.lr)
         stopper   = EarlyStopping(patience=self.patience)
 
@@ -281,12 +320,14 @@ class BaseDLModel(abc.ABC):
             train_loss = run_epoch(
                 self.network_, train_dl, criterion, optimiser,
                 self.device, training=True, model_type=self.model_type,
+                max_grad_norm=self.max_grad_norm,   # FIX: gradient clipping
             )
             val_loss = None
             if val_dl is not None:
                 val_loss = run_epoch(
                     self.network_, val_dl, criterion, None,
                     self.device, training=False, model_type=self.model_type,
+                    max_grad_norm=self.max_grad_norm,
                 )
 
             monitor = val_loss if val_loss is not None else train_loss
@@ -314,19 +355,11 @@ class BaseDLModel(abc.ABC):
         """
         Generate predictions for the given feature matrix.
 
-        The first ``seq_len - 1`` rows are consumed as the warm-up window and
-        produce no output; the returned array therefore has
-        ``len(X) - seq_len + 1`` elements.
+        The first ``seq_len - 1`` rows are consumed as the warm-up window.
+        Returns ``len(X) - seq_len + 1`` elements.
 
-        For classifiers: returns integer signals in ``{-1, 0, 1}`` via argmax.
-        For regressors:  returns raw continuous values from the linear head.
-
-        Args:
-            X : Feature matrix aligned with the test set.
-
-        Returns:
-            1-D NumPy array of predictions (signals for classifiers,
-            continuous values for regressors).
+        For classifiers: integer signals in ``{-1, 0, 1}`` via argmax.
+        For regressors:  raw continuous values from the linear head.
         """
         if self.network_ is None:
             raise RuntimeError("Model has not been fitted yet. Call fit() first.")
@@ -344,14 +377,10 @@ class BaseDLModel(abc.ABC):
         with torch.no_grad():
             for X_batch, _ in dl:
                 X_batch = X_batch.to(self.device)
-                out     = self.network_(X_batch)  # (B, output_size)
+                out     = self.network_(X_batch)
 
                 if self.model_type == "classifier":
-                    # ✅ UPDATED — network outputs raw logits; argmax over logits
-                    # is equivalent to argmax over softmax probabilities and avoids
-                    # a redundant softmax call in the hot path.
-                    # Subtract 1 to map class indices {0,1,2} → signals {-1,0,1}.
-                    pred_cls = torch.argmax(out, dim=-1)   # (B,)
+                    pred_cls = torch.argmax(out, dim=-1)
                     preds_np = (pred_cls - 1).cpu().numpy().astype(np.float32)
                 else:
                     preds_np = out.squeeze(-1).cpu().numpy()
@@ -365,27 +394,14 @@ class BaseDLModel(abc.ABC):
         )
         return result
 
-    # ✅ UPDATED — predict_proba: returns softmax probabilities for classifiers
     def predict_proba(self, X: pd.DataFrame) -> np.ndarray:
         """
-        Return class probability estimates (classifiers) or raw outputs
-        (regressors) for the given feature matrix.
+        Return class probability estimates (classifiers) or raw scalar outputs
+        (regressors).
 
-        For classifiers: applies softmax over the logit output so each row
-        sums to 1.  Shape: ``(N, 3)`` — columns are [P(short), P(neutral), P(long)].
-
-        For regressors: identical to ``predict()`` — returns the raw scalar
-        output of the linear head.  Shape: ``(N,)``.
-
-        Use this method when you need calibrated confidence scores for position
-        sizing rather than hard signal labels.
-
-        Args:
-            X : Feature matrix aligned with the test set.
-
-        Returns:
-            NumPy array of shape ``(N, 3)`` for classifiers or ``(N,)`` for
-            regressors, where N = len(X) - seq_len + 1.
+        For classifiers: softmax over logits → shape ``(N, 3)``,
+                         columns = [P(short), P(neutral), P(long)].
+        For regressors:  identical to ``predict()`` → shape ``(N,)``.
         """
         if self.network_ is None:
             raise RuntimeError("Model has not been fitted yet. Call fit() first.")
@@ -403,11 +419,10 @@ class BaseDLModel(abc.ABC):
         with torch.no_grad():
             for X_batch, _ in dl:
                 X_batch = X_batch.to(self.device)
-                out     = self.network_(X_batch)  # (B, output_size)
+                out     = self.network_(X_batch)
 
                 if self.model_type == "classifier":
-                    # ✅ UPDATED — apply softmax here (inference only, not training)
-                    probs = torch.softmax(out, dim=-1)   # (B, 3)
+                    probs = torch.softmax(out, dim=-1)
                     all_probs.append(probs.cpu().numpy())
                 else:
                     all_probs.append(out.squeeze(-1).cpu().numpy())
@@ -428,28 +443,20 @@ class BaseDLModel(abc.ABC):
 
         For regressors: MSE, MAE, and directional accuracy.
         For classifiers: accuracy.
-
-        Args:
-            X_test : Test feature matrix.
-            y_test : Ground-truth labels / targets.
-
-        Returns:
-            Dict of metric name → value.
         """
-        preds = self.predict(X_test)
+        preds     = self.predict(X_test)
         y_aligned = y_test.to_numpy(dtype=np.float32)[-len(preds):]
 
         if self.model_type == "classifier":
             accuracy = float(np.mean(preds == y_aligned.astype(np.float32)))
             logger.info(f"[{self.__class__.__name__}] Test accuracy: {accuracy:.4f}")
             return {"accuracy": accuracy}
-        else:
-            mse = float(np.mean((preds - y_aligned) ** 2))
-            mae = float(np.mean(np.abs(preds - y_aligned)))
-            # ✅ UPDATED — also report directional accuracy for trading relevance
-            dir_acc = float(np.mean(np.sign(preds) == np.sign(y_aligned)))
-            logger.info(
-                f"[{self.__class__.__name__}] MSE={mse:.6f}  MAE={mae:.6f}  "
-                f"DirectionalAcc={dir_acc:.4f}"
-            )
-            return {"mse": mse, "mae": mae, "directional_accuracy": dir_acc}
+
+        mse     = float(np.mean((preds - y_aligned) ** 2))
+        mae     = float(np.mean(np.abs(preds - y_aligned)))
+        dir_acc = float(np.mean(np.sign(preds) == np.sign(y_aligned)))
+        logger.info(
+            f"[{self.__class__.__name__}] MSE={mse:.6f}  MAE={mae:.6f}  "
+            f"DirectionalAcc={dir_acc:.4f}"
+        )
+        return {"mse": mse, "mae": mae, "directional_accuracy": dir_acc}

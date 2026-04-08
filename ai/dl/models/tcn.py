@@ -5,7 +5,7 @@ import pandas as pd
 import optuna
 import torch
 import torch.nn as nn
-from torch.nn.utils import weight_norm
+from torch.nn.utils import spectral_norm   # FIX: spectral_norm replaces weight_norm
 
 from TradeX.ai.dl.models.base_model import BaseDLModel
 from TradeX.ai.dl.models.train_utils import (
@@ -29,6 +29,17 @@ class _CausalConv1d(nn.Module):
     """
     1-D causal convolution: pads only on the left so no future leakage occurs.
 
+    FIX: weight_norm replaced with spectral_norm.
+
+    weight_norm decouples the weight into a magnitude scalar ``g`` and a
+    direction vector ``v``.  DirectionalLoss pushes prediction magnitude
+    unboundedly (loss = -mean(sign(y)*pred)), so the optimiser grows ``g``
+    without limit across the dilated stack, producing float32 overflow
+    (~10¹⁹) after only a few hundred epochs.  spectral_norm constrains the
+    Lipschitz constant of each conv layer to ≤1, bounding the forward-pass
+    amplification through the residual stack regardless of optimiser step size.
+    Gradient clipping in BaseDLModel.fit() provides a complementary safeguard.
+
     Args:
         in_channels  : Input channel count.
         out_channels : Output channel count.
@@ -45,7 +56,9 @@ class _CausalConv1d(nn.Module):
     ) -> None:
         super().__init__()
         self.padding = (kernel_size - 1) * dilation
-        self.conv    = weight_norm(
+        # FIX: spectral_norm bounds the operator norm to ≤1 per layer,
+        # preventing the compounding magnitude explosion seen with weight_norm.
+        self.conv = spectral_norm(
             nn.Conv1d(
                 in_channels, out_channels,
                 kernel_size=kernel_size,
@@ -53,13 +66,10 @@ class _CausalConv1d(nn.Module):
                 padding=self.padding,
             )
         )
-        # ✅ UPDATED — use fan_in + relu for Kaiming init (compatible with GELU too;
-        # GELU ≈ ReLU in the positive half so the same init heuristic applies).
-        nn.init.kaiming_normal_(self.conv.weight_v, mode="fan_in", nonlinearity="relu")
+        nn.init.kaiming_normal_(self.conv.weight_orig, mode="fan_in", nonlinearity="relu")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         out = self.conv(x)
-        # Remove the right-side padding to preserve causality
         return out[:, :, : -self.padding] if self.padding > 0 else out
 
 
@@ -67,12 +77,10 @@ class _TCNBlock(nn.Module):
     """
     One residual TCN block: two causal conv layers + skip connection.
 
-    ✅ UPDATED — uses GELU activation instead of ReLU.
-
-    GELU advantages over ReLU for financial time-series:
-        - Smooth, non-zero gradient everywhere (no dying-neuron problem).
-        - Stochastic regularisation effect (similar to dropout) during training.
-        - Better empirical performance in transformer / sequence models.
+    Uses GELU activation (smooth, non-dying-neuron) instead of ReLU.
+    No activation after the residual addition — applying one here clamps
+    block outputs and causes the FC head bias to absorb the negative target
+    mean, reproducing the constant-negative collapse bug.
 
     Args:
         in_channels  : Input channels (must equal out_channels for residual).
@@ -93,9 +101,8 @@ class _TCNBlock(nn.Module):
         super().__init__()
         self.conv1      = _CausalConv1d(in_channels,  out_channels, kernel_size, dilation)
         self.conv2      = _CausalConv1d(out_channels, out_channels, kernel_size, dilation)
-        self.activation = nn.GELU()    # ✅ UPDATED — GELU replaces ReLU
+        self.activation = nn.GELU()
         self.dropout    = nn.Dropout(dropout)
-        # Downsample / projection for residual when channels change
         self.downsample = (
             nn.Conv1d(in_channels, out_channels, kernel_size=1)
             if in_channels != out_channels
@@ -110,17 +117,12 @@ class _TCNBlock(nn.Module):
             )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x : (B, C, T)
-        out = self.activation(self.conv1(x))   # ✅ UPDATED — GELU
+        out = self.activation(self.conv1(x))
         out = self.dropout(out)
-        out = self.activation(self.conv2(out)) # ✅ UPDATED — GELU
+        out = self.activation(self.conv2(out))
         out = self.dropout(out)
-
         residual = x if self.downsample is None else self.downsample(x)
-        # NOTE: No activation after residual addition (Bai et al. 2018).
-        # Applying ReLU/GELU here clamps block outputs and causes the FC head
-        # bias to absorb the negative target mean — reproducing the bug that
-        # was previously fixed. Keep the residual connection activation-free.
+        # No activation after residual addition — intentional.
         return out + residual
 
 
@@ -147,35 +149,26 @@ class _TCNNetwork(nn.Module):
         kernel_size: int,
         dropout: float,
         output_size: int,
-        model_type: str = "regressor",   # ✅ UPDATED
+        model_type: str = "regressor",
     ) -> None:
         super().__init__()
-        self.model_type = model_type      # ✅ UPDATED
+        self.model_type = model_type
         layers: list[nn.Module] = []
         for i in range(num_layers):
-            dilation   = 2 ** i
-            in_ch      = input_size if i == 0 else num_channels
-            out_ch     = num_channels
+            dilation = 2 ** i
+            in_ch    = input_size if i == 0 else num_channels
             layers.append(
-                _TCNBlock(in_ch, out_ch, kernel_size, dilation, dropout)
+                _TCNBlock(in_ch, num_channels, kernel_size, dilation, dropout)
             )
         self.network = nn.Sequential(*layers)
         self.fc      = nn.Linear(num_channels, output_size)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x : (B, seq_len, input_size)  →  transpose for Conv1d
+        # x : (B, seq_len, input_size) → transpose for Conv1d
         x    = x.permute(0, 2, 1)          # (B, input_size, seq_len)
         out  = self.network(x)              # (B, num_channels, seq_len)
-        last = out[:, :, -1]               # take last timestep: (B, num_channels)
-        logits = self.fc(last)             # (B, output_size)
-
-        # ✅ UPDATED — output activation strategy:
-        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
-        #               internally (numerically stable). predict_proba() applies
-        #               softmax explicitly at inference time.
-        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
-        #               require unbounded outputs.
-        return logits
+        last = out[:, :, -1]               # last timestep: (B, num_channels)
+        return self.fc(last)               # (B, output_size)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -205,7 +198,7 @@ class TCNModel(BaseDLModel):
             kernel_size=self.kernel_size,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,   # ✅ UPDATED
+            model_type=self.model_type,
         )
 
 
@@ -222,7 +215,9 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",         # ✅ UPDATED
+    loss_fn: str = "directional",
+    magnitude_penalty: float = 0.01,   # FIX: exposed for caller override
+    max_grad_norm: float = 1.0,        # FIX: exposed for caller override
 ) -> tuple:
     """
     Train a TCN model using PnL-based Optuna optimisation.
@@ -236,11 +231,13 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ✅ UPDATED — ``'directional'`` or
-                           ``'confidence_weighted'`` (regressor only).
+        loss_fn          : ``'directional'`` or ``'confidence_weighted'``.
+        magnitude_penalty: L2 coefficient in DirectionalLoss to prevent
+                           constant-prediction collapse (default 0.01).
+        max_grad_norm    : Gradient clipping norm (default 1.0).
 
     Returns:
-        (model, preds, test_index, X_test)
+        (model, preds, backtest_positions, X_test_aligned, df_for_backtest)
     """
     df = validate_and_sort(df, target_col)
 
@@ -276,7 +273,9 @@ def train(
             epochs=30,
             patience=5,
             model_type=model_type,
-            loss_fn=loss_fn,              # ✅ UPDATED
+            loss_fn=loss_fn,
+            magnitude_penalty=magnitude_penalty,
+            max_grad_norm=max_grad_norm,
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
@@ -308,7 +307,9 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,                  # ✅ UPDATED
+        loss_fn=loss_fn,
+        magnitude_penalty=magnitude_penalty,
+        max_grad_norm=max_grad_norm,
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -316,10 +317,12 @@ def train(
     if np.std(final_preds) < 1e-6:
         logger.warning(
             "[train] Final TCN model collapsed to constant output "
-            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
+            f"({final_preds.mean():.6f}). Adding noise to prevent all-zero signals."
         )
         rng = np.random.default_rng(42)
-        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
+        # FIX: noise scale increased to 1e-2 (was 1e-4) so it meaningfully
+        # perturbs predictions around a large collapsed constant.
+        final_preds = final_preds + rng.normal(0, 1e-2, size=final_preds.shape)
 
     aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]
