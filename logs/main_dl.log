@@ -216,3 +216,41 @@
 [ 0.0793356   0.07934739  0.07942687  0.07977426 -0.05058906]
 2026-04-06 15:42:13,369 | INFO | main_dl | [tft] Balance=494.89  PnL=-69.5700
 2026-04-06 16:05:43,430 | INFO | main_dl | DL model training complete for btc.
+2026-04-08 10:55:47,233 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-08 10:55:47,249 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-08 10:56:24,086 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-08 10:56:24,086 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-08 10:57:31,330 | INFO | main_dl | Training DL classifier: gru for btc
+2026-04-08 10:59:29,963 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[-1. -1. -1. -1. -1.]
+2026-04-08 10:59:31,226 | INFO | main_dl | [gru] Balance=495.04  PnL=-68.7900
+2026-04-08 11:06:52,799 | INFO | main_dl | Training DL classifier: lstm for btc
+2026-04-08 11:08:40,749 | INFO | main_dl | [Dry-run] lstm predictions on first samples:
+[-1. -1. -1. -1. -1.]
+2026-04-08 11:08:42,213 | INFO | main_dl | [lstm] Balance=498.05  PnL=-68.7600
+2026-04-08 11:14:54,359 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-08 12:19:26,084 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[-1. -1.  1.  1.  1.]
+2026-04-08 12:19:30,060 | INFO | main_dl | [tcn] Balance=497.02  PnL=-68.8800
+2026-04-08 12:40:24,838 | INFO | main_dl | Training DL classifier: tft for btc
+2026-04-08 12:41:53,891 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[1. 1. 1. 1. 1.]
+2026-04-08 12:41:55,405 | INFO | main_dl | [tft] Balance=498.21  PnL=-68.2600
+2026-04-08 12:48:42,212 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-08 12:52:27,111 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[-323.96463 -368.73264 -382.08975 -395.52    -395.52   ]
+2026-04-08 12:52:28,219 | INFO | main_dl | [gru] Balance=499.84  PnL=-67.8000
+2026-04-08 13:00:09,575 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-08 13:02:28,255 | INFO | main_dl | [Dry-run] lstm predictions on first samples:
+[-39.36843  -38.35794  -40.00448  -40.56726  -40.585403]
+2026-04-08 13:02:29,746 | INFO | main_dl | [lstm] Balance=499.84  PnL=-67.8000
+2026-04-08 13:09:15,941 | INFO | main_dl | Training DL regressor: tcn for btc
+2026-04-08 14:07:50,929 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[-4.5415869e+18 -4.5504952e+18 -4.5698779e+18 -4.5945438e+18
+ -4.6300325e+18]
+2026-04-08 14:07:52,731 | INFO | main_dl | [tcn] Balance=495.69  PnL=-68.8000
+2026-04-08 14:18:08,415 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-08 14:42:53,271 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[-1654.5745 -1654.5745 -1654.5746 -1654.5746 -1654.5745]
+2026-04-08 14:42:54,368 | INFO | main_dl | [tft] Balance=496.62  PnL=-68.5000
+2026-04-08 14:49:16,599 | INFO | main_dl | DL model training complete for btc.

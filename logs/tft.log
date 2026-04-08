@@ -13,3 +13,9 @@
 2026-04-06 15:23:34,961 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
 2026-04-06 15:32:33,012 | INFO | tft | [train] Best params: {'seq_len': 62, 'hidden_size': 84, 'num_heads': 8, 'num_layers': 1, 'dropout': 0.009540498497157435, 'lr': 0.0002001135520529833, 'batch_size': 128} | Best PnL: -68.6400
 2026-04-06 15:42:05,834 | INFO | tft | [train] Final preds — min: -0.2477, max: 0.1128, mean: 0.0355
+2026-04-08 12:40:25,238 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
+2026-04-08 12:41:28,130 | INFO | tft | [train] Best params: {'seq_len': 29, 'hidden_size': 35, 'num_heads': 2, 'num_layers': 3, 'dropout': 0.1137196166751584, 'lr': 0.00022052136714393656, 'batch_size': 32} | Best PnL: -46.0200
+2026-04-08 12:41:53,856 | INFO | tft | [train] Final preds — min: -1.0000, max: 1.0000, mean: -0.5230
+2026-04-08 14:18:08,968 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
+2026-04-08 14:38:54,156 | INFO | tft | [train] Best params: {'seq_len': 106, 'hidden_size': 62, 'num_heads': 2, 'num_layers': 2, 'dropout': 0.3119611823365283, 'lr': 0.0028806314986041504, 'batch_size': 64} | Best PnL: -68.5000
+2026-04-08 14:42:53,216 | INFO | tft | [train] Final preds — min: -1654.5746, max: -1654.5742, mean: -1654.5745

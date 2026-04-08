@@ -20,3 +20,9 @@
 2026-04-06 10:22:38,011 | INFO | lstm | [train] Starting LSTM Optuna study (2 trials)…
 2026-04-06 10:45:57,119 | INFO | lstm | [train] Best params: {'seq_len': 92, 'hidden_size': 225, 'num_layers': 1, 'dropout': 0.01812029030223522, 'lr': 0.0028135535507299125, 'batch_size': 64} | Best PnL: -68.7300
 2026-04-06 10:52:17,350 | INFO | lstm | [train] Final preds — min: -0.3048, max: 0.4732, mean: 0.1490
+2026-04-08 11:06:55,802 | INFO | lstm | [train] Starting LSTM Optuna study (2 trials)…
+2026-04-08 11:08:18,078 | INFO | lstm | [train] Best params: {'seq_len': 24, 'hidden_size': 124, 'num_layers': 3, 'dropout': 0.038881108578343815, 'lr': 0.002188062478706546, 'batch_size': 128} | Best PnL: -68.3300
+2026-04-08 11:08:40,183 | INFO | lstm | [train] Final preds — min: -1.0000, max: 1.0000, mean: -0.2500
+2026-04-08 13:00:09,839 | INFO | lstm | [train] Starting LSTM Optuna study (2 trials)…
+2026-04-08 13:02:03,302 | INFO | lstm | [train] Best params: {'seq_len': 25, 'hidden_size': 90, 'num_layers': 1, 'dropout': 0.21135794212451436, 'lr': 0.0010210460026707216, 'batch_size': 64} | Best PnL: -67.8000
+2026-04-08 13:02:28,252 | INFO | lstm | [train] Final preds — min: -45.6462, max: -12.8286, mean: -33.3810
