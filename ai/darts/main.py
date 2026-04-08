@@ -8,8 +8,8 @@ import pandas as pd
 
 warnings.filterwarnings("ignore")
 
-from TradeX.ai.dl.models.model_trainer import train_model, save_model
-from TradeX.ai.dl.optuna_tuner import tune_all_models
+from TradeX.ai.darts.models.model_trainer import train_model, save_model
+from TradeX.ai.darts.optuna_tuner import tune_all_models
 from TradeX.ai.ml.utils import (
     compute_trade_statistics,
     prepare_predictions,

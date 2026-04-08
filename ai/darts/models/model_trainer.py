@@ -64,7 +64,7 @@ def _inline_optuna_tune(
         return {}
 
     try:
-        from TradeX.ai.dl.optuna_tuner import tune_model  # noqa: PLC0415
+        from TradeX.ai.darts.optuna_tuner import tune_model  # noqa: PLC0415
         best = tune_model(
             model_name=model_name,
             df=df,
@@ -98,16 +98,16 @@ def _inline_optuna_tune(
 def _get_trainer(model_name: str):
     """Return the train function for *model_name*, importing lazily."""
     if model_name == "arima":
-        from TradeX.ai.dl.models.arima import train
+        from TradeX.ai.darts.models.arima import train
         return train
     if model_name == "varima":
-        from TradeX.ai.dl.models.varima import train
+        from TradeX.ai.darts.models.varima import train
         return train
     if model_name == "nbeats":
-        from TradeX.ai.dl.models.nbeats import train
+        from TradeX.ai.darts.models.nbeats import train
         return train
     if model_name == "transformer":
-        from TradeX.ai.dl.models.transformer import train
+        from TradeX.ai.darts.models.transformer import train
         return train
     raise ValueError(
         f"Unknown DL model: '{model_name}'. "

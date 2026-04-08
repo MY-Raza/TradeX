@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 from darts.models import ARIMA
 
-from TradeX.ai.dl.utils import prepare_series, train_test_split
-from TradeX.ai.dl.models.trainer_utils import (
+from TradeX.ai.darts.utils import prepare_series, train_test_split
+from TradeX.ai.darts.models.trainer_utils import (
     normalise_datetime, ensure_log_return, check_min_rows, make_test_artifacts,
 )
 
@@ -91,7 +91,7 @@ def train(
     preds = model.predict(len(test_series))
 
     # --- 10. Return artifacts ---------------------------------------------
-    from TradeX.ai.dl.models.trainer_utils import make_test_artifacts
+    from TradeX.ai.darts.models.trainer_utils import make_test_artifacts
     split_idx = len(df_target[df_target.index < train_series.end_time()])
     test_index, df_test = make_test_artifacts(split_idx, test_series, n_full=len(df_target))
     return model, preds, test_index, df_test

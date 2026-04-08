@@ -1,32 +1,3 @@
-"""
-utils.py — Darts TimeSeries helpers
-=====================================
-Bug-fixes applied in this version
------------------------------------
-BUG-1 (prepare_series — target_col guard):
-    Original: `target_col not in (df.columns) and target_col not in (df.index.name,)`
-    The second clause is a 1-tuple test; it silently passes when target_col IS
-    the index name but is NOT a real column, causing a cryptic KeyError inside
-    TimeSeries.from_dataframe later. Fixed to check df.columns only — which is
-    the only place we actually look for the column.
-
-BUG-2 (prepare_series — DatetimeIndex path, index name):
-    Darts' from_dataframe() requires a time_col= or a named DatetimeIndex.
-    The original code never set df.index.name, so on Darts ≥ 0.26 this raises:
-    "ValueError: time column or index name must be specified".
-    Fixed: always set df.index.name = "datetime" before handing to Darts.
-
-BUG-3 (prepare_series — tz guard order):
-    tz_localize(None) on an already tz-naive Series raises TypeError.
-    Fixed: always tz_localize → tz_convert → tz_localize(None) in one branch.
-
-BUG-4 (train_test_split — fence-post with split_before):
-    split_before(ts) in Darts places ts as the FIRST point of the test series.
-    Therefore split_date equal to the series end_time() leaves test empty.
-    The guard `ts >= end` is correct; added a debug log showing actual slice
-    boundaries so mis-configured splits are diagnosed immediately.
-"""
-
 from __future__ import annotations
 
 import logging

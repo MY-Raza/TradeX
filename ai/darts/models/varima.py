@@ -5,7 +5,7 @@ import pandas as pd
 from darts import TimeSeries
 from darts.models import VARIMA
 
-from TradeX.ai.dl.models.trainer_utils import (
+from TradeX.ai.darts.models.trainer_utils import (
     normalise_datetime, ensure_log_return, rolling_train_test_split,
     check_min_rows, make_test_artifacts,
 )

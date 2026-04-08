@@ -4,8 +4,8 @@ import os
 import numpy as np
 import pandas as pd
 
-from TradeX.ai.dl.utils import prepare_series, train_test_split
-from TradeX.ai.dl.models.trainer_utils import normalise_datetime,ensure_log_return,rolling_train_test_split,check_min_rows,concat_dedup_sort,build_pl_trainer_kwargs,make_test_artifacts
+from TradeX.ai.darts.utils import prepare_series, train_test_split
+from TradeX.ai.darts.models.trainer_utils import normalise_datetime,ensure_log_return,rolling_train_test_split,check_min_rows,concat_dedup_sort,build_pl_trainer_kwargs,make_test_artifacts
 from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("transformer")
