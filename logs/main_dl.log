@@ -334,3 +334,10 @@
 [1. 1. 1. 1. 1.]
 2026-04-09 11:14:44,587 | INFO | main_dl | [tft] Balance=499.03  PnL=-68.2000
 2026-04-09 11:22:20,102 | INFO | main_dl | DL model training complete for btc.
+2026-04-09 12:01:05,456 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-09 12:01:05,456 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-09 12:02:10,292 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-09 12:21:04,537 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[1. 1. 1. 1. 1.]
+2026-04-09 12:21:04,539 | ERROR | main_dl | DL Classifier tcn failed for btc: "None of [Index(['datetime'], dtype='object')] are in the [columns]"
+2026-04-09 12:21:04,539 | INFO | main_dl | Training DL classifier: tft for btc
