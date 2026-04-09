@@ -257,13 +257,12 @@ def main() -> None:
                 logger.info(f"[{clf_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
                 # Importance + stats
-                # Pass df_test_norm (length-aligned, RangeIndex 0..P-1) so
-                # pnl_permutation_importance receives a df whose row count
-                # matches the (seq_len-shortened) prediction array exactly.
+                # NOTE: pnl_permutation_importance uses prepare_predictions internally,
+                # which applies a std-threshold designed for continuous regressor scores.
+                # For DL classifiers outputting discrete {-1, 0, 1}, permuted features
+                # often collapse to a single class → std≈0 → all signals zero → misleading
+                # importance scores. Skip importance for classifiers; run only trade stats.
                 table_name_clf = f"{clf_name}_dl_clf_{timestamp}"
-                _compute_and_save_importance(
-                    model, X_test, df_test_norm, df_1m, pnl, "classifier", table_name_clf
-                )
                 _save_trade_stats(ledger, pnl, table_name_clf)
 
                 # Persist

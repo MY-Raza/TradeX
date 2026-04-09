@@ -13,34 +13,104 @@ from torch.utils.data import DataLoader
 
 from TradeX.ai.dl.dataset import TimeSeriesDataset, build_sequences
 from TradeX.ai.dl.models.train_loop import run_epoch, EarlyStopping
+from TradeX.ai.dl.models.train_utils import (
+    validate_and_sort,
+    apply_log_diff_transform,
+    split_features_labels,
+    run_chunked_backtest,
+)
 from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("base_dl_model")
 
 
-# ─────────────────────────────────────────────────────────────
-# ✅ LOSSES (unchanged)
-# ─────────────────────────────────────────────────────────────
-
+# ✅ UPDATED — Trading-oriented loss functions
 class DirectionalLoss(nn.Module):
-    def forward(self, preds, targets):
+    """
+    Directional loss for regression models.
+
+    Encourages predictions to have the correct sign (direction) relative to
+    the target return, and rewards larger magnitude predictions when correct.
+
+    Loss = -mean(sign(targets) * preds)
+
+    A lower (more negative) value means the model is predicting in the right
+    direction with higher confidence. Minimising this loss maximises directional
+    PnL alignment.
+    """
+
+    def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         return -torch.mean(torch.sign(targets) * preds)
 
 
+# ✅ UPDATED — Confidence-weighted trading loss
 class ConfidenceWeightedLoss(nn.Module):
-    def forward(self, preds, targets):
-        return -torch.mean(torch.sign(targets) * preds * torch.abs(preds))
+    """
+    Confidence-weighted directional loss for regression models.
 
+    Extends DirectionalLoss by scaling each term by the absolute prediction
+    magnitude (confidence):
 
-# ─────────────────────────────────────────────────────────────
-# BASE MODEL
-# ─────────────────────────────────────────────────────────────
+        Loss = -mean(sign(targets) * preds * |preds|)
+             = -mean(sign(targets) * preds²  * sign(preds))
+
+    Effect:
+        - Correct high-confidence predictions → large negative contribution (good).
+        - Wrong high-confidence predictions   → large positive contribution (bad).
+        - Low-confidence predictions           → near-zero contribution.
+
+    This is stronger than DirectionalLoss and can be enabled via the
+    ``loss_fn`` constructor argument on ``BaseDLModel``.
+    """
+
+    def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
+        direction  = torch.sign(targets)
+        confidence = torch.abs(preds)
+        return -torch.mean(direction * preds * confidence)
+
 
 class BaseDLModel(abc.ABC):
+    """
+    Abstract base for all PyTorch time-series forecasting models.
+
+    Subclasses must implement:
+        - ``_build_network(input_size, **kwargs) -> nn.Module``
+        - ``_predict_raw(X_tensor) -> np.ndarray``
+
+    Parameters
+    ----------
+    seq_len : int
+        Look-back window length fed into the network.
+    horizon : int
+        Number of steps ahead to forecast (currently 1).
+    hidden_size : int
+        Hidden / channel dimension for the network.
+    num_layers : int
+        Stacking depth of recurrent layers or TCN blocks.
+    dropout : float
+        Dropout probability applied inside the network.
+    batch_size : int
+        Mini-batch size for DataLoader.
+    epochs : int
+        Maximum training epochs.
+    lr : float
+        Adam learning rate.
+    patience : int
+        Early-stopping patience (epochs without validation improvement).
+    device : str or None
+        ``'cpu'``, ``'cuda'``, or ``None`` (auto-detect).
+    model_type : str
+        ``'classifier'`` or ``'regressor'``.
+    loss_fn : str
+        ✅ UPDATED — Loss function selector for regressors.
+        ``'directional'`` (default) or ``'confidence_weighted'``.
+        Classifiers always use ``CrossEntropyLoss`` regardless of this setting.
+    """
 
     def __init__(
         self,
         seq_len: int = 60,
+        horizon: int = 1,
         hidden_size: int = 64,
         num_layers: int = 2,
         dropout: float = 0.2,
@@ -50,179 +120,336 @@ class BaseDLModel(abc.ABC):
         patience: int = 10,
         device: Optional[str] = None,
         model_type: str = "regressor",
-        loss_fn: str = "directional",
-
-        # ✅ NEW
-        temperature: float = 0.8,
-        confidence_threshold: float = 0.4,
-    ):
-        self.seq_len = seq_len
+        loss_fn: str = "directional",   # ✅ UPDATED
+    ) -> None:
+        self.seq_len     = seq_len
+        self.horizon     = horizon
         self.hidden_size = hidden_size
-        self.num_layers = num_layers
-        self.dropout = dropout
-        self.batch_size = batch_size
-        self.epochs = epochs
-        self.lr = lr
-        self.patience = patience
-        self.model_type = model_type
-        self.loss_fn = loss_fn
+        self.num_layers  = num_layers
+        self.dropout     = dropout
+        self.batch_size  = batch_size
+        self.epochs      = epochs
+        self.lr          = lr
+        self.patience    = patience
+        self.model_type  = model_type
+        self.loss_fn     = loss_fn      # ✅ UPDATED
 
-        # ✅ NEW
-        self.temperature = temperature
-        self.conf_threshold = confidence_threshold
-
-        self.device = torch.device(
-            device if device else ("cuda" if torch.cuda.is_available() else "cpu")
-        )
-
-        self.network_ = None
-        self.feature_names_ = []
-        self.input_size_ = 0
+        if device is None:
+            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        else:
+            self.device = torch.device(device)
 
         logger.info(f"[{self.__class__.__name__}] Using device: {self.device}")
 
-    # ─────────────────────────────────────────────
+        # Set after fit()
+        self.network_: Optional[nn.Module]  = None
+        self.feature_names_: list[str]      = []
+        self.input_size_: int               = 0
+
+    # ------------------------------------------------------------------
+    # Abstract interface
+    # ------------------------------------------------------------------
 
     @abc.abstractmethod
     def _build_network(self, input_size: int) -> nn.Module:
-        pass
+        """
+        Construct and return the ``nn.Module`` for this architecture.
 
-    # ─────────────────────────────────────────────
+        Args:
+            input_size: Number of input features per time step.
 
-    def _build_criterion(self, y_seq_tr):
+        Returns:
+            Uninitialised ``nn.Module``.
+        """
+
+    # ------------------------------------------------------------------
+    # ✅ UPDATED — Loss factory
+    # ------------------------------------------------------------------
+
+    def _build_criterion(self, y_seq_tr: np.ndarray) -> nn.Module:
+        """
+        Construct the appropriate loss function for the current model type
+        and ``loss_fn`` setting.
+
+        For classifiers: always ``CrossEntropyLoss`` with inverse-frequency
+        class weights to counter label imbalance.
+
+        For regressors: ``DirectionalLoss`` (default) or
+        ``ConfidenceWeightedLoss`` depending on ``self.loss_fn``.
+
+        Args:
+            y_seq_tr : Training label array (float32) used for class-weight
+                       computation in classifier mode.
+
+        Returns:
+            Configured ``nn.Module`` loss criterion.
+        """
         if self.model_type == "classifier":
-            remapped = (torch.from_numpy(y_seq_tr) + 1).long()
-            counts = torch.bincount(remapped, minlength=3).float().clamp(min=1)
-            weights = (1.0 / counts)
-            weights = (weights / weights.sum() * 3).to(self.device)
-
+            # Compute inverse-frequency class weights to counter label imbalance.
+            # y_seq_tr labels are still float {-1, 0, 1}; remap to {0, 1, 2}
+            # (same mapping as _remap_labels in train_loop.py) before counting.
+            remapped = (torch.from_numpy(y_seq_tr) + 1).long()  # {0, 1, 2}
+            counts   = torch.bincount(remapped, minlength=3).float()
+            counts   = counts.clamp(min=1.0)
+            weights  = (1.0 / counts)
+            weights  = (weights / weights.sum() * 3).to(self.device)
+            logger.info(
+                f"[{self.__class__.__name__}] Class weights: "
+                f"short={weights[0]:.3f} neutral={weights[1]:.3f} long={weights[2]:.3f}"
+            )
+            # ✅ UPDATED — Classifiers use CrossEntropyLoss on raw logits.
+            # Networks output raw logits (no softmax in forward); CrossEntropyLoss
+            # applies log-softmax internally, which is numerically stable.
             return nn.CrossEntropyLoss(weight=weights)
 
-        return (
-            ConfidenceWeightedLoss()
-            if self.loss_fn == "confidence_weighted"
-            else DirectionalLoss()
-        )
+        else:
+            # ✅ UPDATED — Regressors use trading-aligned losses instead of MSE.
+            if self.loss_fn == "confidence_weighted":
+                logger.info(
+                    f"[{self.__class__.__name__}] Using ConfidenceWeightedLoss."
+                )
+                return ConfidenceWeightedLoss()
+            else:
+                # Default: directional loss
+                logger.info(
+                    f"[{self.__class__.__name__}] Using DirectionalLoss."
+                )
+                return DirectionalLoss()
 
-    # ─────────────────────────────────────────────
+    # ------------------------------------------------------------------
+    # Public interface — mirrors train() in sklearn-style model files
+    # ------------------------------------------------------------------
 
-    def fit(self, X_train, y_train, X_val=None, y_val=None):
+    def fit(
+        self,
+        X_train: pd.DataFrame,
+        y_train: pd.Series,
+        X_val: Optional[pd.DataFrame] = None,
+        y_val: Optional[pd.Series]    = None,
+    ) -> "BaseDLModel":
+        """
+        Build sequences, construct the network, and run the training loop.
 
+        Args:
+            X_train : Training feature matrix (rows = timesteps).
+            y_train : Training labels / targets aligned with X_train.
+            X_val   : Optional validation feature matrix.
+            y_val   : Optional validation labels.
+
+        Returns:
+            self (for chaining).
+        """
         self.feature_names_ = X_train.columns.tolist()
-        self.input_size_ = len(self.feature_names_)
+        self.input_size_    = len(self.feature_names_)
 
-        X_tr = X_train.to_numpy(np.float32)
-        y_tr = y_train.to_numpy(np.float32)
+        # ── Build sequences ──────────────────────────────────────────
+        X_tr_np = X_train.to_numpy(dtype=np.float32)
+        y_tr_np = y_train.to_numpy(dtype=np.float32)
 
-        X_seq, y_seq = build_sequences(X_tr, y_tr, self.seq_len)
+        X_seq_tr, y_seq_tr = build_sequences(X_tr_np, y_tr_np, self.seq_len)
 
-        train_dl = DataLoader(
-            TimeSeriesDataset(X_seq, y_seq),
-            batch_size=self.batch_size,
-            shuffle=True,
-        )
+        train_ds = TimeSeriesDataset(X_seq_tr, y_seq_tr)
+        train_dl = DataLoader(train_ds, batch_size=self.batch_size, shuffle=True,
+                              num_workers=0, pin_memory=(self.device.type == "cuda"))
 
         val_dl = None
-        if X_val is not None:
-            X_v = X_val.to_numpy(np.float32)
-            y_v = y_val.to_numpy(np.float32)
+        if X_val is not None and y_val is not None:
+            X_v_np  = X_val.to_numpy(dtype=np.float32)
+            y_v_np  = y_val.to_numpy(dtype=np.float32)
+            X_seq_v, y_seq_v = build_sequences(X_v_np, y_v_np, self.seq_len)
+            val_ds  = TimeSeriesDataset(X_seq_v, y_seq_v)
+            val_dl  = DataLoader(val_ds, batch_size=self.batch_size, shuffle=False,
+                                 num_workers=0)
 
-            X_seq_v, y_seq_v = build_sequences(X_v, y_v, self.seq_len)
-
-            val_dl = DataLoader(
-                TimeSeriesDataset(X_seq_v, y_seq_v),
-                batch_size=self.batch_size,
-                shuffle=False,
-            )
-
+        # ── Network ──────────────────────────────────────────────────
         self.network_ = self._build_network(self.input_size_).to(self.device)
-
-        criterion = self._build_criterion(y_seq)
-        optimizer = Adam(self.network_.parameters(), lr=self.lr)
-
-        stopper = EarlyStopping(self.patience)
-
-        for epoch in range(self.epochs):
-
-            train_loss = run_epoch(
-                self.network_, train_dl, criterion, optimizer,
-                self.device, True, self.model_type
-            )
-
-            val_loss = None
-            if val_dl:
-                val_loss = run_epoch(
-                    self.network_, val_dl, criterion, None,
-                    self.device, False, self.model_type
-                )
-
-            monitor = val_loss if val_loss else train_loss
-
-            if stopper(monitor):
-                break
-
-        return self
-
-    # ─────────────────────────────────────────────
-    # ✅ FIXED PREDICT (adds threshold)
-    # ─────────────────────────────────────────────
-
-    def predict(self, X):
-
-        probs = self.predict_proba(X)
-
-        if self.model_type == "classifier":
-
-            preds = np.argmax(probs, axis=1)
-
-            # ✅ confidence filter
-            confidence = np.max(probs, axis=1)
-            preds = np.where(confidence < self.conf_threshold, 1, preds)
-
-            return (preds - 1).astype(np.float32)
-
-        return probs
-
-    # ─────────────────────────────────────────────
-    # ✅ FIXED PROBA (main fix here)
-    # ─────────────────────────────────────────────
-
-    def predict_proba(self, X):
-
-        X_np = X.to_numpy(np.float32)
-        dummy = np.zeros(len(X_np), dtype=np.float32)
-
-        X_seq, _ = build_sequences(X_np, dummy, self.seq_len)
-
-        dl = DataLoader(
-            TimeSeriesDataset(X_seq, dummy[:len(X_seq)]),
-            batch_size=self.batch_size,
-            shuffle=False,
+        logger.info(
+            f"[{self.__class__.__name__}] Network params: "
+            f"{sum(p.numel() for p in self.network_.parameters()):,}"
         )
 
+        # ── Loss & optimiser ─────────────────────────────────────────
+        # ✅ UPDATED — delegate to _build_criterion()
+        criterion = self._build_criterion(y_seq_tr)
+
+        optimiser = Adam(self.network_.parameters(), lr=self.lr)
+        stopper   = EarlyStopping(patience=self.patience)
+
+        # ── Training loop ────────────────────────────────────────────
+        t0 = time.time()
+        for epoch in range(1, self.epochs + 1):
+            train_loss = run_epoch(
+                self.network_, train_dl, criterion, optimiser,
+                self.device, training=True, model_type=self.model_type,
+            )
+            val_loss = None
+            if val_dl is not None:
+                val_loss = run_epoch(
+                    self.network_, val_dl, criterion, None,
+                    self.device, training=False, model_type=self.model_type,
+                )
+
+            monitor = val_loss if val_loss is not None else train_loss
+            if epoch % 10 == 0 or epoch == 1:
+                msg = (
+                    f"[{self.__class__.__name__}] Epoch {epoch}/{self.epochs} "
+                    f"train_loss={train_loss:.6f}"
+                )
+                if val_loss is not None:
+                    msg += f"  val_loss={val_loss:.6f}"
+                logger.info(msg)
+
+            if stopper(monitor):
+                logger.info(
+                    f"[{self.__class__.__name__}] Early stop at epoch {epoch}. "
+                    f"Best val_loss={stopper.best_score:.6f}"
+                )
+                break
+
+        elapsed = time.time() - t0
+        logger.info(f"[{self.__class__.__name__}] Training finished in {elapsed:.1f}s")
+        return self
+
+    def predict(self, X: pd.DataFrame) -> np.ndarray:
+        """
+        Generate predictions for the given feature matrix.
+
+        The first ``seq_len - 1`` rows are consumed as the warm-up window and
+        produce no output; the returned array therefore has
+        ``len(X) - seq_len + 1`` elements.
+
+        For classifiers: returns integer signals in ``{-1, 0, 1}`` via argmax.
+        For regressors:  returns raw continuous values from the linear head.
+
+        Args:
+            X : Feature matrix aligned with the test set.
+
+        Returns:
+            1-D NumPy array of predictions (signals for classifiers,
+            continuous values for regressors).
+        """
+        if self.network_ is None:
+            raise RuntimeError("Model has not been fitted yet. Call fit() first.")
+
+        X_np    = X.to_numpy(dtype=np.float32)
+        dummy_y = np.zeros(len(X_np), dtype=np.float32)
+        X_seq, _ = build_sequences(X_np, dummy_y, self.seq_len)
+
+        ds = TimeSeriesDataset(X_seq, np.zeros(len(X_seq), dtype=np.float32))
+        dl = DataLoader(ds, batch_size=self.batch_size, shuffle=False, num_workers=0)
+
         self.network_.eval()
-        outputs = []
+        all_preds: list[np.ndarray] = []
 
         with torch.no_grad():
-            for xb, _ in dl:
-                xb = xb.to(self.device)
-                logits = self.network_(xb)
+            for X_batch, _ in dl:
+                X_batch = X_batch.to(self.device)
+                out     = self.network_(X_batch)  # (B, output_size)
 
                 if self.model_type == "classifier":
-
-                    # ✅ KEY FIX 1: normalize logits
-                    logits = logits - logits.mean(dim=1, keepdim=True)
-
-                    # ✅ KEY FIX 2: temperature scaling
-                    logits = logits / self.temperature
-
-                    probs = torch.softmax(logits, dim=-1)
-
-                    outputs.append(probs.cpu().numpy())
+                    # ✅ UPDATED — network outputs raw logits; argmax over logits
+                    # is equivalent to argmax over softmax probabilities and avoids
+                    # a redundant softmax call in the hot path.
+                    # Subtract 1 to map class indices {0,1,2} → signals {-1,0,1}.
+                    pred_cls = torch.argmax(out, dim=-1)   # (B,)
+                    preds_np = (pred_cls - 1).cpu().numpy().astype(np.float32)
                 else:
-                    outputs.append(logits.squeeze(-1).cpu().numpy())
+                    preds_np = out.squeeze(-1).cpu().numpy()
 
-        result = np.concatenate(outputs, axis=0)
+                all_preds.append(preds_np)
 
-        logger.info(f"[predict_proba] shape={result.shape}")
+        result = np.concatenate(all_preds, axis=0)
+        logger.info(
+            f"[{self.__class__.__name__}] predict() → "
+            f"min={result.min():.4f}  max={result.max():.4f}  mean={result.mean():.4f}"
+        )
         return result
+
+    # ✅ UPDATED — predict_proba: returns softmax probabilities for classifiers
+    def predict_proba(self, X: pd.DataFrame) -> np.ndarray:
+        """
+        Return class probability estimates (classifiers) or raw outputs
+        (regressors) for the given feature matrix.
+
+        For classifiers: applies softmax over the logit output so each row
+        sums to 1.  Shape: ``(N, 3)`` — columns are [P(short), P(neutral), P(long)].
+
+        For regressors: identical to ``predict()`` — returns the raw scalar
+        output of the linear head.  Shape: ``(N,)``.
+
+        Use this method when you need calibrated confidence scores for position
+        sizing rather than hard signal labels.
+
+        Args:
+            X : Feature matrix aligned with the test set.
+
+        Returns:
+            NumPy array of shape ``(N, 3)`` for classifiers or ``(N,)`` for
+            regressors, where N = len(X) - seq_len + 1.
+        """
+        if self.network_ is None:
+            raise RuntimeError("Model has not been fitted yet. Call fit() first.")
+
+        X_np    = X.to_numpy(dtype=np.float32)
+        dummy_y = np.zeros(len(X_np), dtype=np.float32)
+        X_seq, _ = build_sequences(X_np, dummy_y, self.seq_len)
+
+        ds = TimeSeriesDataset(X_seq, np.zeros(len(X_seq), dtype=np.float32))
+        dl = DataLoader(ds, batch_size=self.batch_size, shuffle=False, num_workers=0)
+
+        self.network_.eval()
+        all_probs: list[np.ndarray] = []
+
+        with torch.no_grad():
+            for X_batch, _ in dl:
+                X_batch = X_batch.to(self.device)
+                out     = self.network_(X_batch)  # (B, output_size)
+
+                if self.model_type == "classifier":
+                    # ✅ UPDATED — apply softmax here (inference only, not training)
+                    probs = torch.softmax(out, dim=-1)   # (B, 3)
+                    all_probs.append(probs.cpu().numpy())
+                else:
+                    all_probs.append(out.squeeze(-1).cpu().numpy())
+
+        result = np.concatenate(all_probs, axis=0)
+        logger.info(
+            f"[{self.__class__.__name__}] predict_proba() → shape={result.shape}"
+        )
+        return result
+
+    def evaluate(
+        self,
+        X_test: pd.DataFrame,
+        y_test: pd.Series,
+    ) -> dict[str, float]:
+        """
+        Compute evaluation metrics on the test set.
+
+        For regressors: MSE, MAE, and directional accuracy.
+        For classifiers: accuracy.
+
+        Args:
+            X_test : Test feature matrix.
+            y_test : Ground-truth labels / targets.
+
+        Returns:
+            Dict of metric name → value.
+        """
+        preds = self.predict(X_test)
+        y_aligned = y_test.to_numpy(dtype=np.float32)[-len(preds):]
+
+        if self.model_type == "classifier":
+            accuracy = float(np.mean(preds == y_aligned.astype(np.float32)))
+            logger.info(f"[{self.__class__.__name__}] Test accuracy: {accuracy:.4f}")
+            return {"accuracy": accuracy}
+        else:
+            mse = float(np.mean((preds - y_aligned) ** 2))
+            mae = float(np.mean(np.abs(preds - y_aligned)))
+            # ✅ UPDATED — also report directional accuracy for trading relevance
+            dir_acc = float(np.mean(np.sign(preds) == np.sign(y_aligned)))
+            logger.info(
+                f"[{self.__class__.__name__}] MSE={mse:.6f}  MAE={mae:.6f}  "
+                f"DirectionalAcc={dir_acc:.4f}"
+            )
+            return {"mse": mse, "mae": mae, "directional_accuracy": dir_acc}

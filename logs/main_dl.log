@@ -361,3 +361,31 @@
 [1. 1. 1. 1. 1.]
 2026-04-09 13:38:21,336 | INFO | main_dl | [tft] Balance=645.33  PnL=-42.2500
 2026-04-09 14:01:58,739 | INFO | main_dl | DL model training complete for btc.
+2026-04-09 14:05:37,276 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-09 14:05:37,276 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-09 14:06:46,000 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-09 14:28:58,451 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[-171.04546 -171.04549 -171.04552 -171.04552 -171.04553]
+2026-04-09 14:28:59,539 | INFO | main_dl | [gru] Balance=499.84  PnL=-67.8000
+2026-04-09 14:35:04,633 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-09 14:39:59,730 | INFO | main_dl | [Dry-run] lstm predictions on first samples:
+[-11.310038   -9.604767   -6.6268954  -8.401229  -10.47162  ]
+2026-04-09 14:40:01,033 | INFO | main_dl | [lstm] Balance=496.62  PnL=-68.5000
+2026-04-09 14:45:26,441 | INFO | main_dl | Training DL regressor: tcn for btc
+2026-04-09 14:51:20,062 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-09 14:51:20,062 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-09 14:52:49,198 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-09 15:07:09,414 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[-117.47643 -117.47643 -117.47643 -117.47645 -117.47645]
+2026-04-09 15:07:11,082 | INFO | main_dl | [gru] Balance=498.90  PnL=-68.1000
+2026-04-09 15:14:38,290 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-09 15:23:33,320 | INFO | main_dl | [Dry-run] lstm predictions on first samples:
+[-135.65295 -135.65297 -135.65312 -135.65189 -135.65314]
+2026-04-09 15:23:34,705 | INFO | main_dl | [lstm] Balance=496.62  PnL=-68.5000
+2026-04-09 15:30:59,114 | INFO | main_dl | Training DL regressor: tcn for btc
+2026-04-09 15:33:36,972 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-09 15:33:36,972 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-09 15:34:53,471 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-09 16:08:50,744 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[1. 1. 1. 1. 1.]
+2026-04-09 16:08:53,434 | INFO | main_dl | [tcn] Balance=518.33  PnL=-64.1100
