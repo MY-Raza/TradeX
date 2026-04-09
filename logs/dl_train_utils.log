@@ -856,3 +856,24 @@
 2026-04-08 17:53:31,885 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.8000
 2026-04-08 17:57:48,960 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -32.3000
 2026-04-08 17:57:50,254 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -68.5000
+2026-04-09 09:37:05,128 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-09 09:37:05,129 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-09 09:37:05,136 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-09 09:38:06,220 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: 4.3000
+2026-04-09 09:38:07,173 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: 10.5800
+2026-04-09 09:40:05,984 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -18.4400
+2026-04-09 09:40:07,222 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -68.4300
+2026-04-09 09:50:44,411 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-09 09:50:44,412 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-09 09:50:44,449 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-09 09:52:11,641 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -33.6200
+2026-04-09 09:52:13,012 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -69.3400
+2026-04-09 09:53:48,682 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -26.7100
+2026-04-09 09:53:50,178 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -69.2500
+2026-04-09 10:07:54,812 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-09 10:07:54,812 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-09 10:07:54,874 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-09 10:10:16,171 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -8.5300
+2026-04-09 10:10:18,120 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -24.9900
+2026-04-09 10:13:23,833 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -30.8000
+2026-04-09 10:13:25,962 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -58.9700

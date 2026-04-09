@@ -66,3 +66,6 @@
 2026-04-08 16:46:29,643 | INFO | gru | [train] Starting GRU Optuna study (2 trials)…
 2026-04-08 16:49:53,138 | INFO | gru | [train] Best params: {'seq_len': 29, 'hidden_size': 235, 'num_layers': 1, 'dropout': 0.23750520232320932, 'lr': 0.002971517109999167, 'batch_size': 32} | Best PnL: -67.8000
 2026-04-08 16:52:15,595 | INFO | gru | [train] Final preds — min: -1526.0249, max: -954.0116, mean: -1329.2273
+2026-04-09 09:37:05,136 | INFO | gru | [train] Starting GRU Optuna study (2 trials)…
+2026-04-09 09:40:07,339 | INFO | gru | [train] Best params: {'seq_len': 97, 'hidden_size': 95, 'num_layers': 4, 'dropout': 0.27817257237285753, 'lr': 0.0008020137852606366, 'batch_size': 128} | Best PnL: 10.5800
+2026-04-09 09:41:51,945 | INFO | gru | [train] Final preds — min: -1.0000, max: 1.0000, mean: -0.7071
