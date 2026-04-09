@@ -12592,3 +12592,8 @@
 2026-04-09 17:37:15,071 | INFO | base_dl_model | [TFTModel] Training finished in 2579.1s
 2026-04-09 17:37:20,522 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=1.0000  mean=-0.2971
 2026-04-09 17:37:21,222 | INFO | base_dl_model | [TFTModel] predict() → min=-1.0000  max=1.0000  mean=0.3333
+2026-04-09 17:39:48,441 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-09 17:39:49,623 | INFO | base_dl_model | [GRUModel] Network params: 1,013,790
+2026-04-09 17:39:49,623 | INFO | base_dl_model | [GRUModel] Using DirectionalLoss.
+2026-04-09 17:41:33,177 | INFO | base_dl_model | [GRUModel] Epoch 1/30 train_loss=-15.278986  val_loss=-25.769806
+2026-04-09 17:58:56,725 | INFO | base_dl_model | [GRUModel] Epoch 10/30 train_loss=-184.880305  val_loss=-196.592243
