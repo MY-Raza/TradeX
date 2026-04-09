@@ -329,23 +329,55 @@ def prepare_features(
 # ===========================================================================
 # 6. TARGET CREATION
 # ===========================================================================
-def create_classification_target(df: pd.DataFrame, window: int = 15, threshold: float = 0.001) -> pd.DataFrame:
+def create_classification_target(
+    df: pd.DataFrame,
+    window: int = 15,
+    threshold: float = 0.003,
+    min_neutral_frac: float = 0.05,
+) -> pd.DataFrame:
     """
     Create classification targets for trading:
-    1 = significant upward move
-    0 = neutral
+     1 = significant upward move
+     0 = neutral
     -1 = significant downward move
-    """
-    future_close = df["close"].shift(-window)
 
+    ``threshold`` is the minimum absolute future return to be labelled
+    long/short.  The default is 0.3% (suited to 1-hour crypto bars).
+    0.1% is too tight — on BTC/1h almost every bar exceeds it, leaving
+    only ~16 neutral rows out of 8700, which gives neutral a class weight
+    of ~3.0 and destabilises CrossEntropyLoss training.
+
+    If the neutral class still represents less than ``min_neutral_frac``
+    of the data after thresholding, neutral rows are reassigned to the
+    closest directional class using the sign of their return, keeping
+    training as an effective binary {-1, 1} problem rather than a
+    degenerate three-class one.
+    """
+    df = df.copy()
+    future_close = df["close"].shift(-window)
     future_return = (future_close - df["close"]) / df["close"]
 
     df["target"] = np.where(
         future_return > threshold, 1,
         np.where(future_return < -threshold, -1, 0)
     )
-
     df = df.dropna().reset_index(drop=True)
+
+    neutral_frac = (df["target"] == 0).mean()
+    if neutral_frac < min_neutral_frac:
+        logger.warning(
+            f"[create_classification_target] Neutral class is only "
+            f"{neutral_frac:.1%} of data (threshold={threshold}). "
+            "Reassigning neutral rows by return sign to avoid degenerate "
+            "class weights. Consider raising `threshold`."
+        )
+        fut = df["close"].shift(-window)
+        ret = (fut - df["close"]) / df["close"]
+        neutral_mask = df["target"] == 0
+        df.loc[neutral_mask, "target"] = np.where(
+            ret[neutral_mask] >= 0, 1, -1
+        )
+
     return df
 
 

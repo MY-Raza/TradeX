@@ -986,3 +986,13 @@
 2026-04-09 15:40:00,433 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -70.1000
 2026-04-09 15:53:05,872 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -48.6900
 2026-04-09 15:53:06,926 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -69.4400
+2026-04-09 16:17:54,670 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-09 16:17:54,671 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-09 16:17:54,677 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85
+2026-04-09 16:22:02,588 | INFO | dl_train_utils | [trial 0] Chunk 1/2 PnL: -54.4000
+2026-04-09 16:22:03,974 | INFO | dl_train_utils | [trial 0] Chunk 2/2 PnL: -68.7900
+2026-04-09 16:22:57,231 | INFO | dl_train_utils | [trial 1] Chunk 1/2 PnL: -35.3700
+2026-04-09 16:22:58,501 | INFO | dl_train_utils | [trial 1] Chunk 2/2 PnL: -69.1000
+2026-04-09 16:31:33,476 | WARNING | dl_train_utils | [apply_log_diff_transform] Dropped 6583 rows with inf/NaN.
+2026-04-09 16:31:33,477 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after transform: (2114, 87)
+2026-04-09 16:31:33,493 | INFO | dl_train_utils | [split_features_labels] Train rows: 1499 | Test rows: 615 | Features: 85

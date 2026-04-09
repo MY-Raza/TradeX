@@ -36,19 +36,21 @@ def validate_and_sort(df: pd.DataFrame, target_col: str) -> pd.DataFrame:
 
 def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Apply log-differencing to OHLCV columns and sanitise inf/NaN.
+    Sanitise inf/NaN values from numeric columns.
 
-    Transformation:
-        - open, high, low, close  ->  log(x).diff()
-        - volume                  ->  log1p(x).diff()
+    NOTE: This function intentionally does NOT apply log-differencing to
+    OHLCV columns.  By the time data reaches the DL training pipeline,
+    ``make_stationary`` in ``data_pipeline.py`` has already differenced
+    non-stationary price columns (open, high, low, close, and moving
+    averages) once.  Applying log-diff here a second time produces
+    double-differenced series which are dominated by inf/NaN — in practice
+    this was dropping ~6 500 of 8 700 rows (75 %) and leaving the model
+    training on 2 100 rows instead of 8 700.
+
+    The function now only replaces inf with NaN and drops rows that contain
+    any NaN in numeric columns, preserving the full dataset.
     """
     df = df.copy()
-
-    price_cols = [c for c in ("open", "high", "low", "close") if c in df.columns]
-    for col in price_cols:
-        df[col] = np.log(df[col]).diff()
-    if "volume" in df.columns:
-        df["volume"] = np.log1p(df["volume"]).diff()
 
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
     df[numeric_cols] = df[numeric_cols].replace([np.inf, -np.inf], np.nan)
@@ -62,7 +64,7 @@ def apply_log_diff_transform(df: pd.DataFrame) -> pd.DataFrame:
             f"[apply_log_diff_transform] Dropped {rows_dropped} rows with inf/NaN."
         )
 
-    logger.info(f"[apply_log_diff_transform] Shape after transform: {df.shape}")
+    logger.info(f"[apply_log_diff_transform] Shape after sanitise: {df.shape}")
     return df
 
 
