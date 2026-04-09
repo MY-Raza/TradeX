@@ -53,7 +53,7 @@ class BaseDLModel(abc.ABC):
         loss_fn: str = "directional",
 
         # ✅ NEW
-        temperature: float = 1.5,
+        temperature: float = 0.8,
         confidence_threshold: float = 0.4,
     ):
         self.seq_len = seq_len
