@@ -323,3 +323,14 @@
 2026-04-09 10:27:23,099 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
 [-1. -1. -1. -1. -1.]
 2026-04-09 10:27:30,667 | INFO | main_dl | [tcn] Balance=497.63  PnL=-68.5500
+2026-04-09 10:35:31,269 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-09 10:35:31,269 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-09 10:36:39,516 | INFO | main_dl | Training DL classifier: tcn for btc
+2026-04-09 11:01:28,287 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[-1. -1. -1. -1. -1.]
+2026-04-09 11:01:32,146 | INFO | main_dl | [tcn] Balance=497.94  PnL=-68.3200
+2026-04-09 11:11:02,184 | INFO | main_dl | Training DL classifier: tft for btc
+2026-04-09 11:14:43,207 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[1. 1. 1. 1. 1.]
+2026-04-09 11:14:44,587 | INFO | main_dl | [tft] Balance=499.03  PnL=-68.2000
+2026-04-09 11:22:20,102 | INFO | main_dl | DL model training complete for btc.

@@ -3287,3 +3287,77 @@
 {-1: 6516, 1: 2165, 0: 16}
 2026-04-09 10:07:54,611 | INFO | data_pipeline | Classification target created — shape: (8697, 87), class counts:
 {-1: 6516, 1: 2165, 0: 16}
+2026-04-09 10:35:31,269 | INFO | data_pipeline | Fetching data: schema=data_binance, table=btc_1m, start=2025-03-29, end=2026-03-30
+2026-04-09 10:35:44,392 | INFO | data_pipeline | Fetched 527,041 rows for btc.
+2026-04-09 10:35:44,392 | INFO | data_pipeline | Resampling to 1h…
+2026-04-09 10:35:44,779 | INFO | data_pipeline | Resampled shape: (8785, 6)
+2026-04-09 10:35:44,779 | INFO | data_pipeline | Generating 71 indicator(s)…
+2026-04-09 10:35:44,863 | INFO | data_pipeline | Feature shape after generation: (8785, 89)
+2026-04-09 10:35:44,863 | INFO | data_pipeline | Running ADF stationarity tests…
+2026-04-09 10:35:45,424 | INFO | data_pipeline | [ADF] 'open' — NON-STATIONARY  (p=0.8767, stat=-0.5740)
+2026-04-09 10:35:45,869 | INFO | data_pipeline | [ADF] 'high' — NON-STATIONARY  (p=0.8825, stat=-0.5469)
+2026-04-09 10:35:46,300 | INFO | data_pipeline | [ADF] 'low' — NON-STATIONARY  (p=0.8585, stat=-0.6534)
+2026-04-09 10:35:46,749 | INFO | data_pipeline | [ADF] 'close' — NON-STATIONARY  (p=0.8754, stat=-0.5800)
+2026-04-09 10:35:47,748 | INFO | data_pipeline | [ADF] 'BB_UPPER' — NON-STATIONARY  (p=0.9126, stat=-0.3850)
+2026-04-09 10:35:48,333 | INFO | data_pipeline | [ADF] 'BB_MIDDLE' — NON-STATIONARY  (p=0.9121, stat=-0.3877)
+2026-04-09 10:35:48,921 | INFO | data_pipeline | [ADF] 'BB_LOWER' — NON-STATIONARY  (p=0.8719, stat=-0.5961)
+2026-04-09 10:35:49,481 | INFO | data_pipeline | [ADF] 'DEMA_14' — NON-STATIONARY  (p=0.8243, stat=-0.7821)
+2026-04-09 10:35:50,063 | INFO | data_pipeline | [ADF] 'EMA_14' — NON-STATIONARY  (p=0.8837, stat=-0.5413)
+2026-04-09 10:35:50,749 | INFO | data_pipeline | [ADF] 'HT_TRENDLINE' — NON-STATIONARY  (p=0.8997, stat=-0.4592)
+2026-04-09 10:35:51,331 | INFO | data_pipeline | [ADF] 'KAMA_14' — NON-STATIONARY  (p=0.9003, stat=-0.4561)
+2026-04-09 10:35:51,930 | INFO | data_pipeline | [ADF] 'MA_14' — NON-STATIONARY  (p=0.8865, stat=-0.5274)
+2026-04-09 10:35:52,511 | INFO | data_pipeline | [ADF] 'MIDPOINT_14' — NON-STATIONARY  (p=0.8730, stat=-0.5908)
+2026-04-09 10:35:53,097 | INFO | data_pipeline | [ADF] 'MIDPRICE_14' — NON-STATIONARY  (p=0.8624, stat=-0.6371)
+2026-04-09 10:35:53,663 | INFO | data_pipeline | [ADF] 'SAR' — NON-STATIONARY  (p=0.8587, stat=-0.6524)
+2026-04-09 10:35:54,823 | INFO | data_pipeline | [ADF] 'SMA_14' — NON-STATIONARY  (p=0.8865, stat=-0.5274)
+2026-04-09 10:35:55,399 | INFO | data_pipeline | [ADF] 'T3_14' — NON-STATIONARY  (p=0.8759, stat=-0.5777)
+2026-04-09 10:35:56,007 | INFO | data_pipeline | [ADF] 'TEMA_14' — NON-STATIONARY  (p=0.9008, stat=-0.4532)
+2026-04-09 10:35:56,596 | INFO | data_pipeline | [ADF] 'TRIMA_14' — NON-STATIONARY  (p=0.8454, stat=-0.7050)
+2026-04-09 10:35:57,166 | INFO | data_pipeline | [ADF] 'WMA_14' — NON-STATIONARY  (p=0.8953, stat=-0.4829)
+2026-04-09 10:36:09,785 | INFO | data_pipeline | [ADF] 'AD' — NON-STATIONARY  (p=0.3670, stat=-1.8272)
+2026-04-09 10:36:11,062 | INFO | data_pipeline | [ADF] 'OBV' — NON-STATIONARY  (p=0.9834, stat=0.4524)
+2026-04-09 10:36:13,442 | INFO | data_pipeline | [ADF] 'AVGPRICE' — NON-STATIONARY  (p=0.8793, stat=-0.5623)
+2026-04-09 10:36:14,054 | INFO | data_pipeline | [ADF] 'MEDPRICE' — NON-STATIONARY  (p=0.8680, stat=-0.6132)
+2026-04-09 10:36:14,652 | INFO | data_pipeline | [ADF] 'TYPPRICE' — NON-STATIONARY  (p=0.8720, stat=-0.5955)
+2026-04-09 10:36:15,212 | INFO | data_pipeline | [ADF] 'WCLPRICE' — NON-STATIONARY  (p=0.8716, stat=-0.5974)
+2026-04-09 10:36:19,649 | INFO | data_pipeline | [ADF] 'LINEARREG_14' — NON-STATIONARY  (p=0.8692, stat=-0.6081)
+2026-04-09 10:36:20,762 | INFO | data_pipeline | [ADF] 'LINEARREG_INTERCEPT_14' — NON-STATIONARY  (p=0.8633, stat=-0.6331)
+2026-04-09 10:36:22,552 | INFO | data_pipeline | [ADF] 'TSF_14' — NON-STATIONARY  (p=0.8673, stat=-0.6161)
+2026-04-09 10:36:23,124 | INFO | data_pipeline | [ADF] Tested 65 column(s): 36 stationary, 29 non-stationary.
+2026-04-09 10:36:23,133 | INFO | data_pipeline | [make_stationary] Differencing 29 non-stationary column(s)…
+2026-04-09 10:36:23,788 | INFO | data_pipeline | [make_stationary] 'open' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:24,334 | INFO | data_pipeline | [make_stationary] 'high' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:24,876 | INFO | data_pipeline | [make_stationary] 'low' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:25,441 | INFO | data_pipeline | [make_stationary] 'close' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:26,047 | INFO | data_pipeline | [make_stationary] 'BB_UPPER' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:26,651 | INFO | data_pipeline | [make_stationary] 'BB_MIDDLE' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:27,242 | INFO | data_pipeline | [make_stationary] 'BB_LOWER' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:27,784 | INFO | data_pipeline | [make_stationary] 'DEMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:28,318 | INFO | data_pipeline | [make_stationary] 'EMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:28,873 | INFO | data_pipeline | [make_stationary] 'HT_TRENDLINE' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:29,419 | INFO | data_pipeline | [make_stationary] 'KAMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:29,982 | INFO | data_pipeline | [make_stationary] 'MA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:30,537 | INFO | data_pipeline | [make_stationary] 'MIDPOINT_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:31,109 | INFO | data_pipeline | [make_stationary] 'MIDPRICE_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:31,675 | INFO | data_pipeline | [make_stationary] 'SAR' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:32,227 | INFO | data_pipeline | [make_stationary] 'SMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:32,758 | INFO | data_pipeline | [make_stationary] 'T3_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:33,320 | INFO | data_pipeline | [make_stationary] 'TEMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:33,890 | INFO | data_pipeline | [make_stationary] 'TRIMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:34,439 | INFO | data_pipeline | [make_stationary] 'WMA_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:35,006 | INFO | data_pipeline | [make_stationary] 'AD' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:35,555 | INFO | data_pipeline | [make_stationary] 'OBV' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:36,117 | INFO | data_pipeline | [make_stationary] 'AVGPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:36,662 | INFO | data_pipeline | [make_stationary] 'MEDPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:37,203 | INFO | data_pipeline | [make_stationary] 'TYPPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:37,741 | INFO | data_pipeline | [make_stationary] 'WCLPRICE' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:38,305 | INFO | data_pipeline | [make_stationary] 'LINEARREG_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:38,874 | INFO | data_pipeline | [make_stationary] 'LINEARREG_INTERCEPT_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:39,452 | INFO | data_pipeline | [make_stationary] 'TSF_14' became stationary after 1 diff(s)  (p=0.0000).
+2026-04-09 10:36:39,457 | INFO | data_pipeline | [make_stationary] Shape after differencing & dropna: (8697, 89)
+2026-04-09 10:36:39,457 | INFO | data_pipeline | Differencing summary: open=1d, high=1d, low=1d, close=1d, BB_UPPER=1d, BB_MIDDLE=1d, BB_LOWER=1d, DEMA_14=1d, EMA_14=1d, HT_TRENDLINE=1d, KAMA_14=1d, MA_14=1d, MIDPOINT_14=1d, MIDPRICE_14=1d, SAR=1d, SMA_14=1d, T3_14=1d, TEMA_14=1d, TRIMA_14=1d, WMA_14=1d, AD=1d, OBV=1d, AVGPRICE=1d, MEDPRICE=1d, TYPPRICE=1d, WCLPRICE=1d, LINEARREG_14=1d, LINEARREG_INTERCEPT_14=1d, TSF_14=1d
+2026-04-09 10:36:39,513 | INFO | data_pipeline | train_ratio=0.7 → split at row 6087/8697 → split_date='2025-12-11 07:00:00' (70% train / 30% test)
+2026-04-09 10:36:39,549 | INFO | data_pipeline | Classification target created — shape: (8697, 87), class counts:
+{-1: 6516, 1: 2165, 0: 16}
+2026-04-09 11:11:02,623 | INFO | data_pipeline | Classification target created — shape: (8697, 87), class counts:
+{-1: 6516, 1: 2165, 0: 16}
