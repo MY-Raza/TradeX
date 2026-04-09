@@ -254,5 +254,6 @@ def train(
 
     aligned_index = X_test.index[-len(final_preds):]
     X_test_aligned = X_test.loc[aligned_index]
+    df_test_norm = df.loc[aligned_index].reset_index(drop=True)
 
-    return final_model, final_preds, aligned_index, X_test_aligned, X_test_aligned
+    return final_model, final_preds, aligned_index, X_test_aligned, df_test_norm
