@@ -401,3 +401,10 @@
 2026-04-09 16:31:33,378 | INFO | main_dl | Training DL classifier: tft for btc
 2026-04-09 16:33:11,873 | ERROR | main_dl | DL Classifier tft failed for btc: No trials are completed yet.
 2026-04-09 16:33:11,873 | INFO | main_dl | DL model training complete for btc.
+2026-04-09 16:39:44,445 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-09 16:39:44,445 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-09 16:40:42,840 | INFO | main_dl | Training DL classifier: tft for btc
+2026-04-09 17:37:21,255 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[ 1.  1.  1.  1. -1.]
+2026-04-09 17:37:25,353 | INFO | main_dl | [tft] Balance=861.05  PnL=-11.7500
+2026-04-09 17:37:25,858 | INFO | main_dl | DL model training complete for btc.
