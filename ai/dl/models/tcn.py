@@ -22,177 +22,118 @@ optuna.logging.set_verbosity(optuna.logging.WARNING)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# 🔥 NEW — Signal Generation (FIXES ZERO SIGNAL ISSUE)
+# ──────────────────────────────────────────────────────────────────────────────
+
+def generate_signals_from_probs(probs: np.ndarray, threshold: float = 0.05) -> np.ndarray:
+    """
+    Convert probabilities → trading signals using margin vs neutral.
+
+    probs: (N,3) → [short, neutral, long]
+    """
+
+    short_p   = probs[:, 0]
+    neutral_p = probs[:, 1]
+    long_p    = probs[:, 2]
+
+    long_score  = long_p  - neutral_p
+    short_score = short_p - neutral_p
+
+    signals = np.zeros(len(probs), dtype=np.float32)
+
+    signals[long_score > threshold] = 1
+    signals[short_score > threshold] = -1
+
+    return signals
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # TCN building blocks
 # ──────────────────────────────────────────────────────────────────────────────
 
 class _CausalConv1d(nn.Module):
-    """
-    1-D causal convolution: pads only on the left so no future leakage occurs.
-
-    Args:
-        in_channels  : Input channel count.
-        out_channels : Output channel count.
-        kernel_size  : Convolution kernel width.
-        dilation     : Dilation factor (receptive field multiplier).
-    """
-
-    def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        kernel_size: int,
-        dilation: int,
-    ) -> None:
+    def __init__(self, in_channels, out_channels, kernel_size, dilation):
         super().__init__()
         self.padding = (kernel_size - 1) * dilation
-        self.conv    = weight_norm(
+        self.conv = weight_norm(
             nn.Conv1d(
-                in_channels, out_channels,
+                in_channels,
+                out_channels,
                 kernel_size=kernel_size,
                 dilation=dilation,
                 padding=self.padding,
             )
         )
-        # ✅ UPDATED — use fan_in + relu for Kaiming init (compatible with GELU too;
-        # GELU ≈ ReLU in the positive half so the same init heuristic applies).
         nn.init.kaiming_normal_(self.conv.weight_v, mode="fan_in", nonlinearity="relu")
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(self, x):
         out = self.conv(x)
-        # Remove the right-side padding to preserve causality
         return out[:, :, : -self.padding] if self.padding > 0 else out
 
 
 class _TCNBlock(nn.Module):
-    """
-    One residual TCN block: two causal conv layers + skip connection.
-
-    ✅ UPDATED — uses GELU activation instead of ReLU.
-
-    GELU advantages over ReLU for financial time-series:
-        - Smooth, non-zero gradient everywhere (no dying-neuron problem).
-        - Stochastic regularisation effect (similar to dropout) during training.
-        - Better empirical performance in transformer / sequence models.
-
-    Args:
-        in_channels  : Input channels (must equal out_channels for residual).
-        out_channels : Output channels.
-        kernel_size  : Kernel width of each conv layer.
-        dilation     : Dilation for this block.
-        dropout      : Spatial dropout probability.
-    """
-
-    def __init__(
-        self,
-        in_channels: int,
-        out_channels: int,
-        kernel_size: int,
-        dilation: int,
-        dropout: float,
-    ) -> None:
+    def __init__(self, in_channels, out_channels, kernel_size, dilation, dropout):
         super().__init__()
-        self.conv1      = _CausalConv1d(in_channels,  out_channels, kernel_size, dilation)
-        self.conv2      = _CausalConv1d(out_channels, out_channels, kernel_size, dilation)
-        self.activation = nn.GELU()    # ✅ UPDATED — GELU replaces ReLU
-        self.dropout    = nn.Dropout(dropout)
-        # Downsample / projection for residual when channels change
+        self.conv1 = _CausalConv1d(in_channels, out_channels, kernel_size, dilation)
+        self.conv2 = _CausalConv1d(out_channels, out_channels, kernel_size, dilation)
+        self.activation = nn.GELU()
+        self.dropout = nn.Dropout(dropout)
+
         self.downsample = (
             nn.Conv1d(in_channels, out_channels, kernel_size=1)
             if in_channels != out_channels
             else None
         )
-        self._init_weights()
 
-    def _init_weights(self) -> None:
         if self.downsample is not None:
-            nn.init.kaiming_normal_(
-                self.downsample.weight, mode="fan_in", nonlinearity="relu"
-            )
+            nn.init.kaiming_normal_(self.downsample.weight, mode="fan_in", nonlinearity="relu")
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x : (B, C, T)
-        out = self.activation(self.conv1(x))   # ✅ UPDATED — GELU
+    def forward(self, x):
+        out = self.activation(self.conv1(x))
         out = self.dropout(out)
-        out = self.activation(self.conv2(out)) # ✅ UPDATED — GELU
+        out = self.activation(self.conv2(out))
         out = self.dropout(out)
 
         residual = x if self.downsample is None else self.downsample(x)
-        # NOTE: No activation after residual addition (Bai et al. 2018).
-        # Applying ReLU/GELU here clamps block outputs and causes the FC head
-        # bias to absorb the negative target mean — reproducing the bug that
-        # was previously fixed. Keep the residual connection activation-free.
         return out + residual
 
 
 class _TCNNetwork(nn.Module):
-    """
-    Full TCN: stack of ``_TCNBlock`` with exponentially increasing dilations,
-    followed by a linear projection head.
-
-    Args:
-        input_size   : Number of input features (channels).
-        num_channels : Number of channels per TCN block.
-        num_layers   : Number of stacked TCN blocks.
-        kernel_size  : Kernel width (same for every block).
-        dropout      : Dropout probability.
-        output_size  : Dimension of the linear head output.
-        model_type   : ``'classifier'`` or ``'regressor'``.
-    """
-
     def __init__(
         self,
-        input_size: int,
-        num_channels: int,
-        num_layers: int,
-        kernel_size: int,
-        dropout: float,
-        output_size: int,
-        model_type: str = "regressor",   # ✅ UPDATED
-    ) -> None:
+        input_size,
+        num_channels,
+        num_layers,
+        kernel_size,
+        dropout,
+        output_size,
+        model_type="regressor",
+    ):
         super().__init__()
-        self.model_type = model_type      # ✅ UPDATED
-        layers: list[nn.Module] = []
+
+        layers = []
         for i in range(num_layers):
-            dilation   = 2 ** i
-            in_ch      = input_size if i == 0 else num_channels
-            out_ch     = num_channels
-            layers.append(
-                _TCNBlock(in_ch, out_ch, kernel_size, dilation, dropout)
-            )
+            dilation = 2 ** i
+            in_ch = input_size if i == 0 else num_channels
+            layers.append(_TCNBlock(in_ch, num_channels, kernel_size, dilation, dropout))
+
         self.network = nn.Sequential(*layers)
-        self.fc      = nn.Linear(num_channels, output_size)
+        self.fc = nn.Linear(num_channels, output_size)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        # x : (B, seq_len, input_size)  →  transpose for Conv1d
-        x    = x.permute(0, 2, 1)          # (B, input_size, seq_len)
-        out  = self.network(x)              # (B, num_channels, seq_len)
-        last = out[:, :, -1]               # take last timestep: (B, num_channels)
-        logits = self.fc(last)             # (B, output_size)
-
-        # ✅ UPDATED — output activation strategy:
-        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
-        #               internally (numerically stable). predict_proba() applies
-        #               softmax explicitly at inference time.
-        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
-        #               require unbounded outputs.
+    def forward(self, x):
+        x = x.permute(0, 2, 1)
+        out = self.network(x)
+        last = out[:, :, -1]
+        logits = self.fc(last)
         return logits
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# BaseDLModel subclass
+# Model Wrapper
 # ──────────────────────────────────────────────────────────────────────────────
 
 class TCNModel(BaseDLModel):
-    """
-    TCN-based forecasting model.
-
-    Additional constructor parameters (beyond ``BaseDLModel``):
-        kernel_size (int): Convolution kernel width (default 3).
-        num_channels (int): Channel width of every TCN block; maps to
-            ``hidden_size`` inherited from ``BaseDLModel``.
-    """
-
-    def __init__(self, kernel_size: int = 3, **kwargs) -> None:
+    def __init__(self, kernel_size: int = 3, **kwargs):
         super().__init__(**kwargs)
         self.kernel_size = kernel_size
 
@@ -205,12 +146,12 @@ class TCNModel(BaseDLModel):
             kernel_size=self.kernel_size,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,   # ✅ UPDATED
+            model_type=self.model_type,
         )
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Public train()
+# Training
 # ──────────────────────────────────────────────────────────────────────────────
 
 def train(
@@ -219,29 +160,12 @@ def train(
     target_col: str = "target",
     split_date: str = "2024-01-01 00:00",
     n_trials: int = 10,
-    k: float = 0.5,
+    k: float = 0.35,   # 🔥 FIXED
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",         # ✅ UPDATED
+    loss_fn: str = "directional",
 ) -> tuple:
-    """
-    Train a TCN model using PnL-based Optuna optimisation.
 
-    Args:
-        df               : Feature DataFrame (output of ``data_pipeline``).
-        df_1m            : 1-minute OHLCV for backtesting.
-        target_col       : Name of the label column.
-        split_date       : ISO date string for train/test boundary.
-        n_trials         : Optuna trial budget.
-        k                : Top-k threshold fraction for signal selection.
-        transform_features: Apply log-diff to OHLCV columns if True.
-        model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ✅ UPDATED — ``'directional'`` or
-                           ``'confidence_weighted'`` (regressor only).
-
-    Returns:
-        (model, preds, test_index, X_test)
-    """
     df = validate_and_sort(df, target_col)
 
     if transform_features:
@@ -254,48 +178,52 @@ def train(
 
     X_train, y_train, X_test, y_test = split_features_labels(df, target_col, split_date)
 
-    logger.info(f"[train] Starting TCN Optuna study ({n_trials} trials)…")
+    logger.info(f"[train] Label distribution:\n{y_train.value_counts()}")
 
-    def objective(trial: optuna.Trial) -> float:
-        seq_len      = trial.suggest_int("seq_len",      20,  120)
-        num_channels = trial.suggest_int("num_channels", 32,  256)
-        num_layers   = trial.suggest_int("num_layers",    2,    6)
-        kernel_size  = trial.suggest_int("kernel_size",   2,    8)
-        dropout      = trial.suggest_float("dropout",    0.0,  0.5)
-        lr           = trial.suggest_float("lr",         1e-4, 1e-2, log=True)
-        batch_size   = trial.suggest_categorical("batch_size", [32, 64, 128])
+    def objective(trial):
 
         model = TCNModel(
-            seq_len=seq_len,
-            hidden_size=num_channels,
-            num_layers=num_layers,
-            kernel_size=kernel_size,
-            dropout=dropout,
-            lr=lr,
-            batch_size=batch_size,
+            seq_len=trial.suggest_int("seq_len", 20, 120),
+            hidden_size=trial.suggest_int("num_channels", 32, 256),
+            num_layers=trial.suggest_int("num_layers", 2, 6),
+            kernel_size=trial.suggest_int("kernel_size", 2, 8),
+            dropout=trial.suggest_float("dropout", 0.0, 0.5),
+            lr=trial.suggest_float("lr", 1e-4, 1e-2, log=True),
+            batch_size=trial.suggest_categorical("batch_size", [32, 64, 128]),
             epochs=30,
             patience=5,
             model_type=model_type,
-            loss_fn=loss_fn,              # ✅ UPDATED
+            loss_fn=loss_fn,
         )
+
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
-        preds = model.predict(X_test)
+
+        if model_type == "classifier":
+            probs = model.predict_proba(X_test)
+            preds = generate_signals_from_probs(probs)
+        else:
+            preds = model.predict(X_test)
 
         if np.std(preds) < 1e-8:
             raise optuna.TrialPruned()
 
-        aligned_index = X_test.index[-(len(preds)):]
+        aligned_index = X_test.index[-len(preds):]
+
         return run_chunked_backtest(
-            trial, df, preds, aligned_index, df_1m,
-            model_type=model_type, k=k, lookback=seq_len,
+            trial,
+            df,
+            preds,
+            aligned_index,
+            df_1m,
+            model_type=model_type,
+            k=k,
+            lookback=model.seq_len,
         )
 
-    pruner = optuna.pruners.MedianPruner(n_startup_trials=3, n_warmup_steps=0)
-    study  = optuna.create_study(direction="maximize", pruner=pruner)
-    study.optimize(objective, n_trials=n_trials, n_jobs=1)
+    study = optuna.create_study(direction="maximize")
+    study.optimize(objective, n_trials=n_trials)
 
     best = study.best_params
-    logger.info(f"[train] Best params: {best} | Best PnL: {study.best_value:.4f}")
 
     final_model = TCNModel(
         seq_len=best["seq_len"],
@@ -308,39 +236,23 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,                  # ✅ UPDATED
+        loss_fn=loss_fn,
     )
+
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
-    final_preds = final_model.predict(X_test)
 
-    if np.std(final_preds) < 1e-6:
-        logger.warning(
-            "[train] Final TCN model collapsed to constant output "
-            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
-        )
-        rng = np.random.default_rng(42)
-        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
-
-    aligned_index  = X_test.index[-(len(final_preds)):]
-    X_test_aligned = X_test.loc[aligned_index]
+    if model_type == "classifier":
+        probs = final_model.predict_proba(X_test)
+        final_preds = generate_signals_from_probs(probs)
+    else:
+        final_preds = final_model.predict(X_test)
 
     logger.info(
-        f"[train] Final preds — min: {final_preds.min():.4f}, "
-        f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
+        f"[train] Final preds — min={final_preds.min():.4f}, "
+        f"max={final_preds.max():.4f}, mean={final_preds.mean():.4f}"
     )
 
-    n_preds    = len(final_preds)
-    iloc_start = max(0, len(df_normalised) - n_preds)
-    pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
+    aligned_index = X_test.index[-len(final_preds):]
+    X_test_aligned = X_test.loc[aligned_index]
 
-    pred_datetimes     = pred_datetimes[-n_preds:]
-    backtest_positions = np.arange(n_preds)
-
-    df_for_backtest = X_test_aligned.reset_index(drop=True).copy()
-    df_for_backtest.insert(0, "datetime", pred_datetimes)
-
-    assert len(df_for_backtest) == n_preds, (
-        f"df_for_backtest length {len(df_for_backtest)} != preds length {n_preds}"
-    )
-
-    return final_model, final_preds, backtest_positions, X_test_aligned, df_for_backtest
+    return final_model, final_preds, aligned_index, X_test_aligned, X_test_aligned
