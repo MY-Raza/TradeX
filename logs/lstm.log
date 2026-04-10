@@ -45,3 +45,10 @@
 2026-04-09 15:23:33,268 | INFO | lstm | [train] Final preds — min: -135.6533, max: -135.6511, mean: -135.6528
 2026-04-10 12:17:14,777 | INFO | lstm | [train] Starting LSTM Optuna study (2 trials)…
 2026-04-10 12:33:33,812 | INFO | lstm | [train] Best params: {'seq_len': 78, 'hidden_size': 201, 'num_layers': 1, 'dropout': 0.20830938696969076, 'lr': 0.0010675823217378064, 'batch_size': 128} | Best PnL: -69.2800
+2026-04-10 14:15:57,952 | INFO | lstm | [train] Starting LSTM Optuna study (2 trials)…
+2026-04-10 14:26:14,883 | INFO | lstm | [train] Starting LSTM Optuna study (2 trials)…
+2026-04-10 14:26:14,885 | INFO | lstm | [train] Using loss_fn='mse' (default='mse' to prevent collapse)
+2026-04-10 14:26:14,885 | INFO | lstm | [train] Data: 6086 train, 2596 test | Target distribution — mean=-0.0021, std=1.0337
+2026-04-10 14:44:41,825 | INFO | lstm | [train] Best params: {'seq_len': 20, 'hidden_size': 170, 'num_layers': 2, 'dropout': 0.09797891342599413, 'lr': 0.0017385940717453761, 'batch_size': 128} | Best PnL: -45.3500
+2026-04-10 14:49:52,485 | INFO | lstm | [train] Final preds — min: -5.9335, max: 1.1091, mean: -0.0568, std: 0.3388
+2026-04-10 14:49:52,487 | INFO | lstm | [train] Signal distribution — Short: 1375 (53.4%) | Neutral: 0 (0.0%) | Long: 1202 (46.6%)
