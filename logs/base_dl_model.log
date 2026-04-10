@@ -14057,3 +14057,20 @@
 2026-04-10 14:57:22,708 | INFO | base_dl_model | [LSTMModel] predict() → min=-5.9335  max=1.1091  mean=-0.0573
 2026-04-10 14:57:24,457 | INFO | base_dl_model | [LSTMModel] predict() → min=-5.9335  max=1.1090  mean=-0.0573
 2026-04-10 14:57:26,170 | INFO | base_dl_model | [LSTMModel] predict() → min=-5.9335  max=1.1091  mean=-0.0573
+2026-04-10 15:01:14,895 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-10 15:01:15,160 | INFO | base_dl_model | [TCNModel] Network params: 510,770
+2026-04-10 15:01:15,160 | WARNING | base_dl_model | [TCNModel] DirectionalLoss may collapse. Consider using MSE or Margin loss instead.
+2026-04-10 15:02:48,080 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=-110532681543032416.000000  val_loss=-668724770745666816.000000
+2026-04-10 15:12:20,547 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-10 15:12:20,919 | INFO | base_dl_model | [TCNModel] Network params: 331,801
+2026-04-10 15:12:20,919 | INFO | base_dl_model | [TCNModel] Using MSELoss.
+2026-04-10 15:13:09,496 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=234103288.378947  val_loss=6913858.366071
+2026-04-10 15:15:13,141 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=308287.681456  val_loss=338966.172247
+2026-04-10 15:17:29,928 | INFO | base_dl_model | [TCNModel] Epoch 20/30 train_loss=33568.449897  val_loss=22216.299090
+2026-04-10 15:19:37,343 | INFO | base_dl_model | [TCNModel] Epoch 30/30 train_loss=9579.266964  val_loss=2340.973551
+2026-04-10 15:19:37,343 | INFO | base_dl_model | [TCNModel] Training finished in 431.7s
+2026-04-10 15:19:45,741 | INFO | base_dl_model | [TCNModel] predict() → min=-312.4543  max=280.4685  mean=-1.3522
+2026-04-10 15:19:50,375 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-10 15:19:50,605 | INFO | base_dl_model | [TCNModel] Network params: 1,348,236
+2026-04-10 15:19:50,605 | INFO | base_dl_model | [TCNModel] Using MSELoss.
+2026-04-10 15:21:13,906 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=20188159445.166668  val_loss=147061562.744318
