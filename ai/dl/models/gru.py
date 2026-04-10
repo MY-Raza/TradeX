@@ -26,18 +26,25 @@ optuna.logging.set_verbosity(optuna.logging.WARNING)
 
 class _GRUNetwork(nn.Module):
     """
-    Multi-layer GRU with a linear projection head and layer normalisation.
+    Multi-layer GRU with a linear projection head.
 
-    Layer normalisation on the GRU output stabilises training significantly
-    on financial time series with z-scored targets, and adds negligible
-    compute cost.
+    For regressors, the forward pass ends with ``torch.tanh`` which bounds
+    the output to (-1, 1). This is not optional — DirectionalLoss and
+    ConfidenceWeightedLoss both have gradients that are constant w.r.t.
+    prediction magnitude, so without this bound the optimizer will grow
+    weights indefinitely in whichever sign minimises the loss on the majority
+    of training steps. The observed symptom is all predictions converging to
+    a large negative constant (e.g. -11819) regardless of input.
+
+    For classifiers, tanh is not applied — raw logits are returned and
+    CrossEntropyLoss applies log-softmax internally.
 
     Args:
         input_size  : Number of features per timestep.
         hidden_size : GRU hidden dimension.
         num_layers  : Number of stacked GRU layers.
-        dropout     : Dropout applied between GRU layers (ignored if num_layers==1).
-        output_size : Dimension of the final linear layer.
+        dropout     : Dropout applied between GRU layers (0 if num_layers==1).
+        output_size : Dimension of the final linear layer (1 for regressor, 3 for classifier).
         model_type  : ``'classifier'`` or ``'regressor'``.
     """
 
@@ -59,17 +66,26 @@ class _GRUNetwork(nn.Module):
             batch_first=True,
             dropout=dropout if num_layers > 1 else 0.0,
         )
-        # Layer norm on the last hidden state — cheap and effective
+        # LayerNorm on the hidden state stabilises scale before the linear head.
+        # It does NOT prevent magnitude explosion on the output — that requires
+        # tanh after fc, which is applied below for regressors.
         self.norm = nn.LayerNorm(hidden_size)
         self.fc   = nn.Linear(hidden_size, output_size)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, seq_len, input_size)
-        out, _ = self.gru(x)          # (B, seq_len, hidden_size)
+        out, _  = self.gru(x)         # (B, seq_len, hidden_size)
         last    = out[:, -1, :]       # (B, hidden_size)
-        last    = self.norm(last)     # stabilise scale before linear head
+        last    = self.norm(last)     # normalise hidden state scale
         logits  = self.fc(last)       # (B, output_size)
-        return logits
+
+        if self.model_type == "regressor":
+            # Bound output to (-1, 1) so DirectionalLoss gradient cannot cause
+            # unbounded weight growth. Positive → bullish, negative → bearish.
+            return torch.tanh(logits)
+        else:
+            # Classifiers: return raw logits — CrossEntropyLoss handles softmax.
+            return logits
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -77,12 +93,7 @@ class _GRUNetwork(nn.Module):
 # ──────────────────────────────────────────────────────────────────────────────
 
 class GRUModel(BaseDLModel):
-    """
-    GRU-based forecasting model wrapping ``_GRUNetwork``.
-
-    All hyper-parameters are inherited from ``BaseDLModel`` and can be
-    overridden at construction time or via Optuna.
-    """
+    """GRU-based forecasting model wrapping ``_GRUNetwork``."""
 
     def _build_network(self, input_size: int) -> nn.Module:
         output_size = 3 if self.model_type == "classifier" else 1
@@ -97,7 +108,7 @@ class GRUModel(BaseDLModel):
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Public train() — identical signature to RF/XGB counterparts
+# Public train()
 # ──────────────────────────────────────────────────────────────────────────────
 
 def train(
@@ -114,36 +125,13 @@ def train(
     """
     Train a GRU model using PnL-based Optuna optimisation.
 
-    Mirrors the ``train()`` contract in ``randomforest_clf.py`` and
-    ``xgboost_reg.py``:
-        - Validates & sorts the input DataFrame.
-        - Optionally log-diff transforms OHLCV columns.
-        - Splits into train / test sets via a temporal boundary.
-        - Runs an Optuna study maximising backtested PnL.
-        - Retrains the best model on the full training set.
-
-    Performance notes (CPU):
-        - Optuna trials use ``epochs=15`` (vs 50 for the final model) with
-          ``patience=5`` so each trial converges quickly enough to distinguish
-          good from bad hyper-parameters.
-        - The hidden_size search range is capped at 128 (down from 256) to
-          keep parameter counts under ~200 K on CPU.
-        - The seq_len range is narrowed to 20-80 (down from 20-120).
-
-    Args:
-        df               : Feature DataFrame (output of ``data_pipeline``).
-        df_1m            : 1-minute OHLCV for backtesting.
-        target_col       : Name of the label column.
-        split_date       : ISO date string for train/test boundary.
-        n_trials         : Optuna trial budget.
-        k                : Top-k threshold fraction for signal selection.
-        transform_features: Apply log-diff to OHLCV columns if True.
-        model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ``'directional'`` or ``'confidence_weighted'``
-                           (regressor only).
-
     Returns:
-        (model, preds, test_index, X_test, df_for_backtest)
+        (final_model, final_preds, backtest_positions, X_test_aligned, df_for_backtest)
+
+    Regressor predictions are tanh-bounded floats in (-1, 1):
+        Positive → predicted up move (long signal).
+        Negative → predicted down move (short signal).
+        Magnitude → confidence level.
     """
     df = validate_and_sort(df, target_col)
 
@@ -160,14 +148,10 @@ def train(
     logger.info(f"[train] Starting GRU Optuna study ({n_trials} trials)…")
 
     def objective(trial: optuna.Trial) -> float:
-        # ── Tightened search space for CPU efficiency ─────────────
-        # hidden_size capped at 128 — keeps params <200 K, cuts epoch time ~4×
-        # seq_len capped at 80   — longer windows add diminishing returns on 1h bars
-        # num_layers capped at 2 — 3-4 layers with dropout add little on short seqs
-        seq_len     = trial.suggest_int("seq_len",     20,   80)
-        hidden_size = trial.suggest_int("hidden_size", 32,  128)
-        num_layers  = trial.suggest_int("num_layers",   1,    2)
-        dropout     = trial.suggest_float("dropout",   0.0,  0.4)
+        seq_len     = trial.suggest_int("seq_len",     20,  80)
+        hidden_size = trial.suggest_int("hidden_size", 32, 128)
+        num_layers  = trial.suggest_int("num_layers",   1,   2)
+        dropout     = trial.suggest_float("dropout",   0.0, 0.4)
         lr          = trial.suggest_float("lr",        1e-4, 5e-3, log=True)
         batch_size  = trial.suggest_categorical("batch_size", [64, 128, 256])
 
@@ -178,8 +162,6 @@ def train(
             dropout=dropout,
             lr=lr,
             batch_size=batch_size,
-            # 15 epochs is enough to signal which configs are worth pursuing;
-            # patience=4 stops clearly diverging runs fast.
             epochs=15,
             patience=4,
             model_type=model_type,
@@ -188,7 +170,12 @@ def train(
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
 
-        if model_type == "regressor" and np.std(preds) < 1e-8:
+        # With tanh output, std check uses a tighter threshold
+        if model_type == "regressor" and np.std(preds) < 1e-4:
+            logger.warning(
+                f"[trial {trial.number}] Predictions collapsed "
+                f"(std={np.std(preds):.2e}). Pruning."
+            )
             raise optuna.TrialPruned()
 
         aligned_index = X_test.index[-(len(preds)):]
@@ -205,7 +192,7 @@ def train(
     best = study.best_params
     logger.info(f"[train] Best params: {best} | Best PnL: {study.best_value:.4f}")
 
-    # ── Retrain final model with best hyper-parameters ───────────────
+    # ── Retrain final model ───────────────────────────────────────────
     final_model = GRUModel(
         seq_len=best["seq_len"],
         hidden_size=best["hidden_size"],
@@ -221,13 +208,15 @@ def train(
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
 
-    if np.std(final_preds) < 1e-6:
+    if np.std(final_preds) < 1e-4:
         logger.warning(
-            "[train] Final GRU model collapsed to constant output "
-            f"({final_preds.mean():.6f}). Adding small noise to prevent all-zero signals."
+            f"[train] Final GRU collapsed (std={np.std(final_preds):.2e}). "
+            "Adding small noise."
         )
         rng = np.random.default_rng(42)
-        final_preds = final_preds + rng.normal(0, 1e-4, size=final_preds.shape)
+        final_preds = final_preds + rng.normal(0, 1e-3, size=final_preds.shape)
+        # Re-clamp after noise to keep within (-1, 1)
+        final_preds = np.clip(final_preds, -1.0, 1.0)
 
     aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]
@@ -240,8 +229,8 @@ def train(
     n_preds    = len(final_preds)
     iloc_start = max(0, len(df_normalised) - n_preds)
     pred_datetimes = df_normalised.iloc[iloc_start : iloc_start + n_preds]["datetime"].values
+    pred_datetimes = pred_datetimes[-n_preds:]
 
-    pred_datetimes     = pred_datetimes[-n_preds:]
     backtest_positions = np.arange(n_preds)
 
     df_for_backtest = X_test_aligned.reset_index(drop=True).copy()
