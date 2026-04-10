@@ -26,7 +26,11 @@ optuna.logging.set_verbosity(optuna.logging.WARNING)
 
 class _GRUNetwork(nn.Module):
     """
-    Multi-layer GRU with a linear projection head.
+    Multi-layer GRU with a linear projection head and layer normalisation.
+
+    Layer normalisation on the GRU output stabilises training significantly
+    on financial time series with z-scored targets, and adds negligible
+    compute cost.
 
     Args:
         input_size  : Number of features per timestep.
@@ -44,10 +48,10 @@ class _GRUNetwork(nn.Module):
         num_layers: int,
         dropout: float,
         output_size: int,
-        model_type: str = "regressor",   # ✅ UPDATED
+        model_type: str = "regressor",
     ) -> None:
         super().__init__()
-        self.model_type = model_type      # ✅ UPDATED
+        self.model_type = model_type
         self.gru = nn.GRU(
             input_size=input_size,
             hidden_size=hidden_size,
@@ -55,20 +59,16 @@ class _GRUNetwork(nn.Module):
             batch_first=True,
             dropout=dropout if num_layers > 1 else 0.0,
         )
-        self.fc = nn.Linear(hidden_size, output_size)
+        # Layer norm on the last hidden state — cheap and effective
+        self.norm = nn.LayerNorm(hidden_size)
+        self.fc   = nn.Linear(hidden_size, output_size)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         # x : (B, seq_len, input_size)
         out, _ = self.gru(x)          # (B, seq_len, hidden_size)
         last    = out[:, -1, :]       # (B, hidden_size)
+        last    = self.norm(last)     # stabilise scale before linear head
         logits  = self.fc(last)       # (B, output_size)
-
-        # ✅ UPDATED — output activation strategy:
-        #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
-        #               internally (numerically stable). predict_proba() applies
-        #               softmax explicitly at inference time.
-        #   Regressor:  return raw scalar — DirectionalLoss / ConfidenceWeightedLoss
-        #               require unbounded outputs.
         return logits
 
 
@@ -92,7 +92,7 @@ class GRUModel(BaseDLModel):
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,   # ✅ UPDATED
+            model_type=self.model_type,
         )
 
 
@@ -109,7 +109,7 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",         # ✅ UPDATED
+    loss_fn: str = "directional",
 ) -> tuple:
     """
     Train a GRU model using PnL-based Optuna optimisation.
@@ -122,6 +122,14 @@ def train(
         - Runs an Optuna study maximising backtested PnL.
         - Retrains the best model on the full training set.
 
+    Performance notes (CPU):
+        - Optuna trials use ``epochs=15`` (vs 50 for the final model) with
+          ``patience=5`` so each trial converges quickly enough to distinguish
+          good from bad hyper-parameters.
+        - The hidden_size search range is capped at 128 (down from 256) to
+          keep parameter counts under ~200 K on CPU.
+        - The seq_len range is narrowed to 20-80 (down from 20-120).
+
     Args:
         df               : Feature DataFrame (output of ``data_pipeline``).
         df_1m            : 1-minute OHLCV for backtesting.
@@ -131,15 +139,11 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : ✅ UPDATED — ``'directional'`` or
-                           ``'confidence_weighted'`` (regressor only).
+        loss_fn          : ``'directional'`` or ``'confidence_weighted'``
+                           (regressor only).
 
     Returns:
-        (model, preds, test_index, X_test)
-        - model      : Fitted ``GRUModel`` instance.
-        - preds      : 1-D np.ndarray of predictions on the test set.
-        - test_index : pd.Index of test-set rows in the original DataFrame.
-        - X_test     : Test feature matrix.
+        (model, preds, test_index, X_test, df_for_backtest)
     """
     df = validate_and_sort(df, target_col)
 
@@ -156,12 +160,16 @@ def train(
     logger.info(f"[train] Starting GRU Optuna study ({n_trials} trials)…")
 
     def objective(trial: optuna.Trial) -> float:
-        seq_len     = trial.suggest_int("seq_len",     20,  120)
-        hidden_size = trial.suggest_int("hidden_size", 32,  256)
-        num_layers  = trial.suggest_int("num_layers",   1,    4)
-        dropout     = trial.suggest_float("dropout",   0.0,  0.5)
-        lr          = trial.suggest_float("lr",        1e-4, 1e-2, log=True)
-        batch_size  = trial.suggest_categorical("batch_size", [32, 64, 128])
+        # ── Tightened search space for CPU efficiency ─────────────
+        # hidden_size capped at 128 — keeps params <200 K, cuts epoch time ~4×
+        # seq_len capped at 80   — longer windows add diminishing returns on 1h bars
+        # num_layers capped at 2 — 3-4 layers with dropout add little on short seqs
+        seq_len     = trial.suggest_int("seq_len",     20,   80)
+        hidden_size = trial.suggest_int("hidden_size", 32,  128)
+        num_layers  = trial.suggest_int("num_layers",   1,    2)
+        dropout     = trial.suggest_float("dropout",   0.0,  0.4)
+        lr          = trial.suggest_float("lr",        1e-4, 5e-3, log=True)
+        batch_size  = trial.suggest_categorical("batch_size", [64, 128, 256])
 
         model = GRUModel(
             seq_len=seq_len,
@@ -170,10 +178,12 @@ def train(
             dropout=dropout,
             lr=lr,
             batch_size=batch_size,
-            epochs=30,
-            patience=5,
+            # 15 epochs is enough to signal which configs are worth pursuing;
+            # patience=4 stops clearly diverging runs fast.
+            epochs=15,
+            patience=4,
             model_type=model_type,
-            loss_fn=loss_fn,              # ✅ UPDATED
+            loss_fn=loss_fn,
         )
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
@@ -206,7 +216,7 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,                  # ✅ UPDATED
+        loss_fn=loss_fn,
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)

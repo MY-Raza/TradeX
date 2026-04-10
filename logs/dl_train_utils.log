@@ -1005,3 +1005,8 @@
 2026-04-09 17:39:48,395 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000010  std=0.213039
 2026-04-09 17:39:48,396 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
 2026-04-09 17:39:48,428 | INFO | dl_train_utils | [split_features_labels] Train rows: 6086 | Test rows: 2596 | Features: 85
+2026-04-10 09:45:48,883 | INFO | dl_train_utils | [apply_log_diff_transform] Shape after sanitise: (8683, 87)
+2026-04-10 09:45:48,885 | INFO | dl_train_utils | [normalize_regression_target] Converting 'target' from raw price (|mean|=709.51) to z-scored log-return.
+2026-04-10 09:45:48,901 | INFO | dl_train_utils | [normalize_regression_target] Z-score params stored — mean=0.000010  std=0.213039
+2026-04-10 09:45:48,903 | INFO | dl_train_utils | [normalize_regression_target] Target stats after transform — mean=0.000000  std=1.000000
+2026-04-10 09:45:48,939 | INFO | dl_train_utils | [split_features_labels] Train rows: 6086 | Test rows: 2596 | Features: 85
