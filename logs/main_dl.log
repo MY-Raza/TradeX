@@ -436,3 +436,12 @@
 2026-04-10 12:15:50,562 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
 2026-04-10 12:15:50,562 | INFO | main_dl | === Processing symbol: btc ===
 2026-04-10 12:17:14,608 | INFO | main_dl | Training DL regressor: lstm for btc
+2026-04-10 12:36:59,938 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-10 12:36:59,938 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-10 12:37:31,393 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-10 12:37:31,393 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-10 12:38:38,438 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-10 12:48:57,501 | INFO | main_dl | [Dry-run] gru predictions on first samples:
+[-0.9999468  -0.9999468  -0.9999337  -0.99995875 -0.99995077]
+2026-04-10 12:49:01,792 | INFO | main_dl | [gru] Balance=497.58  PnL=-69.4800
+2026-04-10 12:56:46,525 | INFO | main_dl | DL model training complete for btc.

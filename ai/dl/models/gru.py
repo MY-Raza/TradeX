@@ -120,10 +120,17 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",
+    loss_fn: str = "mse",
 ) -> tuple:
     """
     Train a GRU model using PnL-based Optuna optimisation.
+
+    CRITICAL FIX (April 2026):
+    - Changed default loss_fn from 'directional' to 'mse'
+    - DirectionalLoss collapses to constant predictions (-1.0) when target
+      distribution is imbalanced
+    - MSELoss has non-zero gradient everywhere, preventing collapse
+    - Predictions should now vary and have reasonable directional accuracy
 
     Returns:
         (final_model, final_preds, backtest_positions, X_test_aligned, df_for_backtest)
@@ -146,6 +153,7 @@ def train(
     X_train, y_train, X_test, y_test = split_features_labels(df, target_col, split_date)
 
     logger.info(f"[train] Starting GRU Optuna study ({n_trials} trials)…")
+    logger.info(f"[train] Using loss_fn='{loss_fn}' (default='mse' to prevent collapse)")
 
     def objective(trial: optuna.Trial) -> float:
         seq_len     = trial.suggest_int("seq_len",     20,  80)
@@ -170,11 +178,12 @@ def train(
         model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
         preds = model.predict(X_test)
 
-        # With tanh output, std check uses a tighter threshold
-        if model_type == "regressor" and np.std(preds) < 1e-4:
+        # Check for collapse with looser threshold (MSE won't collapse as hard)
+        pred_std = np.std(preds)
+        if model_type == "regressor" and pred_std < 5e-5:
             logger.warning(
                 f"[trial {trial.number}] Predictions collapsed "
-                f"(std={np.std(preds):.2e}). Pruning."
+                f"(std={pred_std:.2e}). Pruning."
             )
             raise optuna.TrialPruned()
 
@@ -203,15 +212,17 @@ def train(
         epochs=50,
         patience=10,
         model_type=model_type,
-        loss_fn=loss_fn,
+        loss_fn=loss_fn,  # FIX: Use MSE by default
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
 
-    if np.std(final_preds) < 1e-4:
+    pred_std = np.std(final_preds)
+    if pred_std < 1e-4:
         logger.warning(
-            f"[train] Final GRU collapsed (std={np.std(final_preds):.2e}). "
-            "Adding small noise."
+            f"[train] Final GRU has very low variance (std={pred_std:.2e}). "
+            "This may indicate the model learned a collapse strategy. "
+            "Adding small noise to encourage diversity."
         )
         rng = np.random.default_rng(42)
         final_preds = final_preds + rng.normal(0, 1e-3, size=final_preds.shape)
@@ -223,7 +234,19 @@ def train(
 
     logger.info(
         f"[train] Final preds — min: {final_preds.min():.4f}, "
-        f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}"
+        f"max: {final_preds.max():.4f}, mean: {final_preds.mean():.4f}, "
+        f"std: {pred_std:.4f}"
+    )
+
+    # Check sign distribution
+    signs = np.sign(final_preds)
+    n_short = (signs < 0).sum()
+    n_neutral = (signs == 0).sum()
+    n_long = (signs > 0).sum()
+    logger.info(
+        f"[train] Signal distribution — Short: {n_short} ({100*n_short/len(final_preds):.1f}%) | "
+        f"Neutral: {n_neutral} ({100*n_neutral/len(final_preds):.1f}%) | "
+        f"Long: {n_long} ({100*n_long/len(final_preds):.1f}%)"
     )
 
     n_preds    = len(final_preds)

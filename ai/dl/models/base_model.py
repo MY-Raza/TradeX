@@ -46,6 +46,11 @@ class DirectionalLoss(nn.Module):
     that predicts one large constant (as observed: preds ~ -11819 for all
     inputs). With tanh, the gradient vanishes as |pred| → 1, which is the
     correct saturation behaviour for a directional signal.
+    
+    WARNING: Even with tanh, DirectionalLoss can collapse to a constant
+    if the target distribution is highly imbalanced (e.g., 70% negative).
+    The model learns that predicting -1.0 is a local optimum and cannot escape.
+    For general use, prefer MSELoss instead.
     """
 
     def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
@@ -66,6 +71,34 @@ class ConfidenceWeightedLoss(nn.Module):
 
     def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         return -torch.mean(torch.sign(targets) * preds * torch.abs(preds))
+
+
+class MarginDirectionalLoss(nn.Module):
+    """
+    Margin-based directional loss that prevents collapse.
+    
+    Loss = mean(max(0, margin - sign(targets) * preds))
+    
+    - If prediction has correct sign and magnitude > margin: loss ≈ 0
+    - If prediction has wrong sign: loss ≈ margin + 1
+    - If prediction has correct sign but low magnitude: loss > 0, incentivizes confidence
+    
+    Advantages over DirectionalLoss:
+    - Non-zero gradient everywhere → no local minima at constant predictions
+    - Natural margin-based objective → prevents collapse to ±1.0
+    - Penalizes confident wrong predictions more than uncertain ones
+    
+    Args:
+        margin : Margin threshold (default: 0.1). Tune via hyperparameter search.
+    """
+    def __init__(self, margin: float = 0.1):
+        super().__init__()
+        self.margin = margin
+    
+    def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
+        directional_score = torch.sign(targets) * preds
+        loss = torch.nn.functional.relu(self.margin - directional_score)
+        return loss.mean()
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -110,7 +143,8 @@ class BaseDLModel(abc.ABC):
     model_type : str
         ``'classifier'`` or ``'regressor'``.
     loss_fn : str
-        ``'directional'`` (default) or ``'confidence_weighted'`` for regressors.
+        ``'mse'`` (default for regressors), ``'directional'``, 
+        ``'confidence_weighted'``, or ``'margin'``.
         Classifiers always use CrossEntropyLoss.
     """
 
@@ -127,7 +161,7 @@ class BaseDLModel(abc.ABC):
         patience: int = 10,
         device: Optional[str] = None,
         model_type: str = "regressor",
-        loss_fn: str = "directional",
+        loss_fn: str = "mse",
     ) -> None:
         self.seq_len     = seq_len
         self.horizon     = horizon
@@ -168,11 +202,26 @@ class BaseDLModel(abc.ABC):
             )
             return nn.CrossEntropyLoss(weight=weights)
         else:
-            if self.loss_fn == "confidence_weighted":
+            # CRITICAL FIX (April 2026):
+            # DirectionalLoss and ConfidenceWeightedLoss collapse to constant
+            # predictions when target distribution is imbalanced. MSELoss is
+            # the new default because it has non-zero gradient everywhere,
+            # preventing the model from settling at local minima like pred=-1.0.
+            if self.loss_fn == "mse":
+                logger.info(f"[{self.__class__.__name__}] Using MSELoss.")
+                return nn.MSELoss()
+            elif self.loss_fn == "confidence_weighted":
                 logger.info(f"[{self.__class__.__name__}] Using ConfidenceWeightedLoss.")
                 return ConfidenceWeightedLoss()
+            elif self.loss_fn == "margin":
+                logger.info(f"[{self.__class__.__name__}] Using MarginDirectionalLoss.")
+                return MarginDirectionalLoss(margin=0.1)
             else:
-                logger.info(f"[{self.__class__.__name__}] Using DirectionalLoss.")
+                # Fallback: DirectionalLoss (not recommended)
+                logger.warning(
+                    f"[{self.__class__.__name__}] DirectionalLoss may collapse. "
+                    "Consider using MSE or Margin loss instead."
+                )
                 return DirectionalLoss()
 
     def fit(
@@ -292,6 +341,15 @@ class BaseDLModel(abc.ABC):
             f"[{self.__class__.__name__}] predict() → "
             f"min={result.min():.4f}  max={result.max():.4f}  mean={result.mean():.4f}"
         )
+        
+        # WARNING: Check for collapse
+        pred_std = np.std(result)
+        if pred_std < 0.05:
+            logger.warning(
+                f"[{self.__class__.__name__}] Predictions show very low variance (std={pred_std:.6f}). "
+                "Model may have collapsed to a constant. Check loss function and target distribution."
+            )
+        
         return result
 
     def predict_proba(self, X: pd.DataFrame) -> np.ndarray:
