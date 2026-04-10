@@ -421,3 +421,8 @@
 [-11819.471 -11819.47  -11819.471 -11819.471 -11819.472]
 2026-04-10 10:33:07,543 | INFO | main_dl | [gru] Balance=908.19  PnL=-6.3200
 2026-04-10 10:46:58,135 | INFO | main_dl | DL model training complete for btc.
+2026-04-10 10:57:03,538 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-10 10:57:03,538 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-10 10:58:20,617 | INFO | main_dl | Training DL regressor: gru for btc
+2026-04-10 11:02:12,910 | ERROR | main_dl | DL Regressor gru failed for btc: No trials are completed yet.
+2026-04-10 11:02:12,922 | INFO | main_dl | DL model training complete for btc.

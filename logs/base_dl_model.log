@@ -12883,3 +12883,18 @@
 2026-04-10 10:46:45,574 | INFO | base_dl_model | [GRUModel] predict() → min=-11819.4727  max=-11819.4180  mean=-11819.4678
 2026-04-10 10:46:50,839 | INFO | base_dl_model | [GRUModel] predict() → min=-11819.4727  max=-11819.4180  mean=-11819.4678
 2026-04-10 10:46:54,634 | INFO | base_dl_model | [GRUModel] predict() → min=-11819.4727  max=-11819.4180  mean=-11819.4678
+2026-04-10 10:58:20,812 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-10 10:58:20,968 | INFO | base_dl_model | [GRUModel] Network params: 154,792
+2026-04-10 10:58:20,968 | INFO | base_dl_model | [GRUModel] Using DirectionalLoss.
+2026-04-10 10:59:15,753 | INFO | base_dl_model | [GRUModel] Epoch 1/15 train_loss=-0.846303  val_loss=-0.871574
+2026-04-10 11:00:58,790 | INFO | base_dl_model | [GRUModel] Early stop at epoch 8. Best val_loss=-0.871575
+2026-04-10 11:00:58,792 | INFO | base_dl_model | [GRUModel] Training finished in 154.7s
+2026-04-10 11:01:04,996 | INFO | base_dl_model | [GRUModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 11:01:05,123 | INFO | base_dl_model | [GRUModel] Using device: cpu
+2026-04-10 11:01:05,359 | INFO | base_dl_model | [GRUModel] Network params: 79,876
+2026-04-10 11:01:05,359 | INFO | base_dl_model | [GRUModel] Using DirectionalLoss.
+2026-04-10 11:01:26,844 | INFO | base_dl_model | [GRUModel] Epoch 1/15 train_loss=-0.827361  val_loss=-0.893108
+2026-04-10 11:01:57,518 | INFO | base_dl_model | [GRUModel] Epoch 10/15 train_loss=-0.864586  val_loss=-0.893220
+2026-04-10 11:02:09,538 | INFO | base_dl_model | [GRUModel] Early stop at epoch 14. Best val_loss=-0.893220
+2026-04-10 11:02:09,538 | INFO | base_dl_model | [GRUModel] Training finished in 64.2s
+2026-04-10 11:02:12,885 | INFO | base_dl_model | [GRUModel] predict() → min=-1.0000  max=-0.9994  mean=-1.0000
