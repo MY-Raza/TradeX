@@ -90,3 +90,8 @@
 2026-04-10 12:44:53,989 | WARNING | gru | [trial 1] Predictions collapsed (std=1.28e-06). Pruning.
 2026-04-10 12:44:54,078 | INFO | gru | [train] Best params: {'seq_len': 61, 'hidden_size': 48, 'num_layers': 1, 'dropout': 0.38031755123085675, 'lr': 0.0005552682286712402, 'batch_size': 128} | Best PnL: -69.4800
 2026-04-10 12:48:57,329 | INFO | gru | [train] Final preds — min: -1.0000, max: -0.9964, mean: -0.9997
+2026-04-10 13:36:28,903 | INFO | gru | [train] Starting GRU Optuna study (2 trials)…
+2026-04-10 13:36:28,903 | INFO | gru | [train] Using loss_fn='mse' (default='mse' to prevent collapse)
+2026-04-10 13:43:12,974 | INFO | gru | [train] Best params: {'seq_len': 34, 'hidden_size': 124, 'num_layers': 2, 'dropout': 0.3838716998624264, 'lr': 0.0026749040214544906, 'batch_size': 64} | Best PnL: -45.3500
+2026-04-10 13:48:30,365 | INFO | gru | [train] Final preds — min: -0.3168, max: 0.5227, mean: 0.0509, std: 0.1311
+2026-04-10 13:48:30,370 | INFO | gru | [train] Signal distribution — Short: 860 (33.6%) | Neutral: 0 (0.0%) | Long: 1703 (66.4%)
