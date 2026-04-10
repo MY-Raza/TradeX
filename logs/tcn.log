@@ -87,3 +87,11 @@ Name: count, Length: 586, dtype: int64
 2026-04-10 15:12:20,488 | INFO | tcn | [train] Starting TCN Optuna study (2 trials)…
 2026-04-10 15:12:20,488 | INFO | tcn | [train] Using loss_fn='mse' (default='mse' to prevent collapse)
 2026-04-10 15:12:20,488 | INFO | tcn | [train] Data: 6086 train, 2596 test | Target distribution — mean=-0.0021, std=1.0337
+2026-04-10 15:30:28,093 | INFO | tcn | [train] Starting TCN Optuna study (2 trials)…
+2026-04-10 15:30:28,093 | INFO | tcn | [train] Using loss_fn='mse' (default='mse' to prevent collapse)
+2026-04-10 15:30:28,093 | INFO | tcn | [train] Data: 6086 train, 2596 test | Target distribution — mean=-0.0021, std=1.0337
+2026-04-10 15:39:36,831 | WARNING | tcn | [trial 1] Predictions collapsed (std=0.00e+00). Pruning.
+2026-04-10 15:39:36,844 | INFO | tcn | [train] Best params: {'seq_len': 54, 'num_channels': 198, 'num_layers': 2, 'kernel_size': 4, 'dropout': 0.1504291193947132, 'lr': 0.0009882262388636997, 'batch_size': 128} | Best PnL: -69.7800
+2026-04-10 15:46:18,658 | WARNING | tcn | [train] Final TCN shows very low variance (std=0.00e+00). Range: [-1.0000, -1.0000]. This may indicate model learned a collapse strategy. Adding small noise to encourage diversity.
+2026-04-10 15:46:18,830 | INFO | tcn | [train] Final preds — min: -1.0000, max: -1.0000, mean: -0.9996, std: 0.0000
+2026-04-10 15:46:18,830 | INFO | tcn | [train] Signal distribution — Short: 2543 (100.0%) | Neutral: 0 (0.0%) | Long: 0 (0.0%)

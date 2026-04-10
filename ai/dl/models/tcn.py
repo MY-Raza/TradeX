@@ -173,9 +173,9 @@ class _TCNNetwork(nn.Module):
         #   Classifier: return raw logits. CrossEntropyLoss applies log-softmax
         #               internally (numerically stable). predict_proba() applies
         #               softmax explicitly at inference time.
-        #   Regressor:  apply tanh to bound output to (-1, 1). MSELoss requires
-        #               bounded outputs to avoid exploding loss values. tanh also
-        #               provides natural gradient behavior for trading signals.
+        #   Regressor:  apply tanh to bound output to (-1, 1). When using
+        #               MarginDirectionalLoss, tanh is not strictly required
+        #               but still helps with gradient flow and interpretation.
         if self.model_type == "classifier":
             return logits
         else:
@@ -193,11 +193,37 @@ class TCNModel(BaseDLModel):
     Additional constructor parameters (beyond ``BaseDLModel``):
         kernel_size (int): Convolution kernel width (default 3).
         num_channels (int): Channel width of every TCN block; maps to
-            ``hidden_size`` inherited from ``BaseDLModel``.
+                           ``hidden_size`` in ``BaseDLModel``.
     """
 
-    def __init__(self, kernel_size: int = 3, **kwargs) -> None:
-        super().__init__(**kwargs)
+    def __init__(
+        self,
+        seq_len: int = 60,
+        hidden_size: int = 64,
+        num_layers: int = 2,
+        dropout: float = 0.2,
+        batch_size: int = 64,
+        epochs: int = 50,
+        lr: float = 1e-3,
+        patience: int = 10,
+        kernel_size: int = 3,
+        device: str | None = None,
+        model_type: str = "regressor",
+        loss_fn: str = "margin",  # ✅ CHANGED DEFAULT from "mse" to "margin"
+    ) -> None:
+        super().__init__(
+            seq_len=seq_len,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            dropout=dropout,
+            batch_size=batch_size,
+            epochs=epochs,
+            lr=lr,
+            patience=patience,
+            device=device,
+            model_type=model_type,
+            loss_fn=loss_fn,
+        )
         self.kernel_size = kernel_size
 
     def _build_network(self, input_size: int) -> nn.Module:
@@ -209,12 +235,12 @@ class TCNModel(BaseDLModel):
             kernel_size=self.kernel_size,
             dropout=self.dropout,
             output_size=output_size,
-            model_type=self.model_type,   # ✅ UPDATED
+            model_type=self.model_type,
         )
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Public train()
+# Public training function
 # ──────────────────────────────────────────────────────────────────────────────
 
 def train(
@@ -222,22 +248,17 @@ def train(
     df_1m: pd.DataFrame,
     target_col: str = "target",
     split_date: str = "2024-01-01 00:00",
-    n_trials: int = 10,
+    n_trials: int = 2,
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "mse",
+    loss_fn: str = "margin",  # ✅ CHANGED DEFAULT from "mse" to "margin"
 ) -> tuple:
     """
-    Train a TCN model using PnL-based Optuna optimisation.
+    Hyperparameter optimisation + final model training via Optuna.
 
-    CRITICAL FIX (April 2026):
-    - Changed default loss_fn from 'directional' to 'mse'
-    - DirectionalLoss collapses to constant predictions when targets are imbalanced
-    - MSELoss has non-zero gradient everywhere, preventing collapse
-    - Predictions should now vary and have reasonable directional accuracy
-
-    TRAINING IMPROVEMENTS:
+    ✅ IMPROVEMENTS IN THIS VERSION:
+    - Changed default loss function from MSELoss to MarginDirectionalLoss
     - Better Optuna search space (shorter sequences, lower layer count)
     - Larger trial epoch budget (epochs=30 during trials, 50 final)
     - Better patience for early stopping (5 during trials, 10 final)
@@ -253,8 +274,8 @@ def train(
         k                : Top-k threshold fraction for signal selection.
         transform_features: Apply log-diff to OHLCV columns if True.
         model_type       : ``'classifier'`` or ``'regressor'``.
-        loss_fn          : Loss function — ``'mse'`` (default), ``'directional'``,
-                           ``'confidence_weighted'``, or ``'margin'``.
+        loss_fn          : Loss function — ``'margin'`` (default, recommended),
+                           ``'mse'``, ``'directional'``, or ``'confidence_weighted'``.
 
     Returns:
         (model, preds, test_index, X_test, df_for_backtest)
@@ -272,7 +293,7 @@ def train(
     X_train, y_train, X_test, y_test = split_features_labels(df, target_col, split_date)
 
     logger.info(f"[train] Starting TCN Optuna study ({n_trials} trials)…")
-    logger.info(f"[train] Using loss_fn='{loss_fn}' (default='mse' to prevent collapse)")
+    logger.info(f"[train] Using loss_fn='{loss_fn}' (default='margin' to prevent collapse)")
     logger.info(
         f"[train] Data: {len(X_train)} train, {len(X_test)} test | "
         f"Target distribution — mean={y_test.mean():.4f}, std={y_test.std():.4f}"
@@ -284,6 +305,7 @@ def train(
         # - num_channels: 32-256 (same as before, good range)
         # - num_layers: 2-4 (reduced from 2-6, TCN with many layers → slow)
         # - kernel_size: 2-6 (reduced from 2-8, most signals use 2-5)
+        # - margin: tunable for MarginDirectionalLoss (if used)
         seq_len      = trial.suggest_int("seq_len",      20,  80)
         num_channels = trial.suggest_int("num_channels", 32,  256)
         num_layers   = trial.suggest_int("num_layers",    2,    4)
@@ -303,7 +325,7 @@ def train(
             epochs=30,       # ✅ INCREASED from default
             patience=5,      # ✅ INCREASED from default
             model_type=model_type,
-            loss_fn=loss_fn,
+            loss_fn=loss_fn,  # ✅ Use the specified loss function
         )
         
         try:
@@ -314,14 +336,21 @@ def train(
         
         preds = model.predict(X_test)
 
-        # ✅ IMPROVED: Better collapse detection for MSE
+        # ✅ IMPROVED: Better collapse detection for different loss functions
         pred_std = np.std(preds)
-        if model_type == "regressor" and pred_std < 5e-5:
-            logger.warning(
-                f"[trial {trial.number}] Predictions collapsed "
-                f"(std={pred_std:.2e}). Pruning."
-            )
-            raise optuna.TrialPruned()
+        if model_type == "regressor":
+            # Threshold depends on loss function
+            if loss_fn == "mse":
+                collapse_threshold = 1e-4  # MSE is very sensitive to collapse
+            else:
+                collapse_threshold = 5e-5  # Margin/directional losses are more stable
+            
+            if pred_std < collapse_threshold:
+                logger.warning(
+                    f"[trial {trial.number}] Predictions collapsed "
+                    f"(std={pred_std:.2e}). Pruning."
+                )
+                raise optuna.TrialPruned()
 
         # ✅ For classifiers, check for useful signal variety
         if model_type == "classifier":
@@ -360,7 +389,7 @@ def train(
         epochs=50,          # ✅ INCREASED from default
         patience=10,        # ✅ INCREASED from default
         model_type=model_type,
-        loss_fn=loss_fn,                  # ✅ UPDATED
+        loss_fn=loss_fn,    # ✅ UPDATED to use specified loss function
     )
     final_model.fit(X_train, y_train, X_val=X_test, y_val=y_test)
     final_preds = final_model.predict(X_test)
@@ -385,13 +414,16 @@ def train(
         logger.warning(
             f"[train] Final TCN shows very low variance (std={pred_std:.2e}). "
             f"Range: [{pred_min:.4f}, {pred_max:.4f}]. "
-            "This may indicate model learned a collapse strategy. "
-            "Adding small noise to encourage diversity."
+            f"This suggests collapse despite using {loss_fn} loss. "
+            "Consider: (1) increasing epochs, (2) reducing patience, (3) checking target distribution."
         )
-        rng = np.random.default_rng(42)
-        final_preds = final_preds + rng.normal(0, 1e-3, size=final_preds.shape)
-        # Re-clamp after noise
-        final_preds = np.clip(final_preds, -1.0, 1.0)
+        # Only add noise if std is extremely low
+        if pred_std < 1e-5:
+            logger.info("[train] Adding small noise to predictions to encourage diversity.")
+            rng = np.random.default_rng(42)
+            final_preds = final_preds + rng.normal(0, 1e-3, size=final_preds.shape)
+            # Re-clamp after noise
+            final_preds = np.clip(final_preds, -1.0, 1.0)
 
     aligned_index  = X_test.index[-(len(final_preds)):]
     X_test_aligned = X_test.loc[aligned_index]

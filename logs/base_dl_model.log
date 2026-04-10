@@ -14074,3 +14074,78 @@
 2026-04-10 15:19:50,605 | INFO | base_dl_model | [TCNModel] Network params: 1,348,236
 2026-04-10 15:19:50,605 | INFO | base_dl_model | [TCNModel] Using MSELoss.
 2026-04-10 15:21:13,906 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=20188159445.166668  val_loss=147061562.744318
+2026-04-10 15:30:28,093 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-10 15:30:28,367 | INFO | base_dl_model | [TCNModel] Network params: 556,579
+2026-04-10 15:30:28,367 | INFO | base_dl_model | [TCNModel] Using MSELoss.
+2026-04-10 15:31:40,190 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=1.931928  val_loss=2.015892
+2026-04-10 15:36:21,402 | INFO | base_dl_model | [TCNModel] Epoch 10/30 train_loss=1.923729  val_loss=2.029555
+2026-04-10 15:36:51,723 | INFO | base_dl_model | [TCNModel] Early stop at epoch 11. Best val_loss=1.947658
+2026-04-10 15:36:51,723 | INFO | base_dl_model | [TCNModel] Training finished in 376.7s
+2026-04-10 15:37:04,006 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=1.0000  mean=-0.8805
+2026-04-10 15:37:07,945 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-10 15:37:08,085 | INFO | base_dl_model | [TCNModel] Network params: 289,181
+2026-04-10 15:37:08,085 | INFO | base_dl_model | [TCNModel] Using MSELoss.
+2026-04-10 15:37:52,092 | INFO | base_dl_model | [TCNModel] Epoch 1/30 train_loss=2.005813  val_loss=2.068979
+2026-04-10 15:39:30,921 | INFO | base_dl_model | [TCNModel] Early stop at epoch 6. Best val_loss=2.068979
+2026-04-10 15:39:30,921 | INFO | base_dl_model | [TCNModel] Training finished in 142.8s
+2026-04-10 15:39:36,809 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:39:36,822 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:39:36,846 | INFO | base_dl_model | [TCNModel] Using device: cpu
+2026-04-10 15:39:37,007 | INFO | base_dl_model | [TCNModel] Network params: 556,579
+2026-04-10 15:39:37,007 | INFO | base_dl_model | [TCNModel] Using MSELoss.
+2026-04-10 15:40:29,351 | INFO | base_dl_model | [TCNModel] Epoch 1/50 train_loss=1.975124  val_loss=2.030903
+2026-04-10 15:45:11,603 | INFO | base_dl_model | [TCNModel] Epoch 10/50 train_loss=1.958262  val_loss=2.073544
+2026-04-10 15:46:11,690 | INFO | base_dl_model | [TCNModel] Early stop at epoch 12. Best val_loss=1.972881
+2026-04-10 15:46:11,690 | INFO | base_dl_model | [TCNModel] Training finished in 394.7s
+2026-04-10 15:46:18,637 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:18,641 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:19,018 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:19,020 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:24,938 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:24,938 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:28,886 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:28,886 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:32,672 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:32,672 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:36,489 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:36,491 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:40,151 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:40,151 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:44,113 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:44,113 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:47,730 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:47,732 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:51,702 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:51,702 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:46:57,015 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:46:57,017 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:03,211 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:03,212 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:09,446 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:09,446 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:14,496 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:14,497 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:19,988 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:19,988 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:24,842 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:24,844 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:29,808 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:29,809 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:34,305 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:34,305 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:38,990 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:38,991 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:43,787 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:43,787 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:48,369 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:48,369 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:52,361 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:52,361 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:47:56,864 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:47:56,864 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:48:01,025 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:48:01,026 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:48:05,108 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:48:05,108 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-10 15:48:08,856 | INFO | base_dl_model | [TCNModel] predict() → min=-1.0000  max=-1.0000  mean=-1.0000
+2026-04-10 15:48:08,856 | WARNING | base_dl_model | [TCNModel] Predictions show very low variance (std=0.000000). Model may have collapsed to a constant. Check loss function and target distribution.
