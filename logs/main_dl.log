@@ -474,3 +474,10 @@
 2026-04-10 15:46:19,038 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
 [-1. -1. -1. -1. -1.]
 2026-04-10 15:46:22,105 | INFO | main_dl | [tcn] Balance=496.12  PnL=-69.7800
+2026-04-10 15:53:14,873 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-10 15:53:14,875 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-10 15:54:39,258 | INFO | main_dl | Training DL regressor: tcn for btc
+2026-04-10 16:09:46,654 | INFO | main_dl | [Dry-run] tcn predictions on first samples:
+[-1. -1. -1. -1. -1.]
+2026-04-10 16:09:50,964 | INFO | main_dl | [tcn] Balance=498.40  PnL=-69.3300
+2026-04-10 16:17:00,798 | INFO | main_dl | DL model training complete for btc.
