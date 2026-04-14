@@ -1,6 +1,8 @@
 import praw
 import pandas as pd
 from datetime import datetime
+from TradeX.utils.common.logs import get_logger
+logger = get_logger("reddit_scraper")
 
 # =========================
 # Reddit API Initialization
@@ -16,9 +18,15 @@ reddit = praw.Reddit(
 # =========================
 subreddits = [
     "cryptocurrency",
-    "bitcoin",
+    "CryptoMarkets",
+    "Bitcoin",
+    "BitcoinMarkets",
+    "ethereum",
     "ethtrader",
-    "CryptoMarkets"
+    "CryptoMoonShots",
+    "SatoshiStreetBets",
+    "CryptoCurrencyTrading",
+    "CryptoNews"
 ]
 
 # =========================
@@ -31,9 +39,10 @@ comments_data = []
 # Data Collection
 # =========================
 for sub in subreddits:
+    logger.info(f"⏳ Fetching r/{sub}...")
     subreddit = reddit.subreddit(sub)
 
-    for post in subreddit.hot(limit=100):
+    for post in subreddit.hot(limit=200):
 
         post_id = post.id
         post_time = datetime.fromtimestamp(post.created_utc)
@@ -79,11 +88,13 @@ for sub in subreddits:
             comments_data.append({
                 "post_id": post_id,
                 "comment_id": comment.id,
+                "subreddit": sub,
                 "comment_text": comment.body,
                 "comment_score": comment.score,   # ONLY available metric
                 "comment_time": comment_time,
                 "comment_author": str(comment.author)
             })
+    logger.info(f"✅ r/{sub} done")        
 
 # =========================
 # Convert to DataFrames
@@ -97,6 +108,6 @@ comments_df = pd.DataFrame(comments_data)
 posts_df.to_csv("crypto_posts.csv", index=False)
 comments_df.to_csv("crypto_comments.csv", index=False)
 
-print("✅ Data collection completed!")
-print("📁 Saved: crypto_posts.csv")
-print("📁 Saved: crypto_comments.csv")
+logger.info("✅ Data collection completed!")
+logger.info("📁 Saved: crypto_posts.csv")
+logger.info("📁 Saved: crypto_comments.csv")
