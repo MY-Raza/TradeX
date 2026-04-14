@@ -45,3 +45,7 @@
 2026-04-14 10:40:20,707 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
 2026-04-14 10:54:56,558 | INFO | tft | [train] Best params: {'seq_len': 109, 'hidden_size': 116, 'num_heads': 2, 'num_layers': 1, 'dropout': 0.34935246240498574, 'lr': 0.0026724380050978528, 'batch_size': 32} | Best PnL: -69.1100
 2026-04-14 11:07:40,726 | INFO | tft | [train] Final preds — min: -0.2577, max: 0.1079, mean: -0.0892
+2026-04-14 12:12:27,606 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
+2026-04-14 12:12:27,606 | INFO | tft | [train] Using loss_fn='mse' (MSE works best with normalized targets, avoids collapse)
+2026-04-14 12:12:27,882 | WARNING | tft | [trial 0] Training failed: d_model (69) must be divisible by num_heads (4)
+2026-04-14 12:12:27,942 | WARNING | tft | [trial 1] Training failed: d_model (71) must be divisible by num_heads (4)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import numpy as np
 import pandas as pd
 import optuna
@@ -268,11 +269,16 @@ class TFTModel(BaseDLModel):
 
     def _build_network(self, input_size: int) -> nn.Module:
         output_size = 3 if self.model_type == "classifier" else 1
+        num_heads = max(1, self.hidden_size // 16)
+        # Round hidden_size UP to the nearest multiple of num_heads so the
+        # divisibility assertion in _MultiheadAttention is always satisfied,
+        # regardless of what value Optuna sampled.
+        hidden_size = math.ceil(self.hidden_size / num_heads) * num_heads
         return _TFTNetwork(
             input_size=input_size,
             seq_len=self.seq_len,
-            hidden_size=self.hidden_size,
-            num_heads=max(1, self.hidden_size // 16),  # Ensure heads divide hidden_size
+            hidden_size=hidden_size,
+            num_heads=num_heads,
             num_layers=self.num_layers,
             dropout=self.dropout,
             output_size=output_size,
