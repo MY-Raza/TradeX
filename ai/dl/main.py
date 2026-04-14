@@ -43,10 +43,11 @@ def _run_backtest(
     test_index,
     df_test_norm: pd.DataFrame,
     model_type: str,
-    k: float = 0.5,
+    k: float = 0.2,  # ✅ CHANGED from 0.5 to 0.2 (lower threshold, accept more signals)
     lookback: int = 1,
 ) -> tuple:
-    """Prepare predictions and run a BackTest. Returns (ledger, balance, pnl).
+    """
+    Prepare predictions and run a BackTest. Returns (ledger, balance, pnl).
 
     ``df_test_norm`` must be the normalised (reset-index) test slice returned
     by each model's ``train()`` function.  Its RangeIndex matches the integer
@@ -94,7 +95,8 @@ def _compute_and_save_importance(
     model_type: str,
     table_name: str,
 ) -> None:
-    """Compute PnL-permutation importance and persist to DB.
+    """
+    Compute PnL-permutation importance and persist to DB.
 
     ``df_test_norm`` must be the length-aligned DataFrame returned by
     ``train_model`` (i.e. ``df_for_backtest`` with RangeIndex 0..P-1).
@@ -111,7 +113,7 @@ def _compute_and_save_importance(
         df_1m=df_1m,
         base_pnl=pnl,
         model_type=model_type,
-        k=0.5,
+        k=0.2,  # ✅ CHANGED from 0.5 to 0.2
         n_repeats=3,
     )
     pnl_importance_wide = (
@@ -175,7 +177,7 @@ def main() -> None:
     # Read DL-specific config; fall back to empty dicts so it's optional
     dl_classifiers   = config.get("classifiers", {})
     dl_regressors    = config.get("regressors", {})
-    dl_n_trials      = int(config.get("dl_n_trials",2))
+    dl_n_trials      = int(config.get("dl_n_trials", 2))
 
     active_indicators = [ind for ind, active in indicators_config.items() if active]
 
@@ -252,7 +254,7 @@ def main() -> None:
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
                     df_1m, model, preds, test_index, df_test_norm, "classifier",
-                    k=0.5, lookback=model.seq_len,
+                    k=0.2, lookback=model.seq_len,  # ✅ CHANGED from 0.5 to 0.2
                 )
                 logger.info(f"[{clf_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
@@ -312,7 +314,7 @@ def main() -> None:
                 # Backtest
                 ledger, final_balance, pnl = _run_backtest(
                     df_1m, model, preds, test_index, df_test_norm, "regressor",
-                    k=0.5, lookback=model.seq_len,
+                    k=0.2, lookback=model.seq_len,  # ✅ CHANGED from 0.5 to 0.2
                 )
                 logger.info(f"[{reg_name}] Balance={final_balance:.2f}  PnL={pnl:.4f}")
 
