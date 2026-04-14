@@ -1,37 +1,36 @@
 import praw
 import pandas as pd
 
-# Initialize Reddit
 reddit = praw.Reddit(
     client_id="c4tOcIwaGed2RYnsuEEFUQ",
     client_secret="-yG8JfMUxhn9Th8fctAShn6pi_co0A",
     user_agent="Scraping"
 )
 
-
-# Target subreddits
 subreddits = ["cryptocurrency", "bitcoin", "ethtrader", "CryptoMarkets"]
 
 data = []
 
 for sub in subreddits:
+    print(f"⏳ Fetching r/{sub}...")
     subreddit = reddit.subreddit(sub)
-    
-    for post in subreddit.hot(limit=100):  # change limit as needed
-        
-        # Estimate votes
+
+    for post in subreddit.hot(limit=100):
         upvote_ratio = post.upvote_ratio
         score = post.score
-        
+
         try:
             upvotes = int(score / upvote_ratio) if upvote_ratio > 0 else score
             downvotes = upvotes - score
         except:
             upvotes, downvotes = score, 0
 
-        # Fetch comments (top 10)
-        post.comments.replace_more(limit=0)
-        comments = [comment.body for comment in post.comments[:10]]
+        # Fetch comments without triggering extra API calls
+        try:
+            post.comments.replace_more(limit=0)
+            comments = [c.body for c in post.comments[:10] if hasattr(c, 'body')]
+        except Exception:
+            comments = []
 
         data.append({
             "subreddit": sub,
@@ -47,10 +46,8 @@ for sub in subreddits:
             "url": post.url
         })
 
-# Convert to DataFrame
+    print(f"✅ r/{sub} done")
+
 df = pd.DataFrame(data)
-
-# Save to CSV
 df.to_csv("crypto_reddit_data.csv", index=False)
-
-print("✅ Data saved successfully!")
+print(f"\n✅ Saved {len(df)} posts to crypto_reddit_data.csv")
