@@ -1,23 +1,48 @@
 import praw
 import pandas as pd
+from datetime import datetime
 
+# =========================
+# Reddit API Initialization
+# =========================
 reddit = praw.Reddit(
     client_id="c4tOcIwaGed2RYnsuEEFUQ",
     client_secret="-yG8JfMUxhn9Th8fctAShn6pi_co0A",
     user_agent="Scraping"
 )
 
-subreddits = ["cryptocurrency", "bitcoin", "ethtrader", "CryptoMarkets"]
+# =========================
+# Subreddits
+# =========================
+subreddits = [
+    "cryptocurrency",
+    "bitcoin",
+    "ethtrader",
+    "CryptoMarkets"
+]
 
-data = []
+# =========================
+# Storage
+# =========================
+posts_data = []
+comments_data = []
 
+# =========================
+# Data Collection
+# =========================
 for sub in subreddits:
-    print(f"⏳ Fetching r/{sub}...")
     subreddit = reddit.subreddit(sub)
 
     for post in subreddit.hot(limit=100):
-        upvote_ratio = post.upvote_ratio
+
+        post_id = post.id
+        post_time = datetime.fromtimestamp(post.created_utc)
+
+        # ---------------------
+        # Post metrics
+        # ---------------------
         score = post.score
+        upvote_ratio = post.upvote_ratio
 
         try:
             upvotes = int(score / upvote_ratio) if upvote_ratio > 0 else score
@@ -25,14 +50,11 @@ for sub in subreddits:
         except:
             upvotes, downvotes = score, 0
 
-        # Fetch comments without triggering extra API calls
-        try:
-            post.comments.replace_more(limit=0)
-            comments = [c.body for c in post.comments[:10] if hasattr(c, 'body')]
-        except Exception:
-            comments = []
-
-        data.append({
+        # ---------------------
+        # Store post
+        # ---------------------
+        posts_data.append({
+            "post_id": post_id,
             "subreddit": sub,
             "title": post.title,
             "score": score,
@@ -40,14 +62,41 @@ for sub in subreddits:
             "estimated_upvotes": upvotes,
             "estimated_downvotes": downvotes,
             "num_comments": post.num_comments,
-            "comments": comments,
+            "post_time": post_time,
             "author": str(post.author),
-            "created_utc": post.created_utc,
             "url": post.url
         })
 
-    print(f"✅ r/{sub} done")
+        # ---------------------
+        # Comments
+        # ---------------------
+        post.comments.replace_more(limit=0)
 
-df = pd.DataFrame(data)
-df.to_csv("crypto_reddit_data.csv", index=False)
-print(f"\n✅ Saved {len(df)} posts to crypto_reddit_data.csv")
+        for comment in post.comments[:10]:
+
+            comment_time = datetime.fromtimestamp(comment.created_utc)
+
+            comments_data.append({
+                "post_id": post_id,
+                "comment_id": comment.id,
+                "comment_text": comment.body,
+                "comment_score": comment.score,   # ONLY available metric
+                "comment_time": comment_time,
+                "comment_author": str(comment.author)
+            })
+
+# =========================
+# Convert to DataFrames
+# =========================
+posts_df = pd.DataFrame(posts_data)
+comments_df = pd.DataFrame(comments_data)
+
+# =========================
+# Save CSVs
+# =========================
+posts_df.to_csv("crypto_posts.csv", index=False)
+comments_df.to_csv("crypto_comments.csv", index=False)
+
+print("✅ Data collection completed!")
+print("📁 Saved: crypto_posts.csv")
+print("📁 Saved: crypto_comments.csv")
