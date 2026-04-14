@@ -481,3 +481,10 @@
 [-1. -1. -1. -1. -1.]
 2026-04-10 16:09:50,964 | INFO | main_dl | [tcn] Balance=498.40  PnL=-69.3300
 2026-04-10 16:17:00,798 | INFO | main_dl | DL model training complete for btc.
+2026-04-14 09:39:37,129 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-14 09:39:37,129 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-14 09:40:44,268 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-14 10:13:33,747 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[-102599.96 -102599.96 -102599.96 -102599.95 -102599.96]
+2026-04-14 10:13:36,578 | INFO | main_dl | [tft] Balance=946.66  PnL=-2.0200
+2026-04-14 10:27:19,863 | INFO | main_dl | DL model training complete for btc.

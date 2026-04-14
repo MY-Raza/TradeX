@@ -101,6 +101,72 @@ class MarginDirectionalLoss(nn.Module):
         return loss.mean()
 
 
+class HybridPnLLoss(nn.Module):
+    """
+    Hybrid loss combining prediction accuracy (MSE) and trading PnL.
+    
+    Loss = α * MSE(preds, targets) + β * PnL_loss
+    
+    where:
+        MSE = mean((preds - targets)²)
+        pnl = preds * targets  (positive returns from long when targets > 0)
+        PnL_loss = -mean(pnl)  (minimize negative PnL)
+    
+    This loss balances two objectives:
+    1. Predicting the target accurately (MSE term)
+    2. Maximizing trading PnL regardless of target scale (PnL term)
+    
+    The PnL term ensures:
+        - Long positions (pred > 0) on positive returns (target > 0) → lower loss
+        - Short positions (pred < 0) on negative returns (target < 0) → lower loss
+        - Wrong-direction predictions → higher loss
+    
+    By default, α=0.7 (prediction accuracy) and β=0.3 (trading performance).
+    Adjust the balance for your use case:
+        - Increase α for stronger MSE penalty (conservative, smooth predictions)
+        - Increase β for stronger PnL penalty (aggressive, directionally correct)
+    
+    Args:
+        alpha : Weight for MSE component (default: 0.7). Must sum with beta to 1.0
+                for interpretability, though not strictly required.
+        beta  : Weight for PnL component (default: 0.3).
+    """
+    def __init__(self, alpha: float = 0.7, beta: float = 0.3):
+        super().__init__()
+        self.alpha = alpha
+        self.beta = beta
+        self.mse_loss = nn.MSELoss()
+    
+    def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
+        """
+        Compute hybrid loss.
+        
+        Args:
+            preds   : Model predictions, shape (batch_size,) or (batch_size, 1)
+            targets : Target returns, shape (batch_size,) or (batch_size, 1)
+        
+        Returns:
+            Scalar loss tensor.
+        """
+        # Ensure correct shape: flatten to 1D
+        preds = preds.view(-1)
+        targets = targets.view(-1)
+        
+        # MSE component: penalize prediction inaccuracy
+        mse = self.mse_loss(preds, targets)
+        
+        # PnL component: penalize trading losses
+        # Positive product → aligned sign → profitable trade
+        # Negative product → misaligned sign → losing trade
+        pnl = preds * targets
+        pnl_loss = -torch.mean(pnl)  # negative because we want to maximize pnl
+        
+        # Hybrid loss: weighted combination
+        loss = self.alpha * mse + self.beta * pnl_loss
+        
+        return loss
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Abstract base
 # ──────────────────────────────────────────────────────────────────────────────
@@ -143,7 +209,7 @@ class BaseDLModel(abc.ABC):
     model_type : str
         ``'classifier'`` or ``'regressor'``.
     loss_fn : str
-        ``'mse'`` (default for regressors), ``'directional'``, 
+        ``'mse'`` (default for regressors), ``'hybrid'``, ``'directional'``, 
         ``'confidence_weighted'``, or ``'margin'``.
         Classifiers always use CrossEntropyLoss.
     """
@@ -210,6 +276,12 @@ class BaseDLModel(abc.ABC):
             if self.loss_fn == "mse":
                 logger.info(f"[{self.__class__.__name__}] Using MSELoss.")
                 return nn.MSELoss()
+            elif self.loss_fn == "hybrid":
+                logger.info(
+                    f"[{self.__class__.__name__}] Using HybridPnLLoss "
+                    f"(α=0.7 MSE + β=0.3 PnL)."
+                )
+                return HybridPnLLoss(alpha=0.7, beta=0.3)
             elif self.loss_fn == "confidence_weighted":
                 logger.info(f"[{self.__class__.__name__}] Using ConfidenceWeightedLoss.")
                 return ConfidenceWeightedLoss()
@@ -220,7 +292,7 @@ class BaseDLModel(abc.ABC):
                 # Fallback: DirectionalLoss (not recommended)
                 logger.warning(
                     f"[{self.__class__.__name__}] DirectionalLoss may collapse. "
-                    "Consider using MSE or Margin loss instead."
+                    "Consider using MSE, Hybrid, or Margin loss instead."
                 )
                 return DirectionalLoss()
 

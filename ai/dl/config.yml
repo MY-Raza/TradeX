@@ -10,8 +10,8 @@ classifiers:
 regressors:
   gru:  false
   lstm: false
-  tcn:  true
-  tft:  false
+  tcn:  false
+  tft:  true
 
   # Optuna trial budget per DL model
 dl_n_trials: 2

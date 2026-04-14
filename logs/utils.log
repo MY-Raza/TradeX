@@ -36535,3 +36535,52 @@ Last 5 rows from data_binance.btc_1m:
 2026-04-10 16:17:00,747 | INFO | utils | Schema 'model_stats' ready
 2026-04-10 16:17:00,747 | INFO | utils | No time_column provided and 'datetime' missing
 2026-04-10 16:17:00,779 | INFO | utils | Inserted 1 rows into model_stats.ml_results
+2026-04-14 09:34:31,428 | INFO | utils | Database engine initialized
+2026-04-14 09:34:48,681 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:34:49,175 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-04-14 09:34:49,195 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-04-14 09:34:51,390 | INFO | utils | Inserted 5751 rows into data_binance.btc_1m
+2026-04-14 09:35:07,974 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:35:08,048 | INFO | utils | Indexes ensured: eth_1m_datetime_uidx, eth_1m_datetime_desc_idx
+2026-04-14 09:35:08,048 | INFO | utils | Hypertable created/verified for "data_binance"."eth_1m"
+2026-04-14 09:35:10,778 | INFO | utils | Inserted 5750 rows into data_binance.eth_1m
+2026-04-14 09:35:27,565 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:35:27,636 | INFO | utils | Indexes ensured: bnb_1m_datetime_uidx, bnb_1m_datetime_desc_idx
+2026-04-14 09:35:27,636 | INFO | utils | Hypertable created/verified for "data_binance"."bnb_1m"
+2026-04-14 09:35:30,299 | INFO | utils | Inserted 5751 rows into data_binance.bnb_1m
+2026-04-14 09:35:46,989 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:35:47,069 | INFO | utils | Indexes ensured: ada_1m_datetime_uidx, ada_1m_datetime_desc_idx
+2026-04-14 09:35:47,078 | INFO | utils | Hypertable created/verified for "data_binance"."ada_1m"
+2026-04-14 09:35:49,351 | INFO | utils | Inserted 5751 rows into data_binance.ada_1m
+2026-04-14 09:36:05,968 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:36:06,028 | INFO | utils | Indexes ensured: xrp_1m_datetime_uidx, xrp_1m_datetime_desc_idx
+2026-04-14 09:36:06,031 | INFO | utils | Hypertable created/verified for "data_binance"."xrp_1m"
+2026-04-14 09:36:08,111 | INFO | utils | Inserted 5750 rows into data_binance.xrp_1m
+2026-04-14 09:36:24,900 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:36:24,980 | INFO | utils | Indexes ensured: doge_1m_datetime_uidx, doge_1m_datetime_desc_idx
+2026-04-14 09:36:24,984 | INFO | utils | Hypertable created/verified for "data_binance"."doge_1m"
+2026-04-14 09:36:27,630 | INFO | utils | Inserted 5751 rows into data_binance.doge_1m
+2026-04-14 09:36:44,311 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:36:44,372 | INFO | utils | Indexes ensured: sol_1m_datetime_uidx, sol_1m_datetime_desc_idx
+2026-04-14 09:36:44,389 | INFO | utils | Hypertable created/verified for "data_binance"."sol_1m"
+2026-04-14 09:36:46,741 | INFO | utils | Inserted 5751 rows into data_binance.sol_1m
+2026-04-14 09:37:03,279 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:37:03,346 | INFO | utils | Indexes ensured: dot_1m_datetime_uidx, dot_1m_datetime_desc_idx
+2026-04-14 09:37:03,352 | INFO | utils | Hypertable created/verified for "data_binance"."dot_1m"
+2026-04-14 09:37:09,114 | INFO | utils | Inserted 5751 rows into data_binance.dot_1m
+2026-04-14 09:39:37,285 | INFO | utils | Database engine initialized
+2026-04-14 09:39:54,118 | INFO | utils | Table Found
+2026-04-14 09:40:01,432 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:40:03,031 | INFO | utils | Indexes ensured: matic_1m_datetime_uidx, matic_1m_datetime_desc_idx
+2026-04-14 09:40:03,041 | INFO | utils | Hypertable created/verified for "data_binance"."matic_1m"
+2026-04-14 09:40:03,063 | INFO | utils | No new rows to insert
+2026-04-14 09:40:36,695 | INFO | utils | Schema 'data_binance' ready
+2026-04-14 09:40:36,764 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
+2026-04-14 09:40:36,779 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
+2026-04-14 09:40:39,964 | INFO | utils | Inserted 5755 rows into data_binance.link_1m
+2026-04-14 10:27:19,264 | INFO | utils | Schema 'ml_features' ready
+2026-04-14 10:27:19,266 | INFO | utils | No time_column provided and 'datetime' missing
+2026-04-14 10:27:19,661 | INFO | utils | Inserted 1 rows into ml_features.best_features
+2026-04-14 10:27:19,719 | INFO | utils | Schema 'model_stats' ready
+2026-04-14 10:27:19,721 | INFO | utils | No time_column provided and 'datetime' missing
+2026-04-14 10:27:19,800 | INFO | utils | Inserted 1 rows into model_stats.ml_results
