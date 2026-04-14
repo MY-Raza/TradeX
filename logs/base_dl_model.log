@@ -15261,3 +15261,543 @@
 2026-04-14 11:27:07,764 | INFO | base_dl_model | [TFTModel] predict() → min=-0.2577  max=0.1079  mean=-0.0874
 2026-04-14 12:12:27,623 | INFO | base_dl_model | [TFTModel] Using device: cpu
 2026-04-14 12:12:27,882 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-14 12:30:00,371 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-14 12:30:00,527 | INFO | base_dl_model | [TFTModel] Network params: 251,497
+2026-04-14 12:30:00,527 | INFO | base_dl_model | [TFTModel] Using MSELoss.
+2026-04-14 12:30:50,632 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=3.286082  val_loss=1.170257
+2026-04-14 12:32:59,226 | INFO | base_dl_model | [TFTModel] Epoch 10/30 train_loss=0.976282  val_loss=1.068570
+2026-04-14 12:34:37,572 | INFO | base_dl_model | [TFTModel] Early stop at epoch 17. Best val_loss=1.067694
+2026-04-14 12:34:37,582 | INFO | base_dl_model | [TFTModel] Training finished in 273.2s
+2026-04-14 12:35:00,982 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0316  max=-0.0306  mean=-0.0307
+2026-04-14 12:35:01,005 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000061). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:35:07,649 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-14 12:35:07,829 | INFO | base_dl_model | [TFTModel] Network params: 684,081
+2026-04-14 12:35:07,829 | INFO | base_dl_model | [TFTModel] Using MSELoss.
+2026-04-14 12:36:04,588 | INFO | base_dl_model | [TFTModel] Epoch 1/30 train_loss=3.460755  val_loss=1.102293
+2026-04-14 12:40:13,690 | INFO | base_dl_model | [TFTModel] Epoch 10/30 train_loss=0.988316  val_loss=1.068288
+2026-04-14 12:44:53,616 | INFO | base_dl_model | [TFTModel] Epoch 20/30 train_loss=0.952962  val_loss=1.038410
+2026-04-14 12:49:50,261 | INFO | base_dl_model | [TFTModel] Epoch 30/30 train_loss=0.776026  val_loss=0.961802
+2026-04-14 12:49:50,263 | INFO | base_dl_model | [TFTModel] Training finished in 882.4s
+2026-04-14 12:50:18,290 | INFO | base_dl_model | [TFTModel] predict() → min=-4.9050  max=0.2506  mean=-0.0179
+2026-04-14 12:50:26,473 | INFO | base_dl_model | [TFTModel] Using device: cpu
+2026-04-14 12:50:26,647 | INFO | base_dl_model | [TFTModel] Network params: 251,497
+2026-04-14 12:50:26,650 | INFO | base_dl_model | [TFTModel] Using MSELoss.
+2026-04-14 12:51:16,706 | INFO | base_dl_model | [TFTModel] Epoch 1/100 train_loss=2.555113  val_loss=1.072422
+2026-04-14 12:53:14,048 | INFO | base_dl_model | [TFTModel] Epoch 10/100 train_loss=0.970744  val_loss=1.067688
+2026-04-14 12:55:23,287 | INFO | base_dl_model | [TFTModel] Epoch 20/100 train_loss=0.976868  val_loss=1.067737
+2026-04-14 12:56:15,864 | INFO | base_dl_model | [TFTModel] Early stop at epoch 24. Best val_loss=1.067687
+2026-04-14 12:56:15,866 | INFO | base_dl_model | [TFTModel] Training finished in 349.2s
+2026-04-14 12:56:44,417 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:56:44,437 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:56:44,894 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0010  max=-0.0010  mean=-0.0010
+2026-04-14 12:56:44,896 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000011). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:56:56,055 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:56:56,055 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:56:57,992 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:56:57,992 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:00,060 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:00,062 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:02,589 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:02,589 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:05,085 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:05,085 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:07,553 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:07,555 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:10,216 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:10,216 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:12,776 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:12,776 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:15,243 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:15,243 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:18,076 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:18,076 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:21,050 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:21,050 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:23,930 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:23,932 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:26,773 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:26,773 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:29,637 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:29,639 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:32,284 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:32,284 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:35,128 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:35,128 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:37,916 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:37,916 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:40,369 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:40,369 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:42,850 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:42,851 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:45,580 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:45,580 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:48,357 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:48,357 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:51,153 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:51,154 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:53,791 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:53,792 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:56,767 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:56,769 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:57:59,514 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:57:59,516 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:02,453 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:02,453 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:05,444 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:05,444 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:08,271 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:08,271 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:10,619 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:10,619 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:13,075 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:13,075 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:15,963 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:15,963 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:18,708 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:18,708 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:21,558 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:21,558 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:24,446 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:24,446 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:27,400 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:27,400 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:30,161 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:30,161 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:33,025 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:33,025 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:35,933 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:35,933 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:39,058 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:39,060 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:41,820 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:41,820 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:44,688 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:44,688 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000032). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:47,583 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:47,585 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:50,129 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:50,131 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:52,680 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:52,680 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:55,077 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:55,077 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:58:57,769 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:58:57,769 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:00,175 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:00,175 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:02,704 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:02,704 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:05,302 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:05,302 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:07,895 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:07,895 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:10,319 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:10,319 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:12,894 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:12,895 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:15,502 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:15,502 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:17,964 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:17,965 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:20,254 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:20,254 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:22,729 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:22,729 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:25,415 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:25,417 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:27,821 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:27,837 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:30,524 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:30,524 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:33,253 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:33,253 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:35,969 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:35,969 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:38,402 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:38,402 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:41,065 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:41,065 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:43,587 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:43,589 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:46,298 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:46,298 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:48,647 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:48,647 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:51,065 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:51,068 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:53,579 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:53,580 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:56,115 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:56,115 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 12:59:58,659 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 12:59:58,660 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:01,075 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:01,075 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:03,805 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:03,805 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:06,203 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:06,203 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:08,751 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:08,751 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:11,299 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:11,299 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:14,008 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:14,010 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:16,441 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:16,441 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:19,144 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:19,144 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:21,592 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:21,592 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:24,151 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:24,151 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:26,674 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:26,674 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:29,227 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:29,227 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:31,648 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:31,648 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:34,181 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:34,181 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:36,689 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:36,691 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:39,549 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:39,550 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:42,334 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:42,334 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:44,779 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:44,781 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:47,339 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:47,341 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:49,866 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:49,866 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:52,300 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:52,300 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:54,658 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:54,659 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:57,102 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:57,102 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:00:59,640 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:00:59,640 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:02,141 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:02,156 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:04,609 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:04,609 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:06,877 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:06,877 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:09,468 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:09,468 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:11,942 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:11,942 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:14,521 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:14,521 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:17,065 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:17,066 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:19,628 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:19,628 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:21,996 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:21,996 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:24,532 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:24,532 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:27,030 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:27,030 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:29,545 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:29,545 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:31,930 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:31,932 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:34,385 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:34,385 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:37,020 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:37,020 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:39,740 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:39,740 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:42,300 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:42,300 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:44,914 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:44,914 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:47,463 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:47,463 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:49,887 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:49,887 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:53,172 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:53,172 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:01:56,998 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:01:56,998 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:00,196 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:00,196 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:02,775 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:02,776 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:06,822 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:06,824 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:10,622 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:10,623 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:13,971 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:13,971 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:17,446 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:17,448 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:21,085 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:21,086 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:25,004 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:25,005 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:28,397 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:28,398 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:31,119 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:31,119 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:34,542 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:34,544 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:37,163 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:37,163 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:39,747 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:39,747 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:42,356 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:42,358 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:44,909 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:44,909 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:47,496 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:47,496 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:49,819 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:49,829 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:52,333 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:52,337 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:54,980 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:54,980 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:57,627 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:57,627 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:02:59,889 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:02:59,891 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:02,292 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:02,292 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:04,724 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:04,725 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:07,050 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:07,050 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:09,636 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:09,636 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:11,960 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:11,960 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:14,430 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:14,431 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:16,799 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:16,799 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:19,215 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:19,215 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:21,429 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:21,429 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:23,907 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:23,907 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:26,412 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:26,412 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:28,917 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:28,917 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:31,640 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:31,640 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:34,344 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:34,344 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:37,307 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:37,307 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:40,293 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:40,294 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:43,174 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:43,175 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:45,547 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:45,550 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:48,096 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:48,107 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:50,744 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:50,744 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:53,309 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:53,309 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:55,718 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:55,718 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:03:57,936 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:03:57,936 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:00,356 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:00,356 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:02,741 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:02,741 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:05,153 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:05,153 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:07,341 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:07,341 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:09,715 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:09,715 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:12,135 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:12,135 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:14,567 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:14,569 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:16,754 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:16,754 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:19,118 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:19,118 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:21,508 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:21,508 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:23,867 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:23,867 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:26,235 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:26,235 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:28,599 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:28,599 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:30,968 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:30,968 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:33,502 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:33,502 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:35,717 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:35,717 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:38,258 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:38,258 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:40,728 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:40,728 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:43,128 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:43,128 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:45,323 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:45,323 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:47,663 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:47,663 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:49,961 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:49,961 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:52,326 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:52,326 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:54,747 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:54,747 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:57,201 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:57,201 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:04:59,523 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:04:59,523 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:02,049 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:02,049 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:04,203 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:04,203 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:06,648 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:06,648 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:08,989 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:08,989 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:11,375 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:11,376 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:13,578 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:13,578 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:15,933 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:15,933 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:18,326 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:18,328 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:20,665 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:20,665 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:22,986 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:22,986 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:25,384 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:25,384 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:27,799 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:27,800 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:30,382 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:30,382 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:32,572 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:32,572 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:34,949 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:34,949 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:37,370 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:37,370 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:39,690 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:39,690 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:41,933 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:41,933 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:44,407 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:44,407 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:46,820 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:46,820 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:49,264 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:49,264 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:52,021 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:52,021 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:55,472 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:55,472 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:05:59,263 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:05:59,264 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:02,402 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:02,402 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:05,236 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:05,238 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:08,096 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:08,097 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:11,721 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:11,722 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:14,626 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:14,626 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:17,532 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:17,533 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:20,704 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:20,710 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:23,202 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:23,204 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:25,910 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:25,911 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:28,675 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:28,676 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:31,393 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:31,393 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:34,145 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:34,145 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:37,075 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:37,077 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:40,252 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:40,253 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:43,084 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:43,085 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:46,144 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:46,145 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:49,715 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:49,715 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:52,641 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:52,641 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:55,674 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:55,677 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:06:58,740 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:06:58,742 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:01,458 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:01,459 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:04,363 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:04,363 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:07,126 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:07,126 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:10,035 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:10,037 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:12,684 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0010  mean=-0.0010
+2026-04-14 13:07:12,686 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000033). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:15,679 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:15,679 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000033). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:18,863 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0012  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:18,864 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000034). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:21,891 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:21,891 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:24,650 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:24,650 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:27,496 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:27,498 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:30,322 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:30,322 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:32,853 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:32,855 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:35,546 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:35,546 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:38,172 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:38,174 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:40,897 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:40,897 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:43,752 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:43,753 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:46,515 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:46,515 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:49,273 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:49,275 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:52,079 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:52,080 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:55,150 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:55,153 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:07:58,264 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:07:58,264 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:08:01,056 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:08:01,057 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:08:04,372 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:08:04,373 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:08:07,306 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:08:07,307 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.
+2026-04-14 13:08:10,495 | INFO | base_dl_model | [TFTModel] predict() → min=-0.0011  max=-0.0009  mean=-0.0010
+2026-04-14 13:08:10,496 | WARNING | base_dl_model | [TFTModel] Predictions show very low variance (std=0.000031). Model may have collapsed to a constant. Check loss function and target distribution.

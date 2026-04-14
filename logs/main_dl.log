@@ -503,3 +503,10 @@
 2026-04-14 12:12:27,456 | INFO | main_dl | Training DL regressor: tft for btc
 2026-04-14 12:12:27,942 | ERROR | main_dl | DL Regressor tft failed for btc: No trials are completed yet.
 2026-04-14 12:12:27,942 | INFO | main_dl | DL model training complete for btc.
+2026-04-14 12:28:27,510 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-14 12:28:27,510 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-14 12:30:00,170 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-14 12:56:44,914 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[-0.00100265 -0.00100322 -0.00100451 -0.00098163 -0.00098207]
+2026-04-14 12:56:55,096 | INFO | main_dl | [tft] Balance=498.19  PnL=-69.3800
+2026-04-14 13:08:13,267 | INFO | main_dl | DL model training complete for btc.

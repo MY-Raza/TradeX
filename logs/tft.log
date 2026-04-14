@@ -49,3 +49,9 @@
 2026-04-14 12:12:27,606 | INFO | tft | [train] Using loss_fn='mse' (MSE works best with normalized targets, avoids collapse)
 2026-04-14 12:12:27,882 | WARNING | tft | [trial 0] Training failed: d_model (69) must be divisible by num_heads (4)
 2026-04-14 12:12:27,942 | WARNING | tft | [trial 1] Training failed: d_model (71) must be divisible by num_heads (4)
+2026-04-14 12:30:00,360 | INFO | tft | [train] Starting TFT Optuna study (2 trials)…
+2026-04-14 12:30:00,361 | INFO | tft | [train] Using loss_fn='mse' (MSE works best with normalized targets, avoids collapse)
+2026-04-14 12:50:26,470 | INFO | tft | [train] Best params: {'seq_len': 46, 'hidden_size': 122, 'num_layers': 1, 'dropout': 0.27183212758445024, 'lr': 0.0046587587907738785, 'batch_size': 64} | Best PnL: -45.6500
+2026-04-14 12:56:44,457 | WARNING | tft | [train] Final TFT shows very low variance (std=3.11e-05). Range: [-0.0011, -0.0009]. Model may have learned a collapse strategy. Adding small noise to encourage diversity.
+2026-04-14 12:56:44,610 | INFO | tft | [train] Final preds — min: -0.0011, max: -0.0009, mean: -0.0010, std: 0.0000
+2026-04-14 12:56:44,612 | INFO | tft | [train] Signal distribution — Short: 2174 (85.2%) | Neutral: 0 (0.0%) | Long: 377 (14.8%)
