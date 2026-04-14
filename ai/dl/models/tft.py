@@ -277,7 +277,7 @@ def train(
     k: float = 0.5,
     transform_features: bool = True,
     model_type: str = "regressor",
-    loss_fn: str = "directional",         # ✅ UPDATED
+    loss_fn: str = "hybrid",         # ✅ UPDATED
 ) -> tuple:
     """
     Train a TFT model using PnL-based Optuna optimisation.

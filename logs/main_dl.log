@@ -488,3 +488,13 @@
 [-102599.96 -102599.96 -102599.96 -102599.95 -102599.96]
 2026-04-14 10:13:36,578 | INFO | main_dl | [tft] Balance=946.66  PnL=-2.0200
 2026-04-14 10:27:19,863 | INFO | main_dl | DL model training complete for btc.
+2026-04-14 10:34:04,319 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-14 10:34:04,319 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-14 10:35:11,106 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-14 10:39:04,114 | INFO | main_dl | DL Config loaded | symbols=['btc'] | timehorizon=1h | n_trials=2
+2026-04-14 10:39:04,114 | INFO | main_dl | === Processing symbol: btc ===
+2026-04-14 10:40:20,531 | INFO | main_dl | Training DL regressor: tft for btc
+2026-04-14 11:07:41,264 | INFO | main_dl | [Dry-run] tft predictions on first samples:
+[0.0462456  0.05488998 0.05824329 0.06263462 0.0663788 ]
+2026-04-14 11:07:56,868 | INFO | main_dl | [tft] Balance=499.55  PnL=-69.1100
+2026-04-14 11:27:09,516 | INFO | main_dl | DL model training complete for btc.
