@@ -1,13 +1,3 @@
-# feature_pipeline.py
-#
-# Production-ready ML Feature Engineering Pipeline
-# Processes OHLCV + Reddit post/comment sentiment → ML-ready features
-#
-# Design principles:
-#   - Zero row drops from NaNs (safe 0-fill everywhere except targets)
-#   - No data leakage (all rolling windows use past data only)
-#   - Reusable, modular functions that integrate with the existing pipeline
-
 from __future__ import annotations
 
 import pandas as pd
@@ -99,6 +89,25 @@ def create_sentiment_features(df: pd.DataFrame, prefix: str) -> pd.DataFrame:
     """
     df = df.copy()
     df = df.sort_values("time_window").reset_index(drop=True)
+
+    # FIX: Normalise the item-count column name.
+    # sentiment_analysis.py now always writes 'num_items', but tables written
+    # by older runs may carry a legacy name like 'post_id_count' or
+    # 'comment_id_count'.  This block handles both cases gracefully so the
+    # pipeline never raises a KeyError regardless of which DB snapshot is used.
+    if "num_items" not in df.columns:
+        legacy_count_cols = [c for c in df.columns if c.endswith("_count")]
+        if legacy_count_cols:
+            df.rename(columns={legacy_count_cols[0]: "num_items"}, inplace=True)
+            logger.warning(
+                f"[{prefix}] Renamed '{legacy_count_cols[0]}' → 'num_items'. "
+                f"Re-run sentiment_analysis.py to persist the correct column name."
+            )
+        else:
+            logger.warning(
+                f"[{prefix}] No count column found — defaulting num_items to 1."
+            )
+            df["num_items"] = 1
 
     # Core series — fill source NaNs before any computation
     mean_s  = df["mean_sentiment"].fillna(0)
