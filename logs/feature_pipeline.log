@@ -1,0 +1,50 @@
+2026-04-15 13:04:42,163 | INFO | feature_pipeline | Loading data from DB… [OHLCV: data_binance.btc_1m] [Posts: reddit.posts_sentiment_hourly] [Comments: reddit.comments_sentiment_hourly]
+2026-04-15 13:04:56,991 | INFO | feature_pipeline | Loaded | OHLCV: 1,728,538 rows | Posts: 169 rows | Comments: 522 rows
+2026-04-15 13:04:57,153 | INFO | feature_pipeline | [post] Sentiment features built | shape: (169, 12) | NaNs: 0
+2026-04-15 13:04:57,155 | INFO | feature_pipeline | [comment] Sentiment features built | shape: (522, 12) | NaNs: 0
+2026-04-15 13:04:57,230 | INFO | feature_pipeline | Sentiment combined | shape: (578, 27) | NaNs: 5115
+2026-04-15 13:04:58,078 | INFO | feature_pipeline | OHLCV features built | interval: 1h | shape: (28808, 10) | NaNs: 0
+2026-04-15 13:04:58,134 | INFO | feature_pipeline | Merged | shape: (28808, 36) | NaNs: 0
+2026-04-15 13:04:58,154 | INFO | feature_pipeline | Alpha features built | NaNs: 0
+2026-04-15 13:04:58,166 | INFO | feature_pipeline | Targets built | shape after drop: (28807, 42) | Class balance: {1.0: 14620, 0.0: 14187}
+2026-04-15 13:04:58,201 | INFO | feature_pipeline | Final clean | shape: (28807, 26)
+2026-04-15 13:05:34,882 | INFO | feature_pipeline | Saved to DB: ml_features
+2026-04-15 13:05:34,882 | INFO | feature_pipeline | 
+────────────────────────────────────────────────────────────
+2026-04-15 13:05:34,882 | INFO | feature_pipeline | DATASET DIAGNOSTICS
+2026-04-15 13:05:34,882 | INFO | feature_pipeline | ────────────────────────────────────────────────────────────
+2026-04-15 13:05:34,885 | INFO | feature_pipeline | 
+Shape:  28,807 rows × 26 columns
+2026-04-15 13:05:34,904 | INFO | feature_pipeline | NaNs in features:  0  (should be 0)
+2026-04-15 13:05:34,917 | INFO | feature_pipeline | 
+Class balance (target):
+target
+1.0    50.8
+0.0    49.2
+2026-04-15 13:05:35,009 | INFO | feature_pipeline | 
+Top-10 features by |correlation| with target:
+2026-04-15 13:05:35,012 | INFO | feature_pipeline | returns               0.062850
+price_momentum        0.049118
+divergence            0.049113
+volume_change         0.012382
+volatility            0.011343
+sentiment_combined    0.010104
+comment_lag_1         0.009437
+comment_lag_4         0.006475
+sentiment_spike       0.006285
+comment_lag_2         0.006248
+2026-04-15 13:05:35,012 | INFO | feature_pipeline | 
+target_return summary:
+2026-04-15 13:05:35,012 | INFO | feature_pipeline | count    28807.000000
+mean         0.000065
+std          0.005028
+min         -0.062584
+25%         -0.001926
+50%          0.000054
+75%          0.002094
+max          0.055638
+2026-04-15 13:05:35,012 | INFO | feature_pipeline | 
+────────────────────────────────────────────────────────────
+
+2026-04-15 13:05:35,023 | INFO | feature_pipeline | 
+Done. Final shape: (28807, 26)
