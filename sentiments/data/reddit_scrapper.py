@@ -2,6 +2,7 @@ import praw
 import pandas as pd
 from datetime import datetime
 from TradeX.utils.common.logs import get_logger
+from TradeX.utils.db.utils import save_df_to_db
 logger = get_logger("reddit_scraper")
 
 # =========================
@@ -23,7 +24,7 @@ subreddits = [
     "BitcoinMarkets",
     "ethereum",
     "ethtrader",
-    "CryptoMoonShots",
+    "CryptoMoonShots", 
     "SatoshiStreetBets",
     "CryptoCurrencyTrading",
     "CryptoNews"
@@ -103,11 +104,23 @@ posts_df = pd.DataFrame(posts_data)
 comments_df = pd.DataFrame(comments_data)
 
 # =========================
-# Save CSVs
+# Save to Database
 # =========================
-posts_df.to_csv("crypto_posts.csv", index=False)
-comments_df.to_csv("crypto_comments.csv", index=False)
 
-logger.info("✅ Data collection completed!")
-logger.info("📁 Saved: crypto_posts.csv")
-logger.info("📁 Saved: crypto_comments.csv")
+save_df_to_db(
+    df=posts_df,
+    table_name="reddit_posts",
+    schema="reddit",    
+    time_column="post_time",
+    is_timeseries=True
+)
+
+save_df_to_db(
+    df=comments_df,
+    table_name="reddit_comments",
+    schema="reddit",
+    time_column="comment_time",
+    is_timeseries=True
+)
+
+logger.info("✅ Data saved to database!")
