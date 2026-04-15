@@ -148,3 +148,303 @@
 7 2024-11-07 19:00:00+00:00             1.0            NaN          1                   0.962532              1
 8 2024-11-10 17:00:00+00:00             1.0            NaN          1                   0.582838              1
 9 2024-11-14 09:00:00+00:00             0.0            NaN          1                   0.938209              1
+2026-04-15 11:55:43,825 | INFO | reddit_sentiment_pipeline | 
+================================================================================
+2026-04-15 11:55:43,831 | INFO | reddit_sentiment_pipeline | STARTING REDDIT SENTIMENT ANALYSIS PIPELINE
+2026-04-15 11:55:43,831 | INFO | reddit_sentiment_pipeline | ================================================================================
+
+2026-04-15 11:55:43,832 | INFO | reddit_sentiment_pipeline | ⚠️  GPU not available - using CPU (slower)
+2026-04-15 11:55:43,832 | INFO | reddit_sentiment_pipeline | 💻 CPU Cores: 4
+2026-04-15 11:55:43,832 | INFO | reddit_sentiment_pipeline | 
+[1/6] LOADING DATA
+2026-04-15 11:55:43,832 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 11:55:43,832 | INFO | reddit_sentiment_pipeline | 📥 Loading data from database...
+2026-04-15 11:55:45,110 | INFO | reddit_sentiment_pipeline | ✅ Posts loaded: 2,000
+2026-04-15 11:55:45,110 | INFO | reddit_sentiment_pipeline | ✅ Comments loaded: 8,817
+2026-04-15 11:55:45,110 | INFO | reddit_sentiment_pipeline | 
+[2/6] FILTERING SUBREDDITS
+2026-04-15 11:55:45,110 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 11:55:45,110 | INFO | reddit_sentiment_pipeline | 🚫 Filtering excluded subreddits...
+2026-04-15 11:55:45,110 | INFO | reddit_sentiment_pipeline |    Excluded: ['ethereum', 'ethtrader']
+2026-04-15 11:55:45,135 | INFO | reddit_sentiment_pipeline | ✅ Posts filtered: 1,600 (removed: 400)
+2026-04-15 11:55:45,137 | INFO | reddit_sentiment_pipeline | ✅ Comments filtered: 6,428 (removed: 2,389)
+2026-04-15 11:55:45,137 | INFO | reddit_sentiment_pipeline | 
+[3/6] APPLYING BTC FILTER
+2026-04-15 11:55:45,137 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 11:55:45,137 | INFO | reddit_sentiment_pipeline | ₿ Applying BTC filter...
+2026-04-15 11:55:45,201 | INFO | reddit_sentiment_pipeline | ✅ BTC Posts: 364 (from 1,600)
+2026-04-15 11:55:45,201 | INFO | reddit_sentiment_pipeline | ✅ BTC Comments: 1,139 (from 6,428)
+2026-04-15 11:55:45,201 | INFO | reddit_sentiment_pipeline | 
+[4/6] LOADING SENTIMENT MODEL
+2026-04-15 11:55:45,201 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 11:55:45,201 | INFO | reddit_sentiment_pipeline | 📥 Loading sentiment model: cardiffnlp/twitter-roberta-base-sentiment
+2026-04-15 11:55:45,201 | INFO | reddit_sentiment_pipeline | 🔧 Using device: cpu
+2026-04-15 11:55:55,391 | INFO | reddit_sentiment_pipeline | ✅ Model loaded successfully
+2026-04-15 11:55:55,391 | INFO | reddit_sentiment_pipeline | 
+[5/6] SENTIMENT ANALYSIS
+2026-04-15 11:55:55,391 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 11:55:55,407 | INFO | reddit_sentiment_pipeline | 🔍 Analyzing sentiment for 364 items...
+2026-04-15 11:55:57,951 | INFO | reddit_sentiment_pipeline |    ✓ Processed 32/364 items
+2026-04-15 11:55:59,996 | INFO | reddit_sentiment_pipeline |    ✓ Processed 64/364 items
+2026-04-15 11:56:01,417 | INFO | reddit_sentiment_pipeline |    ✓ Processed 96/364 items
+2026-04-15 11:56:02,735 | INFO | reddit_sentiment_pipeline |    ✓ Processed 128/364 items
+2026-04-15 11:56:04,192 | INFO | reddit_sentiment_pipeline |    ✓ Processed 160/364 items
+2026-04-15 11:56:05,448 | INFO | reddit_sentiment_pipeline |    ✓ Processed 192/364 items
+2026-04-15 11:56:06,755 | INFO | reddit_sentiment_pipeline |    ✓ Processed 224/364 items
+2026-04-15 11:56:08,401 | INFO | reddit_sentiment_pipeline |    ✓ Processed 256/364 items
+2026-04-15 11:56:10,302 | INFO | reddit_sentiment_pipeline |    ✓ Processed 288/364 items
+2026-04-15 11:56:11,314 | INFO | reddit_sentiment_pipeline |    ✓ Processed 320/364 items
+2026-04-15 11:56:12,686 | INFO | reddit_sentiment_pipeline |    ✓ Processed 352/364 items
+2026-04-15 11:56:13,828 | INFO | reddit_sentiment_pipeline |    ✓ Processed 364/364 items
+2026-04-15 11:56:13,853 | INFO | reddit_sentiment_pipeline | ✅ Sentiment analysis complete!
+2026-04-15 11:56:13,853 | INFO | reddit_sentiment_pipeline |    Positive: 30
+2026-04-15 11:56:13,853 | INFO | reddit_sentiment_pipeline |    Neutral: 288
+2026-04-15 11:56:13,853 | INFO | reddit_sentiment_pipeline |    Negative: 46
+2026-04-15 11:56:13,859 | INFO | reddit_sentiment_pipeline | 🔍 Analyzing sentiment for 1,139 items...
+2026-04-15 11:56:49,925 | INFO | reddit_sentiment_pipeline |    ✓ Processed 96/1,139 items
+2026-04-15 11:57:20,368 | INFO | reddit_sentiment_pipeline |    ✓ Processed 192/1,139 items
+2026-04-15 11:58:01,705 | INFO | reddit_sentiment_pipeline |    ✓ Processed 288/1,139 items
+2026-04-15 11:59:08,153 | INFO | reddit_sentiment_pipeline |    ✓ Processed 384/1,139 items
+2026-04-15 12:00:09,472 | INFO | reddit_sentiment_pipeline |    ✓ Processed 480/1,139 items
+2026-04-15 12:00:52,556 | INFO | reddit_sentiment_pipeline |    ✓ Processed 576/1,139 items
+2026-04-15 12:01:58,432 | INFO | reddit_sentiment_pipeline |    ✓ Processed 672/1,139 items
+2026-04-15 12:02:51,287 | INFO | reddit_sentiment_pipeline |    ✓ Processed 768/1,139 items
+2026-04-15 12:03:46,269 | INFO | reddit_sentiment_pipeline |    ✓ Processed 864/1,139 items
+2026-04-15 12:04:43,623 | INFO | reddit_sentiment_pipeline |    ✓ Processed 960/1,139 items
+2026-04-15 12:05:49,266 | INFO | reddit_sentiment_pipeline |    ✓ Processed 1,056/1,139 items
+2026-04-15 12:06:47,002 | INFO | reddit_sentiment_pipeline |    ✓ Processed 1,139/1,139 items
+2026-04-15 12:06:47,091 | INFO | reddit_sentiment_pipeline | ✅ Sentiment analysis complete!
+2026-04-15 12:06:47,097 | INFO | reddit_sentiment_pipeline |    Positive: 223
+2026-04-15 12:06:47,097 | INFO | reddit_sentiment_pipeline |    Neutral: 651
+2026-04-15 12:06:47,097 | INFO | reddit_sentiment_pipeline |    Negative: 265
+2026-04-15 12:06:47,109 | INFO | reddit_sentiment_pipeline | 
+[6/6] AGGREGATION & SAVING
+2026-04-15 12:06:47,110 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:06:47,110 | INFO | reddit_sentiment_pipeline | 📊 Aggregating sentiment by hour...
+2026-04-15 12:06:47,272 | INFO | reddit_sentiment_pipeline | ✅ Created 169 hourly aggregates
+2026-04-15 12:06:47,278 | INFO | reddit_sentiment_pipeline | 📊 Aggregating sentiment by hour...
+2026-04-15 12:06:47,311 | INFO | reddit_sentiment_pipeline | ✅ Created 522 hourly aggregates
+2026-04-15 12:06:47,320 | INFO | reddit_sentiment_pipeline | 💾 Saving sentiment results to database...
+2026-04-15 12:06:50,503 | INFO | reddit_sentiment_pipeline | ✅ Saved 364 posts with sentiment
+2026-04-15 12:06:55,265 | INFO | reddit_sentiment_pipeline | ✅ Saved 1,139 comments with sentiment
+2026-04-15 12:07:00,461 | INFO | reddit_sentiment_pipeline | ✅ Saved 169 hourly post aggregates
+2026-04-15 12:07:02,823 | INFO | reddit_sentiment_pipeline | ✅ Saved 522 hourly comment aggregates
+2026-04-15 12:07:02,823 | INFO | reddit_sentiment_pipeline | ✅ All sentiment data saved to database!
+2026-04-15 12:07:02,832 | INFO | reddit_sentiment_pipeline | 
+================================================================================
+2026-04-15 12:07:02,833 | INFO | reddit_sentiment_pipeline | SENTIMENT ANALYSIS STATISTICS
+2026-04-15 12:07:02,833 | INFO | reddit_sentiment_pipeline | ================================================================================
+2026-04-15 12:07:02,835 | INFO | reddit_sentiment_pipeline | 
+📝 POSTS SENTIMENT:
+2026-04-15 12:07:02,835 | INFO | reddit_sentiment_pipeline |   Total posts: 364
+2026-04-15 12:07:02,859 | INFO | reddit_sentiment_pipeline |   Mean sentiment: -0.0440
+2026-04-15 12:07:02,859 | INFO | reddit_sentiment_pipeline |   Std sentiment: 0.4554
+2026-04-15 12:07:02,862 | INFO | reddit_sentiment_pipeline |   Mean confidence: 0.7555
+2026-04-15 12:07:02,876 | INFO | reddit_sentiment_pipeline |   NEUTRAL: 288 (79.1%)
+2026-04-15 12:07:02,876 | INFO | reddit_sentiment_pipeline |   NEGATIVE: 46 (12.6%)
+2026-04-15 12:07:02,876 | INFO | reddit_sentiment_pipeline |   POSITIVE: 30 (8.2%)
+2026-04-15 12:07:02,877 | INFO | reddit_sentiment_pipeline | 
+💬 COMMENTS SENTIMENT:
+2026-04-15 12:07:02,877 | INFO | reddit_sentiment_pipeline |   Total comments: 1,139
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline |   Mean sentiment: -0.0369
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline |   Std sentiment: 0.6538
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline |   Mean confidence: 0.6681
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline |   NEUTRAL: 651 (57.2%)
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline |   NEGATIVE: 265 (23.3%)
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline |   POSITIVE: 223 (19.6%)
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline | 
+================================================================================
+
+2026-04-15 12:07:02,878 | INFO | reddit_sentiment_pipeline | ✅ PIPELINE COMPLETE in 679.0s
+2026-04-15 12:07:03,070 | INFO | reddit_sentiment_pipeline | 
+📊 SAMPLE RESULTS - POSTS:
+2026-04-15 12:07:03,239 | INFO | reddit_sentiment_pipeline | 
+                                               title sentiment_label  sentiment_score  sentiment_confidence
+0  Billionaire Tim Draper doubles down on bold Bi...         neutral                0              0.680959
+1  US Oil Falls Below $94 as Bitcoin Tops $76K Am...        negative               -1              0.520230
+2  Goldman Sachs files for bitcoin income ETF in ...         neutral                0              0.882471
+3    Bitcoin Breaks $76K, MicroStrategy Shares Rally         neutral                0              0.696878
+4  Officially 105,000 blocks until the next Bitco...         neutral                0              0.856446
+5  Musician G. Love Loses $424,000 Bitcoin Retire...        negative               -1              0.720739
+6  Strategy Buys $1 Billion in Bitcoin, Now Holds...         neutral                0              0.881369
+7  Strategy Buys 13,927 BTC For $1B, Holdings Nea...         neutral                0              0.924092
+8                      Thoughts on 100% bitcoin etf?         neutral                0              0.907097
+9  The companies that built Bitcoin's mining infr...         neutral                0              0.578828
+2026-04-15 12:07:03,239 | INFO | reddit_sentiment_pipeline | 
+💬 SAMPLE RESULTS - COMMENTS:
+2026-04-15 12:07:03,261 | INFO | reddit_sentiment_pipeline | 
+                                        comment_text sentiment_label  sentiment_score  sentiment_confidence
+0  I kept wondering about four years ago the last...         neutral                0              0.740247
+1  BTC has been on an uptrend since we got stuck ...        positive                1              0.685646
+2  He predicted BTC $250k by end of 2025, was cle...         neutral                0              0.488208
+3  Watch BTC break down again just as everyone be...         neutral                0              0.503464
+4  Lmao\n\nBitcoin just moves up and down all the...        negative               -1              0.596508
+5  Wow, what a push! Bitcoin just keeps surprisin...        positive                1              0.972769
+6                  Most crypto is garbage except btc        negative               -1              0.928262
+7  Imagine if ETH actually hit $50k, people just ...        positive                1              0.464341
+8  Whats this the rock? They dont know how to rec...        negative               -1              0.628779
+9  Why not a privacy coin? Market cap is too smal...        negative               -1              0.559642
+2026-04-15 12:07:03,261 | INFO | reddit_sentiment_pipeline | 
+📈 HOURLY AGGREGATION - POSTS:
+2026-04-15 12:07:03,298 | INFO | reddit_sentiment_pipeline | 
+                time_window  mean_sentiment  std_sentiment  num_items  sentiment_confidence_mean  post_id_count
+0 2024-10-06 09:00:00+00:00             0.0            NaN          1                   0.747421              1
+1 2024-10-06 18:00:00+00:00             0.0            NaN          1                   0.853246              1
+2 2024-10-09 00:00:00+00:00             0.0            NaN          1                   0.931370              1
+3 2024-10-10 15:00:00+00:00             0.0            NaN          1                   0.831786              1
+4 2024-10-12 18:00:00+00:00             1.0            NaN          1                   0.811823              1
+5 2024-10-16 18:00:00+00:00             0.0            NaN          1                   0.628216              1
+6 2024-10-26 00:00:00+00:00             0.0            NaN          1                   0.835751              1
+7 2024-11-07 18:00:00+00:00             1.0            NaN          1                   0.962532              1
+8 2024-11-10 15:00:00+00:00             1.0            NaN          1                   0.582838              1
+9 2024-11-14 09:00:00+00:00             0.0            NaN          1                   0.938209              1
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | 
+================================================================================
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | STARTING REDDIT SENTIMENT ANALYSIS PIPELINE
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | ================================================================================
+
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | ⚠️  GPU not available - using CPU (slower)
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | 💻 CPU Cores: 4
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | 
+[1/6] LOADING DATA
+2026-04-15 12:08:03,151 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:08:03,155 | INFO | reddit_sentiment_pipeline | 📥 Loading data from database...
+2026-04-15 12:08:04,067 | INFO | reddit_sentiment_pipeline | ✅ Posts loaded: 2,000
+2026-04-15 12:08:04,067 | INFO | reddit_sentiment_pipeline | ✅ Comments loaded: 8,817
+2026-04-15 12:08:04,067 | INFO | reddit_sentiment_pipeline | 
+[2/6] FILTERING SUBREDDITS
+2026-04-15 12:08:04,067 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:08:04,067 | INFO | reddit_sentiment_pipeline | 🚫 Filtering excluded subreddits...
+2026-04-15 12:08:04,071 | INFO | reddit_sentiment_pipeline |    Excluded: ['ethereum', 'ethtrader']
+2026-04-15 12:08:04,072 | INFO | reddit_sentiment_pipeline | ✅ Posts filtered: 1,600 (removed: 400)
+2026-04-15 12:08:04,072 | INFO | reddit_sentiment_pipeline | ✅ Comments filtered: 6,428 (removed: 2,389)
+2026-04-15 12:08:04,072 | INFO | reddit_sentiment_pipeline | 
+[3/6] APPLYING BTC FILTER
+2026-04-15 12:08:04,072 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:08:04,072 | INFO | reddit_sentiment_pipeline | ₿ Applying BTC filter...
+2026-04-15 12:08:04,133 | INFO | reddit_sentiment_pipeline | ✅ BTC Posts: 364 (from 1,600)
+2026-04-15 12:08:04,133 | INFO | reddit_sentiment_pipeline | ✅ BTC Comments: 1,139 (from 6,428)
+2026-04-15 12:08:04,134 | INFO | reddit_sentiment_pipeline | 
+[4/6] LOADING SENTIMENT MODEL
+2026-04-15 12:08:04,134 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:08:04,134 | INFO | reddit_sentiment_pipeline | 📥 Loading sentiment model: cardiffnlp/twitter-roberta-base-sentiment
+2026-04-15 12:08:04,134 | INFO | reddit_sentiment_pipeline | 🔧 Using device: cpu
+2026-04-15 12:08:07,285 | INFO | reddit_sentiment_pipeline | ✅ Model loaded successfully
+2026-04-15 12:08:07,285 | INFO | reddit_sentiment_pipeline | 
+[5/6] SENTIMENT ANALYSIS
+2026-04-15 12:08:07,285 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:08:07,285 | INFO | reddit_sentiment_pipeline | 🔍 Analyzing sentiment for 364 items...
+2026-04-15 12:08:08,441 | INFO | reddit_sentiment_pipeline |    ✓ Processed 32/364 items
+2026-04-15 12:08:10,244 | INFO | reddit_sentiment_pipeline |    ✓ Processed 64/364 items
+2026-04-15 12:08:11,485 | INFO | reddit_sentiment_pipeline |    ✓ Processed 96/364 items
+2026-04-15 12:08:12,868 | INFO | reddit_sentiment_pipeline |    ✓ Processed 128/364 items
+2026-04-15 12:08:14,374 | INFO | reddit_sentiment_pipeline |    ✓ Processed 160/364 items
+2026-04-15 12:08:15,745 | INFO | reddit_sentiment_pipeline |    ✓ Processed 192/364 items
+2026-04-15 12:08:17,247 | INFO | reddit_sentiment_pipeline |    ✓ Processed 224/364 items
+2026-04-15 12:08:19,873 | INFO | reddit_sentiment_pipeline |    ✓ Processed 256/364 items
+2026-04-15 12:08:22,736 | INFO | reddit_sentiment_pipeline |    ✓ Processed 288/364 items
+2026-04-15 12:08:24,255 | INFO | reddit_sentiment_pipeline |    ✓ Processed 320/364 items
+2026-04-15 12:08:26,015 | INFO | reddit_sentiment_pipeline |    ✓ Processed 352/364 items
+2026-04-15 12:08:27,224 | INFO | reddit_sentiment_pipeline |    ✓ Processed 364/364 items
+2026-04-15 12:08:27,242 | INFO | reddit_sentiment_pipeline | ✅ Sentiment analysis complete!
+2026-04-15 12:08:27,242 | INFO | reddit_sentiment_pipeline |    Positive: 30
+2026-04-15 12:08:27,242 | INFO | reddit_sentiment_pipeline |    Neutral: 288
+2026-04-15 12:08:27,245 | INFO | reddit_sentiment_pipeline |    Negative: 46
+2026-04-15 12:08:27,245 | INFO | reddit_sentiment_pipeline | 🔍 Analyzing sentiment for 1,139 items...
+2026-04-15 12:09:07,111 | INFO | reddit_sentiment_pipeline |    ✓ Processed 96/1,139 items
+2026-04-15 12:09:40,779 | INFO | reddit_sentiment_pipeline |    ✓ Processed 192/1,139 items
+2026-04-15 12:10:24,213 | INFO | reddit_sentiment_pipeline |    ✓ Processed 288/1,139 items
+2026-04-15 12:11:30,535 | INFO | reddit_sentiment_pipeline |    ✓ Processed 384/1,139 items
+2026-04-15 12:12:33,089 | INFO | reddit_sentiment_pipeline |    ✓ Processed 480/1,139 items
+2026-04-15 12:13:15,991 | INFO | reddit_sentiment_pipeline |    ✓ Processed 576/1,139 items
+2026-04-15 12:14:41,510 | INFO | reddit_sentiment_pipeline |    ✓ Processed 672/1,139 items
+2026-04-15 12:16:06,313 | INFO | reddit_sentiment_pipeline |    ✓ Processed 768/1,139 items
+2026-04-15 12:17:36,057 | INFO | reddit_sentiment_pipeline |    ✓ Processed 864/1,139 items
+2026-04-15 12:19:13,437 | INFO | reddit_sentiment_pipeline |    ✓ Processed 960/1,139 items
+2026-04-15 12:21:03,093 | INFO | reddit_sentiment_pipeline |    ✓ Processed 1,056/1,139 items
+2026-04-15 12:22:33,476 | INFO | reddit_sentiment_pipeline |    ✓ Processed 1,139/1,139 items
+2026-04-15 12:22:34,672 | INFO | reddit_sentiment_pipeline | ✅ Sentiment analysis complete!
+2026-04-15 12:22:34,685 | INFO | reddit_sentiment_pipeline |    Positive: 223
+2026-04-15 12:22:34,685 | INFO | reddit_sentiment_pipeline |    Neutral: 651
+2026-04-15 12:22:34,685 | INFO | reddit_sentiment_pipeline |    Negative: 265
+2026-04-15 12:22:34,732 | INFO | reddit_sentiment_pipeline | 
+[6/6] AGGREGATION & SAVING
+2026-04-15 12:22:34,732 | INFO | reddit_sentiment_pipeline | --------------------------------------------------------------------------------
+2026-04-15 12:22:34,732 | INFO | reddit_sentiment_pipeline | 📊 Aggregating sentiment by hour...
+2026-04-15 12:22:35,150 | INFO | reddit_sentiment_pipeline | ✅ Created 169 hourly aggregates
+2026-04-15 12:22:35,155 | INFO | reddit_sentiment_pipeline | 📊 Aggregating sentiment by hour...
+2026-04-15 12:22:35,182 | INFO | reddit_sentiment_pipeline | ✅ Created 522 hourly aggregates
+2026-04-15 12:22:35,182 | INFO | reddit_sentiment_pipeline | 💾 Saving sentiment results to database...
+2026-04-15 12:22:39,971 | INFO | reddit_sentiment_pipeline | ✅ Saved 364 posts with sentiment
+2026-04-15 12:22:42,337 | INFO | reddit_sentiment_pipeline | ✅ Saved 1,139 comments with sentiment
+2026-04-15 12:22:43,407 | INFO | reddit_sentiment_pipeline | ✅ Saved 169 hourly post aggregates
+2026-04-15 12:22:47,301 | INFO | reddit_sentiment_pipeline | ✅ Saved 522 hourly comment aggregates
+2026-04-15 12:22:47,305 | INFO | reddit_sentiment_pipeline | ✅ All sentiment data saved to database!
+2026-04-15 12:22:47,305 | INFO | reddit_sentiment_pipeline | 
+================================================================================
+2026-04-15 12:22:47,305 | INFO | reddit_sentiment_pipeline | SENTIMENT ANALYSIS STATISTICS
+2026-04-15 12:22:47,308 | INFO | reddit_sentiment_pipeline | ================================================================================
+2026-04-15 12:22:47,308 | INFO | reddit_sentiment_pipeline | 
+📝 POSTS SENTIMENT:
+2026-04-15 12:22:47,308 | INFO | reddit_sentiment_pipeline |   Total posts: 364
+2026-04-15 12:22:47,531 | INFO | reddit_sentiment_pipeline |   Mean sentiment: -0.0440
+2026-04-15 12:22:47,586 | INFO | reddit_sentiment_pipeline |   Std sentiment: 0.4554
+2026-04-15 12:22:47,640 | INFO | reddit_sentiment_pipeline |   Mean confidence: 0.7555
+2026-04-15 12:22:49,602 | INFO | reddit_sentiment_pipeline |   NEUTRAL: 288 (79.1%)
+2026-04-15 12:22:49,602 | INFO | reddit_sentiment_pipeline |   NEGATIVE: 46 (12.6%)
+2026-04-15 12:22:49,602 | INFO | reddit_sentiment_pipeline |   POSITIVE: 30 (8.2%)
+2026-04-15 12:22:49,602 | INFO | reddit_sentiment_pipeline | 
+💬 COMMENTS SENTIMENT:
+2026-04-15 12:22:49,606 | INFO | reddit_sentiment_pipeline |   Total comments: 1,139
+2026-04-15 12:22:49,606 | INFO | reddit_sentiment_pipeline |   Mean sentiment: -0.0369
+2026-04-15 12:22:49,606 | INFO | reddit_sentiment_pipeline |   Std sentiment: 0.6538
+2026-04-15 12:22:49,606 | INFO | reddit_sentiment_pipeline |   Mean confidence: 0.6681
+2026-04-15 12:22:49,626 | INFO | reddit_sentiment_pipeline |   NEUTRAL: 651 (57.2%)
+2026-04-15 12:22:49,628 | INFO | reddit_sentiment_pipeline |   NEGATIVE: 265 (23.3%)
+2026-04-15 12:22:49,630 | INFO | reddit_sentiment_pipeline |   POSITIVE: 223 (19.6%)
+2026-04-15 12:22:49,630 | INFO | reddit_sentiment_pipeline | 
+================================================================================
+
+2026-04-15 12:22:49,649 | INFO | reddit_sentiment_pipeline | ✅ PIPELINE COMPLETE in 886.5s
+2026-04-15 12:22:49,995 | INFO | reddit_sentiment_pipeline | 
+📊 SAMPLE RESULTS - POSTS:
+2026-04-15 12:22:50,084 | INFO | reddit_sentiment_pipeline | 
+                                               title sentiment_label  sentiment_score  sentiment_confidence
+0  Billionaire Tim Draper doubles down on bold Bi...         neutral                0              0.680959
+1  US Oil Falls Below $94 as Bitcoin Tops $76K Am...        negative               -1              0.520230
+2  Goldman Sachs files for bitcoin income ETF in ...         neutral                0              0.882471
+3    Bitcoin Breaks $76K, MicroStrategy Shares Rally         neutral                0              0.696878
+4  Officially 105,000 blocks until the next Bitco...         neutral                0              0.856446
+5  Musician G. Love Loses $424,000 Bitcoin Retire...        negative               -1              0.720739
+6  Strategy Buys $1 Billion in Bitcoin, Now Holds...         neutral                0              0.881369
+7  Strategy Buys 13,927 BTC For $1B, Holdings Nea...         neutral                0              0.924092
+8                      Thoughts on 100% bitcoin etf?         neutral                0              0.907097
+9  The companies that built Bitcoin's mining infr...         neutral                0              0.578828
+2026-04-15 12:22:50,084 | INFO | reddit_sentiment_pipeline | 
+💬 SAMPLE RESULTS - COMMENTS:
+2026-04-15 12:22:50,099 | INFO | reddit_sentiment_pipeline | 
+                                        comment_text sentiment_label  sentiment_score  sentiment_confidence
+0  I kept wondering about four years ago the last...         neutral                0              0.740247
+1  BTC has been on an uptrend since we got stuck ...        positive                1              0.685646
+2  He predicted BTC $250k by end of 2025, was cle...         neutral                0              0.488208
+3  Watch BTC break down again just as everyone be...         neutral                0              0.503464
+4  Lmao\n\nBitcoin just moves up and down all the...        negative               -1              0.596508
+5  Wow, what a push! Bitcoin just keeps surprisin...        positive                1              0.972769
+6                  Most crypto is garbage except btc        negative               -1              0.928262
+7  Imagine if ETH actually hit $50k, people just ...        positive                1              0.464341
+8  Whats this the rock? They dont know how to rec...        negative               -1              0.628779
+9  Why not a privacy coin? Market cap is too smal...        negative               -1              0.559642
+2026-04-15 12:22:50,104 | INFO | reddit_sentiment_pipeline | 
+📈 HOURLY AGGREGATION - POSTS:
+2026-04-15 12:22:50,133 | INFO | reddit_sentiment_pipeline | 
+                time_window  mean_sentiment  std_sentiment  num_items  sentiment_confidence_mean  post_id_count
+0 2024-10-06 09:00:00+00:00             0.0            NaN          1                   0.747421              1
+1 2024-10-06 18:00:00+00:00             0.0            NaN          1                   0.853246              1
+2 2024-10-09 00:00:00+00:00             0.0            NaN          1                   0.931370              1
+3 2024-10-10 15:00:00+00:00             0.0            NaN          1                   0.831786              1
+4 2024-10-12 18:00:00+00:00             1.0            NaN          1                   0.811823              1
+5 2024-10-16 18:00:00+00:00             0.0            NaN          1                   0.628216              1
+6 2024-10-26 00:00:00+00:00             0.0            NaN          1                   0.835751              1
+7 2024-11-07 18:00:00+00:00             1.0            NaN          1                   0.962532              1
+8 2024-11-10 15:00:00+00:00             1.0            NaN          1                   0.582838              1
+9 2024-11-14 09:00:00+00:00             0.0            NaN          1                   0.938209              1

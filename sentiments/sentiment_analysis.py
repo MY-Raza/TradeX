@@ -386,7 +386,7 @@ def aggregate_sentiment_hourly(df: pd.DataFrame, time_column: str) -> pd.DataFra
     df[time_column] = pd.to_datetime(df[time_column])
     
     # Round to hour
-    df["hour"] = df[time_column].dt.floor("H")
+    df["hour"] = df[time_column].dt.floor("3H")
     
     # Aggregate
     agg_df = df.groupby("hour").agg({
