@@ -1,5 +1,5 @@
 import pandas as pd
-from TradeX.utils.db.utils import read_df_from_db, save_df_to_db
+from TradeX.utils.db.utils import read_df_from_db
 from TradeX.utils.common.logs import get_logger
 
 logger = get_logger("filtered_reddit_pipeline")
@@ -7,7 +7,7 @@ logger = get_logger("filtered_reddit_pipeline")
 # =====================================
 # CONFIG
 # =====================================
-SCHEMA = "social_data"
+SCHEMA = "reddit"
 POSTS_TABLE = "reddit_posts"
 COMMENTS_TABLE = "reddit_comments"
 

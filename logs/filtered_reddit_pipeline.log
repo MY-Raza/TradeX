@@ -1,0 +1,29 @@
+2026-04-15 10:37:09,197 | INFO | filtered_reddit_pipeline | 📥 Loading data from DB...
+2026-04-15 10:37:09,775 | INFO | filtered_reddit_pipeline | ✅ Posts loaded: 2000
+2026-04-15 10:37:09,775 | INFO | filtered_reddit_pipeline | ✅ Comments loaded: 8817
+2026-04-15 10:37:09,775 | INFO | filtered_reddit_pipeline | 🚫 Removing ethereum & ethtrader data...
+2026-04-15 10:37:09,793 | INFO | filtered_reddit_pipeline | ✅ Posts after filter: 1600
+2026-04-15 10:37:09,794 | INFO | filtered_reddit_pipeline | ✅ Comments after filter: 6428
+2026-04-15 10:37:09,794 | INFO | filtered_reddit_pipeline | ₿ Filtering BTC-related data...
+2026-04-15 10:37:09,859 | INFO | filtered_reddit_pipeline | ✅ BTC Posts: 364
+2026-04-15 10:37:09,864 | INFO | filtered_reddit_pipeline | ✅ BTC Comments: 1139
+2026-04-15 10:37:09,864 | INFO | filtered_reddit_pipeline | 
+📊 Sample Posts:
+2026-04-15 10:37:09,864 | INFO | filtered_reddit_pipeline |    post_id       subreddit  ...            author                                                url
+0  1sls9a6  cryptocurrency  ...          002Chris  https://finance.yahoo.com/markets/crypto/artic...
+1  1slqlzz  cryptocurrency  ...  Sad-Struggle7797  https://coinedition.com/us-oil-falls-below-94-...
+2  1slce37  cryptocurrency  ...          diwalost  https://www.coindesk.com/business/2026/04/14/g...
+3  1slcjhd  cryptocurrency  ...         gdscrypto  https://beincrypto.com/bitcoin-76k-microstrate...
+4  1sl3wm5  cryptocurrency  ...       WatcherGuru               https://i.redd.it/qi67d99ym4vg1.jpeg
+
+[5 rows x 11 columns]
+2026-04-15 10:37:09,893 | INFO | filtered_reddit_pipeline | 
+💬 Sample Comments:
+2026-04-15 10:37:09,893 | INFO | filtered_reddit_pipeline |    post_id comment_id       subreddit  ... comment_score              comment_time comment_author
+0  1sloi38    og9gmug  cryptocurrency  ...             1 2026-04-15 08:32:53+00:00   GreenStretch
+1  1sloi38    og8owfq  cryptocurrency  ...             1 2026-04-15 05:53:44+00:00      maniloona
+2  1sls9a6    og9euly  cryptocurrency  ...             5 2026-04-15 08:21:16+00:00   marcbolanman
+3  1slcjhd    og5k5mf  cryptocurrency  ...            20 2026-04-14 20:58:47+00:00       partymsl
+4  1slcjhd    og807yg  cryptocurrency  ...             2 2026-04-15 03:38:33+00:00        Suibeam
+
+[5 rows x 7 columns]
