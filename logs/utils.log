@@ -36645,3 +36645,12 @@ Last 5 rows from data_binance.btc_1m:
 2026-04-15 08:59:52,286 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
 2026-04-15 08:59:52,289 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
 2026-04-15 08:59:52,727 | INFO | utils | Inserted 1399 rows into data_binance.link_1m
+2026-04-15 10:13:29,440 | INFO | utils | Database engine initialized
+2026-04-15 10:13:29,869 | INFO | utils | Schema 'reddit' ready
+2026-04-15 10:13:30,037 | INFO | utils | Indexes ensured: reddit_posts_post_time_uidx, reddit_posts_post_time_desc_idx
+2026-04-15 10:13:30,855 | INFO | utils | Hypertable created/verified for "reddit"."reddit_posts"
+2026-04-15 10:13:33,674 | INFO | utils | Inserted 2000 rows into reddit.reddit_posts
+2026-04-15 10:13:33,729 | INFO | utils | Schema 'reddit' ready
+2026-04-15 10:13:33,824 | INFO | utils | Indexes ensured: reddit_comments_comment_time_uidx, reddit_comments_comment_time_desc_idx
+2026-04-15 10:13:33,842 | INFO | utils | Hypertable created/verified for "reddit"."reddit_comments"
+2026-04-15 10:13:38,711 | INFO | utils | Inserted 8835 rows into reddit.reddit_comments

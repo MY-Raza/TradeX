@@ -2,8 +2,23 @@ import praw
 import pandas as pd
 from datetime import datetime
 from TradeX.utils.common.logs import get_logger
-from TradeX.utils.db.utils import save_df_to_db
+from TradeX.utils.db.utils import save_df_to_db,read_df_from_db
 logger = get_logger("reddit_scraper")
+
+posts = read_df_from_db(
+    table_name="reddit_posts",
+    schema="reddit",
+    limit=1000
+)
+
+comments = read_df_from_db(
+    table_name="reddit_comments",
+    schema="reddit",
+    limit=1000
+)
+
+print(posts.head())
+print(comments.head())
 
 # =========================
 # Reddit API Initialization
