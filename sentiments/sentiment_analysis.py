@@ -200,12 +200,21 @@ def aggregate_sentiment_hourly(df, time_column):
     }, inplace=True)
 
     return agg
+def fix_dtypes_for_sql(df):
+    df = df.copy()
 
+    # 🔥 FIX simhash (uint64 → string)
+    if "simhash" in df.columns:
+        df["simhash"] = df["simhash"].astype(str)
+
+    return df
 # ================================================================================
 # SAVE
 # ================================================================================
 def save_sentiment_to_db(posts_df, comments_df, posts_agg, comments_agg):
 
+    posts_df = fix_dtypes_for_sql(posts_df)
+    comments_df = fix_dtypes_for_sql(comments_df)
     save_df_to_db(posts_df, POSTS_SENTIMENT_TABLE, SCHEMA, "post_time", True)
     save_df_to_db(comments_df, COMMENTS_SENTIMENT_TABLE, SCHEMA, "comment_time", True)
     save_df_to_db(posts_agg, POSTS_SENTIMENT_AGG_TABLE, SCHEMA, "time_window", True)
@@ -254,5 +263,5 @@ if __name__ == "__main__":
 
     results = main()
 
-    logger.info(f"{results["posts"].head()}")
-    print(f"{results["posts_agg"].head()}")
+    logger.info(results["posts"].head())
+    logger.info(results["posts_agg"].head())
