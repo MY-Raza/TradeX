@@ -28,7 +28,7 @@ logger = get_logger("feature_engineering")
 
 SCHEMA_REDDIT  = "reddit"
 SCHEMA_MARKET  = "data_binance"
-SCHEMA_OUTPUT  = "ml_features"
+SCHEMA_OUTPUT  = "reddit"
 
 POSTS_AGG_TABLE    = "posts_sentiment_hourly"
 COMMENTS_AGG_TABLE = "comments_sentiment_hourly"
@@ -306,9 +306,10 @@ def build_alpha_features(df: pd.DataFrame) -> pd.DataFrame:
         .mean()
         .fillna(0)
     )
-    df["sentiment_spike"] = (
-        df["sentiment_volume_total"] > 2 * rolling_vol_mean
-    ).astype(int)
+    df["sentiment_spike"] = np.where(
+    df["sentiment_combined"].diff() > 0.3, 1,
+    np.where(df["sentiment_combined"].diff() < -0.3, -1, 0)
+    )
 
     # 3. Fear-greed proxy: sentiment × activity
     df["fear_greed_index"] = (
@@ -448,15 +449,8 @@ def save_outputs(df: pd.DataFrame) -> None:
     logger.info("Saving to DB…")
     save_df_to_db(df, OUTPUT_TABLE, SCHEMA_OUTPUT, "datetime", is_timeseries=True)
 
-    csv_path     = f"{OUTPUT_TABLE}.csv"
-    parquet_path = f"{OUTPUT_TABLE}.parquet"
-
-    df.to_csv(csv_path, index=False)
-    df.to_parquet(parquet_path, index=False)
 
     logger.info(f"Saved → DB: {SCHEMA_OUTPUT}.{OUTPUT_TABLE}")
-    logger.info(f"Saved → CSV: {csv_path}")
-    logger.info(f"Saved → Parquet: {parquet_path}")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
