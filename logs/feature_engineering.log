@@ -30,3 +30,19 @@
 2026-04-15 17:41:32,248 | INFO | feature_engineering | Saving to DB…
 2026-04-15 17:42:00,915 | INFO | feature_engineering | Saved → DB: reddit.ml_features
 2026-04-15 17:42:00,995 | INFO | feature_engineering | ══ Feature Engineering Pipeline DONE ══
+2026-04-15 17:59:21,616 | INFO | feature_engineering | ══ Feature Engineering Pipeline START ══
+2026-04-15 17:59:21,616 | INFO | feature_engineering | Loading data from DB…
+2026-04-15 17:59:38,998 | INFO | feature_engineering | Loaded  OHLCV=1,728,538  posts=213  comments=695
+2026-04-15 17:59:39,014 | INFO | feature_engineering | [post] sentiment features built: 11 cols
+2026-04-15 17:59:39,026 | INFO | feature_engineering | [comment] sentiment features built: 11 cols
+2026-04-15 17:59:39,052 | INFO | feature_engineering | Combined sentiment shape: (780, 27)
+2026-04-15 17:59:39,053 | INFO | feature_engineering | Resampling OHLCV 1m → 1h…
+2026-04-15 17:59:39,803 | INFO | feature_engineering | OHLCV features built: (28808, 10)
+2026-04-15 17:59:39,869 | INFO | feature_engineering | Merged shape: (28808, 36)
+2026-04-15 17:59:39,877 | INFO | feature_engineering | Alpha features built.
+2026-04-15 17:59:39,903 | INFO | feature_engineering | Targets added. Shape after last-row drop: (28807, 42)
+2026-04-15 17:59:39,911 | INFO | feature_engineering | Final feature set: (28807, 31)
+2026-04-15 17:59:39,933 | INFO | feature_engineering | Final clean shape: (28807, 31)
+2026-04-15 17:59:39,933 | INFO | feature_engineering | Saving to DB…
+2026-04-15 18:00:00,171 | INFO | feature_engineering | Saved → DB: reddit.ml_features
+2026-04-15 18:00:00,226 | INFO | feature_engineering | ══ Feature Engineering Pipeline DONE ══
