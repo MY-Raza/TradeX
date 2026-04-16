@@ -102,3 +102,123 @@ Done. Final shape: (28807, 26)
 4 2024-09-30 21:00:00+00:00                 0.0  ...       0      -0.003461
 
 [5 rows x 26 columns]
+2026-04-16 12:07:37,902 | INFO | feature_pipeline | 🚀 FEATURE PIPELINE START
+2026-04-16 12:07:37,902 | INFO | feature_pipeline | 📥 Loading sentiment data…
+2026-04-16 12:07:39,132 | INFO | feature_pipeline |   Posts rows:    213
+2026-04-16 12:07:39,132 | INFO | feature_pipeline |   Comments rows: 695
+2026-04-16 12:07:39,140 | INFO | feature_pipeline | 📅 Global date range → start: 2024-09-30 17:00:00+00:00  |  end: 2026-04-15 09:00:00+00:00
+2026-04-16 12:07:39,140 | INFO | feature_pipeline | 📈 Fetching OHLCV [data_binance.btc_1m] 2024-09-30 17:00:00+00:00 → 2026-04-15 09:00:00+00:00
+2026-04-16 12:07:58,477 | INFO | feature_pipeline |   OHLCV rows fetched: 808,801
+2026-04-16 12:07:58,477 | INFO | feature_pipeline | 🧮 Engineering sentiment features…
+2026-04-16 12:07:58,522 | INFO | feature_pipeline | 🔗 Combining post + comment sentiment features…
+2026-04-16 12:07:58,563 | INFO | feature_pipeline |   Combined sentiment rows: 780
+2026-04-16 12:07:58,563 | INFO | feature_pipeline | 📊 Resampling OHLCV to 1h…
+2026-04-16 12:07:59,053 | INFO | feature_pipeline |   Hourly candles: 13,481
+2026-04-16 12:07:59,061 | INFO | feature_pipeline | 🔀 Merging OHLCV + sentiment…
+2026-04-16 12:07:59,094 | INFO | feature_pipeline |   Merged rows: 13,481
+2026-04-16 12:07:59,108 | INFO | feature_pipeline | ⚡ Building alpha features…
+2026-04-16 12:07:59,114 | INFO | feature_pipeline | 🎯 Building target variables…
+2026-04-16 12:07:59,129 | INFO | feature_pipeline |   Rows after target construction: 13,480
+2026-04-16 12:07:59,129 | INFO | feature_pipeline | 🗂 Selecting final feature set…
+2026-04-16 12:07:59,156 | INFO | feature_pipeline |   Final shape: (13480, 26)
+2026-04-16 12:07:59,156 | INFO | feature_pipeline | 💾 Saving outputs…
+2026-04-16 12:08:23,603 | INFO | feature_pipeline | 🚀 FEATURE PIPELINE START
+2026-04-16 12:08:23,603 | INFO | feature_pipeline | 📥 Loading sentiment data…
+2026-04-16 12:08:26,238 | INFO | feature_pipeline |   Posts rows:    213
+2026-04-16 12:08:26,238 | INFO | feature_pipeline |   Comments rows: 695
+2026-04-16 12:08:26,245 | INFO | feature_pipeline | 📅 Global date range → start: 2024-09-30 17:00:00+00:00  |  end: 2026-04-15 09:00:00+00:00
+2026-04-16 12:08:26,245 | INFO | feature_pipeline | 📈 Fetching OHLCV [data_binance.btc_1m] 2024-09-30 17:00:00+00:00 → 2026-04-15 09:00:00+00:00
+2026-04-16 12:08:38,872 | INFO | feature_pipeline |   OHLCV rows fetched: 808,801
+2026-04-16 12:08:38,873 | INFO | feature_pipeline | 🧮 Engineering sentiment features…
+2026-04-16 12:08:38,997 | INFO | feature_pipeline | 🔗 Combining post + comment sentiment features…
+2026-04-16 12:08:39,084 | INFO | feature_pipeline |   Combined sentiment rows: 780
+2026-04-16 12:08:39,084 | INFO | feature_pipeline | 📊 Resampling OHLCV to 1h…
+2026-04-16 12:08:39,931 | INFO | feature_pipeline |   Hourly candles: 13,481
+2026-04-16 12:08:39,996 | INFO | feature_pipeline | 🔀 Merging OHLCV + sentiment…
+2026-04-16 12:08:40,057 | INFO | feature_pipeline |   Merged rows: 13,481
+2026-04-16 12:08:40,064 | INFO | feature_pipeline | ⚡ Building alpha features…
+2026-04-16 12:08:40,076 | INFO | feature_pipeline | 🎯 Building target variables…
+2026-04-16 12:08:40,090 | INFO | feature_pipeline |   Rows after target construction: 13,480
+2026-04-16 12:08:40,090 | INFO | feature_pipeline | 🗂 Selecting final feature set…
+2026-04-16 12:08:40,113 | INFO | feature_pipeline |   Final shape: (13480, 26)
+2026-04-16 12:08:40,113 | INFO | feature_pipeline | 💾 Saving outputs…
+2026-04-16 12:08:59,871 | INFO | feature_pipeline |   ✅ Saved to DB: reddit.ml_features
+2026-04-16 12:08:59,871 | INFO | feature_pipeline | ========================================================================
+2026-04-16 12:08:59,871 | INFO | feature_pipeline | 📋 DIAGNOSTICS
+2026-04-16 12:08:59,886 | INFO | feature_pipeline | ========================================================================
+2026-04-16 12:08:59,888 | INFO | feature_pipeline |   Shape: (13480, 26)
+2026-04-16 12:08:59,901 | INFO | feature_pipeline |   ✅ Missing values: 0 (feature columns)
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |   📈 Top 10 feature correlations with 'target':
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     returns                                       -0.0427
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     price_momentum                                -0.0403
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     divergence                                    +0.0403
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     volatility                                    +0.0135
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     sentiment_spike                               +0.0117
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     post_lag_3                                    -0.0112
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     comment_lag_3                                 +0.0108
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     comment_lag_5                                 +0.0086
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     post_lag_1                                    +0.0074
+2026-04-16 12:08:59,945 | INFO | feature_pipeline |     sentiment_price_interaction                   +0.0063
+2026-04-16 12:08:59,958 | INFO | feature_pipeline |   ⚖️  Class balance (target):
+2026-04-16 12:08:59,958 | INFO | feature_pipeline |     DOWN(0): 49.6%
+2026-04-16 12:08:59,958 | INFO | feature_pipeline |     UP  (1): 50.4%
+2026-04-16 12:08:59,958 | INFO | feature_pipeline | ========================================================================
+2026-04-16 12:08:59,958 | INFO | feature_pipeline | ✅ FEATURE PIPELINE COMPLETE
+2026-04-16 12:08:59,964 | INFO | feature_pipeline |                    datetime  sentiment_combined  ...  target  target_return
+0 2024-09-30 17:00:00+00:00                 0.0  ...       0      -0.005768
+1 2024-09-30 18:00:00+00:00                 0.0  ...       1       0.002624
+2 2024-09-30 19:00:00+00:00                 0.0  ...       1       0.004977
+3 2024-09-30 20:00:00+00:00                 0.0  ...       0      -0.001724
+4 2024-09-30 21:00:00+00:00                 0.0  ...       0      -0.003461
+
+[5 rows x 26 columns]
+2026-04-16 12:27:47,487 | INFO | feature_pipeline | 🚀 FEATURE PIPELINE START
+2026-04-16 12:27:47,491 | INFO | feature_pipeline | 📥 Loading sentiment data…
+2026-04-16 12:27:48,093 | INFO | feature_pipeline |   Posts rows:    213
+2026-04-16 12:27:48,094 | INFO | feature_pipeline |   Comments rows: 695
+2026-04-16 12:27:48,097 | INFO | feature_pipeline | 📅 Global date range → start: 2024-09-30 17:00:00+00:00  |  end: 2026-04-15 09:00:00+00:00
+2026-04-16 12:27:48,097 | INFO | feature_pipeline | 📈 Fetching OHLCV [data_binance.btc_1m] 2024-09-30 17:00:00+00:00 → 2026-04-15 09:00:00+00:00
+2026-04-16 12:28:04,390 | INFO | feature_pipeline |   OHLCV rows fetched: 808,801
+2026-04-16 12:28:04,390 | INFO | feature_pipeline | 🧮 Engineering sentiment features…
+2026-04-16 12:28:04,497 | INFO | feature_pipeline | 🔗 Combining post + comment sentiment features…
+2026-04-16 12:28:04,544 | INFO | feature_pipeline |   Combined sentiment rows: 780
+2026-04-16 12:28:04,545 | INFO | feature_pipeline | 📊 Resampling OHLCV to 1h…
+2026-04-16 12:28:04,989 | INFO | feature_pipeline |   Hourly candles: 13,481
+2026-04-16 12:28:05,017 | INFO | feature_pipeline | 🔀 Merging OHLCV + sentiment…
+2026-04-16 12:28:05,086 | INFO | feature_pipeline |   Merged rows: 13,481
+2026-04-16 12:28:05,088 | INFO | feature_pipeline | ⚡ Building alpha features…
+2026-04-16 12:28:05,117 | INFO | feature_pipeline | 🎯 Building target variables…
+2026-04-16 12:28:05,131 | INFO | feature_pipeline |   Rows after target construction: 13,480
+2026-04-16 12:28:05,132 | INFO | feature_pipeline | 🗂 Selecting final feature set…
+2026-04-16 12:28:05,189 | INFO | feature_pipeline |   Final shape: (13480, 26)
+2026-04-16 12:28:05,189 | INFO | feature_pipeline | 💾 Saving outputs…
+2026-04-16 12:28:19,495 | INFO | feature_pipeline |   ✅ Saved to DB: reddit.ml_features
+2026-04-16 12:28:19,497 | INFO | feature_pipeline | ========================================================================
+2026-04-16 12:28:19,497 | INFO | feature_pipeline | 📋 DIAGNOSTICS
+2026-04-16 12:28:19,497 | INFO | feature_pipeline | ========================================================================
+2026-04-16 12:28:19,498 | INFO | feature_pipeline |   Shape: (13480, 26)
+2026-04-16 12:28:19,506 | INFO | feature_pipeline |   ✅ Missing values: 0 (feature columns)
+2026-04-16 12:28:19,555 | INFO | feature_pipeline |   📈 Top 10 feature correlations with 'target':
+2026-04-16 12:28:19,556 | INFO | feature_pipeline |     returns                                       -0.0427
+2026-04-16 12:28:19,556 | INFO | feature_pipeline |     price_momentum                                -0.0403
+2026-04-16 12:28:19,556 | INFO | feature_pipeline |     volatility                                    +0.0135
+2026-04-16 12:28:19,558 | INFO | feature_pipeline |     sentiment_spike                               +0.0117
+2026-04-16 12:28:19,558 | INFO | feature_pipeline |     post_lag_3                                    -0.0112
+2026-04-16 12:28:19,558 | INFO | feature_pipeline |     comment_lag_3                                 +0.0108
+2026-04-16 12:28:19,559 | INFO | feature_pipeline |     comment_lag_5                                 +0.0086
+2026-04-16 12:28:19,559 | INFO | feature_pipeline |     post_lag_1                                    +0.0074
+2026-04-16 12:28:19,559 | INFO | feature_pipeline |     sentiment_price_interaction                   +0.0063
+2026-04-16 12:28:19,560 | INFO | feature_pipeline |     fear_greed_index                              -0.0060
+2026-04-16 12:28:19,563 | INFO | feature_pipeline |   ⚖️  Class balance (target):
+2026-04-16 12:28:19,564 | INFO | feature_pipeline |     DOWN(0): 49.6%
+2026-04-16 12:28:19,564 | INFO | feature_pipeline |     UP  (1): 50.4%
+2026-04-16 12:28:19,565 | INFO | feature_pipeline | ========================================================================
+2026-04-16 12:28:19,565 | INFO | feature_pipeline | ✅ FEATURE PIPELINE COMPLETE
+2026-04-16 12:28:19,570 | INFO | feature_pipeline |                    datetime  sentiment_combined  ...  target  target_return
+0 2024-09-30 17:00:00+00:00                 0.0  ...       0      -0.005768
+1 2024-09-30 18:00:00+00:00                 0.0  ...       1       0.002624
+2 2024-09-30 19:00:00+00:00                 0.0  ...       1       0.004977
+3 2024-09-30 20:00:00+00:00                 0.0  ...       0      -0.001724
+4 2024-09-30 21:00:00+00:00                 0.0  ...       0      -0.003461
+
+[5 rows x 26 columns]
