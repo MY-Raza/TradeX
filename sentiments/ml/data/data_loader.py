@@ -101,8 +101,13 @@ def load_features_from_db() -> pd.DataFrame:
         f"Features loaded → shape: {df.shape}  |  "
         f"date range: {df[DATETIME_COL].min()} → {df[DATETIME_COL].max()}"
     )
-    return df
+    global START
+    START = df[DATETIME_COL].min() 
+    global END
+    END = START = df[DATETIME_COL].min() 
+    
 
+    return df
 
 def load_price_data(
     start_date: str | pd.Timestamp | None = None,
@@ -131,15 +136,15 @@ def load_price_data(
     """
     logger.info(
         f"Loading OHLCV data from {DB_SCHEMA_PRICE}.{PRICE_TABLE} "
-        f"[{start_date} → {end_date}] …"
+        f"[{START} → {END}] …"
     )
 
     df = fetch_ohlcv_df(
         table_name=PRICE_TABLE,
         schema=DB_SCHEMA_PRICE,
         time_column=PRICE_TIME_COLUMN,
-        start_date=str(start_date) if start_date is not None else None,
-        end_date=str(end_date)     if end_date   is not None else None,
+        start_date=START,
+        end_date=END,
     )
 
     if df.empty:

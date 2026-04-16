@@ -36909,3 +36909,16 @@ Last 5 rows from data_binance.btc_1m:
 2026-04-16 17:35:19,018 | INFO | utils | Inserted 28 rows into reddit.backtest_results
 2026-04-16 17:35:19,038 | INFO | utils | Schema 'reddit' ready
 2026-04-16 17:35:19,078 | INFO | utils | Inserted 1 rows into reddit.backtest_summary
+2026-04-16 17:47:04,234 | INFO | utils | Database engine initialized
+2026-04-16 17:47:05,502 | INFO | utils | Table Found
+2026-04-16 17:47:28,889 | INFO | utils | Table Found
+2026-04-16 17:47:29,307 | INFO | utils | Schema 'reddit' ready
+2026-04-16 17:47:29,782 | INFO | utils | Indexes ensured: ml_predictions_datetime_uidx, ml_predictions_datetime_desc_idx
+2026-04-16 17:47:31,317 | INFO | utils | Hypertable created/verified for "reddit"."ml_predictions"
+2026-04-16 17:47:33,194 | INFO | utils | Inserted 2022 rows into reddit.ml_predictions
+2026-04-16 17:47:33,202 | INFO | utils | Schema 'reddit' ready
+2026-04-16 17:47:33,234 | INFO | utils | Indexes ensured: backtest_results_datetime_uidx, backtest_results_datetime_desc_idx
+2026-04-16 17:47:33,260 | INFO | utils | Hypertable created/verified for "reddit"."backtest_results"
+2026-04-16 17:47:33,665 | INFO | utils | Inserted 22 rows into reddit.backtest_results
+2026-04-16 17:47:33,684 | INFO | utils | Schema 'reddit' ready
+2026-04-16 17:47:33,708 | INFO | utils | Inserted 1 rows into reddit.backtest_summary
