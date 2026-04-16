@@ -1,611 +1,619 @@
 """
-feature_engineering.py
-=======================
-Production-ready ML feature engineering pipeline for TradeX.
+feature_pipeline.py
+====================
+Production-ready ML feature engineering pipeline for BTC sentiment + OHLCV data.
 
 Combines:
-  - Reddit post sentiment  (hourly)
-  - Reddit comment sentiment (hourly)
-  - OHLCV market data      (minute → resampled to 1h)
+  - Reddit post sentiment   (reddit.posts_sentiment_hourly)
+  - Reddit comment sentiment (reddit.comments_sentiment_hourly)
+  - BTC 1-minute OHLCV      (data_binance.btc_1m)
 
-Output: ml_features table  +  CSV  +  Parquet
+Output:
+  - final_features_df  (in-memory)
+  - ml_features table  (database)
+  - features.csv       (disk)
+  - features.parquet   (disk)
 """
 
 from __future__ import annotations
 
-import pandas as pd
+import os
+import warnings
 import numpy as np
+import pandas as pd
 
-from TradeX.utils.db.utils import read_df_from_db, save_df_to_db
-from TradeX.utils.data.data_cleaner import resample_ohlcv
+warnings.filterwarnings("ignore")
+
+from TradeX.utils.db.utils import read_df_from_db, save_df_to_db, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
+from TradeX.utils.data.data_cleaner import resample_ohlcv
 
-logger = get_logger("feature_engineering")
+logger = get_logger("feature_pipeline")
 
-# ─────────────────────────────────────────────────────────────────────────────
-# CONSTANTS
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# CONFIG
+# ================================================================================
+POSTS_SCHEMA         = "reddit"
+POSTS_TABLE          = "posts_sentiment_hourly"
 
-SCHEMA_REDDIT  = "reddit"
-SCHEMA_MARKET  = "data_binance"
-SCHEMA_OUTPUT  = "reddit"
+COMMENTS_SCHEMA      = "reddit"
+COMMENTS_TABLE       = "comments_sentiment_hourly"
 
-POSTS_AGG_TABLE    = "posts_sentiment_hourly"
-COMMENTS_AGG_TABLE = "comments_sentiment_hourly"
-OHLCV_TABLE        = "btc_1m"
-OUTPUT_TABLE       = "ml_features"
+OHLCV_TABLE          = "btc_1m"
+OHLCV_SCHEMA         = "data_binance"
+OHLCV_TIME_COLUMN    = "datetime"
+OHLCV_RESAMPLE_FREQ  = "1h"
 
-RESAMPLE_FREQ = "1h"
+ML_FEATURES_TABLE    = "ml_features"
+ML_FEATURES_SCHEMA   = "ml_features"
 
-# Weights for combined sentiment (comments weighted higher — more signal-dense)
-POST_WEIGHT    = 0.4
-COMMENT_WEIGHT = 0.6
+OUTPUT_DIR           = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH             = os.path.join(OUTPUT_DIR, "features.csv")
+PARQUET_PATH         = os.path.join(OUTPUT_DIR, "features.parquet")
 
-# Lag window
-N_LAGS = 5
-
-# EMA span for sentiment smoothing
-EMA_SPAN = 5
-
-# Volume spike window
-SPIKE_WINDOW = 10
-
-# Correlation columns to report in diagnostics
-DIAG_FEATURES = [
-    "sentiment_combined", "sentiment_volume_total", "sentiment_disagreement",
-    "post_momentum", "comment_momentum",
-    "returns", "volatility", "volume_change", "price_momentum",
-    "divergence", "fear_greed_index", "sentiment_price_interaction",
-]
+LAG_RANGE            = range(1, 6)     # lags 1–5
+EMA_SPAN             = 5
+VOL_WINDOW           = 10              # rolling window for volatility / spike detection
+SPIKE_MULTIPLIER     = 2.0
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 1  — LOAD DATA
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 1 — LOAD SENTIMENT DATA
+# ================================================================================
 
-def load_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def load_sentiment_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Load OHLCV, posts sentiment, and comments sentiment from DB.
-
-    Returns:
-        ohlcv_df   : 1-minute OHLCV (datetime sorted)
-        posts_df   : hourly posts sentiment (time_window sorted)
-        comments_df: hourly comments sentiment (time_window sorted)
+    Load hourly-aggregated post and comment sentiment tables.
+    Ensures time_window is UTC-aware and data is sorted ascending.
     """
-    logger.info("Loading data from DB…")
+    logger.info("📥 Loading sentiment data…")
 
-    ohlcv_df    = read_df_from_db(OHLCV_TABLE,        SCHEMA_MARKET)
-    posts_df    = read_df_from_db(POSTS_AGG_TABLE,    SCHEMA_REDDIT)
-    comments_df = read_df_from_db(COMMENTS_AGG_TABLE, SCHEMA_REDDIT)
+    posts_df    = read_df_from_db(POSTS_TABLE,    POSTS_SCHEMA)
+    comments_df = read_df_from_db(COMMENTS_TABLE, COMMENTS_SCHEMA)
 
-    # ── Parse & sort datetimes ──────────────────────────────────────────────
-    ohlcv_df["datetime"]      = pd.to_datetime(ohlcv_df["datetime"], utc=True)
-    posts_df["time_window"]   = pd.to_datetime(posts_df["time_window"], utc=True)
+    for df, label in [(posts_df, "posts"), (comments_df, "comments")]:
+        if "time_window" not in df.columns:
+            raise ValueError(f"'{label}' table missing 'time_window' column.")
+
+    posts_df["time_window"]    = pd.to_datetime(posts_df["time_window"],    utc=True)
     comments_df["time_window"] = pd.to_datetime(comments_df["time_window"], utc=True)
 
-    ohlcv_df    = ohlcv_df.sort_values("datetime").reset_index(drop=True)
     posts_df    = posts_df.sort_values("time_window").reset_index(drop=True)
     comments_df = comments_df.sort_values("time_window").reset_index(drop=True)
 
-    logger.info(
-        f"Loaded  OHLCV={len(ohlcv_df):,}  "
-        f"posts={len(posts_df):,}  "
-        f"comments={len(comments_df):,}"
-    )
-    return ohlcv_df, posts_df, comments_df
+    logger.info(f"  Posts rows:    {len(posts_df):,}")
+    logger.info(f"  Comments rows: {len(comments_df):,}")
+
+    return posts_df, comments_df
+
 
 # ================================================================================
-# DATE RANGE
+# STEP 2 — COMPUTE GLOBAL DATE RANGE
 # ================================================================================
-def compute_date_range(posts_df: pd.DataFrame, comments_df: pd.DataFrame) -> tuple:
+
+def compute_date_range(
+    posts_df: pd.DataFrame,
+    comments_df: pd.DataFrame,
+) -> tuple[pd.Timestamp, pd.Timestamp]:
     """
-    Derives the global start and end timestamps from both posts and comments.
-
-    Converts post_time and comment_time to UTC-aware datetimes, then takes
-    the earliest and latest timestamps across both tables.
-
-    Returns:
-        (start_date, end_date) as timezone-aware pandas Timestamps (UTC)
+    Returns (start_date, end_date) spanning the full range of BOTH sentiment tables.
+    Both timestamps are UTC-aware.
     """
-    posts_times = pd.to_datetime(posts_df["post_time"], utc=True)
-    comments_times = pd.to_datetime(comments_df["comment_time"], utc=True)
+    posts_min    = posts_df["time_window"].min()
+    posts_max    = posts_df["time_window"].max()
+    comments_min = comments_df["time_window"].min()
+    comments_max = comments_df["time_window"].max()
 
-    all_times = pd.concat([posts_times, comments_times], ignore_index=True)
+    start_date = min(posts_min, comments_min)
+    end_date   = max(posts_max, comments_max)
 
-    start_date = all_times.min()
-    end_date = all_times.max()
-
-    logger.info(f"📅 Date range — start: {start_date}  |  end: {end_date}")
+    logger.info(f"📅 Global date range → start: {start_date}  |  end: {end_date}")
 
     return start_date, end_date
 
-# ================================================================================
-# OHLCV LOADING
-# ================================================================================
-def load_ohlcv(start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
-    """
-    Fetches BTC 1-minute OHLCV data for the computed date range.
 
-    Args:
-        start_date: UTC-aware start timestamp
-        end_date:   UTC-aware end timestamp
+# ================================================================================
+# STEP 3 — FETCH OHLCV DATA
+# ================================================================================
 
-    Returns:
-        ohlcv_df: DataFrame containing BTC OHLCV rows within the range
+def load_ohlcv(
+    start_date: pd.Timestamp,
+    end_date: pd.Timestamp,
+) -> pd.DataFrame:
     """
-    logger.info(f"📈 Fetching OHLCV from '{OHLCV_TABLE}' [{start_date} → {end_date}]")
+    Fetches BTC 1-minute OHLCV rows for the computed date range,
+    sorted ascending by datetime (UTC-aware).
+    """
+    logger.info(
+        f"📈 Fetching OHLCV [{OHLCV_SCHEMA}.{OHLCV_TABLE}] "
+        f"{start_date} → {end_date}"
+    )
 
     ohlcv_df = fetch_ohlcv_df(
         table_name=OHLCV_TABLE,
         schema=OHLCV_SCHEMA,
         time_column=OHLCV_TIME_COLUMN,
         start_date=start_date,
-        end_date=end_date
+        end_date=end_date,
     )
 
-    logger.info(f"✅ OHLCV rows fetched: {len(ohlcv_df):,}")
+    if ohlcv_df.empty:
+        raise ValueError("OHLCV fetch returned 0 rows — check date range / DB connectivity.")
+
+    ohlcv_df[OHLCV_TIME_COLUMN] = pd.to_datetime(ohlcv_df[OHLCV_TIME_COLUMN], utc=True)
+    ohlcv_df = ohlcv_df.sort_values(OHLCV_TIME_COLUMN).reset_index(drop=True)
+
+    logger.info(f"  OHLCV rows fetched: {len(ohlcv_df):,}")
 
     return ohlcv_df
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 2  — SENTIMENT FEATURE ENGINEERING (PER SOURCE)
-# ─────────────────────────────────────────────────────────────────────────────
+
+# ================================================================================
+# STEP 4 — SENTIMENT FEATURE ENGINEERING
+# ================================================================================
+
+def _safe_volume_col(df: pd.DataFrame) -> str:
+    """
+    Detect the volume / count column from the aggregated sentiment table.
+    Tries common naming conventions.
+    """
+    candidates = [c for c in df.columns if c.endswith("_count") or c == "count"]
+    if candidates:
+        return candidates[0]
+
+    # Fallback: first non time_window, non-sentinel column
+    fallback = [c for c in df.columns if c != "time_window"][0]
+    logger.warning(f"Volume column not found by name; using '{fallback}' as proxy.")
+    return fallback
+
 
 def create_sentiment_features(df: pd.DataFrame, prefix: str) -> pd.DataFrame:
     """
-    Build per-source sentiment features from an hourly aggregated DataFrame.
+    Compute sentiment feature columns for a single sentiment source.
 
-    Expected input columns (from sentiment_analysis.py aggregation):
-        time_window, mean_sentiment, std_sentiment, sentiment_confidence_mean,
-        <id_col>_count  (num items)
+    Args:
+        df     : Hourly sentiment DataFrame (must contain time_window, mean_sentiment,
+                 std_sentiment, sentiment_confidence_mean or similar, and a count col).
+        prefix : Column prefix, e.g. "post" or "comment".
 
-    Returns a new DataFrame indexed by time_window with prefixed feature cols.
-
-    NOTE:
-      - All NaNs produced by diff / EMA / lag are filled with 0 (safe default).
-      - No rows are dropped.
+    Returns:
+        DataFrame with engineered feature columns and time_window.
     """
-    df = df.copy()
+    df = df.copy().sort_values("time_window").reset_index(drop=True)
 
-    # ── Resolve the "count" column (created dynamically in aggregate_sentiment_hourly)
-    count_col = next(
-        (c for c in df.columns if c.endswith("_count")),
-        None
+    # ── Resolve column names defensively ────────────────────────────────────────
+    mean_col       = "mean_sentiment"
+    std_col        = "std_sentiment"
+    conf_col       = next(
+        (c for c in df.columns if "confidence" in c.lower()),
+        None,
     )
-    if count_col is None:
-        logger.warning(f"[{prefix}] No count column found; defaulting num_items to 0.")
-        df["_num_items"] = 0
+    volume_col     = _safe_volume_col(df)
+
+    if mean_col not in df.columns:
+        raise ValueError(f"Expected '{mean_col}' in {prefix} sentiment DataFrame.")
+
+    # ── Core features ────────────────────────────────────────────────────────────
+    out = pd.DataFrame()
+    out["time_window"] = df["time_window"]
+
+    out[f"{prefix}_mean_sentiment"] = df[mean_col]
+    out[f"{prefix}_volatility"]     = df[std_col] if std_col in df.columns else 0.0
+    out[f"{prefix}_volume"]         = df[volume_col]
+
+    # Momentum = first difference of mean sentiment (backward-looking by definition)
+    out[f"{prefix}_momentum"] = df[mean_col].diff().fillna(0)
+
+    # EMA of mean sentiment
+    out[f"{prefix}_ema"] = (
+        df[mean_col]
+        .ewm(span=EMA_SPAN, adjust=False)
+        .mean()
+        .fillna(0)
+    )
+
+    # Confidence-weighted sentiment
+    if conf_col:
+        out[f"{prefix}_weighted"] = (df[mean_col] * df[conf_col]).fillna(0)
     else:
-        df["_num_items"] = df[count_col].fillna(0)
+        logger.warning(f"[{prefix}] No confidence column found; setting weighted = mean_sentiment.")
+        out[f"{prefix}_weighted"] = df[mean_col].fillna(0)
 
-    # ── Guard: ensure required columns exist ────────────────────────────────
-    for col in ("mean_sentiment", "std_sentiment", "sentiment_confidence_mean"):
-        if col not in df.columns:
-            logger.warning(f"[{prefix}] Missing '{col}'; defaulting to 0.")
-            df[col] = 0.0
+    # ── Lag features (1–5) — strictly backward-looking ──────────────────────────
+    for lag in LAG_RANGE:
+        out[f"{prefix}_lag_{lag}"] = df[mean_col].shift(lag).fillna(0)
 
-    s = df["mean_sentiment"].fillna(0)
-    std = df["std_sentiment"].fillna(0)
-    conf = df["sentiment_confidence_mean"].fillna(0)
-    volume = df["_num_items"]
-
-    features = pd.DataFrame(index=df.index)
-    features["time_window"] = df["time_window"]
-
-    # Core features
-    features[f"{prefix}_mean_sentiment"] = s
-    features[f"{prefix}_momentum"]       = s.diff().fillna(0)
-    features[f"{prefix}_volatility"]     = std
-    features[f"{prefix}_volume"]         = volume
-    features[f"{prefix}_ema"]            = s.ewm(span=EMA_SPAN, adjust=False).mean().fillna(0)
-    features[f"{prefix}_weighted"]       = (s * conf).fillna(0)
-
-    # Lag features — shift(n) on first rows → NaN → fill with 0
-    for lag in range(1, N_LAGS + 1):
-        features[f"{prefix}_lag_{lag}"] = s.shift(lag).fillna(0)
-
-    logger.info(f"[{prefix}] sentiment features built: {features.shape[1] - 1} cols")
-    return features
+    return out.reset_index(drop=True)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 3  — COMBINE POSTS + COMMENTS
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 5 — COMBINE POSTS + COMMENTS
+# ================================================================================
 
 def combine_sentiment(
-    posts_feats: pd.DataFrame,
-    comments_feats: pd.DataFrame,
-    posts_raw: pd.DataFrame,
-    comments_raw: pd.DataFrame,
+    posts_feat: pd.DataFrame,
+    comments_feat: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Outer-join posts and comments features on time_window, then build
-    cross-source alpha signals.
-
-    posts_raw / comments_raw supply mean_sentiment and count for the
-    confidence-weighted average that requires original volume info.
+    Outer-join post and comment features on time_window, then compute
+    combined alpha features.  Missing values are filled with 0 before
+    any combination arithmetic.
     """
-    # ── Merge feature sets ──────────────────────────────────────────────────
-    merged = pd.merge(
-        posts_feats,
-        comments_feats,
-        on="time_window",
-        how="outer",
-    ).sort_values("time_window").reset_index(drop=True)
+    logger.info("🔗 Combining post + comment sentiment features…")
 
-    # Fill any gaps created by outer join with 0 (never drop rows)
-    post_sent    = merged["post_mean_sentiment"].fillna(0)
-    comment_sent = merged["comment_mean_sentiment"].fillna(0)
-    post_vol     = merged["post_volume"].fillna(0)
-    comment_vol  = merged["comment_volume"].fillna(0)
+    merged = pd.merge(posts_feat, comments_feat, on="time_window", how="outer")
+    merged = merged.sort_values("time_window").reset_index(drop=True)
 
-    # Weighted combined sentiment (volume-weighted for confidence avg)
-    total_vol = post_vol + comment_vol
+    # Fill gaps introduced by the outer join
+    merged = merged.fillna(0)
 
+    # ── Combined signals ────────────────────────────────────────────────────────
     merged["sentiment_combined"] = (
-        POST_WEIGHT    * post_sent +
-        COMMENT_WEIGHT * comment_sent
+        0.4 * merged["post_mean_sentiment"]
+        + 0.6 * merged["comment_mean_sentiment"]
     )
 
-    merged["sentiment_volume_total"] = total_vol
+    merged["sentiment_volume_total"] = (
+        merged["post_volume"] + merged["comment_volume"]
+    )
 
-    merged["sentiment_disagreement"] = (post_sent - comment_sent).abs()
+    merged["sentiment_disagreement"] = (
+        merged["post_mean_sentiment"] - merged["comment_mean_sentiment"]
+    ).abs()
 
-    # Volume-weighted confidence average; guard against zero denominator
-    post_conf    = merged.get("post_weighted",    post_sent)     # proxy if missing
-    comment_conf = merged.get("comment_weighted", comment_sent)
+    # Volume-weighted confidence average; guard against zero total volume
+    total_vol = merged["sentiment_volume_total"].replace(0, np.nan)
+    merged["sentiment_confidence_combined"] = (
+        merged["post_weighted"] * merged["post_volume"]
+        + merged["comment_weighted"] * merged["comment_volume"]
+    ) / total_vol
+    merged["sentiment_confidence_combined"] = (
+        merged["sentiment_confidence_combined"].fillna(0)
+    )
 
-    with np.errstate(invalid="ignore", divide="ignore"):
-        merged["sentiment_confidence_combined"] = np.where(
-            total_vol > 0,
-            (post_conf * post_vol + comment_conf * comment_vol) / total_vol,
-            0.0,
-        )
+    logger.info(f"  Combined sentiment rows: {len(merged):,}")
 
-    # Final NaN sweep on combined features
-    combined_cols = [
-        "sentiment_combined",
-        "sentiment_volume_total",
-        "sentiment_disagreement",
-        "sentiment_confidence_combined",
-    ]
-    merged[combined_cols] = merged[combined_cols].fillna(0)
-
-    logger.info(f"Combined sentiment shape: {merged.shape}")
     return merged
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 4  — OHLCV FEATURE ENGINEERING
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 6 — OHLCV FEATURE ENGINEERING
+# ================================================================================
 
 def build_ohlcv_features(ohlcv_1m: pd.DataFrame) -> pd.DataFrame:
     """
-    Resample 1m OHLCV to hourly and compute market features.
-
-    All NaNs from rolling / pct_change are filled with 0.
+    Resamples 1-minute OHLCV to hourly then computes market features.
+    All NaNs replaced with 0.
     """
-    logger.info(f"Resampling OHLCV 1m → {RESAMPLE_FREQ}…")
-    df = resample_ohlcv(ohlcv_1m, RESAMPLE_FREQ).copy()
+    logger.info(f"📊 Resampling OHLCV to {OHLCV_RESAMPLE_FREQ}…")
 
-    df["returns"]        = df["close"].pct_change().fillna(0)
-    df["volatility"]     = df["returns"].rolling(SPIKE_WINDOW).std().fillna(0)
-    df["volume_change"]  = df["volume"].pct_change().fillna(0)
-    df["price_momentum"] = df["close"].diff().fillna(0)
+    ohlcv_h = resample_ohlcv(ohlcv_1m, OHLCV_RESAMPLE_FREQ).copy()
+    ohlcv_h[OHLCV_TIME_COLUMN] = pd.to_datetime(ohlcv_h[OHLCV_TIME_COLUMN], utc=True)
+    ohlcv_h = ohlcv_h.sort_values(OHLCV_TIME_COLUMN).reset_index(drop=True)
 
-    logger.info(f"OHLCV features built: {df.shape}")
-    return df
+    logger.info(f"  Hourly candles: {len(ohlcv_h):,}")
+
+    # Strictly backward-looking market features
+    ohlcv_h["returns"]          = ohlcv_h["close"].pct_change().fillna(0)
+    ohlcv_h["volatility"]       = (
+        ohlcv_h["returns"]
+        .rolling(VOL_WINDOW, min_periods=1)
+        .std()
+        .fillna(0)
+    )
+    ohlcv_h["volume_change"]    = ohlcv_h["volume"].pct_change().fillna(0)
+    ohlcv_h["price_momentum"]   = ohlcv_h["close"].diff().fillna(0)
+
+    return ohlcv_h
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 5  — MERGE SENTIMENT + MARKET
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 7 — MERGE SENTIMENT + MARKET
+# ================================================================================
 
 def merge_sentiment_market(
-    ohlcv_feats: pd.DataFrame,
+    ohlcv_h: pd.DataFrame,
     sentiment_df: pd.DataFrame,
 ) -> pd.DataFrame:
     """
-    Left-join OHLCV (master timeline) with combined sentiment.
-
-    Missing sentiment values after merge:
-      1. Forward-filled (carry last known value — no leakage, hourly cadence)
-      2. Remaining leading NaNs filled with 0
+    LEFT JOIN ohlcv_h (market anchor) with sentiment on datetime == time_window.
+    Forward-fills then zero-fills any remaining NaN sentiment values.
     """
-    merged = ohlcv_feats.merge(
+    logger.info("🔀 Merging OHLCV + sentiment…")
+
+    merged = ohlcv_h.merge(
         sentiment_df,
-        left_on="datetime",
+        left_on=OHLCV_TIME_COLUMN,
         right_on="time_window",
         how="left",
     )
 
-    # Drop redundant time_window column
-    merged.drop(columns=["time_window"], errors="ignore", inplace=True)
+    # Drop the redundant time_window column that came from the right side
+    if "time_window" in merged.columns:
+        merged = merged.drop(columns=["time_window"])
 
-    # Forward fill then zero-fill
-    sentiment_cols = [c for c in merged.columns if c not in ohlcv_feats.columns]
-    merged[sentiment_cols] = (
-        merged[sentiment_cols]
-        .ffill()
-        .fillna(0)
-    )
+    # Forward fill to propagate the last known sentiment into market gaps
+    sentiment_cols = [c for c in merged.columns if c not in ohlcv_h.columns]
+    merged[sentiment_cols] = merged[sentiment_cols].ffill()
 
-    logger.info(f"Merged shape: {merged.shape}")
-    return merged
+    # Zero-fill any remaining NaNs (start of series with no prior sentiment)
+    merged[sentiment_cols] = merged[sentiment_cols].fillna(0)
+
+    logger.info(f"  Merged rows: {len(merged):,}")
+
+    return merged.reset_index(drop=True)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 6  — ALPHA FEATURES
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 8 — ALPHA FEATURES
+# ================================================================================
 
 def build_alpha_features(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Compute cross-domain alpha signals from merged market + sentiment data.
-
-    All NaN results are filled with 0.
+    Compute cross-domain alpha signals.  All NaNs replaced with 0.
     """
+    logger.info("⚡ Building alpha features…")
+
     df = df.copy()
 
-    # 1. Divergence: sentiment vs price momentum (normalised to similar scale)
-    df["divergence"] = (
-        df["sentiment_combined"] - df["price_momentum"]
-    ).fillna(0)
+    # 1. Divergence: sentiment direction vs price momentum
+    df["divergence"] = (df["sentiment_combined"] - df["price_momentum"]).fillna(0)
 
-    # 2. Sentiment spike: binary flag when volume > 2x rolling mean
-    rolling_vol_mean = (
+    # 2. Sentiment spike: volume > 2× rolling mean (boolean → int)
+    rolling_mean_vol = (
         df["sentiment_volume_total"]
-        .rolling(SPIKE_WINDOW, min_periods=1)
+        .rolling(VOL_WINDOW, min_periods=1)
         .mean()
-        .fillna(0)
     )
-    df["sentiment_spike"] = np.where(
-    df["sentiment_combined"].diff() > 0.3, 1,
-    np.where(df["sentiment_combined"].diff() < -0.3, -1, 0)
-    )
+    df["sentiment_spike"] = (
+        df["sentiment_volume_total"] > SPIKE_MULTIPLIER * rolling_mean_vol
+    ).astype(int)
 
-    # 3. Fear-greed proxy: sentiment × activity
+    # 3. Fear / greed index
     df["fear_greed_index"] = (
         df["sentiment_combined"] * df["sentiment_volume_total"]
     ).fillna(0)
 
-    # 4. Interaction: rate-of-change of sentiment × price returns
+    # 4. Sentiment × price interaction (both differenced → backward-looking)
     df["sentiment_price_interaction"] = (
-        df["sentiment_combined"].diff().fillna(0) * df["returns"]
+        df["sentiment_combined"].diff() * df["returns"]
     ).fillna(0)
 
-    logger.info("Alpha features built.")
     return df
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 7  — TARGET VARIABLES
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 9 — TARGET VARIABLES
+# ================================================================================
 
 def build_targets(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Construct classification and regression targets.
+    Adds classification (target) and regression (target_return) labels.
 
-    target        : 1 if next-bar close > current close, else 0
-    target_return : next-bar pct_change of close
+    target        = 1 if next-bar close > current close, else 0
+    target_return = next-bar pct_change of close
 
-    The LAST row is dropped (no forward label available).
-    No other rows are dropped.
+    The final row is dropped because its target is undefined (no future bar).
     """
+    logger.info("🎯 Building target variables…")
+
     df = df.copy()
 
-    df["target"]        = (df["close"].shift(-1) > df["close"]).astype("Int64")
+    df["target"]        = (df["close"].shift(-1) > df["close"]).astype(int)
     df["target_return"] = df["close"].pct_change().shift(-1)
 
-    # Drop only the final row (NaN target unavoidable)
-    df = df.iloc[:-1].copy()
+    # Drop only the last row (NaN target from forward-shift)
+    df = df.iloc[:-1].reset_index(drop=True)
 
-    logger.info(f"Targets added. Shape after last-row drop: {df.shape}")
+    logger.info(f"  Rows after target construction: {len(df):,}")
+
     return df
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 8  — SELECT FINAL FEATURE SET
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 10 — FINAL FEATURE SELECTION
+# ================================================================================
+
+SENTIMENT_FEATURES = [
+    "sentiment_combined",
+    "sentiment_volume_total",
+    "sentiment_disagreement",
+    "post_momentum",
+    "comment_momentum",
+    *[f"post_lag_{i}"    for i in LAG_RANGE],
+    *[f"comment_lag_{i}" for i in LAG_RANGE],
+]
+
+MARKET_FEATURES = [
+    "returns",
+    "volatility",
+    "volume_change",
+    "price_momentum",
+]
+
+ALPHA_FEATURES = [
+    "divergence",
+    "sentiment_spike",
+    "fear_greed_index",
+    "sentiment_price_interaction",
+]
+
+TARGET_COLS = ["target", "target_return"]
+
+ALL_FEATURES = SENTIMENT_FEATURES + MARKET_FEATURES + ALPHA_FEATURES
+
 
 def select_final_features(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Keep only the documented feature set + meta / target columns.
+    Selects the final feature set + datetime + targets.
+    Enforces zero-fill, deduplication, and ascending sort.
     """
-    lag_cols = (
-        [f"post_lag_{i}"    for i in range(1, N_LAGS + 1)] +
-        [f"comment_lag_{i}" for i in range(1, N_LAGS + 1)]
-    )
+    logger.info("🗂 Selecting final feature set…")
 
-    feature_cols = [
-        # ── Identifiers
-        "datetime",
+    keep_cols = [OHLCV_TIME_COLUMN] + ALL_FEATURES + TARGET_COLS
+    missing   = [c for c in keep_cols if c not in df.columns]
 
-        # ── OHLCV passthrough (needed for targets / downstream models)
-        "open", "high", "low", "close", "volume",
-
-        # ── Sentiment
-        "sentiment_combined",
-        "sentiment_volume_total",
-        "sentiment_disagreement",
-        "post_momentum",
-        "comment_momentum",
-        *lag_cols,
-
-        # ── Market
-        "returns",
-        "volatility",
-        "volume_change",
-        "price_momentum",
-
-        # ── Alpha
-        "divergence",
-        "sentiment_spike",
-        "fear_greed_index",
-        "sentiment_price_interaction",
-
-        # ── Targets
-        "target",
-        "target_return",
-    ]
-
-    # Keep only columns that actually exist (defensive)
-    available = [c for c in feature_cols if c in df.columns]
-    missing   = set(feature_cols) - set(available)
     if missing:
-        logger.warning(f"Missing columns (skipped): {missing}")
+        logger.warning(f"  Missing columns (will be created as 0): {missing}")
+        for col in missing:
+            df[col] = 0
 
-    final = df[available].copy()
-    logger.info(f"Final feature set: {final.shape}")
+    final = df[keep_cols].copy()
+
+    # ── STEP 11: Final cleaning ─────────────────────────────────────────────────
+    # Fill remaining NaNs (targets intentionally excluded from blanket fill)
+    feature_cols = [c for c in ALL_FEATURES if c in final.columns]
+    final[feature_cols] = final[feature_cols].fillna(0)
+
+    final = final.sort_values(OHLCV_TIME_COLUMN).reset_index(drop=True)
+    final = final.drop_duplicates(subset=[OHLCV_TIME_COLUMN]).reset_index(drop=True)
+
+    logger.info(f"  Final shape: {final.shape}")
+
     return final
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 9  — FINAL CLEANING
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 12 — SAVE OUTPUTS
+# ================================================================================
 
-def final_clean(df: pd.DataFrame) -> pd.DataFrame:
+def save_outputs(final_df: pd.DataFrame) -> None:
     """
-    Last safety pass:
-      - Fill any residual NaNs (except targets) with 0
-      - Sort by datetime
-      - Remove duplicate timestamps
+    Persists final_features_df to:
+      1. Database  (ml_features.ml_features)
+      2. CSV       (features.csv)
+      3. Parquet   (features.parquet)
     """
-    df = df.copy()
+    logger.info("💾 Saving outputs…")
 
-    # Preserve targets as-is (they should be clean after build_targets)
-    non_target_cols = [c for c in df.columns if c not in ("target", "target_return")]
-    df[non_target_cols] = df[non_target_cols].fillna(0)
-
-    df = (
-        df
-        .sort_values("datetime")
-        .drop_duplicates(subset=["datetime"], keep="last")
-        .reset_index(drop=True)
+    # DB
+    save_df_to_db(
+        final_df,
+        table_name=ML_FEATURES_TABLE,
+        schema=ML_FEATURES_SCHEMA,
+        time_column=OHLCV_TIME_COLUMN,
+        is_timeseries=True,
     )
+    logger.info(f"  ✅ Saved to DB: {ML_FEATURES_SCHEMA}.{ML_FEATURES_TABLE}")
 
-    logger.info(f"Final clean shape: {df.shape}")
-    return df
+    # CSV
+    final_df.to_csv(CSV_PATH, index=False)
+    logger.info(f"  ✅ CSV: {CSV_PATH}")
+
+    # Parquet
+    final_df.to_parquet(PARQUET_PATH, index=False)
+    logger.info(f"  ✅ Parquet: {PARQUET_PATH}")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 10  — OUTPUT
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# STEP 13 — DIAGNOSTICS
+# ================================================================================
 
-def save_outputs(df: pd.DataFrame) -> None:
+def run_diagnostics(final_df: pd.DataFrame) -> None:
     """
-    Persist the final feature DataFrame to:
-      1. Database (ml_features.ml_features)
-      2. CSV
-      3. Parquet
+    Prints dataset shape, missing value audit, feature-target correlations,
+    and classification target class balance.
     """
-    logger.info("Saving to DB…")
-    save_df_to_db(df, OUTPUT_TABLE, SCHEMA_OUTPUT, "datetime", is_timeseries=True)
+    logger.info("=" * 72)
+    logger.info("📋 DIAGNOSTICS")
+    logger.info("=" * 72)
 
-
-    logger.info(f"Saved → DB: {SCHEMA_OUTPUT}.{OUTPUT_TABLE}")
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# STEP 11  — DIAGNOSTICS
-# ─────────────────────────────────────────────────────────────────────────────
-
-def run_diagnostics(df: pd.DataFrame) -> None:
-    """
-    Print key quality metrics without modifying the DataFrame.
-    """
-    print("\n" + "=" * 60)
-    print("  FEATURE ENGINEERING DIAGNOSTICS")
-    print("=" * 60)
-
-    print(f"\n  Dataset shape   : {df.shape}")
-    print(f"  Datetime range  : {df['datetime'].min()} → {df['datetime'].max()}")
+    # Shape
+    logger.info(f"  Shape: {final_df.shape}")
 
     # Missing values
-    total_nan = df.drop(columns=["target", "target_return"], errors="ignore").isna().sum().sum()
-    print(f"\n  Missing values (excl. targets): {total_nan}  (should be 0)")
+    total_nans = final_df[ALL_FEATURES].isna().sum().sum()
+    if total_nans == 0:
+        logger.info("  ✅ Missing values: 0 (feature columns)")
+    else:
+        nan_report = final_df[ALL_FEATURES].isna().sum()
+        nan_report = nan_report[nan_report > 0]
+        logger.warning(f"  ⚠️ NaN columns:\n{nan_report}")
 
-    # Class balance
-    if "target" in df.columns:
-        counts = df["target"].value_counts()
-        pct_up = counts.get(1, 0) / len(df) * 100
-        print(f"\n  Class balance   : UP={pct_up:.1f}%  DOWN={100 - pct_up:.1f}%")
-
-    # Feature correlations with target
-    if "target" in df.columns:
-        print("\n  Feature correlations with target (top 10 |r|):")
-        available_diag = [c for c in DIAG_FEATURES if c in df.columns]
-        corr_series = (
-            df[available_diag + ["target"]]
+    # Feature correlation with target
+    if "target" in final_df.columns:
+        corr = (
+            final_df[ALL_FEATURES + ["target"]]
             .corr()["target"]
             .drop("target")
-            .abs()
-            .sort_values(ascending=False)
+            .sort_values(key=abs, ascending=False)
         )
-        print(corr_series.head(10).to_string())
+        logger.info("  📈 Top 10 feature correlations with 'target':")
+        for feat, val in corr.head(10).items():
+            logger.info(f"    {feat:<45} {val:+.4f}")
 
-    print("\n" + "=" * 60 + "\n")
+    # Class balance
+    if "target" in final_df.columns:
+        balance = final_df["target"].value_counts(normalize=True).sort_index()
+        logger.info("  ⚖️  Class balance (target):")
+        for cls, pct in balance.items():
+            label = "UP  (1)" if cls == 1 else "DOWN(0)"
+            logger.info(f"    {label}: {pct:.1%}")
+
+    logger.info("=" * 72)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# MAIN PIPELINE
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# MAIN
+# ================================================================================
 
-def run_feature_pipeline(save_to_db: bool = True) -> pd.DataFrame:
+def main(save_to_database: bool = True) -> pd.DataFrame:
     """
-    Orchestrate the full feature engineering pipeline.
-
-    Args:
-        save_to_db: If True, persist outputs to DB + disk.
+    Full feature engineering pipeline.
 
     Returns:
-        final_features_df: ML-ready DataFrame.
+        final_features_df — ML-ready DataFrame
     """
-    logger.info("══ Feature Engineering Pipeline START ══")
+    logger.info("🚀 FEATURE PIPELINE START")
 
-    # ── 1. Load ─────────────────────────────────────────────────────────────
-    ohlcv_df, posts_df, comments_df = load_data()
+    # ── 1. Load sentiment ───────────────────────────────────────────────────────
+    posts_df, comments_df = load_sentiment_data()
 
-    # ── 2. Per-source sentiment features ────────────────────────────────────
-    posts_feats    = create_sentiment_features(posts_df,    prefix="post")
-    comments_feats = create_sentiment_features(comments_df, prefix="comment")
+    # ── 2. Compute global date range ────────────────────────────────────────────
+    start_date, end_date = compute_date_range(posts_df, comments_df)
 
-    # ── 3. Combine sentiment sources ────────────────────────────────────────
-    sentiment_df = combine_sentiment(
-        posts_feats, comments_feats, posts_df, comments_df
-    )
+    # ── 3. Fetch OHLCV ──────────────────────────────────────────────────────────
+    ohlcv_1m = load_ohlcv(start_date, end_date)
 
-    # ── 4. OHLCV features ───────────────────────────────────────────────────
-    ohlcv_feats = build_ohlcv_features(ohlcv_df)
+    # ── 4. Sentiment feature engineering ────────────────────────────────────────
+    logger.info("🧮 Engineering sentiment features…")
+    posts_feat    = create_sentiment_features(posts_df,    prefix="post")
+    comments_feat = create_sentiment_features(comments_df, prefix="comment")
 
-    # ── 5. Merge market + sentiment ─────────────────────────────────────────
-    merged_df = merge_sentiment_market(ohlcv_feats, sentiment_df)
+    # ── 5. Combine posts + comments ─────────────────────────────────────────────
+    sentiment_df = combine_sentiment(posts_feat, comments_feat)
 
-    # ── 6. Alpha features ───────────────────────────────────────────────────
+    # ── 6. OHLCV feature engineering ────────────────────────────────────────────
+    ohlcv_h = build_ohlcv_features(ohlcv_1m)
+
+    # ── 7. Merge sentiment + market ─────────────────────────────────────────────
+    merged_df = merge_sentiment_market(ohlcv_h, sentiment_df)
+
+    # ── 8. Alpha features ───────────────────────────────────────────────────────
     merged_df = build_alpha_features(merged_df)
 
-    # ── 7. Target variables ─────────────────────────────────────────────────
+    # ── 9. Target variables ─────────────────────────────────────────────────────
     merged_df = build_targets(merged_df)
 
-    # ── 8. Select final feature set ─────────────────────────────────────────
-    final_df = select_final_features(merged_df)
+    # ── 10 + 11. Select + clean final feature set ───────────────────────────────
+    final_features_df = select_final_features(merged_df)
 
-    # ── 9. Final cleaning ───────────────────────────────────────────────────
-    final_df = final_clean(final_df)
+    # ── 12. Save outputs ────────────────────────────────────────────────────────
+    if save_to_database:
+        save_outputs(final_features_df)
 
-    # ── 10. Persist ─────────────────────────────────────────────────────────
-    if save_to_db:
-        save_outputs(final_df)
+    # ── 13. Diagnostics ─────────────────────────────────────────────────────────
+    run_diagnostics(final_features_df)
 
-    # ── 11. Diagnostics ─────────────────────────────────────────────────────
-    run_diagnostics(final_df)
+    logger.info("✅ FEATURE PIPELINE COMPLETE")
 
-    logger.info("══ Feature Engineering Pipeline DONE ══")
-    return final_df
+    return final_features_df
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# ENTRY POINT
-# ─────────────────────────────────────────────────────────────────────────────
+# ================================================================================
+# RUN
+# ================================================================================
 
 if __name__ == "__main__":
-    final_features_df = run_feature_pipeline(save_to_db=True)
+    final_features_df = main()
+    logger.info(final_features_df.head())
