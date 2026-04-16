@@ -1,10 +1,3 @@
-"""
-config.py
-=========
-Central configuration for the BTC/USD ML trading pipeline.
-All tuneable parameters live here — do NOT scatter magic numbers across modules.
-"""
-
 # ============================================================
 # DATABASE / SCHEMA
 # ============================================================

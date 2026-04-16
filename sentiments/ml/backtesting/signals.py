@@ -1,32 +1,12 @@
-"""
-signals.py
-==========
-Converts model predictions into directional trading signals.
-
-Signal logic
-------------
-  class == 1  AND  reg_pred >  +THRESHOLD  AND  proba[1] >= MIN_PROB  →  +1  (long)
-  class == 0  AND  reg_pred < -THRESHOLD   AND  proba[0] >= MIN_PROB  →  -1  (short)
-  otherwise                                                             →   0  (neutral)
-
-All parameters are drawn from config.py for easy tuning.
-
-The output DataFrame contains exactly two columns:
-    datetime  — UTC-aware hourly timestamps aligned to feature rows
-    signals   — {1, -1, 0}
-
-This format is consumed directly by backtest_runner.run_backtest().
-"""
-
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
 
 from TradeX.utils.common.logs import get_logger
-from models import ModelBundle
-from preprocessing import PreparedData
-from config import SIGNAL_THRESHOLD, MIN_CLASS_PROBABILITY, DATETIME_COL
+from TradeX.sentiments.ml.model import ModelBundle
+from TradeX.sentiments.ml.data.preprocessing import PreparedData
+from TradeX.sentiments.ml.config import SIGNAL_THRESHOLD, MIN_CLASS_PROBABILITY, DATETIME_COL
 
 logger = get_logger("signals")
 

@@ -1,21 +1,3 @@
-"""
-preprocessing.py
-================
-Time-based train/val/test splitting and leak-free feature scaling.
-
-Responsibilities
-----------------
-* split_data_timewise(df)   — chronological split, zero shuffle
-* prepare_features(df_train, df_val, df_test)
-                            — extracts X / y_class / y_reg arrays,
-                              fits ScalerGuard on TRAIN only,
-                              transforms val & test
-
-STRICT NO-LEAKAGE GUARANTEE
-    ScalerGuard is fit exclusively on df_train.  Val and test rows are
-    transformed using train-derived statistics only (FIX-9 from pipeline).
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -25,9 +7,9 @@ from TradeX.utils.common.logs import get_logger
 
 # ScalerGuard lives inside the feature_pipeline module; import from there
 # so we use the canonical, documented implementation.
-from feature_pipeline import ScalerGuard
+from TradeX.sentiments.ml.feature_pipeline import ScalerGuard
 
-from config import (
+from TradeX.sentiments.ml.config import (
     ALL_FEATURES,
     TARGET_CLASS_COL,
     TARGET_RETURN_COL,

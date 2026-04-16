@@ -1,34 +1,11 @@
-"""
-backtest_runner.py
-==================
-Wires the BackTest engine to the ML signal pipeline.
-
-Responsibilities
-----------------
-* run_backtest()  — loads minute OHLCV spanning the test set, aligns
-                    signal timestamps to the BackTest engine's expectations,
-                    executes BackTest.run(), and returns structured results.
-
-TIMING ALIGNMENT CONTRACT
---------------------------
-Feature rows carry hourly timestamps.  Each feature timestamp T represents
-a candle that CLOSES at T (activity window [T-1h, T)).  The signal for that
-bar is therefore known ONLY at time T (bar-close).
-
-BackTest.run() interprets prediction timestamps as the moment the signal
-is received and uses buy_after_minutes to delay actual entry.  Setting
-buy_after_minutes=0 enters on the OPEN of the NEXT minute bar after T,
-which is correctly forward in time and free of look-ahead bias.
-"""
-
 from __future__ import annotations
 
 import pandas as pd
 from dataclasses import dataclass
 
 from TradeX.utils.common.logs import get_logger
-from backtest import BackTest          # provided class
-from data_loader import load_price_data
+from TradeX.backtest.backtest import BackTest        
+from TradeX.sentiments.ml.data.data_loader import load_price_data
 from config import BACKTEST_PARAMS, DATETIME_COL
 
 logger = get_logger("backtest_runner")

@@ -1,24 +1,10 @@
-"""
-data_loader.py
-==============
-Loads feature data and OHLCV price data from the database.
-
-Responsibilities
-----------------
-* load_features_from_db()  — pulls reddit.ml_features, validates, deduplicates
-* load_price_data()        — pulls minute-level OHLCV for backtesting
-
-All datetime columns are returned as UTC-aware pd.Timestamp.
-Rows are deduplicated and sorted ascending before returning.
-"""
-
 from __future__ import annotations
 
 import pandas as pd
 from TradeX.utils.db.utils import read_df_from_db, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 
-from config import (
+from TradeX.sentiments.ml.config import (
     DB_SCHEMA_FEATURES,
     DB_SCHEMA_PRICE,
     FEATURES_TABLE,
