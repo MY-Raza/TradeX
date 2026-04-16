@@ -13,6 +13,7 @@ PRICE_TIME_COLUMN    = "datetime"
 TABLE_ML_PREDICTIONS    = "ml_predictions"
 TABLE_BACKTEST_RESULTS  = "backtest_results"
 TABLE_BACKTEST_SUMMARY  = "backtest_summary"
+LAG_RANGE            = range(1, 6)
 
 # ============================================================
 # FEATURE LIST
@@ -20,44 +21,29 @@ TABLE_BACKTEST_SUMMARY  = "backtest_summary"
 # Keep in sync if the pipeline adds/removes features.
 # ============================================================
 SENTIMENT_FEATURES = [
-    # Post-based
-    "post_sentiment_mean", "post_sentiment_std", "post_sentiment_combined",
-    "post_sentiment_ema", "post_sentiment_spike", "post_sentiment_divergence",
-    # Lag features — posts
-    "post_sentiment_combined_lag1", "post_sentiment_combined_lag2",
-    "post_sentiment_combined_lag3", "post_sentiment_combined_lag4",
-    "post_sentiment_combined_lag5",
-    # Comment-based
-    "comment_sentiment_mean", "comment_sentiment_std", "comment_sentiment_combined",
-    "comment_sentiment_ema", "comment_sentiment_spike", "comment_sentiment_divergence",
-    # Lag features — comments
-    "comment_sentiment_combined_lag1", "comment_sentiment_combined_lag2",
-    "comment_sentiment_combined_lag3", "comment_sentiment_combined_lag4",
-    "comment_sentiment_combined_lag5",
+    "sentiment_combined",
+    "sentiment_volume_total",
+    "sentiment_disagreement",
+    "post_momentum",
+    "comment_momentum",
+    *[f"post_lag_{i}"    for i in LAG_RANGE],
+    *[f"comment_lag_{i}" for i in LAG_RANGE],
 ]
 
 MARKET_FEATURES = [
     "returns",
-    "log_returns",
     "volatility",
     "volume_change",
-    "rsi",
-    "macd",
-    "macd_signal",
-    "macd_hist",
-    "bb_upper",
-    "bb_lower",
-    "bb_width",
-    "atr",
     "price_momentum",
 ]
 
 ALPHA_FEATURES = [
-    "sentiment_momentum",
-    "sentiment_vol_interaction",
-    "cross_source_divergence",
-    "sentiment_market_alignment",
+    "divergence",
+    "sentiment_spike",
+    "fear_greed_index",
+    "sentiment_price_interaction",
 ]
+
 
 ALL_FEATURES = SENTIMENT_FEATURES + MARKET_FEATURES + ALPHA_FEATURES
 
@@ -113,7 +99,7 @@ MIN_CLASS_PROBABILITY = 0.55   # 0.0 = disable
 # ============================================================
 BACKTEST_PARAMS = {
     "starting_balance":  1_000,
-    "take_profit":       1.5,    # %
+    "take_profit":       3,    # %
     "stop_loss":         1.0,    # %
     "buy_after_minutes": 0,      # enter on open of signal bar
     "fee":               0.05,   # % per side (Binance maker ~0.02, taker 0.05)
