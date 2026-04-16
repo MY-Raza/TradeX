@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timezone
 import torch
 from transformers import pipeline
 import logging
@@ -15,7 +15,7 @@ from TradeX.sentiments.data.data_cleaner import (
     deduplicate_near
 )
 
-from TradeX.utils.db.utils import read_df_from_db, save_df_to_db
+from TradeX.utils.db.utils import read_df_from_db, save_df_to_db, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 
 # ================================================================================
@@ -35,18 +35,24 @@ COMMENTS_SENTIMENT_TABLE = "comments_sentiment"
 POSTS_SENTIMENT_AGG_TABLE = "posts_sentiment_hourly"
 COMMENTS_SENTIMENT_AGG_TABLE = "comments_sentiment_hourly"
 
+OHLCV_TABLE = "btc_1m"
+OHLCV_TIME_COLUMN = "datetime"
+OHLCV_SCHEMA = "data_binance"
+
 EXCLUDED_SUBS = ["ethereum", "ethtrader"]
 BTC_PATTERN = r"\b(btc|bitcoin)\b|\$btc"
 
-MODEL_NAME = "cardiffnlp/twitter-roberta-base-sentiment"
+# ✅ UPGRADED: FinBERT replaces twitter-roberta
+MODEL_NAME = "ProsusAI/finbert"
 BATCH_SIZE = 32
 MAX_LENGTH = 512
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
+# ✅ UPGRADED: FinBERT uses human-readable labels directly
 SENTIMENT_MAPPING = {
-    "LABEL_0": -1,
-    "LABEL_1": 0,
-    "LABEL_2": 1
+    "positive": 1,
+    "neutral":  0,
+    "negative": -1
 }
 
 # ================================================================================
@@ -87,6 +93,59 @@ def load_data():
     return posts_df, comments_df
 
 # ================================================================================
+# DATE RANGE
+# ================================================================================
+def compute_date_range(posts_df: pd.DataFrame, comments_df: pd.DataFrame) -> tuple:
+    """
+    Derives the global start and end timestamps from both posts and comments.
+
+    Converts post_time and comment_time to UTC-aware datetimes, then takes
+    the earliest and latest timestamps across both tables.
+
+    Returns:
+        (start_date, end_date) as timezone-aware pandas Timestamps (UTC)
+    """
+    posts_times = pd.to_datetime(posts_df["post_time"], utc=True)
+    comments_times = pd.to_datetime(comments_df["comment_time"], utc=True)
+
+    all_times = pd.concat([posts_times, comments_times], ignore_index=True)
+
+    start_date = all_times.min()
+    end_date = all_times.max()
+
+    logger.info(f"📅 Date range — start: {start_date}  |  end: {end_date}")
+
+    return start_date, end_date
+
+# ================================================================================
+# OHLCV LOADING
+# ================================================================================
+def load_ohlcv(start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
+    """
+    Fetches BTC 1-minute OHLCV data for the computed date range.
+
+    Args:
+        start_date: UTC-aware start timestamp
+        end_date:   UTC-aware end timestamp
+
+    Returns:
+        ohlcv_df: DataFrame containing BTC OHLCV rows within the range
+    """
+    logger.info(f"📈 Fetching OHLCV from '{OHLCV_TABLE}' [{start_date} → {end_date}]")
+
+    ohlcv_df = fetch_ohlcv_df(
+        table_name=OHLCV_TABLE,
+        schema=OHLCV_SCHEMA,
+        time_column=OHLCV_TIME_COLUMN,
+        start_date=start_date,
+        end_date=end_date
+    )
+
+    logger.info(f"✅ OHLCV rows fetched: {len(ohlcv_df):,}")
+
+    return ohlcv_df
+
+# ================================================================================
 # FILTERING
 # ================================================================================
 def filter_subreddits(posts_df, comments_df):
@@ -107,12 +166,25 @@ def filter_btc(posts_df, comments_df):
 # SENTIMENT CORE
 # ================================================================================
 def apply_sentiment_analysis(texts, sentiment_pipeline):
+    """
+    Runs FinBERT inference over a list of texts.
+
+    Empty strings are skipped and filled with a neutral default
+    {"label": "neutral", "score": 0.5} — consistent with FinBERT label format.
+    """
+    NEUTRAL_DEFAULT = {"label": "neutral", "score": 0.5}
+
     valid_texts = [t for t in texts if len(t) > 0]
 
     if not valid_texts:
-        return [{"label": "LABEL_1", "score": 0.5}] * len(texts)
+        return [NEUTRAL_DEFAULT] * len(texts)
 
     results = sentiment_pipeline(valid_texts)
+
+    # ✅ FinBERT returns lowercase labels: "positive", "neutral", "negative"
+    # Normalise to lowercase defensively in case of future model variation
+    for r in results:
+        r["label"] = r["label"].lower()
 
     out = []
     idx = 0
@@ -121,12 +193,12 @@ def apply_sentiment_analysis(texts, sentiment_pipeline):
             out.append(results[idx])
             idx += 1
         else:
-            out.append({"label": "LABEL_1", "score": 0.5})
+            out.append(NEUTRAL_DEFAULT)
 
     return out
 
 # ================================================================================
-# MAIN SENTIMENT FUNCTION (UPDATED)
+# MAIN SENTIMENT FUNCTION
 # ================================================================================
 def add_sentiment_to_df(df, text_column, sentiment_pipeline):
 
@@ -152,10 +224,11 @@ def add_sentiment_to_df(df, text_column, sentiment_pipeline):
 
     texts = df["cleaned_text"].tolist()
 
-    logger.info("🔍 Running sentiment...")
+    logger.info("🔍 Running sentiment (FinBERT)...")
 
     results = apply_sentiment_analysis(texts, sentiment_pipeline)
 
+    # ✅ SENTIMENT_MAPPING now keyed on FinBERT string labels
     df["sentiment_score"] = [SENTIMENT_MAPPING[r["label"]] for r in results]
     df["sentiment_confidence"] = [r["score"] for r in results]
 
@@ -173,7 +246,7 @@ def add_sentiment_to_df(df, text_column, sentiment_pipeline):
 def aggregate_sentiment_hourly(df, time_column):
 
     df = df.copy()
-    df[time_column] = pd.to_datetime(df[time_column])
+    df[time_column] = pd.to_datetime(df[time_column], utc=True)
 
     df["hour"] = df[time_column].dt.floor("1H")
 
@@ -200,6 +273,10 @@ def aggregate_sentiment_hourly(df, time_column):
     }, inplace=True)
 
     return agg
+
+# ================================================================================
+# DTYPE FIXES FOR SQL
+# ================================================================================
 def fix_dtypes_for_sql(df):
     df = df.copy()
 
@@ -208,6 +285,7 @@ def fix_dtypes_for_sql(df):
         df["simhash"] = df["simhash"].astype(str)
 
     return df
+
 # ================================================================================
 # SAVE
 # ================================================================================
@@ -229,21 +307,32 @@ def main(apply_btc_filter=True, save_to_database=True):
 
     log_device_info()
 
+    # ── 1. Load raw data ────────────────────────────────────────────────────────
     posts_df, comments_df = load_data()
 
+    # ── 2. Compute global date range (before filtering to keep full span) ───────
+    start_date, end_date = compute_date_range(posts_df, comments_df)
+
+    # ── 3. Fetch BTC OHLCV for that range ──────────────────────────────────────
+    ohlcv_df = load_ohlcv(start_date, end_date)
+
+    # ── 4. Filter subreddits / BTC mentions ────────────────────────────────────
     posts_df, comments_df = filter_subreddits(posts_df, comments_df)
 
     if apply_btc_filter:
         posts_df, comments_df = filter_btc(posts_df, comments_df)
 
+    # ── 5. Load FinBERT and run sentiment ──────────────────────────────────────
     model = load_sentiment_model()
 
     posts_df = add_sentiment_to_df(posts_df, "title", model)
     comments_df = add_sentiment_to_df(comments_df, "comment_text", model)
 
+    # ── 6. Hourly aggregation ──────────────────────────────────────────────────
     posts_agg = aggregate_sentiment_hourly(posts_df, "post_time")
     comments_agg = aggregate_sentiment_hourly(comments_df, "comment_time")
 
+    # ── 7. Persist to DB ───────────────────────────────────────────────────────
     if save_to_database:
         save_sentiment_to_db(posts_df, comments_df, posts_agg, comments_agg)
 
@@ -253,7 +342,8 @@ def main(apply_btc_filter=True, save_to_database=True):
         "posts": posts_df,
         "comments": comments_df,
         "posts_agg": posts_agg,
-        "comments_agg": comments_agg
+        "comments_agg": comments_agg,
+        "ohlcv": ohlcv_df
     }
 
 # ================================================================================
@@ -265,3 +355,4 @@ if __name__ == "__main__":
 
     logger.info(results["posts"].head())
     logger.info(results["posts_agg"].head())
+    logger.info(results["ohlcv"].head())
