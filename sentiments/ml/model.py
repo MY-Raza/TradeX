@@ -1,16 +1,3 @@
-"""
-models.py
-=========
-Train and evaluate RandomForest classification + regression models.
-
-Responsibilities
-----------------
-* train_classification_model()  — fits RFC on scaled train data
-* train_regression_model()      — fits RFR on scaled train data
-* evaluate_models()             — reports accuracy, RMSE, feature importances
-* ModelBundle                   — dataclass carrying trained models + predictions
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -25,7 +12,7 @@ from sklearn.metrics import (
 )
 
 from TradeX.utils.common.logs import get_logger
-from preprocessing import PreparedData
+from TradeX.sentiments.ml.data.preprocessing import PreparedData
 from config import CLASSIFIER_PARAMS, REGRESSOR_PARAMS
 
 logger = get_logger("models")
