@@ -13,7 +13,7 @@ from sklearn.metrics import (
 
 from TradeX.utils.common.logs import get_logger
 from TradeX.sentiments.ml.data.preprocessing import PreparedData
-from config import CLASSIFIER_PARAMS, REGRESSOR_PARAMS
+from TradeX.sentiments.ml.config import CLASSIFIER_PARAMS, REGRESSOR_PARAMS
 
 logger = get_logger("models")
 

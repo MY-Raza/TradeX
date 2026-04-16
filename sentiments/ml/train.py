@@ -1,25 +1,3 @@
-"""
-train.py  ← MAIN ENTRY POINT
-=============================
-Orchestrates the full BTC/USD ML trading pipeline:
-
-    1. Load feature data from DB
-    2. Time-based train / val / test split
-    3. Scale features (ScalerGuard — fit on train only)
-    4. Train RandomForest classifier + regressor
-    5. Evaluate models (accuracy, RMSE, importances)
-    6. Generate directional signals on the test set
-    7. Run backtest on minute OHLCV data
-    8. Save predictions, ledger, and summary to DB
-    9. (Optional) Plot feature importances
-
-Usage
------
-    python train.py
-
-All tuneable parameters live in config.py.
-"""
-
 from __future__ import annotations
 
 import sys
@@ -32,11 +10,11 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.db.utils import save_df_to_db
 
 # ── Pipeline modules ──────────────────────────────────────
-from data_loader      import load_features_from_db
-from preprocessing    import split_data_timewise, prepare_features
-from models           import train_classification_model, train_regression_model, evaluate_models
-from signals          import generate_signals
-from backtest_runner  import run_backtest
+from TradeX.sentiments.ml.data.data_loader      import load_features_from_db
+from TradeX.sentiments.ml.data.preprocessing    import split_data_timewise, prepare_features
+from TradeX.sentiments.ml.model           import train_classification_model, train_regression_model, evaluate_models
+from TradeX.sentiments.ml.backtesting.signals          import generate_signals
+from TradeX.sentiments.ml.backtesting.backtest_runner  import run_backtest
 
 # ── Config ────────────────────────────────────────────────
 from config import (
