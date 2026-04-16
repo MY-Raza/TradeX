@@ -1,0 +1,30 @@
+2026-04-16 17:34:42,631 | INFO | train | ========================================================================
+2026-04-16 17:34:42,631 | INFO | train | PIPELINE START
+2026-04-16 17:34:42,631 | INFO | train | ========================================================================
+2026-04-16 17:34:42,631 | INFO | train | --- STEP 1: Load features ---
+2026-04-16 17:34:47,973 | INFO | train | --- STEP 2: Split data ---
+2026-04-16 17:34:48,349 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-16 17:34:48,604 | INFO | train | --- STEP 4: Train models ---
+2026-04-16 17:34:50,877 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-16 17:34:52,217 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-16 17:34:52,234 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-16 17:35:13,887 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-16 17:35:13,887 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-16 17:35:18,387 | INFO | train |   Saved 2022 signal rows.
+2026-04-16 17:35:18,387 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-16 17:35:19,020 | INFO | train |   Saved 28 ledger rows.
+2026-04-16 17:35:19,020 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-16 17:35:19,078 | INFO | train |   Summary saved.
+2026-04-16 17:35:19,078 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-16 17:35:29,088 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-16 17:35:29,671 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-16 17:35:29,677 | INFO | train | ========================================================================
+2026-04-16 17:35:29,677 | INFO | train | PIPELINE COMPLETE
+2026-04-16 17:35:29,677 | INFO | train |   Elapsed          : 47.0 s
+2026-04-16 17:35:29,677 | INFO | train |   Starting balance : 1000.00
+2026-04-16 17:35:29,677 | INFO | train |   Final balance    : 1017.23
+2026-04-16 17:35:29,677 | INFO | train |   Total PnL %%      : 1.82%%
+2026-04-16 17:35:29,679 | INFO | train |   Trades executed  : 14
+2026-04-16 17:35:29,679 | INFO | train |   Win rate         : 50.0%
+2026-04-16 17:35:29,679 | INFO | train |   Max drawdown     : 3.38%%
+2026-04-16 17:35:29,679 | INFO | train | ========================================================================

@@ -1,0 +1,46 @@
+2026-04-16 17:34:48,604 | INFO | models | Training RandomForestClassifier …
+2026-04-16 17:34:48,605 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-16 17:34:50,195 | INFO | models |   Classifier training complete.
+2026-04-16 17:34:50,195 | INFO | models | Training RandomForestRegressor …
+2026-04-16 17:34:50,195 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-16 17:34:50,840 | INFO | models |   Regressor training complete.
+2026-04-16 17:34:50,877 | INFO | models | ================================================================
+2026-04-16 17:34:50,877 | INFO | models | EVALUATION
+2026-04-16 17:34:50,881 | INFO | models | ================================================================
+2026-04-16 17:34:51,706 | INFO | models |   Classifier — Val Accuracy : 0.5312
+2026-04-16 17:34:51,706 | INFO | models |   Classifier — Test Accuracy: 0.5134
+2026-04-16 17:34:51,723 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5261    0.6374    0.5764      1012
+           1     0.5389    0.4248    0.4751      1010
+
+    accuracy                         0.5312      2022
+   macro avg     0.5325    0.5311    0.5257      2022
+weighted avg     0.5325    0.5312    0.5258      2022
+
+2026-04-16 17:34:51,999 | INFO | models |   Regressor — Val  RMSE: 0.004755
+2026-04-16 17:34:51,999 | INFO | models |   Regressor — Test RMSE: 0.005713
+2026-04-16 17:34:52,204 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-16 17:34:52,204 | INFO | models |     volume_change                                      0.26332
+2026-04-16 17:34:52,204 | INFO | models |     volatility                                         0.25118
+2026-04-16 17:34:52,204 | INFO | models |     returns                                            0.24358
+2026-04-16 17:34:52,204 | INFO | models |     price_momentum                                     0.24192
+2026-04-16 17:34:52,204 | INFO | models |     post_sentiment_mean                                0.00000
+2026-04-16 17:34:52,204 | INFO | models |     macd_hist                                          0.00000
+2026-04-16 17:34:52,204 | INFO | models |     log_returns                                        0.00000
+2026-04-16 17:34:52,204 | INFO | models |     rsi                                                0.00000
+2026-04-16 17:34:52,204 | INFO | models |     macd                                               0.00000
+2026-04-16 17:34:52,204 | INFO | models |     macd_signal                                        0.00000
+2026-04-16 17:34:52,204 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-16 17:34:52,212 | INFO | models |     returns                                            0.26448
+2026-04-16 17:34:52,213 | INFO | models |     price_momentum                                     0.25155
+2026-04-16 17:34:52,213 | INFO | models |     volatility                                         0.25101
+2026-04-16 17:34:52,214 | INFO | models |     volume_change                                      0.23296
+2026-04-16 17:34:52,214 | INFO | models |     post_sentiment_mean                                0.00000
+2026-04-16 17:34:52,214 | INFO | models |     macd_hist                                          0.00000
+2026-04-16 17:34:52,216 | INFO | models |     log_returns                                        0.00000
+2026-04-16 17:34:52,216 | INFO | models |     rsi                                                0.00000
+2026-04-16 17:34:52,217 | INFO | models |     macd                                               0.00000
+2026-04-16 17:34:52,217 | INFO | models |     macd_signal                                        0.00000
+2026-04-16 17:34:52,217 | INFO | models | ================================================================
