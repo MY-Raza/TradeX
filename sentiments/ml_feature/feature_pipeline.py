@@ -94,6 +94,58 @@ def load_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     )
     return ohlcv_df, posts_df, comments_df
 
+# ================================================================================
+# DATE RANGE
+# ================================================================================
+def compute_date_range(posts_df: pd.DataFrame, comments_df: pd.DataFrame) -> tuple:
+    """
+    Derives the global start and end timestamps from both posts and comments.
+
+    Converts post_time and comment_time to UTC-aware datetimes, then takes
+    the earliest and latest timestamps across both tables.
+
+    Returns:
+        (start_date, end_date) as timezone-aware pandas Timestamps (UTC)
+    """
+    posts_times = pd.to_datetime(posts_df["post_time"], utc=True)
+    comments_times = pd.to_datetime(comments_df["comment_time"], utc=True)
+
+    all_times = pd.concat([posts_times, comments_times], ignore_index=True)
+
+    start_date = all_times.min()
+    end_date = all_times.max()
+
+    logger.info(f"📅 Date range — start: {start_date}  |  end: {end_date}")
+
+    return start_date, end_date
+
+# ================================================================================
+# OHLCV LOADING
+# ================================================================================
+def load_ohlcv(start_date: pd.Timestamp, end_date: pd.Timestamp) -> pd.DataFrame:
+    """
+    Fetches BTC 1-minute OHLCV data for the computed date range.
+
+    Args:
+        start_date: UTC-aware start timestamp
+        end_date:   UTC-aware end timestamp
+
+    Returns:
+        ohlcv_df: DataFrame containing BTC OHLCV rows within the range
+    """
+    logger.info(f"📈 Fetching OHLCV from '{OHLCV_TABLE}' [{start_date} → {end_date}]")
+
+    ohlcv_df = fetch_ohlcv_df(
+        table_name=OHLCV_TABLE,
+        schema=OHLCV_SCHEMA,
+        time_column=OHLCV_TIME_COLUMN,
+        start_date=start_date,
+        end_date=end_date
+    )
+
+    logger.info(f"✅ OHLCV rows fetched: {len(ohlcv_df):,}")
+
+    return ohlcv_df
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 2  — SENTIMENT FEATURE ENGINEERING (PER SOURCE)

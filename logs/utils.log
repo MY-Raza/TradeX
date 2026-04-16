@@ -36817,3 +36817,43 @@ Last 5 rows from data_binance.btc_1m:
 2026-04-16 08:52:12,359 | INFO | utils | Indexes ensured: link_1m_datetime_uidx, link_1m_datetime_desc_idx
 2026-04-16 08:52:12,359 | INFO | utils | Hypertable created/verified for "data_binance"."link_1m"
 2026-04-16 08:52:13,564 | INFO | utils | Inserted 1433 rows into data_binance.link_1m
+2026-04-16 11:27:06,207 | INFO | utils | Database engine initialized
+2026-04-16 11:27:07,040 | INFO | utils | Table Found
+2026-04-16 11:27:07,459 | INFO | utils | Table Found
+2026-04-16 11:27:31,527 | INFO | utils | Table Found
+2026-04-16 11:33:09,047 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:33:09,182 | INFO | utils | Indexes ensured: posts_sentiment_post_time_uidx, posts_sentiment_post_time_desc_idx
+2026-04-16 11:33:09,199 | INFO | utils | Hypertable created/verified for "reddit"."posts_sentiment"
+2026-04-16 11:33:09,465 | INFO | utils | No new rows to insert
+2026-04-16 11:33:09,469 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:33:09,511 | INFO | utils | Indexes ensured: comments_sentiment_comment_time_uidx, comments_sentiment_comment_time_desc_idx
+2026-04-16 11:33:09,511 | INFO | utils | Hypertable created/verified for "reddit"."comments_sentiment"
+2026-04-16 11:33:09,716 | INFO | utils | No new rows to insert
+2026-04-16 11:33:09,731 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:33:09,759 | INFO | utils | Indexes ensured: posts_sentiment_hourly_time_window_uidx, posts_sentiment_hourly_time_window_desc_idx
+2026-04-16 11:33:09,762 | INFO | utils | Hypertable created/verified for "reddit"."posts_sentiment_hourly"
+2026-04-16 11:33:09,949 | INFO | utils | No new rows to insert
+2026-04-16 11:33:09,949 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:33:09,975 | INFO | utils | Indexes ensured: comments_sentiment_hourly_time_window_uidx, comments_sentiment_hourly_time_window_desc_idx
+2026-04-16 11:33:09,979 | INFO | utils | Hypertable created/verified for "reddit"."comments_sentiment_hourly"
+2026-04-16 11:33:10,188 | INFO | utils | No new rows to insert
+2026-04-16 11:36:08,133 | INFO | utils | Database engine initialized
+2026-04-16 11:36:08,745 | INFO | utils | Table Found
+2026-04-16 11:36:08,932 | INFO | utils | Table Found
+2026-04-16 11:36:21,783 | INFO | utils | Table Found
+2026-04-16 11:42:19,508 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:42:35,276 | INFO | utils | Indexes ensured: posts_sentiment_post_time_uidx, posts_sentiment_post_time_desc_idx
+2026-04-16 11:42:38,283 | INFO | utils | Hypertable created/verified for "reddit"."posts_sentiment"
+2026-04-16 11:42:41,528 | INFO | utils | Inserted 284 rows into reddit.posts_sentiment
+2026-04-16 11:42:41,668 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:42:41,906 | INFO | utils | Indexes ensured: comments_sentiment_comment_time_uidx, comments_sentiment_comment_time_desc_idx
+2026-04-16 11:42:41,930 | INFO | utils | Hypertable created/verified for "reddit"."comments_sentiment"
+2026-04-16 11:42:45,165 | INFO | utils | Inserted 1129 rows into reddit.comments_sentiment
+2026-04-16 11:42:45,224 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:42:45,415 | INFO | utils | Indexes ensured: posts_sentiment_hourly_time_window_uidx, posts_sentiment_hourly_time_window_desc_idx
+2026-04-16 11:42:45,493 | INFO | utils | Hypertable created/verified for "reddit"."posts_sentiment_hourly"
+2026-04-16 11:42:51,753 | INFO | utils | Inserted 213 rows into reddit.posts_sentiment_hourly
+2026-04-16 11:42:51,779 | INFO | utils | Schema 'reddit' ready
+2026-04-16 11:42:51,828 | INFO | utils | Indexes ensured: comments_sentiment_hourly_time_window_uidx, comments_sentiment_hourly_time_window_desc_idx
+2026-04-16 11:42:51,845 | INFO | utils | Hypertable created/verified for "reddit"."comments_sentiment_hourly"
+2026-04-16 11:42:54,026 | INFO | utils | Inserted 695 rows into reddit.comments_sentiment_hourly
