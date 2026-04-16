@@ -1,20 +1,3 @@
-"""
-feature_pipeline.py
-====================
-Production-ready ML feature engineering pipeline for BTC sentiment + OHLCV data.
-
-Combines:
-  - Reddit post sentiment   (reddit.posts_sentiment_hourly)
-  - Reddit comment sentiment (reddit.comments_sentiment_hourly)
-  - BTC 1-minute OHLCV      (data_binance.btc_1m)
-
-Output:
-  - final_features_df  (in-memory)
-  - ml_features table  (database)
-  - features.csv       (disk)
-  - features.parquet   (disk)
-"""
-
 from __future__ import annotations
 
 import os
@@ -33,10 +16,9 @@ logger = get_logger("feature_pipeline")
 # ================================================================================
 # CONFIG
 # ================================================================================
-POSTS_SCHEMA         = "reddit"
+SCHEMA         = "reddit"
 POSTS_TABLE          = "posts_sentiment_hourly"
 
-COMMENTS_SCHEMA      = "reddit"
 COMMENTS_TABLE       = "comments_sentiment_hourly"
 
 OHLCV_TABLE          = "btc_1m"
@@ -45,11 +27,6 @@ OHLCV_TIME_COLUMN    = "datetime"
 OHLCV_RESAMPLE_FREQ  = "1h"
 
 ML_FEATURES_TABLE    = "ml_features"
-ML_FEATURES_SCHEMA   = "ml_features"
-
-OUTPUT_DIR           = os.path.dirname(os.path.abspath(__file__))
-CSV_PATH             = os.path.join(OUTPUT_DIR, "features.csv")
-PARQUET_PATH         = os.path.join(OUTPUT_DIR, "features.parquet")
 
 LAG_RANGE            = range(1, 6)     # lags 1–5
 EMA_SPAN             = 5
@@ -68,8 +45,8 @@ def load_sentiment_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     logger.info("📥 Loading sentiment data…")
 
-    posts_df    = read_df_from_db(POSTS_TABLE,    POSTS_SCHEMA)
-    comments_df = read_df_from_db(COMMENTS_TABLE, COMMENTS_SCHEMA)
+    posts_df    = read_df_from_db(POSTS_TABLE,    SCHEMA)
+    comments_df = read_df_from_db(COMMENTS_TABLE, SCHEMA)
 
     for df, label in [(posts_df, "posts"), (comments_df, "comments")]:
         if "time_window" not in df.columns:
@@ -490,19 +467,11 @@ def save_outputs(final_df: pd.DataFrame) -> None:
     save_df_to_db(
         final_df,
         table_name=ML_FEATURES_TABLE,
-        schema=ML_FEATURES_SCHEMA,
+        schema=SCHEMA,
         time_column=OHLCV_TIME_COLUMN,
         is_timeseries=True,
     )
-    logger.info(f"  ✅ Saved to DB: {ML_FEATURES_SCHEMA}.{ML_FEATURES_TABLE}")
-
-    # CSV
-    final_df.to_csv(CSV_PATH, index=False)
-    logger.info(f"  ✅ CSV: {CSV_PATH}")
-
-    # Parquet
-    final_df.to_parquet(PARQUET_PATH, index=False)
-    logger.info(f"  ✅ Parquet: {PARQUET_PATH}")
+    logger.info(f"  ✅ Saved to DB: {SCHEMA}.{ML_FEATURES_TABLE}")
 
 
 # ================================================================================

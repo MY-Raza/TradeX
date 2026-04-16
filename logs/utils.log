@@ -36857,3 +36857,11 @@ Last 5 rows from data_binance.btc_1m:
 2026-04-16 11:42:51,828 | INFO | utils | Indexes ensured: comments_sentiment_hourly_time_window_uidx, comments_sentiment_hourly_time_window_desc_idx
 2026-04-16 11:42:51,845 | INFO | utils | Hypertable created/verified for "reddit"."comments_sentiment_hourly"
 2026-04-16 11:42:54,026 | INFO | utils | Inserted 695 rows into reddit.comments_sentiment_hourly
+2026-04-16 12:02:03,180 | INFO | utils | Database engine initialized
+2026-04-16 12:02:03,494 | INFO | utils | Table Found
+2026-04-16 12:02:03,601 | INFO | utils | Table Found
+2026-04-16 12:02:18,801 | INFO | utils | Table Found
+2026-04-16 12:02:19,740 | INFO | utils | Schema 'ml_features' ready
+2026-04-16 12:02:20,188 | INFO | utils | Indexes ensured: ml_features_datetime_uidx, ml_features_datetime_desc_idx
+2026-04-16 12:02:20,661 | INFO | utils | Hypertable created/verified for "ml_features"."ml_features"
+2026-04-16 12:02:32,357 | INFO | utils | Inserted 13480 rows into ml_features.ml_features
