@@ -136,3 +136,279 @@ weighted avg     0.5309    0.5252    0.5033      2022
 2026-04-16 18:14:35,640 | INFO | models |     sentiment_disagreement                             0.00717
 2026-04-16 18:14:35,641 | INFO | models |     post_lag_2                                         0.00446
 2026-04-16 18:14:35,641 | INFO | models | ================================================================
+2026-04-17 09:31:37,562 | INFO | models | Training RandomForestClassifier …
+2026-04-17 09:31:37,562 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:31:38,274 | INFO | models |   Classifier training complete.
+2026-04-17 09:31:38,275 | INFO | models | Training RandomForestRegressor …
+2026-04-17 09:31:38,275 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:31:38,769 | INFO | models |   Regressor training complete.
+2026-04-17 09:31:38,769 | INFO | models | ================================================================
+2026-04-17 09:31:38,769 | INFO | models | EVALUATION
+2026-04-17 09:31:38,769 | INFO | models | ================================================================
+2026-04-17 09:31:38,972 | INFO | models |   Classifier — Val Accuracy : 0.5252
+2026-04-17 09:31:38,972 | INFO | models |   Classifier — Test Accuracy: 0.4975
+2026-04-17 09:31:38,976 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5444    0.3152    0.3992      1012
+           1     0.5174    0.7356    0.6075      1010
+
+    accuracy                         0.5252      2022
+   macro avg     0.5309    0.5254    0.5034      2022
+weighted avg     0.5309    0.5252    0.5033      2022
+
+2026-04-17 09:31:39,089 | INFO | models |   Regressor — Val  RMSE: 0.004763
+2026-04-17 09:31:39,089 | INFO | models |   Regressor — Test RMSE: 0.005730
+2026-04-17 09:31:39,174 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-17 09:31:39,175 | INFO | models |     divergence                                         0.19180
+2026-04-17 09:31:39,175 | INFO | models |     volume_change                                      0.19128
+2026-04-17 09:31:39,175 | INFO | models |     returns                                            0.18537
+2026-04-17 09:31:39,175 | INFO | models |     volatility                                         0.18427
+2026-04-17 09:31:39,175 | INFO | models |     price_momentum                                     0.18271
+2026-04-17 09:31:39,175 | INFO | models |     post_momentum                                      0.01061
+2026-04-17 09:31:39,176 | INFO | models |     post_lag_1                                         0.00656
+2026-04-17 09:31:39,176 | INFO | models |     sentiment_disagreement                             0.00602
+2026-04-17 09:31:39,176 | INFO | models |     sentiment_combined                                 0.00596
+2026-04-17 09:31:39,176 | INFO | models |     comment_momentum                                   0.00541
+2026-04-17 09:31:39,176 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-17 09:31:39,176 | INFO | models |     returns                                            0.22150
+2026-04-17 09:31:39,176 | INFO | models |     price_momentum                                     0.20209
+2026-04-17 09:31:39,176 | INFO | models |     volatility                                         0.19362
+2026-04-17 09:31:39,176 | INFO | models |     volume_change                                      0.16450
+2026-04-17 09:31:39,178 | INFO | models |     divergence                                         0.15970
+2026-04-17 09:31:39,178 | INFO | models |     post_momentum                                      0.01445
+2026-04-17 09:31:39,178 | INFO | models |     sentiment_combined                                 0.00912
+2026-04-17 09:31:39,178 | INFO | models |     fear_greed_index                                   0.00727
+2026-04-17 09:31:39,178 | INFO | models |     sentiment_disagreement                             0.00717
+2026-04-17 09:31:39,178 | INFO | models |     post_lag_2                                         0.00446
+2026-04-17 09:31:39,179 | INFO | models | ================================================================
+2026-04-17 09:33:19,138 | INFO | models | Training RandomForestClassifier …
+2026-04-17 09:33:19,138 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:33:20,002 | INFO | models |   Classifier training complete.
+2026-04-17 09:33:20,002 | INFO | models | Training RandomForestRegressor …
+2026-04-17 09:33:20,002 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:33:20,489 | INFO | models |   Regressor training complete.
+2026-04-17 09:33:20,489 | INFO | models | ================================================================
+2026-04-17 09:33:20,489 | INFO | models | EVALUATION
+2026-04-17 09:33:20,489 | INFO | models | ================================================================
+2026-04-17 09:33:20,696 | INFO | models |   Classifier — Val Accuracy : 0.5252
+2026-04-17 09:33:20,696 | INFO | models |   Classifier — Test Accuracy: 0.4975
+2026-04-17 09:33:20,696 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5444    0.3152    0.3992      1012
+           1     0.5174    0.7356    0.6075      1010
+
+    accuracy                         0.5252      2022
+   macro avg     0.5309    0.5254    0.5034      2022
+weighted avg     0.5309    0.5252    0.5033      2022
+
+2026-04-17 09:33:20,816 | INFO | models |   Regressor — Val  RMSE: 0.004763
+2026-04-17 09:33:20,816 | INFO | models |   Regressor — Test RMSE: 0.005730
+2026-04-17 09:33:20,884 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-17 09:33:20,885 | INFO | models |     divergence                                         0.19180
+2026-04-17 09:33:20,885 | INFO | models |     volume_change                                      0.19128
+2026-04-17 09:33:20,885 | INFO | models |     returns                                            0.18537
+2026-04-17 09:33:20,885 | INFO | models |     volatility                                         0.18427
+2026-04-17 09:33:20,885 | INFO | models |     price_momentum                                     0.18271
+2026-04-17 09:33:20,885 | INFO | models |     post_momentum                                      0.01061
+2026-04-17 09:33:20,885 | INFO | models |     post_lag_1                                         0.00656
+2026-04-17 09:33:20,885 | INFO | models |     sentiment_disagreement                             0.00602
+2026-04-17 09:33:20,885 | INFO | models |     sentiment_combined                                 0.00596
+2026-04-17 09:33:20,885 | INFO | models |     comment_momentum                                   0.00541
+2026-04-17 09:33:20,885 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-17 09:33:20,885 | INFO | models |     returns                                            0.22150
+2026-04-17 09:33:20,885 | INFO | models |     price_momentum                                     0.20209
+2026-04-17 09:33:20,885 | INFO | models |     volatility                                         0.19362
+2026-04-17 09:33:20,885 | INFO | models |     volume_change                                      0.16450
+2026-04-17 09:33:20,885 | INFO | models |     divergence                                         0.15970
+2026-04-17 09:33:20,885 | INFO | models |     post_momentum                                      0.01445
+2026-04-17 09:33:20,885 | INFO | models |     sentiment_combined                                 0.00912
+2026-04-17 09:33:20,885 | INFO | models |     fear_greed_index                                   0.00727
+2026-04-17 09:33:20,885 | INFO | models |     sentiment_disagreement                             0.00717
+2026-04-17 09:33:20,885 | INFO | models |     post_lag_2                                         0.00446
+2026-04-17 09:33:20,885 | INFO | models | ================================================================
+2026-04-17 09:35:52,539 | INFO | models | Training RandomForestClassifier …
+2026-04-17 09:35:52,539 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:35:53,246 | INFO | models |   Classifier training complete.
+2026-04-17 09:35:53,246 | INFO | models | Training RandomForestRegressor …
+2026-04-17 09:35:53,248 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:35:53,763 | INFO | models |   Regressor training complete.
+2026-04-17 09:35:53,764 | INFO | models | ================================================================
+2026-04-17 09:35:53,764 | INFO | models | EVALUATION
+2026-04-17 09:35:53,764 | INFO | models | ================================================================
+2026-04-17 09:35:53,992 | INFO | models |   Classifier — Val Accuracy : 0.5252
+2026-04-17 09:35:53,992 | INFO | models |   Classifier — Test Accuracy: 0.4975
+2026-04-17 09:35:53,992 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5444    0.3152    0.3992      1012
+           1     0.5174    0.7356    0.6075      1010
+
+    accuracy                         0.5252      2022
+   macro avg     0.5309    0.5254    0.5034      2022
+weighted avg     0.5309    0.5252    0.5033      2022
+
+2026-04-17 09:35:54,115 | INFO | models |   Regressor — Val  RMSE: 0.004763
+2026-04-17 09:35:54,115 | INFO | models |   Regressor — Test RMSE: 0.005730
+2026-04-17 09:35:54,184 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-17 09:35:54,184 | INFO | models |     divergence                                         0.19180
+2026-04-17 09:35:54,184 | INFO | models |     volume_change                                      0.19128
+2026-04-17 09:35:54,185 | INFO | models |     returns                                            0.18537
+2026-04-17 09:35:54,185 | INFO | models |     volatility                                         0.18427
+2026-04-17 09:35:54,185 | INFO | models |     price_momentum                                     0.18271
+2026-04-17 09:35:54,185 | INFO | models |     post_momentum                                      0.01061
+2026-04-17 09:35:54,185 | INFO | models |     post_lag_1                                         0.00656
+2026-04-17 09:35:54,185 | INFO | models |     sentiment_disagreement                             0.00602
+2026-04-17 09:35:54,186 | INFO | models |     sentiment_combined                                 0.00596
+2026-04-17 09:35:54,186 | INFO | models |     comment_momentum                                   0.00541
+2026-04-17 09:35:54,186 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-17 09:35:54,186 | INFO | models |     returns                                            0.22150
+2026-04-17 09:35:54,186 | INFO | models |     price_momentum                                     0.20209
+2026-04-17 09:35:54,187 | INFO | models |     volatility                                         0.19362
+2026-04-17 09:35:54,187 | INFO | models |     volume_change                                      0.16450
+2026-04-17 09:35:54,187 | INFO | models |     divergence                                         0.15970
+2026-04-17 09:35:54,187 | INFO | models |     post_momentum                                      0.01445
+2026-04-17 09:35:54,187 | INFO | models |     sentiment_combined                                 0.00912
+2026-04-17 09:35:54,187 | INFO | models |     fear_greed_index                                   0.00727
+2026-04-17 09:35:54,188 | INFO | models |     sentiment_disagreement                             0.00717
+2026-04-17 09:35:54,188 | INFO | models |     post_lag_2                                         0.00446
+2026-04-17 09:35:54,188 | INFO | models | ================================================================
+2026-04-17 09:40:43,298 | INFO | models | Training RandomForestClassifier …
+2026-04-17 09:40:43,299 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:40:44,022 | INFO | models |   Classifier training complete.
+2026-04-17 09:40:44,023 | INFO | models | Training RandomForestRegressor …
+2026-04-17 09:40:44,023 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:40:44,538 | INFO | models |   Regressor training complete.
+2026-04-17 09:40:44,538 | INFO | models | ================================================================
+2026-04-17 09:40:44,538 | INFO | models | EVALUATION
+2026-04-17 09:40:44,538 | INFO | models | ================================================================
+2026-04-17 09:40:44,770 | INFO | models |   Classifier — Val Accuracy : 0.5252
+2026-04-17 09:40:44,770 | INFO | models |   Classifier — Test Accuracy: 0.4975
+2026-04-17 09:40:44,770 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5444    0.3152    0.3992      1012
+           1     0.5174    0.7356    0.6075      1010
+
+    accuracy                         0.5252      2022
+   macro avg     0.5309    0.5254    0.5034      2022
+weighted avg     0.5309    0.5252    0.5033      2022
+
+2026-04-17 09:40:44,891 | INFO | models |   Regressor — Val  RMSE: 0.004763
+2026-04-17 09:40:44,891 | INFO | models |   Regressor — Test RMSE: 0.005730
+2026-04-17 09:40:44,958 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-17 09:40:44,958 | INFO | models |     divergence                                         0.19180
+2026-04-17 09:40:44,958 | INFO | models |     volume_change                                      0.19128
+2026-04-17 09:40:44,958 | INFO | models |     returns                                            0.18537
+2026-04-17 09:40:44,958 | INFO | models |     volatility                                         0.18427
+2026-04-17 09:40:44,958 | INFO | models |     price_momentum                                     0.18271
+2026-04-17 09:40:44,958 | INFO | models |     post_momentum                                      0.01061
+2026-04-17 09:40:44,958 | INFO | models |     post_lag_1                                         0.00656
+2026-04-17 09:40:44,958 | INFO | models |     sentiment_disagreement                             0.00602
+2026-04-17 09:40:44,958 | INFO | models |     sentiment_combined                                 0.00596
+2026-04-17 09:40:44,958 | INFO | models |     comment_momentum                                   0.00541
+2026-04-17 09:40:44,961 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-17 09:40:44,961 | INFO | models |     returns                                            0.22150
+2026-04-17 09:40:44,961 | INFO | models |     price_momentum                                     0.20209
+2026-04-17 09:40:44,961 | INFO | models |     volatility                                         0.19362
+2026-04-17 09:40:44,961 | INFO | models |     volume_change                                      0.16450
+2026-04-17 09:40:44,961 | INFO | models |     divergence                                         0.15970
+2026-04-17 09:40:44,961 | INFO | models |     post_momentum                                      0.01445
+2026-04-17 09:40:44,961 | INFO | models |     sentiment_combined                                 0.00912
+2026-04-17 09:40:44,961 | INFO | models |     fear_greed_index                                   0.00727
+2026-04-17 09:40:44,961 | INFO | models |     sentiment_disagreement                             0.00717
+2026-04-17 09:40:44,961 | INFO | models |     post_lag_2                                         0.00446
+2026-04-17 09:40:44,961 | INFO | models | ================================================================
+2026-04-17 09:44:00,459 | INFO | models | Training RandomForestClassifier …
+2026-04-17 09:44:00,460 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:44:01,165 | INFO | models |   Classifier training complete.
+2026-04-17 09:44:01,165 | INFO | models | Training RandomForestRegressor …
+2026-04-17 09:44:01,165 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:44:01,692 | INFO | models |   Regressor training complete.
+2026-04-17 09:44:01,693 | INFO | models | ================================================================
+2026-04-17 09:44:01,693 | INFO | models | EVALUATION
+2026-04-17 09:44:01,693 | INFO | models | ================================================================
+2026-04-17 09:44:01,957 | INFO | models |   Classifier — Val Accuracy : 0.5252
+2026-04-17 09:44:01,957 | INFO | models |   Classifier — Test Accuracy: 0.4975
+2026-04-17 09:44:01,966 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5444    0.3152    0.3992      1012
+           1     0.5174    0.7356    0.6075      1010
+
+    accuracy                         0.5252      2022
+   macro avg     0.5309    0.5254    0.5034      2022
+weighted avg     0.5309    0.5252    0.5033      2022
+
+2026-04-17 09:44:02,096 | INFO | models |   Regressor — Val  RMSE: 0.004763
+2026-04-17 09:44:02,097 | INFO | models |   Regressor — Test RMSE: 0.005730
+2026-04-17 09:44:02,163 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-17 09:44:02,164 | INFO | models |     divergence                                         0.19180
+2026-04-17 09:44:02,164 | INFO | models |     volume_change                                      0.19128
+2026-04-17 09:44:02,164 | INFO | models |     returns                                            0.18537
+2026-04-17 09:44:02,164 | INFO | models |     volatility                                         0.18427
+2026-04-17 09:44:02,165 | INFO | models |     price_momentum                                     0.18271
+2026-04-17 09:44:02,165 | INFO | models |     post_momentum                                      0.01061
+2026-04-17 09:44:02,165 | INFO | models |     post_lag_1                                         0.00656
+2026-04-17 09:44:02,165 | INFO | models |     sentiment_disagreement                             0.00602
+2026-04-17 09:44:02,165 | INFO | models |     sentiment_combined                                 0.00596
+2026-04-17 09:44:02,167 | INFO | models |     comment_momentum                                   0.00541
+2026-04-17 09:44:02,167 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-17 09:44:02,167 | INFO | models |     returns                                            0.22150
+2026-04-17 09:44:02,167 | INFO | models |     price_momentum                                     0.20209
+2026-04-17 09:44:02,167 | INFO | models |     volatility                                         0.19362
+2026-04-17 09:44:02,168 | INFO | models |     volume_change                                      0.16450
+2026-04-17 09:44:02,168 | INFO | models |     divergence                                         0.15970
+2026-04-17 09:44:02,168 | INFO | models |     post_momentum                                      0.01445
+2026-04-17 09:44:02,168 | INFO | models |     sentiment_combined                                 0.00912
+2026-04-17 09:44:02,168 | INFO | models |     fear_greed_index                                   0.00727
+2026-04-17 09:44:02,168 | INFO | models |     sentiment_disagreement                             0.00717
+2026-04-17 09:44:02,168 | INFO | models |     post_lag_2                                         0.00446
+2026-04-17 09:44:02,168 | INFO | models | ================================================================
+2026-04-17 09:45:30,111 | INFO | models | Training RandomForestClassifier …
+2026-04-17 09:45:30,111 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 10, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'class_weight': 'balanced', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:45:30,825 | INFO | models |   Classifier training complete.
+2026-04-17 09:45:30,826 | INFO | models | Training RandomForestRegressor …
+2026-04-17 09:45:30,826 | INFO | models |   Params: {'n_estimators': 200, 'max_depth': 8, 'min_samples_split': 10, 'min_samples_leaf': 5, 'max_features': 'sqrt', 'n_jobs': -1, 'random_state': 42}
+2026-04-17 09:45:31,359 | INFO | models |   Regressor training complete.
+2026-04-17 09:45:31,360 | INFO | models | ================================================================
+2026-04-17 09:45:31,360 | INFO | models | EVALUATION
+2026-04-17 09:45:31,360 | INFO | models | ================================================================
+2026-04-17 09:45:31,687 | INFO | models |   Classifier — Val Accuracy : 0.5252
+2026-04-17 09:45:31,687 | INFO | models |   Classifier — Test Accuracy: 0.4975
+2026-04-17 09:45:31,687 | INFO | models |   Val classification report:
+              precision    recall  f1-score   support
+
+           0     0.5444    0.3152    0.3992      1012
+           1     0.5174    0.7356    0.6075      1010
+
+    accuracy                         0.5252      2022
+   macro avg     0.5309    0.5254    0.5034      2022
+weighted avg     0.5309    0.5252    0.5033      2022
+
+2026-04-17 09:45:31,878 | INFO | models |   Regressor — Val  RMSE: 0.004763
+2026-04-17 09:45:31,878 | INFO | models |   Regressor — Test RMSE: 0.005730
+2026-04-17 09:45:32,034 | INFO | models |   Top 10 Classifier feature importances:
+2026-04-17 09:45:32,034 | INFO | models |     divergence                                         0.19180
+2026-04-17 09:45:32,034 | INFO | models |     volume_change                                      0.19128
+2026-04-17 09:45:32,034 | INFO | models |     returns                                            0.18537
+2026-04-17 09:45:32,034 | INFO | models |     volatility                                         0.18427
+2026-04-17 09:45:32,034 | INFO | models |     price_momentum                                     0.18271
+2026-04-17 09:45:32,034 | INFO | models |     post_momentum                                      0.01061
+2026-04-17 09:45:32,039 | INFO | models |     post_lag_1                                         0.00656
+2026-04-17 09:45:32,039 | INFO | models |     sentiment_disagreement                             0.00602
+2026-04-17 09:45:32,039 | INFO | models |     sentiment_combined                                 0.00596
+2026-04-17 09:45:32,039 | INFO | models |     comment_momentum                                   0.00541
+2026-04-17 09:45:32,039 | INFO | models |   Top 10 Regressor feature importances:
+2026-04-17 09:45:32,042 | INFO | models |     returns                                            0.22150
+2026-04-17 09:45:32,042 | INFO | models |     price_momentum                                     0.20209
+2026-04-17 09:45:32,043 | INFO | models |     volatility                                         0.19362
+2026-04-17 09:45:32,043 | INFO | models |     volume_change                                      0.16450
+2026-04-17 09:45:32,044 | INFO | models |     divergence                                         0.15970
+2026-04-17 09:45:32,044 | INFO | models |     post_momentum                                      0.01445
+2026-04-17 09:45:32,044 | INFO | models |     sentiment_combined                                 0.00912
+2026-04-17 09:45:32,045 | INFO | models |     fear_greed_index                                   0.00727
+2026-04-17 09:45:32,045 | INFO | models |     sentiment_disagreement                             0.00717
+2026-04-17 09:45:32,047 | INFO | models |     post_lag_2                                         0.00446
+2026-04-17 09:45:32,047 | INFO | models | ================================================================

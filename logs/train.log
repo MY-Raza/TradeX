@@ -85,3 +85,207 @@
 2026-04-16 18:14:59,845 | INFO | train |   Total PnL %%      : 0.00%%
 2026-04-16 18:14:59,845 | INFO | train |   Trades executed  : 0
 2026-04-16 18:14:59,845 | INFO | train | ========================================================================
+2026-04-17 09:31:36,418 | INFO | train | ========================================================================
+2026-04-17 09:31:36,418 | INFO | train | PIPELINE START
+2026-04-17 09:31:36,418 | INFO | train | ========================================================================
+2026-04-17 09:31:36,418 | INFO | train | --- STEP 1: Load features ---
+2026-04-17 09:31:37,524 | INFO | train | --- STEP 2: Split data ---
+2026-04-17 09:31:37,541 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-17 09:31:37,562 | INFO | train | --- STEP 4: Train models ---
+2026-04-17 09:31:38,769 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-17 09:31:39,179 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-17 09:31:39,185 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-17 09:31:52,294 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-17 09:31:52,300 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-17 09:31:53,324 | INFO | train |   Saved 2022 signal rows.
+2026-04-17 09:31:53,324 | WARNING | train | Ledger is empty — skipping backtest_results save.
+2026-04-17 09:31:53,324 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-17 09:31:53,448 | INFO | train |   Summary saved.
+2026-04-17 09:31:53,448 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-17 09:31:57,120 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-17 09:31:57,406 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-17 09:31:57,406 | INFO | train | ========================================================================
+2026-04-17 09:31:57,406 | INFO | train | PIPELINE COMPLETE
+2026-04-17 09:31:57,406 | INFO | train |   Elapsed          : 21.0 s
+2026-04-17 09:31:57,406 | INFO | train |   Starting balance : 1000.00
+2026-04-17 09:31:57,406 | INFO | train |   Final balance    : 1000.00
+2026-04-17 09:31:57,406 | INFO | train |   Total PnL %%      : 0.00%%
+2026-04-17 09:31:57,406 | INFO | train |   Trades executed  : 0
+2026-04-17 09:31:57,406 | INFO | train | ========================================================================
+2026-04-17 09:33:16,409 | INFO | train | ========================================================================
+2026-04-17 09:33:16,410 | INFO | train | PIPELINE START
+2026-04-17 09:33:16,410 | INFO | train | ========================================================================
+2026-04-17 09:33:16,410 | INFO | train | --- STEP 1: Load features ---
+2026-04-17 09:33:18,886 | INFO | train | --- STEP 2: Split data ---
+2026-04-17 09:33:19,106 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-17 09:33:19,138 | INFO | train | --- STEP 4: Train models ---
+2026-04-17 09:33:20,489 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-17 09:33:20,885 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-17 09:33:20,894 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-17 09:33:29,975 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-17 09:33:29,976 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-17 09:33:35,586 | INFO | train |   Saved 2022 signal rows.
+2026-04-17 09:33:35,586 | WARNING | train | Ledger is empty — skipping backtest_results save.
+2026-04-17 09:33:35,586 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-17 09:33:35,649 | INFO | train |   Summary saved.
+2026-04-17 09:33:35,649 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-17 09:33:37,798 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-17 09:33:38,067 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-17 09:33:38,067 | INFO | train | ========================================================================
+2026-04-17 09:33:38,067 | INFO | train | PIPELINE COMPLETE
+2026-04-17 09:33:38,067 | INFO | train |   Elapsed          : 21.7 s
+2026-04-17 09:33:38,067 | INFO | train |   Starting balance : 1000.00
+2026-04-17 09:33:38,067 | INFO | train |   Final balance    : 1000.00
+2026-04-17 09:33:38,067 | INFO | train |   Total PnL %%      : 0.00%%
+2026-04-17 09:33:38,067 | INFO | train |   Trades executed  : 0
+2026-04-17 09:33:38,067 | INFO | train | ========================================================================
+2026-04-17 09:35:51,964 | INFO | train | ========================================================================
+2026-04-17 09:35:51,964 | INFO | train | PIPELINE START
+2026-04-17 09:35:51,964 | INFO | train | ========================================================================
+2026-04-17 09:35:51,964 | INFO | train | --- STEP 1: Load features ---
+2026-04-17 09:35:52,503 | INFO | train | --- STEP 2: Split data ---
+2026-04-17 09:35:52,518 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-17 09:35:52,539 | INFO | train | --- STEP 4: Train models ---
+2026-04-17 09:35:53,764 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-17 09:35:54,188 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-17 09:35:54,193 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-17 09:36:03,431 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-17 09:36:03,431 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-17 09:36:03,497 | INFO | train |   Saved 2022 signal rows.
+2026-04-17 09:36:03,499 | WARNING | train | Ledger is empty — skipping backtest_results save.
+2026-04-17 09:36:03,499 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-17 09:36:03,517 | INFO | train |   Summary saved.
+2026-04-17 09:36:03,517 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-17 09:36:04,579 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-17 09:36:04,912 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-17 09:36:04,912 | INFO | train | ========================================================================
+2026-04-17 09:36:04,912 | INFO | train | PIPELINE COMPLETE
+2026-04-17 09:36:04,912 | INFO | train |   Elapsed          : 12.9 s
+2026-04-17 09:36:04,912 | INFO | train |   Starting balance : 1000.00
+2026-04-17 09:36:04,912 | INFO | train |   Final balance    : 1000.00
+2026-04-17 09:36:04,914 | INFO | train |   Total PnL %%      : 0.00%%
+2026-04-17 09:36:04,914 | INFO | train |   Trades executed  : 0
+2026-04-17 09:36:04,914 | INFO | train | ========================================================================
+2026-04-17 09:40:42,662 | INFO | train | ========================================================================
+2026-04-17 09:40:42,662 | INFO | train | PIPELINE START
+2026-04-17 09:40:42,662 | INFO | train | ========================================================================
+2026-04-17 09:40:42,662 | INFO | train | --- STEP 1: Load features ---
+2026-04-17 09:40:43,261 | INFO | train | --- STEP 2: Split data ---
+2026-04-17 09:40:43,277 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-17 09:40:43,298 | INFO | train | --- STEP 4: Train models ---
+2026-04-17 09:40:44,538 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-17 09:40:44,963 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-17 09:40:44,967 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-17 09:40:57,689 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-17 09:40:57,689 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-17 09:40:57,874 | INFO | train |   Saved 2022 signal rows.
+2026-04-17 09:40:57,874 | WARNING | train | Ledger is empty — skipping backtest_results save.
+2026-04-17 09:40:57,874 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-17 09:40:57,899 | INFO | train |   Summary saved.
+2026-04-17 09:40:57,899 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-17 09:40:59,864 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-17 09:41:00,158 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-17 09:41:00,158 | INFO | train | ========================================================================
+2026-04-17 09:41:00,159 | INFO | train | PIPELINE COMPLETE
+2026-04-17 09:41:00,159 | INFO | train |   Elapsed          : 17.5 s
+2026-04-17 09:41:00,159 | INFO | train |   Starting balance : 1000.00
+2026-04-17 09:41:00,160 | INFO | train |   Final balance    : 1000.00
+2026-04-17 09:41:00,160 | INFO | train |   Total PnL %%      : 0.00%%
+2026-04-17 09:41:00,160 | INFO | train |   Trades executed  : 0
+2026-04-17 09:41:00,160 | INFO | train | ========================================================================
+2026-04-17 09:43:59,794 | INFO | train | ========================================================================
+2026-04-17 09:43:59,794 | INFO | train | PIPELINE START
+2026-04-17 09:43:59,794 | INFO | train | ========================================================================
+2026-04-17 09:43:59,794 | INFO | train | --- STEP 1: Load features ---
+2026-04-17 09:44:00,421 | INFO | train | --- STEP 2: Split data ---
+2026-04-17 09:44:00,439 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-17 09:44:00,459 | INFO | train | --- STEP 4: Train models ---
+2026-04-17 09:44:01,692 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-17 09:44:02,169 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-17 09:44:02,173 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-17 09:44:12,457 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-17 09:44:12,464 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-17 09:44:12,543 | INFO | train |   Saved 2022 signal rows.
+2026-04-17 09:44:12,543 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-17 09:44:15,077 | INFO | train |   Saved 322 ledger rows.
+2026-04-17 09:44:15,077 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-17 09:44:15,112 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-17 09:44:15,117 | ERROR | train | Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column "win_rate" of relation "backtest_summary" does not exist
+LINE 2: ...nl_percent","number_of_trades","starting_balance","win_rate"...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 223, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 184, in run_pipeline
+    _save_backtest_summary(result.summary)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 103, in _save_backtest_summary
+    save_df_to_db(
+  File "D:\trading\TradeX\utils\db\utils.py", line 294, in save_df_to_db
+    conn.execute(insert_sql, df.to_dict(orient="records"))
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "win_rate" of relation "backtest_summary" does not exist
+LINE 2: ...nl_percent","number_of_trades","starting_balance","win_rate"...
+                                                             ^
+
+[SQL: 
+        INSERT INTO reddit.backtest_summary ("final_balance","total_pnl_percent","number_of_trades","starting_balance","win_rate","avg_trade_pnl","max_drawdown","exits_take_profit","exits_stop_loss","exits_direction_change","exits_end_of_backtest","run_at")
+        VALUES (%(final_balance)s,%(total_pnl_percent)s,%(number_of_trades)s,%(starting_balance)s,%(win_rate)s,%(avg_trade_pnl)s,%(max_drawdown)s,%(exits_take_profit)s,%(exits_stop_loss)s,%(exits_direction_change)s,%(exits_end_of_backtest)s,%(run_at)s)
+        
+    ]
+[parameters: {'final_balance': 774.96, 'total_pnl_percent': -23.59, 'number_of_trades': 161, 'starting_balance': 1000, 'win_rate': 0.2919, 'avg_trade_pnl': -0.0865, 'max_drawdown': 25.0753, 'exits_take_profit': 27, 'exits_stop_loss': 106, 'exits_direction_change': 28, 'exits_end_of_backtest': 0, 'run_at': Timestamp('2026-04-17 04:44:15.077370+0000', tz='UTC')}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+
+2026-04-17 09:45:29,397 | INFO | train | ========================================================================
+2026-04-17 09:45:29,397 | INFO | train | PIPELINE START
+2026-04-17 09:45:29,397 | INFO | train | ========================================================================
+2026-04-17 09:45:29,397 | INFO | train | --- STEP 1: Load features ---
+2026-04-17 09:45:30,074 | INFO | train | --- STEP 2: Split data ---
+2026-04-17 09:45:30,081 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-17 09:45:30,111 | INFO | train | --- STEP 4: Train models ---
+2026-04-17 09:45:31,360 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-17 09:45:32,048 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-17 09:45:32,060 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-17 09:45:44,032 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-17 09:45:44,032 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-17 09:45:48,885 | INFO | train |   Saved 2022 signal rows.
+2026-04-17 09:45:48,885 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-17 09:45:49,733 | INFO | train |   Saved 322 ledger rows.
+2026-04-17 09:45:49,733 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-17 09:45:49,814 | INFO | train |   Summary saved.
+2026-04-17 09:45:49,815 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-17 09:45:51,605 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-17 09:45:51,906 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-17 09:45:51,906 | INFO | train | ========================================================================
+2026-04-17 09:45:51,906 | INFO | train | PIPELINE COMPLETE
+2026-04-17 09:45:51,906 | INFO | train |   Elapsed          : 22.5 s
+2026-04-17 09:45:51,907 | INFO | train |   Starting balance : 1000.00
+2026-04-17 09:45:51,907 | INFO | train |   Final balance    : 774.96
+2026-04-17 09:45:51,907 | INFO | train |   Total PnL %%      : -23.59%%
+2026-04-17 09:45:51,907 | INFO | train |   Trades executed  : 161
+2026-04-17 09:45:51,907 | INFO | train |   Win rate         : 29.2%
+2026-04-17 09:45:51,907 | INFO | train |   Max drawdown     : 25.08%%
+2026-04-17 09:45:51,907 | INFO | train | ========================================================================

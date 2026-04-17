@@ -101,10 +101,9 @@ def load_features_from_db() -> pd.DataFrame:
         f"Features loaded → shape: {df.shape}  |  "
         f"date range: {df[DATETIME_COL].min()} → {df[DATETIME_COL].max()}"
     )
-    global START
-    START = df[DATETIME_COL].min() 
-    global END
-    END = START = df[DATETIME_COL].max()
+    global START, END
+    START = df[DATETIME_COL].min()
+    END   = df[DATETIME_COL].max()
     
 
     return df
