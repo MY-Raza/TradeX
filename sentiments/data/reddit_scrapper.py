@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 from TradeX.utils.common.logs import get_logger
 from TradeX.utils.db.utils import save_df_to_db,read_df_from_db
+import time
 logger = get_logger("reddit_scraper")
 
 posts = read_df_from_db(
@@ -110,7 +111,8 @@ for sub in subreddits:
                 "comment_time": comment_time,
                 "comment_author": str(comment.author)
             })
-    logger.info(f"✅ r/{sub} done")        
+    logger.info(f"✅ r/{sub} done")
+    time.sleep(2)        
 
 # =========================
 # Convert to DataFrames
