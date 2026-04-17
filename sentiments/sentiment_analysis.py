@@ -200,17 +200,20 @@ def apply_sentiment_analysis(texts, sentiment_pipeline):
 # ================================================================================
 # MAIN SENTIMENT FUNCTION
 # ================================================================================
-def add_sentiment_to_df(df, text_column, sentiment_pipeline):
+def add_sentiment_to_df(df, text_column, time_column,sentiment_pipeline):
 
     logger.info(f"🧹 Cleaning {len(df):,} rows...")
+    df = df.sort_values(time_column).reset_index(drop=True)
 
     # 🔥 CLEAN + FEATURES
+    logger.info(f"Before drop: earliest={df[time_column].min()}, latest={df[time_column].max()}")
     df = apply_cleaning_to_df(
         df,
         text_column=text_column,
         extract_features=True,
         drop_invalid=True
     )
+    logger.info(f"After drop:  earliest={df[time_column].min()}, latest={df[time_column].max()}")
 
     logger.info(f"After cleaning: {len(df):,}")
 
@@ -325,8 +328,8 @@ def main(apply_btc_filter=True, save_to_database=True):
     # ── 5. Load FinBERT and run sentiment ──────────────────────────────────────
     model = load_sentiment_model()
 
-    posts_df = add_sentiment_to_df(posts_df, "title", model)
-    comments_df = add_sentiment_to_df(comments_df, "comment_text", model)
+    posts_df = add_sentiment_to_df(posts_df, "title","post_time", model)
+    comments_df = add_sentiment_to_df(comments_df, "comment_text","comment_time", model)
 
     # ── 6. Hourly aggregation ──────────────────────────────────────────────────
     posts_agg = aggregate_sentiment_hourly(posts_df, "post_time")
