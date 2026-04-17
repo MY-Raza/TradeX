@@ -614,3 +614,46 @@
 2026-04-17 12:23:19,441 | INFO | reddit_sentiment_pipeline | Comments: 10,043
 2026-04-17 12:23:19,461 | INFO | reddit_sentiment_pipeline | 📅 Date range — start: 2018-04-25 03:54:32+00:00  |  end: 2026-04-17 10:57:36+00:00
 2026-04-17 12:23:19,463 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV from 'btc_1m' [2018-04-25 03:54:32+00:00 → 2026-04-17 10:57:36+00:00]
+2026-04-17 12:23:36,437 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE
+2026-04-17 12:23:36,437 | INFO | reddit_sentiment_pipeline | ⚠️ Using CPU
+2026-04-17 12:23:36,924 | INFO | reddit_sentiment_pipeline | Posts: 2,225
+2026-04-17 12:23:36,924 | INFO | reddit_sentiment_pipeline | Comments: 10,043
+2026-04-17 12:23:36,924 | INFO | reddit_sentiment_pipeline | 📅 Date range — start: 2018-04-25 03:54:32+00:00  |  end: 2026-04-17 10:57:36+00:00
+2026-04-17 12:23:36,924 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV from 'btc_1m' [2018-04-25 03:54:32+00:00 → 2026-04-17 10:57:36+00:00]
+2026-04-17 12:23:45,588 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows fetched: 1,731,416
+2026-04-17 12:23:45,685 | INFO | reddit_sentiment_pipeline | 📥 Loading model: ProsusAI/finbert
+2026-04-17 12:23:55,150 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 361 rows...
+2026-04-17 12:23:55,150 | INFO | reddit_sentiment_pipeline | Before drop: earliest=2024-10-06 09:46:46+00:00, latest=2026-04-17 10:34:16+00:00
+2026-04-17 12:23:55,264 | INFO | reddit_sentiment_pipeline | After drop:  earliest=2024-10-06 09:46:46+00:00, latest=2026-04-17 10:34:16+00:00
+2026-04-17 12:23:55,264 | INFO | reddit_sentiment_pipeline | After cleaning: 361
+2026-04-17 12:23:55,339 | INFO | reddit_sentiment_pipeline | After dedup: 349
+2026-04-17 12:23:55,340 | INFO | reddit_sentiment_pipeline | 🔍 Running sentiment (FinBERT)...
+2026-04-17 12:24:17,163 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 1,378 rows...
+2026-04-17 12:24:17,165 | INFO | reddit_sentiment_pipeline | Before drop: earliest=2024-09-30 17:21:33+00:00, latest=2026-04-17 10:57:36+00:00
+2026-04-17 12:24:18,879 | INFO | reddit_sentiment_pipeline | After drop:  earliest=2024-09-30 17:21:33+00:00, latest=2026-04-17 10:57:36+00:00
+2026-04-17 12:24:18,879 | INFO | reddit_sentiment_pipeline | After cleaning: 1,378
+2026-04-17 12:24:19,788 | INFO | reddit_sentiment_pipeline | After dedup: 1,366
+2026-04-17 12:24:19,788 | INFO | reddit_sentiment_pipeline | 🔍 Running sentiment (FinBERT)...
+2026-04-17 12:28:54,098 | INFO | reddit_sentiment_pipeline | ✅ DONE
+2026-04-17 12:28:54,120 | INFO | reddit_sentiment_pipeline |    post_id          subreddit  ... sentiment_confidence  sentiment_label
+0  1fx8tw9  SatoshiStreetBets  ...             0.951372          neutral
+1  1fxhfhn  SatoshiStreetBets  ...             0.824721          neutral
+2  1fz9jci  SatoshiStreetBets  ...             0.923339          neutral
+3  1g0hadh  SatoshiStreetBets  ...             0.923743          neutral
+4  1g2245e  SatoshiStreetBets  ...             0.904987          neutral
+
+[5 rows x 27 columns]
+2026-04-17 12:28:54,166 | INFO | reddit_sentiment_pipeline |                 time_window  mean_sentiment  std_sentiment  ...  spam_score_mean  token_count_mean  post_id_count
+0 2024-10-06 09:00:00+00:00             0.0            NaN  ...              0.0              10.0              1
+1 2024-10-06 19:00:00+00:00             0.0            NaN  ...              0.0               6.0              1
+2 2024-10-09 01:00:00+00:00             0.0            NaN  ...              0.0              10.0              1
+3 2024-10-10 17:00:00+00:00             0.0            NaN  ...              0.0               5.0              1
+4 2024-10-12 20:00:00+00:00             0.0            NaN  ...              0.0              45.0              1
+
+[5 rows x 10 columns]
+2026-04-17 12:28:54,205 | INFO | reddit_sentiment_pipeline |                           datetime     open     high      low    close  volume
+0 2022-12-31 19:00:00.080000+00:00  16571.8  16572.0  16571.7  16572.0  32.988
+1        2022-12-31 19:01:00+00:00  16571.9  16572.1  16571.9  16572.0  14.639
+2        2022-12-31 19:02:00+00:00  16572.0  16572.2  16572.0  16572.1  12.707
+3        2022-12-31 19:03:00+00:00  16572.1  16573.3  16572.1  16573.2  19.332
+4        2022-12-31 19:04:00+00:00  16573.2  16573.3  16569.1  16569.1  74.410

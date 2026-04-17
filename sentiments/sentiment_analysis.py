@@ -153,14 +153,24 @@ def filter_subreddits(posts_df, comments_df):
     comments_df = comments_df[~comments_df["subreddit"].str.lower().isin(EXCLUDED_SUBS)].copy()
     return posts_df.reset_index(drop=True), comments_df.reset_index(drop=True)
 
+BTC_NATIVE_SUBS = {"bitcoin", "bitcoinmarkets", "satoshistreetbets"}
+
 def filter_btc(posts_df, comments_df):
-    posts_df = posts_df[
-        posts_df["title"].str.contains(BTC_PATTERN, case=False, regex=True, na=False)
-    ]
-    comments_df = comments_df[
-        comments_df["comment_text"].str.contains(BTC_PATTERN, case=False, regex=True, na=False)
-    ]
-    return posts_df.reset_index(drop=True), comments_df.reset_index(drop=True)
+    # Skip BTC filter for subreddits where all content is implicitly BTC
+    btc_native_mask = posts_df["subreddit"].str.lower().isin(BTC_NATIVE_SUBS)
+    btc_mention_mask = posts_df["title"].str.contains(
+        BTC_PATTERN, case=False, regex=True, na=False
+    )
+    posts_df = posts_df[btc_native_mask | btc_mention_mask].reset_index(drop=True)
+
+    # Comments: same logic
+    btc_native_mask_c = comments_df["subreddit"].str.lower().isin(BTC_NATIVE_SUBS)
+    btc_mention_mask_c = comments_df["comment_text"].str.contains(
+        BTC_PATTERN, case=False, regex=True, na=False
+    )
+    comments_df = comments_df[btc_native_mask_c | btc_mention_mask_c].reset_index(drop=True)
+
+    return posts_df, comments_df
 
 # ================================================================================
 # SENTIMENT CORE
@@ -254,7 +264,7 @@ def aggregate_sentiment_hourly(df, time_column):
     df["hour"] = df[time_column].dt.floor("1H")
 
     agg = df.groupby("hour").agg({
-        "sentiment_score": ["mean", "std"],
+        "sentiment_score": ["mean", lambda x: x.std(ddof=0)],
         "sentiment_confidence": "mean",
 
         # 🔥 ALPHA FEATURES
