@@ -10,11 +10,19 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.db.utils import save_df_to_db
 
 # ── Pipeline modules ──────────────────────────────────────
-from TradeX.sentiments.ml.data.data_loader      import load_features_from_db
-from TradeX.sentiments.ml.data.preprocessing    import split_data_timewise, prepare_features
-from TradeX.sentiments.ml.model           import train_classification_model, train_regression_model, evaluate_models
-from TradeX.sentiments.ml.backtesting.signals          import generate_signals
-from TradeX.sentiments.ml.backtesting.backtest_runner  import run_backtest
+from TradeX.sentiments.ml.data.data_loader   import (
+    load_features_from_db,
+    load_ohlcv_with_indicators,   # NEW: returns OHLCV + all TA-Lib indicators
+    load_price_data,              # kept for backtest engine (raw OHLCV only)
+)
+from TradeX.sentiments.ml.data.preprocessing import (
+    split_data_timewise,
+    merge_ohlcv_indicators_with_features,   # NEW: aligns & merges before split
+    prepare_features,
+)
+from TradeX.sentiments.ml.model                    import train_classification_model, train_regression_model, evaluate_models
+from TradeX.sentiments.ml.backtesting.signals       import generate_signals
+from TradeX.sentiments.ml.backtesting.backtest_runner import run_backtest
 
 # ── Config ────────────────────────────────────────────────
 from config import (
@@ -29,7 +37,7 @@ logger = get_logger("train")
 
 
 # =========================================================
-# OPTIONAL: FEATURE IMPORTANCE VISUALISATION (BONUS)
+# OPTIONAL: FEATURE IMPORTANCE VISUALISATION
 # =========================================================
 
 def plot_feature_importances(
@@ -43,7 +51,7 @@ def plot_feature_importances(
     """
     try:
         import matplotlib
-        matplotlib.use("Agg")   # non-interactive backend
+        matplotlib.use("Agg")
         import matplotlib.pyplot as plt
     except ImportError:
         logger.warning("matplotlib not installed — skipping importance plots.")
@@ -119,10 +127,21 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     """
     Execute the full ML trading pipeline end-to-end.
 
+    Data flow
+    ---------
+    1.  load_features_from_db()          → df_features  (hourly, ml_features table)
+    2.  load_ohlcv_with_indicators()     → df_ohlcv_indic  (minute OHLCV + all TA-Lib)
+    3.  merge_ohlcv_indicators_with_features()
+                                         → df_merged  (hourly, features + indicators)
+    4.  split_data_timewise(df_merged)   → train / val / test splits
+    5.  prepare_features(…, extra_feature_cols)
+                                         → PreparedData  (scaled arrays, all cols)
+    6–9. Train → Evaluate → Signals → Backtest → Save → Plot  (unchanged)
+
     Parameters
     ----------
     save_to_db : bool
-        Set False to skip all DB writes (useful for dry runs / unit tests).
+        Set False to skip all DB writes (dry run / unit tests).
     plot : bool
         Set False to skip feature importance plots.
     """
@@ -132,64 +151,91 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     logger.info("=" * 72)
 
     # ----------------------------------------------------------
-    # STEP 1 — Load feature data
+    # STEP 1 — Load ml_features
     # ----------------------------------------------------------
-    logger.info("--- STEP 1: Load features ---")
+    logger.info("--- STEP 1: Load ml_features ---")
     df_features = load_features_from_db()
+    # Side-effect: sets data_loader.START / END to the feature date range.
 
     # ----------------------------------------------------------
-    # STEP 2 — Time-based split
+    # STEP 2 — Load OHLCV + compute all TA-Lib indicators
     # ----------------------------------------------------------
-    logger.info("--- STEP 2: Split data ---")
-    df_train, df_val, df_test = split_data_timewise(df_features)
+    logger.info("--- STEP 2: Load OHLCV + compute indicators ---")
+    # load_ohlcv_with_indicators() uses the START/END cached in Step 1
+    # so it fetches exactly the same date window as the feature table.
+    df_ohlcv_indic = load_ohlcv_with_indicators()
 
     # ----------------------------------------------------------
-    # STEP 3 — Scale features
+    # STEP 3 — Merge OHLCV+indicators with ml_features
     # ----------------------------------------------------------
-    logger.info("--- STEP 3: Prepare / scale features ---")
-    prepared = prepare_features(df_train, df_val, df_test)
+    logger.info("--- STEP 3: Merge OHLCV+indicators with ml_features ---")
+    # Resamples minute OHLCV → hourly, then left-joins on datetime.
+    # Returns the enriched feature DataFrame + list of added column names.
+    df_merged, indicator_cols = merge_ohlcv_indicators_with_features(
+        df_features=df_features,
+        df_ohlcv_indic=df_ohlcv_indic,
+    )
 
     # ----------------------------------------------------------
-    # STEP 4 — Train models
+    # STEP 4 — Time-based split on merged DataFrame
     # ----------------------------------------------------------
-    logger.info("--- STEP 4: Train models ---")
+    logger.info("--- STEP 4: Split data ---")
+    df_train, df_val, df_test = split_data_timewise(df_merged)
+
+    # ----------------------------------------------------------
+    # STEP 5 — Scale features  (ml_features + indicator cols)
+    # ----------------------------------------------------------
+    logger.info("--- STEP 5: Prepare / scale features ---")
+    prepared = prepare_features(
+        df_train,
+        df_val,
+        df_test,
+        extra_feature_cols=indicator_cols,   # pass the indicator col names
+    )
+
+    # ----------------------------------------------------------
+    # STEP 6 — Train models
+    # ----------------------------------------------------------
+    logger.info("--- STEP 6: Train models ---")
     clf = train_classification_model(prepared)
     reg = train_regression_model(prepared)
 
     # ----------------------------------------------------------
-    # STEP 5 — Evaluate models
+    # STEP 7 — Evaluate models
     # ----------------------------------------------------------
-    logger.info("--- STEP 5: Evaluate models ---")
+    logger.info("--- STEP 7: Evaluate models ---")
     bundle = evaluate_models(clf, reg, prepared)
 
     # ----------------------------------------------------------
-    # STEP 6 — Generate signals
+    # STEP 8 — Generate signals
     # ----------------------------------------------------------
-    logger.info("--- STEP 6: Generate signals ---")
+    logger.info("--- STEP 8: Generate signals ---")
     df_signals = generate_signals(bundle, prepared)
 
     # ----------------------------------------------------------
-    # STEP 7 — Run backtest
+    # STEP 9 — Run backtest  (raw OHLCV, no indicator columns)
     # ----------------------------------------------------------
-    logger.info("--- STEP 7: Run backtest ---")
+    logger.info("--- STEP 9: Run backtest ---")
+    # run_backtest internally calls load_price_data() which fetches
+    # raw OHLCV — no indicator columns — exactly as the BackTest engine expects.
     result = run_backtest(df_signals)
 
     # ----------------------------------------------------------
-    # STEP 8 — Save outputs
+    # STEP 10 — Save outputs
     # ----------------------------------------------------------
     if save_to_db:
-        logger.info("--- STEP 8: Save outputs to DB ---")
+        logger.info("--- STEP 10: Save outputs to DB ---")
         _save_predictions(df_signals)
         _save_backtest_results(result.ledger)
         _save_backtest_summary(result.summary)
     else:
-        logger.info("--- STEP 8: DB write SKIPPED (save_to_db=False) ---")
+        logger.info("--- STEP 10: DB write SKIPPED (save_to_db=False) ---")
 
     # ----------------------------------------------------------
-    # STEP 9 — (Bonus) Plot feature importances
+    # STEP 11 — (Bonus) Plot feature importances
     # ----------------------------------------------------------
     if plot:
-        logger.info("--- STEP 9: Plot feature importances ---")
+        logger.info("--- STEP 11: Plot feature importances ---")
         plot_feature_importances(
             bundle.clf_importances,
             bundle.reg_importances,
@@ -203,6 +249,7 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     logger.info("=" * 72)
     logger.info("PIPELINE COMPLETE")
     logger.info(f"  Elapsed          : {elapsed:.1f} s")
+    logger.info(f"  Features used    : {len(prepared.feature_cols)}")
     logger.info(f"  Starting balance : {result.summary['starting_balance']:.2f}")
     logger.info(f"  Final balance    : {result.final_balance:.2f}")
     logger.info(f"  Total PnL %%      : {result.total_pnl_pct:.2f}%%")

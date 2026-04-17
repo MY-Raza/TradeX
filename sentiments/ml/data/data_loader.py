@@ -15,8 +15,14 @@ from TradeX.sentiments.ml.config import (
     TARGET_CLASS_COL,
     TARGET_RETURN_COL,
 )
+from TradeX.indicators.talib.indicators1 import compute_all_indicators
 
 logger = get_logger("data_loader")
+
+# Module-level cache set by load_features_from_db so load_price_data
+# can use the same date window without a parameter.
+START: pd.Timestamp | None = None
+END:   pd.Timestamp | None = None
 
 
 # =========================================================
@@ -59,6 +65,8 @@ def load_features_from_db() -> pd.DataFrame:
     ValueError
         If the table is empty or required columns are missing.
     """
+    global START, END
+
     logger.info(f"Loading features from {DB_SCHEMA_FEATURES}.{FEATURES_TABLE} …")
 
     df = read_df_from_db(FEATURES_TABLE, DB_SCHEMA_FEATURES)
@@ -101,12 +109,13 @@ def load_features_from_db() -> pd.DataFrame:
         f"Features loaded → shape: {df.shape}  |  "
         f"date range: {df[DATETIME_COL].min()} → {df[DATETIME_COL].max()}"
     )
-    global START, END
+
+    # Cache date range for load_price_data
     START = df[DATETIME_COL].min()
     END   = df[DATETIME_COL].max()
-    
 
     return df
+
 
 def load_price_data(
     start_date: str | pd.Timestamp | None = None,
@@ -118,44 +127,47 @@ def load_price_data(
     Parameters
     ----------
     start_date : str or pd.Timestamp, optional
-        Lower bound (inclusive).  E.g. "2024-01-01" or a pd.Timestamp.
+        Lower bound (inclusive).
     end_date : str or pd.Timestamp, optional
         Upper bound (inclusive).
 
     Returns
     -------
     pd.DataFrame
-        Columns include at minimum: datetime, open, high, low, close, volume.
+        Columns: datetime, open, high, low, close, volume.
         Sorted ascending, UTC-aware datetime column.
+        No indicator columns — raw OHLCV only (used by the backtest engine).
 
     Raises
     ------
     ValueError
         If fetch returns an empty DataFrame.
     """
+    _start = start_date if start_date is not None else START
+    _end   = end_date   if end_date   is not None else END
+
     logger.info(
         f"Loading OHLCV data from {DB_SCHEMA_PRICE}.{PRICE_TABLE} "
-        f"[{START} → {END}] …"
+        f"[{_start} → {_end}] …"
     )
 
     df = fetch_ohlcv_df(
         table_name=PRICE_TABLE,
         schema=DB_SCHEMA_PRICE,
         time_column=PRICE_TIME_COLUMN,
-        start_date=START,
-        end_date=END,
+        start_date=_start,
+        end_date=_end,
     )
 
     if df.empty:
         raise ValueError(
             f"OHLCV table '{DB_SCHEMA_PRICE}.{PRICE_TABLE}' returned 0 rows "
-            f"for range [{start_date} → {end_date}]."
+            f"for range [{_start} → {_end}]."
         )
 
     df = _ensure_utc(df, PRICE_TIME_COLUMN)
     df = _sort_and_dedup(df, PRICE_TIME_COLUMN)
 
-    # Rename to 'datetime' if the column is named differently
     if PRICE_TIME_COLUMN != DATETIME_COL:
         df = df.rename(columns={PRICE_TIME_COLUMN: DATETIME_COL})
 
@@ -169,3 +181,58 @@ def load_price_data(
         f"date range: {df[DATETIME_COL].min()} → {df[DATETIME_COL].max()}"
     )
     return df
+
+
+def load_ohlcv_with_indicators(
+    start_date: str | pd.Timestamp | None = None,
+    end_date:   str | pd.Timestamp | None = None,
+) -> pd.DataFrame:
+    """
+    Fetch OHLCV data and append every TA-Lib indicator from ALL_INDICATORS.
+
+    This is the function used by the ML pipeline (not the backtest engine).
+    The backtest engine still uses the raw load_price_data() so it receives
+    clean OHLCV without indicator columns.
+
+    Parameters
+    ----------
+    start_date : str or pd.Timestamp, optional
+        Lower bound.  Falls back to the date range cached by
+        load_features_from_db() if not supplied.
+    end_date : str or pd.Timestamp, optional
+        Upper bound.  Same fallback as start_date.
+
+    Returns
+    -------
+    pd.DataFrame
+        Columns: datetime, open, high, low, close, volume, ta_rsi, ta_macd_macd,
+        ta_bbands_upper, … (one column per indicator output).
+        Row count matches the OHLCV fetch (minute bars).
+        NaN warm-up rows are forward-filled then zero-filled.
+
+    Raises
+    ------
+    ValueError
+        If OHLCV fetch returns empty data or required columns are absent.
+    """
+    # 1. Raw OHLCV
+    df_ohlcv = load_price_data(start_date=start_date, end_date=end_date)
+
+    # 2. Compute indicators — returns df with datetime + ta_* columns
+    logger.info("Computing TA-Lib indicators on OHLCV data …")
+    df_indicators = compute_all_indicators(df_ohlcv)
+
+    # 3. Merge indicators back onto OHLCV (drop the duplicate 'datetime' col
+    #    that comes from df_indicators before concat)
+    indicator_cols = [c for c in df_indicators.columns if c != "datetime"]
+    df_combined = pd.concat(
+        [df_ohlcv.reset_index(drop=True),
+         df_indicators[indicator_cols].reset_index(drop=True)],
+        axis=1,
+    )
+
+    logger.info(
+        f"OHLCV + indicators combined → shape: {df_combined.shape}  |  "
+        f"indicator columns added: {len(indicator_cols)}"
+    )
+    return df_combined
