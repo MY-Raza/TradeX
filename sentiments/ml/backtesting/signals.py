@@ -49,6 +49,10 @@ def generate_signals(
     reg_preds   = bundle.reg_preds_test             # shape (n,)  float
     class_proba = bundle.class_proba_test           # shape (n,2) float
 
+    if thr == SIGNAL_THRESHOLD:   # only if not manually overridden
+        thr = float(np.percentile(np.abs(reg_preds), 70))
+        logger.info(f"  Auto-calibrated threshold from reg_preds: {thr:.6f}")
+
     n = len(class_preds)
     signals = np.zeros(n, dtype=np.int8)
 

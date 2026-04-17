@@ -104,7 +104,7 @@ def load_features_from_db() -> pd.DataFrame:
     global START
     START = df[DATETIME_COL].min() 
     global END
-    END = START = df[DATETIME_COL].min() 
+    END = START = df[DATETIME_COL].max()
     
 
     return df
