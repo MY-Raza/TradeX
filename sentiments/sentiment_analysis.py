@@ -256,34 +256,34 @@ def add_sentiment_to_df(df, text_column, time_column,sentiment_pipeline):
 # ================================================================================
 # AGGREGATION (ENHANCED)
 # ================================================================================
-def aggregate_sentiment_hourly(df, time_column):
+def std_pop(x):
+    return x.std(ddof=0)
 
+std_pop.__name__ = "std_pop"  # pandas uses this for the column name
+
+def aggregate_sentiment_hourly(df, time_column):
     df = df.copy()
     df[time_column] = pd.to_datetime(df[time_column], utc=True)
-
     df["hour"] = df[time_column].dt.floor("1H")
 
-    agg = df.groupby("hour").agg({
-        "sentiment_score": ["mean", lambda x: x.std(ddof=0)],
-        "sentiment_confidence": "mean",
+    # Count column = first non-time column (e.g. post_id or comment_id)
+    count_col = df.columns[0]
 
-        # 🔥 ALPHA FEATURES
-        "emoji_count": "mean",
-        "caps_ratio": "mean",
-        "punct_intensity": "mean",
-        "spam_score": "mean",
-        "token_count": "mean",
-
-        df.columns[0]: "count"
-    }).reset_index()
-
-    agg.columns = ["_".join(col).strip("_") for col in agg.columns]
-
-    agg.rename(columns={
-        "hour": "time_window",
-        "sentiment_score_mean": "mean_sentiment",
-        "sentiment_score_std": "std_sentiment"
-    }, inplace=True)
+    agg = (
+        df.groupby("hour", as_index=False)   # ✅ keeps 'hour' as a regular column
+        .agg(
+            mean_sentiment=("sentiment_score", "mean"),
+            std_sentiment=("sentiment_score", std_pop),
+            sentiment_confidence_mean=("sentiment_confidence", "mean"),
+            emoji_count_mean=("emoji_count", "mean"),
+            caps_ratio_mean=("caps_ratio", "mean"),
+            punct_intensity_mean=("punct_intensity", "mean"),
+            spam_score_mean=("spam_score", "mean"),
+            token_count_mean=("token_count", "mean"),
+            post_id_count=(count_col, "count"),
+        )
+        .rename(columns={"hour": "time_window"})  # ✅ now safe to rename
+    )
 
     return agg
 
