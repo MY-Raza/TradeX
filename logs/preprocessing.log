@@ -80,3 +80,12 @@
 2026-04-17 09:45:30,085 | INFO | preprocessing | Using 23 features for modelling.
 2026-04-17 09:45:30,109 | INFO | preprocessing | Scaling complete → X_train: (9436, 23) | X_val: (2022, 23) | X_test: (2022, 23)
 2026-04-17 14:59:42,660 | INFO | preprocessing | Merging OHLCV+indicators with ml_features …
+2026-04-21 10:02:48,268 | INFO | preprocessing | Dataset split (n=13571) → train: 9499 (70%) | val: 2036 (15%) | test: 2036 (15%)
+2026-04-21 10:02:48,300 | INFO | preprocessing |   Train range: 2024-09-28 17:00:00+00:00 → 2025-10-29 11:00:00+00:00
+2026-04-21 10:02:48,300 | INFO | preprocessing |   Val   range: 2025-10-29 12:00:00+00:00   → 2026-01-22 07:00:00+00:00
+2026-04-21 10:02:48,303 | INFO | preprocessing |   Test  range: 2026-01-22 08:00:00+00:00  → 2026-04-17 03:00:00+00:00
+2026-04-21 10:02:48,513 | INFO | preprocessing |   Train class dist — class 0: 49.4% | class 1: 50.6%
+2026-04-21 10:02:48,520 | INFO | preprocessing |   Val class dist — class 0: 50.1% | class 1: 49.9%
+2026-04-21 10:02:48,525 | INFO | preprocessing |   Test class dist — class 0: 50.4% | class 1: 49.6%
+2026-04-21 10:02:48,570 | INFO | preprocessing | Using 23 features for modelling.
+2026-04-21 10:02:48,939 | INFO | preprocessing | Scaling complete → X_train: (9499, 23) | X_val: (2036, 23) | X_test: (2036, 23)

@@ -11,11 +11,12 @@ from TradeX.utils.db.utils import save_df_to_db
 
 # ── Pipeline modules ──────────────────────────────────────
 from TradeX.sentiments.ml.data.data_loader      import load_features_from_db,load_price_data
-from TradeX.sentiments.ml.data.preprocessing    import split_data_timewise, prepare_features
+from TradeX.sentiments.ml.data.preprocessing    import split_data_timewise, prepare_features_sentiments
 from TradeX.sentiments.ml.model           import train_classification_model, train_regression_model, evaluate_models
 from TradeX.sentiments.ml.backtesting.signals          import generate_signals
 from TradeX.sentiments.ml.backtesting.backtest_runner  import run_backtest
-from TradeX.indicators.talib.indicators import call_indicator
+from TradeX.indicators.talib.indicators import call_indicator, ALL_INDICATORS, TA_DEFAULT_WINDOWS
+from TradeX.ai.data.data_pipeline import generate_features
 
 # ── Config ────────────────────────────────────────────────
 from config import (
@@ -139,12 +140,14 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     df_features = load_features_from_db()
 
     df_price_raw = load_price_data()
-    df_price_raw = df_price_raw.set_index(DATETIME_COL)
+    
 
-    indicator_df = call_indicator(df_price_raw)
+    indicator_df = generate_features(df_price_raw,ALL_INDICATORS)
 
     df_features = df_features.set_index(DATETIME_COL)
     df_features = df_features.join(indicator_df, how="left")
+    print(df_features.columns)
+    columns_list = df_features.columns.tolist()
     df_features[indicator_df.columns] = df_features[indicator_df.columns].fillna(0.0)
     df_features = df_features.reset_index()
 
@@ -158,7 +161,7 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     # STEP 3 — Scale features
     # ----------------------------------------------------------
     logger.info("--- STEP 3: Prepare / scale features ---")
-    prepared = prepare_features(df_train, df_val, df_test)
+    prepared = prepare_features_sentiments(df_train, df_val, df_test)
 
     # ----------------------------------------------------------
     # STEP 4 — Train models

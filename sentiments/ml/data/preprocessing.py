@@ -119,7 +119,7 @@ class PreparedData:
         self.feature_cols = feature_cols
 
 
-def prepare_features(
+def prepare_features_sentiments(
     df_train: pd.DataFrame,
     df_val:   pd.DataFrame,
     df_test:  pd.DataFrame,

@@ -366,3 +366,171 @@ LINE 1: SELECT * FROM reddit.ml_features
     new_values = new_values[argsort]
 numpy.core._exceptions._ArrayMemoryError: Unable to allocate 870. MiB for an array with shape (140, 814201) and data type float64
 
+2026-04-21 09:58:13,320 | INFO | train | ========================================================================
+2026-04-21 09:58:13,320 | INFO | train | PIPELINE START
+2026-04-21 09:58:13,320 | INFO | train | ========================================================================
+2026-04-21 09:58:13,321 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 09:58:31,804 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 09:58:31,824 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 234, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 144, in run_pipeline
+    indicator_df = call_indicator(df_price_raw)
+  File "D:\trading\TradeX\indicators\talib\indicators.py", line 163, in call_indicator
+    if not hasattr(talib, name):
+TypeError: hasattr(): attribute name must be string
+
+2026-04-21 10:02:25,482 | INFO | train | ========================================================================
+2026-04-21 10:02:25,482 | INFO | train | PIPELINE START
+2026-04-21 10:02:25,482 | INFO | train | ========================================================================
+2026-04-21 10:02:25,482 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:02:36,153 | WARNING | train | Indicator 'MIDPRICE' skipped: MIDPRICE() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:02:36,173 | WARNING | train | Indicator 'SAR' skipped: SAR() takes at least 2 positional arguments (1 given)
+2026-04-21 10:02:36,174 | WARNING | train | Indicator 'SAREXT' skipped: SAREXT() takes at least 2 positional arguments (1 given)
+2026-04-21 10:02:36,253 | WARNING | train | Indicator 'APO' skipped: APO() got an unexpected keyword argument 'timeperiod'
+2026-04-21 10:02:36,274 | WARNING | train | Indicator 'AROON' skipped: AROON() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:02:36,280 | WARNING | train | Indicator 'AROONOSC' skipped: AROONOSC() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:02:36,280 | WARNING | train | Indicator 'BOP' skipped: BOP() takes exactly 4 positional arguments (3 given)
+2026-04-21 10:02:36,542 | WARNING | train | Indicator 'MINUS_DM' skipped: MINUS_DM() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:02:36,562 | WARNING | train | Indicator 'PLUS_DM' skipped: PLUS_DM() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:02:36,679 | WARNING | train | Indicator 'OBV' skipped: OBV() takes exactly 2 positional arguments (4 given)
+2026-04-21 10:02:36,731 | WARNING | train | Indicator 'AVGPRICE' skipped: AVGPRICE() takes exactly 4 positional arguments (3 given)
+2026-04-21 10:02:36,731 | WARNING | train | Indicator 'MEDPRICE' skipped: MEDPRICE() takes exactly 2 positional arguments (3 given)
+2026-04-21 10:02:48,189 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 10:02:48,569 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 10:02:48,939 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 10:02:50,997 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 10:02:51,550 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 10:02:51,584 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 10:03:07,284 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 10:03:07,284 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 10:03:12,880 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 10:03:12,880 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 10:03:14,287 | INFO | train |   Saved 366 ledger rows.
+2026-04-21 10:03:14,287 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 10:03:14,349 | INFO | train |   Summary saved.
+2026-04-21 10:03:14,349 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 10:03:17,825 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 10:03:18,145 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 10:03:18,162 | INFO | train | ========================================================================
+2026-04-21 10:03:18,162 | INFO | train | PIPELINE COMPLETE
+2026-04-21 10:03:18,162 | INFO | train |   Elapsed          : 52.7 s
+2026-04-21 10:03:18,162 | INFO | train |   Starting balance : 1000.00
+2026-04-21 10:03:18,162 | INFO | train |   Final balance    : 747.48
+2026-04-21 10:03:18,162 | INFO | train |   Total PnL %%      : -27.22%%
+2026-04-21 10:03:18,162 | INFO | train |   Trades executed  : 183
+2026-04-21 10:03:18,162 | INFO | train |   Win rate         : 33.3%
+2026-04-21 10:03:18,162 | INFO | train |   Max drawdown     : 26.88%%
+2026-04-21 10:03:18,162 | INFO | train | ========================================================================
+2026-04-21 10:06:21,534 | INFO | train | ========================================================================
+2026-04-21 10:06:21,534 | INFO | train | PIPELINE START
+2026-04-21 10:06:21,534 | INFO | train | ========================================================================
+2026-04-21 10:06:21,534 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:06:33,113 | WARNING | train | Indicator 'AROON' skipped: AROON() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:06:33,113 | WARNING | train | Indicator 'AROONOSC' skipped: AROONOSC() got multiple values for keyword argument 'timeperiod'
+2026-04-21 10:06:33,415 | WARNING | train | Indicator 'TYPPRICE' skipped: TYPPRICE() takes exactly 3 positional arguments (1 given)
+2026-04-21 10:06:33,415 | WARNING | train | Indicator 'WCLPRICE' skipped: WCLPRICE() takes exactly 3 positional arguments (1 given)
+2026-04-21 10:06:37,747 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 10:06:37,767 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 339, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 252, in run_pipeline
+    df_features = df_features.join(indicator_df, how="left")
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 10784, in join
+    return merge(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\reshape\merge.py", line 184, in merge
+    return op.get_result(copy=copy)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\reshape\merge.py", line 888, in get_result
+    result = self._reindex_and_concat(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\reshape\merge.py", line 840, in _reindex_and_concat
+    llabels, rlabels = _items_overlap_with_suffix(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\reshape\merge.py", line 2721, in _items_overlap_with_suffix
+    raise ValueError(f"columns overlap but no suffix specified: {to_rename}")
+ValueError: columns overlap but no suffix specified: Index(['bbands_upper', 'bbands_middle', 'bbands_lower', 'dema', 'ema',
+       'ht_trendline', 'kama', 'ma', 'mama_mama', 'mama_fama',
+       ...
+       'cdlspinningtop', 'cdlstalledpattern', 'cdlsticksandwich', 'cdltakuri',
+       'cdltasukigap', 'cdlthrusting', 'cdltristar', 'cdlunique3river',
+       'cdlupsidegap2crows', 'cdlxsidegap3methods'],
+      dtype='object', length=135)
+
+2026-04-21 10:27:26,119 | INFO | train | ========================================================================
+2026-04-21 10:27:26,119 | INFO | train | PIPELINE START
+2026-04-21 10:27:26,119 | INFO | train | ========================================================================
+2026-04-21 10:27:26,119 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:27:42,896 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 10:27:42,915 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 235, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 150, in run_pipeline
+    df_features = df_features.reset_index()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 6494, in reset_index
+    new_obj.insert(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 5180, in insert
+    raise ValueError(f"cannot insert {column}, already exists")
+ValueError: cannot insert datetime, already exists
+
+2026-04-21 10:30:35,218 | INFO | train | ========================================================================
+2026-04-21 10:30:35,220 | INFO | train | PIPELINE START
+2026-04-21 10:30:35,220 | INFO | train | ========================================================================
+2026-04-21 10:30:35,220 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:30:48,884 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 10:30:48,884 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 236, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 150, in run_pipeline
+    df_features = df_features.reset_index()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 6494, in reset_index
+    new_obj.insert(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 5180, in insert
+    raise ValueError(f"cannot insert {column}, already exists")
+ValueError: cannot insert datetime, already exists
+
+2026-04-21 10:34:09,265 | INFO | train | ========================================================================
+2026-04-21 10:34:09,265 | INFO | train | PIPELINE START
+2026-04-21 10:34:09,265 | INFO | train | ========================================================================
+2026-04-21 10:34:09,265 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:34:23,657 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 10:34:23,667 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 236, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 149, in run_pipeline
+    print(df_features.column)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\generic.py", line 6321, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'column'
+
+2026-04-21 10:35:36,477 | INFO | train | ========================================================================
+2026-04-21 10:35:36,477 | INFO | train | PIPELINE START
+2026-04-21 10:35:36,477 | INFO | train | ========================================================================
+2026-04-21 10:35:36,486 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:35:50,059 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 10:35:50,064 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 236, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 149, in run_pipeline
+    print(df_features.column)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\generic.py", line 6321, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'column'
+
+2026-04-21 10:36:05,467 | INFO | train | ========================================================================
+2026-04-21 10:36:05,473 | INFO | train | PIPELINE START
+2026-04-21 10:36:05,473 | INFO | train | ========================================================================
+2026-04-21 10:36:05,473 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 10:36:18,100 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 10:36:18,112 | ERROR | train | Traceback (most recent call last):
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 236, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "d:\trading\TradeX\sentiments\ml\train.py", line 151, in run_pipeline
+    df_features = df_features.reset_index()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 6494, in reset_index
+    new_obj.insert(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 5180, in insert
+    raise ValueError(f"cannot insert {column}, already exists")
+ValueError: cannot insert datetime, already exists
+
+2026-04-21 10:37:41,289 | INFO | train | ========================================================================
+2026-04-21 10:37:41,289 | INFO | train | PIPELINE START
+2026-04-21 10:37:41,289 | INFO | train | ========================================================================
+2026-04-21 10:37:41,305 | INFO | train | --- STEP 1: Load features ---
