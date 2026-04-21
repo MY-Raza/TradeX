@@ -10,11 +10,12 @@ from TradeX.utils.common.logs import get_logger
 from TradeX.utils.db.utils import save_df_to_db
 
 # ── Pipeline modules ──────────────────────────────────────
-from TradeX.sentiments.ml.data.data_loader      import load_features_from_db
+from TradeX.sentiments.ml.data.data_loader      import load_features_from_db,load_price_data
 from TradeX.sentiments.ml.data.preprocessing    import split_data_timewise, prepare_features
 from TradeX.sentiments.ml.model           import train_classification_model, train_regression_model, evaluate_models
 from TradeX.sentiments.ml.backtesting.signals          import generate_signals
 from TradeX.sentiments.ml.backtesting.backtest_runner  import run_backtest
+from TradeX.indicators.talib.indicators import call_indicator
 
 # ── Config ────────────────────────────────────────────────
 from config import (
@@ -136,6 +137,16 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     # ----------------------------------------------------------
     logger.info("--- STEP 1: Load features ---")
     df_features = load_features_from_db()
+
+    df_price_raw = load_price_data()
+    df_price_raw = df_price_raw.set_index(DATETIME_COL)
+
+    indicator_df = call_indicator(df_price_raw)
+
+    df_features = df_features.set_index(DATETIME_COL)
+    df_features = df_features.join(indicator_df, how="left")
+    df_features[indicator_df.columns] = df_features[indicator_df.columns].fillna(0.0)
+    df_features = df_features.reset_index()
 
     # ----------------------------------------------------------
     # STEP 2 — Time-based split
