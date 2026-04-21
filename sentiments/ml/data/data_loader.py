@@ -133,17 +133,20 @@ def load_price_data(
     ValueError
         If fetch returns an empty DataFrame.
     """
+    _start = start_date if start_date is not None else START
+    _end   = end_date   if end_date   is not None else END
+
     logger.info(
         f"Loading OHLCV data from {DB_SCHEMA_PRICE}.{PRICE_TABLE} "
-        f"[{START} → {END}] …"
+        f"[{_start} → {_end}] …"
     )
 
     df = fetch_ohlcv_df(
         table_name=PRICE_TABLE,
         schema=DB_SCHEMA_PRICE,
         time_column=PRICE_TIME_COLUMN,
-        start_date=START,
-        end_date=END,
+        start_date=_start,
+        end_date=_end,
     )
 
     if df.empty:

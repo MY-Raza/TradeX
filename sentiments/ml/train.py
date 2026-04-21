@@ -93,7 +93,8 @@ def _save_backtest_results(ledger: pd.DataFrame) -> None:
         table_name=TABLE_BACKTEST_RESULTS,
         schema=DB_SCHEMA_OUTPUT,
         time_column="datetime",
-        is_timeseries=True,
+        is_timeseries=False,
+        enforce_unique_time=False
     )
     logger.info(f"  Saved {len(ledger)} ledger rows.")
 
@@ -143,6 +144,8 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     
 
     indicator_df = generate_features(df_price_raw,ALL_INDICATORS)
+    if DATETIME_COL in indicator_df.columns:
+        indicator_df = indicator_df.drop(columns=[DATETIME_COL])
 
     df_features = df_features.set_index(DATETIME_COL)
     df_features = df_features.join(indicator_df, how="left")
@@ -181,6 +184,7 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
     # ----------------------------------------------------------
     logger.info("--- STEP 6: Generate signals ---")
     df_signals = generate_signals(bundle, prepared)
+    df_signals.to_csv("signals.csv", index=False)
 
     # ----------------------------------------------------------
     # STEP 7 — Run backtest

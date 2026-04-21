@@ -90,7 +90,7 @@ REGRESSOR_PARAMS = {
 # A SHORT signal requires:  class_pred == 0  AND  reg_pred < -SIGNAL_THRESHOLD
 # Otherwise: neutral (0)
 SIGNAL_THRESHOLD = 0.0002      # 10× lower — matches actual RF prediction scale
-MIN_CLASS_PROBABILITY = 0.52    # 0.0 = disable
+MIN_CLASS_PROBABILITY = 0.55    # 0.0 = disable
 
 # ============================================================
 # BACKTEST PARAMETERS

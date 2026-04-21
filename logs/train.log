@@ -534,3 +534,422 @@ ValueError: cannot insert datetime, already exists
 2026-04-21 10:37:41,289 | INFO | train | PIPELINE START
 2026-04-21 10:37:41,289 | INFO | train | ========================================================================
 2026-04-21 10:37:41,305 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:04:34,974 | INFO | train | ========================================================================
+2026-04-21 11:04:34,976 | INFO | train | PIPELINE START
+2026-04-21 11:04:34,976 | INFO | train | ========================================================================
+2026-04-21 11:04:34,978 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:04:35,893 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 11:04:35,914 | ERROR | train | Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is starting up
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\sentiments\ml\train.py", line 237, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "D:\trading\TradeX\sentiments\ml\train.py", line 140, in run_pipeline
+    df_features = load_features_from_db()
+  File "D:\trading\TradeX\sentiments\ml\data\data_loader.py", line 64, in load_features_from_db
+    df = read_df_from_db(FEATURES_TABLE, DB_SCHEMA_FEATURES)
+  File "D:\trading\TradeX\utils\db\utils.py", line 311, in read_df_from_db
+    df = pd.read_sql_query(query, engine)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\io\sql.py", line 527, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\io\sql.py", line 908, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\io\sql.py", line 1648, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is starting up
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2026-04-21 11:06:06,718 | INFO | train | ========================================================================
+2026-04-21 11:06:06,718 | INFO | train | PIPELINE START
+2026-04-21 11:06:06,720 | INFO | train | ========================================================================
+2026-04-21 11:06:06,720 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:06:07,379 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 11:06:07,402 | ERROR | train | Traceback (most recent call last):
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is starting up
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\trading\TradeX\sentiments\ml\train.py", line 237, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "D:\trading\TradeX\sentiments\ml\train.py", line 140, in run_pipeline
+    df_features = load_features_from_db()
+  File "D:\trading\TradeX\sentiments\ml\data\data_loader.py", line 64, in load_features_from_db
+    df = read_df_from_db(FEATURES_TABLE, DB_SCHEMA_FEATURES)
+  File "D:\trading\TradeX\utils\db\utils.py", line 311, in read_df_from_db
+    df = pd.read_sql_query(query, engine)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\io\sql.py", line 527, in read_sql_query
+    with pandasSQL_builder(con) as pandas_sql:
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\io\sql.py", line 908, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\io\sql.py", line 1648, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3285, in connect
+    return self._connection_cls(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\base.py", line 3309, in raw_connection
+    return self.pool.connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 447, in connect
+    return _ConnectionFairy._checkout(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 711, in checkout
+    rec = pool._do_get()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 388, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 673, in __init__
+    self.__connect()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 899, in __connect
+    with util.safe_reraise():
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\pool\base.py", line 895, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\create.py", line 661, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: FATAL:  the database system is starting up
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2026-04-21 11:25:57,437 | INFO | train | ========================================================================
+2026-04-21 11:25:57,437 | INFO | train | PIPELINE START
+2026-04-21 11:25:57,437 | INFO | train | ========================================================================
+2026-04-21 11:25:57,437 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:29:16,856 | ERROR | train | Pipeline failed with unhandled exception:
+2026-04-21 11:29:16,965 | ERROR | train | Traceback (most recent call last):
+  File "D:\trading\TradeX\sentiments\ml\train.py", line 237, in <module>
+    run_pipeline(save_to_db=True, plot=True)
+  File "D:\trading\TradeX\sentiments\ml\train.py", line 152, in run_pipeline
+    df_features = df_features.reset_index()
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 6494, in reset_index
+    new_obj.insert(
+  File "C:\Users\Raza\miniconda3\envs\tradex_env\lib\site-packages\pandas\core\frame.py", line 5180, in insert
+    raise ValueError(f"cannot insert {column}, already exists")
+ValueError: cannot insert datetime, already exists
+
+2026-04-21 11:35:48,945 | INFO | train | ========================================================================
+2026-04-21 11:35:48,946 | INFO | train | PIPELINE START
+2026-04-21 11:35:48,946 | INFO | train | ========================================================================
+2026-04-21 11:35:48,946 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:36:18,333 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 11:36:18,476 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 11:36:18,584 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 11:36:22,444 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 11:36:24,396 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 11:36:24,409 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 11:36:43,825 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 11:36:43,826 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 11:36:44,165 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 11:36:44,165 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 11:36:44,282 | INFO | train |   Saved 366 ledger rows.
+2026-04-21 11:36:44,282 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 11:36:44,345 | INFO | train |   Summary saved.
+2026-04-21 11:36:44,345 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 11:36:47,771 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 11:36:48,662 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 11:36:48,662 | INFO | train | ========================================================================
+2026-04-21 11:36:48,662 | INFO | train | PIPELINE COMPLETE
+2026-04-21 11:36:48,662 | INFO | train |   Elapsed          : 59.7 s
+2026-04-21 11:36:48,662 | INFO | train |   Starting balance : 1000.00
+2026-04-21 11:36:48,662 | INFO | train |   Final balance    : 747.48
+2026-04-21 11:36:48,662 | INFO | train |   Total PnL %%      : -27.22%%
+2026-04-21 11:36:48,662 | INFO | train |   Trades executed  : 183
+2026-04-21 11:36:48,669 | INFO | train |   Win rate         : 33.3%
+2026-04-21 11:36:48,669 | INFO | train |   Max drawdown     : 26.88%%
+2026-04-21 11:36:48,669 | INFO | train | ========================================================================
+2026-04-21 11:43:53,737 | INFO | train | ========================================================================
+2026-04-21 11:43:53,737 | INFO | train | PIPELINE START
+2026-04-21 11:43:53,737 | INFO | train | ========================================================================
+2026-04-21 11:43:53,737 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:44:31,768 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 11:44:31,932 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 11:44:32,103 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 11:44:37,255 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 11:44:40,894 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 11:46:34,000 | INFO | train | ========================================================================
+2026-04-21 11:46:34,001 | INFO | train | PIPELINE START
+2026-04-21 11:46:34,001 | INFO | train | ========================================================================
+2026-04-21 11:46:34,003 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 11:47:14,150 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 11:47:14,295 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 11:47:14,398 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 11:47:18,773 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 11:47:20,600 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 12:16:59,926 | INFO | train | ========================================================================
+2026-04-21 12:16:59,926 | INFO | train | PIPELINE START
+2026-04-21 12:16:59,927 | INFO | train | ========================================================================
+2026-04-21 12:16:59,927 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 12:17:32,276 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 12:17:32,378 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 12:17:32,477 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 12:17:35,087 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 12:17:36,134 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 12:17:36,236 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 12:17:54,773 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 12:17:54,773 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 12:17:54,979 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 12:17:54,979 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 12:17:55,062 | INFO | train |   Saved 178 ledger rows.
+2026-04-21 12:17:55,062 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 12:17:55,107 | INFO | train |   Summary saved.
+2026-04-21 12:17:55,108 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 12:17:57,134 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 12:17:57,652 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 12:17:57,652 | INFO | train | ========================================================================
+2026-04-21 12:17:57,652 | INFO | train | PIPELINE COMPLETE
+2026-04-21 12:17:57,653 | INFO | train |   Elapsed          : 57.7 s
+2026-04-21 12:17:57,653 | INFO | train |   Starting balance : 1000.00
+2026-04-21 12:17:57,653 | INFO | train |   Final balance    : 803.27
+2026-04-21 12:17:57,653 | INFO | train |   Total PnL %%      : -20.80%%
+2026-04-21 12:17:57,653 | INFO | train |   Trades executed  : 89
+2026-04-21 12:17:57,654 | INFO | train |   Win rate         : 25.8%
+2026-04-21 12:17:57,654 | INFO | train |   Max drawdown     : 21.34%%
+2026-04-21 12:17:57,654 | INFO | train | ========================================================================
+2026-04-21 12:20:31,455 | INFO | train | ========================================================================
+2026-04-21 12:20:31,455 | INFO | train | PIPELINE START
+2026-04-21 12:20:31,455 | INFO | train | ========================================================================
+2026-04-21 12:20:31,455 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 12:21:01,168 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 12:21:01,255 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 12:21:01,314 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 12:21:05,292 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 12:21:06,317 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 12:21:06,431 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 12:21:29,183 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 12:21:29,183 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 12:21:32,761 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 12:21:32,762 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 12:21:33,618 | INFO | train |   Saved 178 ledger rows.
+2026-04-21 12:21:33,618 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 12:21:33,681 | INFO | train |   Summary saved.
+2026-04-21 12:21:33,682 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 12:21:35,930 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 12:21:36,643 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 12:21:36,644 | INFO | train | ========================================================================
+2026-04-21 12:21:36,644 | INFO | train | PIPELINE COMPLETE
+2026-04-21 12:21:36,645 | INFO | train |   Elapsed          : 65.2 s
+2026-04-21 12:21:36,645 | INFO | train |   Starting balance : 1000.00
+2026-04-21 12:21:36,645 | INFO | train |   Final balance    : 803.27
+2026-04-21 12:21:36,646 | INFO | train |   Total PnL %%      : -20.80%%
+2026-04-21 12:21:36,646 | INFO | train |   Trades executed  : 89
+2026-04-21 12:21:36,646 | INFO | train |   Win rate         : 25.8%
+2026-04-21 12:21:36,646 | INFO | train |   Max drawdown     : 21.34%%
+2026-04-21 12:21:36,647 | INFO | train | ========================================================================
+2026-04-21 12:35:58,028 | INFO | train | ========================================================================
+2026-04-21 12:35:58,028 | INFO | train | PIPELINE START
+2026-04-21 12:35:58,028 | INFO | train | ========================================================================
+2026-04-21 12:35:58,028 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 12:36:20,249 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 12:36:20,294 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 12:36:20,352 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 12:36:22,787 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 12:36:23,536 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 12:36:23,590 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 12:36:40,858 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 12:36:40,858 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 12:36:41,118 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 12:36:41,118 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 12:36:41,237 | INFO | train |   Saved 178 ledger rows.
+2026-04-21 12:36:41,237 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 12:36:41,285 | INFO | train |   Summary saved.
+2026-04-21 12:36:41,285 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 12:36:43,427 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 12:36:43,833 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 12:36:43,833 | INFO | train | ========================================================================
+2026-04-21 12:36:43,833 | INFO | train | PIPELINE COMPLETE
+2026-04-21 12:36:43,833 | INFO | train |   Elapsed          : 45.8 s
+2026-04-21 12:36:43,833 | INFO | train |   Starting balance : 1000.00
+2026-04-21 12:36:43,833 | INFO | train |   Final balance    : 802.22
+2026-04-21 12:36:43,833 | INFO | train |   Total PnL %%      : -20.93%%
+2026-04-21 12:36:43,833 | INFO | train |   Trades executed  : 89
+2026-04-21 12:36:43,833 | INFO | train |   Win rate         : 25.8%
+2026-04-21 12:36:43,844 | INFO | train |   Max drawdown     : 21.34%%
+2026-04-21 12:36:43,844 | INFO | train | ========================================================================
+2026-04-21 12:37:45,730 | INFO | train | ========================================================================
+2026-04-21 12:37:45,730 | INFO | train | PIPELINE START
+2026-04-21 12:37:45,730 | INFO | train | ========================================================================
+2026-04-21 12:37:45,730 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 12:38:03,875 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 12:38:03,970 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 12:38:04,058 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 12:38:07,038 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 12:38:07,861 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 12:38:07,959 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 12:38:21,710 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 12:38:21,710 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 12:38:24,328 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 12:38:24,328 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 12:38:24,961 | INFO | train |   Saved 178 ledger rows.
+2026-04-21 12:38:24,961 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 12:38:25,013 | INFO | train |   Summary saved.
+2026-04-21 12:38:25,013 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 12:38:26,604 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 12:38:27,034 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 12:38:27,035 | INFO | train | ========================================================================
+2026-04-21 12:38:27,035 | INFO | train | PIPELINE COMPLETE
+2026-04-21 12:38:27,036 | INFO | train |   Elapsed          : 41.3 s
+2026-04-21 12:38:27,036 | INFO | train |   Starting balance : 1000.00
+2026-04-21 12:38:27,036 | INFO | train |   Final balance    : 802.22
+2026-04-21 12:38:27,036 | INFO | train |   Total PnL %%      : -20.93%%
+2026-04-21 12:38:27,037 | INFO | train |   Trades executed  : 89
+2026-04-21 12:38:27,037 | INFO | train |   Win rate         : 25.8%
+2026-04-21 12:38:27,037 | INFO | train |   Max drawdown     : 21.34%%
+2026-04-21 12:38:27,037 | INFO | train | ========================================================================
+2026-04-21 12:44:18,164 | INFO | train | ========================================================================
+2026-04-21 12:44:18,164 | INFO | train | PIPELINE START
+2026-04-21 12:44:18,164 | INFO | train | ========================================================================
+2026-04-21 12:44:18,164 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 12:44:24,617 | WARNING | train | Pipeline interrupted by user.
+2026-04-21 12:44:42,645 | INFO | train | ========================================================================
+2026-04-21 12:44:42,645 | INFO | train | PIPELINE START
+2026-04-21 12:44:42,648 | INFO | train | ========================================================================
+2026-04-21 12:44:42,648 | INFO | train | --- STEP 1: Load features ---
+2026-04-21 12:45:09,209 | INFO | train | --- STEP 2: Split data ---
+2026-04-21 12:45:10,849 | INFO | train | --- STEP 3: Prepare / scale features ---
+2026-04-21 12:45:10,977 | INFO | train | --- STEP 4: Train models ---
+2026-04-21 12:45:14,737 | INFO | train | --- STEP 5: Evaluate models ---
+2026-04-21 12:45:15,782 | INFO | train | --- STEP 6: Generate signals ---
+2026-04-21 12:45:15,855 | INFO | train | --- STEP 7: Run backtest ---
+2026-04-21 12:45:40,812 | INFO | train | --- STEP 8: Save outputs to DB ---
+2026-04-21 12:45:40,812 | INFO | train | Saving predictions to reddit.ml_predictions …
+2026-04-21 12:45:43,867 | INFO | train |   Saved 2036 signal rows.
+2026-04-21 12:45:43,867 | INFO | train | Saving ledger to reddit.backtest_results …
+2026-04-21 12:45:44,084 | INFO | train |   Saved 178 ledger rows.
+2026-04-21 12:45:44,085 | INFO | train | Saving summary to reddit.backtest_summary …
+2026-04-21 12:45:44,131 | INFO | train |   Summary saved.
+2026-04-21 12:45:44,132 | INFO | train | --- STEP 9: Plot feature importances ---
+2026-04-21 12:45:47,358 | INFO | train | Saved importance plot → clf_importances.png
+2026-04-21 12:45:47,934 | INFO | train | Saved importance plot → reg_importances.png
+2026-04-21 12:45:47,934 | INFO | train | ========================================================================
+2026-04-21 12:45:47,934 | INFO | train | PIPELINE COMPLETE
+2026-04-21 12:45:47,934 | INFO | train |   Elapsed          : 65.3 s
+2026-04-21 12:45:47,934 | INFO | train |   Starting balance : 1000.00
+2026-04-21 12:45:47,934 | INFO | train |   Final balance    : 802.22
+2026-04-21 12:45:47,934 | INFO | train |   Total PnL %%      : -20.93%%
+2026-04-21 12:45:47,934 | INFO | train |   Trades executed  : 89
+2026-04-21 12:45:47,934 | INFO | train |   Win rate         : 25.8%
+2026-04-21 12:45:47,934 | INFO | train |   Max drawdown     : 21.34%%
+2026-04-21 12:45:47,934 | INFO | train | ========================================================================
