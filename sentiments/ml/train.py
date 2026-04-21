@@ -149,8 +149,6 @@ def run_pipeline(save_to_db: bool = True, plot: bool = True) -> None:
 
     df_features = df_features.set_index(DATETIME_COL)
     df_features = df_features.join(indicator_df, how="left")
-    print(df_features.columns)
-    columns_list = df_features.columns.tolist()
     df_features[indicator_df.columns] = df_features[indicator_df.columns].fillna(0.0)
     df_features = df_features.reset_index()
 
