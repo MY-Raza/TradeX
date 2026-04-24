@@ -740,3 +740,134 @@
 2        2022-12-31 19:02:00+00:00  16572.0  16572.2  16572.0  16572.1  12.707
 3        2022-12-31 19:03:00+00:00  16572.1  16573.3  16572.1  16573.2  19.332
 4        2022-12-31 19:04:00+00:00  16573.2  16573.3  16569.1  16569.1  74.410
+2026-04-22 17:57:37,823 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-22 17:57:37,826 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-22 17:57:38,591 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,466
+2026-04-22 17:57:38,591 | INFO | reddit_sentiment_pipeline | Comments loaded: 10,893
+2026-04-22 17:57:38,626 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-22 17:47:58+00:00
+2026-04-22 17:57:38,627 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-22 17:47:58+00:00]
+2026-04-22 17:57:56,617 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,738,970
+2026-04-22 17:57:56,748 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 943 | comments: 4,911
+2026-04-22 17:57:56,748 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-22 17:58:02,312 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 943 rows...
+2026-04-22 17:58:02,618 | INFO | reddit_sentiment_pipeline | After cleaning: 943
+2026-04-22 17:58:03,143 | INFO | reddit_sentiment_pipeline | After dedup: 930
+2026-04-22 17:58:03,143 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-22 17:59:10,581 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 4,911 rows...
+2026-04-22 17:59:14,879 | INFO | reddit_sentiment_pipeline | After cleaning: 4,796
+2026-04-22 17:59:26,583 | INFO | reddit_sentiment_pipeline | After dedup: 4,579
+2026-04-22 17:59:26,583 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-22 18:20:36,107 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='btc'
+2026-04-22 18:20:36,176 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=BTC
+2026-04-23 09:38:19,497 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-23 09:38:19,499 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-23 09:38:19,915 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,554
+2026-04-23 09:38:19,915 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,198
+2026-04-23 09:38:19,934 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-23 09:28:21+00:00
+2026-04-23 09:38:19,934 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-23 09:28:21+00:00]
+2026-04-23 09:38:39,512 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,740,087
+2026-04-23 09:38:39,638 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 972 | comments: 5,035
+2026-04-23 09:38:39,638 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-23 09:38:46,943 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 972 rows...
+2026-04-23 09:38:47,203 | INFO | reddit_sentiment_pipeline | After cleaning: 972
+2026-04-23 09:38:47,633 | INFO | reddit_sentiment_pipeline | After dedup: 959
+2026-04-23 09:38:47,634 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 09:39:48,900 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 5,035 rows...
+2026-04-23 09:39:53,087 | INFO | reddit_sentiment_pipeline | After cleaning: 4,920
+2026-04-23 09:40:04,242 | INFO | reddit_sentiment_pipeline | After dedup: 4,700
+2026-04-23 09:40:04,242 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 09:56:59,809 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='btc'
+2026-04-23 09:56:59,811 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=BTC
+2026-04-23 10:21:18,698 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-23 10:21:18,698 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-23 10:21:19,062 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,561
+2026-04-23 10:21:19,062 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,216
+2026-04-23 10:21:19,079 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-23 10:10:59+00:00
+2026-04-23 10:21:19,079 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-23 10:10:59+00:00]
+2026-04-23 10:21:58,506 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,740,087
+2026-04-23 10:21:58,625 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 977 | comments: 5,043
+2026-04-23 10:21:58,625 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-23 10:22:04,469 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 977 rows...
+2026-04-23 10:22:04,721 | INFO | reddit_sentiment_pipeline | After cleaning: 977
+2026-04-23 10:22:05,166 | INFO | reddit_sentiment_pipeline | After dedup: 964
+2026-04-23 10:22:05,166 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 10:23:13,181 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 5,043 rows...
+2026-04-23 10:23:18,458 | INFO | reddit_sentiment_pipeline | After cleaning: 4,928
+2026-04-23 10:23:36,600 | INFO | reddit_sentiment_pipeline | After dedup: 4,708
+2026-04-23 10:23:36,601 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 10:40:28,117 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='btc'
+2026-04-23 10:40:28,123 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=BTC
+2026-04-23 10:53:59,511 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-23 10:53:59,511 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-23 10:53:59,929 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,563
+2026-04-23 10:53:59,929 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,229
+2026-04-23 10:53:59,950 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-23 10:44:38+00:00
+2026-04-23 10:53:59,950 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-23 10:44:38+00:00]
+2026-04-23 10:54:18,452 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,740,087
+2026-04-23 10:54:18,616 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 979 | comments: 5,048
+2026-04-23 10:54:18,616 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-23 10:54:28,779 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 979 rows...
+2026-04-23 10:54:29,086 | INFO | reddit_sentiment_pipeline | After cleaning: 979
+2026-04-23 10:54:29,573 | INFO | reddit_sentiment_pipeline | After dedup: 966
+2026-04-23 10:54:29,573 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 10:55:27,960 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 5,048 rows...
+2026-04-23 10:55:32,379 | INFO | reddit_sentiment_pipeline | After cleaning: 4,933
+2026-04-23 10:55:43,866 | INFO | reddit_sentiment_pipeline | After dedup: 4,713
+2026-04-23 10:55:43,882 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 11:13:10,972 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='btc'
+2026-04-23 11:13:10,981 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=BTC
+2026-04-23 13:02:45,320 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-23 13:02:45,320 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-23 13:02:45,523 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,578
+2026-04-23 13:02:45,523 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,278
+2026-04-23 13:02:45,539 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-23 12:52:31+00:00
+2026-04-23 13:02:45,547 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-23 12:52:31+00:00]
+2026-04-23 13:03:00,945 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,740,290
+2026-04-23 13:03:01,199 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 988 | comments: 5,067
+2026-04-23 13:03:01,200 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-23 13:03:11,183 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 988 rows...
+2026-04-23 13:03:11,494 | INFO | reddit_sentiment_pipeline | After cleaning: 988
+2026-04-23 13:03:12,052 | INFO | reddit_sentiment_pipeline | After dedup: 974
+2026-04-23 13:03:12,052 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 13:04:34,338 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 5,067 rows...
+2026-04-23 13:04:40,905 | INFO | reddit_sentiment_pipeline | After cleaning: 4,952
+2026-04-23 13:04:58,639 | INFO | reddit_sentiment_pipeline | After dedup: 4,732
+2026-04-23 13:04:58,640 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 13:29:51,626 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='btc'
+2026-04-23 13:29:51,645 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=BTC
+2026-04-23 14:13:15,439 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-23 14:13:15,447 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-23 14:13:15,777 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,584
+2026-04-23 14:13:15,777 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,295
+2026-04-23 14:13:15,795 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-23 14:06:47+00:00
+2026-04-23 14:13:15,795 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-23 14:06:47+00:00]
+2026-04-23 14:13:33,448 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,740,290
+2026-04-23 14:13:33,625 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 991 | comments: 5,074
+2026-04-23 14:13:33,629 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-23 14:13:51,629 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 991 rows...
+2026-04-23 14:13:51,940 | INFO | reddit_sentiment_pipeline | After cleaning: 991
+2026-04-23 14:13:52,397 | INFO | reddit_sentiment_pipeline | After dedup: 977
+2026-04-23 14:13:52,397 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-23 14:14:47,656 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 5,074 rows...
+2026-04-23 14:14:51,475 | INFO | reddit_sentiment_pipeline | After cleaning: 4,959
+2026-04-23 14:15:01,967 | INFO | reddit_sentiment_pipeline | After dedup: 4,739
+2026-04-23 14:15:01,967 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-24 09:50:05,789 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=ETH
+2026-04-24 09:50:05,797 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-24 09:50:06,245 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,678
+2026-04-24 09:50:06,245 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,632
+2026-04-24 09:50:06,265 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-24 09:34:55+00:00
+2026-04-24 09:50:06,266 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-24 09:34:55+00:00]
+2026-04-24 09:50:28,243 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,741,517
+2026-04-24 09:50:28,410 | INFO | reddit_sentiment_pipeline | After ETH filter — posts: 556 | comments: 2,993
+2026-04-24 09:50:28,410 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-24 09:50:36,749 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 556 rows...
+2026-04-24 09:50:36,980 | INFO | reddit_sentiment_pipeline | After cleaning: 556
+2026-04-24 09:50:37,165 | INFO | reddit_sentiment_pipeline | After dedup: 522
+2026-04-24 09:50:37,165 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-24 09:51:11,292 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 2,993 rows...
+2026-04-24 09:51:14,275 | INFO | reddit_sentiment_pipeline | After cleaning: 2,764
+2026-04-24 09:51:17,324 | INFO | reddit_sentiment_pipeline | After dedup: 2,365
+2026-04-24 09:51:17,324 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-24 10:00:01,163 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='eth'
+2026-04-24 10:00:01,164 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=ETH
