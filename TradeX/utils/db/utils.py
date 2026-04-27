@@ -34,9 +34,12 @@ def get_engine(db_url: str | None = None):
     if _ENGINE:
         return _ENGINE
 
-    db_url = db_url or os.getenv("DATABASE_URL")
+    db_url = db_url or os.getenv("TRADEX_DATABASE_URL") or os.getenv("DATABASE_URL")
     if not db_url:
         raise ValueError("DATABASE_URL not provided")
+
+    # Strip asyncpg driver — sync engine needs plain postgresql://
+    db_url = db_url.replace("postgresql+asyncpg://", "postgresql://")
 
     _ENGINE = create_engine(db_url, pool_pre_ping=True)
     logger.info("Database engine initialized")
