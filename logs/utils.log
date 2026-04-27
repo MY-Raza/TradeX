@@ -37720,3 +37720,37 @@ Last 5 rows from data_binance.btc_1m:
 2026-04-24 09:59:59,712 | INFO | utils | Indexes ensured: eth_comments_sentiment_hourly_time_window_uidx, eth_comments_sentiment_hourly_time_window_desc_idx
 2026-04-24 09:59:59,724 | INFO | utils | Hypertable created/verified for "reddit"."eth_comments_sentiment_hourly"
 2026-04-24 10:00:01,157 | INFO | utils | Inserted 975 rows into reddit.eth_comments_sentiment_hourly
+2026-04-24 13:01:09,513 | INFO | utils | Schema 'data_binance' ready
+2026-04-24 13:01:09,678 | INFO | utils | Indexes ensured: btc_1m_datetime_uidx, btc_1m_datetime_desc_idx
+2026-04-24 13:01:09,702 | INFO | utils | Hypertable created/verified for "data_binance"."btc_1m"
+2026-04-24 13:01:09,899 | INFO | utils | Inserted 225 rows into data_binance.btc_1m
+2026-04-24 13:31:23,894 | INFO | utils | Table Found
+2026-04-24 13:31:24,198 | INFO | utils | Table Found
+2026-04-24 13:38:43,853 | INFO | utils | Schema 'reddit' ready
+2026-04-24 13:38:43,902 | INFO | utils | Indexes ensured: reddit_posts_post_time_uidx, reddit_posts_post_time_desc_idx
+2026-04-24 13:38:43,914 | INFO | utils | Hypertable created/verified for "reddit"."reddit_posts"
+2026-04-24 13:38:44,010 | INFO | utils | Inserted 22 rows into reddit.reddit_posts
+2026-04-24 13:38:44,010 | INFO | utils | Schema 'reddit' ready
+2026-04-24 13:38:44,032 | INFO | utils | Indexes ensured: reddit_comments_comment_time_uidx, reddit_comments_comment_time_desc_idx
+2026-04-24 13:38:44,034 | INFO | utils | Hypertable created/verified for "reddit"."reddit_comments"
+2026-04-24 13:38:44,103 | INFO | utils | Inserted 70 rows into reddit.reddit_comments
+2026-04-24 13:38:44,240 | INFO | utils | Table Found
+2026-04-24 13:38:44,519 | INFO | utils | Table Found
+2026-04-24 13:39:02,351 | INFO | utils | Table Found
+2026-04-24 14:18:45,034 | INFO | utils | Schema 'reddit' ready
+2026-04-24 14:18:45,413 | INFO | utils | Indexes ensured: btc_posts_sentiment_post_time_uidx, btc_posts_sentiment_post_time_desc_idx
+2026-04-24 14:18:45,432 | INFO | utils | Hypertable created/verified for "reddit"."btc_posts_sentiment"
+2026-04-24 14:18:48,423 | INFO | utils | Inserted 39 rows into reddit.btc_posts_sentiment
+2026-04-24 14:18:48,426 | INFO | utils | Schema 'reddit' ready
+2026-04-24 14:18:48,556 | INFO | utils | Indexes ensured: btc_comments_sentiment_comment_time_uidx, btc_comments_sentiment_comment_time_desc_idx
+2026-04-24 14:18:48,559 | INFO | utils | Hypertable created/verified for "reddit"."btc_comments_sentiment"
+2026-04-24 14:18:49,129 | INFO | utils | Inserted 160 rows into reddit.btc_comments_sentiment
+2026-04-24 14:18:49,130 | INFO | utils | Schema 'reddit' ready
+2026-04-24 14:18:49,150 | INFO | utils | Indexes ensured: btc_posts_sentiment_hourly_time_window_uidx, btc_posts_sentiment_hourly_time_window_desc_idx
+2026-04-24 14:18:49,153 | INFO | utils | Hypertable created/verified for "reddit"."btc_posts_sentiment_hourly"
+2026-04-24 14:18:49,399 | INFO | utils | Inserted 19 rows into reddit.btc_posts_sentiment_hourly
+2026-04-24 14:18:49,400 | INFO | utils | Schema 'reddit' ready
+2026-04-24 14:18:49,426 | INFO | utils | Indexes ensured: btc_comments_sentiment_hourly_time_window_uidx, btc_comments_sentiment_hourly_time_window_desc_idx
+2026-04-24 14:18:49,428 | INFO | utils | Hypertable created/verified for "reddit"."btc_comments_sentiment_hourly"
+2026-04-24 14:18:49,744 | INFO | utils | Inserted 25 rows into reddit.btc_comments_sentiment_hourly
+2026-04-27 09:29:43,674 | INFO | utils | Database engine initialized

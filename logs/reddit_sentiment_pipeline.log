@@ -871,3 +871,22 @@
 2026-04-24 09:51:17,324 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
 2026-04-24 10:00:01,163 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='eth'
 2026-04-24 10:00:01,164 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=ETH
+2026-04-24 13:38:44,104 | INFO | reddit_sentiment_pipeline | 🚀 START PIPELINE  coin=BTC
+2026-04-24 13:38:44,109 | INFO | reddit_sentiment_pipeline | ⚠️  Using CPU
+2026-04-24 13:38:44,519 | INFO | reddit_sentiment_pipeline | Posts loaded:    2,700
+2026-04-24 13:38:44,519 | INFO | reddit_sentiment_pipeline | Comments loaded: 11,702
+2026-04-24 13:38:44,541 | INFO | reddit_sentiment_pipeline | 📅 Date range — 2018-04-25 03:54:32+00:00  →  2026-04-24 13:25:01+00:00
+2026-04-24 13:38:44,542 | INFO | reddit_sentiment_pipeline | 📈 Fetching OHLCV [2018-04-25 03:54:32+00:00 → 2026-04-24 13:25:01+00:00]
+2026-04-24 13:39:02,573 | INFO | reddit_sentiment_pipeline | ✅ OHLCV rows: 1,741,742
+2026-04-24 13:39:02,699 | INFO | reddit_sentiment_pipeline | After BTC filter — posts: 1,027 | comments: 5,232
+2026-04-24 13:39:02,699 | INFO | reddit_sentiment_pipeline | 📥 Loading FinBERT: ProsusAI/finbert
+2026-04-24 13:39:16,369 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 1,027 rows...
+2026-04-24 13:39:16,655 | INFO | reddit_sentiment_pipeline | After cleaning: 1,027
+2026-04-24 13:39:17,125 | INFO | reddit_sentiment_pipeline | After dedup: 1,013
+2026-04-24 13:39:17,125 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-24 13:40:26,067 | INFO | reddit_sentiment_pipeline | 🧹 Cleaning 5,232 rows...
+2026-04-24 13:40:30,713 | INFO | reddit_sentiment_pipeline | After cleaning: 5,114
+2026-04-24 13:40:44,300 | INFO | reddit_sentiment_pipeline | After dedup: 4,892
+2026-04-24 13:40:44,302 | INFO | reddit_sentiment_pipeline | 🔍 Running FinBERT inference...
+2026-04-24 14:18:49,744 | INFO | reddit_sentiment_pipeline | 💾 Saved sentiment tables for coin='btc'
+2026-04-24 14:18:49,759 | INFO | reddit_sentiment_pipeline | ✅ DONE  coin=BTC
