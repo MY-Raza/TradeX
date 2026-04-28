@@ -18,14 +18,62 @@ from TradeX.sentiments.data.data_cleaner import (
 from TradeX.utils.db.utils import read_df_from_db, save_df_to_db, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 
-# Import coin registry from schema (single source of truth)
-from TradeX_Backend.app.schemas.sentiment_schema import COIN_CONFIG
-
 # ================================================================================
 # LOGGING
 # ================================================================================
 logger = get_logger("reddit_sentiment_pipeline")
-
+COIN_CONFIG: dict[str, dict] = {
+    "btc": {
+        "display":    "Bitcoin (BTC)",
+        "pattern":    r"\b(btc|bitcoin)\b|\$btc",
+        "native_subs": {"bitcoin", "bitcoinmarkets", "satoshistreetbets"},
+    },
+    "eth": {
+        "display":    "Ethereum (ETH)",
+        "pattern":    r"\b(eth|ethereum)\b|\$eth",
+        "native_subs": {"ethereum", "ethtrader"},
+    },
+    "bnb": {
+        "display":    "BNB",
+        "pattern":    r"\b(bnb|binance\s*coin)\b|\$bnb",
+        "native_subs": set(),
+    },
+    "sol": {
+        "display":    "Solana (SOL)",
+        "pattern":    r"\b(sol|solana)\b|\$sol",
+        "native_subs": {"solana"},
+    },
+    "xrp": {
+        "display":    "XRP / Ripple",
+        "pattern":    r"\b(xrp|ripple)\b|\$xrp",
+        "native_subs": {"ripple", "xrp"},
+    },
+    "ada": {
+        "display":    "Cardano (ADA)",
+        "pattern":    r"\b(ada|cardano)\b|\$ada",
+        "native_subs": {"cardano"},
+    },
+    "doge": {
+        "display":    "Dogecoin (DOGE)",
+        "pattern":    r"\b(doge|dogecoin)\b|\$doge",
+        "native_subs": {"dogecoin"},
+    },
+    "dot": {
+        "display":    "Polkadot (DOT)",
+        "pattern":    r"\b(dot|polkadot)\b|\$dot",
+        "native_subs": {"polkadot"},
+    },
+    "avax": {
+        "display":    "Avalanche (AVAX)",
+        "pattern":    r"\b(avax|avalanche)\b|\$avax",
+        "native_subs": {"avax"},
+    },
+    "link": {
+        "display":    "Chainlink (LINK)",
+        "pattern":    r"\b(link|chainlink)\b|\$link",
+        "native_subs": set(),
+    },
+}
 # ================================================================================
 # STATIC CONFIG
 # ================================================================================
