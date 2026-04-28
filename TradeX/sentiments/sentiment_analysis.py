@@ -19,7 +19,7 @@ from TradeX.utils.db.utils import read_df_from_db, save_df_to_db, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 
 # Import coin registry from schema (single source of truth)
-from app.schemas.sentiment_schema import COIN_CONFIG
+from TradeX_Backend.app.schemas.sentiment_schema import COIN_CONFIG
 
 # ================================================================================
 # LOGGING
