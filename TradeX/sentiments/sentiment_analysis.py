@@ -15,7 +15,7 @@ from TradeX.sentiments.data.data_cleaner import (
     deduplicate_exact,
     deduplicate_near,
 )
-from TradeX.utils.db.utils import read_df_from_db, save_df_to_db
+from TradeX.utils.db.utils import read_df_from_db, save_df_to_db, fetch_ohlcv_df
 from TradeX.utils.common.logs import get_logger
 
 # Import coin registry from schema (single source of truth)
@@ -32,6 +32,10 @@ logger = get_logger("reddit_sentiment_pipeline")
 SCHEMA           = "reddit"
 POSTS_TABLE      = "reddit_posts"
 COMMENTS_TABLE   = "reddit_comments"
+
+OHLCV_TABLE       = "btc_1m"
+OHLCV_TIME_COLUMN = "datetime"
+OHLCV_SCHEMA      = "data_binance"
 
 # Subreddits excluded regardless of coin
 EXCLUDED_SUBS: set[str] = set()   # extend if needed per-project
@@ -96,6 +100,34 @@ def load_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     logger.info(f"Posts loaded:    {len(posts_df):,}")
     logger.info(f"Comments loaded: {len(comments_df):,}")
     return posts_df, comments_df
+
+
+def compute_date_range(
+    posts_df: pd.DataFrame,
+    comments_df: pd.DataFrame,
+) -> tuple[pd.Timestamp, pd.Timestamp]:
+    posts_times    = pd.to_datetime(posts_df["post_time"],       utc=True)
+    comments_times = pd.to_datetime(comments_df["comment_time"], utc=True)
+    all_times      = pd.concat([posts_times, comments_times], ignore_index=True)
+    start_date, end_date = all_times.min(), all_times.max()
+    logger.info(f"📅 Date range — {start_date}  →  {end_date}")
+    return start_date, end_date
+
+
+def load_ohlcv(
+    start_date: pd.Timestamp,
+    end_date:   pd.Timestamp,
+) -> pd.DataFrame:
+    logger.info(f"📈 Fetching OHLCV [{start_date} → {end_date}]")
+    ohlcv_df = fetch_ohlcv_df(
+        table_name=OHLCV_TABLE,
+        schema=OHLCV_SCHEMA,
+        time_column=OHLCV_TIME_COLUMN,
+        start_date=start_date,
+        end_date=end_date,
+    )
+    logger.info(f"✅ OHLCV rows: {len(ohlcv_df):,}")
+    return ohlcv_df
 
 
 # ================================================================================
@@ -226,16 +258,10 @@ def aggregate_sentiment_hourly(
     df:          pd.DataFrame,
     time_column: str,
 ) -> pd.DataFrame:
-    if df.empty:
-        return pd.DataFrame(columns=[
-            "time_window", "mean_sentiment", "std_sentiment",
-            "sentiment_confidence_mean", "emoji_count_mean", "caps_ratio_mean",
-            "punct_intensity_mean", "spam_score_mean", "token_count_mean", "post_id_count",
-        ])
-
     df = df.copy()
     df[time_column] = pd.to_datetime(df[time_column], utc=True)
     df["hour"]      = df[time_column].dt.floor("1H")
+    count_col       = df.columns[0]
 
     agg = (
         df.groupby("hour", as_index=False)
@@ -248,7 +274,7 @@ def aggregate_sentiment_hourly(
             punct_intensity_mean        =("punct_intensity",      "mean"),
             spam_score_mean             =("spam_score",           "mean"),
             token_count_mean            =("token_count",          "mean"),
-            post_id_count               =("sentiment_score",      "count"),
+            post_id_count               =(count_col,              "count"),
         )
         .rename(columns={"hour": "time_window"})
     )
@@ -308,7 +334,7 @@ def run_pipeline(
         save_to_database:  If True, persist results to the DB
 
     Returns:
-        dict with keys: posts, comments, posts_agg, comments_agg
+        dict with keys: posts, comments, posts_agg, comments_agg, ohlcv
     """
     if coin not in COIN_CONFIG:
         raise ValueError(
@@ -322,35 +348,25 @@ def run_pipeline(
     # 1. Raw data ----------------------------------------------------------------
     posts_df, comments_df = load_data()
 
-    # 2. Filtering ---------------------------------------------------------------
+    # 2. Date range + OHLCV ------------------------------------------------------
+    start_date, end_date = compute_date_range(posts_df, comments_df)
+    ohlcv_df             = load_ohlcv(start_date, end_date)
+
+    # 3. Filtering ---------------------------------------------------------------
     posts_df, comments_df = filter_subreddits(posts_df, comments_df)
     if apply_coin_filter:
         posts_df, comments_df = filter_coin(posts_df, comments_df, coin)
 
-    if posts_df.empty and comments_df.empty:
-        raise ValueError(
-            f"No posts or comments found mentioning coin='{coin}' after filtering. "
-            f"Try scraping more subreddits or run without coin filter."
-        )
+    # 4. FinBERT -----------------------------------------------------------------
+    model       = load_sentiment_model()
+    posts_df    = add_sentiment_to_df(posts_df,    "title",        "post_time",    model)
+    comments_df = add_sentiment_to_df(comments_df, "comment_text", "comment_time", model)
 
-    # 3. FinBERT -----------------------------------------------------------------
-    model = load_sentiment_model()
+    # 5. Hourly aggregation ------------------------------------------------------
+    posts_agg    = aggregate_sentiment_hourly(posts_df,    "post_time")
+    comments_agg = aggregate_sentiment_hourly(comments_df, "comment_time")
 
-    if not posts_df.empty:
-        posts_df = add_sentiment_to_df(posts_df, "title", "post_time", model)
-    else:
-        logger.warning(f"No posts found for coin='{coin}' — skipping post sentiment.")
-
-    if not comments_df.empty:
-        comments_df = add_sentiment_to_df(comments_df, "comment_text", "comment_time", model)
-    else:
-        logger.warning(f"No comments found for coin='{coin}' — skipping comment sentiment.")
-
-    # 4. Hourly aggregation ------------------------------------------------------
-    posts_agg    = aggregate_sentiment_hourly(posts_df,    "post_time")    if not posts_df.empty    else pd.DataFrame()
-    comments_agg = aggregate_sentiment_hourly(comments_df, "comment_time") if not comments_df.empty else pd.DataFrame()
-
-    # 5. Persist -----------------------------------------------------------------
+    # 6. Persist -----------------------------------------------------------------
     if save_to_database:
         save_sentiment_to_db(posts_df, comments_df, posts_agg, comments_agg, coin)
 
@@ -360,6 +376,7 @@ def run_pipeline(
         "comments":    comments_df,
         "posts_agg":   posts_agg,
         "comments_agg":comments_agg,
+        "ohlcv":       ohlcv_df,
     }
 
 
