@@ -33,7 +33,6 @@ SCHEMA           = "reddit"
 POSTS_TABLE      = "reddit_posts"
 COMMENTS_TABLE   = "reddit_comments"
 
-
 # Subreddits excluded regardless of coin
 EXCLUDED_SUBS: set[str] = set()   # extend if needed per-project
 
@@ -97,19 +96,6 @@ def load_data() -> tuple[pd.DataFrame, pd.DataFrame]:
     logger.info(f"Posts loaded:    {len(posts_df):,}")
     logger.info(f"Comments loaded: {len(comments_df):,}")
     return posts_df, comments_df
-
-
-def compute_date_range(
-    posts_df: pd.DataFrame,
-    comments_df: pd.DataFrame,
-) -> tuple[pd.Timestamp, pd.Timestamp]:
-    posts_times    = pd.to_datetime(posts_df["post_time"],       utc=True)
-    comments_times = pd.to_datetime(comments_df["comment_time"], utc=True)
-    all_times      = pd.concat([posts_times, comments_times], ignore_index=True)
-    start_date, end_date = all_times.min(), all_times.max()
-    logger.info(f"📅 Date range — {start_date}  →  {end_date}")
-    return start_date, end_date
-
 
 
 # ================================================================================
@@ -240,10 +226,16 @@ def aggregate_sentiment_hourly(
     df:          pd.DataFrame,
     time_column: str,
 ) -> pd.DataFrame:
+    if df.empty:
+        return pd.DataFrame(columns=[
+            "time_window", "mean_sentiment", "std_sentiment",
+            "sentiment_confidence_mean", "emoji_count_mean", "caps_ratio_mean",
+            "punct_intensity_mean", "spam_score_mean", "token_count_mean", "post_id_count",
+        ])
+
     df = df.copy()
     df[time_column] = pd.to_datetime(df[time_column], utc=True)
     df["hour"]      = df[time_column].dt.floor("1H")
-    count_col       = df.columns[0]
 
     agg = (
         df.groupby("hour", as_index=False)
@@ -256,7 +248,7 @@ def aggregate_sentiment_hourly(
             punct_intensity_mean        =("punct_intensity",      "mean"),
             spam_score_mean             =("spam_score",           "mean"),
             token_count_mean            =("token_count",          "mean"),
-            post_id_count               =(count_col,              "count"),
+            post_id_count               =("sentiment_score",      "count"),
         )
         .rename(columns={"hour": "time_window"})
     )
@@ -316,7 +308,7 @@ def run_pipeline(
         save_to_database:  If True, persist results to the DB
 
     Returns:
-        dict with keys: posts, comments, posts_agg, comments_agg, ohlcv
+        dict with keys: posts, comments, posts_agg, comments_agg
     """
     if coin not in COIN_CONFIG:
         raise ValueError(
@@ -330,24 +322,35 @@ def run_pipeline(
     # 1. Raw data ----------------------------------------------------------------
     posts_df, comments_df = load_data()
 
-    # 2. Date range + OHLCV ------------------------------------------------------
-    start_date, end_date = compute_date_range(posts_df, comments_df)
-
-    # 3. Filtering ---------------------------------------------------------------
+    # 2. Filtering ---------------------------------------------------------------
     posts_df, comments_df = filter_subreddits(posts_df, comments_df)
     if apply_coin_filter:
         posts_df, comments_df = filter_coin(posts_df, comments_df, coin)
 
-    # 4. FinBERT -----------------------------------------------------------------
-    model       = load_sentiment_model()
-    posts_df    = add_sentiment_to_df(posts_df,    "title",        "post_time",    model)
-    comments_df = add_sentiment_to_df(comments_df, "comment_text", "comment_time", model)
+    if posts_df.empty and comments_df.empty:
+        raise ValueError(
+            f"No posts or comments found mentioning coin='{coin}' after filtering. "
+            f"Try scraping more subreddits or run without coin filter."
+        )
 
-    # 5. Hourly aggregation ------------------------------------------------------
-    posts_agg    = aggregate_sentiment_hourly(posts_df,    "post_time")
-    comments_agg = aggregate_sentiment_hourly(comments_df, "comment_time")
+    # 3. FinBERT -----------------------------------------------------------------
+    model = load_sentiment_model()
 
-    # 6. Persist -----------------------------------------------------------------
+    if not posts_df.empty:
+        posts_df = add_sentiment_to_df(posts_df, "title", "post_time", model)
+    else:
+        logger.warning(f"No posts found for coin='{coin}' — skipping post sentiment.")
+
+    if not comments_df.empty:
+        comments_df = add_sentiment_to_df(comments_df, "comment_text", "comment_time", model)
+    else:
+        logger.warning(f"No comments found for coin='{coin}' — skipping comment sentiment.")
+
+    # 4. Hourly aggregation ------------------------------------------------------
+    posts_agg    = aggregate_sentiment_hourly(posts_df,    "post_time")    if not posts_df.empty    else pd.DataFrame()
+    comments_agg = aggregate_sentiment_hourly(comments_df, "comment_time") if not comments_df.empty else pd.DataFrame()
+
+    # 5. Persist -----------------------------------------------------------------
     if save_to_database:
         save_sentiment_to_db(posts_df, comments_df, posts_agg, comments_agg, coin)
 
