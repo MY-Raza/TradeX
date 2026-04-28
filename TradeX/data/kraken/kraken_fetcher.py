@@ -102,8 +102,13 @@ class KrakenFuturesFetcher:
         df["timestamp"] = pd.to_datetime(df["time"], unit="s", utc=True)
         df = df[["timestamp", "open", "high", "low", "close", "volume"]]
 
-        # Filter by end_date
-        df = df[df["timestamp"] <= pd.to_datetime(end_date, utc=True)]
+        # Filter by end_date – resolve 'now' to a real datetime so pd.to_datetime doesn't fail
+        end_dt = (
+            pd.Timestamp.now(tz="UTC")
+            if end_date.lower() == "now"
+            else pd.to_datetime(end_date, utc=True)
+        )
+        df = df[df["timestamp"] <= end_dt].reset_index(drop=True)
 
         logger.info(f"✅ Total rows fetched: {len(df)}")
         logger.info(f"Start: {df['timestamp'].min()}")

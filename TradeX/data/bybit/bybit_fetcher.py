@@ -117,6 +117,7 @@ class BybitFuturesFetcher:
                 symbol=self.symbol,
                 interval=self.interval,
                 start=start_ts,
+                end=self.end_ts,        # ← tell Bybit to stop here
                 limit=self.limit,
             )
 
@@ -146,5 +147,9 @@ class BybitFuturesFetcher:
         # Convert timestamp -> datetime (UTC)
         # ---------------------------
         df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+
+        # Clamp to requested end boundary (defensive — API should already honour it)
+        end_dt = pd.to_datetime(self.end_ts, unit="ms", utc=True)
+        df = df[df["timestamp"] <= end_dt].reset_index(drop=True)
 
         return df

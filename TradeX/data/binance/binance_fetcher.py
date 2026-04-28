@@ -181,4 +181,9 @@ class BinanceFuturesFetcher:
             ]
         )
         df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms", utc=True)
+
+        # Clamp: drop any candles that opened after the requested end boundary
+        end_dt = pd.to_datetime(self.end_ts, unit="ms", utc=True)
+        df = df[df["timestamp"] <= end_dt].reset_index(drop=True)
+
         return df
