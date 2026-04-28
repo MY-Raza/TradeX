@@ -98,19 +98,29 @@ def drop_schema(schema: str | None = None):
 def ensure_unique_index(table_name: str, schema: str, time_column: str):
     engine = get_engine()
     index_name = f"{table_name}_{time_column}_uidx"
-    desc_index = f"{table_name}_{time_column}_desc_idx"
 
     with engine.begin() as conn:
+        exists = conn.execute(text(f"""
+            SELECT 1
+            FROM pg_indexes
+            WHERE schemaname = :schema
+              AND tablename = :table
+              AND indexname = :index
+        """), {
+            "schema": schema,
+            "table": table_name,
+            "index": index_name
+        }).scalar()
+
+        if exists:
+            return  # ✅ Already exists → skip
+
+        logger.info(f"Creating index {index_name} (one-time operation)...")
+
         conn.execute(text(f"""
-            CREATE UNIQUE INDEX IF NOT EXISTS {index_name}
+            CREATE UNIQUE INDEX {index_name}
             ON {schema}.{table_name} ({time_column});
         """))
-        conn.execute(text(f"""
-            CREATE INDEX IF NOT EXISTS {desc_index}
-            ON {schema}.{table_name} ({time_column} DESC);
-        """))
-
-    logger.info(f"Indexes ensured: {index_name}, {desc_index}")
 
 
 def ensure_hypertable(table, schema, time_column):
