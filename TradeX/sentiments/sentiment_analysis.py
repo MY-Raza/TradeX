@@ -15,7 +15,7 @@ from TradeX.sentiments.data.data_cleaner import (
     deduplicate_exact,
     deduplicate_near,
 )
-from TradeX.utils.db.utils import read_df_from_db, save_df_to_db, fetch_ohlcv_df
+from TradeX.utils.db.utils import read_df_from_db, save_df_to_db
 from TradeX.utils.common.logs import get_logger
 
 # Import coin registry from schema (single source of truth)
@@ -33,9 +33,6 @@ SCHEMA           = "reddit"
 POSTS_TABLE      = "reddit_posts"
 COMMENTS_TABLE   = "reddit_comments"
 
-OHLCV_TABLE       = "btc_1m"
-OHLCV_TIME_COLUMN = "datetime"
-OHLCV_SCHEMA      = "data_binance"
 
 # Subreddits excluded regardless of coin
 EXCLUDED_SUBS: set[str] = set()   # extend if needed per-project
@@ -113,21 +110,6 @@ def compute_date_range(
     logger.info(f"📅 Date range — {start_date}  →  {end_date}")
     return start_date, end_date
 
-
-def load_ohlcv(
-    start_date: pd.Timestamp,
-    end_date:   pd.Timestamp,
-) -> pd.DataFrame:
-    logger.info(f"📈 Fetching OHLCV [{start_date} → {end_date}]")
-    ohlcv_df = fetch_ohlcv_df(
-        table_name=OHLCV_TABLE,
-        schema=OHLCV_SCHEMA,
-        time_column=OHLCV_TIME_COLUMN,
-        start_date=start_date,
-        end_date=end_date,
-    )
-    logger.info(f"✅ OHLCV rows: {len(ohlcv_df):,}")
-    return ohlcv_df
 
 
 # ================================================================================
@@ -350,7 +332,6 @@ def run_pipeline(
 
     # 2. Date range + OHLCV ------------------------------------------------------
     start_date, end_date = compute_date_range(posts_df, comments_df)
-    ohlcv_df             = load_ohlcv(start_date, end_date)
 
     # 3. Filtering ---------------------------------------------------------------
     posts_df, comments_df = filter_subreddits(posts_df, comments_df)
@@ -376,7 +357,6 @@ def run_pipeline(
         "comments":    comments_df,
         "posts_agg":   posts_agg,
         "comments_agg":comments_agg,
-        "ohlcv":       ohlcv_df,
     }
 
 
