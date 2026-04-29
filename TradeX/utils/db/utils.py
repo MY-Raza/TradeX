@@ -278,22 +278,41 @@ def save_df_to_db(
         return
 
     # --------------------------------------------------
-    # Insert safely
+    # Insert safely — chunked batch insert to avoid timeout over slow tunnels
     # --------------------------------------------------
-    cols = ",".join([f'"{c}"' for c in df.columns])
-    placeholders = ",".join([f":{c}" for c in df.columns])
-    conflict_clause = ""
+    chunk_size = 500  # insert 500 rows per round trip instead of 1-by-1
+
     if time_column and enforce_unique_time and use_on_conflict:
-        conflict_clause = f"ON CONFLICT ({time_column}) DO NOTHING" if time_column else ""
-
-    insert_sql = text(f"""
-        INSERT INTO {schema}.{table} ({cols})
-        VALUES ({placeholders})
-        {conflict_clause}
-    """)
-
-    with engine.begin() as conn:
-        conn.execute(insert_sql, df.to_dict(orient="records"))
+        # Use temp table + INSERT ... ON CONFLICT for upsert safety
+        tmp_table = f"_tmp_{table}"
+        df.to_sql(
+            tmp_table,
+            engine,
+            schema=schema,
+            if_exists="replace",
+            index=False,
+            chunksize=chunk_size,
+            method="multi",
+        )
+        cols = ",".join([f'"{c}"' for c in df.columns])
+        conflict_col = time_column
+        with engine.begin() as conn:
+            conn.execute(text(f"""
+                INSERT INTO {schema}.{table} ({cols})
+                SELECT {cols} FROM {schema}.{tmp_table}
+                ON CONFLICT ({conflict_col}) DO NOTHING
+            """))
+            conn.execute(text(f"DROP TABLE IF EXISTS {schema}.{tmp_table}"))
+    else:
+        df.to_sql(
+            table,
+            engine,
+            schema=schema,
+            if_exists="append",
+            index=False,
+            chunksize=chunk_size,
+            method="multi",
+        )
 
     logger.info(f"Inserted {len(df)} rows into {schema}.{table}")
 
@@ -572,8 +591,3 @@ def get_important_features(
     logger.info(f"Fetched important features for model: {model_name}")
 
     return important_features
-
-
-
-
-
