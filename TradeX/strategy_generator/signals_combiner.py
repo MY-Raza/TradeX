@@ -52,6 +52,8 @@ def run_active_signals_with_voting(
 
     NaN handling:
         - Rows with any NaN are dropped before voting
+        - Signal columns are shifted by 1 to avoid lookahead bias
+        - First and last rows are removed after the shift
         - Final DataFrame has no NaNs
 
     Args:
@@ -78,7 +80,8 @@ def run_active_signals_with_voting(
 
     Returns:
         tuple:
-            - pd.DataFrame: Columns = ["datetime", "signals"], NaN rows dropped
+            - pd.DataFrame: Columns = ["datetime", "signals"], NaN rows dropped,
+              signals shifted by 1, first and last rows removed.
             - dict: Indicator → window/parameter configuration actually used
     """
 
@@ -230,6 +233,11 @@ def run_active_signals_with_voting(
 
         # Drop rows with any NaN
         all_signals_df = all_signals_df.dropna(axis=0, how="any").reset_index(drop=True)
+
+        # Shift signal columns by 1 to avoid lookahead bias, then drop first and last rows
+        signal_cols = [col for col in all_signals_df.columns if col != "datetime"]
+        all_signals_df[signal_cols] = all_signals_df[signal_cols].shift(1)
+        all_signals_df = all_signals_df.iloc[1:-1].reset_index(drop=True)
 
         final_signal = []
         for i, row in all_signals_df.iterrows():
