@@ -10,28 +10,6 @@ from TradeX.utils.common.logs import get_logger
 logger = get_logger("signals_combiner")
 
 
-# ---------------------------------------------------------------------------
-# Timezone helper
-# ---------------------------------------------------------------------------
-
-def _strip_tz(dt_index) -> pd.DatetimeIndex:
-    """
-    Return a tz-naive DatetimeIndex (or Series) from any datetime-like input.
-    Handles:
-      - Already tz-naive  → returned unchanged
-      - tz-aware          → converted to UTC then tz info stripped
-      - plain array/Series → parsed via pd.to_datetime first
-    """
-    idx = pd.to_datetime(dt_index)
-    if hasattr(idx, "tz") and idx.tz is not None:
-        return idx.tz_convert("UTC").tz_localize(None)
-    if hasattr(idx, "dt"):
-        # It's a Series
-        if idx.dt.tz is not None:
-            return idx.dt.tz_convert("UTC").dt.tz_localize(None)
-    return idx
-
-
 def randomize_indicators(all_indicators):
     """
     Randomly activates or deactivates indicators.
@@ -104,7 +82,6 @@ def run_active_signals_with_voting(
         tuple:
             - pd.DataFrame: Columns = ["datetime", "signals"], NaN rows dropped,
               signals shifted by 1, first and last rows removed.
-              The "datetime" column is always tz-naive.
             - dict: Indicator → window/parameter configuration actually used
     """
 
@@ -247,21 +224,12 @@ def run_active_signals_with_voting(
     # ── Assemble DataFrame & majority-vote ─────────────────────────────────
     if signals_dict:
         all_signals = np.column_stack(list(signals_dict.values())).astype(np.float32)
-
-        # Always build a tz-naive DatetimeIndex to avoid
-        # "Cannot compare tz-naive and tz-aware timestamps" in BackTest
-        tz_naive_index = _strip_tz(pd.to_datetime(timestamps))
-
         all_signals_df = pd.DataFrame(
             all_signals,
             columns=list(signals_dict.keys()),
-            index=tz_naive_index,
+            index=pd.to_datetime(timestamps),
         ).reset_index()
         all_signals_df.rename(columns={"index": "datetime"}, inplace=True)
-
-        # Ensure the datetime column itself is tz-naive (reset_index may
-        # preserve tz info on some pandas versions)
-        all_signals_df["datetime"] = _strip_tz(all_signals_df["datetime"])
 
         # Drop rows with any NaN
         all_signals_df = all_signals_df.dropna(axis=0, how="any").reset_index(drop=True)
