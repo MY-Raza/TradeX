@@ -74,8 +74,13 @@ class BackTest:
         # PRICE DATA PREPARATION
         # ==========================
 
-        # Ensure timestamps are datetime objects
-        df_price['datetime'] = pd.to_datetime(df_price['datetime'])
+        # Ensure timestamps are tz-naive datetime objects.
+        # Both df_price and df_predictions must use the same tz convention;
+        # mismatches cause "Cannot compare tz-naive and tz-aware timestamps"
+        # inside np.searchsorted. We normalise everything to tz-naive here so
+        # the engine is robust regardless of what the caller passes in.
+        _dt = pd.to_datetime(df_price['datetime'])
+        df_price['datetime'] = _dt.dt.tz_convert(None) if _dt.dt.tz is not None else _dt
 
         # Convert price DataFrame to NumPy array for performance
         self.np_price = df_price.to_numpy()
@@ -94,8 +99,11 @@ class BackTest:
         # PREDICTION DATA PREPARATION
         # ==========================
 
-        # Ensure prediction timestamps are datetime objects
-        df_predictions['datetime'] = pd.to_datetime(df_predictions['datetime'])
+        # Ensure prediction timestamps are tz-naive datetime objects
+        _dt_pred = pd.to_datetime(df_predictions['datetime'])
+        df_predictions['datetime'] = (
+            _dt_pred.dt.tz_convert(None) if _dt_pred.dt.tz is not None else _dt_pred
+        )
 
         # Convert predictions to NumPy for speed
         self.np_pred = df_predictions.to_numpy()
