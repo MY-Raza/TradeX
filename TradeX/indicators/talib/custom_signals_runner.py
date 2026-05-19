@@ -45,15 +45,15 @@ import pandas as pd
 
 # ── Project-local imports ──────────────────────────────────────────────────
 # call_indicator lives in the same indicators module your project already uses.
-from indicators import call_indicator  # noqa: E402
+from TradeX.indicators.talib.indicators import call_indicator  # noqa: E402
 
-from custom_signal_registry import (
+from TradeX.indicators.talib.custom_signal_registry import (
     SIGNAL_CONFIG,
     CDL_PATTERNS,
     get_config,
     is_candlestick,
 )
-from custom_signal_utils import (
+from TradeX.indicators.talib.custom_signal_utils import (
     apply_signal_type,
     build_indicator_kwargs,
     unpack_window_config,
